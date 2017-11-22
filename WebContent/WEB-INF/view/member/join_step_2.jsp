@@ -18,6 +18,9 @@
 
 
 <script type="text/javascript">
+	var idCheckTF = false;
+	var passCheckTF = false;
+	
 	$(function() {
 		//메뉴 제어 
 		var lnb = $(".pcLnbWrap ul li a");
@@ -40,7 +43,111 @@
 		$("#subtitle").text($("#"+mbId).text());
 		$("#subtitle2").text($("#"+mbId2).text());
 		
+		//메일 셀렉트박스 제어
+		$("#emailBox").change(function(){
+			if($(this).val()=="direct"){
+				$("#email2").val("");
+			}else{
+				$("#email2").val($(this).val())
+			}
+		});
 	});
+	
+	//아이디 중복확인 ajax
+	function idCheck(){
+		var memberId = $("#id");
+		if(memberId.val()==""){
+			alert("아이디를 입력해주세요.");
+		}else{
+			$.ajax({
+				url : "/member/idCheck.do",
+				method : "post",
+				data : {"memberId" : memberId.val()},
+				success : function(result){
+					if(result == 0){
+						alert("가입가능한 아이디입니다.");
+						idCheckTF = true;
+					}else{
+						alert("이미 가입되어있는 아이디입니다.");
+						memberId.focus();
+						idCheckTF = false;
+					}
+				}
+			})
+		}
+	};
+	
+	//폼 Submit
+	function doSubmit(){
+		var f = $("#f");
+		var id = $("#id");
+		var pwd = $("#password");
+		var pwdChk = $("#passwordCheck");
+		var name = $("#name");
+		var sex = $("#sex");
+		var home1 = $("#tel1");
+		var home2 = $("#tel2");
+		var home3 = $("#tel3");
+		var phone1 = $("#phone1");
+		var phone2 = $("#phone2");
+		var phone3 = $("#phone3");
+		var postno = $("#postcode");
+		var addr1 = $("#address1");
+		var addr2 = $("#address2");
+		
+		if(id.val()==""){
+			alert("아이디를 입력하세요.");
+			id.focus();
+			return false;
+		}else if(idCheckTF == false){
+			alert("아이디 중복확인이 필요합니다.");
+			return false;
+		}else if(pwd.val()==""){
+			alert("패스워드를 입력하세요.");
+			pwd.focus();
+			return false;
+		}else if(pwdChk==""){
+			alert("패스워드확인을 입력하세요.");
+			pwd.focus();
+			return false;
+		}else if(pwd.val()!=pwdChk.val()){
+			alert("패스워드가 일치 하지 않습니다.");
+			pwd.focus();
+			return false;
+		}else if(name.val()==""){
+			alert("이름을 입력하세요.");
+			name.focus();
+			return false;
+		}else if(sex.val()==""){
+			alert("성별을 선택하세요.");
+			sex.focus();
+			return false;
+		}else if(home2.val()==""){
+			alert("전화번호를 입력하세요.");
+			home2.focus();
+			return false;
+		}else if(home3.val()==""){
+			alert("전화번호를 입력하세요.");
+			home3.focus();
+			return false;
+		}else if(phone2.val()==""){
+			alert("휴대전화번호를 입력하세요.");
+			phone2.focus();
+			return false;
+		}else if(phone3.val()==""){
+			alert("휴대전화번호를 입력하세요.");
+			phone3.focus();
+			return false;
+		}else{
+			if(confirm("가입하시겠습니까?")){
+				f.submit();
+				return true;
+			}else{
+				return false;
+			}
+		}
+	};
+	
 
 </script>
 
@@ -89,7 +196,8 @@
 
 			<div class="contents"> <!-- 페이지별 ID none -->
 				<h3 class="smallTit">회원가입</h3>
-
+			
+			<form name="f" id="f" method="post" action="/member/joinProc.do" >
                 <div class="boardType2">
 					<table summary="">
 						<caption>회원가입</caption>
@@ -99,65 +207,119 @@
 						</colgroup>
 						<tbody>
 							<tr>
+								<th scope="row">아이디</th>
+								<td>
+									<input type="text" name="id" id="id" value="" title="이름" class="inputType1" style="" maxlength="15">
+									<a href="javascript:idCheck();" class="btn_active_small">중복확인</a>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">패스워드</th>
+								<td>
+									<input type="password" name="password" id="password" value="" title="이름" class="inputType1" style="" maxlength="25">
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">패스워드확인</th>
+								<td>
+									<input type="password" name="passwordCheck" id="passwordCheck" value="" title="이름" class="inputType1" style="" maxlength="25">
+								</td>
+							</tr>
+							<tr>
 								<th scope="row">성명</th>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<input type="text" name="name" id="name" value="" title="이름" class="inputType1" style="" maxlength="5">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">성별</th>
 								<td>
-									<input type="radio" id="agree1" name="agree" value="Y"> <label for="agree1">남</label>
-									<input type="radio" id="agree1" name="agree" value="Y"> <label for="agree1">여</label>
+									<input type="radio" id="gender" name="sex" value="M"> <label for="agree1">남</label>
+									<input type="radio" id="gender" name="sex" value="F"> <label for="agree1">여</label>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">자택전화</th>
 								<td>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
-										<option value="00">02</option>
-										<option value="01">031</option>
+									<select id="tel1" name="tel1" title="" class="inputType3">
+										<option value="02">02</option>
+										<option value="031">031</option>
 									</select>
 									-
-									<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
+									<input type="text" name="tel2" id="tel2" value="" title="이름" class="inputType2" style="" maxlength="4">
 									-
-									<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
+									<input type="text" name="tel3" id="tel3" value="" title="이름" class="inputType2" style="" maxlength="4">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">휴대전화</th>
 								<td>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
+									<select id="phone1" name="phone1" title="" class="inputType3">
 										<option value="00">010</option>
 										<option value="01">011</option>
 									</select>
 									-
-									<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
+									<input type="text" name="phone2" id="phone2" value="" title="이름" class="inputType2" style="" maxlength="4">
 									-
-									<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
+									<input type="text" name="phone3" id="phone3" value="" title="이름" class="inputType2" style="" maxlength="4">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row" rowspan="2">주소</th>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
-									-
-									<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
-									<a href="#" class="btn_active_small">우편번호</a>
+									<input type="text" name="postcode" id="postcode" value="" title="이름" class="inputType2" style="" maxlength="5">
+									<a href="javascript:daumPostcode();" class="btn_active_small">우편번호</a>
+									<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>									
+									<script>
+										function daumPostcode() {
+											new daum.Postcode(
+													{
+														oncomplete : function(
+																data) {
+															var fullAddr = '';
+															var extraAddr = '';
+															if (data.userSelectedType === 'R') {
+																fullAddr = data.roadAddress;
+
+															} else {
+																fullAddr = data.jibunAddress;
+															}
+															if (data.userSelectedType === 'R') {
+																if (data.bname !== '') {
+																	extraAddr += data.bname;
+																}
+																if (data.buildingName !== '') {
+																	extraAddr += (extraAddr !== '' ? ', '
+																			+ data.buildingName
+																			: data.buildingName);
+																}
+																fullAddr += (extraAddr !== '' ? ' ('
+																		+ extraAddr
+																		+ ')'
+																		: '');
+															}
+															document.getElementById('postcode').value = data.zonecode;
+															document.getElementById('address1').value = fullAddr;
+															document.getElementById('address2').focus();
+														}
+													}).open();
+										}
+									</script>
+									
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType5" style="" maxlength="5">
-									나머지주소
+									<input type="text" name="address1" id="address1" value="" title="이름" class="inputType5" style="">
+									<input type="text" name="address2" id="address2" value="" title="이름" class="inputType5" style="">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">이메일 주소</th>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5"> @
-									<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType2">
+									<input type="text" name="email1" id="email1" value="" title="이름" class="inputType2" style="" maxlength="5"> @
+									<input type="text" name="email2" id="email2" value="" title="이름" class="inputType2" style="" maxlength="5">
+									<select id="emailBox" name="emailBox" title="" class="inputType2">
 										<option value="">선택하세요</option>
 										<option value="nate.com">nate.com</option>
 										<option value="hotmail.com">hotmail.com</option>
@@ -184,10 +346,11 @@
 				</div>
 
 				<div class="btn_area">
-					<a href="#" id="submitLink" class="btn_active">가입신청</a>
+					<a href="javascript:doSubmit();" id="submitLink" class="btn_active">가입신청</a>
 					<a href="#" id="btnCancel" class="btn_cancel">취소</a>
 				</div>
 
+			</form>
 			</div> <!-- // contents -->
 
 

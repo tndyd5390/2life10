@@ -41,6 +41,24 @@
 		$("#subtitle2").text($("#"+mbId2).text());
 		
 	});
+	
+	function doSubmit(){
+		var id = $("#id");
+		var pwd = $("#password");
+		
+		if(id.val()==""){
+			alert("아이디를 입력하세요.");
+			id.focus();
+			return false;
+		}else if(pwd.val()==""){
+			alert("패스워드를 입력하세요.");
+			pwd.focus();
+			return false;
+		}else{
+			f.submit();
+			return true;
+		}
+	}
 
 </script>
 
@@ -90,18 +108,18 @@
 			<div class="contents"> <!-- 페이지별 ID none -->
 				<h3 class="smallTit">로그인</h3>
 
-                <form name="frm" method="post">
+                <form name="f" id="f" method="post" action="/member/loginProc.do">
                     <div class="loginDiv">
                         <div class="inputArea">
                             <div class="areaDiv">
                                 <div class="pBox">
                                     <div class="inputDiv">
                                         <label for="id">아이디</label>
-                                        <input type="text" id="id" value="" title="아이디" class="lginInput idChk">
+                                        <input type="text" id="id" name="id" value="" title="아이디" class="lginInput idChk">
                                         <label for="password">패스워드</label>
-                                        <input type="password" id="password" name="패스워드" value="" title="비밀번호" class="lginInput">
+                                        <input type="password" id="password" name="password" value="" title="비밀번호" class="lginInput">
                                     </div>
-                                    <a href="" id="submit" class="loginBt">로그인</a>
+                                    <a href="javascript:doSubmit();" id="submit" class="loginBt">로그인</a>
                                 </div>
 
                                 <div class="srchArea">
@@ -117,7 +135,7 @@
                         <div class="joinArea">
                             <div class="areaDiv">
                                 <p class="txt"><strong>아직 크리스찬상조(주) 회원이 아니신가요?</strong><br>회원이 되시면 다양한 서비스 이용이 가능합니다.</p>
-                                <a href="../member/join_step.jsp" class="whtBt">회원가입</a>
+                                <a href="../member/joinStep.do" class="whtBt">회원가입</a>
                             </div>
                         </div>
                     </div>

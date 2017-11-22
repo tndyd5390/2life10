@@ -1,5 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cl.persistance.mapper.MemberMapper">
-
+	<select id="getIdCheck" parameterType="MemberDTO" resultType="int">
+		SELECT COUNT(*) FROM MEMBER_INFO WHERE MEMBER_ID = #{memberId}
+	</select>
+	
+	<insert id="insertMember" parameterType="MemberDTO">
+		INSERT INTO MEMBER_INFO (
+			MEMBER_ID, 
+			MEMBER_PASSWORD, 
+			MEMBER_NAME, 
+			MEMBER_SEX, 
+			MEMBER_HOME_NO, 
+			MEMBER_PHONE_NO,
+			MEMBER_POST_NO, 
+			MEMBER_ADDRESS,
+			MEMBER_ADDRESS_DETAIL,
+			MEMBER_EMAIL1,
+			MEMBER_EMAIL2,
+			MEMBER_PRE,
+			REG_MEMBER_NO,
+			REG_DT) VALUES (
+			#{memberId},
+			#{memberPassword},
+			#{memberName},
+			#{memberSex},
+			#{memberHomeNo},
+			#{memberPhoneNo},
+			#{memberPostNo},
+			#{memberAddress},
+			#{memberAddressDetail},
+			#{memberEmail1},
+			#{memberEmail2},
+			'N',			
+			last_insert_id(),
+			now()
+			)
+	</insert>
+	
+	<select id="getMemberLogin" parameterType="MemberDTO" resultType="MemberDTO">
+		SELECT MEMBER_NO AS MEMBERNO, MEMBER_ID AS MEMBERID, MEMBER_NAME AS MEMBERNAME, MEMBER_PRE AS MEMBERPRE FROM MEMBER_INFO
+		WHERE MEMBER_ID = #{memberId} AND MEMBER_PASSWORD = #{memberPassword}
+	</select>
 </mapper>

@@ -40,7 +40,41 @@
 		$("#subtitle").text($("#"+mbId).text());
 		$("#subtitle2").text($("#"+mbId2).text());
 		
+		
+		// 이메일2 셀렉트박스 값 제어
+		$("#emailBox").change(function(){
+			if($(this).val()=="direct"){
+				$("#email2").val("");
+			}else{
+				$("#email2").val($(this).val())
+			}
+		});
 	});
+	
+	
+	function doSubmit(){
+		var name = $("#name");
+		var email1 = $("#email1");
+		var email2 = $("#email2");
+		var f = $("#f");
+		console.log(name.val());
+		if(name.val()==""){
+			alert("이름을 입력해주세요.");
+			name.focus();
+			return false;
+		}else if(email1.val()== ""){
+			alert("이메일을 입력해주세요.");
+			email1.focus();
+			return false;
+		}else if(email2.val()== ""){
+			alert("이메일을 입력해주세요.");
+			email2.focus();
+			return false;
+		}else{
+			f.submit();
+			return true;
+		}
+	};
 
 </script>
 
@@ -64,8 +98,8 @@
 					<div class="flexItem4"> <!-- .select 버튼 클릭시 다중클래스 on 추가 -->
 						<strong><button type="button" class="select" id="subtitle">로그인</button></strong>
 						<ul>
-							<li id="MO70100"><a href="javascript:goMenu('../login/login.jsp', 'MO70100');">로그인</a></li>
-                            <li id="MO70200"><a href="javascript:goMenu('../member/join_step.jsp', 'MO70200');">회원가입</a></li>
+							<li id="MO70100"><a href="javascript:goMenu('../member/login.do', 'MO70100');">로그인</a></li>
+                            <li id="MO70200"><a href="javascript:goMenu('../member/joinStep.do', 'MO70200');">회원가입</a></li>
                             <li id="MO70300"><a href="javascript:goMenu('../member/find_id.jsp', 'MO70300');">아이디찾기</a></li>
                             <li id="MO70400"><a href="javascript:goMenu('../member/find_pass.jsp', 'MO70400');">패스워드찾기</a></li>
 						</ul>
@@ -77,8 +111,8 @@
 			<div class="pcLnbWrap">
 				<nav>
 					<ul class="pcLnb">
-						<li id="MN70100"><a href="javascript:goMenu('../login/login.jsp', 'MN70100');">로그인</a></li>
-                        <li id="MN70200"><a href="javascript:goMenu('../member/join_step.jsp', 'MN70200');">회원가입</a></li>
+						<li id="MN70100"><a href="javascript:goMenu('../member/login.do', 'MN70100');">로그인</a></li>
+                        <li id="MN70200"><a href="javascript:goMenu('../member/joinStep.do', 'MN70200');">회원가입</a></li>
                         <li id="MN70300"><a href="javascript:goMenu('../member/find_id.jsp', 'MN70300');">아이디찾기</a></li>
                         <li id="MN70400"><a href="javascript:goMenu('../member/find_pass.jsp', 'MN70400');">패스워드찾기</a></li>
 					</ul>
@@ -89,7 +123,7 @@
 
 			<div class="contents"> <!-- 페이지별 ID none -->
 				<h3 class="smallTit">회원가입유무확인</h3>
-
+			<form name="f" id="f" method="post" action="/member/joinCheckProc.do">
                 <div class="boardType2">
 					<table summary="">
 						<caption></caption>
@@ -101,15 +135,15 @@
 							<tr>
 								<th scope="row">성명</th>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<input type="text" id="name" name="name" value="" title="이름" class="inputType1" style="" maxlength="25">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">이메일 주소</th>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5"> @
-									<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType2">
+									<input type="text" id="email1" name="email1" value="" title="아이디" class="inputType2" style="" maxlength="15"> @
+									<input type="text" id="email2" name="email2" value="" title="메일" class="inputType2" style="" maxlength="15">
+									<select id="emailBox" name="emailBox" title="" class="inputType2">
 										<option value="">선택하세요</option>
 										<option value="nate.com">nate.com</option>
 										<option value="hotmail.com">hotmail.com</option>
@@ -134,11 +168,11 @@
 						</tbody>
 					</table>
 				</div>
-
 				<div class="btn_area">
-					<a href="#" id="submitLink" class="btn_active">가입유무확인</a>
+					<a href="javascript:doSubmit();" id="submitLink" class="btn_active">가입유무확인</a>
 					<a href="#" id="btnCancel" class="btn_cancel">취소</a>
 				</div>
+			</form>
 
 				<br/><br/><br/>
 				<div class="businessIntro">
