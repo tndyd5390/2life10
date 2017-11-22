@@ -1,3 +1,4 @@
+//전국장례시설안내 컨트롤러
 package com.cl.controller.admin;
 
 import javax.annotation.Resource;

@@ -1,3 +1,4 @@
+//멤버 컨트롤러
 package com.cl.controller.admin;
 
 import javax.annotation.Resource;
