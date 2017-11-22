@@ -1,5 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cl.persistance.mapper.BranchMapper">
-
+	
+	<select id="getBranchList" resultType="BranchDTO">
+		SELECT BRANCH_NO 				AS BRANCHNO,
+		       BRANCH_AREA_CODE 		AS BRANCHAREACODE,
+		       BRANCH_NAME 				AS BRANCHNAME,
+		       BRANCH_OFFICER_NAME 		AS BRANCHOFFICERNAME,
+		       BRANCH_TEL_NO 			AS BRANCHTELNO,
+		       BRANCH_POST_NO 			AS BRANCHPOSTNO,
+		       BRANCH_ADDRESS 			AS BRANCHADDRESS,
+		       BRANCH_ADDRESS_DETAIL 	AS BRANCHADDRESSDETAIL,
+		       BRANCH_VIEW_CNT 			AS BRANCHVIEWCNT,
+		       REG_MEMBER_NO 			AS REGMEMBERNO,
+		       REG_DT 					AS REGDT,
+		       CHG_MEMBER_NO 			AS CHGMEMBERNO,
+		       CHG_DT 					AS CHGDT
+		  FROM BRANCH_INFO
+	</select>
+	
+	<insert id="insertBranch" parameterType="BranchDTO">
+		INSERT INTO BRANCH_INFO
+		(
+			BRANCH_AREA_CODE, 
+			BRANCH_NAME, 
+			BRANCH_OFFICER_NAME, 
+			BRANCH_TEL_NO, 
+			BRANCH_POST_NO, 
+			BRANCH_ADDRESS, 
+			BRANCH_ADDRESS_DETAIL, 
+			BRANCH_VIEW_CNT, 
+			REG_MEMBER_NO, 
+			REG_DT
+		)
+		VALUES
+		(
+			#{branchAreaCode},
+			#{branchName},
+			#{branchOfficerName},
+			#{branchTelNo},
+			#{branchPostNo},
+			#{branchAddress},
+			#{branchAddressDetail},
+			0,
+			'0',
+			NOW()
+		)
+	</insert>
+	
+	<select id="getBranchDetail" parameterType="string" resultType="BranchDTO">
+		SELECT BRANCH_NO 				AS BRANCHNO,
+		       BRANCH_AREA_CODE 		AS BRANCHAREACODE,
+		       BRANCH_NAME 				AS BRANCHNAME,
+		       BRANCH_OFFICER_NAME 		AS BRANCHOFFICERNAME,
+		       BRANCH_TEL_NO 			AS BRANCHTELNO,
+		       BRANCH_POST_NO 			AS BRANCHPOSTNO,
+		       BRANCH_ADDRESS 			AS BRANCHADDRESS,
+		       BRANCH_ADDRESS_DETAIL 	AS BRANCHADDRESSDETAIL,
+		       BRANCH_VIEW_CNT 			AS BRANCHVIEWCNT,
+		       REG_MEMBER_NO 			AS REGMEMBERNO,
+		       REG_DT 					AS REGDT,
+		       CHG_MEMBER_NO 			AS CHGMEMBERNO,
+		       CHG_DT 					AS CHGDT
+		  FROM BRANCH_INFO
+		 where BRANCH_NO = #{branchNo}
+	</select>
 </mapper>

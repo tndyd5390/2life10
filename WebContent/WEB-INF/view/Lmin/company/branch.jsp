@@ -1,15 +1,24 @@
+<%@page import="com.cl.util.TextUtil"%>
+<%@page import="com.cl.util.CmmUtil"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.cl.dto.BranchDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	List<BranchDTO> bList = (List<BranchDTO>)request.getAttribute("bList");
+	if(bList == null) bList = new ArrayList<>();
+%>
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <title>관리자모드-크리스찬라이프</title>
-
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
 <link type="text/css" rel="stylesheet" href="../../public/css/default.css" />
 <link type="text/css" rel="stylesheet" href="../../public/css/layout_kor.css" />
-
 <link type="text/css" rel="stylesheet" href="../../public/css/sub_kor.css" />
 
 <script type="text/javascript" src="../../public/js/jquery-1.11.3.min.js"></script>
@@ -162,83 +171,25 @@
 
 				<br/><br/>
 				<ul class="boradType4">
+				<%for(BranchDTO bDTO : bList){ %>
 					<li>
-						<p class="num">1</p>
+						<p class="num"><%=CmmUtil.nvl(bDTO.getBranchNo()) %></p>
 						<div class="info">
-							<p class="txt">강남본점</p>
+							<p class="txt"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchName()) %></p>
 							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')">서울시 강남구 논현동 268-2</a>
+								<a href="/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
 							</p>
 							<p class="txt2">
-								김현재<span class="bar">&nbsp;|</span>
-								<span>1644-4491</span>
+								<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchOfficerName()) %><span class="bar">&nbsp;|</span>
+								<span><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchTelNo()) %></span>
 								<span class="bar">|</span>
-								<span class="count">서울</span>
+								<span class="count"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAreaCode()) %></span>
 							</p>
 						</div>
 					</li>
-					<li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt">강남본점</p>
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')">서울시 강남구 논현동 268-2</a>
-							</p>
-							<p class="txt2">
-								김현재<span class="bar">&nbsp;|</span>
-								<span>1644-4491</span>
-								<span class="bar">|</span>
-								<span class="count">서울</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt">강남본점</p>
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')">서울시 강남구 논현동 268-2</a>
-							</p>
-							<p class="txt2">
-								김현재<span class="bar">&nbsp;|</span>
-								<span>1644-4491</span>
-								<span class="bar">|</span>
-								<span class="count">서울</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt">강남본점</p>
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')">서울시 강남구 논현동 268-2</a>
-							</p>
-							<p class="txt2">
-								김현재<span class="bar">&nbsp;|</span>
-								<span>1644-4491</span>
-								<span class="bar">|</span>
-								<span class="count">서울</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt">강남본점</p>
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')">서울시 강남구 논현동 268-2</a>
-							</p>
-							<p class="txt2">
-								김현재<span class="bar">&nbsp;|</span>
-								<span>1644-4491</span>
-								<span class="bar">|</span>
-								<span class="count">서울</span>
-							</p>
-						</div>
-					</li>
+				<%} %>
 				</ul>
-
+				<a href="/company/branchWriteView.do" class="btn_active_small" style="float:right;">전국 지사 등록</a>
 
 				<!-- pageArea -->
 				<div class="pageArea">
