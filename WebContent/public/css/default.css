@@ -1,0 +1,131 @@
+@charset "utf-8";
+/*****************************************************************************************************************************************
+	나눔바른고딕 폰트 사용법 : font-weight: 400; - 레귤러 / font-weight: 700; - 볼드
+*****************************************************************************************************************************************/
+
+@font-face {
+	font-family:'NanumGothic';
+	font-style: normal;
+	font-weight: 400;
+	src: url(../../public/fonts/NanumGothic.eot);
+	src: local('.'),
+		 url(../../public/fonts/NanumGothic.eot?#iefix) format('embedded-opentype'),
+		 url(../../public/fonts/NanumGothic.woff) format('woff'),
+		 url(../../public/fonts/NanumGothic.ttf) format('truetype');
+}
+@font-face {
+	font-family:'NanumGothic';
+	font-style: normal;
+	font-weight: 700;
+	src: url(../../public/fonts/NanumGothicBold.eot);
+	src: local('.'),
+		 url(../../public/fonts/NanumGothicBold.eot?#iefix) format('embedded-opentype'),
+		 url(../../public/fonts/NanumGothicBold.woff) format('woff'),
+		 url(../../public/fonts/NanumGothicBold.ttf) format('truetype');
+}
+/*****************************************************************************************************************************************
+	폰트사이즈 정의 - rem : 최상위 폰트정의 값에 상속 (사파리5+, 크롬, 파이어폭스 3.6+, 익스플로러9+) / em, % : 설정한 부모 폰트 사이즈에 상속
+	8px == 0.8rem, 0.8em, 80%
+	9px == 0.9rem, 0.9em, 90%
+	10px == 1rem, 1em, 100% : 기본 사이즈 설정 값
+	11px == 1.1rem, 1.1em, 110%
+	12px == 1.2rem, 1.2em, 120%
+	13px == 1.3rem, 1.3em, 130%
+	14px == 1.4rem, 1.4em, 140%
+	15px == 1.5rem, 1.5em, 150%
+	16px == 1.6rem, 1.6em, 160%
+	17px == 1.7rem, 1.7em, 170%
+	18px == 1.8rem, 1.8em, 180%
+*****************************************************************************************************************************************/
+html, body {height:100%;font-family:'NanumGothic', san-serif;font-weight:400;font-size:10px;color:#555;-webkit-text-size-adjust:none;-moz-text-size-adjust:none;-ms-text-size-adjust:none;} /* 나눔고딕 기본값을 초기값으로 지정, 아이폰 폰트 사이즈 변환방지 설정 */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,select,input,textarea,p,blockquote,th,td,figure,figcaption {margin:0;padding:0;}
+header,footer,section,article,aside,nav,hgroup,details,menu,figure,figcaption {display:block;} /* html5 태그 초기 설정 값 */
+h1,h2,h3,h4,h5,h6 {font-weight:normal;font-size:100%;}
+img,legend,fieldset,button {border:none;}
+input,select,textarea {font-family:inherit;font-size:inherit;*font-weight:inherit;vertical-align:middle;} /* 기본 설정값으로 초기화 */
+table {border-collapse:collapse;table-layout:fixed;}
+caption,legend {width:0;height:0;line-height:0;visibility:hidden;font-size:0;} /* 사용하지 않는 전제 조건 */
+ul,ol,li {list-style-type:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-ms-box-sizing:border-box;} /* 익스 9부터 적용가능 */
+hr {display:none;}
+em {font-style:normal;}
+strong,b {font-weight:normal;}
+textarea {resize:none;} /* 리사이징 초기화 : 리사이징을 원하면 해당영역을 주석처리 해주세요 */
+
+a, a:link, a:visited, a:active {color:#555;text-decoration:none;}
+a:hover {color:#555;}
+a[class~="btn"] {vertical-align:middle;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-ms-box-sizing:border-box;text-decoration:none;} /* 버튼의 경우에 언더라인 삭제 */
+
+.clfix:after {content: "."; display: block; height: 0px; clear: both; visibility: hidden;}
+.clfix {display: inline-block;}
+.clfix {display: block;}
+* html .clfix {height: 1%;} /* Hides from IE-mac */
+.clfix {zoom: 1;} /*for IE 5.5-7*/
+
+.blind {font-size:0;height:1px !important;position:absolute !important;top:-9999px !important;width: 1px !important;} /* ir 처리 및 숨김영역 공통 */
+.ellipsis {white-space: nowrap;overflow: hidden;text-overflow: ellipsis;} /* 한줄 텍스트 줄임표 설정 */
+
+/* 스킵네비게이션 */
+#skipnavi {}
+#skipnavi a {display:block;position:absolute;top:-1000px;left:0;width:100%;height:1px;color:#222;overflow:hidden;z-index:99999999;}
+#skipnavi a:focus, #skipnavi a:hover, #skipnavi a:active {top:0px;left:0;background-color:#e9e9e9;padding:7px 0 5px;height:auto;color:#000;font-weight:bold;text-align:center;text-decoration:none;}
+
+/*****************************************************************************************************************************************
+	form 요소 절대값 정의
+*****************************************************************************************************************************************/
+button {padding:0 0;font-family:'NanumGothic';font-weight:400;vertical-align:middle;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;background-color:transparent;color:#777;}
+	button span {box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-ms-box-sizing:border-box;}
+label {display:inline-block;vertical-align:middle;}
+
+select[disabled='disabled'], input[disabled='disabled'], .disabled {background-color:#f0f0f0;border:1px solid #d9d9d9;cursor:default;}
+select[readonly='readonly'], input[readonly='readonly'], .readonly {background-color:#f0f0f0;border:1px solid #d9d9d9;}
+input[type="text"]::-ms-clear {display:none;} /* 익스 10, 11에서 입풋창에 생성되는 텍스트 삭제 버튼제어 */
+
+/* placeholder color 적용 */
+::-webkit-input-placeholder {color:#aaa;}/* WebKit, Blink, Edge */
+:-moz-placeholder {color:#aaa;} /* Mozilla Firefox 4 to 18 */
+::-moz-placeholder {color:#aaa;}/* Mozilla Firefox 19+ */
+:-ms-input-placeholder {color:#aaa;}/* Internet Explorer 10-11 */
+
+.inputText, .selectText, .textArea, .inputFile {width:100%;font-size:1.6rem;font-family:'NanumGothic';font-weight:400;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-ms-box-sizing:border-box;} /* 익스 9부터 적용가능, 아이폰 둥근 모서리 설정빼기 */
+
+/*****************************************************************************************************************************************
+	화면 정렬 절대값 
+	- 화면을 12개로 나누어 작업합니다.
+	-열(row) 단위로 박스구성을 하며, 12개 조각으로 작업합니다.
+	- 모바일 최소사이즈(360px)는 대략 4개이고 테블릿 최소사이즈(768px)은 9개, 테블릿 최대 사이즈와 PC 컨텐츠 최소사이즈(1024px)는 12개 입니다.
+	- PC 최대사이즈는 1920px 이며, 컨텐츠는 7개가 추가되어 작업됩니다.
+*****************************************************************************************************************************************/
+.flexContainer {display:-webkit-flex;display:flex;}
+.flexItem1 {width:8.33%;-webkit-flex:1;flex:1;}
+.flexItem2 {width:16.5%;-webkit-flex:2;flex:2;}
+.flexItem3 {width:25%;-webkit-flex:3;flex:3;}
+.flexItem4 {width:33.3%;-webkit-flex:4;flex:4;}
+.flexItem5 {width:41.66%;-webkit-flex:5;flex:5;}
+.flexItem6 {width:50%;-webkit-flex:6;flex:6;}
+.flexItem7 {width:58.33%;-webkit-flex:7;flex:7;}
+.flexItem8 {width:66.66%;-webkit-flex:8;flex:8;}
+.flexItem9 {width:75%;-webkit-flex:9;flex:9;}
+.flexItem10 {width:83.33%;-webkit-flex:10;flex:10;}
+.flexItem12 {width:100%;-webkit-flex:12;flex:12;}
+
+/* PC 버전 */
+@media screen and (min-width:1025px) {
+	.flexContainer {width:100%;}
+	.flexContainer:before, .flexContainer:after {display: table;line-height: 0;content: "";}
+	.flexContainer:after {clear: both;}
+	.flexContainer [class~="flexItem"] {display:block;float:left;vertical-align:middle;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-ms-box-sizing:border-box;}
+}
+
+/* 아래 정의된 값은 복수 클래스로 사용되나, 최대한 지양합니다. */
+.alignL {text-align:left !important;}
+.alignC {text-align:center !important;}
+.alignR {text-align:right !important;}
+
+.fl {float:left !important;}
+.fr {float:right !important;}
+.fn {float:none !important;}
+.clear {clear:both !important;}
+
+.positionWrap {position:relative;}
+.positionL {position:absolute;left:0;top:0;}
+.positionR {position:absolute;right:0;top:0;}

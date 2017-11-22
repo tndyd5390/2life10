@@ -1,0 +1,707 @@
+@charset "utf-8";
+
+/*******************************************************************************************************************************
+	corporate 메뉴 공통정의
+*******************************************************************************************************************************/
+
+/* common 2016-09-06 */
+.visualImgBox{overflow:hidden;}
+.visualImgBox img{width:100%;margin-top:10px;}
+.visualImgBox img + img{margin-top:10px;}
+.normalTxt{margin-top:5px;}
+.normalTxt p{margin-top:5px;line-height:1.6;color:#555;}
+.halfArea > div{vertical-align:top;}
+.halfArea > div + div > .blueTit{display:block;margin-top:26px;}
+.normalTxt + .blueTit{display:block;margin-top:26px;}
+.halfArea + .halfArea,
+.normalTxt + .halfArea{margin-top:26px;}
+.cmdTxt {position:relative;margin-top:5px !important;padding-left:15px;font-size:1.3rem;line-height:1.5 !important;color:#999 !important;} /* 2016-09-06 추가 */
+.cmdTxt:before {content:'※';position:absolute;left:0;top:0;} /* 2016-09-06 추가 */
+.businessIntro + .blueTit{display:block;margin-top:16px;}
+
+/* btn 2016-09-06 */
+.btnArea.ar{text-align:right;}
+.btnInfoView {display:inline-block;margin-top:20px;background-color:#fff;padding:6px 13px;font-size:1.2rem;border:1px solid #d0d0d0;border-radius:3px;}
+.btnInfoView [class^="icon"] {display:inline-block;margin-left:12px;width:17px;height:14px;vertical-align:middle;}
+.btnInfoTxt {display:inline-block;margin:26px 10px 0 0;font-size:1.4rem;color:#777;vertical-align:top;}
+.iconArrRight {background:url("/images/front/icon/icon_arrRight.png") no-repeat center top;background-size:100%;}
+
+/* 갤러리타입 */
+.galleryType > article {position:relative;margin-bottom:20px;border:1px solid #d9d9d9;box-sizing:border-box;line-height:1.6;}
+.galleryType > article .tit {position:absolute;top:0;left:0;background-color:#1a4779;padding:10px 15px;color:#ffffff;font-size:1.4rem;}
+.galleryType > article .img {width:100%;overflow:hidden;}
+.galleryType > article .img img {display:block;width:100%;}
+.galleryType > article .cont {padding:15px 15px 20px 15px;}
+.galleryType > article .cont .title {display:block;margin-bottom:12px;color:#333;}
+.galleryType > article .cont .text {margin-bottom:12px;}
+.galleryType > article .cont .date {color:#aaa;font-size:1.2rem;}
+
+/* 사업영역 */
+.businessIntro {}
+.businessIntro p {margin-top:10px;line-height:1.6;color:#555;}
+.businessIntro p em{display:block;margin-top:22px;} /* 2016-09-06 추가 */
+.businessIntro .subTit {padding-bottom:6px;line-height:1.4;}
+.businessIntro .subTit:after {display:block;content: "";background-color:#1a4779;margin-top:17px;width:32px;height:3px;}
+.businessIntro p + .subTit {margin-top:27px;} /* 2016-09-06 추가 */
+.businessUnit {margin-top:14px;}
+.businessUnit img {width:100%;vertical-align:top;}
+.businessUnit li {position:relative;margin-top:20px;}
+.businessUnit .txtWrap {position:absolute;bottom:0;left:0;z-index:1;width:100%;}
+.businessUnit .txtWrap:after {content:"";display:block;clear:both;position:absolute;top:0;left:0;z-index:-1;width:100%;height:100%;background-color:#000;opacity:0.5;filter:alpha(opacity=50);}
+.businessUnit .txtWrap strong {display:block;padding:15px 15px 12px 15px;font-size:1.6rem;color:#fff;}
+.businessUnit .txtWrap p {padding:0 15px 15px 15px;color:#ccc;line-height:1.4;}
+.businessUnit .unitTit {margin-top:0;}
+.businessUnit .unitTit .txtWrap {position:static;}
+.businessUnit .unitTit .txtWrap:after {background-color:#2a6eb6;opacity:0.9;filter:alpha(opacity=90);}
+.businessUnit .unitTit .btnArea {padding:0 15px 15px 15px;}
+
+/* 사업별 바로가기 */
+.businessList ul {overflow:hidden;}
+.businessList ul li {float:left;width:48.5%;margin-left:3%;margin-bottom:10px;}
+.businessList ul li:first-child, .businessList li.sector3 {margin-left:0;}
+.businessList ul li a {display:block;}
+.businessList ul li img {display:block;width:100%;}
+.businessList ul.basicType {}
+.businessList ul.basicType li a {display:block;height:47px;padding:16px 14px;background-color:#f0f0f0;color:#555;box-sizing:border-box;}
+.businessList ul.basicType li a .txt {display:block;padding-right:10px;background:url('/images/front/icon/ico_movearrow.png') no-repeat right 50%;background-size:6px auto;}
+.businessList ul.basicType li a:hover {background-color:#1a4779;color:#fff;}
+.businessList ul.basicType li a:hover .txt {background-image:url('/images/front/icon/ico_movearrow_over.png')}
+
+.businessList ul.imgType {}
+.businessList ul.imgType li {position:relative;}
+.businessList ul.imgType li a span {position:relative;display:block;margin:-28px 10px 0;padding:6px 0;background:url('/images/front/icon/ico_shortcut_mo.png') no-repeat right 50%;background-size:13px auto;color:#fff;z-index:2;}
+.businessList ul.imgType li:after {content:"";display:block;clear:both;position:absolute;bottom:0;left:0;z-index:1;width:100%;height:30px;background-color:#2a6eb6;opacity:0.9;filter:alpha(opacity=90);}
+
+.businessList ul.imgType02 {}
+.businessList ul.imgType02 li {width:50%;margin:0;box-sizing:border-box;}
+.businessList ul.imgType02 li a {padding:22px 0;border-right:1px solid #d9d9d9;border-bottom:1px solid #d9d9d9;box-sizing:border-box;text-align:center;color:#222;font-size:1.8rem;}
+.businessList ul.imgType02 li a span {display:block;margin-top:14px;color:#555;font-size:1.4rem;text-decoration:underline;}
+.businessList ul.imgType02 li.sector1 a, .businessList ul.imgType02 li.sector3 a {border-left:1px solid #d9d9d9;}
+
+
+/*******************************************************************************************************************************
+	컨텐츠 별 정의
+*******************************************************************************************************************************/
+/* OVERVIEW */
+#CT-PCK-001 .contTit:after {display:block;content:"";background-color:#1a4779;margin-top:18px;margin-bottom:16px;width:32px;height:3px;}
+#CT-PCK-001 .contTit + p {line-height:1.6;}
+#CT-PCK-001 .mBck {display:block;}
+#CT-PCK-001 .bck {display:block;}
+#CT-PCK-001 .cntIntro {margin-bottom:15px;line-height:1.6;}
+#CT-PCK-001 .cntIntro p {margin-top:10px;}
+#CT-PCK-001 .cntIntro p:first-child {margin-top:0;}
+
+#CT-PCK-001 .businessList {margin-bottom:60px;}
+
+#CT-PCK-001 .cntInfo {margin:30px 0 60px;background:url('/images/front/contents/img_CT-PCK-001_mo01.png') no-repeat 0 0;background-size:100% 100%;overflow:hidden;}
+#CT-PCK-001 .cntInfo li {float:left;width:50%;padding:26px 20px;color:#fff;}
+#CT-PCK-001 .cntInfo li strong {display:block;margin-bottom:26px;}
+/* #CT-PCK-001 .cntInfo li strong:after {display:block;content:"";background-color:#fff;margin:6px auto 18px;width:15px;height:1px;} */
+#CT-PCK-001 .cntInfo li em {display:block;font-size:1.8rem;margin-bottom:5px;}
+#CT-PCK-001 .cntInfo li span {display:block;font-size:1.2rem;color:#aaa;}
+#CT-PCK-001 .cntInfo li.cnt1 {border-right:1px solid #6a8099;border-bottom:1px solid #6a8099;}
+#CT-PCK-001 .cntInfo li.cnt2 {border-right:1px solid #6a8099;border-bottom:1px solid #6a8099;}
+#CT-PCK-001 .cntInfo li.cnt3 {border-right:1px solid #6a8099;}
+
+#CT-PCK-001 .vision {padding:16px 15px;margin:0 0 60px;height:211px;background:url('/images/front/contents/img_CT-PCK-001_mo02.png') no-repeat right 0;background-size:auto 243px;}
+#CT-PCK-001 .vision > strong {display:block;margin-bottom:10px;color:#222;font-size:2rem;line-height:1.3;}
+#CT-PCK-001 .vision > p {line-height:1.6;}
+
+#CT-PCK-001 section .imgWrap {margin:16px 0 60px;}
+
+/* CEO 메시지 */
+#CT-PCK-026 .imgWrap img {vertical-align:top;}
+#CT-PCK-026 .imgWrap {background-color:#e5eef5;}
+#CT-PCK-026 .imgWrap .moImg {max-width:480px;margin:0 auto;}
+#CT-PCK-026 [class*="ceo"] {padding:25px 0;border-top:1px solid #d9d9d9;line-height:1.6;word-wrap:break-word;}
+#CT-PCK-026 [class*="ceo"].ceo01 {border-top:none;}
+#CT-PCK-026 [class*="ceo"].ceo04 {padding-bottom:0;}
+#CT-PCK-026 [class*="ceo"] p {margin-top:11px;}
+#CT-PCK-026 [class*="ceo"] .subTit {word-break:keep-all;}
+#CT-PCK-026 [class*="ceo"] .pointColor {font-weight:700;}
+#CT-PCK-026 [class*="ceo"] .visualTxt {display:none;}
+#CT-PCK-026 [class*="ceo"] .signArea {margin-top:20px;}
+#CT-PCK-026 [class*="ceo"] .signArea img {width:69px;vertical-align:middle;}
+#CT-PCK-026 [class*="ceo"] .signArea .smallTit {margin-bottom:5px;font-size:1.4rem;}
+#CT-PCK-026 [class*="ceo"] .signArea .subTit {font-size:2.4rem;}
+
+/* 경영진 */
+#CT-PCK-002 section {position:relative;overflow:hidden;width:100%;margin-top:46px;}
+#CT-PCK-002 section:first-child {margin-top:0;}
+#CT-PCK-002 .contTit {margin-top:67%;padding-top:18px;padding-bottom:17px;}
+#CT-PCK-002 .contTit:after {display:block;content:"";background-color:#1a4779;margin-top:17px;width:32px;height:3px;}
+#CT-PCK-002 .contTit span {display:block;margin-bottom:10px;font-size:1.4rem;color:#222;}
+#CT-PCK-002 .imgWrap {position:absolute;top:0;left:0;width:100%;height:100%;}
+
+/* 연혁 */
+#organ .contTit:after {display:block;content:"";background-color:#1a4779;margin-top:18px;margin-bottom:15px;width:32px;height:3px;}
+#organ section p {line-height:1.6;}
+#organ section .btnArea {display:none;}
+#organ .history {margin:30px 0;line-height:1.6;}
+#organ .history > li {position:relative;padding-left:60px;overflow:hidden;}
+#organ .history .year {display:block;position:absolute;left:0;top:0;width:60px;padding-top:8px;border-top:1px solid #1a4779;color:#1a4779;}
+#organ .history .details {padding:8px 0 5px;border-top:1px solid #d9d9d9;}
+#organ .history .details > li {position:relative;padding-left:40px;padding-bottom:10px;overflow:hidden;}
+#organ .history .details > li .month {display:block;position:absolute;left:0;top:0;width:40px;color:#222;text-align:right;}
+#organ .history .details > li ul li {margin-top:10px;}
+#organ .history .details > li ul li:first-child {margin-top:0;}
+#organ .history .details > li ul li img {display:none;}
+#organ .businessList {margin-top:17px;}
+
+/* CSR 경영 */
+#CT-PCK-014 .tableBasicView tr td {padding-top:0;}
+#CT-PCK-014 .tableBasicView .btnArea .btnDownload {margin-top:8px;}
+#CT-PCK-014 .txtTableInfoBot .pointColor {margin-bottom:8px;color:#aaa;text-align:left;text-indent:-12px;padding-left:12px;}
+
+/* 뉴스 */
+#CT-PCK-016 .btnArea {margin-top:28px}
+#CT-PCK-016 .btnServiceArea .btnPrint {display:none;}
+
+/* 소셜미디어 */
+#CT-PCK-018 .smallTit {line-height:1.6;}
+#CT-PCK-018 .tableBasicView th {padding-right:0;padding-left:0;}
+#CT-PCK-018 .btnSns {display:block;}
+#CT-PCK-018 .btnSns span{display:block;width:33px;height:33px;background-image:url('/images/front/btn/btn_sns_mo.png');background-size:297px auto;background-repeat:no-repeat;text-indent:-999em;overflow:hidden;}
+#CT-PCK-018 .btnSns:hover span {background-image:url('/images/front/btn/btn_sns_over_mo.png');}
+#CT-PCK-018 .btnSns .facebook {background-position:0 0;}
+#CT-PCK-018 .btnSns .blog {background-position:-66px 0;}
+#CT-PCK-018 .btnSns .youtube {background-position:-132px 0;}
+#CT-PCK-018 .btnSns .twitter {background-position:-198px 0;}
+#CT-PCK-018 .btnSns .instagram {background-position:-264px 0;}
+
+/* 채용 */
+#CT-PCK-019 .recruitHead {padding:7% 0;border-top:1px solid #d9d9d9;border-right:1px solid #d9d9d9;border-left:1px solid #d9d9d9;text-align:center;}
+#CT-PCK-019 .recruitHead p {margin-top:11px;padding:0 60px;line-height:1.6;word-break:keep-all;}
+#CT-PCK-019 .recruitHead .contTit {padding:0 30px 10px 30px;line-height:1.4;}
+#CT-PCK-019 .recruitHead .contTit span {display:block;}
+#CT-PCK-019 .recruitList img {width:100%;vertical-align:top;}
+#CT-PCK-019 .recruitList li {position:relative;z-index:1;}
+#CT-PCK-019 .recruitList a {position:absolute;top:50%;z-index:5;width:33%;margin-top:-18px;text-align:center;color:#fff;}
+#CT-PCK-019 .recruitList li:nth-child(odd) a {right:0;}
+#CT-PCK-019 .recruitList li:nth-child(even) a {left:0;}
+#CT-PCK-019 .recruitList a span {display:block;padding-top:7px;text-decoration:underline;}
+
+/* Contact Us - 오시는 길 */
+#road .mapArea {height:170px;background:#fafafa}
+#road .addrArea {margin-top:16px;padding:4px 0 15px;border-top:1px solid #434343;}
+#road .addrArea li {position:relative;padding-left:70px;margin-top:11px;line-height:1.6;}
+#road .addrArea li strong {display:block;position:absolute;left:0;top:0;color:#222;}
+
+/* Contact Us - 고객문의 */
+#CT-PCK-024 .contTit {line-height:1.4;}
+#CT-PCK-024 .contTit:after {display:block;content:"";background-color:#1a4779;margin-top:15px;margin-bottom:15px;width:32px;height:3px;}
+#CT-PCK-024 section > .subTit {padding-top:40px;}
+#CT-PCK-024 p {line-height:1.6;}
+#CT-PCK-024 > .btnArea {padding:0 15px 40px;margin:0 -15px;border-bottom:1px solid #d9d9d9}
+#CT-PCK-024 .grayWrap {padding:30px 15px 30px;margin:0 -15px;background:#fafafa;}
+#CT-PCK-024 .grayWrap > header {overflow:hidden;}
+#CT-PCK-024 .grayWrap > header .subTit {float:left;}
+#CT-PCK-024 .compulsory {color:#ea0000;}
+#CT-PCK-024 .termsWrap {margin-top:30px;padding-top:24px;border-top:1px solid #d9d9d9;line-height:1.6;}
+#CT-PCK-024 .termsWrap p {margin:12px 0;}
+#CT-PCK-024 .termsWrap .defaultGrayDotList > li {background-position:0 8px;}
+#CT-PCK-024 .termsWrap .noti {margin-bottom:32px;color:#ea0000;font-size:1.2rem;padding-left:14px;text-indent:-14px;}
+#CT-PCK-024 .termsWrap .pointSubColor {margin:0 0 12px;font-size:1.6rem;text-align:center;}
+#CT-PCK-024 .termsWrap .radioArea {text-align:center;}
+#CT-PCK-024 .termsWrap .radioArea li {display:inline-block;padding:0 10px;}
+#CT-PCK-024 .termsWrap .radioArea li label {color:#222;}
+#CT-PCK-024 .termsWrap .radioArea li input[type="radio"] {display:inline-block;margin-top:-2px;}
+#CT-PCK-024 .btnArea {margin-top:20px;text-align:center;}
+#CT-PCK-024 .btnDefaultForm {width:160px;margin-right:0;padding:15px 30px;}
+#CT-PCK-024 .formList {overflow:hidden;}
+#CT-PCK-024 .formList li {position:relative;margin-top:30px;overflow:hidden;}
+#CT-PCK-024 .formList li .tit {display:block;margin-bottom:11px;color:#222;}
+#CT-PCK-024 .formList li .email {overflow:hidden;}
+#CT-PCK-024 .formList li .email .emailId {position:relative;padding-right:24px;}
+#CT-PCK-024 .formList li .email .emailId .unit {display:block;position:absolute;right:0;top:8px;text-align:right;}
+#CT-PCK-024 .formList li .email .domain {margin:9px 0;}
+#CT-PCK-024 .formList li .textArea {padding:10px 15px;height:175px;}
+#CT-PCK-024 .formList .defaultList {overflow:hidden;}
+#CT-PCK-024 .formList .defaultList li, #CT-PCK-024 .formList .defaultList li:first-child {margin-top:0;padding-left:0;}
+#CT-PCK-024 .formList .defaultList li {float:left;}
+#CT-PCK-024 .formList .defaultList li + li {margin-left:15px;}
+#CT-PCK-024 .formList .defaultList label {margin-left:10px;vertical-align:middle;}
+#CT-PCK-024 .formList .limit {display:block;float:right;margin-top:5px;font-size:14px;}
+#CT-PCK-024  .businessList {margin-top:16px;}
+#CT-PCK-024  .autoEntry #capImg {margin-bottom: 8px;display: inline-block;}/* 2017-03-30 추가 */
+#CT-PCK-024  .autoEntry img {width: 178px;height: 54px;vertical-align: middle;}/* 2017-03-30 추가 */
+#CT-PCK-024  .autoEntry .inputText {width:50%;margin: 0 6px 0 0;}/* 2017-03-30 추가 */
+
+/* CSR - Our CSR 2016-09-06 */
+#CT-PCK-107 .chartArea{margin-top:18px;}
+#CT-PCK-107 .chartArea img{width:100%;}
+#CT-PCK-107 .chartArea .pc{display:none;}
+
+/* CSR - Our CSR - 인사말 2016-09-06 */
+#CT-PCK-108 .signArea + .btnArea {margin-top:25px;border-top:1px solid #d9d9d9;}
+#CT-PCK-108 .signArea {padding-top:20px;}
+#CT-PCK-108 .signArea img {height:29px;margin-left:15px;vertical-align:middle;}
+#CT-PCK-108 .signArea .smallTit {margin:11px 0 14px;color:#222;}
+#CT-PCK-108 .signArea .subTit {font-size:2.4rem;color:#1a4779;}
+
+/* CSR - Our CSR - 비전 및 전략 2016-09-06 */
+#CT-PCK-109 .visionArea > p{margin-top:10px;line-height:1.6;color:#777;}
+#CT-PCK-109 .visionArea > p strong{display:block;margin-top:26px;}
+#CT-PCK-109 .visionArea div[class*="visionList"]{margin-top:29px;text-align:center;}
+#CT-PCK-109 .visionArea > p + div[class*="visionList"]{margin-top:16px;}
+#CT-PCK-109 .visionArea div[class*="visionList"] + div[class*="visionList"]{margin-top:20px;}
+#CT-PCK-109 .visionArea div[class*="visionList"] h4{height:23px;line-height:23px;color:#fff;}
+#CT-PCK-109 .visionArea .visionList.color01 h4{background-color:#0a64bd;}
+#CT-PCK-109 .visionArea .visionList.color02 h4{background-color:#37bfe6;}
+#CT-PCK-109 .visionArea .visionList > p,
+#CT-PCK-109 .visionArea .visionList > ul li{padding:1px 0;line-height:1.5;}
+#CT-PCK-109 .visionArea .visionList.color01 > p{border:solid #186dc1;border-width:0 1px 1px;}
+#CT-PCK-109 .visionArea .visionList > ul{display:table;width:100%;border-collapse:collapse;table-layout:fixed;}
+#CT-PCK-109 .visionArea .visionList > ul > li{display:table-cell;width:25%;}
+#CT-PCK-109 .visionArea .visionList.color02 > ul > li{border:solid #37bfe6;border-width:0 1px 1px;}
+#CT-PCK-109 .visionArea .visionList .inner li{margin-top:6px;border:solid #43c3e7;border-width:0 1px 1px;}
+#CT-PCK-109 .visionArea .visionList .inner li em{display:block;padding:1px 0;border:solid #43c3e7;border-width:2px 1px;line-height:1.5;}
+#CT-PCK-109 .visionArea .visionList .inner li em br{display:none;}
+#CT-PCK-109 .visionArea .visionList .inner li > div{padding:14px;text-align:left;}
+#CT-PCK-109 .visionArea .visionList .inner li p{position:relative;margin-top:6px;padding-left:8px;}
+#CT-PCK-109 .visionArea .visionList .inner li p:before{content:'·';position:absolute;left:0;top:0;}
+#CT-PCK-109 .visionArea .visionList .inner li p:first-child{margin-top:0;}
+
+/* CSR - Act 2016-09-05 */
+#CT-PCK-110 .photoList{overflow:hidden;margin-top:12px;}
+#CT-PCK-110 .photoList h4,
+#CT-PCK-110 .photoList ul li{margin-bottom:10px;box-sizing:border-box;}
+#CT-PCK-110 .photoList h4{padding:9px 0;background-color:#105d99;text-align:center;}
+#CT-PCK-110 .photoList h4 span{font-size:20px;line-height:1.25;color:#fff;text-decoration:underline;}
+#CT-PCK-110 .photoList h4 br{display:none;}
+#CT-PCK-110 .photoList h4 br.mb{display:inline-block;}
+#CT-PCK-110 .photoList li{overflow:hidden;position:relative;}
+#CT-PCK-110 .photoList li a{display:block;}
+#CT-PCK-110 .photoList li img{display:block;width:100%;}
+#CT-PCK-110 .photoList li a span{position:absolute;left:0;bottom:0;z-index:2;width:100%;height:36px;padding-left:20px;line-height:36px;color:#fff;box-sizing:border-box;}
+#CT-PCK-110 .photoList li a:before{content:"";position:absolute;bottom:12px;right:20px;z-index:2;width:13px;height:13px;background:url('/images/front/icon/ico_shortcut_mo.png') no-repeat right 50%;background-size:13px auto;}
+#CT-PCK-110 .photoList li a:after{content:"";position:absolute;bottom:0;left:0;width:100%;height:36px;background-color:#2a6eb6;opacity:0.9;filter:alpha(opacity=90);}
+
+/* CSR - Our CSR - 파트너와 함께하는 도약 2016-09-06 */
+#CT-PCK-113 .historyArea{margin:26px 0;}
+#CT-PCK-113 .historyArea li{position:relative;margin-top:28px;padding-top:30px;border-top:1px solid #c5c5c5;text-align:center;}
+#CT-PCK-113 .historyArea li:after{content:'';position:absolute;left:50%;top:-12px;width:23px;height:23px;margin-left:-12px;background:url(/images/front/contents/bg_history_arrow01.png) no-repeat 0 0;background-size:100% auto;}
+#CT-PCK-113 .historyArea li:first-child{margin-top:0;padding-top:0;border-top:none;}
+#CT-PCK-113 .historyArea li:first-child:after{display:none;}
+#CT-PCK-113 .historyArea li > h4{font-size:1.8rem;color:#1a4779;}
+#CT-PCK-113 .historyArea li > em{display:block;margin-top:2px;padding:1px 0;border:solid #0b65bd;border-width:2px 0 1px;line-height:1.5;}
+#CT-PCK-113 .historyArea li > div{padding:14px 10px;background-color:#f8f8f8;text-align:left;}
+#CT-PCK-113 .historyArea li p{position:relative;margin-top:2px;padding-left:8px;}
+#CT-PCK-113 .historyArea li p:before{content:'·';position:absolute;left:0;top:0;}
+#CT-PCK-113 .historyArea li p:first-child{margin-top:0;}
+
+/* CSR - Act - 생태계 보전 노력 2016-09-06 */
+#CT-PCK-114 section p .blueTit{display:block;margin-top:26px;}
+#CT-PCK-114 section p{line-height:1.6;color:#555;}
+#CT-PCK-114 section p + p{margin-top:10px;}
+
+/* CSR - Report 2016-09-06 */
+#CT-PCK-116 .contInfoArea .txt {margin-bottom:16px;}
+#CT-PCK-116 .contInfoArea .subTxt {position:relative;margin-bottom:16px;padding-left:14px;font-size:12px;line-height:1.4;color:#aaa;}
+#CT-PCK-116 .contInfoArea .subTxt:before {content:'※';position:absolute;left:0;top:0;}
+#CT-PCK-116 .tableBasicView th{padding:0;}
+#CT-PCK-116 .tableBasicView tr td {padding:0 0 8px 15px}
+#CT-PCK-116 .tableBasicView .btnDownload {min-width:120px;padding:6px 12px;box-sizing:border-box;}
+#CT-PCK-116 .tableBasicView .btnArea .btnDownload {margin-top:8px;}
+#CT-PCK-116 .tableBasicView .btnDownload [class^="icon"]{margin-right:4px;}
+#CT-PCK-116 .txtTableInfoBot .txt {text-indent:-17px;padding-left:17px;}
+#CT-PCK-116 .txtTableInfoBot .pointColor {margin-bottom:8px;color:#aaa;text-indent:-12px;padding-left:12px;}
+#CT-PCK-116 .defaultGrayDotList {display:none;margin-top:8px;}
+#CT-PCK-116 .report {display:none;}
+
+/* 이사회 산화 위원회 > CSR위원회 */
+#CT-PCK-044 .visualImg {background-image:url('/images/front/contents/img_CT-PCK-044_mo01.png');background-repeat:no-repeat;background-size:cover;background-position:right center;padding:34px 20px;color:#ffffff;font-size:1.6rem;}
+#CT-PCK-044 .visualImg .txt {line-height:1.4;text-align:center;}
+#CT-PCK-044 .visualImg + .txt {margin-top:28px;line-height:1.6;}
+#CT-PCK-044 .txt + .txt {margin-top:16px;line-height:1.6;}
+#CT-PCK-044 .txt .point {color:#ea0000;}
+#CT-PCK-044 .noti {margin-top:10px;}
+#CT-PCK-044 .noti + .defaultGrayDotList {padding-left:15px;}
+#CT-PCK-044 .blueTit {display:inline-block;margin-bottom:11px;}
+#CT-PCK-044 .blueTit + .txt {line-height:1.6;}
+#CT-PCK-044 .pointSubColor {display:block;margin:16px 0 10px;}
+#CT-PCK-044 .blueTit + .pointSubColor {margin-top:4px;}
+#CT-PCK-044 .defaultGrayDotList li {background-position:left 8px;line-height:1.6;}
+#CT-PCK-044 .defaultGrayDotList li .defaultGrayDotList {margin-bottom:10px;}
+#CT-PCK-044 .btnArea {margin:20px -6px 0 0;text-align:right;}
+#CT-PCK-044 .btnArea .btnDownload {margin-bottom:5px;border-color:#105d99;background-color:#105d99;color:#fff;}
+#CT-PCK-044 .btnArea .iconDownLoad {background-image:url('/images/front/icon/ico_downLoad_white.png');}
+#CT-PCK-044 .tableBasicList tbody th {background-color:#fff;}
+#CT-PCK-044 .tableBasicList th, #CT-PCK-044 .tableBasicList td {padding-right:5px;padding-left:5px;}
+#CT-PCK-044 .tableBasicList2{margin-top:20px;}
+#CT-PCK-044 .defaultTable2 th{border-bottom:1px solid #ccc;}
+#CT-PCK-044 .defaultTable2 td{border-top:1px solid #ccc; border-bottom:0;}
+#CT-PCK-044 .defaultTable2 span.bold{font-weight:bold;}
+#CT-PCK-044 .txt2 br{display:none;}
+#CT-PCK-044 .mt-10{margin-top:10px;}
+#CT-PCK-044 .hidden_dot{background:none;}
+
+
+/* 테블릿 + PC */
+@media screen and (min-width:768px) {
+/*******************************************************************************************************************************
+	corporate 메뉴 공통정의
+*******************************************************************************************************************************/
+/* COMMON */
+.cmdTxt {padding-left:20px;font-size:15px;} /* 2016-09-06 추가 */
+
+/* 갤러리타입 */
+.galleryType {margin:20px 0 20px -4%;width:104%;overflow:hidden;}
+.galleryType > article {float:left;width:46%;margin-left:4%;}
+.galleryType > article .cont {height:134px;}
+.galleryType > article .cont .text {font-size:1.4rem;}
+.galleryType > article .cont .date {font-size:1.4rem;}
+
+/* 사업영역 */
+.businessIntro {}
+.businessIntro .subTit {padding-bottom:25px;}
+.businessIntro .subTit:after {margin-top:26px;width:54px;height:5px;}
+.businessIntro p em{margin-top:20px;} /* 2016-09-06 추가 */
+.businessUnit {margin-top:24px;}
+.businessUnit ul:after {content:"";display:block;clear:both;height:0;visibility:hidden;}
+.businessUnit li[class*="unit0"] {float:left;width:32%;margin-left:2%;}
+.businessUnit li.unit01 {margin-left:0;}
+.businessUnit .imgWrap .moImg {display:none;}
+.businessUnit .imgWrap .pcImg {display:block;}
+.businessUnit .txtWrap strong {padding:18px 18px 7px 18px;font-size:1.8rem;}
+.businessUnit .txtWrap p {padding:0 18px 18px 18px;}
+.businessUnit .unitTit .txtWrap {position:absolute;}
+.businessUnit .unitTit .txtWrap strong {padding:30px 18px 7px 18px;}
+.businessUnit .unitTit .txtWrap p {padding-right:160px;padding-bottom:28px}
+.businessUnit .unitTit .btnArea {position:absolute;top:50%;right:12px;margin-top:-21px;padding:0;}
+.businessUnit .unitTit .btnArea .btnVisual {overflow:hidden;min-width:102px;}
+.businessUnit .unitTit .btnArea .iconGoArrow {float:right;margin-top:3px;}
+
+/* 사업별 바로가기 */
+.businessList ul li {;width:23.5%;margin-left:2%;margin-bottom:0;}
+.businessList ul li.sector3 {margin-left:2%;}
+.businessList ul.basicType {height:52px;}
+.businessList ul.basicType li a {display:block;height:52px;padding:17px 18px;}
+
+.businessList ul.imgType li a span {margin:-41px 10px 0;padding:11px 0;background:url('/images/front/icon/ico_shortcut_pc.png') no-repeat right 50%;background-size:inherit;}
+.businessList ul.imgType li:after {height:42px;}
+
+.businessList ul.imgType02 li {width:25%;}
+.businessList ul.imgType02 li a {padding:42px 0;font-size:2.2rem;}
+.businessList ul.imgType02 li a span {margin-top:10px;font-size:1.6rem;}
+.businessList ul.imgType02 li.sector3 {margin-left:0;}
+.businessList ul.imgType02 li.sector3 a {border-left:0;}
+
+/*******************************************************************************************************************************
+	컨텐츠 별 정의
+*******************************************************************************************************************************/
+
+/* OVERVIEW */
+#CT-PCK-001 .contTit:after {margin-top:28px;margin-bottom:36px;width:54px;height:5px;}
+#CT-PCK-001 .mBck {display:inline;}
+#CT-PCK-001 .cntIntro {margin-bottom:25px;}
+#CT-PCK-001 .cntIntro p {margin-top:12px;}
+
+#CT-PCK-001 .businessList {margin-bottom:80px;}
+
+#CT-PCK-001 .cntInfo {margin:20px 0 80px;background:url('/images/front/contents/img_CT-PCK-001_pc01.png') no-repeat right 0;background-size:initial;}
+#CT-PCK-001 .cntInfo li {position:relative;height:101px;padding-right:40px;padding-left:40px;box-sizing:border-box;text-align:right;}
+#CT-PCK-001 .cntInfo li strong {position:absolute;top:50%;left:40px;margin-top:-9px;margin-bottom:0;}
+#CT-PCK-001 .cntInfo li em {font-size:2.2rem;margin-bottom:8px;}
+#CT-PCK-001 .cntInfo li span {font-size:1.4rem;}
+
+#CT-PCK-001 .vision {padding:24px 30px;margin:0 0 76px;height:312px;background:url('/images/front/contents/img_CT-PCK-001_pc02.png') no-repeat right 0;background-size:inherit;}
+#CT-PCK-001 .vision > strong {display:block;margin-bottom:16px;font-size:3.6rem;line-height:1.2}
+#CT-PCK-001 .vision > p {line-height:1.6;}
+
+#CT-PCK-001 section .imgWrap {margin:54px 0 70px;}
+#CT-PCK-001 section .imgWrap .moImg {display:none;}
+#CT-PCK-001 section .imgWrap .pcImg {display:block;}
+
+/* CEO 메시지 */
+#CT-PCK-026 .imgWrap {margin-bottom:56px;}
+#CT-PCK-026 [class*="ceo"] {padding:0;}
+#CT-PCK-026 [class*="ceo"] .subTit {padding-bottom:12px;line-height:1.4;}
+#CT-PCK-026 [class*="ceo"] .signArea {margin-top:30px;}
+#CT-PCK-026 [class*="ceo"] .signArea img {width:140px;vertical-align:top;}
+#CT-PCK-026 [class*="ceo"] .signArea .smallTit {font-size:2.0rem;}
+#CT-PCK-026 [class*="ceo"] .signArea .subTit {font-size:3.0rem;}
+
+/* 경영진 */
+#CT-PCK-002 section {margin-top:30px;padding-bottom:24px;min-height:219px;}
+#CT-PCK-002 .contTit, #CT-PCK-002 .dashList {margin-left:45%;padding-left:8%;}
+#CT-PCK-002 .contTit {margin-top:0;padding-top:0;font-size:2.5rem;}
+#CT-PCK-002 .dashList {font-size:1.4rem;}
+#CT-PCK-002 .imgWrap {width:45%;}
+#CT-PCK-002 .imgWrap img {position:relative;bottom:10px;}
+
+/* 연혁 */
+#organ .contTit:after {margin-top:28px;margin-bottom:35px;width:54px;height:5px;}
+#organ .history {margin:60px 0 20px;}
+#organ .defaultTab a {padding-top:9px;padding-bottom:8px;}
+#organ .history > li {padding-left:32%;}
+#organ .history .year {width:32%;padding-top:20px;font-size:3rem;}
+#organ .history .details {padding:0 0 9px 18px;}
+#organ .history .details > li {padding:27px 0 24px 68px;background:url('/images/front/common/bg_dashed_line.png') repeat-x 0 0;}
+#organ .history .details > li:first-child {background:none;}
+#organ .history .details > li .month {width:40px;padding-top:27px;}
+#organ .history .details > li ul li {margin-top:11px}
+#organ .history .details > li ul li img {display:block;margin-top:8px;padding-bottom:5px;}
+#organ .businessList {margin-top:26px;}
+
+/* 사업영역 - 상사부문 */
+#CT-PCK-009 .businessUnit li.unit04,
+#CT-PCK-009 .businessUnit li.unit05 {width:49%;}
+#CT-PCK-009 .businessUnit li.unit04 {margin-left:0;}
+
+/* 사업영역 - 리조트부문 */
+/*#CT-PCK-011 .businessUnit li[class*="unit0"] {width:49%;}
+#CT-PCK-011 .businessUnit li.unit03 {margin-left:0;}*/
+
+/* 뉴스 */
+#CT-PCK-016 .btnArea {margin-top:42px}
+
+/* 소셜미디어 */
+#CT-PCK-018 .smallTit {}
+#CT-PCK-018 .btnSns span {width:36px;height:36px;background-image:url('/images/front/btn/btn_sns_pc.png');background-size:300px auto;}
+#CT-PCK-018 .btnSns:hover span {background-image:url('/images/front/btn/btn_sns_over_pc.png');}
+
+/* 채용 */
+#CT-PCK-019 .recruitHead .contTit {line-height:1.25;}
+#CT-PCK-019 .recruitList a {margin-top:-23px;}
+
+/* 오시는 길 */
+#road .mapArea {height:420px;}
+#road .addrArea li {padding-left:90px;}
+
+/* Contact Us - 고객문의 */
+#CT-PCK-024 .contTit:after {margin-top:23px;margin-bottom:35px;width:54px;height:5px;}
+#CT-PCK-024 section > .subTit {padding-top:80px;}
+#CT-PCK-024 p {line-height:1.6;}
+#CT-PCK-024 > .btnArea {padding:0 0 60px;margin:0;border-bottom:1px solid #d9d9d9}
+#CT-PCK-024 .grayWrap {padding:45px 35px;margin:80px 0 0;}
+#CT-PCK-024 .termsWrap {margin-top:40px;padding-top:34px;}
+#CT-PCK-024 .termsWrap .defaultGrayDotList > li {background-position:0 9px;}
+#CT-PCK-024 .termsWrap .noti {margin-bottom:60px;font-size:1.4rem;}
+#CT-PCK-024 .termsWrap .pointSubColor {margin:0 0 18px;font-size:1.8rem;}
+#CT-PCK-024 .btnArea {margin-top:35px;text-align:center;}
+#CT-PCK-024 .btnDefaultForm {width:242px;padding:17px 20px 16px;text-align:center;}
+#CT-PCK-024 .formList li {margin-top:10px;padding-left:112px}
+#CT-PCK-024 .formList li:first-child {margin-top:30px;}
+#CT-PCK-024 .formList li .tit {position:absolute;left:0;top:9px;margin-bottom:0;color:#222;}
+#CT-PCK-024 .formList li .email .emailId {float:left;width:38%;padding-right:36px;box-sizing:border-box;}
+#CT-PCK-024 .formList li .email .emailId .unit {width:36px;text-align:center;}
+#CT-PCK-024 .formList li .email .domain {float:left;width:31%;padding-right:10px;margin:0;box-sizing:border-box;}
+#CT-PCK-024 .formList li .email .select {float:left;width:31%;}
+#CT-PCK-024 .formList .defaultList {margin:5px 0;}
+#CT-PCK-024 .businessList {margin-top:35px;margin-bottom:140px;}
+#CT-PCK-024  .autoEntry br{display: none;}/* 2017-03-30 추가 */
+#CT-PCK-024  .autoEntry .inputText {width:50%;margin: 0 7px 0 6px;}/* 2017-03-30 추가 */
+
+/* 이사회 산화 위원회 > CSR위원회 */
+#CT-PCK-044 .btnArea {margin-top:10px}
+#CT-PCK-044 .btnArea .btnDownload {margin-bottom:0;}
+#CT-PCK-044 .tableBasicList th, #CT-PCK-044 .tableBasicList td {padding-right:25px;padding-left:25px;}
+    
+}
+
+/* PC 버전 */
+@media screen and (min-width:1025px) {
+/*******************************************************************************************************************************
+	corporate 메뉴 공통정의
+*******************************************************************************************************************************/
+
+/* common 2016-09-06 */
+.depthMenu{display:none;}
+.visualImgBox,
+.normalTxt{margin-top:22px;}
+.halfArea{overflow:hidden;width:100%;}
+.halfArea > div{float:left;box-sizing:border-box;}
+.halfArea > div + div > .blueTit{margin-top:0;}
+.halfArea + .halfArea,
+.normalTxt + .halfArea{margin-top:38px;}
+.businessIntro p + .subTit{margin-top:75px;}
+
+/* btn 2016-09-06 */
+.btnInfoView {font-size:14px;}
+.btnInfoTxt {margin-right:20px;font-size:16px;}
+
+/* 갤러리타입 */
+.galleryType {margin:20px 0 60px;width:100%;}
+.galleryType > article {width:23.5%;margin-left:2%;margin-bottom:0;}
+.galleryType > article:first-child {margin-left:0;}
+.galleryType > article .tit {font-size:14px;}
+.galleryType > article .cont {position:relative;padding:20px 24px 30px 24px;height:202px;}
+.galleryType > article .cont .text {font-size:14px;line-height:1.9;}
+.galleryType > article .cont .date {position:absolute;bottom:23px;font-size:14px;}
+
+/* 사업영역 */
+.businessUnit .txtWrap strong {font-size:18px;}
+
+/* 사업별 바로가기 */
+.businessList ul.imgType02 li a {font-size:22px;}
+.businessList ul.imgType02 li a span {font-size:16px;}
+
+/*******************************************************************************************************************************
+	컨텐츠 별 정의
+*******************************************************************************************************************************/
+
+/* OVERVIEW */
+#CT-PCK-001 .pcBck {display:block;}
+#CT-PCK-001 .vision > strong {font-size:36px;}
+
+/* CEO 메시지 */
+#CT-PCK-026 [class*="ceo"] .signArea .smallTit {font-size:20px;}
+#CT-PCK-026 [class*="ceo"] .signArea .subTit {font-size:30px;}
+
+/* 경영진 */
+#CT-PCK-002 section {min-height:279px;}
+#CT-PCK-002 .contTit, #CT-PCK-002 .dashList {margin-left:414px;padding-left:102px;}
+#CT-PCK-002 .contTit {padding-bottom:37px;font-size:30px;}
+#CT-PCK-002 .contTit:after {margin-top:30px;width:54px;height:5px;}
+#CT-PCK-002 .contTit span {font-size:22px;}
+#CT-PCK-002 .dashList {font-size:16px;}
+#CT-PCK-002 .imgWrap {width:414px;}
+#CT-PCK-002 .imgWrap img {position:relative;bottom:0;}
+
+/* 연혁 */
+#CT-PCK-004 .bck {display:block;}
+#CT-PCK-004 .defaultTab .tab04 a {padding-top:19px;padding-bottom:18px;}
+#CT-PCK-004 section .btnArea {display:block;margin-top:30px;text-align:right;}
+#CT-PCK-004 section .btnArea a {width:202px;padding:17px 20px 16px;margin-right:0;text-align:center;}
+
+/* CSP 경영 */
+#CT-PCK-014 .contInfoArea .area {min-height:286px;}
+
+/* 뉴스 */
+#CT-PCK-016 .btnServiceArea .btnPrint {display:inline-block;}
+
+/* 채용 */
+#CT-PCK-019 .recruitWrap {display:table;width:100%;table-layout:fixed;}
+#CT-PCK-019 .recruitHead, #CT-PCK-019 .recruitList {display:table-cell;width:50%;vertical-align:middle;}
+#CT-PCK-019 .recruitHead {padding:0;border-right:none;border-bottom:1px solid #d9d9d9;}
+#CT-PCK-019 .recruitHead p {margin-top:20px;}
+#CT-PCK-019 .recruitHead p span {display:block;}
+#CT-PCK-019 .recruitHead .contTit {position:relative;padding-bottom:0;}
+#CT-PCK-019 .recruitHead .contTit:after {content:"";display:block;clear:both;width:1px;height:75px;background-color:#d9d9d9;margin:22px auto 0 auto;}
+#CT-PCK-019 .recruitList {}
+
+/* Contact Us - 고객문의 */
+#CT-PCK-024 .grayWrap {padding:60px 50px;}
+#CT-PCK-024 .grayWrap:before {top:-140px;width:100%;margin:0 -50px;padding:0 50px;}
+#CT-PCK-024 .termsWrap .noti {font-size:14px;}
+#CT-PCK-024 .formList .defaultList {margin:10px 0 16px 0;}
+
+/* CSR - Our CSR 2016-09-06 */
+#CT-PCK-107 .chartArea{margin-top:45px;}
+#CT-PCK-107 .chartArea .mo{display:none;}
+#CT-PCK-107 .chartArea .pc{display:block;}
+
+/* CSR - Our CSR - 인사말 2016-09-06 */
+#CT-PCK-108 .signArea + .btnArea{margin-top:38px;}
+#CT-PCK-108 .signArea img{height:45px;}
+#CT-PCK-108 .signArea .smallTit {font-size:20px;}
+
+/* CSR - Our CSR - 비전 및 전략 2016-09-06 */
+#CT-PCK-109 .visionArea div[class*="visionList"]{margin-top:50px;}
+#CT-PCK-109 .visionArea div[class*="visionList"] h4{height:41px;line-height:41px;}
+#CT-PCK-109 .visionArea > p strong{margin-top:58px;}
+#CT-PCK-109 .visionArea > p + div[class*="visionList"]{margin-top:28px;}
+#CT-PCK-109 .visionArea .visionList > p,
+#CT-PCK-109 .visionArea .visionList > ul li{padding:8px 0 4px;}
+#CT-PCK-109 .visionArea .visionList .inner ul{display:table;width:100%;border-collapse:collapse;table-layout:fixed;}
+#CT-PCK-109 .visionArea .visionList .inner li{display:table-cell;width:25%;margin-top:0;vertical-align:top;}
+#CT-PCK-109 .visionArea .visionList .inner li em{padding:8px 0 4px;border:solid #43c3e7;border-width:0 0 2px;line-height:1.4;}
+#CT-PCK-109 .visionArea .visionList .inner li em br{display:inline-block;}
+#CT-PCK-109 .visionArea .visionList.color02 .inner li em{height:48px;vertical-align:middle;}
+#CT-PCK-109 .visionArea .visionList.color02 .inner li em span{display:inline-block;overflow:hidden;width:0;height:100%;vertical-align:middle;}
+#CT-PCK-109 .visionArea .visionList .inner li > div{padding:20px 14px;}
+#CT-PCK-109 .visionArea .visionList .inner li p{padding-left:10px;}
+
+/* CSR - Act 2016-09-06 */
+#CT-PCK-110 .photoList{margin-top:28px;}
+#CT-PCK-110 .photoList > .inner{overflow:hidden;width:102%;margin-left:-16px;}
+#CT-PCK-110 .photoList h4,
+#CT-PCK-110 .photoList ul li{float:left;width:31.8%;height:240px;margin-bottom:20px;margin-left:1.5%;}
+#CT-PCK-110 .photoList h4{position:relative;text-align:left;}
+#CT-PCK-110 .photoList h4 span{position:absolute;left:0;bottom:20px;padding:0 0 0 25px;font-size:32px;}
+#CT-PCK-110 .photoList h4 br{display:inline-block;}
+#CT-PCK-110 .photoList h4 br.mb{display:none;}
+#CT-PCK-110 .photoList li a{height:240px;}
+#CT-PCK-110 .photoList li img{height:104%;}
+#CT-PCK-110 .photoList li a span{width:87%;height:43px;line-height:43px;}
+#CT-PCK-110 .photoList li a:before{content:"";position:absolute;bottom:12px;right:20px;z-index:2;width:21px;height:21px;background-image:url('/images/front/icon/ico_shortcut_pc.png');background-size:21px auto;}
+#CT-PCK-110 .photoList li a:after{height:43px;}
+
+/* CSR - Act - 최우선의 가치, 안전 2016-09-06 */
+#CT-PCK-111 .visualImgBox{height:229px;vertical-align:top;}
+#CT-PCK-111 .halfArea.list01 > div.con01{width:70%;}
+#CT-PCK-111 .halfArea.list01 > div.con02{width:30%;}
+#CT-PCK-111 .halfArea.list02 > div{width:50%;}
+#CT-PCK-111 .halfArea > div.con01{padding-right:8px;}
+#CT-PCK-111 .halfArea > div.con02{padding-left:8px;}
+#CT-PCK-111 .halfArea > div .visualImgBox img{margin-top:-10px;}
+#CT-PCK-111 .halfArea.list01 > div.con01 .visualImgBox img{margin-top:-80px;}
+#CT-PCK-111 .halfArea.list01 > div.con02 .visualImgBox img{width:auto;height:100%;margin:0 0 0 -95px;}
+
+/* CSR - Act - 청렴한 기업운영 2016-09-06 */
+#CT-PCK-112 .visualImgBox{height:229px;vertical-align:top;}
+#CT-PCK-112 > .visualImgBox img{margin-top:-140px;}
+#CT-PCK-112 .halfArea > div{width:50%;}
+#CT-PCK-112 .halfArea > div.con01{padding-right:8px;}
+#CT-PCK-112 .halfArea > div.con02{padding-left:8px;}
+#CT-PCK-112 .halfArea > div .visualImgBox img{margin-top:-10px;}
+
+/* CSR - Act - 파트너와 함께하는 도약 2016-09-06 */
+#CT-PCK-113 .visualImgBox{height:229px;vertical-align:top;}
+#CT-PCK-113 > .visualImgBox img{margin-top:-140px;}
+#CT-PCK-113 .halfArea > div{width:50%;padding-left:3px;}
+#CT-PCK-113 .halfArea > div.con01{width:27%;}
+#CT-PCK-113 .halfArea > div.con02{width:36%;}
+#CT-PCK-113 .halfArea > div.con03{width:37%;}
+#CT-PCK-113 .halfArea > div.con02 .visualImgBox img{width:auto;height:100%;margin:0;}
+#CT-PCK-113 .halfArea > div.con01 .visualImgBox img,
+#CT-PCK-113 .halfArea > div.con03 .visualImgBox img{width:auto;height:100%;margin:0;}
+#CT-PCK-113 .historyArea{overflow:hidden;margin:40px 0 73px;}
+#CT-PCK-113 .historyArea ul{display:table;width:100%;}
+#CT-PCK-113 .historyArea li{display:table-cell;width:33.33%;padding:0 0 0 15px;border:none;}
+#CT-PCK-113 .historyArea li:before{content:'';position:absolute;left:7px;top:0;width:1px;height:100%;background-color:#dcdcdc;}
+#CT-PCK-113 .historyArea li:after{left:0px;top:76px;width:20px;height:20px;margin-left:-2px;background-image:url(/images/front/contents/bg_history_arrow02.png);}
+#CT-PCK-113 .historyArea li:first-child{padding-left:0;border:none;}
+#CT-PCK-113 .historyArea li:first-child:before{display:none;}
+#CT-PCK-113 .historyArea li > em{padding:28px 0;}
+#CT-PCK-113 .historyArea li > div{position:relative;}
+#CT-PCK-113 .historyArea li > div:before{content:'';position:absolute;left:0;top:0;width:100%;height:200px;background-color:#f8f8f8;}
+#CT-PCK-113 .historyArea li > h4{font-size:36px;}
+
+/* CSR - Act - 생태계 보전 노력 2016-09-06 */
+#CT-PCK-114 .visualImgBox{height:229px;vertical-align:top;}
+#CT-PCK-114 .halfArea > div{width:50%;}
+#CT-PCK-114 .halfArea.list02 > div.con01{padding-right:8px;}
+#CT-PCK-114 .halfArea.list02 > div.con02{padding-left:8px;}
+#CT-PCK-114 .halfArea.list02 > div .visualImgBox img{margin-top:0;}
+#CT-PCK-114 section p .blueTit{margin-top:38px;}
+
+/* CSR - Act - 아름다운 가치실현 2016-09-06 */
+#CT-PCK-115 .visualImgBox{height:229px;vertical-align:top;}
+#CT-PCK-115 .halfArea > div{width:50%;}
+#CT-PCK-115 .halfArea > div.con01{padding-right:8px;}
+#CT-PCK-115 .halfArea > div.con02{padding-left:8px;}
+#CT-PCK-115 .halfArea > div .visualImgBox img{margin-top:0;}
+
+/* CSR - Report 2016-09-06 */
+#CT-PCK-116 .contInfoArea .area {min-height:286px;}
+#CT-PCK-116 .contInfoArea .subTxt {font-size:14px;}
+#CT-PCK-116 .tableBasicView tr:last-child {display:table-row;}
+#CT-PCK-116 .tableBasicView tr td{padding-left:30px;}
+#CT-PCK-116 .tableBasicView tr td .btnArea a{margin-right:10px;}
+#CT-PCK-116 .tableBasicView .btnDownload{min-width:150px;padding:6px 20px;}
+#CT-PCK-116 .txtTableInfoBot {position:relative;padding-right:38%;}
+#CT-PCK-116 .txtTableInfoBot .pointColor {margin-bottom:17px;}
+#CT-PCK-116 .report {display:block;position:absolute;top:0;right:0;width:37%;text-align:right;color:#555;}
+#CT-PCK-116 .report > span {display:inline-block;width:50%;margin-right:8px;vertical-align:middle;}
+
+/* 이사회 산화 위원회 > CSR위원회 */
+#CT-PCK-044 .visualImg {background-image:url('/images/front/contents/img_CT-PCK-044_pc01.png');background-size:inherit;padding:60px 0 0 0;min-height:180px;font-size:20px;}
+#CT-PCK-044 .visualImg + .blueTit {margin-top:49px;}
+#CT-PCK-044 .pBck {display:block;}
+#CT-PCK-044 .blueTit {margin-bottom:17px;}
+#CT-PCK-044 .defaultGrayDotList li {background-position:left 9px;}
+#CT-PCK-044 .btnArea + .blueTit {margin-top:10px;}
+
+}
