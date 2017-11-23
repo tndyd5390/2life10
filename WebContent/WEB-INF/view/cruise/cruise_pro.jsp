@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="../include/inc_header.jsp"%>
-<!--#include file="../include/inc_header.jsp"-->
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="../include/inc_header.jsp" %>
 
 	<div id="contentsWrap">
 		<div class="container">
@@ -145,5 +144,4 @@
 		</div>
 	</div> <!-- // contentsWrap -->
 
-<!--#include file="../include/inc_footer.jsp"-->
-<%@include file="../include/inc_footer.jsp"%>
+<%@ include file="../include/inc_footer.jsp" %>

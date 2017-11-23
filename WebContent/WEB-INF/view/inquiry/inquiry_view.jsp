@@ -4,11 +4,11 @@
 	<div id="contentsWrap">
 		<div class="container">
 			<div class="conTitWrap">
-				<h2>주요정보고시사항</h2>
+				<h2>납부조회</h2>
 				<div class="location">
 					<span class="home">홈</span>
 					<span>고객센터</span>
-					<strong>주요정보고시사항</strong>
+					<strong>납부조회</strong>
 				</div>
 			</div> <!-- // conTitWrap -->
 			<!-- 메뉴 영역 -->
@@ -20,8 +20,8 @@
 	$(function() {
 		//메뉴 제어 
 		var lnb = $(".pcLnbWrap ul li a");
-		var menuId = "MN60400";
-		var mbId = "MO60400";
+		var menuId = "MN60700";
+		var mbId = "MO60700";
 		var mbId2 = "";
 		
 		console.log(menuId);
@@ -61,7 +61,7 @@
 						</ul>
 					</div>
 					<div class="flexItem4"> <!-- .select 버튼 클릭시 다중클래스 on 추가 -->
-						<strong><button type="button" class="select" id="subtitle">주요정보고시사항</button></strong>
+						<strong><button type="button" class="select" id="subtitle">납부조회</button></strong>
 						<ul>
 							<li id="MO60100"><a href="javascript:goMenu('../notice/notice_list.jsp', 'MO60100');">공지사항</a></li>
                             <li id="MO60200"><a href="javascript:goMenu('../qna/qna_list.jsp', 'MO60200');">자주하는질문</a></li>
@@ -94,93 +94,84 @@
 
 			<!-- 메뉴 영역 -->
 
-			<div id="agreement" class="contents"> <!-- 페이지별 ID none -->
-				<h3 class="smallTit">주요정보고시사항</h3>
+			<div class="contents"> <!-- 페이지별 ID none -->
+				<h3 class="smallTit">납부조회</h3>
 
-
-				<!-- 주요정보고시사항 -->
-				<article>
-
-					<section>
-						<p class="txt">당사는 2009.4.28 공정거래위원회의 "중용표기,광고사항고시"에 의거하여 아래와 같이 고시합니다.<br/>목적:소비자 피해방지 및 합리적 상품선택을 할 수 있도록 정보제공.</p>
-					</section>
-
-					<section>
-						<h4 class="blueTit">1.중도 해약 환급금에 대한 환급기준 및 환급시기.</h4>
-						<ul class="nonumList">
-							<li>- 중도 해약 환급금에 대한 환급기준은 공정거래 위원회가 승인한 상조업 표준약관에 따라 환급 가능하며 환급금액은 신청일로부터 제3영업일 이내에 수령 할 수 있습니다.</li>
-						</ul>
-					</section>
-
-					<section>
-						<h4 class="blueTit">2.소비자 분쟁시 해결기준.</h4>
-						<ul class="nonumList">
-							<li>- 공정거래 위원회 소비자 분쟁 해결기준에 따릅니다.</li>
-							<li>- 청약(계약)철회 환급금은 신청일로 부터 제3영업일 이내에 수령 할 수 있습니다.</li>
-						</ul>
-					</section>
-
-					<section>
-						<h4 class="blueTit">2.소비자 분쟁시 해결기준.</h4>
-						<ul class="nonumList">
-							<li>- 수의,관,장의차량,인력정보등 구체적인 제공물품 및 서비스 내용은 홈페이지의 상품소개란에 자세히 소개되어 있습니다.
-								<ul class="roundNumList">
-									<li>① 관:재질-오동(3~6츠), 원산지-중국, 제조-한국</li>
-									<li>② 수의:원단-대마(원산지-중국), 제조방법-기계직, 제조-대한민국</li>
-									<li>③ 차량:링컨, 캐디락-2010년식형 리무진/장의버스:상품별 차등 전국무료 제공.</li>
-									<li>④ 인력:장례지도사 1명(입관시 2명)/도우미2~6명(상품별 차등 제공 :1일 10시간기준) / 도우미 추가요금:추가 1시간당 8,000원추가.</li>
-								</ul>
-							</li>
-						</ul>
-					</section>
-
-					<section>
-						<h4 class="blueTit">4.상조관련자산, 총 고객 환급 의무액 (2016년 12월말 기준).</h4>
-						<div class="tableBasicList">
-							<table class="defaultTable">
-								<caption></caption>
-								<colgroup>
-									<col style="width:auto%;">
-									<col style="width:50%;">
-								</colgroup>
-								<head>
-									<tr>
-										<th scope="row">총 고객 환급 의무액</th>
-										<th scope="row">상조관련자산</th>
-									</tr>
-								</head>
-								<tbody>
-									<tr>
-										<td>869,400만원</td>
-										<td>1,031,285만원</td>
-									</tr>
-									<tr>
-										<td colspan="2">*현대회계법인의 회계감사를 받았음</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</section>
-
-					<section>
-						<h4 class="blueTit">5.고객 불입금에 대한 관리방법.</h4>
-						<ul class="nonumList">
-							<li>- 고객 불입금의 50%는 한국상조공제조합에 소비자피해보상을 위한 공제계약(선수금보전)을 체결하고 있습니다.</li>
-						</ul>
-					</section>
-
-					<section>
-						<h4 class="blueTit">6.크리스찬상조 회계감사보고서.</h4>
-
-					</section>
-
-				</article>
-				<!-- // 주요정보고시사항 -->
-
-				<div class="btn_area">
-					<a href="#" id="submitLink" class="btn_active">회계감사보고서 다운로드</a>
+				<div class="tableBasicList">
+					<table class="defaultTable">
+						<caption></caption>
+						<colgroup>
+							<col style="width:20%;">
+							<col style="width:30%;">
+							<col style="width:20%;">
+							<col style="width:30%;">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th scope="row">회원번호</th>
+								<td>205120</td>
+								<th scope="row">회원성명</th>
+								<td>김종덕</td>
+							</tr>
+							<tr>
+								<th scope="row">주민등록번호</th>
+								<td>720507-*******</td>
+								<th scope="row">성별</th>
+								<td>남</td>
+							</tr>
+							<tr>
+								<th scope="row">상품종류</th>
+								<td>19000X147</td>
+								<th scope="row">나이</th>
+								<td>-</td>
+							</tr>
+							<tr>
+								<th scope="row">만기계약금</th>
+								<td>2800000원</td>
+								<th scope="row">월부금액</th>
+								<td>19000원</td>
+							</tr>
+							<tr>
+								<th scope="row">가입일자</th>
+								<td>2012.12.17</td>
+								<th scope="row">불입종별</th>
+								<td>월납</td>
+							</tr>
+							<tr>
+								<th scope="row">불입방법</th>
+								<td>출금보류</td>
+								<th scope="row">관리구분</th>
+								<td>행사</td>
+							</tr>
+							<tr>
+								<th scope="row">불입횟수</th>
+								<td>21</td>
+								<th scope="row">연체</th>
+								<td>39</td>
+							</tr>
+							<tr>
+								<th scope="row">불입총금액</th>
+								<td>399000원</td>
+								<th scope="row">영업사원</th>
+								<td>(418)김종덕/정</td>
+							</tr>
+							<tr>
+								<th scope="row">집주소</th>
+								<td colspan="3">경기 시흥시 대야동 서해아파트 101동 308호</td>
+							</tr>
+							<tr>
+								<th scope="row">발송처주소</th>
+								<td colspan="3">경기 시흥시 대야동 서해아파트 101동 308호</td>
+							</tr>
+							<tr>
+								<th scope="row">집전화번호</th>
+								<td>-</td>
+								<th scope="row">발송처전화</th>
+								<td>010-4134-2671</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-			
 
 			</div> <!-- // contents -->
 

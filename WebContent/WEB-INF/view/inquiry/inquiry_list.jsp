@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="../include/inc_header.jsp"%>
-<!--#include file="../include/inc_header.jsp"-->
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="../include/inc_header.jsp" %>
 
 	<div id="contentsWrap">
 		<div class="container">
@@ -98,7 +97,87 @@
 			<div class="contents"> <!-- 페이지별 ID none -->
 				<h3 class="smallTit">납부조회</h3>
 
-			
+				<div class="tableBasicList">
+					<table class="defaultTable">
+						<caption></caption>
+						<colgroup>
+							<col style="width:auto%;">
+							<col style="width:30%;">
+							<col style="width:30%;">
+							<col style="width:30%;">
+						</colgroup>
+						<head>
+							<tr>
+								<th scope="row">No</th>
+								<th scope="row">예정납입</th>
+								<th scope="row">실제납입</th>
+								<th scope="row">납입방법</th>
+							</tr>
+						</head>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>2012.12</td>
+								<td>2012.12.17</td>
+								<td>자동이체</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>2012.12</td>
+								<td>2012.12.17</td>
+								<td>자동이체</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>2012.12</td>
+								<td>2012.12.17</td>
+								<td>자동이체</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>2012.12</td>
+								<td>2012.12.17</td>
+								<td>자동이체</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>2012.12</td>
+								<td>2012.12.17</td>
+								<td>자동이체</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>2012.12</td>
+								<td>2012.12.17</td>
+								<td>자동이체</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>2012.12</td>
+								<td>2012.12.17</td>
+								<td>자동이체</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>2012.12</td>
+								<td>2012.12.17</td>
+								<td>자동이체</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>2012.12</td>
+								<td>2012.12.17</td>
+								<td>자동이체</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>2012.12</td>
+								<td>2012.12.17</td>
+								<td>자동이체</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 
 			</div> <!-- // contents -->
 
@@ -106,5 +185,4 @@
 		</div>
 	</div> <!-- // contentsWrap -->
 
-<!--#include file="../include/inc_footer.jsp"-->
-<%@include file="../include/inc_footer.jsp"%>
+<%@ include file="../include/inc_footer.jsp" %>
