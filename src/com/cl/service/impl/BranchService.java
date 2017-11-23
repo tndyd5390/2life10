@@ -1,5 +1,6 @@
 package com.cl.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -27,7 +28,28 @@ public class BranchService implements IBranchService{
 	}
 
 	@Override
+	public BranchDTO getBranchDetailAddCnt(String branchNo) throws Exception {
+		branchMapper.updateBranchViewCnt(branchNo);
+		return branchMapper.getBranchDetail(branchNo);
+	}
+	
+	@Override
 	public BranchDTO getBranchDetail(String branchNo) throws Exception {
 		return branchMapper.getBranchDetail(branchNo);
+	}
+
+	@Override
+	public int deleteBranch(String branchNo) throws Exception {
+		return branchMapper.deleteBranch(branchNo);
+	}
+
+	@Override
+	public int updateBranch(BranchDTO bDTO) throws Exception {
+		return branchMapper.updateBranch(bDTO);
+	}
+
+	@Override
+	public List<BranchDTO> getBranchSearch(HashMap<String, Object> sMap) throws Exception {
+		return branchMapper.getBranchSearch(sMap);
 	}
 }

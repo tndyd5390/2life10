@@ -17,6 +17,7 @@
 		       CHG_MEMBER_NO 			AS CHGMEMBERNO,
 		       CHG_DT 					AS CHGDT
 		  FROM BRANCH_INFO
+      ORDER BY BRANCH_NO DESC
 	</select>
 	
 	<insert id="insertBranch" parameterType="BranchDTO">
@@ -43,7 +44,7 @@
 			#{branchAddress},
 			#{branchAddressDetail},
 			0,
-			'0',
+			'0',<!-- 여기는 나중에 회원 모듈 끝나면 바꿔주기 -->
 			NOW()
 		)
 	</insert>
@@ -63,6 +64,65 @@
 		       CHG_MEMBER_NO 			AS CHGMEMBERNO,
 		       CHG_DT 					AS CHGDT
 		  FROM BRANCH_INFO
-		 where BRANCH_NO = #{branchNo}
+		 WHERE BRANCH_NO = #{branchNo}
+	  ORDER BY BRANCH_NO DESC
+	</select>
+	
+	<delete id="deleteBranch" parameterType="string">
+		DELETE FROM BRANCH_INFO WHERE BRANCH_NO = #{branchNo}
+	</delete>
+	
+	<update id="updateBranch">
+		UPDATE BRANCH_INFO
+		   SET BRANCH_AREA_CODE = #{branchAreaCode},
+		       BRANCH_NAME = #{branchName},
+		       BRANCH_OFFICER_NAME = #{branchOfficerName},
+		       BRANCH_TEL_NO = #{branchTelNo},
+		       BRANCH_POST_NO = #{branchPostNo},
+		       BRANCH_ADDRESS = #{branchAddress},
+		       BRANCH_ADDRESS_DETAIL = #{branchAddressDetail},
+		       CHG_MEMBER_NO = '0',
+		       CHG_DT = NOW()
+		 WHERE BRANCH_NO = #{branchNo}
+	</update>
+	
+	<update id="updateBranchViewCnt" parameterType="string">
+		UPDATE BRANCH_INFO
+		   SET BRANCH_VIEW_CNT = BRANCH_VIEW_CNT + 1
+		 WHERE BRANCH_NO = #{branchNo}
+	</update>
+	
+	<select id="getBranchSearch" parameterType="hashmap" resultType="BranchDTO">
+		SELECT BRANCH_NO 				AS BRANCHNO,
+	   		   BRANCH_AREA_CODE 		AS BRANCHAREACODE,
+	     	   BRANCH_NAME 				AS BRANCHNAME,
+	   		   BRANCH_OFFICER_NAME 		AS BRANCHOFFICERNAME,
+	   		   BRANCH_TEL_NO 			AS BRANCHTELNO,
+	   		   BRANCH_POST_NO 			AS BRANCHPOSTNO,
+	   		   BRANCH_ADDRESS 			AS BRANCHADDRESS,
+	   		   BRANCH_ADDRESS_DETAIL 	AS BRANCHADDRESSDETAIL,
+	   		   BRANCH_VIEW_CNT 			AS BRANCHVIEWCNT,
+	   		   REG_MEMBER_NO 			AS REGMEMBERNO,
+	   		   REG_DT 					AS REGDT,
+	   		   CHG_MEMBER_NO 			AS CHGMEMBERNO,
+	   		   CHG_DT 					AS CHGDT
+  		  FROM (SELECT BRANCH_NO,
+					   BRANCH_AREA_CODE,
+	           		   BRANCH_NAME,		
+	           		   BRANCH_OFFICER_NAME,
+	           		   BRANCH_TEL_NO,
+	           		   BRANCH_POST_NO,
+	           		   BRANCH_ADDRESS,			
+	           		   BRANCH_ADDRESS_DETAIL,
+	           		   BRANCH_VIEW_CNT,	
+	           		   REG_MEMBER_NO,		
+	           		   REG_DT,			
+	           		   CHG_MEMBER_NO,
+	           		   CHG_DT
+		  		  FROM BRANCH_INFO
+		 		 WHERE BRANCH_AREA_CODE = #{searchArea}) SEARCH_TABLE
+   		   WHERE INSTR(BRANCH_NAME, #{searchWord}) > 0
+   		ORDER BY BRANCHNO DESC
+	
 	</select>
 </mapper>
