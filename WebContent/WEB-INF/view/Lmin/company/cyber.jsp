@@ -231,7 +231,8 @@
 						</div>
 					</li>
 				</ul>
-
+				<a href="/Lmin/company/cyberWrite.do" class="btn_active_small" style="float:right;">사이버 홍보 등록</a>
+				
 				<!-- pageArea -->
 				<div class="pageArea">
 					<a href='#none' class='btnFirst'><span>처음</span></a> <a href='#' class='btnPrev'><span>이전</span></a><strong>1</strong><a href="javascript:goPage('2','15')" >2</a><a href="javascript:goPage('3','15')" >3</a><a href="javascript:goPage('4','15')" >4</a><a href="javascript:goPage('5','15')" >5</a><a href="javascript:goPage('2','15')" class='btnNext'><span>다음</span></a> <a href="javascript:goPage('19','15')" class='btnLast'><span>마지막</span></a>

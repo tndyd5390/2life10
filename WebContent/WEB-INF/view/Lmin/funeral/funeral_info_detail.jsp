@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.cl.dto.CodeDTO" %>
+<%@ page import="com.cl.dto.FuneralInfoDTO" %>
 <%@ page import="com.cl.util.CmmUtil" %>
+<%@ page import="com.cl.util.TextUtil" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.List" %>
 <%
 	HashMap<String ,List<CodeDTO>> hashMap = (HashMap) request.getAttribute("hashMap");
+	FuneralInfoDTO fDTO = (FuneralInfoDTO) request.getAttribute("fDTO");
 	List<CodeDTO> fList = hashMap.get("funeralList");
 	List<CodeDTO> gList = hashMap.get("geoList");
-
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -192,7 +194,7 @@
 								<td>
 									<select id="funeral" name="funeral" title="" class="inputType2">
 									<% for(CodeDTO cDTO : fList){ %>
-										<option value=<%=CmmUtil.nvl(cDTO.getCodeId())%>><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
+										<option value="<%=CmmUtil.select(cDTO.getCodeId(), fDTO.getFuneralInfoCode())%>"><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
 									<% } %>
 									</select>
 								</td>
@@ -200,7 +202,7 @@
 							<tr>
 								<th scope="row">식장명</th>
 								<td>
-									<input type="text" name="name" id="name" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<input type="text" name="name" id="name" value="<%=CmmUtil.nvl(fDTO.getFuneralInfoName())%>" title="이름" class="inputType1">
 								</td>
 							</tr>
 							<tr>
@@ -208,7 +210,7 @@
 								<td>
 									<select id="geo" name="geo" title="" class="inputType2">
 									<% for(CodeDTO cDTO : gList){ %>
-										<option value=<%=CmmUtil.nvl(cDTO.getCodeId())%>><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
+										<option value="<%=CmmUtil.select(cDTO.getCodeId(), fDTO.getFuneralInfoAreaCode())%>"><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
 									<% } %>
 									</select>
 								</td>
@@ -221,7 +223,7 @@
 										<option value="031">031</option>
 									</select>
 									-
-									<input type="text" name="tel2" value="" class="inputType2" maxlength="4">
+									<input type="text" name="tel2" value="<%=CmmUtil.nvl(fDTO.getFuneralInfoTelNo()) %>" class="inputType2" maxlength="4">
 									-
 									<input type="text" name="tel3" value="" class="inputType2" maxlength="4">
 								</td>
@@ -229,7 +231,7 @@
 							<tr>
 								<th scope="row" rowspan="2">식장주소</th>
 								<td>
-									<input type="text" name="postcode" id="postcode" value="" title="이름" class="inputType2" style="" maxlength="5">
+									<input type="text" name="postcode" id="postcode" value="<%=CmmUtil.nvl(fDTO.getFuneralPostNo())%>" title="이름" class="inputType2" style="" maxlength="5">
 									<a href="javascript:daumPostcode();" class="btn_active_small">우편번호</a>
 									<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>									
 									<script>
@@ -271,8 +273,8 @@
 							</tr>
 							<tr>
 								<td>
-									<input type="text" name="address1" id="address1" value="" class="inputType5">
-									<input type="text" name="address2" id="address2" value="" class="inputType5">
+									<input type="text" name="address1" id="address1" value="<%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralAddress()) %>" class="inputType5">
+									<input type="text" name="address2" id="address2" value="<%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralAddressDetail()) %>" class="inputType5">
 								</td>
 							</tr>
 						</tbody>

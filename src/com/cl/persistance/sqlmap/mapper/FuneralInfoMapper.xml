@@ -1,5 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cl.persistance.mapper.FuneralInfoMapper">
+	<select id="getFuneralList" resultType="CodeDTO">
+		SELECT
+			CODE_ID				AS CODEID,
+			CODE_NAME 			AS CODENAME,
+			GRP_CODE_ID 		AS GRPCODEID,
+			GRP_CODE_NAME 		AS GRPCODENAME
+		FROM CODE
+		WHERE GRP_CODE_ID = '001'
+	</select>
 
+	<select id="getGeoList" resultType="CodeDTO">
+		SELECT
+			CODE_ID				AS CODEID,
+			CODE_NAME 			AS CODENAME,
+			GRP_CODE_ID 		AS GRPCODEID,
+			GRP_CODE_NAME 		AS GRPCODENAME
+		FROM CODE
+		WHERE GRP_CODE_ID = '002'
+	</select>
+	
+	<insert id="insertFuneralInfo" parameterType="FuneralInfoDTO">
+		INSERT INTO FUNERAL_INFO
+		(
+			FUNERAL_INFO_CODE,
+			FUNERAL_INFO_AREA_CODE,
+			FUNERAL_INFO_NAME,
+			FUNERAL_INFO_TEL_NO,
+			FUNERAL_POST_NO,
+			FUNERAL_ADDRESS,
+			FUNERAL_ADDRESS_DETAIL,
+			REG_MEMBER_NO,
+			REG_DT
+		) VALUES (
+			#{funeralInfoCode},
+			#{funeralInfoAreaCode},
+			#{funeralInfoName},
+			#{funeralInfoTelNo},
+			#{funeralPostNo},
+			#{funeralAddress},
+			#{funeralAddressDetail},
+			'3',
+			now()
+		)
+	</insert>
+	
+	<select id="getFuneralInfoList" resultType="funeralInfoDTO">
+	    SELECT 
+	    	F.FUNERAL_INFO_NO			AS FUNERALINFONO, 
+	    	F.FUNERAL_INFO_NAME 		AS FUNERALINFONAME, 
+	    	C.CODE_NAME 				AS FUNERALINFOCODE, 
+	    	G.CODE_NAME 				AS FUNERALINFOAREACODE, 
+	    	FUNERAL_INFO_TEL_NO 		AS FUNERALINFOTELNO, 
+	    	F.FUNERAL_ADDRESS			AS FUNERALADDRESS, 
+	    	F.FUNERAL_ADDRESS_DETAIL	AS FUNERALADDRESSDETAIL
+	    FROM FUNERAL_INFO F, CODE C, CODE G
+	    WHERE F.FUNERAL_INFO_CODE = C.CODE_ID AND F.FUNERAL_INFO_AREA_CODE = G.CODE_ID;
+	</select>
+	
+	<select id="getFuneralInfoDetail" parameterType="FuneralInfoDTO" resultType="FuneralInfoDTO">
+	    SELECT 
+	    	FUNERAL_INFO_NO				AS FUNERALINFONO, 
+	    	FUNERAL_INFO_NAME 			AS FUNERALINFONAME, 
+	    	FUNERAL_INFO_CODE 			AS FUNERALINFOCODE, 
+	    	FUNERAL_INFO_AREA_CODE 		AS FUNERALINFOAREACODE, 
+	    	FUNERAL_INFO_TEL_NO 		AS FUNERALINFOTELNO, 
+	    	FUNERAL_POST_NO 			AS FUNERALPOSTNO, 
+	    	FUNERAL_ADDRESS				AS FUNERALADDRESS, 
+	    	FUNERAL_ADDRESS_DETAIL		AS FUNERALADDRESSDETAIL
+	    FROM FUNERAL_INFO
+	    WHERE FUNERAL_INFO_NO = #{funeralInfoNo}
+	</select>
 </mapper>

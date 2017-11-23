@@ -71,7 +71,7 @@ public class MemberController {
 			memberName = AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberName()));
 			memberPre = CmmUtil.nvl(mDTO.getMemberPre());
 			long time = System.currentTimeMillis(); 
-			SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+			SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String timeStr = dayTime.format(new Date(time));
 				
 			log.info("login No : " +memberNo);
@@ -104,7 +104,7 @@ public class MemberController {
 		String memeberName = CmmUtil.nvl((String)session.getAttribute("ss_member_name"));
 		String memeberPre = CmmUtil.nvl((String)session.getAttribute("ss_member_pre"));
 		long time = System.currentTimeMillis(); 
-		SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+		SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String timeStr = dayTime.format(new Date(time));
 
 		log.info("logout No : "+memeberNo);
@@ -117,11 +117,11 @@ public class MemberController {
 		session.setAttribute("ss_memeber_id", "");
 		session.setAttribute("ss_memeber_name", "");
 		session.setAttribute("ss_memeber_pre", "");
+		session.invalidate();
 		
 		log.info("logout End!!");
 		return "/member/redirect";
 	}
-	
 	
 	@RequestMapping("/member/joinStep")
 	public String joinStep() throws Exception{
