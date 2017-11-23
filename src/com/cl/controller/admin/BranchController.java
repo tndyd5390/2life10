@@ -2,6 +2,7 @@
 package com.cl.controller.admin;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -80,17 +81,17 @@ public class BranchController {
 		bDTO.setBranchPostNo(branchPostNo);
 		bDTO.setBranchAddress(branchAddress);
 		bDTO.setBranchAddressDetail(branchAddressDetail);
-		bDTO.setRegNo(regMemberNo);
+		bDTO.setRegMemberNo(regMemberNo);
 		
 		int result = branchService.insertBranch(bDTO);
 		if(result != 0){
 			//성공
 			model.addAttribute("msg", "지사등록에 성공했습니다.");
-			model.addAttribute("url", "/company/branchView.do");
+			model.addAttribute("url", "/company/branchList.do");
 		}else{
 			//실패
 			model.addAttribute("msg", "지사등록에 실패했습니다.");
-			model.addAttribute("url", "company/branchVeiw.do");
+			model.addAttribute("url", "/company/branchList.do");
 		}
 		
 		regMemberNo = null;
@@ -115,7 +116,7 @@ public class BranchController {
 		String branchNo = CmmUtil.nvl(req.getParameter("branchNo"));
 		log.info(" branchNo : " + branchNo);
 		
-		BranchDTO bDTO = branchService.getBranchDetail(branchNo);
+		BranchDTO bDTO = branchService.getBranchDetailAddCnt(branchNo);
 		if(bDTO == null) bDTO = new BranchDTO();
 		
 		model.addAttribute("bDTO", bDTO);
@@ -125,5 +126,132 @@ public class BranchController {
 		
 		log.info(this.getClass() + ".branchDetailView end!!!");
 		return "/Lmin/company/branch_detail";
+	}
+	
+	@RequestMapping(value="company/branchDeleteProc", method=RequestMethod.GET)
+	public String branchDeleteProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+		log.info(this.getClass() + ".branchDeleteProc start!!!");
+		
+		String branchNo = CmmUtil.nvl(req.getParameter("branchNo"));
+		log.info(" branchNo : " + branchNo);
+		
+		int result = branchService.deleteBranch(branchNo);
+		
+		if(result != 0){
+			//성공
+			model.addAttribute("msg", "삭제되었습니다.");
+			model.addAttribute("url", "/company/branchList.do");
+		}else{
+			//실패
+			model.addAttribute("msg", "삭제에 실패했습니다.");
+			model.addAttribute("url", "/company/branchDetail.do?branchNo=" + branchNo);
+		}
+		log.info(this.getClass() + ".branchDeleteProc end!!!");
+		return "/alert";
+	}
+	
+	@RequestMapping(value="company/branchUpdateView", method=RequestMethod.GET)
+	public String branchUpdateView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+		log.info(this.getClass() + ".branchUpdateView start!!!");
+		
+		String branchNo = CmmUtil.nvl(req.getParameter("branchNo"));
+		log.info(" branchNo : " + branchNo);
+		
+		BranchDTO bDTO = branchService.getBranchDetail(branchNo);
+		if(bDTO == null) bDTO = new BranchDTO();
+		
+		model.addAttribute("bDTO", bDTO);
+		
+		branchNo = null;
+		bDTO = null;
+		
+		log.info(this.getClass() + ".branchUpdateView end!!!");
+		return "/Lmin/company/branch_updateView";
+	}
+	
+	@RequestMapping(value="company/branchUpdateProc", method=RequestMethod.POST)
+	public String branchUpcateProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+		log.info(this.getClass() + ".branchUpdateProc start!!!");
+		
+		String branchNo = CmmUtil.nvl(req.getParameter("branchNo"));
+		log.info(" branchNo : " + branchNo);
+		String chgMemberNo = CmmUtil.nvl((String)session.getAttribute("memberNo"));
+		log.info(" regNo : " + chgMemberNo);
+		String branchAreaCode = CmmUtil.nvl(req.getParameter("branchAreaCode"));
+		log.info(" branchAreaCode : " + branchAreaCode);
+		String branchName = CmmUtil.nvl(req.getParameter("branchName"));
+		log.info(" branchName : " + branchName);
+		String branchOfficerName = CmmUtil.nvl(req.getParameter("branchOfficerName"));
+		log.info(" branchOfficerName : " + branchOfficerName);
+		String branchTel1 = CmmUtil.nvl(req.getParameter("branchTel1"));
+		log.info(" branchTel1 : " + branchTel1);
+		String branchTel2 = CmmUtil.nvl(req.getParameter("branchTel2"));
+		log.info(" branchTel2 : " + branchTel2);
+		String branchTel3 = CmmUtil.nvl(req.getParameter("branchTel3"));
+		log.info(" branchTel3 : " + branchTel3);
+		String branchPostNo = CmmUtil.nvl(req.getParameter("branchPostNo"));
+		log.info(" branchPostNo : " + branchPostNo);
+		String branchAddress = CmmUtil.nvl(req.getParameter("branchAddress"));
+		log.info(" branchAddress : " + branchAddress);
+		String branchAddressDetail = CmmUtil.nvl(req.getParameter("branchAddressDetail"));
+		log.info(" branchAddressDetail : " + branchAddressDetail);
+		
+		BranchDTO bDTO = new BranchDTO();
+		bDTO.setBranchNo(branchNo);
+		bDTO.setBranchAreaCode(branchAreaCode);
+		bDTO.setBranchName(branchName);
+		bDTO.setBranchOfficerName(branchOfficerName);
+		bDTO.setBranchTelNo(branchTel1 + "-" + branchTel2 + "-" + branchTel3);
+		bDTO.setBranchPostNo(branchPostNo);
+		bDTO.setBranchAddress(branchAddress);
+		bDTO.setBranchAddressDetail(branchAddressDetail);
+		bDTO.setChgMemberNo(chgMemberNo);
+		
+		int result = branchService.updateBranch(bDTO);
+		
+		if(result != 0){
+			model.addAttribute("msg", "수정에 성공했습니다.");
+			model.addAttribute("url", "/company/branchList.do");
+		}else{
+			model.addAttribute("msg", "수정에 실패했습니다.");
+			model.addAttribute("url", "/company/branchUpdateView.do?branchNo=" + branchNo);
+		}
+		
+		branchNo = null;
+		chgMemberNo = null;
+		branchAreaCode = null;
+		branchName = null;
+		branchOfficerName = null;;
+		branchTel1 = null;
+		branchTel2 = null;
+		branchTel3 = null;
+		branchPostNo = null;
+		branchAddress = null;
+		branchAddressDetail = null;
+		bDTO = null;
+		log.info(this.getClass() + ".branchUpdateProc end!!!");
+		return "/alert";
+	}
+	
+	@RequestMapping(value="company/branchSearch", method=RequestMethod.POST)
+	public String branchSearch(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+		log.info(this.getClass() + ".branchSearch start!!");
+		
+		String searchArea = CmmUtil.nvl(req.getParameter("searchArea"));
+		log.info(" searchArea : " + searchArea);
+		String searchWord = CmmUtil.nvl(req.getParameter("searchWord"));
+		log.info(" searchWord : " + searchWord);
+		
+		HashMap<String, Object> sMap = new HashMap<String, Object>();
+		sMap.put("searchArea", searchArea);
+		sMap.put("searchWord", searchWord);
+		
+		List<BranchDTO> bList = branchService.getBranchSearch(sMap);
+		if(bList == null) bList = new ArrayList<>();
+		
+		model.addAttribute("bList", bList);
+		model.addAttribute("bySearch", "y");
+		log.info(this.getClass() + ".branchSearch end!!!");
+		return "/Lmin/company/branch";
 	}
 }

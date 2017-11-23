@@ -7,17 +7,19 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
-<link type="text/css" rel="stylesheet" href="../../public/css/default.css" />
-<link type="text/css" rel="stylesheet" href="../../public/css/layout_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/default.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/layout_kor.css" />
 
-<link type="text/css" rel="stylesheet" href="../../public/css/sub_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/sub_kor.css" />
 
-<script type="text/javascript" src="../../public/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="../../public/js/TweenMax.min.js"></script>
-<script type="text/javascript" src="../../public/js/common.js"></script>
-<script type="text/javascript" src="../../public/js/contents.js"></script>
-<script type="text/javascript" src="../../public/js/jquery.form.js"></script>
-<script type="text/javascript" src="../../public/js/jquery.rss.js"></script>
+<script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/public/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="/public/js/common.js"></script>
+<script type="text/javascript" src="/public/js/contents.js"></script>
+<script type="text/javascript" src="/public/js/jquery.form.js"></script>
+<script type="text/javascript" src="/public/js/jquery.rss.js"></script>
+<script type="text/javascript" src="/public/js/samsungcnt.js"></script>
+<script type="text/javascript" src="/public/js/samsungcnt-jquery.js"></script>
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <!--[if lt IE 9]>
 	<script src="/js/html5.js"></script>
@@ -44,13 +46,7 @@ function branchReg(){
 		alert("대표자명을 입력해 주세요.");
 		f.branchOfficerName.focus();
 		return;
-	}else if(f.branchTel2.value == ""){
-		alert("전화번호를 입력해 주세요.");
-		f.branchTel2.focus();
-		return;
-	}else if(f.branchTel3.value == ""){
-		alert("전화번호를 입력해 주세요.");
-		f.branchTel3.focus();
+	}else if(!telChk('telAbleEndTime', 'branchTel2', 'branchTel3')){
 		return;
 	}else if(f.branchPostNo.value == ""){
 		alert("우편번호를 입력해주세요.");
@@ -63,12 +59,6 @@ function branchReg(){
 	}else{
 		f.submit();
 	}
-}
-
-function onlyNumber(obj) {
-    $(obj).keyup(function(){
-         $(this).val($(this).val().replace(/[^0-9]/g,""));
-    }); 
 }
 
 function sample6_execDaumPostcode() {
@@ -123,7 +113,7 @@ function sample6_execDaumPostcode() {
 			
 			<!-- heaer 인쿠르드 -->
 			<!--#include file="../include/inc_header.jsp"-->
-			<%@include file="../include/inc_header.jsp"%>
+			<%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 		</div>
 	</div> <!-- // header -->
 
@@ -164,7 +154,6 @@ function sample6_execDaumPostcode() {
 
 		$("#subtitle").text($("#"+mbId).text());
 		$("#subtitle2").text($("#"+mbId2).text());
-		
 	});
 </script>
 
@@ -290,22 +279,22 @@ function sample6_execDaumPostcode() {
 										<option value="064">064</option>
 									</select>
 									-
-									<input type="text" name="branchTel2" value="" title="" class="inputType2" style="" maxlength="5" onkeydown="onlyNumber(this)">
+									<input type="text" name="branchTel2" id="branchTel2" value="" title="" class="numPhn inputType2" style="" maxlength="5">
 									-
-									<input type="text" name="branchTel3" value="" title="" class="inputType2" style="" maxlength="5" onkeydown="onlyNumber(this)">
+									<input type="text" name="branchTel3" id="branchTel3" value="" title="" class="numPhn inputType2" style="" maxlength="5">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row" rowspan="3">주소</th>
 								<td>
-									<input type="text" name="branchPostNo" id="branchPostNo" value="" title="이름" class="inputType2" style="" maxlength="5">
+									<input type="text" name="branchPostNo" id="branchPostNo" value="" title="이름" class="inputType2" style="">
 									<a href="#" class="btn_active_small"  onclick="sample6_execDaumPostcode();">우편번호</a>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<input type="text" name="branchAddress" id="branchAddress" value="" title="이름" class="inputType5" style="" maxlength="5">
-									<input type="text" name="branchAddressDetail" id="branchAddressDetail" value="" title="이름" class="inputType5" style="" maxlength="5">
+									<input type="text" name="branchAddress" id="branchAddress" value="" title="이름" class="inputType5" style="">
+									<input type="text" name="branchAddressDetail" id="branchAddressDetail" value="" title="이름" class="inputType5" style="">
 									나머지주소
 								</td>
 							</tr>
