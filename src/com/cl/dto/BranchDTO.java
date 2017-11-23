@@ -10,9 +10,9 @@ public class BranchDTO {
 	private String branchAddress;
 	private String branchAddressDetail;
 	private String branchViewCnt;
-	private String regNo;
+	private String regMemberNo;
 	private String regDt;
-	private String chgNo;
+	private String chgMemberNo;
 	private String chgDt;
 	
 	public String getBranchNo() {
@@ -69,23 +69,23 @@ public class BranchDTO {
 	public void setBranchViewCnt(String branchViewCnt) {
 		this.branchViewCnt = branchViewCnt;
 	}
-	public String getRegNo() {
-		return regNo;
-	}
-	public void setRegNo(String regNo) {
-		this.regNo = regNo;
-	}
 	public String getRegDt() {
 		return regDt;
 	}
 	public void setRegDt(String regDt) {
 		this.regDt = regDt;
 	}
-	public String getChgNo() {
-		return chgNo;
+	public String getRegMemberNo() {
+		return regMemberNo;
 	}
-	public void setChgNo(String chgNo) {
-		this.chgNo = chgNo;
+	public void setRegMemberNo(String regMemberNo) {
+		this.regMemberNo = regMemberNo;
+	}
+	public String getChgMemberNo() {
+		return chgMemberNo;
+	}
+	public void setChgMemberNo(String chgMemberNo) {
+		this.chgMemberNo = chgMemberNo;
 	}
 	public String getChgDt() {
 		return chgDt;

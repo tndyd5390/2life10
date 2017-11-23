@@ -7,6 +7,10 @@
 <%
 	List<BranchDTO> bList = (List<BranchDTO>)request.getAttribute("bList");
 	if(bList == null) bList = new ArrayList<>();
+	String bySeach =CmmUtil.nvl((String)request.getAttribute("bySearch"));
+	//페이징 처리를 위한 변수계산 
+	//리스트를 10개로 나누어서 10개씩 한페이지에 나오게한다.
+	int pageCnt = bList.size() / 10 + 1;
 %>
 
 
@@ -17,22 +21,151 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
-<link type="text/css" rel="stylesheet" href="../../public/css/default.css" />
-<link type="text/css" rel="stylesheet" href="../../public/css/layout_kor.css" />
-<link type="text/css" rel="stylesheet" href="../../public/css/sub_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/default.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/layout_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/sub_kor.css" />
 
-<script type="text/javascript" src="../../public/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="../../public/js/TweenMax.min.js"></script>
-<script type="text/javascript" src="../../public/js/common.js"></script>
-<script type="text/javascript" src="../../public/js/contents.js"></script>
-<script type="text/javascript" src="../../public/js/jquery.form.js"></script>
-<script type="text/javascript" src="../../public/js/jquery.rss.js"></script>
+<script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/public/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="/public/js/common.js"></script>
+<script type="text/javascript" src="/public/js/contents.js"></script>
+<script type="text/javascript" src="/public/js/jquery.form.js"></script>
+<script type="text/javascript" src="/public/js/jquery.rss.js"></script>
 
 <!--[if lt IE 9]>
 	<script src="/js/html5.js"></script>
 	<script src="/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
+	var currPage = 0;
+	var pageCnt = <%=pageCnt%>;
+	var currPageBtn = 5;
+	function doSearch(){
+		var searchArea = document.getElementById('searchArea');
+		var searchWord = document.getElementById('searchWord');
+		if(searchArea.value == "00"){
+			alert('지역을 선택해 주세요.');
+			searchArea.focus();
+			return;
+		}else if(searchWord.value == ""){
+			alert('검색할 단어를 입력해 주세요.');
+			searchWord.focus();
+			return;
+		}else{
+			var form = document.createElement("form");
+			form.setAttribute("method", "Post"); // Get 또는 Post 입력
+			form.setAttribute("action", "/company/branchSearch.do");
+			
+			var hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "searchArea");
+			hiddenField.setAttribute("value", searchArea.value);
+			form.appendChild(hiddenField);
+			 
+			hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "searchWord");
+			hiddenField.setAttribute("value", searchWord.value);
+			form.appendChild(hiddenField);
+			
+			document.body.appendChild(form);
+			 
+			form.submit();
+		}
+	}
+	
+	function changePage(pageNum, pageBtnId){
+		currPage = pageNum-1;
+		console.log("currPage : " + currPage);
+		$('a.psyPageBtn').css("background-color", "#ffffff");
+		$('a.psyPageBtn').css('color', "#555");
+		$('#' + pageBtnId).css('background-color', "#205e9f");
+		$('#' + pageBtnId).css('color', "#fff");
+		for(var i = 0; i<= pageCnt; i++){
+			$('li.'  + i).hide();
+		}
+		$('li.' + (pageNum-1)).show();
+		
+	}
+	
+	function prePage(){
+		console.log("currPageBtn : " + currPageBtn);
+		if(currPageBtn <= 5){
+			alert('첫 페이지 입니다.');
+			return;
+		}else{
+			currPageBtn -=5;
+			for(var i = 1;i<=pageCnt;i++){
+				$('#pageBtn' + i).hide();
+			}
+			console.log("currPageBtn : " + currPageBtn);
+			for(var i = currPageBtn; i> currPageBtn-5; i--){
+				$('#pageBtn' + i).show();
+			}
+			
+		}
+	}
+	
+	function nextPage(){
+		if(currPageBtn >= pageCnt){
+			alert("마지막 페이지입니다.");
+			return;
+		}else{
+			for(var i = 1;i<=pageCnt;i++){
+				$('#pageBtn' + i).hide();
+			}
+			for(var i = currPageBtn + 1; i< currPageBtn + 6; i++){
+				$('#pageBtn' + i).show();
+			}
+			currPageBtn += 5;
+		}
+	}
+	
+	function firstPage(){
+		currPageBtn = 5;
+		currPage = 0;
+		$('a.psyPageBtn').css("background-color", "#ffffff");
+		$('a.psyPageBtn').css('color', "#555");
+		$('#pageBtn1').css('background-color', "#205e9f");
+		$('#pageBtn1').css('color', "#fff");
+		for(var i = 0; i<= pageCnt; i++){
+			$('li.'  + i).hide();
+		}
+		$('li.' + 0).show();
+		for(var i = 1;i<=pageCnt;i++){
+			$('#pageBtn' + i).hide();
+		}
+		for(var i = 1; i<= 5; i++){
+			$('#pageBtn' + i).show();
+		}
+	}
+	
+	function lastPage(){
+		console.log("pageCnt : " + pageCnt);
+		currPage = pageCnt -1;
+		$('a.psyPageBtn').css("background-color", "#ffffff");
+		$('a.psyPageBtn').css('color', "#555");
+		$('#pageBtn' + pageCnt).css('background-color', "#205e9f");
+		$('#pageBtn' + pageCnt).css('color', "#fff");
+		for(var i = 1;i<=pageCnt;i++){
+			$('#pageBtn' + i).hide();
+		}
+		if(pageCnt % 5 == 0){
+			for(var i = pageCnt; i > pageCnt -5; i--){
+				$('#pageBtn' + i).show();
+			}
+			
+		}else{
+			for(var i = pageCnt; i%5!=0; i--){
+				$('#pageBtn' + i).show();
+			}
+		}
+		for(var i = 0; i<= pageCnt; i++){
+			$('li.'  + i).hide();
+		}
+		$('li.'  + currPage).show();
+		currPageBtn = pageCnt;
+	}
 </script>
 <body>
 <div id="skipnavi">
@@ -44,7 +177,7 @@
 			
 			<!-- heaer 인쿠르드 -->
 			<!--#include file="../include/inc_header.jsp"-->
-			<%@include file="../include/inc_header.jsp"%>
+			<%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 		</div>
 	</div> <!-- // header -->
 
@@ -86,6 +219,9 @@
 		$("#subtitle").text($("#"+mbId).text());
 		$("#subtitle2").text($("#"+mbId2).text());
 		
+		
+		$('#pageBtn1').css('background-color', "#205e9f");
+		$('#pageBtn1').css('color', "#fff");
 	});
 
 </script>
@@ -154,15 +290,29 @@
 						<tbody>
 							<tr>
 								<td>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
+									<select id="searchArea" name="telAbleEndTime" title="" class="inputType3">
 										<option value="00">지역명</option>
-										<option value="01">서울</option>
-										<option value="01">경기</option>
+										<option value="서울특별시">서울특별시</option>
+										<option value="부산광역시">부산광역시</option>
+										<option value="대구광역시">대구광역시</option>
+										<option value="인천광역시">인천광역시</option>
+										<option value="광주광역시">광주광역시</option>
+										<option value="대전광역시">대전광역시</option>
+										<option value="울산광역시">울산광역시</option>
+										<option value="경기도">경기도</option>
+										<option value="강원도">강원도</option>
+										<option value="충청북도">충청북도</option>
+										<option value="충청남도">충청남도</option>
+										<option value="전라북도">전라북도</option>
+										<option value="전라남도">전라남도</option>
+										<option value="경상북도">경상북도</option>
+										<option value="경상남도">경상남도</option>
+										<option value="제주특별자치도">제주특별자치도</option>
 									</select>
 									지사명
-									<input type="text" name="name" value="" title="" class="inputType6" style="" maxlength="25">
+									<input type="text" name="name" id="searchWord" title="" class="inputType6" style="" maxlength="25">
 
-									<a href="#" class="btn_active_small">검색</a>
+									<a href="#" class="btn_active_small" onclick="doSearch()">검색</a>
 								</td>
 							</tr>
 						</tbody>
@@ -171,29 +321,115 @@
 
 				<br/><br/>
 				<ul class="boradType4">
-				<%for(BranchDTO bDTO : bList){ %>
-					<li>
-						<p class="num"><%=CmmUtil.nvl(bDTO.getBranchNo()) %></p>
+				<%if("y".equals(bySeach)){//검색으로 들어올 경우
+					if(bList.size() == 0){%>
+						<li>
+						<p class="num"></p>
 						<div class="info">
-							<p class="txt"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchName()) %></p>
+							<p class="txt"></p>
 							<p class="txt1"><!-- 박성진수정 -->
-								<a href="/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
+								검색 결과가 없습니다.
 							</p>
 							<p class="txt2">
-								<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchOfficerName()) %><span class="bar">&nbsp;|</span>
-								<span><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchTelNo()) %></span>
-								<span class="bar">|</span>
-								<span class="count"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAreaCode()) %></span>
-							</p>
+								<span class="bar">&nbsp;</span>
+								<span></span>
+								<span class="bar"></span>
+								<span class="count"></span>
+						</p>
 						</div>
-					</li>
-				<%} %>
+						</li>
+					
+					<%}else{
+						for(int i = 0; i< bList.size();i++){ 
+							BranchDTO bDTO = bList.get(i);
+							if(i < 10){//페이지 처리를 위해 처음 10개만 출력하고 나머지는 display:none;%>
+							<li class="<%=i/10%>">
+								<p class="num"><%=CmmUtil.nvl(bDTO.getBranchNo()) %></p>
+								<div class="info">
+									<p class="txt"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchName()) %></p>
+									<p class="txt1"><!-- 박성진수정 -->
+										<a href="/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
+									</p>
+									<p class="txt2">
+										<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchOfficerName()) %><span class="bar">&nbsp;|</span>
+										<span><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchTelNo()) %></span>
+										<span class="bar">|</span>
+										<span class="count"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAreaCode()) %></span>
+									</p>
+								</div>
+							</li>
+						<%}else{%>
+							<li class="<%=i/10%>" style="display:none;">
+								<p class="num"><%=CmmUtil.nvl(bDTO.getBranchNo()) %></p>
+								<div class="info">
+									<p class="txt"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchName()) %></p>
+									<p class="txt1"><!-- 박성진수정 -->
+										<a href="/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
+									</p>
+									<p class="txt2">
+										<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchOfficerName()) %><span class="bar">&nbsp;|</span>
+										<span><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchTelNo()) %></span>
+										<span class="bar">|</span>
+										<span class="count"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAreaCode()) %></span>
+									</p>
+								</div>
+							</li>
+						<%}
+						}
+					  }%>
+				<%}else{//그냥 리스트 뽑을때 검색 말고
+					for(int i = 0; i< bList.size(); i++){
+						BranchDTO bDTO = bList.get(i);
+						if(i<10){//페이지 처리를 위해 처음 10개만 출력하고 나머지는 display:none;%>
+							<li class="<%=i/10%>">
+								<p class="num"><%=CmmUtil.nvl(bDTO.getBranchNo()) %></p>
+								<div class="info">
+									<p class="txt"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchName()) %></p>
+									<p class="txt1"><!-- 박성진수정 -->
+										<a href="/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
+									</p>
+									<p class="txt2">
+										<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchOfficerName()) %><span class="bar">&nbsp;|</span>
+										<span><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchTelNo()) %></span>
+										<span class="bar">|</span>
+										<span class="count"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAreaCode()) %></span>
+									</p>
+								</div>
+							</li>
+						<%}else{%>
+							<li class="<%=i/10%>" style="display:none;">
+								<p class="num"><%=CmmUtil.nvl(bDTO.getBranchNo()) %></p>
+								<div class="info">
+									<p class="txt"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchName()) %></p>
+									<p class="txt1"><!-- 박성진수정 -->
+										<a href="/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
+									</p>
+									<p class="txt2">
+										<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchOfficerName()) %><span class="bar">&nbsp;|</span>
+										<span><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchTelNo()) %></span>
+										<span class="bar">|</span>
+										<span class="count"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAreaCode()) %></span>
+									</p>
+								</div>
+							</li>
+						<%}
+					} 
+				  }%>
 				</ul>
 				<a href="/company/branchWriteView.do" class="btn_active_small" style="float:right;">전국 지사 등록</a>
 
 				<!-- pageArea -->
 				<div class="pageArea">
-					<a href='#none' class='btnFirst'><span>처음</span></a> <a href='#' class='btnPrev'><span>이전</span></a><strong>1</strong><a href="javascript:goPage('2','15')" >2</a><a href="javascript:goPage('3','15')" >3</a><a href="javascript:goPage('4','15')" >4</a><a href="javascript:goPage('5','15')" >5</a><a href="javascript:goPage('2','15')" class='btnNext'><span>다음</span></a> <a href="javascript:goPage('19','15')" class='btnLast'><span>마지막</span></a>
+					<a href='#' class='btnFirst' onclick="firstPage();"><span>처음</span></a> <a href='#' class='btnPrev' onclick="prePage();"><span>이전</span></a>
+					<%for(int i = 1; i<= pageCnt; i++){ 
+					    String pageBtn = "pageBtn" + i;
+					    if(i<6){%>
+						<a href="#" id="<%=pageBtn%>" onclick="changePage('<%=i%>', '<%=pageBtn%>');" class="psyPageBtn"><%=i%></a>
+						<%}else{ %>
+						<a href="#" style="display:none;" id="<%=pageBtn%>" onclick="changePage('<%=i%>', '<%=pageBtn%>');" class="psyPageBtn"><%=i%></a>
+						<%} %>
+					<%} %>
+					<a href="#" class='btnNext' onclick="nextPage();"><span>다음</span></a> <a href="#" class='btnLast' onclick="lastPage();"><span>마지막</span></a>
 				</div>
 				<!-- // pageArea -->
 
@@ -243,7 +479,6 @@
 					</section>
 				</div>
 			</footer>
-			
 		</div>
 	</div> <!-- // footer -->
 </div> <!-- // wrap -->
