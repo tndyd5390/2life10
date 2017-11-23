@@ -1,7 +1,11 @@
 //멤버 컨트롤러
 package com.cl.controller.admin;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.annotation.Resource;
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -66,10 +70,15 @@ public class MemberController {
 			memberId = CmmUtil.nvl(mDTO.getMemberId());
 			memberName = AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberName()));
 			memberPre = CmmUtil.nvl(mDTO.getMemberPre());
+			long time = System.currentTimeMillis(); 
+			SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+			String timeStr = dayTime.format(new Date(time));
+				
 			log.info("login No : " +memberNo);
 			log.info("login Id : " +memberId);
 			log.info("login Name : " +memberName);
 			log.info("login Pre : " +memberPre);
+			log.info("login Time : "+timeStr);
 			
 			session.setAttribute("ss_member_no", memberNo);
 			session.setAttribute("ss_member_id", memberId);
@@ -79,15 +88,43 @@ public class MemberController {
 			msg = memberName+"님 환영합니다.";
 		}
 		
+		mDTO = null;
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
-		
 		log.info("loginProc End!!");
 		return "/member/redirect";
 	}
 	
+	@RequestMapping("/member/logout")
+	public String logout(HttpSession session) throws Exception{
+		log.info("logout Start!!");
+		
+		String memeberNo = CmmUtil.nvl((String)session.getAttribute("ss_member_no"));
+		String memeberId = CmmUtil.nvl((String)session.getAttribute("ss_member_id"));
+		String memeberName = CmmUtil.nvl((String)session.getAttribute("ss_member_name"));
+		String memeberPre = CmmUtil.nvl((String)session.getAttribute("ss_member_pre"));
+		long time = System.currentTimeMillis(); 
+		SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+		String timeStr = dayTime.format(new Date(time));
+
+		log.info("logout No : "+memeberNo);
+		log.info("logout Id : "+memeberId);
+		log.info("logout Name : "+memeberName);
+		log.info("logout Pre : "+memeberPre);
+		log.info("logout Time : "+timeStr);
+		
+		session.setAttribute("ss_memeber_no", "");
+		session.setAttribute("ss_memeber_id", "");
+		session.setAttribute("ss_memeber_name", "");
+		session.setAttribute("ss_memeber_pre", "");
+		
+		log.info("logout End!!");
+		return "/member/redirect";
+	}
+	
+	
 	@RequestMapping("/member/joinStep")
-	public String joinStep()throws Exception{
+	public String joinStep() throws Exception{
 		log.info("joinStep Start!!");
 		
 		
@@ -197,6 +234,7 @@ public class MemberController {
 			msg = "회원가입 실패";
 		}
 		
+		mDTO = null;
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
 		

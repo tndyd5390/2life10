@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="../include/inc_header.jsp"%>
+<%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 <!--#include file="../include/inc_header.jsp"-->
 
 	<div id="contentsWrap">
@@ -49,6 +49,54 @@
 				$("#email2").val("");
 			}else{
 				$("#email2").val($(this).val())
+			}
+		});
+		
+		$("#id").focusout(function(){
+			var value = $(this).val();
+			var regex = /^[A-Za-z0-9+]{4,16}$/;
+			
+			if(value==""){
+				
+			}else if(!regex.test(value)){
+				alert("4자리 이상 16자리 이하, 영문과 숫자만 가능합니다.");
+				$(this).val("");
+			}
+		});
+		
+		$("#name").focusout(function(){
+			var value = $(this).val();
+			var regex = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
+			
+			if(value==""){
+				
+			}else if(regex.test(value)){
+				alert("한글만 입력 가능합니다.");
+				$(this).val("");
+			}
+		});
+		
+		$("#tel2,#tel3,#phone2,#phone3").focusout(function(){
+			var value = $(this).val();
+			var regex = /[^0-9]/g;
+			if(value==""){
+
+			}else if(regex.test(value)){
+				alert("숫자만 입력 가능합니다.");
+				$(this).val("");
+			}
+		
+		});
+		
+		$("#email1,#email2").focusout(function(){
+			var value = $(this).val();
+			var regex = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
+			
+			if(value=""){
+				
+			}else if(!regex.test(value)){
+				alert("한글은 입력 불가능 합니다.");
+				$(this).val("");
 			}
 		});
 	});
@@ -357,4 +405,4 @@
 		</div>
 	</div> <!-- // contentsWrap -->
 
-<!--#include file="../include/inc_footer.jsp"--><%@include file="../include/inc_footer.jsp"%>
+<!--#include file="../include/inc_footer.jsp"--><%@include file="/WEB-INF/view/include/inc_footer.jsp"%>

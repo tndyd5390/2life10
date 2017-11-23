@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <header>
 	<h1 class="logo">
-		<a href="/index.jsp"><img src="./public/img/common/t_logo.png" alt="크리스찬라이프" /></a>
+		<a href="/index.jsp"><img src="/WEB-INF/view/public/img/common/t_logo.png" alt="크리스찬라이프" /></a>
 	</h1>
 
 	<div class="topMenuWrap">
