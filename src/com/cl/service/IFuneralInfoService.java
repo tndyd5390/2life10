@@ -8,8 +8,6 @@ import com.cl.dto.FuneralInfoDTO;
 
 public interface IFuneralInfoService {
 
-	HashMap<String, List<CodeDTO>> getCodeList() throws Exception;
-
 	int insertFuneralInfo(FuneralInfoDTO fDTO) throws Exception;
 
 	List<FuneralInfoDTO> getFuneralInfoList(FuneralInfoDTO fDTO) throws Exception;

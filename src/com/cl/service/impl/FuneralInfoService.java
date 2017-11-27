@@ -19,17 +19,6 @@ public class FuneralInfoService implements IFuneralInfoService{
 	private FuneralInfoMapper funeralInfoMapper;
 
 	@Override
-	public HashMap<String, List<CodeDTO>> getCodeList() throws Exception {
-		
-		HashMap<String, List<CodeDTO>> hashMap = new HashMap<>();
-		hashMap.put("funeralList", funeralInfoMapper.getFuneralList());
-		hashMap.put("geoList", funeralInfoMapper.getGeoList());
-		hashMap.put("telList", funeralInfoMapper.getTelList());
-		
-		return hashMap;
-	}
-
-	@Override
 	public int insertFuneralInfo(FuneralInfoDTO fDTO) throws Exception {
 		return funeralInfoMapper.insertFuneralInfo(fDTO);
 	}

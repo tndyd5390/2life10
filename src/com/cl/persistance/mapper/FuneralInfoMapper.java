@@ -9,11 +9,6 @@ import com.cl.dto.FuneralInfoDTO;
 @Mapper("FuneralInfoMapper")
 public interface FuneralInfoMapper {
 
-
-	List<CodeDTO> getFuneralList() throws Exception;
-
-	List<CodeDTO> getGeoList() throws Exception;
-
 	int insertFuneralInfo(FuneralInfoDTO fDTO) throws Exception;
 
 	List<FuneralInfoDTO> getFuneralInfoList(FuneralInfoDTO fDTO) throws Exception;
@@ -23,8 +18,6 @@ public interface FuneralInfoMapper {
 	int updateFuneralInfo(FuneralInfoDTO fDTO) throws Exception;
 
 	int deleteFuneralInfo(String funeralInfoNo) throws Exception;
-
-	List<CodeDTO> getTelList() throws Exception;
 
 	List<FuneralInfoDTO> getFuneralInfoSearch(FuneralInfoDTO fDTO) throws Exception;
 

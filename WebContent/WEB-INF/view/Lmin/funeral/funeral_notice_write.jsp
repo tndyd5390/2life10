@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -78,6 +79,34 @@
 		$("#subtitle2").text($("#"+mbId2).text());
 		
 	});
+	
+	function doSubmit(){
+		var f = $("#f");
+		var name = $("#name");
+		var member = $("#member");
+		var place = $("#place");
+		var date = $("#date");
+		
+		if(name.val()==""){
+			alert("소천인을 입력하세요.");
+			name.focus();
+			return false;
+		}else if(member.val()==""){
+			alert("회원명을 입력하세요.");
+			member.focus();
+			return false;
+		}else if(place.val()==""){
+			alert("장소를 입력하세요.");
+			place.focus();
+			return false;
+		}else if(date.val()==""){
+			alert("소천일을 선택하세요.");
+			return false;
+		}else{
+			f.submit();
+			return true;
+		}
+	}
 
 </script>
 
@@ -135,7 +164,7 @@
 
 			<div id="write" class="contents"> <!-- 페이지별 ID -->
 				<h3 class="smallTit">부고알림</h3>
-				
+				<form name="f" id="f" method="post" action="/Lmin/funeral/funeralNoticeRegProc.do">
 				<div class="boardType2">
 					<table summary="">
 						<caption></caption>
@@ -147,19 +176,25 @@
 							<tr>
 								<th scope="row">소천인</th>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<input type="text" name="name" id="name" class="inputType1" style="" maxlength="25">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">회원명</th>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<input type="text" name="member" id="member" class="inputType1" style="" maxlength="25">
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">장소</th>
+								<td>
+									<input type="text" name="place" id="place" class="inputType1" style="" maxlength="25">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">소천일</th>
 								<td>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
+									<!-- <select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
 										<option value="00">2017</option>
 									</select>
 									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
@@ -169,7 +204,8 @@
 									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
 										<option value="00">01</option>
 										<option value="01">02</option>
-									</select>
+									</select> -->
+									<input type="date" name="date" id="date">
 								</td>
 							</tr>
 						</tbody>
@@ -177,9 +213,10 @@
 				</div>
 
 				<div class="btn_area">
-					<a href="#" id="submitLink" class="btn_active">등록</a>
-					<a href="#" id="btnCancel" class="btn_cancel">취소</a>
+					<a href="javascript:doSubmit();" id="submitLink" class="btn_active">등록</a>
+					<a href="/Lmin/funeral/funeralNoticeList.do" id="btnCancel" class="btn_cancel">취소</a>
 				</div>
+			</form>
 
 
 

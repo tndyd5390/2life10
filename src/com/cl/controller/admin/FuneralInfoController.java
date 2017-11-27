@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cl.dto.CodeDTO;
 import com.cl.dto.FuneralInfoDTO;
+import com.cl.service.ICodeService;
 import com.cl.service.IFuneralInfoService;
 import com.cl.util.CmmUtil;
 
@@ -27,6 +27,9 @@ public class FuneralInfoController {
 	
 	@Resource(name="FuneralInfoService")
 	private IFuneralInfoService funeralInfoService;
+	
+	@Resource(name="CodeService")
+	private ICodeService codeService;
 	
 	@RequestMapping("/Lmin/funeral/funeralInfoList")
 	public String funeralInfoList(HttpServletRequest req, Model model) throws Exception{
@@ -40,7 +43,6 @@ public class FuneralInfoController {
 			System.out.println(nowPage);
 			page = (Integer.parseInt(nowPage)-1) * splitPage;
 		}else{
-			System.out.println(nowPage);
 			nowPage = "1";
 			page = 0;
 		}
@@ -54,7 +56,7 @@ public class FuneralInfoController {
 		log.info("nowPage : "+ nowPage);
 		
 		HashMap<String ,List<CodeDTO>> hashMap = new HashMap<>();
-		hashMap = funeralInfoService.getCodeList();
+		hashMap = codeService.getCodeList();
 		
 		model.addAttribute("fList", fList);
 		model.addAttribute("hashMap", hashMap);
@@ -102,7 +104,7 @@ public class FuneralInfoController {
 		log.info("nowPage : "+ nowPage);
 		
 		HashMap<String ,List<CodeDTO>> hashMap = new HashMap<>();
-		hashMap = funeralInfoService.getCodeList();
+		hashMap = codeService.getCodeList();
 		
 		model.addAttribute("fList", fList);
 		model.addAttribute("hashMap", hashMap);
@@ -123,7 +125,7 @@ public class FuneralInfoController {
 		log.info("Lmin:funeralInfoWrite Start!!");
 		
 		HashMap<String ,List<CodeDTO>> hashMap = new HashMap<>();
-		hashMap = funeralInfoService.getCodeList();
+		hashMap = codeService.getCodeList();
 		
 		model.addAttribute("hashMap", hashMap);
 		log.info("Lmin:funeralInfoWrite End!!");
@@ -193,7 +195,7 @@ public class FuneralInfoController {
 		fDTO.setFuneralInfoNo(funeralInfoNo);
 		
 		HashMap<String ,List<CodeDTO>> hashMap = new HashMap<>();
-		hashMap = funeralInfoService.getCodeList();
+		hashMap = codeService.getCodeList();
 		fDTO = funeralInfoService.getFuneralInfoDetail(fDTO);
 		
 		model.addAttribute("fDTO", fDTO);

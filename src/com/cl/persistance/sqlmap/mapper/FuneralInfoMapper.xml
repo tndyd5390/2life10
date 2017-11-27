@@ -1,36 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cl.persistance.mapper.FuneralInfoMapper">
-	<select id="getFuneralList" resultType="CodeDTO">
-		SELECT
-			CODE_ID				AS CODEID,
-			CODE_NAME 			AS CODENAME,
-			GRP_CODE_ID 		AS GRPCODEID,
-			GRP_CODE_NAME 		AS GRPCODENAME
-		FROM CODE
-		WHERE GRP_CODE_ID = '001'
-	</select>
-
-	<select id="getGeoList" resultType="CodeDTO">
-		SELECT
-			CODE_ID				AS CODEID,
-			CODE_NAME 			AS CODENAME,
-			GRP_CODE_ID 		AS GRPCODEID,
-			GRP_CODE_NAME 		AS GRPCODENAME
-		FROM CODE
-		WHERE GRP_CODE_ID = '002'
-	</select>
-	
-	<select id="getTelList" resultType="CodeDTO">
-		SELECT
-			CODE_ID				AS CODEID,
-			CODE_NAME 			AS CODENAME,
-			GRP_CODE_ID 		AS GRPCODEID,
-			GRP_CODE_NAME 		AS GRPCODENAME
-		FROM CODE
-		WHERE GRP_CODE_ID = '003'
-	</select>
-	
 	<insert id="insertFuneralInfo" parameterType="FuneralInfoDTO">
 		INSERT INTO FUNERAL_INFO
 		(

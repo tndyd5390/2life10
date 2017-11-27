@@ -5,31 +5,12 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%
+	FuneralNoticeDTO fDTO = (FuneralNoticeDTO) request.getAttribute("fDTO");
 	
-	List<FuneralNoticeDTO> fList = (List) request.getAttribute("fList");
-	if(fList == null){
-		fList = new ArrayList<>();
+	if(fDTO == null){
+		fDTO = new FuneralNoticeDTO();
 	}
-	int splitPage = (int) request.getAttribute("splitPage");
-	int nowPage =  Integer.parseInt((String)request.getAttribute("nowPage"));
-	int pageList = (fList.get(0).getPage() / splitPage) + 1;
-	int pageBtn = 1;
-	int pageBtnSplit = 5;
-	int pageBtnLast = pageBtn+4;
-
-	if((nowPage/(pageBtnSplit+1))<1){
-		pageBtn = 1;
-		if(pageList<pageBtnSplit){
-			pageBtnLast = pageList;
-		}
-	}else{
-		pageBtn = ((nowPage/(pageBtnSplit+1))*5)+1;
-		pageBtnLast = pageBtn + 4;
-		if(pageList<pageBtnLast){
-			pageBtnLast = pageList;
-		}
-	}
-
+	
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -39,17 +20,17 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
-<link type="text/css" rel="stylesheet" href="/public/css/default.css" />
-<link type="text/css" rel="stylesheet" href="/public/css/layout_kor.css" />
+<link type="text/css" rel="stylesheet" href="../../public/css/default.css" />
+<link type="text/css" rel="stylesheet" href="../../public/css/layout_kor.css" />
 
-<link type="text/css" rel="stylesheet" href="/public/css/sub_kor.css" />
+<link type="text/css" rel="stylesheet" href="../../public/css/sub_kor.css" />
 
-<script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="/public/js/TweenMax.min.js"></script>
-<script type="text/javascript" src="/public/js/common.js"></script>
-<script type="text/javascript" src="/public/js/contents.js"></script>
-<script type="text/javascript" src="/public/js/jquery.form.js"></script>
-<script type="text/javascript" src="/public/js/jquery.rss.js"></script>
+<script type="text/javascript" src="../../public/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../../public/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="../../public/js/common.js"></script>
+<script type="text/javascript" src="../../public/js/contents.js"></script>
+<script type="text/javascript" src="../../public/js/jquery.form.js"></script>
+<script type="text/javascript" src="../../public/js/jquery.rss.js"></script>
 
 <!--[if lt IE 9]>
 	<script src="/js/html5.js"></script>
@@ -67,7 +48,7 @@
 			
 			<!-- heaer 인쿠르드 -->
 			<!--#include file="../include/inc_header.jsp"-->
-			<%@include file="/WEB-INF/view/include/inc_header.jsp"%>
+			<%@include file="../include/inc_header.jsp"%>
 		</div>
 	</div> <!-- // header -->
 
@@ -111,9 +92,44 @@
 		
 	});
 	
-	function goPage(page, lastPage){
-		location.href="funeralInfoList.do?page="+page;
-	};
+	function doSubmit(){
+		var f = $("#f");
+		var name = $("#name");
+		var member = $("#member");
+		var place = $("#place");
+		var date = $("#date");
+		
+		if(name.val()==""){
+			alert("소천인을 입력하세요.");
+			name.focus();
+			return false;
+		}else if(member.val()==""){
+			alert("회원명을 입력하세요.");
+			member.focus();
+			return false;
+		}else if(place.val()==""){
+			alert("장소를 입력하세요.");
+			place.focus();
+			return false;
+		}else if(date.val()==""){
+			alert("소천일을 선택하세요.");
+			return false;
+		}else{
+			f.submit();
+			return true;
+		}
+	}
+	
+	function doDelete(){
+		var f = $("#f");
+		if(confirm("삭제 하시겠습니까?")){
+			f.attr("action", "/Lmin/funeral/funeralNoticeDelete.do");
+			f.submit();
+			return true;
+		}else{
+			return false;			
+		}
+	}
 
 </script>
 
@@ -169,133 +185,63 @@
 
 			<!-- 메뉴 영역 -->
 
-			<div class="contents"> <!-- 페이지별 ID none -->
+			<div id="write" class="contents"> <!-- 페이지별 ID -->
 				<h3 class="smallTit">부고알림</h3>
-				
+				<form name="f" id="f" method="post" action="/Lmin/funeral/funeralNoticeUpdateProc.do">
+				<input type="hidden" name="fNo" id="fNo" value="<%=CmmUtil.nvl(fDTO.getFuneralNoticeNo())%>">
 				<div class="boardType2">
 					<table summary="">
 						<caption></caption>
 						<colgroup>
-							<col width="100%">
+							<col width="20%">
+							<col width="80%">
 						</colgroup>
 						<tbody>
 							<tr>
+								<th scope="row">소천인</th>
 								<td>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
-										<option value="00">전체</option>
-										<option value="01">소천인</option>
-										<option value="02">회원명</option>
+									<input type="text" name="name" id="name" class="inputType1" maxlength="25" value="<%=CmmUtil.nvl(fDTO.getFuneralNoticeName())%>">
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">회원명</th>
+								<td>
+									<input type="text" name="member" id="member" class="inputType1" maxlength="25" value="<%=CmmUtil.nvl(fDTO.getFuneralNoticeMember())%>">
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">장소</th>
+								<td>
+									<input type="text" name="place" id="place" class="inputType1" maxlength="25" value="<%=CmmUtil.nvl(fDTO.getFuneralNoticePlace())%>">
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">소천일</th>
+								<td>
+									<!-- <select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
+										<option value="00">2017</option>
 									</select>
-									<input type="text" name="name" value="" title="" class="inputType1" style="" maxlength="25">
-
-									<a href="#" class="btn_active_small">검색</a>
+									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
+										<option value="00">01</option>
+										<option value="01">02</option>
+									</select>
+									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
+										<option value="00">01</option>
+										<option value="01">02</option>
+									</select> -->
+									<input type="date" name="date" id="date" value="<%=CmmUtil.nvl(fDTO.getFuneralNoticeDay())%>">
 								</td>
 							</tr>
 						</tbody>
 					</table>
-                </div>
-
-				<br/><br/>
-				<ul class="boradType4">
-				<%for(FuneralNoticeDTO fDTO : fList){%>
-					<li>
-						<p class="num">부고</p>
-						<div class="info">
-							<p class="txt">회원 <%=CmmUtil.nvl(fDTO.getFuneralNoticeMember()) %></p>
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="/Lmin/funeral/funeralNoticeDetail.do?fNo=<%=CmmUtil.nvl(fDTO.getFuneralNoticeNo())%>"><%=CmmUtil.nvl(fDTO.getFuneralNoticeName()) %>님 소천</a>
-							</p>
-							<p class="txt2">
-								소천일<span class="bar">&nbsp;:</span>
-								<span><%=CmmUtil.nvl(fDTO.getFuneralNoticeDay()) %></span>
-								<span class="bar">l</span>
-								<span><%=CmmUtil.nvl(fDTO.getFuneralNoticePlace()) %></span>
-							</p>
-						</div>
-					</li>
-				<%}%>
-					<!-- <li>
-						<p class="num">부고</p>
-						<div class="info">
-							<p class="txt">회원 이설희</p>
-							<p class="txt1">박성진수정
-								<a href="javascript:selectBoardDtl('480')">박춘심님 소천</a>
-							</p>
-							<p class="txt2">
-								소천일<span class="bar">&nbsp;:</span>
-								<span>2017-11-09</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">부고</p>
-						<div class="info">
-							<p class="txt">회원 이설희</p>
-							<p class="txt1">박성진수정
-								<a href="javascript:selectBoardDtl('480')">박춘심님 소천</a>
-							</p>
-							<p class="txt2">
-								소천일<span class="bar">&nbsp;:</span>
-								<span>2017-11-09</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">부고</p>
-						<div class="info">
-							<p class="txt">회원 이설희</p>
-							<p class="txt1">박성진수정
-								<a href="javascript:selectBoardDtl('480')">박춘심님 소천</a>
-							</p>
-							<p class="txt2">
-								소천일<span class="bar">&nbsp;:</span>
-								<span>2017-11-09</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">부고</p>
-						<div class="info">
-							<p class="txt">회원 이설희</p>
-							<p class="txt1">박성진수정
-								<a href="javascript:selectBoardDtl('480')">박춘심님 소천</a>
-							</p>
-							<p class="txt2">
-								소천일<span class="bar">&nbsp;:</span>
-								<span>2017-11-09</span>
-							</p>
-						</div>
-					</li> -->
-				</ul>
-				<br>
-				<a href="/Lmin/funeral/funeralNoticeWrite.do" class="btn_active_small" style="float:right;">부고 등록</a>
-				
-				<!-- pageArea -->
-				<div class="pageArea">
-					<%if(nowPage!=1){%>
-						<a href="javascript:goPage('1','<%=pageList %>')" class='btnFirst'><span>처음</span></a>
-						<a href="javascript:goPage('<%=nowPage-1 %>','<%=pageList %>')" class='btnPrev'><span>이전</span></a>
-					<%}%>
-					<!-- <strong>1</strong>
-					<a href="javascript:goPage('2','15')" >2</a>
-					<a href="javascript:goPage('3','15')" >3</a>
-					<a href="javascript:goPage('4','15')" >4</a>
-					<a href="javascript:goPage('5','15')" >5</a> -->
-					<% for(int i=pageBtn;i<=pageBtnLast;i++){
-					  		if(i == nowPage){ %>
-							<strong><%=i %></strong>						
-							<%  }else{ %>
-							<a href="javascript:goPage('<%=i %>','<%=pageList %>')"><%=i %></a>
-					<%		}
-					}%>
-					
-					<%if(nowPage!=pageList){%>
-						<a href="javascript:goPage('<%=nowPage+1 %>','<%=pageList %>')" class='btnNext'><span>다음</span></a>
-						<a href="javascript:goPage('<%=pageList%>','<%=pageList%>')" class='btnLast'><span>마지막</span></a>
-					<%}%>
 				</div>
-				<!-- // pageArea -->
 
+				<div class="btn_area">
+					<a href="javascript:doSubmit();" id="submitLink" class="btn_active">수정</a>
+					<a href="javascript:doDelete();" id="submitLink" class="btn_active">삭제</a>
+					<a href="/Lmin/funeral/funeralNoticeList.do" id="btnCancel" class="btn_cancel">취소</a>
+				</div>
+			</form>
 
 			</div> <!-- // contents -->
 
