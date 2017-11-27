@@ -54,7 +54,7 @@
 		}else{
 			var form = document.createElement("form");
 			form.setAttribute("method", "Post"); // Get 또는 Post 입력
-			form.setAttribute("action", "/company/branchSearch.do");
+			form.setAttribute("action", "/Lmin/company/branchSearch.do");
 			
 			var hiddenField = document.createElement("input");
 			hiddenField.setAttribute("type", "hidden");
@@ -292,7 +292,7 @@
 			<!-- 메뉴 영역 -->
 
 			<div class="contents"> <!-- 페이지별 ID none -->
-				<h4 class="smallTit">전국지사안내</h4>
+				<h4 class="smallTit">전국지ddd사안내</h4>
 
 				<div class="boardType2">
 					<table summary="">
@@ -357,7 +357,7 @@
 							BranchDTO bDTO = bList.get(i);
 							if(i < 10){//페이지 처리를 위해 처음 10개만 출력하고 나머지는 display:none;%>
 							<li class="<%=i/10%>">
-								<p class="num"><%=CmmUtil.nvl(bDTO.getBranchNo()) %></p>
+								<p class="num"><%=CmmUtil.nvl(bDTO.getRowNum()) %></p>
 								<div class="info">
 									<p class="txt"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchName()) %></p>
 									<p class="txt1"><!-- 박성진수정 -->
@@ -373,7 +373,7 @@
 							</li>
 						<%}else{%>
 							<li class="<%=i/10%>" style="display:none;">
-								<p class="num"><%=CmmUtil.nvl(bDTO.getBranchNo()) %></p>
+								<p class="num"><%=CmmUtil.nvl(bDTO.getRowNum()) %></p>
 								<div class="info">
 									<p class="txt"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchName()) %></p>
 									<p class="txt1"><!-- 박성진수정 -->
@@ -395,7 +395,7 @@
 						BranchDTO bDTO = bList.get(i);
 						if(i<10){//페이지 처리를 위해 처음 10개만 출력하고 나머지는 display:none;%>
 							<li class="<%=i/10%>">
-								<p class="num"><%=CmmUtil.nvl(bDTO.getBranchNo()) %></p>
+								<p class="num"><%=CmmUtil.nvl(bDTO.getRowNum()) %></p>
 								<div class="info">
 									<p class="txt"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchName()) %></p>
 									<p class="txt1"><!-- 박성진수정 -->
@@ -411,7 +411,7 @@
 							</li>
 						<%}else{%>
 							<li class="<%=i/10%>" style="display:none;">
-								<p class="num"><%=CmmUtil.nvl(bDTO.getBranchNo()) %></p>
+								<p class="num"><%=CmmUtil.nvl(bDTO.getRowNum()) %></p>
 								<div class="info">
 									<p class="txt"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchName()) %></p>
 									<p class="txt1"><!-- 박성진수정 -->

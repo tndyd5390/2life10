@@ -3,7 +3,8 @@
 <mapper namespace="com.cl.persistance.mapper.BranchMapper">
 	
 	<select id="getBranchList" resultType="BranchDTO">
-		SELECT BRANCH_NO 				AS BRANCHNO,
+		SELECT @ROWNUM := @ROWNUM + 1 	AS ROWNUM,
+			   BRANCH_NO				AS BRANCHNO,
 		       BRANCH_AREA_CODE 		AS BRANCHAREACODE,
 		       BRANCH_NAME 				AS BRANCHNAME,
 		       BRANCH_OFFICER_NAME 		AS BRANCHOFFICERNAME,
@@ -16,7 +17,7 @@
 		       REG_DT 					AS REGDT,
 		       CHG_MEMBER_NO 			AS CHGMEMBERNO,
 		       CHG_DT 					AS CHGDT
-		  FROM BRANCH_INFO
+		  FROM BRANCH_INFO, (SELECT @ROWNUM := 0) R
       ORDER BY BRANCH_NO DESC
 	</select>
 	
@@ -50,7 +51,8 @@
 	</insert>
 	
 	<select id="getBranchDetail" parameterType="string" resultType="BranchDTO">
-		SELECT BRANCH_NO 				AS BRANCHNO,
+		SELECT @ROWNUM := @ROWNUM + 1 	AS ROWNUM,
+			   BRANCH_NO				AS BRANCHNO,
 		       BRANCH_AREA_CODE 		AS BRANCHAREACODE,
 		       BRANCH_NAME 				AS BRANCHNAME,
 		       BRANCH_OFFICER_NAME 		AS BRANCHOFFICERNAME,
@@ -63,7 +65,7 @@
 		       REG_DT 					AS REGDT,
 		       CHG_MEMBER_NO 			AS CHGMEMBERNO,
 		       CHG_DT 					AS CHGDT
-		  FROM BRANCH_INFO
+		  FROM BRANCH_INFO, (SELECT @ROWNUM := 0) R
 		 WHERE BRANCH_NO = #{branchNo}
 	  ORDER BY BRANCH_NO DESC
 	</select>
@@ -93,7 +95,8 @@
 	</update>
 	
 	<select id="getBranchSearch" parameterType="hashmap" resultType="BranchDTO">
-		SELECT BRANCH_NO 				AS BRANCHNO,
+		SELECT @ROWNUM := @ROWNUM + 1 	AS ROWNUM,
+			   BRANCH_NO				AS BRANCHNO,
 	   		   BRANCH_AREA_CODE 		AS BRANCHAREACODE,
 	     	   BRANCH_NAME 				AS BRANCHNAME,
 	   		   BRANCH_OFFICER_NAME 		AS BRANCHOFFICERNAME,
@@ -120,7 +123,8 @@
 	           		   CHG_MEMBER_NO,
 	           		   CHG_DT
 		  		  FROM BRANCH_INFO
-		 		 WHERE BRANCH_AREA_CODE = #{searchArea}) SEARCH_TABLE
+		 		 WHERE BRANCH_AREA_CODE = #{searchArea}) SEARCH_TABLE, 
+		 		 (SELECT @ROWNUM := 0) R
    		   WHERE INSTR(BRANCH_NAME, #{searchWord}) > 0
    		ORDER BY BRANCHNO DESC
 	
