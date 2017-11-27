@@ -76,7 +76,6 @@
 	
 	function changePage(pageNum, pageBtnId){
 		currPage = pageNum-1;
-		console.log("currPage : " + currPage);
 		$('a.psyPageBtn').css("background-color", "#ffffff");
 		$('a.psyPageBtn').css('color', "#555");
 		$('#' + pageBtnId).css('background-color', "#205e9f");
@@ -102,7 +101,14 @@
 			for(var i = currPageBtn; i> currPageBtn-5; i--){
 				$('#pageBtn' + i).show();
 			}
-			
+			for(var i = 0; i<= pageCnt; i++){
+				$('li.'  + i).hide();
+			}
+			$('li.' + (currPageBtn-1)).show();
+			$('a.psyPageBtn').css("background-color", "#ffffff");
+			$('a.psyPageBtn').css('color', "#555");
+			$('#pageBtn' + currPageBtn).css('background-color', "#205e9f");
+			$('#pageBtn' + currPageBtn).css('color', "#fff");
 		}
 	}
 	
@@ -117,7 +123,16 @@
 			for(var i = currPageBtn + 1; i< currPageBtn + 6; i++){
 				$('#pageBtn' + i).show();
 			}
+			for(var i = 0; i<= pageCnt; i++){
+				$('li.'  + i).hide();
+			}
+			$('li.' + currPageBtn).show();
+			$('a.psyPageBtn').css("background-color", "#ffffff");
+			$('a.psyPageBtn').css('color', "#555");
+			$('#pageBtn' + (currPageBtn + 1)).css('background-color', "#205e9f");
+			$('#pageBtn' + (currPageBtn + 1)).css('color', "#fff");
 			currPageBtn += 5;
+
 		}
 	}
 	
