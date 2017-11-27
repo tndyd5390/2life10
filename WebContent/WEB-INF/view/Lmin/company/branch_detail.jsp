@@ -34,12 +34,12 @@
 <script type="text/javascript">
 	function doDeleteBranch(branchNo){
 		if(confirm('삭제하시겠습니까?')){
-			location.href="/company/branchDeleteProc.do?branchNo=" + branchNo;
+			location.href="/Lmin/company/branchDeleteProc.do?branchNo=" + branchNo;
 		}
 	}
 	
 	function doUpdateBranch(branchNo){
-		location.href="/company/branchUpdateView.do?branchNo=" + branchNo;
+		location.href="/Lmin/company/branchUpdateView.do?branchNo=" + branchNo;
 	}
 </script>
 <body>
@@ -153,7 +153,7 @@
 				<h4 class="smallTit">전국지사안내</h4>
 
 				<div class="boardType2">
-				<form action="/company/branchRegProc.do" method="post" id="form">
+				<form action="/Lmin/company/branchRegProc.do" method="post" id="form">
 					<table summary="">
 						<caption></caption>
 						<colgroup>
@@ -197,7 +197,7 @@
 				</div>
 
 				<div class="btn_area">
-					<a href="#" id="submitLink" class="btn_active" onclick="javascript:location.href='/company/branchList.do'">목록</a>
+					<a href="#" id="submitLink" class="btn_active" onclick="javascript:location.href='/Lmin/company/branchList.do'">목록</a>
 					<a href="#" id="btnCancel" class="btn_active" onclick="doDeleteBranch('<%=CmmUtil.nvl(bDTO.getBranchNo())%>')">삭제</a>
 					<a href="#" id="btnCancel" class="btn_active" onclick="doUpdateBranch('<%=CmmUtil.nvl(bDTO.getBranchNo())%>')">수정</a>
 				</div>

@@ -125,6 +125,12 @@ function sample6_execDaumPostcode() {
         }
     }).open();
 }
+
+function doCancel(){
+	if(confirm("현재 작성중인 정보는 저장되지 않습니다. 취소하시겠습니까?")){
+		location.href="/Lmin/company/branchList.do";
+	}
+}
 </script>
 <body>
 <div id="skipnavi">
@@ -249,7 +255,7 @@ function sample6_execDaumPostcode() {
 				<h4 class="smallTit">전국지사안내</h4>
 
 				<div class="boardType2">
-				<form action="/company/branchUpdateProc.do" method="post" id="form">
+				<form action="/Lmin/company/branchUpdateProc.do" method="post" id="form">
 				<input type="hidden" name="branchNo" value="<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchNo()) %>">
 					<table summary="">
 						<caption></caption>
@@ -342,7 +348,7 @@ function sample6_execDaumPostcode() {
 
 				<div class="btn_area">
 					<a href="#" id="submitLink" class="btn_active" onclick="branchReg();">수정</a>
-					<a href="#" id="btnCancel" class="btn_cancel">취소</a>
+					<a href="#" id="btnCancel" class="btn_cancel" onclick="doCancel();">취소</a>
 				</div>
 
 			</div> <!-- // contents -->

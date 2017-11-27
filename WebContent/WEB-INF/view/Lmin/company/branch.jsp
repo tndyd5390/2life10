@@ -233,8 +233,6 @@
 
 		$("#subtitle").text($("#"+mbId).text());
 		$("#subtitle2").text($("#"+mbId2).text());
-		
-		
 		$('#pageBtn1').css('background-color', "#205e9f");
 		$('#pageBtn1').css('color', "#fff");
 	});
@@ -363,7 +361,7 @@
 								<div class="info">
 									<p class="txt"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchName()) %></p>
 									<p class="txt1"><!-- 박성진수정 -->
-										<a href="/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
+										<a href="/Lmin/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
 									</p>
 									<p class="txt2">
 										<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchOfficerName()) %><span class="bar">&nbsp;|</span>
@@ -379,7 +377,7 @@
 								<div class="info">
 									<p class="txt"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchName()) %></p>
 									<p class="txt1"><!-- 박성진수정 -->
-										<a href="/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
+										<a href="/Lmin/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
 									</p>
 									<p class="txt2">
 										<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchOfficerName()) %><span class="bar">&nbsp;|</span>
@@ -401,7 +399,7 @@
 								<div class="info">
 									<p class="txt"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchName()) %></p>
 									<p class="txt1"><!-- 박성진수정 -->
-										<a href="/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
+										<a href="/Lmin/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
 									</p>
 									<p class="txt2">
 										<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchOfficerName()) %><span class="bar">&nbsp;|</span>
@@ -417,7 +415,7 @@
 								<div class="info">
 									<p class="txt"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchName()) %></p>
 									<p class="txt1"><!-- 박성진수정 -->
-										<a href="/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
+										<a href="/Lmin/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
 									</p>
 									<p class="txt2">
 										<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchOfficerName()) %><span class="bar">&nbsp;|</span>
@@ -431,7 +429,7 @@
 					} 
 				  }%>
 				</ul>
-				<a href="/company/branchWriteView.do" class="btn_active_small" style="float:right;">전국 지사 등록</a>
+				<a href="/Lmin/company/branchWriteView.do" class="btn_active_small" style="float:right;">전국 지사 등록</a>
 
 				<!-- pageArea -->
 				<div class="pageArea">

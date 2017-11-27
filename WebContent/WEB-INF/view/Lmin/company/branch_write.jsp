@@ -213,7 +213,7 @@ function sample6_execDaumPostcode() {
 				<h4 class="smallTit">전국지사안내</h4>
 
 				<div class="boardType2">
-				<form action="/company/branchRegProc.do" method="post" id="form">
+				<form action="/Lmin/company/branchRegProc.do" method="post" id="form">
 					<table summary="">
 						<caption></caption>
 						<colgroup>
