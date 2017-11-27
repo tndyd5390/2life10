@@ -7,6 +7,7 @@
 	HashMap<String ,List<CodeDTO>> hashMap = (HashMap) request.getAttribute("hashMap");
 	List<CodeDTO> fList = hashMap.get("funeralList");
 	List<CodeDTO> gList = hashMap.get("geoList");
+	List<CodeDTO> tList = hashMap.get("telList");
 
 %>
 <!DOCTYPE html>
@@ -217,9 +218,9 @@
 								<th scope="row">전화번호</th>
 								<td>
 									<select id="tel1" name="tel1" class="inputType3">
-										<option value="02">02</option>
-										<option value="031">031</option>
-									</select>
+									<% for(CodeDTO cDTO : tList){ %>
+										<option value=<%=CmmUtil.nvl(cDTO.getCodeName())%>><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
+									<% } %>									</select>
 									-
 									<input type="text" name="tel2" value="" class="inputType2" maxlength="4">
 									-

@@ -6,13 +6,33 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.List" %>
 <%
-
+	
 	List<FuneralInfoDTO> fuList = (List) request.getAttribute("fList");
 	HashMap<String ,List<CodeDTO>> hashMap = (HashMap) request.getAttribute("hashMap");
 	List<CodeDTO> fList = hashMap.get("funeralList");
 	List<CodeDTO> gList = hashMap.get("geoList");
+	int splitPage = (int) request.getAttribute("splitPage");
+	int nowPage =  Integer.parseInt((String)request.getAttribute("nowPage"));
+	int pageList = (fuList.get(0).getPage() / splitPage) + 1;
+	int pageBtn = 1;
+	int pageBtnSplit = 5;
+	int pageBtnLast = pageBtn+4;
+	
+	if((nowPage/(pageBtnSplit+1))<1){
+		pageBtn = 1;
+		if(pageList<pageBtnSplit){
+			pageBtnLast = pageList;
+		}
+	}else{
+		pageBtn = ((nowPage/(pageBtnSplit+1))*5)+1;
+		pageBtnLast = pageBtn + 4;
+		if(pageList<pageBtnLast){
+			pageBtnLast = pageList;
+		}
+	}
 
 %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -92,7 +112,15 @@
 		$("#subtitle2").text($("#"+mbId2).text());
 		
 	});
-
+	
+	function goPage(page, lastPage){
+		location.href="funeralInfoList.do?page="+page;
+	};
+	
+	function doSubmit(){
+		var f = $("#f");
+		f.submit();		
+	}
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -150,6 +178,7 @@
 			<div id="pro_info" class="contents"> <!-- 페이지별 ID -->
 				
 				<div class="boardType2">
+				<form name="f" id="f" method="post" action="/Lmin/funeral/funeralInfoSearch.do">
 					<table summary="">
 						<caption></caption>
 						<colgroup>
@@ -158,24 +187,24 @@
 						<tbody>
 							<tr>
 								<td>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
+									<select id="geoCode" name="geoCode" title="" class="inputType3">
 										<option value="00">지역명</option>
 									<% for(CodeDTO cDTO : gList){ %>
-										<option value=<%=CmmUtil.nvl(cDTO.getCodeId())%>><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
+										<option value='<%=CmmUtil.nvl(cDTO.getCodeId())%>'><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
 									<% } %>
 									</select>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType5">
-										<option value="00">식장명</option>
+									<select id="funeral" name="funeral" title="" class="inputType5">
+										<option value="00">구분명</option>
 									<% for(CodeDTO cDTO : fList){ %>
-										<option value=<%=CmmUtil.nvl(cDTO.getCodeId())%>><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
+										<option value='<%=CmmUtil.nvl(cDTO.getCodeId())%>'><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
 									<% } %>
 									</select>
-
-									<a href="#" class="btn_active_small">검색</a>
+									<a href="javascript:doSubmit();" class="btn_active_small">검색</a>
 								</td>
 							</tr>
 						</tbody>
 					</table>
+				</form>
                 </div>
 
 				<br/><br/>			
@@ -201,7 +230,7 @@
 						<tbody>
 						<%for(FuneralInfoDTO fDTO : fuList){%>
 							<tr>
-								<td><%=CmmUtil.nvl(fDTO.getFuneralInfoNo())%></td>
+								<td><%=CmmUtil.nvl(fDTO.getRownum())%></td>
 								<td><%=CmmUtil.nvl(fDTO.getFuneralInfoCode())%></td>
 								<td>
 								<a href="/Lmin/funeral/funeralInfoDetail.do?fNo=<%=CmmUtil.nvl(fDTO.getFuneralInfoNo())%>">
@@ -281,7 +310,27 @@
 				
 				<!-- pageArea -->
 				<div class="pageArea">
-					<a href='#none' class='btnFirst'><span>처음</span></a> <a href='#' class='btnPrev'><span>이전</span></a><strong>1</strong><a href="javascript:goPage('2','15')" >2</a><a href="javascript:goPage('3','15')" >3</a><a href="javascript:goPage('4','15')" >4</a><a href="javascript:goPage('5','15')" >5</a><a href="javascript:goPage('2','15')" class='btnNext'><span>다음</span></a> <a href="javascript:goPage('19','15')" class='btnLast'><span>마지막</span></a>
+					<%if(nowPage!=1){%>
+						<a href="javascript:goPage('1','<%=pageList %>')" class='btnFirst'><span>처음</span></a>
+						<a href="javascript:goPage('<%=nowPage-1 %>','<%=pageList %>')" class='btnPrev'><span>이전</span></a>
+					<%}%>
+					<!-- <strong>1</strong>
+					<a href="javascript:goPage('2','15')" >2</a>
+					<a href="javascript:goPage('3','15')" >3</a>
+					<a href="javascript:goPage('4','15')" >4</a>
+					<a href="javascript:goPage('5','15')" >5</a> -->
+					<% for(int i=pageBtn;i<=pageBtnLast;i++){
+					  		if(i == nowPage){ %>
+							<strong><%=i %></strong>						
+							<%  }else{ %>
+							<a href="javascript:goPage('<%=i %>','<%=pageList %>')"><%=i %></a>
+					<%		}
+					}%>
+					
+					<%if(nowPage!=pageList){%>
+						<a href="javascript:goPage('<%=nowPage+1 %>','<%=pageList %>')" class='btnNext'><span>다음</span></a>
+						<a href="javascript:goPage('<%=pageList%>','<%=pageList%>')" class='btnLast'><span>마지막</span></a>
+					<%}%>
 				</div>
 				<!-- // pageArea -->
 

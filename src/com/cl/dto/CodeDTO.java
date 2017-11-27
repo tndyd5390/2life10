@@ -9,6 +9,7 @@ public class CodeDTO {
 	private String regDt;
 	private String chgMemberNo;
 	private String chgDt;
+	
 	public String getCodeId() {
 		return codeId;
 	}

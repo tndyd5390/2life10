@@ -1,6 +1,7 @@
 package com.cl.dto;
 
 public class FuneralInfoDTO {
+	private String rownum;
 	private String funeralInfoNo;
 	private String funeralInfoCode;
 	private String funeralInfoAreaCode;
@@ -13,6 +14,8 @@ public class FuneralInfoDTO {
 	private String regDt;
 	private String chgMemberNo;
 	private String chgDt;
+	private int page;
+	private int splitPage;
 
 	public String getFuneralPostNo() {
 		return funeralPostNo;
@@ -109,4 +112,30 @@ public class FuneralInfoDTO {
 	public void setChgDt(String chgDt) {
 		this.chgDt = chgDt;
 	}
+
+	public String getRownum() {
+		return rownum;
+	}
+
+	public void setRownum(String rownum) {
+		this.rownum = rownum;
+	}
+
+
+	public int getSplitPage() {
+		return splitPage;
+	}
+
+	public void setSplitPage(int splitPage) {
+		this.splitPage = splitPage;
+	}
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
 }

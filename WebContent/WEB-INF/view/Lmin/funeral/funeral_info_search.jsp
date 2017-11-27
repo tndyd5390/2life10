@@ -5,13 +5,56 @@
 <%@ page import="com.cl.util.TextUtil" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <%
+	FuneralInfoDTO fuDTO = (FuneralInfoDTO) request.getAttribute("fDTO");
+	List<FuneralInfoDTO> fuList = (List) request.getAttribute("fList");
+	
+	System.out.println(fuDTO.getFuneralInfoCode());
+	System.out.println(fuDTO.getFuneralInfoAreaCode());
+	
+	int splitPage = 0;
+	int nowPage = 0;
+	int pageList = 0;
+	int pageBtn = 0;
+	int pageBtnSplit = 0;
+	int pageBtnLast = 0;
+	
+	if(fuDTO == null){
+		fuDTO = new FuneralInfoDTO();
+	}
+	
+	if(fuList == null){
+		fuList = new ArrayList<>();
+	}else{
+		if(fuList.size()!=0){
+		splitPage = (int) request.getAttribute("splitPage");
+		nowPage =  Integer.parseInt((String)request.getAttribute("nowPage"));
+		pageList = (fuList.get(0).getPage() / splitPage) + 1;
+		pageBtn = 1;
+		pageBtnSplit = 5;
+		pageBtnLast = pageBtn+4;
+			if((nowPage/(pageBtnSplit+1))<1){
+				pageBtn = 1;
+				if(pageList<pageBtnSplit){
+					pageBtnLast = pageList;
+				}
+			}else{
+				pageBtn = ((nowPage/(pageBtnSplit+1))*5)+1;
+				pageBtnLast = pageBtn + 4;
+				if(pageList<pageBtnLast){
+					pageBtnLast = pageList;
+				}
+			}
+		}
+	}
+	
 	HashMap<String ,List<CodeDTO>> hashMap = (HashMap) request.getAttribute("hashMap");
-	FuneralInfoDTO fDTO = (FuneralInfoDTO) request.getAttribute("fDTO");
 	List<CodeDTO> fList = hashMap.get("funeralList");
 	List<CodeDTO> gList = hashMap.get("geoList");
-	List<CodeDTO> tList = hashMap.get("telList");
+
 %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -48,7 +91,6 @@
 			
 			<!-- heaer 인쿠르드 -->
 			<!--#include file="../include/inc_header.jsp"-->
-			
 			<%@include file="../include/inc_header.jsp"%>
 		</div>
 	</div> <!-- // header -->
@@ -91,52 +133,25 @@
 		$("#subtitle").text($("#"+mbId).text());
 		$("#subtitle2").text($("#"+mbId2).text());
 		
-		
-		// 전화번호 숫자만 받기
-		$("#tel2,#tel3").focusout(function(){
-			var value = $(this).val();
-			var regex = /[^0-9]/g;
-			if(value==""){
-
-			}else if(regex.test(value)){
-				alert("숫자만 입력 가능합니다.");
-				$(this).val("");
-			}
-		});
 	});
-
+	
+	function goPage(page, lastPage){
+		var f = $('#f');
+		$('#page').val(page);
+		f.submit();
+	};
 	
 	function doSubmit(){
 		var f = $("#f");
-		var name = $("#name");
-		var tel2 = $("#tel2");
-		var tel3 = $("#tel3");
+		var geoCode = $('#geoCode').val();
+		var funeral = $('#funeral').val();
 		
-		if(name.val()==""){
-			alert("식장명을 입력해주세요.");
-			name.focus();
-			return false;
-		}else if(tel2.val()==""||tel3.val()==""){
-			alert("전화번호를 입력해주세요.");
-			tel2.focus();
-			return false;
+		if(geoCode == '00' && funeral == '00'){
+			location.href="/Lmin/funeral/funeralInfoList.do";
 		}else{
-			f.submit();
-			return true;
+			f.submit();		
 		}
-	};
-	
-	function doDelete(){
-		var f = $("#f");
-		
-		if(confirm("삭제 하시겠습니까?")){
-			f.attr("action", "/Lmin/funeral/funeralInfoDelete.do");
-			f.submit();
-			return true;
-		}else{
-			return false;
-		}
-	};
+	}
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -191,119 +206,181 @@
 
 			<!-- 메뉴 영역 -->
 
-			<div id="write" class="contents"> <!-- 페이지별 ID -->
-				<h4 class="smallTit">전국장례시설안내</h4>
-				<form name="f" id="f" method="post" action="/Lmin/funeral/funeralInfoUpdateProc.do">
-				<input type="hidden" name="fNo" value="<%=CmmUtil.nvl(fDTO.getFuneralInfoNo())%>">
+			<form name="f" id="f" method="post" action="/Lmin/funeral/funeralInfoSearch.do">
+			<div id="pro_info" class="contents"> <!-- 페이지별 ID -->
 				<div class="boardType2">
 					<table summary="">
 						<caption></caption>
 						<colgroup>
-							<col width="20%">
-							<col width="80%">
+							<col width="100%">
 						</colgroup>
 						<tbody>
 							<tr>
-								<th scope="row">구분</th>
 								<td>
-									<select id="funeral" name="funeral" title="" class="inputType2">
-									<% for(CodeDTO cDTO : fList){ %>
-										<option value="<%=CmmUtil.nvl(cDTO.getCodeId()) %>" <%=CmmUtil.select(cDTO.getCodeId(), fDTO.getFuneralInfoCode())%>><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
-									<% } %>
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<th scope="row">식장명</th>
-								<td>
-									<input type="text" name="name" id="name" value="<%=CmmUtil.nvl(fDTO.getFuneralInfoName())%>" title="이름" class="inputType1">
-								</td>
-							</tr>
-							<tr>
-								<th scope="row">지역</th>
-								<td>
-									<select id="geo" name="geo" title="" class="inputType2">
+									<select id="geoCode" name="geoCode" title="" class="inputType3">
+										<option value="00">지역명</option>
 									<% for(CodeDTO cDTO : gList){ %>
-										<option value="<%=CmmUtil.nvl(cDTO.getCodeId())%>" <%=CmmUtil.select(cDTO.getCodeId(), fDTO.getFuneralInfoAreaCode())%>><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
+										<%if(fuList.size()!=0){%>
+											<option value='<%=CmmUtil.nvl(cDTO.getCodeId())%>' <%=CmmUtil.select(cDTO.getCodeId(), fuDTO.getFuneralInfoAreaCode()) %>><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
+										<%}else{%>
+											<option value='<%=CmmUtil.nvl(cDTO.getCodeId())%>'><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
+										<%}%>
+										
 									<% } %>
 									</select>
-								</td>
-							</tr>
-							<tr>
-								<th scope="row">전화번호</th>
-								<td>
-									<select id="tel1" name="tel1" class="inputType3">
-									<% for(CodeDTO cDTO : tList){ %>
-										<option value="<%=CmmUtil.nvl(cDTO.getCodeName())%>" <%=CmmUtil.select(cDTO.getCodeName(), CmmUtil.nvl(fDTO.getFuneralInfoTelNo().split("-")[0]))%>><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
+									<select id="funeral" name="funeral" title="" class="inputType5">
+										<option value="00">구분명</option>
+									<% for(CodeDTO cDTO : fList){ %>
+										<%if(fuList.size()!=0){%>
+											<option value='<%=CmmUtil.nvl(cDTO.getCodeId())%>' <%=CmmUtil.select(cDTO.getCodeId(), fuDTO.getFuneralInfoCode()) %>><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
+										<%}else{%>
+											<option value='<%=CmmUtil.nvl(cDTO.getCodeId())%>'><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
+										<%}%>
 									<% } %>
 									</select>
-									-
-									<input type="text" name="tel2" value="<%=CmmUtil.nvl(fDTO.getFuneralInfoTelNo().split("-")[1]) %>" class="inputType2" maxlength="4">
-									-
-									<input type="text" name="tel3" value="<%=CmmUtil.nvl(fDTO.getFuneralInfoTelNo().split("-")[2]) %>" class="inputType2" maxlength="4">
-								</td>
-							</tr>
-							<tr>
-								<th scope="row" rowspan="2">식장주소</th>
-								<td>
-									<input type="text" name="postcode" id="postcode" value="<%=CmmUtil.nvl(fDTO.getFuneralPostNo())%>" title="이름" class="inputType2" style="" maxlength="5">
-									<a href="javascript:daumPostcode();" class="btn_active_small">우편번호</a>
-									<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>									
-									<script>
-										function daumPostcode() {
-											new daum.Postcode(
-													{
-														oncomplete : function(
-																data) {
-															var fullAddr = '';
-															var extraAddr = '';
-															if (data.userSelectedType === 'R') {
-																fullAddr = data.roadAddress;
-
-															} else {
-																fullAddr = data.jibunAddress;
-															}
-															if (data.userSelectedType === 'R') {
-																if (data.bname !== '') {
-																	extraAddr += data.bname;
-																}
-																if (data.buildingName !== '') {
-																	extraAddr += (extraAddr !== '' ? ', '
-																			+ data.buildingName
-																			: data.buildingName);
-																}
-																fullAddr += (extraAddr !== '' ? ' ('
-																		+ extraAddr
-																		+ ')'
-																		: '');
-															}
-															document.getElementById('postcode').value = data.zonecode;
-															document.getElementById('address1').value = fullAddr;
-															document.getElementById('address2').focus();
-														}
-													}).open();
-										}
-									</script>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<input type="text" name="address1" id="address1" value="<%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralAddress()) %>" class="inputType5">
-									<input type="text" name="address2" id="address2" value="<%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralAddressDetail()) %>" class="inputType5">
+									<a href="javascript:doSubmit();" class="btn_active_small">검색</a>
 								</td>
 							</tr>
 						</tbody>
 					</table>
+                </div>
+
+				<br/><br/>			
+				<div class="tableBasicList">
+					<table class="defaultTable">
+						<caption></caption>
+						<colgroup>
+							<col style="width:10%;">
+							<col style="width:16%;">
+							<col style="width:20%;">
+							<col style="width:auto%;">
+							<col style="width:20%;">
+						</colgroup>
+						<thead>
+							<tr>
+								<th scope="row">번호</th>
+								<th scope="row">구분</th>
+								<th scope="row">식장명</th>
+								<th scope="row">지역(식장주소)</th>
+								<th scope="row">전화번호</th>
+							</tr>
+						</thead>
+						<tbody>
+						<%if(fuList.size()!=0){%>
+							<%for(FuneralInfoDTO fDTO : fuList){%>
+								<tr>
+									<td><%=CmmUtil.nvl(fDTO.getRownum())%></td>
+									<td><%=CmmUtil.nvl(fDTO.getFuneralInfoCode())%></td>
+									<td>
+									<a href="/Lmin/funeral/funeralInfoDetail.do?fNo=<%=CmmUtil.nvl(fDTO.getFuneralInfoNo())%>">
+									<%=CmmUtil.nvl(fDTO.getFuneralInfoName())%></a>
+									</td>
+									<td><%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralAddress())%> <%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralAddressDetail())%></td>
+									<td><%=CmmUtil.nvl(fDTO.getFuneralInfoTelNo())%></td>
+								</tr>
+							<%}%>
+						<%} %>
+						
+						<!--<tr>
+								<td>319</td>
+								<td>병원 장례식장</td>
+								<td>성모병원</td>
+								<td>경남 김해시 삼정동 615-6</td>
+								<td>055-336-4475</td>
+							</tr>
+							<tr>
+								<td>319</td>
+								<td>병원 장례식장</td>
+								<td>성모병원</td>
+								<td>경남 김해시 삼정동 615-6</td>
+								<td>055-336-4475</td>
+							</tr>
+							<tr>
+								<td>319</td>
+								<td>병원 장례식장</td>
+								<td>성모병원</td>
+								<td>경남 김해시 삼정동 615-6</td>
+								<td>055-336-4475</td>
+							</tr>
+							<tr>
+								<td>319</td>
+								<td>병원 장례식장</td>
+								<td>성모병원</td>
+								<td>경남 김해시 삼정동 615-6</td>
+								<td>055-336-4475</td>
+							</tr>
+							<tr>
+								<td>319</td>
+								<td>병원 장례식장</td>
+								<td>성모병원</td>
+								<td>경남 김해시 삼정동 615-6</td>
+								<td>055-336-4475</td>
+							</tr>
+							<tr>
+								<td>319</td>
+								<td>병원 장례식장</td>
+								<td>성모병원</td>
+								<td>경남 김해시 삼정동 615-6</td>
+								<td>055-336-4475</td>
+							</tr>
+							<tr>
+								<td>319</td>
+								<td>병원 장례식장</td>
+								<td>성모병원</td>
+								<td>경남 김해시 삼정동 615-6</td>
+								<td>055-336-4475</td>
+							</tr>
+							<tr>
+								<td>319</td>
+								<td>병원 장례식장</td>
+								<td>성모병원</td>
+								<td>경남 김해시 삼정동 615-6</td>
+								<td>055-336-4475</td>
+							</tr>
+							<tr>
+								<td>319</td>
+								<td>병원 장례식장</td>
+								<td>성모병원</td>
+								<td>경남 김해시 삼정동 615-6</td>
+								<td>055-336-4475</td>
+							</tr>-->
+						</tbody>
+					</table>
 				</div>
-				</form>
-				<div class="btn_area">
-					<a href="javascript:doSubmit();" id="submitLink" class="btn_active">수정</a>
-					<a href="javascript:doDelete();" id="btnDelete" class="btn_active">삭제</a>
-					<a href="/Lmin/funeral/funeralInfoList.do" id="btnCancel" class="btn_cancel">취소</a>
+				<a href="/Lmin/funeral/funeralInfoWrite.do" class="btn_active_small" style="float:right;">장례시설 등록</a>
+				
+				<!-- pageArea -->
+				<div class="pageArea">
+				<%if(fuList.size()!=0){%>
+					<%if(nowPage!=1){%>
+						<a href="javascript:goPage('1','<%=pageList %>')" class='btnFirst'><span>처음</span></a>
+						<a href="javascript:goPage('<%=nowPage-1 %>','<%=pageList %>')" class='btnPrev'><span>이전</span></a>
+					<%}%>
+					<!-- <strong>1</strong>
+					<a href="javascript:goPage('2','15')" >2</a>
+					<a href="javascript:goPage('3','15')" >3</a>
+					<a href="javascript:goPage('4','15')" >4</a>
+					<a href="javascript:goPage('5','15')" >5</a> -->
+					<input type="hidden" name="page" id="page" value="<%=nowPage%>">
+					<% for(int i=pageBtn;i<=pageBtnLast;i++){
+					  		if(i == nowPage){ %>
+							<strong><%=i %></strong>						
+							<%  }else{ %>
+							<a href="javascript:goPage('<%=i %>','<%=pageList %>')"><%=i %></a>
+					<%		}
+					}%>
+					
+					<%if(nowPage!=pageList){%>
+						<a href="javascript:goPage('<%=nowPage+1 %>','<%=pageList %>')" class='btnNext'><span>다음</span></a>
+						<a href="javascript:goPage('<%=pageList%>','<%=pageList%>')" class='btnLast'><span>마지막</span></a>
+					<%}%>
+				<%} %>
 				</div>
+				<!-- // pageArea -->
+
 			</div> <!-- // contents -->
 
-
+		</form>
 		</div>
 	</div> <!-- // contentsWrap -->
 

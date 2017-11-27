@@ -21,6 +21,16 @@
 		WHERE GRP_CODE_ID = '002'
 	</select>
 	
+	<select id="getTelList" resultType="CodeDTO">
+		SELECT
+			CODE_ID				AS CODEID,
+			CODE_NAME 			AS CODENAME,
+			GRP_CODE_ID 		AS GRPCODEID,
+			GRP_CODE_NAME 		AS GRPCODENAME
+		FROM CODE
+		WHERE GRP_CODE_ID = '003'
+	</select>
+	
 	<insert id="insertFuneralInfo" parameterType="FuneralInfoDTO">
 		INSERT INTO FUNERAL_INFO
 		(
@@ -46,17 +56,31 @@
 		)
 	</insert>
 	
-	<select id="getFuneralInfoList" resultType="funeralInfoDTO">
-	    SELECT 
+	<select id="getFuneralInfoList" resultType="funeralInfoDTO" parameterType="funeralInfoDTO">
+	<![CDATA[
+	    SELECT
+	    	@rownum:=@rownum+1			AS ROWNUM,
 	    	F.FUNERAL_INFO_NO			AS FUNERALINFONO, 
 	    	F.FUNERAL_INFO_NAME 		AS FUNERALINFONAME, 
 	    	C.CODE_NAME 				AS FUNERALINFOCODE, 
 	    	G.CODE_NAME 				AS FUNERALINFOAREACODE, 
 	    	FUNERAL_INFO_TEL_NO 		AS FUNERALINFOTELNO, 
 	    	F.FUNERAL_ADDRESS			AS FUNERALADDRESS, 
-	    	F.FUNERAL_ADDRESS_DETAIL	AS FUNERALADDRESSDETAIL
-	    FROM FUNERAL_INFO F, CODE C, CODE G
-	    WHERE F.FUNERAL_INFO_CODE = C.CODE_ID AND F.FUNERAL_INFO_AREA_CODE = G.CODE_ID;
+	    	F.FUNERAL_ADDRESS_DETAIL	AS FUNERALADDRESSDETAIL,
+	    	P.PAGE						AS PAGE
+	    FROM 
+	    	FUNERAL_INFO F,
+	    	CODE C,
+	    	CODE G,
+	    	(SELECT @rownum:=0) TMP,
+	    	(SELECT COUNT(*) AS PAGE FROM FUNERAL_INFO) P
+	    WHERE 
+	    	F.FUNERAL_INFO_CODE 		= C.CODE_ID AND 
+	    	F.FUNERAL_INFO_AREA_CODE 	= G.CODE_ID
+	    ORDER BY 
+	    	ROWNUM DESC
+	    LIMIT #{page}, #{splitPage}
+	]]>
 	</select>
 	
 	<select id="getFuneralInfoDetail" parameterType="FuneralInfoDTO" resultType="FuneralInfoDTO">
@@ -72,4 +96,68 @@
 	    FROM FUNERAL_INFO
 	    WHERE FUNERAL_INFO_NO = #{funeralInfoNo}
 	</select>
+	
+	<update id="updateFuneralInfo" parameterType="FuneralInfoDTO">
+		UPDATE 
+			FUNERAL_INFO 
+		SET 
+			FUNERAL_INFO_CODE 		= #{funeralInfoCode},
+			FUNERAL_INFO_AREA_CODE 	= #{funeralInfoAreaCode},
+			FUNERAL_INFO_NAME 		= #{funeralInfoName},
+			FUNERAL_INFO_TEL_NO		= #{funeralInfoTelNo},
+			FUNERAL_POST_NO 		= #{funeralPostNo},
+			FUNERAL_ADDRESS 		= #{funeralAddress},
+			FUNERAL_ADDRESS_DETAIL 	= #{funeralAddressDetail},
+			CHG_MEMBER_NO 			= '3',
+			CHG_DT 					= now()
+		WHERE
+			FUNERAL_INFO_NO 		= #{funeralInfoNo}
+	</update>
+	
+	<delete id="deleteFuneralInfo" parameterType="String">
+		DELETE FROM 
+			FUNERAL_INFO
+		WHERE
+			FUNERAL_INFO_NO 		= #{funeralInfoNo}
+	</delete>
+	
+	<select id="getFuneralInfoSearch" resultType="funeralInfoDTO" parameterType="funeralInfoDTO">
+	    SELECT
+	    	@rownum:=@rownum+1			AS ROWNUM,
+	    	F.FUNERAL_INFO_NO			AS FUNERALINFONO, 
+	    	F.FUNERAL_INFO_NAME 		AS FUNERALINFONAME, 
+	    	C.CODE_NAME 				AS FUNERALINFOCODE, 
+	    	G.CODE_NAME 				AS FUNERALINFOAREACODE, 
+	    	FUNERAL_INFO_TEL_NO 		AS FUNERALINFOTELNO, 
+	    	F.FUNERAL_ADDRESS			AS FUNERALADDRESS, 
+	    	F.FUNERAL_ADDRESS_DETAIL	AS FUNERALADDRESSDETAIL,
+	    	P.PAGE						AS PAGE
+	    FROM 
+	    	FUNERAL_INFO F,
+	    	CODE C,
+	    	CODE G,
+	    	(SELECT @rownum:=0) TMP,
+	    	(SELECT COUNT(FUNERAL_INFO_NO) AS PAGE FROM FUNERAL_INFO
+	    		WHERE REG_MEMBER_NO = '3'
+	    	<if test="funeralInfoAreaCode!=null and funeralInfoAreaCode!=00">
+	    		AND FUNERAL_INFO_AREA_CODE = #{funeralInfoAreaCode}
+	    	</if>
+	    	<if test="funeralInfoCode!=null and funeralInfoCode!=00">
+	    		AND FUNERAL_INFO_CODE = #{funeralInfoCode}
+	    	</if>
+	    	) P
+	    WHERE 
+	    	F.FUNERAL_INFO_CODE 		= C.CODE_ID AND 
+	    	F.FUNERAL_INFO_AREA_CODE 	= G.CODE_ID 
+	    	<if test="funeralInfoAreaCode!=null and funeralInfoAreaCode!=00">
+	    		AND F.FUNERAL_INFO_AREA_CODE = #{funeralInfoAreaCode}
+	    	</if>
+	    	<if test="funeralInfoCode!=null and funeralInfoCode!=00">
+	    		AND F.FUNERAL_INFO_CODE = #{funeralInfoCode}
+	    	</if>
+	    ORDER BY 
+	    	ROWNUM DESC
+	    LIMIT #{page}, #{splitPage}
+	</select>
+	
 </mapper>

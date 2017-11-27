@@ -24,6 +24,7 @@ public class FuneralInfoService implements IFuneralInfoService{
 		HashMap<String, List<CodeDTO>> hashMap = new HashMap<>();
 		hashMap.put("funeralList", funeralInfoMapper.getFuneralList());
 		hashMap.put("geoList", funeralInfoMapper.getGeoList());
+		hashMap.put("telList", funeralInfoMapper.getTelList());
 		
 		return hashMap;
 	}
@@ -34,13 +35,28 @@ public class FuneralInfoService implements IFuneralInfoService{
 	}
 
 	@Override
-	public List<FuneralInfoDTO> getFuneralInfoList() throws Exception {
-		return funeralInfoMapper.getFuneralInfoList();
+	public List<FuneralInfoDTO> getFuneralInfoList(FuneralInfoDTO fDTO) throws Exception {
+		return funeralInfoMapper.getFuneralInfoList(fDTO);
 	}
 
 	@Override
 	public FuneralInfoDTO getFuneralInfoDetail(FuneralInfoDTO fDTO) throws Exception {
 		return funeralInfoMapper.getFuneralInfoDetail(fDTO);
+	}
+
+	@Override
+	public int updateFuneralInfo(FuneralInfoDTO fDTO) throws Exception {
+		return funeralInfoMapper.updateFuneralInfo(fDTO);
+	}
+
+	@Override
+	public int deleteFuneralInfo(String funeralInfoNo) throws Exception {
+		return funeralInfoMapper.deleteFuneralInfo(funeralInfoNo);
+	}
+
+	@Override
+	public List<FuneralInfoDTO> getFuneralInfoSearch(FuneralInfoDTO fDTO) throws Exception {
+		return funeralInfoMapper.getFuneralInfoSearch(fDTO);
 	}
 	
 }

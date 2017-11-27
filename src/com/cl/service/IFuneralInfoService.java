@@ -12,8 +12,14 @@ public interface IFuneralInfoService {
 
 	int insertFuneralInfo(FuneralInfoDTO fDTO) throws Exception;
 
-	List<FuneralInfoDTO> getFuneralInfoList() throws Exception;
+	List<FuneralInfoDTO> getFuneralInfoList(FuneralInfoDTO fDTO) throws Exception;
 
 	FuneralInfoDTO getFuneralInfoDetail(FuneralInfoDTO fDTO) throws Exception;
+
+	int updateFuneralInfo(FuneralInfoDTO fDTO) throws Exception;
+
+	int deleteFuneralInfo(String funeralInfoNo) throws Exception;
+
+	List<FuneralInfoDTO> getFuneralInfoSearch(FuneralInfoDTO fDTO) throws Exception;
 	
 }
