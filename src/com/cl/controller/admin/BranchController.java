@@ -28,7 +28,7 @@ public class BranchController {
 	@Resource(name="BranchService")
 	private IBranchService branchService;
 	
-	@RequestMapping(value="company/branchList", method=RequestMethod.GET)
+	@RequestMapping(value="Lmin/company/branchList", method=RequestMethod.GET)
 	public String branchList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".branchView start!!!");
 		
@@ -41,18 +41,18 @@ public class BranchController {
 		return "/Lmin/company/branch";
 	}
 	
-	@RequestMapping(value="company/branchWriteView", method=RequestMethod.GET)
+	@RequestMapping(value="Lmin/company/branchWriteView", method=RequestMethod.GET)
 	public String branchWriteView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".branchWriteView start!!!");
 		log.info(this.getClass() + ".branchWriteView end!!!");
 		return "/Lmin/company/branch_write";
 	}
 	
-	@RequestMapping(value="company/branchRegProc", method=RequestMethod.POST)
+	@RequestMapping(value="Lmin/company/branchRegProc", method=RequestMethod.POST)
 	public String branchRegProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".branchRegProc start!!!");
 
-		String regMemberNo = CmmUtil.nvl((String)session.getAttribute("memberNo"));
+		String regMemberNo = CmmUtil.nvl((String)session.getAttribute("ss_member_no"));
 		log.info(" regNo : " + regMemberNo);
 		String branchAreaCode = CmmUtil.nvl(req.getParameter("branchAreaCode"));
 		log.info(" branchAreaCode : " + branchAreaCode);
@@ -87,11 +87,11 @@ public class BranchController {
 		if(result != 0){
 			//성공
 			model.addAttribute("msg", "지사등록에 성공했습니다.");
-			model.addAttribute("url", "/company/branchList.do");
+			model.addAttribute("url", "/Lmin/company/branchList.do");
 		}else{
 			//실패
 			model.addAttribute("msg", "지사등록에 실패했습니다.");
-			model.addAttribute("url", "/company/branchList.do");
+			model.addAttribute("url", "/Lmin/company/branchList.do");
 		}
 		
 		regMemberNo = null;
@@ -109,7 +109,7 @@ public class BranchController {
 		return "/alert";
 	}
 	
-	@RequestMapping(value="company/branchDetail", method=RequestMethod.GET)
+	@RequestMapping(value="Lmin/company/branchDetail", method=RequestMethod.GET)
 	public String branchDetailView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".branchDetailVeiw start!!!");
 		
@@ -128,7 +128,7 @@ public class BranchController {
 		return "/Lmin/company/branch_detail";
 	}
 	
-	@RequestMapping(value="company/branchDeleteProc", method=RequestMethod.GET)
+	@RequestMapping(value="Lmin/company/branchDeleteProc", method=RequestMethod.GET)
 	public String branchDeleteProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".branchDeleteProc start!!!");
 		
@@ -140,17 +140,17 @@ public class BranchController {
 		if(result != 0){
 			//성공
 			model.addAttribute("msg", "삭제되었습니다.");
-			model.addAttribute("url", "/company/branchList.do");
+			model.addAttribute("url", "/Lmin/company/branchList.do");
 		}else{
 			//실패
 			model.addAttribute("msg", "삭제에 실패했습니다.");
-			model.addAttribute("url", "/company/branchDetail.do?branchNo=" + branchNo);
+			model.addAttribute("url", "/Lmin/company/branchDetail.do?branchNo=" + branchNo);
 		}
 		log.info(this.getClass() + ".branchDeleteProc end!!!");
 		return "/alert";
 	}
 	
-	@RequestMapping(value="company/branchUpdateView", method=RequestMethod.GET)
+	@RequestMapping(value="Lmin/company/branchUpdateView", method=RequestMethod.GET)
 	public String branchUpdateView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".branchUpdateView start!!!");
 		
@@ -169,7 +169,7 @@ public class BranchController {
 		return "/Lmin/company/branch_updateView";
 	}
 	
-	@RequestMapping(value="company/branchUpdateProc", method=RequestMethod.POST)
+	@RequestMapping(value="Lmin/company/branchUpdateProc", method=RequestMethod.POST)
 	public String branchUpcateProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".branchUpdateProc start!!!");
 		
@@ -211,10 +211,10 @@ public class BranchController {
 		
 		if(result != 0){
 			model.addAttribute("msg", "수정에 성공했습니다.");
-			model.addAttribute("url", "/company/branchList.do");
+			model.addAttribute("url", "/Lmin/company/branchList.do");
 		}else{
 			model.addAttribute("msg", "수정에 실패했습니다.");
-			model.addAttribute("url", "/company/branchUpdateView.do?branchNo=" + branchNo);
+			model.addAttribute("url", "/Lmin/company/branchUpdateView.do?branchNo=" + branchNo);
 		}
 		
 		branchNo = null;
@@ -233,7 +233,7 @@ public class BranchController {
 		return "/alert";
 	}
 	
-	@RequestMapping(value="company/branchSearch", method=RequestMethod.POST)
+	@RequestMapping(value="Lmin/company/branchSearch", method=RequestMethod.POST)
 	public String branchSearch(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".branchSearch start!!");
 		

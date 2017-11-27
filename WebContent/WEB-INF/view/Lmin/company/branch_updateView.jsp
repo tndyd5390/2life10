@@ -79,7 +79,7 @@ function branchReg(){
 }
 
 function onlyNumber(obj) {
-    $(obj).keyup(function(){
+    $(obj).focusout(function(){
          $(this).val($(this).val().replace(/[^0-9]/g,""));
     }); 
 }
@@ -124,6 +124,12 @@ function sample6_execDaumPostcode() {
             document.getElementById('branchAddressDetail').focus();
         }
     }).open();
+}
+
+function doCancel(){
+	if(confirm("현재 작성중인 정보는 저장되지 않습니다. 취소하시겠습니까?")){
+		location.href="/Lmin/company/branchList.do";
+	}
 }
 </script>
 <body>
@@ -249,7 +255,7 @@ function sample6_execDaumPostcode() {
 				<h4 class="smallTit">전국지사안내</h4>
 
 				<div class="boardType2">
-				<form action="/company/branchUpdateProc.do" method="post" id="form">
+				<form action="/Lmin/company/branchUpdateProc.do" method="post" id="form">
 				<input type="hidden" name="branchNo" value="<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchNo()) %>">
 					<table summary="">
 						<caption></caption>
@@ -324,7 +330,7 @@ function sample6_execDaumPostcode() {
 							<tr>
 								<th scope="row" rowspan="3">주소</th>
 								<td>
-									<input type="text" name="branchPostNo" id="branchPostNo" title="이름" class="inputType2" value="<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchPostNo())%>" disabled="disabled" onclick="sample6_execDaumPostcode();">
+									<input type="text" name="branchPostNo" id="branchPostNo" title="이름" class="inputType2" value="<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchPostNo())%>" onclick="sample6_execDaumPostcode();">
 									<a href="#" class="btn_active_small"  onclick="sample6_execDaumPostcode();">우편번호</a>
 								</td>
 							</tr>
@@ -342,7 +348,7 @@ function sample6_execDaumPostcode() {
 
 				<div class="btn_area">
 					<a href="#" id="submitLink" class="btn_active" onclick="branchReg();">수정</a>
-					<a href="#" id="btnCancel" class="btn_cancel">취소</a>
+					<a href="#" id="btnCancel" class="btn_cancel" onclick="doCancel();">취소</a>
 				</div>
 
 			</div> <!-- // contents -->

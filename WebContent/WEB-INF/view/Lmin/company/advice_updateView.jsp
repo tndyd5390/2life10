@@ -1,4 +1,12 @@
+<%@page import="com.cl.util.TextUtil"%>
+<%@page import="com.cl.dto.AdviceDTO"%>
+<%@page import="com.cl.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	AdviceDTO aDTO = (AdviceDTO)request.getAttribute("aDTO");
+	if(aDTO == null) aDTO = new AdviceDTO();
+	String[] tel = aDTO.getAdvicePhoneNo().split("-");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -27,7 +35,7 @@
 <![endif]-->
 <script type="text/javascript">
 
-function doAdviceReg(){
+function doAdviceUpdate(){
 	var form = document.getElementById('adviceForm');
 	
 	if(form.adviceName.value == ""){
@@ -159,6 +167,13 @@ function sample6_execDaumPostcode() {
 		$("#subtitle").text($("#"+mbId).text());
 		$("#subtitle2").text($("#"+mbId2).text());
 		
+		$('#adviceTel1 option').each(function(){
+		    if($(this).val()=="<%=CmmUtil.nvl(tel[0])%>"){
+		    	$(this).attr("selected","selected"); 
+		 	}
+		 });
+		
+		
 	});
 
 </script>
@@ -219,7 +234,8 @@ function sample6_execDaumPostcode() {
 				<h4 class="smallTit">상담사조회</h4>
 
 				<div class="boardType2">
-				<form action="/Lmin/company/adviceRegProc.do" id="adviceForm" method="post">
+				<form action="/Lmin/company/adviceUpdateProc.do" id="adviceForm" method="post">
+				<input type="hidden" name="adviceNo" value="<%=TextUtil.exchangeEscapeNvl(aDTO.getAdviceNo()) %>">
 					<table summary="">
 						<caption></caption>
 						<colgroup>
@@ -230,7 +246,7 @@ function sample6_execDaumPostcode() {
 							<tr>
 								<th scope="row">상담사명</th>
 								<td>
-									<input type="text" name="adviceName" title="상담사명" class="inputType1" style="" maxlength="25">
+									<input type="text" name="adviceName" title="상담사명" value="<%=TextUtil.exchangeEscapeNvl(aDTO.getAdviceName()) %>" class="inputType1" style="" maxlength="25">
 								</td>
 							</tr>
 							<tr>
@@ -257,22 +273,22 @@ function sample6_execDaumPostcode() {
 										<option value="064">064</option>
 									</select>
 									-
-									<input type="text" name="adviceTel2" id="adviceTel2" class="numPhn inputType2" style="" maxlength="5" onkeydown="onlyNumber(this)">
+									<input type="text" name="adviceTel2" id="adviceTel2" class="numPhn inputType2" value="<%=TextUtil.exchangeEscapeNvl(tel[1]) %>" style="" maxlength="5" onkeydown="onlyNumber(this)">
 									-
-									<input type="text" name="adviceTel3" id="adviceTel3" class="numPhn inputType2" style="" maxlength="5" onkeydown="onlyNumber(this)">
+									<input type="text" name="adviceTel3" id="adviceTel3" class="numPhn inputType2" value="<%=TextUtil.exchangeEscapeNvl(tel[2]) %>" style="" maxlength="5" onkeydown="onlyNumber(this)">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row" rowspan="3">주소</th>
 								<td>
-									<input type="text" name="advicePostNo" id="advicePostNo" title="우편번호" class="inputType2" style="">
+									<input type="text" name="advicePostNo" id="advicePostNo" title="우편번호" class="inputType2" style="" value="<%=TextUtil.exchangeEscapeNvl(aDTO.getAdvicePostNo())%>">
 									<a href="#" class="btn_active_small"  onclick="sample6_execDaumPostcode();">우편번호</a>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<input type="text" name="adviceAddress" id="adviceAddress" title="주소" class="inputType5" style="">
-									<input type="text" name="adviceAddressDetail" id="adviceAddressDetail" title="상세주소" class="inputType5" style="">
+									<input type="text" name="adviceAddress" id="adviceAddress" title="주소" class="inputType5" style="" value="<%=TextUtil.exchangeEscapeNvl(aDTO.getAdviceAddress())%>">
+									<input type="text" name="adviceAddressDetail" id="adviceAddressDetail" title="상세주소" class="inputType5" style="" value="<%=TextUtil.exchangeEscapeNvl(aDTO.getAdviceAddressDetail())%>">
 									나머지주소
 								</td>
 							</tr>
@@ -282,7 +298,7 @@ function sample6_execDaumPostcode() {
 				</div>
 
 				<div class="btn_area">
-					<a href="#" id="submitLink" class="btn_active" onclick="doAdviceReg();">등록</a>
+					<a href="#" id="submitLink" class="btn_active" onclick="doAdviceUpdate();">수정</a>
 					<a href="#" id="btnCancel" class="btn_cancel" onclick="doAdviceRegCancel();">취소</a>
 				</div>
 

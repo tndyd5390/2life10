@@ -10,7 +10,10 @@
 	String bySeach =CmmUtil.nvl((String)request.getAttribute("bySearch"));
 	//페이징 처리를 위한 변수계산 
 	//리스트를 10개로 나누어서 10개씩 한페이지에 나오게한다.
-	int pageCnt = bList.size() / 10 + 1;
+	int pageCnt = bList.size() / 10;
+	if(bList.size() % 10 > 0){
+		pageCnt++;
+	}
 %>
 
 
@@ -54,7 +57,7 @@
 		}else{
 			var form = document.createElement("form");
 			form.setAttribute("method", "Post"); // Get 또는 Post 입력
-			form.setAttribute("action", "/company/branchSearch.do");
+			form.setAttribute("action", "/Lmin/company/branchSearch.do");
 			
 			var hiddenField = document.createElement("input");
 			hiddenField.setAttribute("type", "hidden");
@@ -76,7 +79,6 @@
 	
 	function changePage(pageNum, pageBtnId){
 		currPage = pageNum-1;
-		console.log("currPage : " + currPage);
 		$('a.psyPageBtn').css("background-color", "#ffffff");
 		$('a.psyPageBtn').css('color', "#555");
 		$('#' + pageBtnId).css('background-color', "#205e9f");
@@ -102,7 +104,14 @@
 			for(var i = currPageBtn; i> currPageBtn-5; i--){
 				$('#pageBtn' + i).show();
 			}
-			
+			for(var i = 0; i<= pageCnt; i++){
+				$('li.'  + i).hide();
+			}
+			$('li.' + (currPageBtn-1)).show();
+			$('a.psyPageBtn').css("background-color", "#ffffff");
+			$('a.psyPageBtn').css('color', "#555");
+			$('#pageBtn' + currPageBtn).css('background-color', "#205e9f");
+			$('#pageBtn' + currPageBtn).css('color', "#fff");
 		}
 	}
 	
@@ -117,7 +126,16 @@
 			for(var i = currPageBtn + 1; i< currPageBtn + 6; i++){
 				$('#pageBtn' + i).show();
 			}
+			for(var i = 0; i<= pageCnt; i++){
+				$('li.'  + i).hide();
+			}
+			$('li.' + currPageBtn).show();
+			$('a.psyPageBtn').css("background-color", "#ffffff");
+			$('a.psyPageBtn').css('color', "#555");
+			$('#pageBtn' + (currPageBtn + 1)).css('background-color', "#205e9f");
+			$('#pageBtn' + (currPageBtn + 1)).css('color', "#fff");
 			currPageBtn += 5;
+
 		}
 	}
 	
@@ -218,8 +236,6 @@
 
 		$("#subtitle").text($("#"+mbId).text());
 		$("#subtitle2").text($("#"+mbId2).text());
-		
-		
 		$('#pageBtn1').css('background-color', "#205e9f");
 		$('#pageBtn1').css('color', "#fff");
 	});
@@ -344,11 +360,11 @@
 							BranchDTO bDTO = bList.get(i);
 							if(i < 10){//페이지 처리를 위해 처음 10개만 출력하고 나머지는 display:none;%>
 							<li class="<%=i/10%>">
-								<p class="num"><%=CmmUtil.nvl(bDTO.getBranchNo()) %></p>
+								<p class="num"><%=CmmUtil.nvl(bDTO.getRowNum()) %></p>
 								<div class="info">
 									<p class="txt"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchName()) %></p>
 									<p class="txt1"><!-- 박성진수정 -->
-										<a href="/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
+										<a href="/Lmin/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
 									</p>
 									<p class="txt2">
 										<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchOfficerName()) %><span class="bar">&nbsp;|</span>
@@ -360,11 +376,11 @@
 							</li>
 						<%}else{%>
 							<li class="<%=i/10%>" style="display:none;">
-								<p class="num"><%=CmmUtil.nvl(bDTO.getBranchNo()) %></p>
+								<p class="num"><%=CmmUtil.nvl(bDTO.getRowNum()) %></p>
 								<div class="info">
 									<p class="txt"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchName()) %></p>
 									<p class="txt1"><!-- 박성진수정 -->
-										<a href="/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
+										<a href="/Lmin/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
 									</p>
 									<p class="txt2">
 										<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchOfficerName()) %><span class="bar">&nbsp;|</span>
@@ -382,11 +398,11 @@
 						BranchDTO bDTO = bList.get(i);
 						if(i<10){//페이지 처리를 위해 처음 10개만 출력하고 나머지는 display:none;%>
 							<li class="<%=i/10%>">
-								<p class="num"><%=CmmUtil.nvl(bDTO.getBranchNo()) %></p>
+								<p class="num"><%=CmmUtil.nvl(bDTO.getRowNum()) %></p>
 								<div class="info">
 									<p class="txt"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchName()) %></p>
 									<p class="txt1"><!-- 박성진수정 -->
-										<a href="/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
+										<a href="/Lmin/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
 									</p>
 									<p class="txt2">
 										<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchOfficerName()) %><span class="bar">&nbsp;|</span>
@@ -398,11 +414,11 @@
 							</li>
 						<%}else{%>
 							<li class="<%=i/10%>" style="display:none;">
-								<p class="num"><%=CmmUtil.nvl(bDTO.getBranchNo()) %></p>
+								<p class="num"><%=CmmUtil.nvl(bDTO.getRowNum()) %></p>
 								<div class="info">
 									<p class="txt"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchName()) %></p>
 									<p class="txt1"><!-- 박성진수정 -->
-										<a href="/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
+										<a href="/Lmin/company/branchDetail.do?branchNo=<%=CmmUtil.nvl(bDTO.getBranchNo())%>"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
 									</p>
 									<p class="txt2">
 										<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchOfficerName()) %><span class="bar">&nbsp;|</span>
@@ -416,7 +432,7 @@
 					} 
 				  }%>
 				</ul>
-				<a href="/company/branchWriteView.do" class="btn_active_small" style="float:right;">전국 지사 등록</a>
+				<a href="/Lmin/company/branchWriteView.do" class="btn_active_small" style="float:right;">전국 지사 등록</a>
 
 				<!-- pageArea -->
 				<div class="pageArea">

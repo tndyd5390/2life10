@@ -1,6 +1,7 @@
 package com.cl.dto;
 
 public class BranchDTO {
+	private String rowNum;
 	private String branchNo;
 	private String branchAreaCode;
 	private String branchName;
@@ -15,6 +16,12 @@ public class BranchDTO {
 	private String chgMemberNo;
 	private String chgDt;
 	
+	public String getRowNum() {
+		return rowNum;
+	}
+	public void setRowNum(String rowNum) {
+		this.rowNum = rowNum;
+	}
 	public String getBranchNo() {
 		return branchNo;
 	}
