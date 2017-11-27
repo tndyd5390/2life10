@@ -2,7 +2,9 @@
 package com.cl.controller.admin;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -31,10 +33,36 @@ public class AdviceController {
 	public String adviceList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".adviceList start!!!");
 		
-		List<AdviceDTO> aList = adviceService.getAdviceList();
+		String pageNum = CmmUtil.nvl(req.getParameter("pageNum"));
+		log.info(" pageNum : " + pageNum);
+		Map<String, Integer> startEndPage = new HashMap<>();
+		int viewCnt = 10;
+		if("".equals(pageNum)){
+			startEndPage.put("limit", viewCnt);
+			startEndPage.put("offset", 0);
+			model.addAttribute("currPage", 1);
+		}else{
+			int startEndPageInt = Integer.parseInt(pageNum) - 1;
+			startEndPage.put("limit", viewCnt);
+			startEndPage.put("offset", startEndPageInt * viewCnt);
+			System.out.println("limit : " + viewCnt);
+			System.out.println("offset: " + startEndPageInt * viewCnt);
+			model.addAttribute("currPage", startEndPageInt + 1);
+		}
+		Map<String, Object> aMap = adviceService.getAdviceList(startEndPage);
+		List<AdviceDTO> aList = (List<AdviceDTO>)aMap.get("aList");
+		int adviceRecordCnt = (int)aMap.get("adviceRecordCnt");
 		if(aList == null) aList = new ArrayList<>();
-		System.out.println("aList.size() : " + aList.size());
+		int pageCnt = adviceRecordCnt / viewCnt;
+		if(pageCnt % viewCnt > 0){
+			pageCnt++;
+		}
 		model.addAttribute("aList", aList);
+		model.addAttribute("adviceRecordCnt", adviceRecordCnt);
+		model.addAttribute("pageCnt", pageCnt);
+		
+		aMap = null;
+		aList = null;
 		
 		log.info(this.getClass() + ".adviceList end!!!");
 		return "/Lmin/company/advice";
@@ -86,6 +114,15 @@ public class AdviceController {
 		}
 		model.addAttribute("url", "/Lmin/company/adviceList.do");
 		
+		regMemberNo = null;
+		adviceName = null;
+		adviceTel1 = null;
+		adviceTel2 = null;
+		adviceTel3 = null;
+		advicePostNo = null;
+		adviceAddress = null;
+		adviceAddressDetail = null;
+		
 		log.info(this.getClass() + ".adviceRegProc end!!!");
 		return "/alert";
 	}
@@ -101,6 +138,9 @@ public class AdviceController {
 		if(aDTO == null) aDTO = new AdviceDTO();
 		
 		model.addAttribute("aDTO", aDTO);
+		
+		adviceNo = null;
+		aDTO= null;
 		
 		log.info(this.getClass() + ".adviceDetail end!!!");
 		return "/Lmin/company/advice_detail";
@@ -123,6 +163,8 @@ public class AdviceController {
 		
 		model.addAttribute("url", "/Lmin/company/adviceList.do");
 		
+		adviceNo = null;
+		
 		log.info(this.getClass() + ".adviceDelete end!!!");
 		return "/alert";
 	}
@@ -138,6 +180,8 @@ public class AdviceController {
 		if(aDTO == null) aDTO = new AdviceDTO();
 		
 		model.addAttribute("aDTO", aDTO);
+		
+		adviceNo = null;
 		
 		log.info(this.getClass() + ".adviceUpdateView end!!!");
 		return "/Lmin/company/advice_updateView";
@@ -183,6 +227,18 @@ public class AdviceController {
 			model.addAttribute("msg", "상담사 수정에 실패하였습니다.");
 		}
 		model.addAttribute("url", "/Lmin/company/adviceList.do");
+		
+		chgMemberNo = null;
+		adviceNo = null;
+		adviceName = null;
+		adviceTel1 = null;
+		adviceTel2 = null;
+		adviceTel3 = null;
+		advicePostNo = null;
+		adviceAddress = null;;
+		adviceAddressDetail = null;
+		aDTO = null;
+		
 		log.info(this.getClass() + ".adviceUpdateProc end!!!");
 		return "/alert";
 	}

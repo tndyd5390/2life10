@@ -1,6 +1,8 @@
 package com.cl.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -17,8 +19,11 @@ public class AdviceService implements IAdviceService{
 	private AdviceMapper adviceMapper;
 
 	@Override
-	public List<AdviceDTO> getAdviceList() throws Exception {
-		return adviceMapper.getAdviceList();
+	public Map<String, Object> getAdviceList(Map<String, Integer> startEndPage) throws Exception {
+		Map<String, Object> aMap = new HashMap<>();
+		aMap.put("aList", adviceMapper.getAdviceList(startEndPage));
+		aMap.put("adviceRecordCnt", adviceMapper.getAdviceRecordCnt());
+		return aMap;
 	}
 	
 	@Override

@@ -10,7 +10,10 @@
 	String bySeach =CmmUtil.nvl((String)request.getAttribute("bySearch"));
 	//페이징 처리를 위한 변수계산 
 	//리스트를 10개로 나누어서 10개씩 한페이지에 나오게한다.
-	int pageCnt = bList.size() / 10 + 1;
+	int pageCnt = bList.size() / 10;
+	if(bList.size() % 10 > 0){
+		pageCnt++;
+	}
 %>
 
 
@@ -292,7 +295,7 @@
 			<!-- 메뉴 영역 -->
 
 			<div class="contents"> <!-- 페이지별 ID none -->
-				<h4 class="smallTit">전국지ddd사안내</h4>
+				<h4 class="smallTit">전국지사안내</h4>
 
 				<div class="boardType2">
 					<table summary="">

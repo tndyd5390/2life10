@@ -1,4 +1,3 @@
-<%@page import="com.cl.util.MathUtil"%>
 <%@page import="com.cl.util.TextUtil"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.cl.dto.AdviceDTO"%>
@@ -6,9 +5,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	List<AdviceDTO> aList = (List<AdviceDTO>)request.getAttribute("aList");
-	int adviceRecordCnt = (int)request.getAttribute("adviceRecordCnt");//레코드 갯수
-	int pageCnt = (int)request.getAttribute("pageCnt");//페이지 갯수
-	int currPage = (int) request.getAttribute("currPage");
 	if(aList == null) aList = new ArrayList<>();
 %>
 <!DOCTYPE html>
@@ -36,41 +32,6 @@
 	<script src="/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
-	var currPage = <%=currPage%>;
-	var pageCnt = <%=pageCnt%>;
-	function firstPage(){
-		if(currPage == 1){
-			alert("첫 페이지 입니다.");
-			return;
-		}
-		location.href="/Lmin/company/adviceList.do?pageNum=1";
-	}
-	
-	function lastPage(){
-		if(currPage == pageCnt){
-			alert("마지막 페이지 입니다.");
-			return;
-		}
-		location.href="/Lmin/company/adviceList.do?pageNum=" + pageCnt;
-	}
-	
-	function nextPage(){
-		if(currPage == pageCnt){
-			alert("마지막 페이지 입니다.");
-			return;
-		}
-		currPage++;
-		location.href="/Lmin/company/adviceList.do?pageNum=" + currPage;
-	}
-	
-	function prePage(){
-		if(currPage == 1){
-			alert("첫 페이지 입니다.");
-			return;
-		}
-		currPage--;
-		location.href="/Lmin/company/adviceList.do?pageNum=" + currPage;
-	}
 </script>
 <body>
 <div id="skipnavi">
@@ -125,6 +86,7 @@
 
 		$("#subtitle").text($("#"+mbId).text());
 		$("#subtitle2").text($("#"+mbId2).text());
+		
 	});
 
 </script>
@@ -210,7 +172,7 @@
 					AdviceDTO aDTO = aList.get(i);
 				%>
 					<li>
-						<p class="num"><%=TextUtil.exchangeEscapeNvl(aDTO.getAdviceNo()) %></p>
+						<p class="num"><%=TextUtil.exchangeEscapeNvl(aDTO.getRowNum()) %></p>
 						<div class="info">
 							<p class="txt"><%=TextUtil.exchangeEscapeNvl(aDTO.getAdviceName()) %></p>
 							<p class="txt1"><!-- 박성진수정 -->
@@ -230,24 +192,7 @@
 				<a href="/Lmin/company/adviceWriteView.do" class="btn_active_small" style="float:right;">상담사 등록</a>
 				<!-- pageArea -->
 				<div class="pageArea">
-					<a href='#' class='btnFirst' onclick="firstPage();"><span>처음</span></a> 
-					<a href='#' class='btnPrev' onclick="prePage();"><span>이전</span></a>
-					<%
-					int[] startAndEnd = MathUtil.range(currPage, 5);
-					for(int i = startAndEnd[0]; i<= startAndEnd[1] && i<= pageCnt; i++){
-						if(currPage == i){
-					%>
-						<strong><%=i%></strong>
-					<%
-						}else{
-					%>
-						<a href="/Lmin/company/adviceList.do?pageNum=<%=i%>" id="pageNum<%=i%>"><%=i%></a>
-					<%
-						}
-					}
-					%>
-					<a href="#" class='btnNext' onclick="nextPage();"><span>다음</span></a>
-					<a href="#" class='btnLast' onclick="lastPage();"><span>마지막</span></a>
+					<a href='#none' class='btnFirst'><span>처음</span></a> <a href='#' class='btnPrev'><span>이전</span></a><strong>1</strong><a href="javascript:goPage('2','15')" >2</a><a href="javascript:goPage('3','15')" >3</a><a href="javascript:goPage('4','15')" >4</a><a href="javascript:goPage('5','15')" >5</a><a href="javascript:goPage('2','15')" class='btnNext'><span>다음</span></a> <a href="javascript:goPage('19','15')" class='btnLast'><span>마지막</span></a>
 				</div>
 				<!-- // pageArea -->
 

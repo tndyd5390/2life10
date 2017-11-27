@@ -124,7 +124,7 @@
 	           		   CHG_DT
 		  		  FROM BRANCH_INFO
 		 		 WHERE BRANCH_AREA_CODE = #{searchArea}) SEARCH_TABLE, 
-		 		 (SELECT @ROWNUM := 0) R
+		 		 	   (SELECT @ROWNUM := 0) R)
    		   WHERE INSTR(BRANCH_NAME, #{searchWord}) > 0
    		ORDER BY BRANCHNO DESC
 	
