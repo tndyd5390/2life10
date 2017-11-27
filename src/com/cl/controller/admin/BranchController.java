@@ -52,7 +52,7 @@ public class BranchController {
 	public String branchRegProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".branchRegProc start!!!");
 
-		String regMemberNo = CmmUtil.nvl((String)session.getAttribute("memberNo"));
+		String regMemberNo = CmmUtil.nvl((String)session.getAttribute("ss_member_no"));
 		log.info(" regNo : " + regMemberNo);
 		String branchAreaCode = CmmUtil.nvl(req.getParameter("branchAreaCode"));
 		log.info(" branchAreaCode : " + branchAreaCode);

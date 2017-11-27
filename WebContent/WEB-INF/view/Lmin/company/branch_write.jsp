@@ -61,6 +61,12 @@ function branchReg(){
 	}
 }
 
+function onlyNumber(obj) {
+    $(obj).focusout(function(){
+         $(this).val($(this).val().replace(/[^0-9]/g,""));
+    }); 
+}
+
 function sample6_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -279,9 +285,9 @@ function sample6_execDaumPostcode() {
 										<option value="064">064</option>
 									</select>
 									-
-									<input type="text" name="branchTel2" id="branchTel2" value="" title="" class="numPhn inputType2" style="" maxlength="5">
+									<input type="text" name="branchTel2" id="branchTel2" value="" title="" class="numPhn inputType2" style="" maxlength="5" onkeydown="onlyNumber(this)">
 									-
-									<input type="text" name="branchTel3" id="branchTel3" value="" title="" class="numPhn inputType2" style="" maxlength="5">
+									<input type="text" name="branchTel3" id="branchTel3" value="" title="" class="numPhn inputType2" style="" maxlength="5" onkeydown="onlyNumber(this)">
 								</td>
 							</tr>
 							<tr>

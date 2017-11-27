@@ -1,11 +1,10 @@
+<%@page import="com.cl.util.CmmUtil"%>
 <%@page import="com.cl.util.TextUtil"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="com.cl.dto.AdviceDTO"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	List<AdviceDTO> aList = (List<AdviceDTO>)request.getAttribute("aList");
-	if(aList == null) aList = new ArrayList<>();
+	AdviceDTO aDTO = (AdviceDTO)request.getAttribute("aDTO");
+	if(aDTO == null) aDTO = new AdviceDTO();
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -26,12 +25,23 @@
 <script type="text/javascript" src="/public/js/contents.js"></script>
 <script type="text/javascript" src="/public/js/jquery.form.js"></script>
 <script type="text/javascript" src="/public/js/jquery.rss.js"></script>
-
+<script type="text/javascript" src="/public/js/samsungcnt.js"></script>
+<script type="text/javascript" src="/public/js/samsungcnt-jquery.js"></script>
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <!--[if lt IE 9]>
 	<script src="/js/html5.js"></script>
 	<script src="/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
+function doAdviceList(){
+	location.href="/Lmin/campany/adviceList.do";
+}
+
+function doAdviceDelete(){
+	if(confirm('해당 게시글을 삭제하시겠습니까?')){
+		location.href="/Lmin/company/adviceDelete.do?adviceNo=<%=CmmUtil.nvl(aDTO.getAdviceNo())%>";
+	}
+}
 </script>
 <body>
 <div id="skipnavi">
@@ -43,9 +53,7 @@
 			
 			<!-- heaer 인쿠르드 -->
 			<!--#include file="../include/inc_header.jsp"-->
-			
 			<%@include file="/WEB-INF/view/include/inc_header.jsp"%>
-			
 		</div>
 	</div> <!-- // header -->
 
@@ -143,71 +151,46 @@
 
 			<!-- 메뉴 영역 -->
 
-			<div class="contents"> <!-- 페이지별 ID none -->
-				<h3 class="smallTit">상담사조회</h3>
-				
+			<div id="write" class="contents"> <!-- 페이지별 ID none -->
+				<h4 class="smallTit">상담사조회</h4>
+
 				<div class="boardType2">
+				<form action="/Lmin/company/adviceRegProc.do" id="adviceForm" method="post">
 					<table summary="">
 						<caption></caption>
 						<colgroup>
-							<col width="100%">
+							<col width="20%">
+							<col width="80%">
 						</colgroup>
 						<tbody>
 							<tr>
+								<th scope="row">상담사명</th>
 								<td>
-									상담사명
-									<input type="text" name="name" value="" title="" class="inputType1" style="" maxlength="25">
-
-									<a href="#" class="btn_active_small">검색</a>
+									<%=TextUtil.exchangeEscapeNvl(aDTO.getAdviceName()) %>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">전화번호</th>
+								<td>
+									<%=TextUtil.exchangeEscapeNvl(aDTO.getAdvicePhoneNo()) %>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row" rowspan="3">주소</th>
+								<td>
+									<%=TextUtil.exchangeEscapeNvl(aDTO.getAdviceAddress() + " " + aDTO.getAdviceAddressDetail()) %>
 								</td>
 							</tr>
 						</tbody>
 					</table>
-                </div>
-
-				<br/><br/>
-				<ul class="boradType4">
-				<%
-				for(int i = 0; i< aList.size(); i++){
-					AdviceDTO aDTO = aList.get(i);
-				%>
-					<li>
-						<p class="num"><%=TextUtil.exchangeEscapeNvl(aDTO.getRowNum()) %></p>
-						<div class="info">
-							<p class="txt"><%=TextUtil.exchangeEscapeNvl(aDTO.getAdviceName()) %></p>
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="/Lmin/company/adviceDetail.do?adviceNo=<%=TextUtil.exchangeEscapeNvl(aDTO.getAdviceNo())%>">
-									<%=TextUtil.exchangeEscapeNvl(aDTO.getAdviceAddress() + " " + aDTO.getAdviceAddressDetail()) %>
-								</a>
-							</p>
-							<p class="txt2">
-								<span><%=TextUtil.exchangeEscapeNvl(aDTO.getAdvicePhoneNo()) %></span>
-							</p>
-						</div>
-					</li>				
-				<%
-				} 
-				%>
-					<li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt">김카다시안</p>
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')">서울시 강남구 논현동 268-2</a>
-							</p>
-							<p class="txt2">
-								<span>1644-4491</span>
-							</p>
-						</div>
-					</li>
-				</ul>
-				<a href="/Lmin/company/adviceWriteView.do" class="btn_active_small" style="float:right;">상담사 등록</a>
-				<!-- pageArea -->
-				<div class="pageArea">
-					<a href='#none' class='btnFirst'><span>처음</span></a> <a href='#' class='btnPrev'><span>이전</span></a><strong>1</strong><a href="javascript:goPage('2','15')" >2</a><a href="javascript:goPage('3','15')" >3</a><a href="javascript:goPage('4','15')" >4</a><a href="javascript:goPage('5','15')" >5</a><a href="javascript:goPage('2','15')" class='btnNext'><span>다음</span></a> <a href="javascript:goPage('19','15')" class='btnLast'><span>마지막</span></a>
+					</form>
 				</div>
-				<!-- // pageArea -->
 
+				<div class="btn_area">
+					<a href="/Lmin/company/adviceList.do" id="submitLink" class="btn_active">목록</a>
+					<a href="/Lmin/company/adviceUpdateView.do?adviceNo=<%=CmmUtil.nvl(aDTO.getAdviceNo())%>" id="btnCancel" class="btn_active">수정</a>
+					<a href="#" id="btnCancel" class="btn_active" onclick="doAdviceDelete();">삭제</a>
+				</div>
 
 			</div> <!-- // contents -->
 

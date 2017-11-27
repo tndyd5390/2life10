@@ -1,9 +1,12 @@
 package com.cl.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.cl.dto.AdviceDTO;
 import com.cl.persistance.mapper.AdviceMapper;
 import com.cl.service.IAdviceService;
 
@@ -12,5 +15,29 @@ public class AdviceService implements IAdviceService{
 	
 	@Resource(name="AdviceMapper")
 	private AdviceMapper adviceMapper;
+
+	@Override
+	public List<AdviceDTO> getAdviceList() throws Exception {
+		return adviceMapper.getAdviceList();
+	}
 	
+	@Override
+	public int insertAdvice(AdviceDTO aDTO) throws Exception {
+		return adviceMapper.insertAdvice(aDTO);
+	}
+
+	@Override
+	public AdviceDTO getAdviceDetail(String adviceNo) throws Exception {
+		return adviceMapper.getAdviceDetail(adviceNo);
+	}
+
+	@Override
+	public int deleteAdvice(String adviceNo) throws Exception {
+		return adviceMapper.deleteAdvice(adviceNo);
+	}
+
+	@Override
+	public int updateAdvice(AdviceDTO aDTO) throws Exception {
+		return adviceMapper.updateAdvice(aDTO);
+	}
 }

@@ -45,7 +45,7 @@
 			#{branchAddress},
 			#{branchAddressDetail},
 			0,
-			'0',<!-- 여기는 나중에 회원 모듈 끝나면 바꿔주기 -->
+			#{regMemberNo},<!-- 여기는 나중에 회원 모듈 끝나면 바꿔주기 -->
 			NOW()
 		)
 	</insert>

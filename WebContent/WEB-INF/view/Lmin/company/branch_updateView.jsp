@@ -79,7 +79,7 @@ function branchReg(){
 }
 
 function onlyNumber(obj) {
-    $(obj).keyup(function(){
+    $(obj).focusout(function(){
          $(this).val($(this).val().replace(/[^0-9]/g,""));
     }); 
 }
@@ -330,7 +330,7 @@ function doCancel(){
 							<tr>
 								<th scope="row" rowspan="3">주소</th>
 								<td>
-									<input type="text" name="branchPostNo" id="branchPostNo" title="이름" class="inputType2" value="<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchPostNo())%>" disabled="disabled" onclick="sample6_execDaumPostcode();">
+									<input type="text" name="branchPostNo" id="branchPostNo" title="이름" class="inputType2" value="<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchPostNo())%>" onclick="sample6_execDaumPostcode();">
 									<a href="#" class="btn_active_small"  onclick="sample6_execDaumPostcode();">우편번호</a>
 								</td>
 							</tr>
