@@ -13,11 +13,36 @@
       		P.PAGE						AS PAGE
 	    FROM 
 	    	FUNERAL_NOTICE,
-	    	(SELECT COUNT(*) AS PAGE FROM FUNERAL_NOTICE) P,
+	    	(SELECT COUNT(*) AS PAGE FROM FUNERAL_NOTICE
+	    	<where>
+	    	<if test="searchBox==00">
+	    		FUNERAL_NOTICE_MEMBER LIKE CONCAT('%',#{search},'%')
+	    		OR FUNERAL_NOTICE_NAME	LIKE CONCAT('%',#{search},'%')
+	    	</if>
+	    	<if test="searchBox==01">
+	    		FUNERAL_NOTICE_NAME	LIKE CONCAT('%',#{search},'%')
+	    	</if>
+	    	<if test="searchBox==02">
+	    		FUNERAL_NOTICE_MEMBER LIKE CONCAT('%',#{search}},'%')
+	    	</if>
+	    	</where>
+	    	) P,
 	    	(SELECT @rownum:=0) TMP
+	    <where>
+	    	<if test="searchBox==00">
+	    		FUNERAL_NOTICE_MEMBER LIKE CONCAT('%',#{search},'%')
+	    		OR FUNERAL_NOTICE_NAME	LIKE CONCAT('%',#{search},'%')
+	    	</if>
+	    	<if test="searchBox==01">
+	    		FUNERAL_NOTICE_NAME	LIKE CONCAT('%',#{search},'%')
+	    	</if>
+	    	<if test="searchBox==02">
+	    		FUNERAL_NOTICE_MEMBER LIKE CONCAT('%',#{search},'%')
+	    	</if>
+	    </where>
 	    ORDER BY 
 	    	ROWNUM DESC
-	    LIMIT 0, 10
+	    LIMIT #{page}, #{splitPage}
 	</select>
 	
 	<insert id="insertFuneralNotice" parameterType="FuneralNoticeDTO">

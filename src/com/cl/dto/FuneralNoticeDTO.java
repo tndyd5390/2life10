@@ -12,6 +12,8 @@ public class FuneralNoticeDTO {
 	private String chgDt;
 	private int page;
 	private int splitPage;
+	private String searchBox;
+	private String search;
 	
 	public String getRegMemberNo() {
 		return regMemberNo;
@@ -79,6 +81,18 @@ public class FuneralNoticeDTO {
 	}
 	public void setSplitPage(int splitPage) {
 		this.splitPage = splitPage;
+	}
+	public String getSearchBox() {
+		return searchBox;
+	}
+	public void setSearchBox(String searchBox) {
+		this.searchBox = searchBox;
+	}
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
 	}
 	
 }

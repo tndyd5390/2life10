@@ -7,26 +7,41 @@
 <%
 	
 	List<FuneralNoticeDTO> fList = (List) request.getAttribute("fList");
+	FuneralNoticeDTO fuDTO = (FuneralNoticeDTO) request.getAttribute("fDTO");
+	
+	int splitPage=0;
+	int nowPage=0;
+	int pageList=0;
+	int pageBtn=0;
+	int pageBtnSplit=0;
+	int pageBtnLast=0;
+	
+	if(fuDTO == null){
+		fuDTO = new FuneralNoticeDTO();
+	}
 	if(fList == null){
 		fList = new ArrayList<>();
-	}
-	int splitPage = (int) request.getAttribute("splitPage");
-	int nowPage =  Integer.parseInt((String)request.getAttribute("nowPage"));
-	int pageList = (fList.get(0).getPage() / splitPage) + 1;
-	int pageBtn = 1;
-	int pageBtnSplit = 5;
-	int pageBtnLast = pageBtn+4;
-
-	if((nowPage/(pageBtnSplit+1))<1){
-		pageBtn = 1;
-		if(pageList<pageBtnSplit){
-			pageBtnLast = pageList;
-		}
 	}else{
-		pageBtn = ((nowPage/(pageBtnSplit+1))*5)+1;
-		pageBtnLast = pageBtn + 4;
-		if(pageList<pageBtnLast){
-			pageBtnLast = pageList;
+		if(fList.size()!=0){
+			splitPage = (int) request.getAttribute("splitPage");
+			nowPage =  Integer.parseInt((String)request.getAttribute("nowPage"));
+			pageList = (fList.get(0).getPage() / splitPage) + 1;
+			pageBtn = 1;
+			pageBtnSplit = 5;
+			pageBtnLast = pageBtn+4;
+		
+			if((nowPage/(pageBtnSplit+1))<1){
+				pageBtn = 1;
+				if(pageList<pageBtnSplit){
+					pageBtnLast = pageList;
+				}
+			}else{
+				pageBtn = ((nowPage/(pageBtnSplit+1))*5)+1;
+				pageBtnLast = pageBtn + 4;
+				if(pageList<pageBtnLast){
+					pageBtnLast = pageList;
+				}
+			}
 		}
 	}
 
@@ -41,7 +56,6 @@
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
 <link type="text/css" rel="stylesheet" href="/public/css/default.css" />
 <link type="text/css" rel="stylesheet" href="/public/css/layout_kor.css" />
-
 <link type="text/css" rel="stylesheet" href="/public/css/sub_kor.css" />
 
 <script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
@@ -112,8 +126,26 @@
 	});
 	
 	function goPage(page, lastPage){
-		location.href="funeralInfoList.do?page="+page;
+		var f = $("#f");
+		$("#page").val(page);
+		f.submit();
 	};
+	
+	function doSubmit(){
+		var f = $("#f");
+		var search = $("#search");
+		
+		if(search.val() == ""){
+			alert("검색어를 입력하세요.");
+			search.focus();
+			return false;
+		}else{
+			f.submit();
+			return true;
+		}
+	};
+	
+	
 
 </script>
 
@@ -135,8 +167,8 @@
 						<li id="MO70100"><a href="javascript:goMenu('../company/branch.jsp', 'MO70100');">전국지사안내</a></li>
 						<li id="MO70200"><a href="javascript:goMenu('../company/advice.jsp', 'MO70200');">상담사조회</a></li>
 						<li id="MO70300"><a href="javascript:goMenu('../company/cyber.jsp', 'MO70300');">사이버홍보실</a></li>
-						<li id="MO70400"><a href="javascript:goMenu('../funeral/funeral_info_list.jsp', 'MO70400');">전국장례시설안내</a></li>
-						<li id="MO70500"><a href="javascript:goMenu('../funeral/funeral_notice.jsp', 'M760500');">부고알림</a></li>
+						<li id="MO70400"><a href="javascript:goMenu('/Lmin/funeral/funeralInfoList.do', 'MO70400');">전국장례시설안내</a></li>
+						<li id="MO70500"><a href="javascript:goMenu('/Lmin/funeral/funeralNoticeList.do', 'M760500');">부고알림</a></li>
 						<li id="MO70600"><a href="javascript:goMenu('../cruise/cruise_schedule.jsp', 'MO70600');">크루즈일정</a></li>
 						<li id="MO70700"><a href="javascript:goMenu('../notice/notice_list.jsp', 'MO70700');">공지사항</a></li>
 						<li id="MO70800"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MO70800');">1:1상담</a></li>
@@ -152,26 +184,26 @@
 			<div class="pcLnbWrap">
 				<nav>
 					<ul class="pcLnb">
-						<li id="MN70100"><a href="javascript:goMenu('../company/branch.jsp', 'MN70100');">전국지사안내</a></li>
-						<li id="MN70200"><a href="javascript:goMenu('../company/advice.jsp', 'MN70200');">상담사조회</a></li>
-						<li id="MN70300"><a href="javascript:goMenu('../company/cyber.jsp', 'MN70300');">사이버홍보실</a></li>
-						<li id="MN70400"><a href="javascript:goMenu('../funeral/funeral_info_list.jsp', 'MN70400');">전국장례시설안내</a></li>
-						<li id="MN70500"><a href="javascript:goMenu('../funeral/funeral_notice.jsp', 'M760500');">부고알림</a></li>
-						<li id="MN70600"><a href="javascript:goMenu('../cruise/cruise_schedule.jsp', 'MN70600');">크루즈일정</a></li>
-						<li id="MN70700"><a href="javascript:goMenu('../notice/notice_list.jsp', 'MN70700');">공지사항</a></li>
-						<li id="MN70800"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MN70800');">1:1상담</a></li>
-						<li id="MN70900"><a href="javascript:goMenu('../regulation/regulation_list.jsp', 'MN0900');">상조관련법규</a></li>
-						<li id="MN71000"><a href="javascript:goMenu('../inquiry/inquiry_list.jsp', 'MN71000');">납부조회</a></li>
-						<li id="MN71200"><a href="javascript:goMenu('../appli/appli_form.jsp', 'MN71200');">가입신청</a></li>
+						<li id="MO70100"><a href="javascript:goMenu('../company/branch.jsp', 'MO70100');">전국지사안내</a></li>
+						<li id="MO70200"><a href="javascript:goMenu('../company/advice.jsp', 'MO70200');">상담사조회</a></li>
+						<li id="MO70300"><a href="javascript:goMenu('../company/cyber.jsp', 'MO70300');">사이버홍보실</a></li>
+						<li id="MO70400"><a href="javascript:goMenu('/Lmin/funeral/funeralInfoList.do', 'MO70400');">전국장례시설안내</a></li>
+						<li id="MO70500"><a href="javascript:goMenu('/Lmin/funeral/funeralNoticeList.do', 'M760500');">부고알림</a></li>
+						<li id="MO70600"><a href="javascript:goMenu('../cruise/cruise_schedule.jsp', 'MO70600');">크루즈일정</a></li>
+						<li id="MO70700"><a href="javascript:goMenu('../notice/notice_list.jsp', 'MO70700');">공지사항</a></li>
+						<li id="MO70800"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MO70800');">1:1상담</a></li>
+						<li id="MO70900"><a href="javascript:goMenu('../regulation/regulation_list.jsp', 'MO0900');">상조관련법규</a></li>
+						<li id="MO71000"><a href="javascript:goMenu('../inquiry/inquiry_list.jsp', 'MO71000');">납부조회</a></li>
+						<li id="MO71200"><a href="javascript:goMenu('../appli/appli_form.jsp', 'MO71200');">가입신청</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->
 
 			<!-- 메뉴 영역 -->
-
 			<div class="contents"> <!-- 페이지별 ID none -->
 				<h3 class="smallTit">부고알림</h3>
-				
+				<form name="f" id="f" method="post" action="/Lmin/funeral/funeralNoticeList.do">
+				<input type="hidden" name="page" id="page">
 				<div class="boardType2">
 					<table summary="">
 						<caption></caption>
@@ -181,22 +213,23 @@
 						<tbody>
 							<tr>
 								<td>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
-										<option value="00">전체</option>
-										<option value="01">소천인</option>
-										<option value="02">회원명</option>
+									<select id="searchBox" name="searchBox" class="inputType3">
+										<option value="00" <%=CmmUtil.select("00", CmmUtil.nvl(fuDTO.getSearchBox()))%>>전체</option>
+										<option value="01" <%=CmmUtil.select("01", CmmUtil.nvl(fuDTO.getSearchBox()))%>>소천인</option>
+										<option value="02" <%=CmmUtil.select("02", CmmUtil.nvl(fuDTO.getSearchBox()))%>>회원명</option>
 									</select>
-									<input type="text" name="name" value="" title="" class="inputType1" style="" maxlength="25">
-
-									<a href="#" class="btn_active_small">검색</a>
+									<input type="text" name="search" id="search" class="inputType1" value="<%=CmmUtil.nvl(fuDTO.getSearch())%>" maxlength="25">
+									<a href="javascript:doSubmit();" class="btn_active_small">검색</a>
 								</td>
 							</tr>
 						</tbody>
 					</table>
                 </div>
+				</form>
 
 				<br/><br/>
 				<ul class="boradType4">
+				<%if(fList.size()!=0){%>
 				<%for(FuneralNoticeDTO fDTO : fList){%>
 					<li>
 						<p class="num">부고</p>
@@ -214,6 +247,7 @@
 						</div>
 					</li>
 				<%}%>
+				<% }%>
 					<!-- <li>
 						<p class="num">부고</p>
 						<div class="info">
@@ -272,6 +306,7 @@
 				
 				<!-- pageArea -->
 				<div class="pageArea">
+				<%if(fList.size()!=0){%>
 					<%if(nowPage!=1){%>
 						<a href="javascript:goPage('1','<%=pageList %>')" class='btnFirst'><span>처음</span></a>
 						<a href="javascript:goPage('<%=nowPage-1 %>','<%=pageList %>')" class='btnPrev'><span>이전</span></a>
@@ -288,11 +323,11 @@
 							<a href="javascript:goPage('<%=i %>','<%=pageList %>')"><%=i %></a>
 					<%		}
 					}%>
-					
 					<%if(nowPage!=pageList){%>
 						<a href="javascript:goPage('<%=nowPage+1 %>','<%=pageList %>')" class='btnNext'><span>다음</span></a>
 						<a href="javascript:goPage('<%=pageList%>','<%=pageList%>')" class='btnLast'><span>마지막</span></a>
 					<%}%>
+				<%}%>
 				</div>
 				<!-- // pageArea -->
 

@@ -33,16 +33,27 @@ public class FuneralNoticeController {
 		String nowPage = "";
 		int page;
 		int splitPage = 10;
+		String selBox = CmmUtil.nvl(req.getParameter("searchBox"));
+		String search = CmmUtil.nvl(req.getParameter("search"));
+		
+		log.info("selBox : "+selBox);
+		log.info("search : "+search);
 		
 		if(!CmmUtil.nvl(req.getParameter("page")).equals("")){
 			nowPage = CmmUtil.nvl(req.getParameter("page"));
-			System.out.println(nowPage);
 			page = (Integer.parseInt(nowPage)-1) * splitPage;
 		}else{
 			nowPage = "1";
 			page = 0;
 		}
+		
 		FuneralNoticeDTO fDTO = new FuneralNoticeDTO();
+		
+		if(!search.equals("")){
+			fDTO.setSearch(search);
+			fDTO.setSearchBox(selBox);
+		}
+		
 		fDTO.setPage(page);
 		fDTO.setSplitPage(splitPage);
 		List<FuneralNoticeDTO> fList = new ArrayList<FuneralNoticeDTO>();
@@ -51,6 +62,7 @@ public class FuneralNoticeController {
 		model.addAttribute("fList", fList);
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("splitPage", splitPage);
+		model.addAttribute("fDTO", fDTO);
 		
 		fList = null;
 		fDTO = null;
@@ -85,6 +97,7 @@ public class FuneralNoticeController {
 		log.info("regMemberNo : "+regMemberNo);
 		
 		FuneralNoticeDTO fDTO = new FuneralNoticeDTO();
+
 		fDTO.setFuneralNoticeName(funeralNoticeName);
 		fDTO.setFuneralNoticeMember(funeralNoticeMember);
 		fDTO.setFuneralNoticePlace(funeralNoticePlace);

@@ -27,7 +27,6 @@
 	</insert>
 	
 	<select id="getFuneralInfoList" resultType="funeralInfoDTO" parameterType="funeralInfoDTO">
-	<![CDATA[
 	    SELECT
 	    	@rownum:=@rownum+1			AS ROWNUM,
 	    	F.FUNERAL_INFO_NO			AS FUNERALINFONO, 
@@ -50,7 +49,6 @@
 	    ORDER BY 
 	    	ROWNUM DESC
 	    LIMIT #{page}, #{splitPage}
-	]]>
 	</select>
 	
 	<select id="getFuneralInfoDetail" parameterType="FuneralInfoDTO" resultType="FuneralInfoDTO">
@@ -108,13 +106,14 @@
 	    	CODE G,
 	    	(SELECT @rownum:=0) TMP,
 	    	(SELECT COUNT(FUNERAL_INFO_NO) AS PAGE FROM FUNERAL_INFO
-	    		WHERE REG_MEMBER_NO = '3'
+			<where>
 	    	<if test="funeralInfoAreaCode!=null and funeralInfoAreaCode!=00">
 	    		AND FUNERAL_INFO_AREA_CODE = #{funeralInfoAreaCode}
 	    	</if>
 	    	<if test="funeralInfoCode!=null and funeralInfoCode!=00">
 	    		AND FUNERAL_INFO_CODE = #{funeralInfoCode}
 	    	</if>
+			</where>
 	    	) P
 	    WHERE 
 	    	F.FUNERAL_INFO_CODE 		= C.CODE_ID AND 
