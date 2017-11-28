@@ -26,31 +26,6 @@
 		)
 	</insert>
 	
-	<select id="getFuneralInfoList" resultType="funeralInfoDTO" parameterType="funeralInfoDTO">
-	    SELECT
-	    	@rownum:=@rownum+1			AS ROWNUM,
-	    	F.FUNERAL_INFO_NO			AS FUNERALINFONO, 
-	    	F.FUNERAL_INFO_NAME 		AS FUNERALINFONAME, 
-	    	C.CODE_NAME 				AS FUNERALINFOCODE, 
-	    	G.CODE_NAME 				AS FUNERALINFOAREACODE, 
-	    	FUNERAL_INFO_TEL_NO 		AS FUNERALINFOTELNO, 
-	    	F.FUNERAL_ADDRESS			AS FUNERALADDRESS, 
-	    	F.FUNERAL_ADDRESS_DETAIL	AS FUNERALADDRESSDETAIL,
-	    	P.PAGE						AS PAGE
-	    FROM 
-	    	FUNERAL_INFO F,
-	    	CODE C,
-	    	CODE G,
-	    	(SELECT @rownum:=0) TMP,
-	    	(SELECT COUNT(*) AS PAGE FROM FUNERAL_INFO) P
-	    WHERE 
-	    	F.FUNERAL_INFO_CODE 		= C.CODE_ID AND 
-	    	F.FUNERAL_INFO_AREA_CODE 	= G.CODE_ID
-	    ORDER BY 
-	    	ROWNUM DESC
-	    LIMIT #{page}, #{splitPage}
-	</select>
-	
 	<select id="getFuneralInfoDetail" parameterType="FuneralInfoDTO" resultType="FuneralInfoDTO">
 	    SELECT 
 	    	FUNERAL_INFO_NO				AS FUNERALINFONO, 
@@ -89,7 +64,7 @@
 			FUNERAL_INFO_NO 		= #{funeralInfoNo}
 	</delete>
 	
-	<select id="getFuneralInfoSearch" resultType="funeralInfoDTO" parameterType="funeralInfoDTO">
+	<select id="getFuneralInfoList" resultType="funeralInfoDTO" parameterType="hashmap">
 	    SELECT
 	    	@rownum:=@rownum+1			AS ROWNUM,
 	    	F.FUNERAL_INFO_NO			AS FUNERALINFONO, 
@@ -107,22 +82,22 @@
 	    	(SELECT @rownum:=0) TMP,
 	    	(SELECT COUNT(FUNERAL_INFO_NO) AS PAGE FROM FUNERAL_INFO
 			<where>
-	    	<if test="funeralInfoAreaCode!=null and funeralInfoAreaCode!=00">
-	    		AND FUNERAL_INFO_AREA_CODE = #{funeralInfoAreaCode}
+	    	<if test="searchBox!=null and searchBox!=00">
+	    		AND FUNERAL_INFO_AREA_CODE = #{searchBox}
 	    	</if>
-	    	<if test="funeralInfoCode!=null and funeralInfoCode!=00">
-	    		AND FUNERAL_INFO_CODE = #{funeralInfoCode}
+	    	<if test="search!=null and search!=00">
+	    		AND FUNERAL_INFO_CODE = #{search}
 	    	</if>
 			</where>
 	    	) P
 	    WHERE 
 	    	F.FUNERAL_INFO_CODE 		= C.CODE_ID AND 
 	    	F.FUNERAL_INFO_AREA_CODE 	= G.CODE_ID 
-	    	<if test="funeralInfoAreaCode!=null and funeralInfoAreaCode!=00">
-	    		AND F.FUNERAL_INFO_AREA_CODE = #{funeralInfoAreaCode}
+	    	<if test="searchBox!=null and searchBox!=00">
+	    		AND F.FUNERAL_INFO_AREA_CODE = #{searchBox}
 	    	</if>
-	    	<if test="funeralInfoCode!=null and funeralInfoCode!=00">
-	    		AND F.FUNERAL_INFO_CODE = #{funeralInfoCode}
+	    	<if test="search!=null and search!=00">
+	    		AND F.FUNERAL_INFO_CODE = #{search}
 	    	</if>
 	    ORDER BY 
 	    	ROWNUM DESC

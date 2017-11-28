@@ -1,5 +1,6 @@
 package com.cl.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -7,7 +8,6 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.cl.dto.CodeDTO;
 import com.cl.dto.FuneralInfoDTO;
 import com.cl.persistance.mapper.FuneralInfoMapper;
 import com.cl.service.IFuneralInfoService;
@@ -24,8 +24,17 @@ public class FuneralInfoService implements IFuneralInfoService{
 	}
 
 	@Override
-	public List<FuneralInfoDTO> getFuneralInfoList(FuneralInfoDTO fDTO) throws Exception {
-		return funeralInfoMapper.getFuneralInfoList(fDTO);
+	public HashMap<String, Object> getFuneralInfoList(HashMap<String, Object> hMap) throws Exception {
+		List<FuneralInfoDTO> fList = new ArrayList<>();
+		fList = funeralInfoMapper.getFuneralInfoList(hMap);
+		hMap.put("list", fList);
+		if(fList.size()!=0){
+			hMap.put("pageList", fList.get(0).getPage());
+		}else{
+			hMap.put("pageList", 1);
+		}
+		
+		return hMap;
 	}
 
 	@Override
@@ -42,10 +51,4 @@ public class FuneralInfoService implements IFuneralInfoService{
 	public int deleteFuneralInfo(String funeralInfoNo) throws Exception {
 		return funeralInfoMapper.deleteFuneralInfo(funeralInfoNo);
 	}
-
-	@Override
-	public List<FuneralInfoDTO> getFuneralInfoSearch(FuneralInfoDTO fDTO) throws Exception {
-		return funeralInfoMapper.getFuneralInfoSearch(fDTO);
-	}
-	
 }

@@ -19,6 +19,7 @@ import com.cl.dto.FuneralInfoDTO;
 import com.cl.service.ICodeService;
 import com.cl.service.IFuneralInfoService;
 import com.cl.util.CmmUtil;
+import com.cl.util.PageUtil;
 
 @Controller
 public class FuneralInfoController {
@@ -34,90 +35,22 @@ public class FuneralInfoController {
 	@RequestMapping("/Lmin/funeral/funeralInfoList")
 	public String funeralInfoList(HttpServletRequest req, Model model) throws Exception{
 		log.info("Lmin:funeralInfoList Start!!");
-		String nowPage = "";
-		int page;
 		int splitPage = 10;
 		
-		if(!CmmUtil.nvl(req.getParameter("page")).equals("")){
-			nowPage = CmmUtil.nvl(req.getParameter("page"));
-			System.out.println(nowPage);
-			page = (Integer.parseInt(nowPage)-1) * splitPage;
-		}else{
-			nowPage = "1";
-			page = 0;
-		}
-		
-		FuneralInfoDTO fDTO = new FuneralInfoDTO();
-		fDTO.setPage(page);
-		fDTO.setSplitPage(splitPage);
-		List<FuneralInfoDTO> fList = new ArrayList<>();
-		fList = funeralInfoService.getFuneralInfoList(fDTO);
-		
-		log.info("nowPage : "+ nowPage);
-		
+		HashMap<String, Object> hMap = new HashMap<>();
+		hMap = PageUtil.paging(req, splitPage);
+		hMap = funeralInfoService.getFuneralInfoList(hMap);
 		HashMap<String ,List<CodeDTO>> hashMap = new HashMap<>();
 		hashMap = codeService.getCodeList();
 		
-		model.addAttribute("fList", fList);
-		model.addAttribute("hashMap", hashMap);
-		model.addAttribute("nowPage", nowPage);
-		model.addAttribute("splitPage", splitPage);
 		
-		fList = null;
+		model.addAttribute("hashMap", hashMap);
+		model.addAttribute("hMap", hMap);
+		
 		hashMap = null;
-		fDTO = null;
+		hMap = null;
 		log.info("Lmin:funeralInfoList End!!");
 		return "/Lmin/funeral/funeral_info_list";
-	}
-	
-	@RequestMapping("/Lmin/funeral/funeralInfoSearch")
-	public String funeralInfoSearch(HttpServletRequest req, Model model) throws Exception{
-		log.info("Lmin:funeralInfoSearch Start!!");
-		String nowPage = "";
-		int page;
-		int splitPage = 10;
-		String geoCode = CmmUtil.nvl(req.getParameter("geoCode"));
-		String funeralCode = CmmUtil.nvl(req.getParameter("funeral"));
-		
-		log.info("geoCode : "+geoCode);
-		log.info("funeralCode : "+funeralCode);
-		
-		if(!CmmUtil.nvl(req.getParameter("page")).equals("")){
-			nowPage = CmmUtil.nvl(req.getParameter("page"));
-			page = (Integer.parseInt(nowPage)-1) * splitPage;
-		}else{
-			nowPage = "1";
-			page = 0;
-		}
-		
-		FuneralInfoDTO fDTO = new FuneralInfoDTO();
-		fDTO.setPage(page);
-		fDTO.setSplitPage(splitPage);
-		fDTO.setFuneralInfoCode(funeralCode);
-		fDTO.setFuneralInfoAreaCode(geoCode);
-		List<FuneralInfoDTO> fList = new ArrayList<>();
-		fList = funeralInfoService.getFuneralInfoSearch(fDTO);
-		
-		if(fList==null){
-			fList = new ArrayList<>();
-		}
-		log.info("nowPage : "+ nowPage);
-		
-		HashMap<String ,List<CodeDTO>> hashMap = new HashMap<>();
-		hashMap = codeService.getCodeList();
-		
-		model.addAttribute("fList", fList);
-		model.addAttribute("hashMap", hashMap);
-		model.addAttribute("nowPage", nowPage);
-		model.addAttribute("splitPage", splitPage);
-		model.addAttribute("fDTO", fDTO);
-		
-		fList = null;
-		hashMap = null;
-		fDTO = null;
-		
-		log.info("Lmin:funeralInfoSearch End!!");
-		return "/Lmin/funeral/funeral_info_search";
 	}
 	
 	@RequestMapping("/Lmin/funeral/funeralInfoWrite")

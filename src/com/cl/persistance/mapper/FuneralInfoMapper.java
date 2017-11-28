@@ -1,9 +1,9 @@
 package com.cl.persistance.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.cl.config.Mapper;
-import com.cl.dto.CodeDTO;
 import com.cl.dto.FuneralInfoDTO;
 
 @Mapper("FuneralInfoMapper")
@@ -11,7 +11,7 @@ public interface FuneralInfoMapper {
 
 	int insertFuneralInfo(FuneralInfoDTO fDTO) throws Exception;
 
-	List<FuneralInfoDTO> getFuneralInfoList(FuneralInfoDTO fDTO) throws Exception;
+	List<FuneralInfoDTO> getFuneralInfoList(HashMap<String, Object> hMap) throws Exception;
 
 	FuneralInfoDTO getFuneralInfoDetail(FuneralInfoDTO fDTO) throws Exception;
 
@@ -19,6 +19,5 @@ public interface FuneralInfoMapper {
 
 	int deleteFuneralInfo(String funeralInfoNo) throws Exception;
 
-	List<FuneralInfoDTO> getFuneralInfoSearch(FuneralInfoDTO fDTO) throws Exception;
 
 }

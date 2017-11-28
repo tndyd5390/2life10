@@ -77,19 +77,19 @@ public class PageUtil {
 		}
 		
 		if(nowPage!=1){
-			result += "<a href='javascript:goPage('1','"+pageList+"')' class='btnFirst'><span>처음</span></a>";
-			result += "<a href='javascript:goPage('"+(nowPage-1)+"','"+pageList+"')' class='btnPrev'><span>이전</span></a>";
+			result += "<a href='javascript:goPage(1,"+pageList+")' class='btnFirst'><span>처음</span></a>";
+			result += "<a href='javascript:goPage("+(nowPage-1)+","+pageList+")' class='btnPrev'><span>이전</span></a>";
 		}
-		for(int i=pageBtn;i<=pageBtn;i++){
+		for(int i=pageBtn;i<=pageBtnLast;i++){
 			if(i == nowPage){
 				result += "<strong>"+i+"</strong>";
 			}else{
-				result += "<a href='javascript:goPage('"+i+"','+pageList+')'>"+i+"</a>";
+				result += "<a href='javascript:goPage("+i+","+pageList+")'>"+i+"</a>";
 			}
 		}
 		if(nowPage!=pageList){
-			result += "<a href='javascript:goPage('"+(nowPage+1)+"','"+pageList+"')' class='btnPrev'><span>다음</span></a>";
-			result += "<a href='javascript:goPage('"+pageList+"','"+pageList+"')' class='btnPrev'><span>마지막</span></a>";
+			result += "<a href='javascript:goPage("+(nowPage+1)+","+pageList+")' class='btnNext'><span>다음</span></a>";
+			result += "<a href='javascript:goPage("+pageList+","+pageList+")' class='btnLast'><span>마지막</span></a>";
 		}
 		
 		return result;
