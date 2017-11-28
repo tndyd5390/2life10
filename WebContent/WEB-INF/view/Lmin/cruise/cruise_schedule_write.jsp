@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -7,23 +7,200 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
-<link type="text/css" rel="stylesheet" href="../../public/css/default.css" />
-<link type="text/css" rel="stylesheet" href="../../public/css/layout_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/default.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/layout_kor.css" />
 
-<link type="text/css" rel="stylesheet" href="../../public/css/sub_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/sub_kor.css" />
 
-<script type="text/javascript" src="../../public/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="../../public/js/TweenMax.min.js"></script>
-<script type="text/javascript" src="../../public/js/common.js"></script>
-<script type="text/javascript" src="../../public/js/contents.js"></script>
-<script type="text/javascript" src="../../public/js/jquery.form.js"></script>
-<script type="text/javascript" src="../../public/js/jquery.rss.js"></script>
+<script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/public/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="/public/js/common.js"></script>
+<script type="text/javascript" src="/public/js/contents.js"></script>
+<script type="text/javascript" src="/public/js/jquery.form.js"></script>
+<script type="text/javascript" src="/public/js/jquery.rss.js"></script>
 
 <!--[if lt IE 9]>
 	<script src="/js/html5.js"></script>
 	<script src="/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
+/*<[CDATA[*/
+
+window.onload = function() {
+    var frm = document.getElementById('cruiseForm');
+    
+    var nowDate        = new Date();
+    var nowYear        = nowDate.getFullYear();
+    var nowMonth    = eval(nowDate.getMonth()) +1;
+    var nowDay        = eval(nowDate.getDate());
+    
+    /***************
+     * 년 세팅
+     ***************/
+    var startYear    = nowYear - 10;
+    for( var i=0; i<20; i++ ) {
+        frm['startYear'].options[i] = new Option(startYear+i, startYear+i);
+        frm['endYear'].options[i] = new Option(startYear+i, startYear+i);
+    }
+
+    /***************
+     * 월 세팅
+     **************/
+    for (var i=0; i<12; i++) {
+    	frm['startMonth'].options[i] = new Option(i+1, i+1);
+    	frm['endMonth'].options[i] = new Option(i+1, i+1);
+    }
+    
+    
+    /***************************************
+     * 먼저 현재 년과 월을 셋팅
+     * 윤년계산과 월의 마지막 일자를 구하기 위해
+     ***************************************/
+    frm['startYear'].value        = nowYear;
+    frm['endYear'].value        = nowYear;
+    frm['startMonth'].value    = nowMonth;
+    frm['endMonth'].value    = nowMonth;
+    setStartDay();
+    setEndDay();
+    /********************************************
+     * 일(day)의 select를 생성하고 현재 일자로 초기화
+     ********************************************/
+    frm['startDay'].value        = nowDay;
+    frm['endDay'].value        = nowDay;
+}
+
+/******************
+ * 일(day) 셋팅
+ ******************/
+function setStartDay() {
+    var frm = document.getElementById('cruiseForm');
+    
+    var year            = frm['startYear'].value;
+    var month            = frm['startMonth'].value;
+    var day                = frm['startDay'].value;    
+    var dateDay        = frm['startDay'];
+    
+    var arrayMonth    = [31,28,31,30,31,30,31,31,30,31,30,31];
+
+    /*******************************************
+     * 윤달 체크 부분
+     * 윤달이면 2월 마지막 일자를 29일로 변경
+     *******************************************/
+    if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+        arrayMonth[1] = 29;
+    }
+
+    /**************************************
+     * 기존 일(day) select를 모두 삭제한다.
+     **************************************/
+    for( var i=dateDay.length; i>0; i--) {
+        dateDay.remove(dateDay.selectedIndex);
+    }
+        
+    /*********************************
+     * 일(day) select 옵션 생성
+     *********************************/
+    for (var i=1; i<=arrayMonth[month-1]; i++) {
+        dateDay.options[i-1] = new Option(i, i);
+    }
+
+    /*********************************************
+     * 기존에 선택된 일값 유지
+     * 기존 일값보다 현재 최대일값이 작을 경우
+     * 현재 선택 최대일값으로 세팅
+     ********************************************/
+    if( day != null || day != "" ) {
+        if( day > arrayMonth[month-1] ) {
+            dateDay.options.selectedIndex = arrayMonth[month-1]-1;
+        } else {
+            dateDay.options.selectedIndex = day-1;
+        }
+    }
+}
+
+function setEndDay() {
+    var frm = document.getElementById('cruiseForm');
+    
+    var year            = frm['endYear'].value;
+    var month            = frm['endMonth'].value;
+    var day                = frm['endDay'].value;    
+    var dateDay        = frm['endDay'];
+    
+    var arrayMonth    = [31,28,31,30,31,30,31,31,30,31,30,31];
+
+    /*******************************************
+     * 윤달 체크 부분
+     * 윤달이면 2월 마지막 일자를 29일로 변경
+     *******************************************/
+    if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+        arrayMonth[1] = 29;
+    }
+
+    /**************************************
+     * 기존 일(day) select를 모두 삭제한다.
+     **************************************/
+    for( var i=dateDay.length; i>0; i--) {
+        dateDay.remove(dateDay.selectedIndex);
+    }
+        
+    /*********************************
+     * 일(day) select 옵션 생성
+     *********************************/
+    for (var i=1; i<=arrayMonth[month-1]; i++) {
+        dateDay.options[i-1] = new Option(i, i);
+    }
+
+    /*********************************************
+     * 기존에 선택된 일값 유지
+     * 기존 일값보다 현재 최대일값이 작을 경우
+     * 현재 선택 최대일값으로 세팅
+     ********************************************/
+    if( day != null || day != "" ) {
+        if( day > arrayMonth[month-1] ) {
+            dateDay.options.selectedIndex = arrayMonth[month-1]-1;
+        } else {
+            dateDay.options.selectedIndex = day-1;
+        }
+    }
+}
+
+function doCruiseReg(){
+	var form = document.getElementById('cruiseForm');
+	
+	if(form.cruiseShipName.value == ""){
+		alert('선사명을 입력해 주세요.');
+		form.cruiseShipName.focus();
+		return;
+	}else if(form.cruiseName.value == ""){
+		alert('상품명을 입력해주세요.');
+		form.cruiseName.focus();
+		return;
+	}else if(form.cruisePrice.value == ""){
+		alert('상품가격을 입력해 주세요');
+		form.cruisePrice.focus();
+		return;
+	}else if(form.cruiseAccomodation.value == ""){
+		alert('인원을 입력해 주세요.');
+		form.cruiseAccomodation.focus();
+		return;
+	}else if(form.cruiseCabinCode.value == ""){
+		alert('캐빈을 입력해 주세요.');
+		form.cruiseCabinCode.focus();
+		return;
+	}else if(form.cruiseScheFile.value == ""){
+		alert('일정 파일을 업로드 해주세요.');
+		form.cruiseScheFile.focus();
+		return;
+	}else if(form.cruiseImgFile.value == ""){
+		alert('이미지 파일을 업로드 해주세요.');
+		form.cruiseImgFile.focus();
+		return;
+	}else{
+		form.submit();
+	}
+	
+}
+
 </script>
 <body>
 <div id="skipnavi">
@@ -34,7 +211,7 @@
 		<div class="container">
 			
 			<!-- heaer 인쿠르드 -->
-			<%@ include file="../include/inc_header.jsp" %>
+			<%@ include file="/WEB-INF/view/include/inc_header.jsp" %>
 
 		</div>
 	</div> <!-- // header -->
@@ -137,6 +314,7 @@
 				<h3 class="smallTit">크루즈일정</h3>
 
 				<div class="boardType2">
+				<form action="/Lmin/cruise/cruiseScheduleRegProc.do" method="post" enctype="multipart/form-data" id="cruiseForm">
 					<table summary="">
 						<caption></caption>
 						<colgroup>
@@ -147,91 +325,80 @@
 							<tr>
 								<th scope="row">선사명</th>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<input type="text" name="cruiseShipName" value="" title="이름" class="inputType1" style="" maxlength="25">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">시작일</th>
 								<td>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
-										<option value="00">2017</option>
-									</select>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
-										<option value="00">01</option>
-										<option value="01">02</option>
-									</select>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
-										<option value="00">01</option>
-										<option value="01">02</option>
-									</select>
+									<select name="startYear" onChange="setStartDay()" class="inputType3"></select>
+    								<select name="startMonth" onChange="setStartDay()" class="inputType3"></select>
+   									<select name="startDay" class="inputType3"></select>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">완료일</th>
 								<td>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
-										<option value="00">2017</option>
-									</select>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
-										<option value="00">01</option>
-										<option value="01">02</option>
-									</select>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
-										<option value="00">01</option>
-										<option value="01">02</option>
-									</select>
+									<select name="endYear" onChange="setEndDay()" class="inputType3"></select>
+    								<select name="endMonth" onChange="setEndDay()" class="inputType3"></select>
+   									<select name="endDay" class="inputType3"></select>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">상품명</th>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<input type="text" name="cruiseName" class="inputType1" maxlength="25">
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">상품가</th>
+								<td>
+									<input type="text" name="cruisePrice" class="inputType1" maxlength="25">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">인원</th>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<input type="text" name="cruiseAccomodation" class="inputType1" style="" maxlength="25">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">캐빈</th>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<input type="text" name="cruiseCabinCode" class="inputType1" style="" maxlength="25">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">비고</th>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<input type="text" name="cruiseEtc" class="inputType1" style="" maxlength="25">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">일정업로드</th>
 								<td>
-									<input type="file" name="name" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<input type="file" name="cruiseScheFile" class="inputType1" style="" maxlength="25">
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">사진업로드</th>
+								<td>
+									<input type="file" name="cruiseImgFile" class="inputType1" style="" maxlength="25">
 								</td>
 							</tr>
 						</tbody>
 					</table>
+					</form>
 				</div>
-
 				<div class="btn_area">
-					<a href="#" id="submitLink" class="btn_active">등록</a>
+					<a href="#" id="submitLink" class="btn_active" onclick="doCruiseReg();">등록</a>
 					<a href="#" id="btnCancel" class="btn_cancel">취소</a>
 				</div>
-
 			</div> <!-- // contents -->
-
-
 		</div>
 	</div> <!-- // contentsWrap -->
-
 	<div class="footer">
 		<div class="container">
-			
-
-
 			<footer>
 				<div class="footMenuWrap">
 					<ul>

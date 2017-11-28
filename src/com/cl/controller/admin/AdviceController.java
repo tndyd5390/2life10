@@ -274,12 +274,10 @@ public class AdviceController {
 			pageCnt++;
 		}
 		model.addAttribute("aList", aList);
-		System.out.println("aList.size() : " + aList.size());
 		model.addAttribute("adviceRecordCnt", adviceRecordCnt);
-		System.out.println("advicerecordCnt : " + adviceRecordCnt);
 		model.addAttribute("pageCnt", pageCnt);
-		System.out.println("pageCnt  : " + pageCnt);
 		model.addAttribute("searchWord", adviceSearchName);
+		
 		log.info(this.getClass() + ".adviceSearch end!!!");
 		return "/Lmin/company/advice_search";
 	}
