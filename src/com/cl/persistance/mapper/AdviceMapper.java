@@ -14,4 +14,6 @@ public interface AdviceMapper {
 	public int deleteAdvice(String adviceNo) throws Exception;
 	public int updateAdvice(AdviceDTO aDTO) throws Exception;
 	public int getAdviceRecordCnt() throws Exception;
+	public List<AdviceDTO> getAdviceSearch(Map<String, Object> startEndPage) throws Exception;
+	public int getAdviceSearchRecordCnt(String adviceSearchName) throws Exception;
 }

@@ -1,7 +1,7 @@
 package com.cl.util;
 
 public class MathUtil {
-	public static int[] range(int num, int range){
+	public static int[] pageRange(int num, int range){
 		int start;
 		int end;
 		int tmp = num;

@@ -45,8 +45,6 @@ public class AdviceController {
 			int startEndPageInt = Integer.parseInt(pageNum) - 1;
 			startEndPage.put("limit", viewCnt);
 			startEndPage.put("offset", startEndPageInt * viewCnt);
-			System.out.println("limit : " + viewCnt);
-			System.out.println("offset: " + startEndPageInt * viewCnt);
 			model.addAttribute("currPage", startEndPageInt + 1);
 		}
 		Map<String, Object> aMap = adviceService.getAdviceList(startEndPage);
@@ -54,7 +52,7 @@ public class AdviceController {
 		int adviceRecordCnt = (int)aMap.get("adviceRecordCnt");
 		if(aList == null) aList = new ArrayList<>();
 		int pageCnt = adviceRecordCnt / viewCnt;
-		if(pageCnt % viewCnt > 0){
+		if(adviceRecordCnt % viewCnt > 0){
 			pageCnt++;
 		}
 		model.addAttribute("aList", aList);
@@ -241,5 +239,48 @@ public class AdviceController {
 		
 		log.info(this.getClass() + ".adviceUpdateProc end!!!");
 		return "/alert";
+	}
+	
+	@RequestMapping(value="Lmin/company/adviceSearch", method=RequestMethod.POST)
+	public String adviceSearch(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+		log.info(this.getClass() + ".adviceSearch start!!!");
+		
+		String adviceSearchName = CmmUtil.nvl(req.getParameter("adviceSearchName"));
+		log.info(" adviceSearchName : " + adviceSearchName);
+		String pageNum = CmmUtil.nvl(req.getParameter("pageNum"));
+		log.info(" pageNum : " + pageNum);
+		Map<String, Object> startEndPage = new HashMap<>();
+		int viewCnt = 10;
+		
+		if("".equals(pageNum)){
+			startEndPage.put("limit", viewCnt);
+			startEndPage.put("offset", 0);
+			startEndPage.put("searchWord", adviceSearchName);
+			model.addAttribute("currPage", 1);
+		}else{
+			int startEndPageInt = Integer.parseInt(pageNum) - 1;
+			startEndPage.put("limit", viewCnt);
+			startEndPage.put("offset", startEndPageInt * viewCnt);
+			startEndPage.put("searchWord", adviceSearchName);
+			model.addAttribute("currPage", startEndPageInt + 1);
+		}
+		
+		Map<String, Object> aMap = adviceService.getAdivceSearch(startEndPage);
+		List<AdviceDTO> aList = (List<AdviceDTO>)aMap.get("aList");
+		int adviceRecordCnt = (int)aMap.get("adviceRecordCnt");
+		if(aList == null) aList = new ArrayList<>();
+		int pageCnt = adviceRecordCnt / viewCnt;
+		if(adviceRecordCnt % viewCnt > 0){
+			pageCnt++;
+		}
+		model.addAttribute("aList", aList);
+		System.out.println("aList.size() : " + aList.size());
+		model.addAttribute("adviceRecordCnt", adviceRecordCnt);
+		System.out.println("advicerecordCnt : " + adviceRecordCnt);
+		model.addAttribute("pageCnt", pageCnt);
+		System.out.println("pageCnt  : " + pageCnt);
+		model.addAttribute("searchWord", adviceSearchName);
+		log.info(this.getClass() + ".adviceSearch end!!!");
+		return "/Lmin/company/advice_search";
 	}
 }
