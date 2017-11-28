@@ -11,4 +11,5 @@ public interface IAdviceService {
 	public AdviceDTO getAdviceDetail(String adviceNo) throws Exception;
 	public int deleteAdvice(String adviceNo) throws Exception;
 	public int updateAdvice(AdviceDTO aDTO) throws Exception;
+	public Map<String, Object> getAdivceSearch(Map<String, Object> startEndPage) throws Exception;
 }

@@ -1,3 +1,4 @@
+<%@page import="com.cl.util.CmmUtil"%>
 <%@page import="com.cl.util.MathUtil"%>
 <%@page import="com.cl.util.TextUtil"%>
 <%@page import="java.util.ArrayList"%>
@@ -10,6 +11,8 @@
 	int pageCnt = (int)request.getAttribute("pageCnt");//페이지 갯수
 	int currPage = (int) request.getAttribute("currPage");
 	if(aList == null) aList = new ArrayList<>();
+	String searchName = CmmUtil.nvl((String)request.getAttribute("searchWord"));
+	System.out.println(searchName);
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -38,12 +41,31 @@
 <script type="text/javascript">
 	var currPage = <%=currPage%>;
 	var pageCnt = <%=pageCnt%>;
+	var searchWord = '<%=searchName%>';
 	function firstPage(){
 		if(currPage == 1){
 			alert("첫 페이지 입니다.");
 			return;
 		}
-		location.href="/Lmin/company/adviceList.do?pageNum=1";
+		//location.href="/Lmin/company/adviceList.do?pageNum=1";
+		var form = document.createElement("form");
+		var adviceSearchName = document.getElementById('adviceSearchName').value;
+		form.setAttribute("method", "Post"); // Get 또는 Post 입력
+		form.setAttribute("action", "/Lmin/company/adviceSearch.do");
+		
+		var hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", "adviceSearchName");
+		hiddenField.setAttribute("value", searchWord);
+		form.appendChild(hiddenField);
+		hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", "pageNum");
+		hiddenField.setAttribute("value", "1");
+		form.appendChild(hiddenField);
+		document.body.appendChild(form);
+		
+		form.submit();
 	}
 	
 	function lastPage(){
@@ -51,7 +73,25 @@
 			alert("마지막 페이지 입니다.");
 			return;
 		}
-		location.href="/Lmin/company/adviceList.do?pageNum=" + pageCnt;
+		var form = document.createElement("form");
+		var adviceSearchName = document.getElementById('adviceSearchName').value;
+		form.setAttribute("method", "Post"); // Get 또는 Post 입력
+		form.setAttribute("action", "/Lmin/company/adviceSearch.do");
+		
+		var hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", "adviceSearchName");
+		hiddenField.setAttribute("value", searchWord);
+		form.appendChild(hiddenField);
+		
+		hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", "pageNum");
+		hiddenField.setAttribute("value", pageCnt);
+		form.appendChild(hiddenField);
+		document.body.appendChild(form);
+		
+		form.submit();
 	}
 	
 	function nextPage(){
@@ -59,8 +99,29 @@
 			alert("마지막 페이지 입니다.");
 			return;
 		}
+		console.log(currPage);
+		console.log(searchWord);
 		currPage++;
-		location.href="/Lmin/company/adviceList.do?pageNum=" + currPage;
+		//location.href="/Lmin/company/adviceList.do?pageNum=" + currPage;
+		var form = document.createElement("form");
+		var adviceSearchName = document.getElementById('adviceSearchName').value;
+		form.setAttribute("method", "Post"); // Get 또는 Post 입력
+		form.setAttribute("action", "/Lmin/company/adviceSearch.do");
+		
+		var hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", "adviceSearchName");
+		hiddenField.setAttribute("value", searchWord);
+		form.appendChild(hiddenField);
+		
+		hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", "pageNum");
+		hiddenField.setAttribute("value", currPage);
+		form.appendChild(hiddenField);
+		document.body.appendChild(form);
+		
+		form.submit();
 	}
 	
 	function prePage(){
@@ -69,7 +130,49 @@
 			return;
 		}
 		currPage--;
-		location.href="/Lmin/company/adviceList.do?pageNum=" + currPage;
+		//location.href="/Lmin/company/adviceList.do?pageNum=" + currPage;
+		var form = document.createElement("form");
+		var adviceSearchName = document.getElementById('adviceSearchName').value;
+		form.setAttribute("method", "Post"); // Get 또는 Post 입력
+		form.setAttribute("action", "/Lmin/company/adviceSearch.do");
+		
+		var hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", "adviceSearchName");
+		hiddenField.setAttribute("value", searchWord);
+		form.appendChild(hiddenField);
+		
+		hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", "pageNum");
+		hiddenField.setAttribute("value", currPage);
+		form.appendChild(hiddenField);
+		document.body.appendChild(form);
+		
+		form.submit();
+	}
+	
+	function adviceSearchPageMove(pageNum){
+		var form = document.createElement("form");
+		
+		var adviceSearchName = document.getElementById('adviceSearchName').value;
+		form.setAttribute("method", "Post"); // Get 또는 Post 입력
+		form.setAttribute("action", "/Lmin/company/adviceSearch.do");
+		
+		var hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", "adviceSearchName");
+		hiddenField.setAttribute("value", searchWord);
+		form.appendChild(hiddenField);
+		
+		hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", "pageNum");
+		hiddenField.setAttribute("value", pageNum);
+		form.appendChild(hiddenField);
+		document.body.appendChild(form);
+		
+		form.submit();
 	}
 	
 	function adviceSearch(){
@@ -211,7 +314,7 @@
 							<tr>
 								<td>
 									상담사명
-									<input type="text" id="adviceSearchName" class="inputType1" maxlength="25">
+									<input type="text" id="adviceSearchName" class="inputType1" maxlength="25" value="<%=CmmUtil.nvl(searchName)%>">
 
 									<a href="#" class="btn_active_small" onclick="adviceSearch();">검색</a>
 								</td>
@@ -258,7 +361,7 @@
 					<%
 						}else{
 					%>
-						<a href="/Lmin/company/adviceList.do?pageNum=<%=i%>" id="pageNum<%=i%>"><%=i%></a>
+						<a href="#" id="pageNum<%=i%>" onclick="adviceSearchPageMove(<%=i%>);"><%=i%></a>
 					<%
 						}
 					}
