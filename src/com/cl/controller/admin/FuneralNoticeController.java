@@ -2,6 +2,7 @@
 package com.cl.controller.admin;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.cl.dto.FuneralNoticeDTO;
 import com.cl.service.IFuneralNoticeService;
 import com.cl.util.CmmUtil;
+import com.cl.util.PageUtil;
 import com.sun.xml.internal.ws.resources.HttpserverMessages;
 
 @Controller
@@ -30,42 +32,16 @@ public class FuneralNoticeController {
 	public String funeralNoticeList(HttpServletRequest req, Model model) throws Exception{
 		log.info("Lmin:funeralNoticeList Start!!");
 		
-		String nowPage = "";
-		int page;
 		int splitPage = 10;
-		String selBox = CmmUtil.nvl(req.getParameter("searchBox"));
-		String search = CmmUtil.nvl(req.getParameter("search"));
 		
-		log.info("selBox : "+selBox);
-		log.info("search : "+search);
+		HashMap<String, Object> hMap = new HashMap<>();
 		
-		if(!CmmUtil.nvl(req.getParameter("page")).equals("")){
-			nowPage = CmmUtil.nvl(req.getParameter("page"));
-			page = (Integer.parseInt(nowPage)-1) * splitPage;
-		}else{
-			nowPage = "1";
-			page = 0;
-		}
+		hMap = PageUtil.paging(req, splitPage);
+		hMap = funeralNoticeService.getFuneralNoticeList(hMap);
 		
-		FuneralNoticeDTO fDTO = new FuneralNoticeDTO();
+		model.addAttribute("hMap", hMap);
 		
-		if(!search.equals("")){
-			fDTO.setSearch(search);
-			fDTO.setSearchBox(selBox);
-		}
-		
-		fDTO.setPage(page);
-		fDTO.setSplitPage(splitPage);
-		List<FuneralNoticeDTO> fList = new ArrayList<FuneralNoticeDTO>();
-		fList = funeralNoticeService.getFuneralNoticeList(fDTO);
-		
-		model.addAttribute("fList", fList);
-		model.addAttribute("nowPage", nowPage);
-		model.addAttribute("splitPage", splitPage);
-		model.addAttribute("fDTO", fDTO);
-		
-		fList = null;
-		fDTO = null;
+		hMap = null;
 		log.info("Lmin:funeralNoticeList End!!");
 		return "/Lmin/funeral/funeral_notice";
 	}

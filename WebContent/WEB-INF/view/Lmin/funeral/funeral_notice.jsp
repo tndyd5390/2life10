@@ -1,50 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.cl.util.CmmUtil" %>
+<%@ page import="com.cl.util.PageUtil" %>
 <%@ page import="com.cl.util.TextUtil" %>
 <%@ page import="com.cl.dto.FuneralNoticeDTO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.HashMap" %>
 <%
+	HashMap<String, Object> hMap = (HashMap) request.getAttribute("hMap");
+	int pageBtnSplit = 5;
 	
-	List<FuneralNoticeDTO> fList = (List) request.getAttribute("fList");
-	FuneralNoticeDTO fuDTO = (FuneralNoticeDTO) request.getAttribute("fDTO");
-	
-	int splitPage=0;
-	int nowPage=0;
-	int pageList=0;
-	int pageBtn=0;
-	int pageBtnSplit=0;
-	int pageBtnLast=0;
-	
-	if(fuDTO == null){
-		fuDTO = new FuneralNoticeDTO();
-	}
-	if(fList == null){
-		fList = new ArrayList<>();
-	}else{
-		if(fList.size()!=0){
-			splitPage = (int) request.getAttribute("splitPage");
-			nowPage =  Integer.parseInt((String)request.getAttribute("nowPage"));
-			pageList = (fList.get(0).getPage() / splitPage) + 1;
-			pageBtn = 1;
-			pageBtnSplit = 5;
-			pageBtnLast = pageBtn+4;
-		
-			if((nowPage/(pageBtnSplit+1))<1){
-				pageBtn = 1;
-				if(pageList<pageBtnSplit){
-					pageBtnLast = pageList;
-				}
-			}else{
-				pageBtn = ((nowPage/(pageBtnSplit+1))*5)+1;
-				pageBtnLast = pageBtn + 4;
-				if(pageList<pageBtnLast){
-					pageBtnLast = pageList;
-				}
-			}
-		}
-	}
-
+	List<FuneralNoticeDTO> fList = (List<FuneralNoticeDTO>) hMap.get("list");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -214,11 +180,11 @@
 							<tr>
 								<td>
 									<select id="searchBox" name="searchBox" class="inputType3">
-										<option value="00" <%=CmmUtil.select("00", CmmUtil.nvl(fuDTO.getSearchBox()))%>>전체</option>
-										<option value="01" <%=CmmUtil.select("01", CmmUtil.nvl(fuDTO.getSearchBox()))%>>소천인</option>
-										<option value="02" <%=CmmUtil.select("02", CmmUtil.nvl(fuDTO.getSearchBox()))%>>회원명</option>
+										<option value="00" <%=CmmUtil.select("00", CmmUtil.nvl((String) hMap.get("searchBox")))%>>전체</option>
+										<option value="01" <%=CmmUtil.select("01", CmmUtil.nvl((String) hMap.get("searchBox")))%>>소천인</option>
+										<option value="02" <%=CmmUtil.select("02", CmmUtil.nvl((String) hMap.get("searchBox")))%>>회원명</option>
 									</select>
-									<input type="text" name="search" id="search" class="inputType1" value="<%=CmmUtil.nvl(fuDTO.getSearch())%>" maxlength="25">
+									<input type="text" name="search" id="search" class="inputType1" value="<%=CmmUtil.nvl((String) hMap.get("search"))%>" maxlength="25">
 									<a href="javascript:doSubmit();" class="btn_active_small">검색</a>
 								</td>
 							</tr>
@@ -306,28 +272,7 @@
 				
 				<!-- pageArea -->
 				<div class="pageArea">
-				<%if(fList.size()!=0){%>
-					<%if(nowPage!=1){%>
-						<a href="javascript:goPage('1','<%=pageList %>')" class='btnFirst'><span>처음</span></a>
-						<a href="javascript:goPage('<%=nowPage-1 %>','<%=pageList %>')" class='btnPrev'><span>이전</span></a>
-					<%}%>
-					<!-- <strong>1</strong>
-					<a href="javascript:goPage('2','15')" >2</a>
-					<a href="javascript:goPage('3','15')" >3</a>
-					<a href="javascript:goPage('4','15')" >4</a>
-					<a href="javascript:goPage('5','15')" >5</a> -->
-					<% for(int i=pageBtn;i<=pageBtnLast;i++){
-					  		if(i == nowPage){ %>
-							<strong><%=i %></strong>						
-							<%  }else{ %>
-							<a href="javascript:goPage('<%=i %>','<%=pageList %>')"><%=i %></a>
-					<%		}
-					}%>
-					<%if(nowPage!=pageList){%>
-						<a href="javascript:goPage('<%=nowPage+1 %>','<%=pageList %>')" class='btnNext'><span>다음</span></a>
-						<a href="javascript:goPage('<%=pageList%>','<%=pageList%>')" class='btnLast'><span>마지막</span></a>
-					<%}%>
-				<%}%>
+					<%= PageUtil.frontPaging(hMap, pageBtnSplit)%>
 				</div>
 				<!-- // pageArea -->
 

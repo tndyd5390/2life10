@@ -1,5 +1,7 @@
 package com.cl.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -15,11 +17,6 @@ public class FuneralNoticeService implements IFuneralNoticeService{
 	
 	@Resource(name="FuneralNoticeMapper")
 	private FuneralNoticeMapper funeralNoticeMapper;
-
-	@Override
-	public List<FuneralNoticeDTO> getFuneralNoticeList(FuneralNoticeDTO fDTO) throws Exception {
-		return funeralNoticeMapper.getFuneralNoticeList(fDTO);
-	}
 
 	@Override
 	public int insertFuneralNotice(FuneralNoticeDTO fDTO) throws Exception {
@@ -39,6 +36,20 @@ public class FuneralNoticeService implements IFuneralNoticeService{
 	@Override
 	public int deleteFuneralNotice(String funeralNoticeNo) throws Exception {
 		return funeralNoticeMapper.deleteFuneralNotice(funeralNoticeNo);
+	}
+
+	@Override
+	public HashMap<String, Object> getFuneralNoticeList(HashMap<String, Object> hMap) throws Exception {
+		List<FuneralNoticeDTO> fList = new ArrayList<>();
+		fList = funeralNoticeMapper.getFuneralNoticeList(hMap);
+		hMap.put("list", fList);
+		
+		if(fList.size()!=0){
+			hMap.put("pageList", fList.get(0).getPage());
+		}else{
+			hMap.put("pageList", 1);
+		}
+		return hMap;
 	}
 	
 }

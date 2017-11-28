@@ -11,7 +11,7 @@
 	HashMap<String ,List<CodeDTO>> hashMap = (HashMap) request.getAttribute("hashMap");
 	List<CodeDTO> fList = hashMap.get("funeralList");
 	List<CodeDTO> gList = hashMap.get("geoList");
-	int pageBtnSplit = 10;
+	int pageBtnSplit = 5;
 	
 	List<FuneralInfoDTO> fuList = (List<FuneralInfoDTO>) hMap.get("list");
 	
@@ -297,7 +297,7 @@
 				
 				<!-- pageArea -->
 				<div class="pageArea">
-					<%=PageUtil.frontPaging(hMap, 10) %>
+					<%=PageUtil.frontPaging(hMap, pageBtnSplit) %>
 				</div>
 				<!-- // pageArea -->
 

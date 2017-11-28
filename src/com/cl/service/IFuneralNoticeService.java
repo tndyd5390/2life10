@@ -1,12 +1,13 @@
 package com.cl.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.cl.dto.FuneralNoticeDTO;
 
 public interface IFuneralNoticeService {
 
-	List<FuneralNoticeDTO> getFuneralNoticeList(FuneralNoticeDTO fDTO) throws Exception;
+	HashMap<String, Object> getFuneralNoticeList(HashMap<String, Object> hMap) throws Exception;
 
 	int insertFuneralNotice(FuneralNoticeDTO fDTO) throws Exception;
 
