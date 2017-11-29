@@ -7,23 +7,107 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
-<link type="text/css" rel="stylesheet" href="../../public/css/default.css" />
-<link type="text/css" rel="stylesheet" href="../../public/css/layout_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/default.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/layout_kor.css" />
 
-<link type="text/css" rel="stylesheet" href="../../public/css/sub_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/sub_kor.css" />
 
-<script type="text/javascript" src="../../public/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="../../public/js/TweenMax.min.js"></script>
-<script type="text/javascript" src="../../public/js/common.js"></script>
-<script type="text/javascript" src="../../public/js/contents.js"></script>
-<script type="text/javascript" src="../../public/js/jquery.form.js"></script>
-<script type="text/javascript" src="../../public/js/jquery.rss.js"></script>
-
+<script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/public/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="/public/js/common.js"></script>
+<script type="text/javascript" src="/public/js/contents.js"></script>
+<script type="text/javascript" src="/public/js/jquery.form.js"></script>
+<script type="text/javascript" src="/public/js/jquery.rss.js"></script>
+<script type="text/javascript" src="/public/js/samsungcnt.js"></script>
+<script type="text/javascript" src="/public/js/samsungcnt-jquery.js"></script>
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <!--[if lt IE 9]>
 	<script src="/js/html5.js"></script>
 	<script src="/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
+function branchReg(){
+	var f = document.getElementById('form');
+	var regNumber = /^[0-9]*$/;
+	
+	if(f.name.value == ""){
+		alert("성명을 입력해 주세요.");
+		f.name.focus();
+		return;
+	}else if(f.branchAreaCode.value == "선택하세요"){
+		alert("지역을 선택해 주세요.");
+		f.branchAreaCode.focus();
+		return;
+	}else if(f.branchName.value == ""){
+		alert("지사명을 입력해 주세요.");
+		f.branchName.focus();
+		return;
+	}else if(f.branchOfficerName.value == ""){
+		alert("대표자명을 입력해 주세요.");
+		f.branchOfficerName.focus();
+		return;
+	}else if(!telChk('telAbleEndTime', 'branchTel2', 'branchTel3')){
+		return;
+	}else if(f.branchPostNo.value == ""){
+		alert("우편번호를 입력해주세요.");
+		f.branchPostNo.focus();
+		return;
+	}else if(f.branchAddressDetail.value == ""){
+		alert("상세주소를 입력해 주세요.");
+		f.branchAddressDetail.focus();
+		return;
+	}else{
+		f.submit();
+	}
+}
+
+function onlyNumber(obj) {
+    $(obj).focusout(function(){
+         $(this).val($(this).val().replace(/[^0-9]/g,""));
+    }); 
+}
+
+function sample6_execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var fullAddr = ''; // 최종 주소 변수
+            var extraAddr = ''; // 조합형 주소 변수
+
+            // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                fullAddr = data.roadAddress;
+
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                fullAddr = data.jibunAddress;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+            if(data.userSelectedType === 'R'){
+                //법정동명이 있을 경우 추가한다.
+                if(data.bname !== ''){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있을 경우 추가한다.
+                if(data.buildingName !== ''){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('branchPostNo').value = data.zonecode; //5자리 새우편번호 사용
+            document.getElementById('branchAddress').value = fullAddr;
+
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById('branchAddressDetail').focus();
+        }
+    }).open();
+}
 </script>
 <body>
 <div id="skipnavi">
@@ -35,7 +119,7 @@
 			
 			<!-- heaer 인쿠르드 -->
 			<!--#include file="../include/inc_header.jsp"-->
-			<%@include file="../include/inc_header.jsp"%>
+			<%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 		</div>
 	</div> <!-- // header -->
 
@@ -76,9 +160,7 @@
 
 		$("#subtitle").text($("#"+mbId).text());
 		$("#subtitle2").text($("#"+mbId2).text());
-		
 	});
-
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -137,6 +219,7 @@
 				<h4 class="smallTit">전국지사안내</h4>
 
 				<div class="boardType2">
+				<form action="/Lmin/company/branchRegProc.do" method="post" id="form">
 					<table summary="">
 						<caption></caption>
 						<colgroup>
@@ -145,67 +228,89 @@
 						</colgroup>
 						<tbody>
 							<tr>
-								<th scope="row">성명</th>
-								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType1" style="" maxlength="25">
-								</td>
-							</tr>
-							<tr>
 								<th scope="row">지역</th>
 								<td>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType2">
-										<option value="">선택하세요</option>
-										<option value="">서울</option>
-										<option value="">경기</option>
+									<select id="geoCode_1" name="branchAreaCode" title="" class="inputType2">
+										<option value="선택하세요">선택하세요</option>
+										<option value="서울특별시">서울특별시</option>
+										<option value="부산광역시">부산광역시</option>
+										<option value="대구광역시">대구광역시</option>
+										<option value="인천광역시">인천광역시</option>
+										<option value="광주광역시">광주광역시</option>
+										<option value="대전광역시">대전광역시</option>
+										<option value="울산광역시">울산광역시</option>
+										<option value="경기도">경기도</option>
+										<option value="강원도">강원도</option>
+										<option value="충청북도">충청북도</option>
+										<option value="충청남도">충청남도</option>
+										<option value="전라북도">전라북도</option>
+										<option value="전라남도">전라남도</option>
+										<option value="경상북도">경상북도</option>
+										<option value="경상남도">경상남도</option>
+										<option value="제주특별자치도">제주특별자치도</option>
 									</select>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">지사명</th>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<input type="text" name="branchName" value="" title="" class="inputType1" style="" maxlength="25">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">대표자명</th>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<input type="text" name="branchOfficerName" value="" title="" class="inputType1" style="" maxlength="25">
 								</td>
 							</tr>
 							<tr>
-								<th scope="row">자택전화</th>
+								<th scope="row">지사전화</th>
 								<td>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
-										<option value="00">02</option>
-										<option value="01">031</option>
+									<select id="telAbleEndTime" name="branchTel1" title="" class="inputType3">
+										<option value="02">02</option>
+										<option value="031">031</option>
+										<option value="032">032</option>
+										<option value="033">033</option>
+										<option value="041">041</option>
+										<option value="042">042</option>
+										<option value="043">043</option>
+										<option value="051">051</option>
+										<option value="052">052</option>
+										<option value="053">053</option>
+										<option value="054">054</option>
+										<option value="055">055</option>
+										<option value="061">061</option>
+										<option value="062">062</option>
+										<option value="063">063</option>
+										<option value="064">064</option>
 									</select>
 									-
-									<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
+									<input type="text" name="branchTel2" id="branchTel2" value="" title="" class="numPhn inputType2" style="" maxlength="5" onkeydown="onlyNumber(this)">
 									-
-									<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
+									<input type="text" name="branchTel3" id="branchTel3" value="" title="" class="numPhn inputType2" style="" maxlength="5" onkeydown="onlyNumber(this)">
 								</td>
 							</tr>
 							<tr>
-								<th scope="row" rowspan="2">주소</th>
+								<th scope="row" rowspan="3">주소</th>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
-									-
-									<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
-									<a href="#" class="btn_active_small">우편번호</a>
+									<input type="text" name="branchPostNo" id="branchPostNo" value="" title="이름" class="inputType2" style="">
+									<a href="#" class="btn_active_small"  onclick="sample6_execDaumPostcode();">우편번호</a>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType5" style="" maxlength="5">
+									<input type="text" name="branchAddress" id="branchAddress" value="" title="이름" class="inputType5" style="">
+									<input type="text" name="branchAddressDetail" id="branchAddressDetail" value="" title="이름" class="inputType5" style="">
 									나머지주소
 								</td>
 							</tr>
 						</tbody>
 					</table>
+				</form>
 				</div>
 
 				<div class="btn_area">
-					<a href="#" id="submitLink" class="btn_active">등록</a>
+					<a href="#" id="submitLink" class="btn_active" onclick="branchReg();">등록</a>
 					<a href="#" id="btnCancel" class="btn_cancel">취소</a>
 				</div>
 

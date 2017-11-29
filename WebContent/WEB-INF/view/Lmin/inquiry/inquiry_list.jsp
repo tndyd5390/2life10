@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -34,7 +34,7 @@
 		<div class="container">
 			
 			<!-- heaer 인쿠르드 -->
-			<!--#include file="../include/inc_header.jsp"-->
+			<%@ include file="../include/inc_header.jsp" %>
 
 		</div>
 	</div> <!-- // header -->

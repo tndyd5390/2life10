@@ -1,5 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cl.persistance.mapper.NoticeMapper">
-
+	<select id="getNoticeList" parameterType="HashMap" resultType="NoticeDTO">
+		 SELECT
+	    	@rownum:=@rownum+1			AS ROWNUM,
+	    	N.NOTICE_NO					AS NOTICENO,
+    	   	N.NOTICE_TITLE				AS NOTICETITLE,
+      		N.NOTICE_CONTENTS			AS NOTICECONTENTS,
+      		N.NOTICE_VIEW_CNT			AS NOTICEVIEWCNT,
+      		N.REG_MEMBER_NO				AS REGMEMBERNO,
+      		N.REG_DT					AS REGDT,
+      		M.MEMBER_NAME				AS MEMBERNAME,
+      		P.PAGE						AS PAGE
+	    FROM 
+	    	NOTICE_INFO N,
+	    	MEMBER_INFO M,
+	    	(SELECT COUNT(*) AS PAGE FROM NOTICE_INFO
+	    	<where>
+	    	<if test="searchBox==00">
+	    		AND NOTICE_TITLE LIKE CONCAT('%',#{search},'%')
+	    		OR NOTICE_CONTENTS LIKE CONCAT('%',#{search},'%')
+	    	</if>
+	    	<if test="searchBox==01">
+	    		AND NOTICE_TITLE LIKE CONCAT('%',#{search},'%')
+	    	</if>
+	    	</where>
+	    	) P,
+	    	(SELECT @rownum:=0) TMP
+	    WHERE
+	    	N.REG_MEMBER_NO = M.MEMBER_NO
+	    	<if test="searchBox==00">
+	    		AND NOTICE_TITLE LIKE CONCAT('%',#{search},'%')
+	    		OR NOTICE_CONTENTS LIKE CONCAT('%',#{search},'%')
+	    	</if>
+	    	<if test="searchBox==01">
+	    		AND NOTICE_TITLE LIKE CONCAT('%',#{search},'%')
+	    	</if>
+	    ORDER BY 
+	    	ROWNUM DESC
+	    LIMIT #{page}, #{splitPage}
+		
+	</select>
 </mapper>

@@ -7,17 +7,17 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
-<link type="text/css" rel="stylesheet" href="../public/css/default.css" />
-<link type="text/css" rel="stylesheet" href="../public/css/layout_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/default.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/layout_kor.css" />
 
-<link type="text/css" rel="stylesheet" href="../public/css/sub_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/sub_kor.css" />
 
-<script type="text/javascript" src="../public/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="../public/js/TweenMax.min.js"></script>
-<script type="text/javascript" src="../public/js/common.js"></script>
-<script type="text/javascript" src="../public/js/contents.js"></script>
-<script type="text/javascript" src="../public/js/jquery.form.js"></script>
-<script type="text/javascript" src="../public/js/jquery.rss.js"></script>
+<script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/public/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="/public/js/common.js"></script>
+<script type="text/javascript" src="/public/js/contents.js"></script>
+<script type="text/javascript" src="/public/js/jquery.form.js"></script>
+<script type="text/javascript" src="/public/js/jquery.rss.js"></script>
 
 <!--[if lt IE 9]>
 	<script src="/js/html5.js"></script>
@@ -35,14 +35,14 @@
 			
 			<header>
 				<h1 class="logo">
-					<a href="/index.jsp"><img src="../public/img/common/t_logo.png" alt="크리스찬라이프" /></a>
+					<a href="/index.jsp"><img src="/public/img/common/t_logo.png" alt="크리스찬라이프" /></a>
 				</h1>
 
 				<div class="topMenuWrap">
 					<ul>
 						<li><a href="../appli/appli_form.jsp">온라인가입신청</a></li>
-						<li><a href="../login/login.jsp">로그인</a></li>
-						<li><a href="../member/join_step.jsp">회원가입</a></li>
+						<li><a href="../member/login.do">로그인</a></li>
+						<li><a href="../member/joinStep.do">회원가입</a></li>
 					</ul>
 				</div>
 
@@ -63,7 +63,7 @@
 													<div class="depthArea">
 														<div class="overviewArea">
 															<aside>
-																<strong><img src="../public/img/gnb/img_online.png" alt="온라인상품가입" /></strong>
+																<strong><img src="/public/img/gnb/img_online.png" alt="온라인상품가입" /></strong>
 																<div class="btnArea">
 																	<a href="javascript:goMenu('/overview/info.do', 'MN10100');" class="btnDefault">바로가기<span class="iconGoArrow"></span></a>
 																</div>

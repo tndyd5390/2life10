@@ -1,4 +1,16 @@
+<%@page import="com.cl.util.MathUtil"%>
+<%@page import="com.cl.util.TextUtil"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.cl.dto.AdviceDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	List<AdviceDTO> aList = (List<AdviceDTO>)request.getAttribute("aList");
+	int adviceRecordCnt = (int)request.getAttribute("adviceRecordCnt");//레코드 갯수
+	int pageCnt = (int)request.getAttribute("pageCnt");//페이지 갯수
+	int currPage = (int) request.getAttribute("currPage");
+	if(aList == null) aList = new ArrayList<>();
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -7,23 +19,75 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
-<link type="text/css" rel="stylesheet" href="../../public/css/default.css" />
-<link type="text/css" rel="stylesheet" href="../../public/css/layout_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/default.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/layout_kor.css" />
 
-<link type="text/css" rel="stylesheet" href="../../public/css/sub_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/sub_kor.css" />
 
-<script type="text/javascript" src="../../public/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="../../public/js/TweenMax.min.js"></script>
-<script type="text/javascript" src="../../public/js/common.js"></script>
-<script type="text/javascript" src="../../public/js/contents.js"></script>
-<script type="text/javascript" src="../../public/js/jquery.form.js"></script>
-<script type="text/javascript" src="../../public/js/jquery.rss.js"></script>
+<script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/public/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="/public/js/common.js"></script>
+<script type="text/javascript" src="/public/js/contents.js"></script>
+<script type="text/javascript" src="/public/js/jquery.form.js"></script>
+<script type="text/javascript" src="/public/js/jquery.rss.js"></script>
 
 <!--[if lt IE 9]>
 	<script src="/js/html5.js"></script>
 	<script src="/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
+	var currPage = <%=currPage%>;
+	var pageCnt = <%=pageCnt%>;
+	function firstPage(){
+		if(currPage == 1){
+			alert("첫 페이지 입니다.");
+			return;
+		}
+		location.href="/Lmin/company/adviceList.do?pageNum=1";
+	}
+	
+	function lastPage(){
+		if(currPage == pageCnt){
+			alert("마지막 페이지 입니다.");
+			return;
+		}
+		location.href="/Lmin/company/adviceList.do?pageNum=" + pageCnt;
+	}
+	
+	function nextPage(){
+		if(currPage == pageCnt){
+			alert("마지막 페이지 입니다.");
+			return;
+		}
+		currPage++;
+		location.href="/Lmin/company/adviceList.do?pageNum=" + currPage;
+	}
+	
+	function prePage(){
+		if(currPage == 1){
+			alert("첫 페이지 입니다.");
+			return;
+		}
+		currPage--;
+		location.href="/Lmin/company/adviceList.do?pageNum=" + currPage;
+	}
+	
+	function adviceSearch(){
+		
+		var form = document.createElement("form");
+		var adviceSearchName = document.getElementById('adviceSearchName').value;
+		form.setAttribute("method", "Post"); // Get 또는 Post 입력
+		form.setAttribute("action", "/Lmin/company/adviceSearch.do");
+		
+		var hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", "adviceSearchName");
+		hiddenField.setAttribute("value", adviceSearchName);
+		form.appendChild(hiddenField);
+		document.body.appendChild(form);
+		
+		form.submit();
+	}
 </script>
 <body>
 <div id="skipnavi">
@@ -36,7 +100,7 @@
 			<!-- heaer 인쿠르드 -->
 			<!--#include file="../include/inc_header.jsp"-->
 			
-			<%@include file="../include/inc_header.jsp"%>
+			<%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 			
 		</div>
 	</div> <!-- // header -->
@@ -78,7 +142,6 @@
 
 		$("#subtitle").text($("#"+mbId).text());
 		$("#subtitle2").text($("#"+mbId2).text());
-		
 	});
 
 </script>
@@ -148,9 +211,9 @@
 							<tr>
 								<td>
 									상담사명
-									<input type="text" name="name" value="" title="" class="inputType1" style="" maxlength="25">
+									<input type="text" id="adviceSearchName" class="inputType1" maxlength="25">
 
-									<a href="#" class="btn_active_small">검색</a>
+									<a href="#" class="btn_active_small" onclick="adviceSearch();">검색</a>
 								</td>
 							</tr>
 						</tbody>
@@ -159,71 +222,49 @@
 
 				<br/><br/>
 				<ul class="boradType4">
+				<%
+				for(int i = 0; i< aList.size(); i++){
+					AdviceDTO aDTO = aList.get(i);
+				%>
 					<li>
-						<p class="num">1</p>
+						<p class="num"><%=TextUtil.exchangeEscapeNvl(aDTO.getAdviceNo()) %></p>
 						<div class="info">
-							<p class="txt">김카다시안</p>
+							<p class="txt"><%=TextUtil.exchangeEscapeNvl(aDTO.getAdviceName()) %></p>
 							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')">서울시 강남구 논현동 268-2</a>
+								<a href="/Lmin/company/adviceDetail.do?adviceNo=<%=TextUtil.exchangeEscapeNvl(aDTO.getAdviceNo())%>">
+									<%=TextUtil.exchangeEscapeNvl(aDTO.getAdviceAddress() + " " + aDTO.getAdviceAddressDetail()) %>
+								</a>
 							</p>
 							<p class="txt2">
-								<span>1644-4491</span>
+								<span><%=TextUtil.exchangeEscapeNvl(aDTO.getAdvicePhoneNo()) %></span>
 							</p>
 						</div>
-					</li>
-					<li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt">김카다시안</p>
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')">서울시 강남구 논현동 268-2</a>
-							</p>
-							<p class="txt2">
-								<span>1644-4491</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt">김카다시안</p>
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')">서울시 강남구 논현동 268-2</a>
-							</p>
-							<p class="txt2">
-								<span>1644-4491</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt">김카다시안</p>
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')">서울시 강남구 논현동 268-2</a>
-							</p>
-							<p class="txt2">
-								<span>1644-4491</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt">김카다시안</p>
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')">서울시 강남구 논현동 268-2</a>
-							</p>
-							<p class="txt2">
-								<span>1644-4491</span>
-							</p>
-						</div>
-					</li>
+					</li>				
+				<%
+				} 
+				%>
 				</ul>
-
+				<a href="/Lmin/company/adviceWriteView.do" class="btn_active_small" style="float:right;">상담사 등록</a>
 				<!-- pageArea -->
 				<div class="pageArea">
-					<a href='#none' class='btnFirst'><span>처음</span></a> <a href='#' class='btnPrev'><span>이전</span></a><strong>1</strong><a href="javascript:goPage('2','15')" >2</a><a href="javascript:goPage('3','15')" >3</a><a href="javascript:goPage('4','15')" >4</a><a href="javascript:goPage('5','15')" >5</a><a href="javascript:goPage('2','15')" class='btnNext'><span>다음</span></a> <a href="javascript:goPage('19','15')" class='btnLast'><span>마지막</span></a>
+					<a href='#' class='btnFirst' onclick="firstPage();"><span>처음</span></a> 
+					<a href='#' class='btnPrev' onclick="prePage();"><span>이전</span></a>
+					<%
+					int[] startAndEnd = MathUtil.pageRange(currPage, 5);
+					for(int i = startAndEnd[0]; i<= startAndEnd[1] && i<= pageCnt; i++){
+						if(currPage == i){
+					%>
+						<strong><%=i%></strong>
+					<%
+						}else{
+					%>
+						<a href="/Lmin/company/adviceList.do?pageNum=<%=i%>" id="pageNum<%=i%>"><%=i%></a>
+					<%
+						}
+					}
+					%>
+					<a href="#" class='btnNext' onclick="nextPage();"><span>다음</span></a>
+					<a href="#" class='btnLast' onclick="lastPage();"><span>마지막</span></a>
 				</div>
 				<!-- // pageArea -->
 

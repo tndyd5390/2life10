@@ -1,5 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cl.persistance.mapper.FuneralInfoMapper">
-
+	<insert id="insertFuneralInfo" parameterType="FuneralInfoDTO">
+		INSERT INTO FUNERAL_INFO
+		(
+			FUNERAL_INFO_CODE,
+			FUNERAL_INFO_AREA_CODE,
+			FUNERAL_INFO_NAME,
+			FUNERAL_INFO_TEL_NO,
+			FUNERAL_POST_NO,
+			FUNERAL_ADDRESS,
+			FUNERAL_ADDRESS_DETAIL,
+			REG_MEMBER_NO,
+			REG_DT
+		) VALUES (
+			#{funeralInfoCode},
+			#{funeralInfoAreaCode},
+			#{funeralInfoName},
+			#{funeralInfoTelNo},
+			#{funeralPostNo},
+			#{funeralAddress},
+			#{funeralAddressDetail},
+			'3',
+			now()
+		)
+	</insert>
+	
+	<select id="getFuneralInfoDetail" parameterType="FuneralInfoDTO" resultType="FuneralInfoDTO">
+	    SELECT 
+	    	FUNERAL_INFO_NO				AS FUNERALINFONO, 
+	    	FUNERAL_INFO_NAME 			AS FUNERALINFONAME, 
+	    	FUNERAL_INFO_CODE 			AS FUNERALINFOCODE, 
+	    	FUNERAL_INFO_AREA_CODE 		AS FUNERALINFOAREACODE, 
+	    	FUNERAL_INFO_TEL_NO 		AS FUNERALINFOTELNO, 
+	    	FUNERAL_POST_NO 			AS FUNERALPOSTNO, 
+	    	FUNERAL_ADDRESS				AS FUNERALADDRESS, 
+	    	FUNERAL_ADDRESS_DETAIL		AS FUNERALADDRESSDETAIL
+	    FROM FUNERAL_INFO
+	    WHERE FUNERAL_INFO_NO = #{funeralInfoNo}
+	</select>
+	
+	<update id="updateFuneralInfo" parameterType="FuneralInfoDTO">
+		UPDATE 
+			FUNERAL_INFO 
+		SET 
+			FUNERAL_INFO_CODE 		= #{funeralInfoCode},
+			FUNERAL_INFO_AREA_CODE 	= #{funeralInfoAreaCode},
+			FUNERAL_INFO_NAME 		= #{funeralInfoName},
+			FUNERAL_INFO_TEL_NO		= #{funeralInfoTelNo},
+			FUNERAL_POST_NO 		= #{funeralPostNo},
+			FUNERAL_ADDRESS 		= #{funeralAddress},
+			FUNERAL_ADDRESS_DETAIL 	= #{funeralAddressDetail},
+			CHG_MEMBER_NO 			= '3',
+			CHG_DT 					= now()
+		WHERE
+			FUNERAL_INFO_NO 		= #{funeralInfoNo}
+	</update>
+	
+	<delete id="deleteFuneralInfo" parameterType="String">
+		DELETE FROM 
+			FUNERAL_INFO
+		WHERE
+			FUNERAL_INFO_NO 		= #{funeralInfoNo}
+	</delete>
+	
+	<select id="getFuneralInfoList" resultType="funeralInfoDTO" parameterType="hashmap">
+	    SELECT
+	    	@rownum:=@rownum+1			AS ROWNUM,
+	    	F.FUNERAL_INFO_NO			AS FUNERALINFONO, 
+	    	F.FUNERAL_INFO_NAME 		AS FUNERALINFONAME, 
+	    	C.CODE_NAME 				AS FUNERALINFOCODE, 
+	    	G.CODE_NAME 				AS FUNERALINFOAREACODE, 
+	    	FUNERAL_INFO_TEL_NO 		AS FUNERALINFOTELNO, 
+	    	F.FUNERAL_ADDRESS			AS FUNERALADDRESS, 
+	    	F.FUNERAL_ADDRESS_DETAIL	AS FUNERALADDRESSDETAIL,
+	    	P.PAGE						AS PAGE
+	    FROM 
+	    	FUNERAL_INFO F,
+	    	CODE C,
+	    	CODE G,
+	    	(SELECT @rownum:=0) TMP,
+	    	(SELECT COUNT(FUNERAL_INFO_NO) AS PAGE FROM FUNERAL_INFO
+			<where>
+	    	<if test="searchBox!=null and searchBox!=00">
+	    		AND FUNERAL_INFO_AREA_CODE = #{searchBox}
+	    	</if>
+	    	<if test="search!=null and search!=00">
+	    		AND FUNERAL_INFO_CODE = #{search}
+	    	</if>
+			</where>
+	    	) P
+	    WHERE 
+	    	F.FUNERAL_INFO_CODE 		= C.CODE_ID AND 
+	    	F.FUNERAL_INFO_AREA_CODE 	= G.CODE_ID 
+	    	<if test="searchBox!=null and searchBox!=00">
+	    		AND F.FUNERAL_INFO_AREA_CODE = #{searchBox}
+	    	</if>
+	    	<if test="search!=null and search!=00">
+	    		AND F.FUNERAL_INFO_CODE = #{search}
+	    	</if>
+	    ORDER BY 
+	    	ROWNUM DESC
+	    LIMIT #{page}, #{splitPage}
+	</select>
+	
 </mapper>

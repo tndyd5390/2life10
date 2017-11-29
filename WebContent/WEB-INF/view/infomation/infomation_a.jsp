@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="../include/inc_header.jsp"%>
-<!--#include file="../include/inc_header.jsp"-->
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="../include/inc_header.jsp" %>
 
 	<div id="contentsWrap">
 		<div class="container">
@@ -144,12 +143,12 @@
 									<col style="width:auto%;">
 									<col style="width:50%;">
 								</colgroup>
-								<thead>
+								<head>
 									<tr>
 										<th scope="row">총 고객 환급 의무액</th>
 										<th scope="row">상조관련자산</th>
 									</tr>
-								</thead>
+								</head>
 								<tbody>
 									<tr>
 										<td>869,400만원</td>
@@ -189,5 +188,4 @@
 		</div>
 	</div> <!-- // contentsWrap -->
 
-<!--#include file="../include/inc_footer."-->
-<%@include file="../include/inc_footer.jsp"%>
+<%@ include file="../include/inc_footer.jsp" %>

@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <header>
 	<h1 class="logo">
-		<a href="/index.jsp"><img src="./public/img/common/t_logo.png" alt="크리스찬라이프" /></a>
+		<a href="/index.jsp"><img src="/public/img/common/t_logo.png" alt="크리스찬라이프" /></a>
 	</h1>
 
 	<div class="topMenuWrap">
 		<ul>
 			<li><a href="./appli/appli_form.jsp">온라인가입신청</a></li>
-			<li><a href="./login/login.jsp">로그인</a></li>
-			<li><a href="./member/join_step.jsp">회원가입</a></li>
+			<li><a href="./member/login.do">로그인</a></li>
+			<li><a href="./member/joinStep.do">회원가입</a></li>
 		</ul>
 	</div>
 

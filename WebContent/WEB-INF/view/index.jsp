@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 <title>크리스찬라이프</title>
@@ -7,19 +7,17 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
-<link type="text/css" rel="stylesheet" href="./public/css/default.css" />
-<link type="text/css" rel="stylesheet" href="./public/css/layout_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/default.css"/>
+<link type="text/css" rel="stylesheet" href="/public/css/layout_kor.css"/>
+<link type="text/css" rel="stylesheet" href="/public/css/main_kor.css" />
+<link rel="stylesheet" type="text/css" href="/public/css/jquery.bxslider.css"/>
+<script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/public/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="/public/js/common.js"></script>
+<script type="text/javascript" src="/public/js/jquery.bxslider.js"></script>
 
-<link type="text/css" rel="stylesheet" href="./public/css/main_kor.css" />
-
-<link rel="stylesheet" type="text/css" href="./public/css/jquery.bxslider.css"/>
-<script type="text/javascript" src="./public/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="./public/js/TweenMax.min.js"></script>
-<script type="text/javascript" src="./public/js/common.js"></script>
-<script type="text/javascript" src="./public/js/jquery.bxslider.js"></script>
-
-<script type="text/javascript" src="./public/js/contents.js"></script>
-<script type="text/javascript" src="./public/js/jquery.form.js"></script>
+<script type="text/javascript" src="/public/js/contents.js"></script>
+<script type="text/javascript" src="/public/js/jquery.form.js"></script>
 <body>
 <form id="frm" name="frm">
 	<input type="hidden" id="seqNum" name="seqNum" >
@@ -64,7 +62,7 @@
         </script>
             <!-- heaer 인쿠르드 -->
             <!--#include file="include/inc_mheader.jsp"-->
-			<%@include file="include/inc_mheader.jsp" %>
+			<%@include file="/WEB-INF/view/include/inc_mheader.jsp" %>
         </div>
     </div> <!-- // header -->
 

@@ -1,4 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.cl.dto.CodeDTO" %>
+<%@ page import="com.cl.dto.FuneralInfoDTO" %>
+<%@ page import="com.cl.util.CmmUtil" %>
+<%@ page import="com.cl.util.PageUtil" %>
+<%@ page import="com.cl.util.TextUtil" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.List" %>
+<%
+	HashMap<String, Object> hMap = (HashMap) request.getAttribute("hMap");
+	HashMap<String ,List<CodeDTO>> hashMap = (HashMap) request.getAttribute("hashMap");
+	List<CodeDTO> fList = hashMap.get("funeralList");
+	List<CodeDTO> gList = hashMap.get("geoList");
+	int pageBtnSplit = 5;
+	
+	List<FuneralInfoDTO> fuList = (List<FuneralInfoDTO>) hMap.get("list");
+	
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -7,17 +25,17 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
-<link type="text/css" rel="stylesheet" href="../../public/css/default.css" />
-<link type="text/css" rel="stylesheet" href="../../public/css/layout_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/default.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/layout_kor.css" />
 
-<link type="text/css" rel="stylesheet" href="../../public/css/sub_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/sub_kor.css" />
 
-<script type="text/javascript" src="../../public/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="../../public/js/TweenMax.min.js"></script>
-<script type="text/javascript" src="../../public/js/common.js"></script>
-<script type="text/javascript" src="../../public/js/contents.js"></script>
-<script type="text/javascript" src="../../public/js/jquery.form.js"></script>
-<script type="text/javascript" src="../../public/js/jquery.rss.js"></script>
+<script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/public/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="/public/js/common.js"></script>
+<script type="text/javascript" src="/public/js/contents.js"></script>
+<script type="text/javascript" src="/public/js/jquery.form.js"></script>
+<script type="text/javascript" src="/public/js/jquery.rss.js"></script>
 
 <!--[if lt IE 9]>
 	<script src="/js/html5.js"></script>
@@ -35,7 +53,7 @@
 			
 			<!-- heaer 인쿠르드 -->
 			<!--#include file="../include/inc_header.jsp"-->
-			<%@include file="../include/inc_header.jsp"%>
+			<%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 		</div>
 	</div> <!-- // header -->
 
@@ -78,7 +96,17 @@
 		$("#subtitle2").text($("#"+mbId2).text());
 		
 	});
-
+	
+	function goPage(page, lastPage){
+		var f = $("#f");
+		$("#page").val(page);
+		f.submit();
+	};
+	
+	function doSubmit(){
+		var f = $("#f");
+		f.submit();
+	}
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -99,8 +127,8 @@
 						<li id="MO70100"><a href="javascript:goMenu('../company/branch.jsp', 'MO70100');">전국지사안내</a></li>
 						<li id="MO70200"><a href="javascript:goMenu('../company/advice.jsp', 'MO70200');">상담사조회</a></li>
 						<li id="MO70300"><a href="javascript:goMenu('../company/cyber.jsp', 'MO70300');">사이버홍보실</a></li>
-						<li id="MO70400"><a href="javascript:goMenu('../funeral/funeral_info_list.jsp', 'MO70400');">전국장례시설안내</a></li>
-						<li id="MO70500"><a href="javascript:goMenu('../funeral/funeral_notice.jsp', 'M760500');">부고알림</a></li>
+						<li id="MO70400"><a href="javascript:goMenu('/Lmin/funeral/funeralInfoList.do', 'MO70400');">전국장례시설안내</a></li>
+						<li id="MO70500"><a href="javascript:goMenu('/Lmin/funeral/funeralNoticeList.do', 'M760500');">부고알림</a></li>
 						<li id="MO70600"><a href="javascript:goMenu('../cruise/cruise_schedule.jsp', 'MO70600');">크루즈일정</a></li>
 						<li id="MO70700"><a href="javascript:goMenu('../notice/notice_list.jsp', 'MO70700');">공지사항</a></li>
 						<li id="MO70800"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MO70800');">1:1상담</a></li>
@@ -116,17 +144,17 @@
 			<div class="pcLnbWrap">
 				<nav>
 					<ul class="pcLnb">
-						<li id="MN70100"><a href="javascript:goMenu('../company/branch.jsp', 'MN70100');">전국지사안내</a></li>
-						<li id="MN70200"><a href="javascript:goMenu('../company/advice.jsp', 'MN70200');">상담사조회</a></li>
-						<li id="MN70300"><a href="javascript:goMenu('../company/cyber.jsp', 'MN70300');">사이버홍보실</a></li>
-						<li id="MN70400"><a href="javascript:goMenu('../funeral/funeral_info_list.jsp', 'MN70400');">전국장례시설안내</a></li>
-						<li id="MN70500"><a href="javascript:goMenu('../funeral/funeral_notice.jsp', 'M760500');">부고알림</a></li>
-						<li id="MN70600"><a href="javascript:goMenu('../cruise/cruise_schedule.jsp', 'MN70600');">크루즈일정</a></li>
-						<li id="MN70700"><a href="javascript:goMenu('../notice/notice_list.jsp', 'MN70700');">공지사항</a></li>
-						<li id="MN70800"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MN70800');">1:1상담</a></li>
-						<li id="MN70900"><a href="javascript:goMenu('../regulation/regulation_list.jsp', 'MN0900');">상조관련법규</a></li>
-						<li id="MN71000"><a href="javascript:goMenu('../inquiry/inquiry_list.jsp', 'MN71000');">납부조회</a></li>
-						<li id="MN71200"><a href="javascript:goMenu('../appli/appli_form.jsp', 'MN71200');">가입신청</a></li>
+						<li id="MO70100"><a href="javascript:goMenu('../company/branch.jsp', 'MO70100');">전국지사안내</a></li>
+						<li id="MO70200"><a href="javascript:goMenu('../company/advice.jsp', 'MO70200');">상담사조회</a></li>
+						<li id="MO70300"><a href="javascript:goMenu('../company/cyber.jsp', 'MO70300');">사이버홍보실</a></li>
+						<li id="MO70400"><a href="javascript:goMenu('/Lmin/funeral/funeralInfoList.do', 'MO70400');">전국장례시설안내</a></li>
+						<li id="MO70500"><a href="javascript:goMenu('/Lmin/funeral/funeralNoticeList.do', 'M760500');">부고알림</a></li>
+						<li id="MO70600"><a href="javascript:goMenu('../cruise/cruise_schedule.jsp', 'MO70600');">크루즈일정</a></li>
+						<li id="MO70700"><a href="javascript:goMenu('../notice/notice_list.jsp', 'MO70700');">공지사항</a></li>
+						<li id="MO70800"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MO70800');">1:1상담</a></li>
+						<li id="MO70900"><a href="javascript:goMenu('../regulation/regulation_list.jsp', 'MO0900');">상조관련법규</a></li>
+						<li id="MO71000"><a href="javascript:goMenu('../inquiry/inquiry_list.jsp', 'MO71000');">납부조회</a></li>
+						<li id="MO71200"><a href="javascript:goMenu('../appli/appli_form.jsp', 'MO71200');">가입신청</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->
@@ -136,6 +164,8 @@
 			<div id="pro_info" class="contents"> <!-- 페이지별 ID -->
 				
 				<div class="boardType2">
+				<form name="f" id="f" method="post" action="/Lmin/funeral/funeralInfoList.do">
+				<input type="hidden" name="page" id="page">
 					<table summary="">
 						<caption></caption>
 						<colgroup>
@@ -144,22 +174,24 @@
 						<tbody>
 							<tr>
 								<td>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
+									<select id="geoCode" name="searchBox" title="" class="inputType3">
 										<option value="00">지역명</option>
-										<option value="01">서울</option>
-										<option value="02">경기</option>
+									<% for(CodeDTO cDTO : gList){ %>
+										<option value='<%=CmmUtil.nvl(cDTO.getCodeId())%>' <%=CmmUtil.select(cDTO.getCodeId(), (String)hMap.get("searchBox")) %>><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
+									<% } %>
 									</select>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType5">
-										<option value="00">식장명</option>
-										<option value="01">병원 장례식장</option>
-										<option value="02">전문 장례식장</option>
+									<select id="funeral" name="search" title="" class="inputType5">
+										<option value="00">구분명</option>
+									<% for(CodeDTO cDTO : fList){ %>
+										<option value='<%=CmmUtil.nvl(cDTO.getCodeId())%>' <%=CmmUtil.select(cDTO.getCodeId(), (String)hMap.get("search")) %>><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
+									<% } %>
 									</select>
-
-									<a href="#" class="btn_active_small">검색</a>
+									<a href="javascript:doSubmit();" class="btn_active_small">검색</a>
 								</td>
 							</tr>
 						</tbody>
 					</table>
+				</form>
                 </div>
 
 				<br/><br/>			
@@ -183,7 +215,19 @@
 							</tr>
 						</thead>
 						<tbody>
+						<%for(FuneralInfoDTO fDTO : fuList){%>
 							<tr>
+								<td><%=CmmUtil.nvl(fDTO.getRownum())%></td>
+								<td><%=CmmUtil.nvl(fDTO.getFuneralInfoCode())%></td>
+								<td>
+								<a href="/Lmin/funeral/funeralInfoDetail.do?fNo=<%=CmmUtil.nvl(fDTO.getFuneralInfoNo())%>">
+								<%=CmmUtil.nvl(fDTO.getFuneralInfoName())%></a>
+								</td>
+								<td><%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralAddress())%> <%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralAddressDetail())%></td>
+								<td><%=CmmUtil.nvl(fDTO.getFuneralInfoTelNo())%></td>
+							</tr>
+						<%}%>
+						<!--<tr>
 								<td>319</td>
 								<td>병원 장례식장</td>
 								<td>성모병원</td>
@@ -245,21 +289,15 @@
 								<td>성모병원</td>
 								<td>경남 김해시 삼정동 615-6</td>
 								<td>055-336-4475</td>
-							</tr>
-							<tr>
-								<td>319</td>
-								<td>병원 장례식장</td>
-								<td>성모병원</td>
-								<td>경남 김해시 삼정동 615-6</td>
-								<td>055-336-4475</td>
-							</tr>
+							</tr>-->
 						</tbody>
 					</table>
 				</div>
-
+				<a href="/Lmin/funeral/funeralInfoWrite.do" class="btn_active_small" style="float:right;">장례시설 등록</a>
+				
 				<!-- pageArea -->
 				<div class="pageArea">
-					<a href='#none' class='btnFirst'><span>처음</span></a> <a href='#' class='btnPrev'><span>이전</span></a><strong>1</strong><a href="javascript:goPage('2','15')" >2</a><a href="javascript:goPage('3','15')" >3</a><a href="javascript:goPage('4','15')" >4</a><a href="javascript:goPage('5','15')" >5</a><a href="javascript:goPage('2','15')" class='btnNext'><span>다음</span></a> <a href="javascript:goPage('19','15')" class='btnLast'><span>마지막</span></a>
+					<%=PageUtil.frontPaging(hMap, pageBtnSplit) %>
 				</div>
 				<!-- // pageArea -->
 

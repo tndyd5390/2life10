@@ -9,7 +9,6 @@ $(document).ready(function() {
 	 * input) even KeyCode 추가 빽스페이스와 탭 은 허용(20150422)
 	 ****************************************************************************/
 	$(".numPhn").keyup(function(e) {
-
 		if ( e.keyCode == "8" || e.keyCode == "9" ) {
 		} else {
 			if ( !$.numberChk($(this).val()) ) {
@@ -150,7 +149,7 @@ function numberChk(inputId) {
 
 	var input = document.getElementById(inputId);
 
-	if ( !$.numberChk(input.valeu) ) {
+	if ( !$.numberChk(input.value) ) {
 		document.getElementById(inputId).value = "";
 		alert("숫자만 가능합니다.");
 		return false;

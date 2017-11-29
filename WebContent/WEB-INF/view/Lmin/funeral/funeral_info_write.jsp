@@ -1,4 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.cl.dto.CodeDTO" %>
+<%@ page import="com.cl.util.CmmUtil" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.List" %>
+<%
+	HashMap<String ,List<CodeDTO>> hashMap = (HashMap) request.getAttribute("hashMap");
+	List<CodeDTO> fList = hashMap.get("funeralList");
+	List<CodeDTO> gList = hashMap.get("geoList");
+	List<CodeDTO> tList = hashMap.get("telList");
+
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -7,17 +18,17 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
-<link type="text/css" rel="stylesheet" href="../../public/css/default.css" />
-<link type="text/css" rel="stylesheet" href="../../public/css/layout_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/default.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/layout_kor.css" />
 
-<link type="text/css" rel="stylesheet" href="../../public/css/sub_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/sub_kor.css" />
 
-<script type="text/javascript" src="../../public/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="../../public/js/TweenMax.min.js"></script>
-<script type="text/javascript" src="../../public/js/common.js"></script>
-<script type="text/javascript" src="../../public/js/contents.js"></script>
-<script type="text/javascript" src="../../public/js/jquery.form.js"></script>
-<script type="text/javascript" src="../../public/js/jquery.rss.js"></script>
+<script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/public/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="/public/js/common.js"></script>
+<script type="text/javascript" src="/public/js/contents.js"></script>
+<script type="text/javascript" src="/public/js/jquery.form.js"></script>
+<script type="text/javascript" src="/public/js/jquery.rss.js"></script>
 
 <!--[if lt IE 9]>
 	<script src="/js/html5.js"></script>
@@ -36,7 +47,7 @@
 			<!-- heaer 인쿠르드 -->
 			<!--#include file="../include/inc_header.jsp"-->
 			
-			<%@include file="../include/inc_header.jsp"%>
+			<%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 		</div>
 	</div> <!-- // header -->
 
@@ -78,8 +89,40 @@
 		$("#subtitle").text($("#"+mbId).text());
 		$("#subtitle2").text($("#"+mbId2).text());
 		
+		
+		// 전화번호 숫자만 받기
+		$("#tel2,#tel3").focusout(function(){
+			var value = $(this).val();
+			var regex = /[^0-9]/g;
+			if(value==""){
+
+			}else if(regex.test(value)){
+				alert("숫자만 입력 가능합니다.");
+				$(this).val("");
+			}
+		});
 	});
 
+	
+	function doSubmit(){
+		var f = $("#f");
+		var name = $("#name");
+		var tel2 = $("#tel2");
+		var tel3 = $("#tel3");
+		
+		if(name.val()==""){
+			alert("식장명을 입력하세요.");
+			name.focus();
+			return false;
+		}else if(tel2.val()==""||tel3.val()==""){
+			alert("전화번호를 입력하세요.");
+			tel2.focus();
+			return false;
+		}else{
+			f.submit();
+			return true;
+		}
+	};
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -100,8 +143,8 @@
 						<li id="MO70100"><a href="javascript:goMenu('../company/branch.jsp', 'MO70100');">전국지사안내</a></li>
 						<li id="MO70200"><a href="javascript:goMenu('../company/advice.jsp', 'MO70200');">상담사조회</a></li>
 						<li id="MO70300"><a href="javascript:goMenu('../company/cyber.jsp', 'MO70300');">사이버홍보실</a></li>
-						<li id="MO70400"><a href="javascript:goMenu('../funeral/funeral_info_list.jsp', 'MO70400');">전국장례시설안내</a></li>
-						<li id="MO70500"><a href="javascript:goMenu('../funeral/funeral_notice.jsp', 'M760500');">부고알림</a></li>
+						<li id="MO70400"><a href="javascript:goMenu('/Lmin/funeral/funeralInfoList.do', 'MO70400');">전국장례시설안내</a></li>
+						<li id="MO70500"><a href="javascript:goMenu('/Lmin/funeral/funeralNoticeList.do', 'M760500');">부고알림</a></li>
 						<li id="MO70600"><a href="javascript:goMenu('../cruise/cruise_schedule.jsp', 'MO70600');">크루즈일정</a></li>
 						<li id="MO70700"><a href="javascript:goMenu('../notice/notice_list.jsp', 'MO70700');">공지사항</a></li>
 						<li id="MO70800"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MO70800');">1:1상담</a></li>
@@ -117,17 +160,17 @@
 			<div class="pcLnbWrap">
 				<nav>
 					<ul class="pcLnb">
-						<li id="MN70100"><a href="javascript:goMenu('../company/branch.jsp', 'MN70100');">전국지사안내</a></li>
-						<li id="MN70200"><a href="javascript:goMenu('../company/advice.jsp', 'MN70200');">상담사조회</a></li>
-						<li id="MN70300"><a href="javascript:goMenu('../company/cyber.jsp', 'MN70300');">사이버홍보실</a></li>
-						<li id="MN70400"><a href="javascript:goMenu('../funeral/funeral_info_list.jsp', 'MN70400');">전국장례시설안내</a></li>
-						<li id="MN70500"><a href="javascript:goMenu('../funeral/funeral_notice.jsp', 'M760500');">부고알림</a></li>
-						<li id="MN70600"><a href="javascript:goMenu('../cruise/cruise_schedule.jsp', 'MN70600');">크루즈일정</a></li>
-						<li id="MN70700"><a href="javascript:goMenu('../notice/notice_list.jsp', 'MN70700');">공지사항</a></li>
-						<li id="MN70800"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MN70800');">1:1상담</a></li>
-						<li id="MN70900"><a href="javascript:goMenu('../regulation/regulation_list.jsp', 'MN0900');">상조관련법규</a></li>
-						<li id="MN71000"><a href="javascript:goMenu('../inquiry/inquiry_list.jsp', 'MN71000');">납부조회</a></li>
-						<li id="MN71200"><a href="javascript:goMenu('../appli/appli_form.jsp', 'MN71200');">가입신청</a></li>
+						<li id="MO70100"><a href="javascript:goMenu('../company/branch.jsp', 'MO70100');">전국지사안내</a></li>
+						<li id="MO70200"><a href="javascript:goMenu('../company/advice.jsp', 'MO70200');">상담사조회</a></li>
+						<li id="MO70300"><a href="javascript:goMenu('../company/cyber.jsp', 'MO70300');">사이버홍보실</a></li>
+						<li id="MO70400"><a href="javascript:goMenu('/Lmin/funeral/funeralInfoList.do', 'MO70400');">전국장례시설안내</a></li>
+						<li id="MO70500"><a href="javascript:goMenu('/Lmin/funeral/funeralNoticeList.do', 'M760500');">부고알림</a></li>
+						<li id="MO70600"><a href="javascript:goMenu('../cruise/cruise_schedule.jsp', 'MO70600');">크루즈일정</a></li>
+						<li id="MO70700"><a href="javascript:goMenu('../notice/notice_list.jsp', 'MO70700');">공지사항</a></li>
+						<li id="MO70800"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MO70800');">1:1상담</a></li>
+						<li id="MO70900"><a href="javascript:goMenu('../regulation/regulation_list.jsp', 'MO0900');">상조관련법규</a></li>
+						<li id="MO71000"><a href="javascript:goMenu('../inquiry/inquiry_list.jsp', 'MO71000');">납부조회</a></li>
+						<li id="MO71200"><a href="javascript:goMenu('../appli/appli_form.jsp', 'MO71200');">가입신청</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->
@@ -136,7 +179,7 @@
 
 			<div id="write" class="contents"> <!-- 페이지별 ID -->
 				<h4 class="smallTit">전국장례시설안내</h4>
-				
+				<form name="f" id="f" method="post" action="/Lmin/funeral/fueralInfoRegProc.do">
 				<div class="boardType2">
 					<table summary="">
 						<caption></caption>
@@ -148,62 +191,97 @@
 							<tr>
 								<th scope="row">구분</th>
 								<td>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType2">
-										<option value="">선택하세요</option>
-										<option value="">병원 장례식장</option>
+									<select id="funeral" name="funeral" title="" class="inputType2">
+									<% for(CodeDTO cDTO : fList){ %>
+										<option value=<%=CmmUtil.nvl(cDTO.getCodeId())%>><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
+									<% } %>
 									</select>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">식장명</th>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<input type="text" name="name" id="name" value="" title="이름" class="inputType1" style="" maxlength="25">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">지역</th>
 								<td>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType2">
-										<option value="">선택하세요</option>
-										<option value="">서울</option>
-										<option value="">경기</option>
+									<select id="geo" name="geo" title="" class="inputType2">
+									<% for(CodeDTO cDTO : gList){ %>
+										<option value=<%=CmmUtil.nvl(cDTO.getCodeId())%>><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
+									<% } %>
 									</select>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">전화번호</th>
 								<td>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
-										<option value="00">02</option>
-										<option value="01">031</option>
-									</select>
+									<select id="tel1" name="tel1" class="inputType3">
+									<% for(CodeDTO cDTO : tList){ %>
+										<option value=<%=CmmUtil.nvl(cDTO.getCodeName())%>><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
+									<% } %>									</select>
 									-
-									<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
+									<input type="text" name="tel2" value="" class="inputType2" maxlength="4">
 									-
-									<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
+									<input type="text" name="tel3" value="" class="inputType2" maxlength="4">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row" rowspan="2">식장주소</th>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
-									-
-									<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
-									<a href="#" class="btn_active_small">우편번호</a>
+									<input type="text" name="postcode" id="postcode" value="" title="이름" class="inputType2" style="" maxlength="5">
+									<a href="javascript:daumPostcode();" class="btn_active_small">우편번호</a>
+									<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>									
+									<script>
+										function daumPostcode() {
+											new daum.Postcode(
+													{
+														oncomplete : function(
+																data) {
+															var fullAddr = '';
+															var extraAddr = '';
+															if (data.userSelectedType === 'R') {
+																fullAddr = data.roadAddress;
+
+															} else {
+																fullAddr = data.jibunAddress;
+															}
+															if (data.userSelectedType === 'R') {
+																if (data.bname !== '') {
+																	extraAddr += data.bname;
+																}
+																if (data.buildingName !== '') {
+																	extraAddr += (extraAddr !== '' ? ', '
+																			+ data.buildingName
+																			: data.buildingName);
+																}
+																fullAddr += (extraAddr !== '' ? ' ('
+																		+ extraAddr
+																		+ ')'
+																		: '');
+															}
+															document.getElementById('postcode').value = data.zonecode;
+															document.getElementById('address1').value = fullAddr;
+															document.getElementById('address2').focus();
+														}
+													}).open();
+										}
+									</script>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType5" style="" maxlength="5">
-									나머지주소
+									<input type="text" name="address1" id="address1" value="" class="inputType5">
+									<input type="text" name="address2" id="address2" value="" class="inputType5">
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-
+				</form>
 				<div class="btn_area">
-					<a href="#" id="submitLink" class="btn_active">등록</a>
+					<a href="javascript:doSubmit();" id="submitLink" class="btn_active">등록</a>
 					<a href="#" id="btnCancel" class="btn_cancel">취소</a>
 				</div>
 
