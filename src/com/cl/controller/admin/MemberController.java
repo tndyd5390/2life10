@@ -1,11 +1,10 @@
-//¸â¹ö ÄÁÆ®·Ñ·¯
+//ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½
 package com.cl.controller.admin;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.annotation.Resource;
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -64,7 +63,7 @@ public class MemberController {
 		
 		if(mDTO==null){
 			url = "/member/login.do";
-			msg = "¾ÆÀÌµð¿Í ÆÐ½º¿öµå¸¦ È®ÀÎÇÏ¼¼¿ä.";
+			msg = "ï¿½ï¿½ï¿½Ìµï¿½ï¿½ ï¿½Ð½ï¿½ï¿½ï¿½ï¿½å¸¦ È®ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½.";
 		}else{
 			memberNo = CmmUtil.nvl(mDTO.getMemberNo());
 			memberId = CmmUtil.nvl(mDTO.getMemberId());
@@ -85,7 +84,7 @@ public class MemberController {
 			session.setAttribute("ss_member_name", memberName);
 			session.setAttribute("ss_member_pre", memberPre);
 			url = "/main.do";
-			msg = memberName+"´Ô È¯¿µÇÕ´Ï´Ù.";
+			msg = memberName+"ï¿½ï¿½ È¯ï¿½ï¿½ï¿½Õ´Ï´ï¿½.";
 		}
 		
 		mDTO = null;
@@ -148,7 +147,7 @@ public class MemberController {
 		log.info("memberEmail = "+ memberEmail1+"@"+memberEmail2);
 		
 		url = "/member/joinStep2.do";
-		msg = "ÀÏÄ¡ÇÏ´Â È¸¿øÀÌ ¾ø½À´Ï´Ù. ´ÙÀ½ÆäÀÌÁö·Î ÀÌµ¿ÇÕ´Ï´Ù.";
+		msg = "ï¿½ï¿½Ä¡ï¿½Ï´ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Õ´Ï´ï¿½.";
 		
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
@@ -228,10 +227,10 @@ public class MemberController {
 		
 		if(result == 1){
 			url = "/member/login.do";
-			msg = "È¸¿ø°¡ÀÔ ¿Ï·á";
+			msg = "È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½";
 		}else{
 			url = "/member/joinStep.do";
-			msg = "È¸¿ø°¡ÀÔ ½ÇÆÐ";
+			msg = "È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½";
 		}
 		
 		mDTO = null;
