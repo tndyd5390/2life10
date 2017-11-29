@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.cl.dto.AdviceDTO;
 import com.cl.service.IAdviceService;
 import com.cl.util.CmmUtil;
+import com.cl.util.PageUtil;
 
 @Controller
 public class AdviceController {
@@ -29,38 +30,16 @@ public class AdviceController {
 	@Resource(name="AdviceService")
 	private IAdviceService adviceService;
 	
-	@RequestMapping(value="Lmin/company/adviceList", method=RequestMethod.GET)
+	@RequestMapping(value="Lmin/company/adviceList", method={RequestMethod.GET, RequestMethod.POST})
 	public String adviceList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".adviceList start!!!");
+		int splitPage = 10;
 		
-		String pageNum = CmmUtil.nvl(req.getParameter("pageNum"));
-		log.info(" pageNum : " + pageNum);
-		Map<String, Integer> startEndPage = new HashMap<>();
-		int viewCnt = 10;
-		if("".equals(pageNum)){
-			startEndPage.put("limit", viewCnt);
-			startEndPage.put("offset", 0);
-			model.addAttribute("currPage", 1);
-		}else{
-			int startEndPageInt = Integer.parseInt(pageNum) - 1;
-			startEndPage.put("limit", viewCnt);
-			startEndPage.put("offset", startEndPageInt * viewCnt);
-			model.addAttribute("currPage", startEndPageInt + 1);
-		}
-		Map<String, Object> aMap = adviceService.getAdviceList(startEndPage);
-		List<AdviceDTO> aList = (List<AdviceDTO>)aMap.get("aList");
-		int adviceRecordCnt = (int)aMap.get("adviceRecordCnt");
-		if(aList == null) aList = new ArrayList<>();
-		int pageCnt = adviceRecordCnt / viewCnt;
-		if(adviceRecordCnt % viewCnt > 0){
-			pageCnt++;
-		}
-		model.addAttribute("aList", aList);
-		model.addAttribute("adviceRecordCnt", adviceRecordCnt);
-		model.addAttribute("pageCnt", pageCnt);
+		HashMap<String, Object> hMap = new HashMap<>();
 		
-		aMap = null;
-		aList = null;
+		hMap = PageUtil.paging(req, splitPage);
+		hMap = adviceService.getAdviceList(hMap);
+		model.addAttribute("hMap", hMap);
 		
 		log.info(this.getClass() + ".adviceList end!!!");
 		return "/Lmin/company/advice";

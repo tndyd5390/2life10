@@ -1,3 +1,5 @@
+<%@page import="com.cl.util.PageUtil"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="com.cl.util.MathUtil"%>
 <%@page import="com.cl.util.TextUtil"%>
 <%@page import="java.util.ArrayList"%>
@@ -5,10 +7,10 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	List<AdviceDTO> aList = (List<AdviceDTO>)request.getAttribute("aList");
-	int adviceRecordCnt = (int)request.getAttribute("adviceRecordCnt");//레코드 갯수
-	int pageCnt = (int)request.getAttribute("pageCnt");//페이지 갯수
-	int currPage = (int) request.getAttribute("currPage");
+	HashMap<String, Object> hMap = (HashMap) request.getAttribute("hMap");
+	if(hMap == null) hMap = new HashMap<>();
+	int pageBtnSplit = 5;
+	List<AdviceDTO> aList = (List<AdviceDTO>) hMap.get("list");
 	if(aList == null) aList = new ArrayList<>();
 %>
 <!DOCTYPE html>
@@ -36,58 +38,25 @@
 	<script src="/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
-	var currPage = <%=currPage%>;
-	var pageCnt = <%=pageCnt%>;
-	function firstPage(){
-		if(currPage == 1){
-			alert("첫 페이지 입니다.");
-			return;
-		}
-		location.href="/Lmin/company/adviceList.do?pageNum=1";
-	}
+function goPage(page, lastPage){
+	var f = $("#f");
+	$("#page").val(page);
+	f.submit();
+};
+
+function adviceSearch(){
+	var f = $("#f");
+	var search = $("#search");
 	
-	function lastPage(){
-		if(currPage == pageCnt){
-			alert("마지막 페이지 입니다.");
-			return;
-		}
-		location.href="/Lmin/company/adviceList.do?pageNum=" + pageCnt;
+	if(search.val() == ""){
+		alert("검색어를 입력하세요.");
+		search.focus();
+		return false;
+	}else{
+		f.submit();
+		return true;
 	}
-	
-	function nextPage(){
-		if(currPage == pageCnt){
-			alert("마지막 페이지 입니다.");
-			return;
-		}
-		currPage++;
-		location.href="/Lmin/company/adviceList.do?pageNum=" + currPage;
-	}
-	
-	function prePage(){
-		if(currPage == 1){
-			alert("첫 페이지 입니다.");
-			return;
-		}
-		currPage--;
-		location.href="/Lmin/company/adviceList.do?pageNum=" + currPage;
-	}
-	
-	function adviceSearch(){
-		
-		var form = document.createElement("form");
-		var adviceSearchName = document.getElementById('adviceSearchName').value;
-		form.setAttribute("method", "Post"); // Get 또는 Post 입력
-		form.setAttribute("action", "/Lmin/company/adviceSearch.do");
-		
-		var hiddenField = document.createElement("input");
-		hiddenField.setAttribute("type", "hidden");
-		hiddenField.setAttribute("name", "adviceSearchName");
-		hiddenField.setAttribute("value", adviceSearchName);
-		form.appendChild(hiddenField);
-		document.body.appendChild(form);
-		
-		form.submit();
-	}
+};
 </script>
 <body>
 <div id="skipnavi">
@@ -202,6 +171,8 @@
 				<h3 class="smallTit">상담사조회</h3>
 				
 				<div class="boardType2">
+				<form name="f" id="f" method="post" action="/Lmin/company/adviceList.do">
+				<input type="hidden" name="page" id="page">
 					<table summary="">
 						<caption></caption>
 						<colgroup>
@@ -211,23 +182,24 @@
 							<tr>
 								<td>
 									상담사명
-									<input type="text" id="adviceSearchName" class="inputType1" maxlength="25">
+									<input type="text" id="search" name="search" class="inputType1" maxlength="25">
 
 									<a href="#" class="btn_active_small" onclick="adviceSearch();">검색</a>
 								</td>
 							</tr>
 						</tbody>
 					</table>
+					</form>
                 </div>
 
 				<br/><br/>
 				<ul class="boradType4">
 				<%
-				for(int i = 0; i< aList.size(); i++){
-					AdviceDTO aDTO = aList.get(i);
+				if(aList.size()!=0){
+					for(AdviceDTO aDTO : aList){
 				%>
 					<li>
-						<p class="num"><%=TextUtil.exchangeEscapeNvl(aDTO.getAdviceNo()) %></p>
+						<p class="num"><%=TextUtil.exchangeEscapeNvl(aDTO.getRowNum()) %></p>
 						<div class="info">
 							<p class="txt"><%=TextUtil.exchangeEscapeNvl(aDTO.getAdviceName()) %></p>
 							<p class="txt1"><!-- 박성진수정 -->
@@ -239,32 +211,16 @@
 								<span><%=TextUtil.exchangeEscapeNvl(aDTO.getAdvicePhoneNo()) %></span>
 							</p>
 						</div>
-					</li>				
+					</li>
 				<%
-				} 
-				%>
+					}
+				}
+				%>			
 				</ul>
 				<a href="/Lmin/company/adviceWriteView.do" class="btn_active_small" style="float:right;">상담사 등록</a>
 				<!-- pageArea -->
 				<div class="pageArea">
-					<a href='#' class='btnFirst' onclick="firstPage();"><span>처음</span></a> 
-					<a href='#' class='btnPrev' onclick="prePage();"><span>이전</span></a>
-					<%
-					int[] startAndEnd = MathUtil.pageRange(currPage, 5);
-					for(int i = startAndEnd[0]; i<= startAndEnd[1] && i<= pageCnt; i++){
-						if(currPage == i){
-					%>
-						<strong><%=i%></strong>
-					<%
-						}else{
-					%>
-						<a href="/Lmin/company/adviceList.do?pageNum=<%=i%>" id="pageNum<%=i%>"><%=i%></a>
-					<%
-						}
-					}
-					%>
-					<a href="#" class='btnNext' onclick="nextPage();"><span>다음</span></a>
-					<a href="#" class='btnLast' onclick="lastPage();"><span>마지막</span></a>
+				<%= PageUtil.frontPaging(hMap, pageBtnSplit)%>
 				</div>
 				<!-- // pageArea -->
 

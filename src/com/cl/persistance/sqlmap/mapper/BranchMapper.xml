@@ -128,7 +128,7 @@
 				BRANCH_AREA_CODE = '제주특별자치도' AND INSTR(BRANCH_NAME, #{search}) > 0 
 			</if>
 		</where>
-      ORDER BY BRANCH_NO DESC
+      ORDER BY ROWNUM DESC
          LIMIT #{page}, #{splitPage}
 	</select>
 	

@@ -1,5 +1,6 @@
 package com.cl.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.cl.dto.AdviceDTO;
+import com.cl.dto.FuneralNoticeDTO;
 import com.cl.persistance.mapper.AdviceMapper;
 import com.cl.service.IAdviceService;
 
@@ -19,11 +21,16 @@ public class AdviceService implements IAdviceService{
 	private AdviceMapper adviceMapper;
 
 	@Override
-	public Map<String, Object> getAdviceList(Map<String, Integer> startEndPage) throws Exception {
-		Map<String, Object> aMap = new HashMap<>();
-		aMap.put("aList", adviceMapper.getAdviceList(startEndPage));
-		aMap.put("adviceRecordCnt", adviceMapper.getAdviceRecordCnt());
-		return aMap;
+	public HashMap<String, Object> getAdviceList(HashMap<String, Object> hMap) throws Exception {
+		List<AdviceDTO> aList = new ArrayList<>();
+		aList = adviceMapper.getAdviceList(hMap);
+		hMap.put("list", aList);
+		if(aList.size()!=0){
+			hMap.put("pageList", aList.get(0).getPage());
+		}else{
+			hMap.put("pageList", 1);
+		}
+		return hMap;
 	}
 	
 	@Override
