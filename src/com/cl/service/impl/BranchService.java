@@ -1,5 +1,6 @@
 package com.cl.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.cl.dto.BranchDTO;
+import com.cl.dto.FuneralNoticeDTO;
 import com.cl.persistance.mapper.BranchMapper;
 import com.cl.service.IBranchService;
 
@@ -18,8 +20,16 @@ public class BranchService implements IBranchService{
 	private BranchMapper branchMapper;
 
 	@Override
-	public List<BranchDTO> getBranchList() throws Exception {
-		return branchMapper.getBranchList();
+	public HashMap<String, Object> getBranchList(HashMap<String, Object> hMap) throws Exception {
+		List<BranchDTO> bList = new ArrayList<>();
+		bList = branchMapper.getBranchList(hMap);
+		hMap.put("list", bList);
+		if(bList.size()!=0){
+			hMap.put("pageList", bList.get(0).getPage());
+		}else{
+			hMap.put("pageList", 1);
+		}
+		return hMap;
 	}
 	
 	@Override

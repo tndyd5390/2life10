@@ -15,7 +15,34 @@ public class BranchDTO {
 	private String regDt;
 	private String chgMemberNo;
 	private String chgDt;
-	
+	private int page;
+	private int splitPage;
+	private String searchBox;
+	private String search;
+	public int getPage() {
+		return page;
+	}
+	public void setPage(int page) {
+		this.page = page;
+	}
+	public int getSplitPage() {
+		return splitPage;
+	}
+	public void setSplitPage(int splitPage) {
+		this.splitPage = splitPage;
+	}
+	public String getSearchBox() {
+		return searchBox;
+	}
+	public void setSearchBox(String searchBox) {
+		this.searchBox = searchBox;
+	}
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
 	public String getRowNum() {
 		return rowNum;
 	}

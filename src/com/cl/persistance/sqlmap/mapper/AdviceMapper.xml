@@ -13,10 +13,24 @@
 			   REG_MEMBER_NO			AS REGMEMBERNO,
 			   REG_DT					AS REGDT,
 			   CHG_MEMBER_NO			AS CHGMEMBERNO,
-			   CHG_DT					AS CHGDT
-		  FROM ADVICE_INFO, (SELECT @ROWNUM := 0) R
-	  ORDER BY ADVICENO DESC
-	     LIMIT #{limit} OFFSET #{offset}
+			   CHG_DT					AS CHGDT,
+			   P.PAGE					AS PAGE
+		  FROM ADVICE_INFO,
+		  	   (SELECT COUNT(*) AS PAGE FROM ADVICE_INFO
+		  	    <where>
+		  	    	<if test="search!=null">
+		  				INSTR(ADVICE_NAME, #{search}) > 0
+		  			</if>
+		  	    </where>
+		  	   ) P,
+		  (SELECT @ROWNUM := 0) R
+		  <where>
+		  	<if test="search!=null">
+		  		INSTR(ADVICE_NAME, #{search}) > 0
+		  	</if>
+		  </where>
+	  ORDER BY ROWNUM DESC
+	     LIMIT #{page}, #{splitPage}
 	</select>
 
 	<insert id="insertAdvice" parameterType="AdviceDTO">

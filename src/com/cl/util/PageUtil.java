@@ -8,20 +8,20 @@ public class PageUtil {
 	public static HashMap<String, Object> paging(HttpServletRequest req, int splitPage){
 		int page;
 		String nowPage = CmmUtil.nvl(req.getParameter("page"));
-		// ÇöÀç ÆäÀÌÁö °ª
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		String selBox = CmmUtil.nvl(req.getParameter("searchBox"));
-		// °Ë»öÇÒ Ç×¸ñ °ª
+		// ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ ï¿½ï¿½
 		String search = CmmUtil.nvl(req.getParameter("search"));
-		// °Ë»öÇÒ °ª
+		// ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½
 		
 		if(!nowPage.equals("")){
 			page = (Integer.parseInt(nowPage)-1) * splitPage;
-			// ½ºÇÃ¸´ÆäÀÌÁö·Î ÆäÀÌÁö¸¦ ³ª´©¾î¼­ (page=limit) ºÎÅÍ Ãâ·ÂÇÒ °ÍÀÎÁö ÆÇ´Ü ÇÔ 
+			// ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½î¼­ (page=limit) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½ 
 		}else{
 			nowPage = "1";
-			// Ã¹ ÆäÀÌÁö·Î ÃÊ±âÈ­
+			// Ã¹ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
 			page = 0;
-			// limit °ª 0À¸·Î ÃÊ±âÈ­
+			// limit ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
 		}
 		
 		HashMap<String, Object> hMap = new HashMap<>();
@@ -31,8 +31,8 @@ public class PageUtil {
 		hMap.put("splitPage", splitPage);
 		
 		if(!search.equals("")){
-			// °Ë»ö °ªÀÌ ÀÖÀ»¶§ ÇØ½¬¸Ê¿¡ °ªÀ» ³Ö¾î ÁÜ
-			// °Ë»ö °ªÀÌ ¾øÀ¸¸é µ¿Àû SQL¿¡ ÀÇÇØ WHERE Á¶°ÇÀÌ »ç¶ó Áü
+			// ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ ï¿½ï¿½
+			// ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ SQLï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ WHERE ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½
 			hMap.put("searchBox", selBox);
 			hMap.put("search", search);
 		}
@@ -46,26 +46,26 @@ public class PageUtil {
 		int pageBtn=0;
 		int pageBtnLast=0;
 		int pageList = (int) hMap.get("pageList");
-		// ¼­ºñ½º¿¡¼­ Ãß°¡ÇØ ³õÀº ÃÑ °Ô½Ã±Û °¹¼ö¸¦ ¹Þ¾Æ ¿È
+		// ï¿½ï¿½ï¿½ñ½º¿ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾ï¿½ ï¿½ï¿½
 		String result = "";
 		
 		if(pageList!=0){
-			// °Ô½Ã±ÛÀÌ ÀÖÀ» ¶§
+			// ï¿½Ô½Ã±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 			splitPage = (int) hMap.get("splitPage");
 			nowPage = Integer.parseInt((String) hMap.get("nowPage"));
 			pageList = (pageList / splitPage) + 1;
-			// ÃÖÁ¾ ÆäÀÌÁö ¼ö¸¦ °è»ê ÇÔ
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½
 			pageBtn = 1;
-			// Ã¹ ÆäÀÌÁö °ª
+			// Ã¹ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 			pageBtnLast = pageBtn+4;
-			// È­¸é¿¡ º¸ÀÌ´Â ¹öÆ°ÀÇ °¹¼ö
+			// È­ï¿½é¿¡ ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			
 			if((nowPage/(pageBtnSplit+1))<1){
 				pageBtn = 1;
-				// ¹öÆ°Àº 1ºÎÅÍ ½ÃÀÛ
+				// ï¿½ï¿½Æ°ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				if(pageList<pageBtnSplit){
 					pageBtnLast = pageList;
-					// ¹öÆ°Àº ÃÑ ÆäÀÌÁö ¼ö ¸¸Å­ »ý¼º
+					// ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½
 				}
 			}else{
 				pageBtn = ((nowPage/(pageBtnSplit+1))*5)+1;
@@ -77,8 +77,8 @@ public class PageUtil {
 		}
 		
 		if(nowPage!=1){
-			result += "<a href='javascript:goPage(1,"+pageList+")' class='btnFirst'><span>Ã³À½</span></a>";
-			result += "<a href='javascript:goPage("+(nowPage-1)+","+pageList+")' class='btnPrev'><span>ÀÌÀü</span></a>";
+			result += "<a href='javascript:goPage(1,"+pageList+")' class='btnFirst'><span>Ã³ï¿½ï¿½</span></a>";
+			result += "<a href='javascript:goPage("+(nowPage-1)+","+pageList+")' class='btnPrev'><span>ï¿½ï¿½ï¿½ï¿½</span></a>";
 		}
 		for(int i=pageBtn;i<=pageBtnLast;i++){
 			if(i == nowPage){
@@ -88,10 +88,9 @@ public class PageUtil {
 			}
 		}
 		if(nowPage!=pageList){
-			result += "<a href='javascript:goPage("+(nowPage+1)+","+pageList+")' class='btnNext'><span>´ÙÀ½</span></a>";
-			result += "<a href='javascript:goPage("+pageList+","+pageList+")' class='btnLast'><span>¸¶Áö¸·</span></a>";
+			result += "<a href='javascript:goPage("+(nowPage+1)+","+pageList+")' class='btnNext'><span>ï¿½ï¿½ï¿½ï¿½</span></a>";
+			result += "<a href='javascript:goPage("+pageList+","+pageList+")' class='btnLast'><span>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</span></a>";
 		}
-		
 		return result;
 	}
 }
