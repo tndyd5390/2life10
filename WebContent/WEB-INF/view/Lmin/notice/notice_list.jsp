@@ -2,6 +2,7 @@
 <%@ page import="com.cl.util.CmmUtil" %>
 <%@ page import="com.cl.util.TextUtil" %>
 <%@ page import="com.cl.util.PageUtil" %>
+<%@ page import="com.cl.util.AES256Util" %>
 <%@ page import="com.cl.dto.NoticeDTO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
@@ -86,6 +87,28 @@
 		$("#subtitle2").text($("#"+mbId2).text());
 		
 	});
+	function doSubmit(){
+		var f = $("#f");
+		var search = $('#search');
+		
+		if(search.val()==""){
+			alert("검색어를 입력하세요.");
+			search.focus();
+			return false;
+		}else{
+			f.attr("action", "/Lmin/notice/noticeList.do");
+			f.submit();
+		}
+	}
+	
+	
+	function goDetail(nNo){
+		var f = $("#f");
+		var noticeNo = $("#nNo");
+		f.attr("action", "/Lmin/notice/noticeDetail.do");
+		noticeNo.val(nNo);
+		f.submit();	
+	}
 
 </script>
 
@@ -143,7 +166,8 @@
 
 			<div class="contents"> <!-- 페이지별 ID none -->
 				<h3 class="smallTit">공지사항</h3>
-				
+				<form name="f" id="f" method="post" action="/Lmin/notice/noticeList.do"> 
+				<input type="hidden" id="nNo" name="nNo">
 				<div class="boardType2">
 					<table summary="">
 						<caption></caption>
@@ -164,7 +188,6 @@
 						</tbody>
 					</table>
                 </div>
-
 				<br/><br/>
 				<ul class="boradType5">
 				<%if(nList.size()!=0){%>
@@ -173,10 +196,10 @@
 						<p class="num"><%=CmmUtil.nvl(nDTO.getRowNum())%></p>
 						<div class="info">
 							<p class="txt1">
-								<a href="javascript:selectBoardDtl('480')"><%=CmmUtil.nvl(nDTO.getNoticeTitle()) %></a>
+								<a href="javascript:goDetail('<%=CmmUtil.nvl(nDTO.getNoticeNo())%>')"><%=CmmUtil.nvl(nDTO.getNoticeTitle()) %></a>
 							</p>
 							<p class="txt2">
-								<%=CmmUtil.nvl(nDTO.getMemberName()) %>
+								<%=AES256Util.strDecode(CmmUtil.nvl(nDTO.getMemberName())) %>
 								<span class="bar">&nbsp;|</span>
 								<span><%=CmmUtil.nvl(nDTO.getRegDt()) %></span>
 								<span class="bar">|</span>
@@ -186,7 +209,6 @@
 					</li>
 					<%}%>
 				<%}%>
-				
 					<!-- <li>
 						<p class="num">[공지]</p>
 						<div class="info">
@@ -245,12 +267,14 @@
 						</div>
 					</li> -->
 				</ul> 
-
-
+				<br>
+				<a href="/Lmin/notice/noticeWrite.do" class="btn_active_small" style="float:right;">공지사항 등록</a>
+				
 				<!-- pageArea -->
 				<div class="pageArea">
 					<%=PageUtil.frontPaging(hMap, 5) %>
 				</div>
+				</form>
 				<!-- // pageArea -->
 			</div> <!-- // contents -->
 
