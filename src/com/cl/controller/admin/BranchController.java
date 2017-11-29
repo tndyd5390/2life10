@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.cl.dto.BranchDTO;
 import com.cl.service.IBranchService;
 import com.cl.util.CmmUtil;
+import com.cl.util.PageUtil;
 
 @Controller
 public class BranchController {
@@ -28,15 +29,21 @@ public class BranchController {
 	@Resource(name="BranchService")
 	private IBranchService branchService;
 	
-	@RequestMapping(value="Lmin/company/branchList", method=RequestMethod.GET)
+	@RequestMapping(value="Lmin/company/branchList", method={RequestMethod.GET, RequestMethod.POST})
 	public String branchList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".branchView start!!!");
+		int splitPage = 10;
 		
-		List<BranchDTO> bList = branchService.getBranchList();
+		HashMap<String, Object> hMap = new HashMap<>();
+		hMap = PageUtil.paging(req, splitPage);
+		hMap = branchService.getBranchList(hMap);
+		
+		model.addAttribute("hMap", hMap);
+		/*List<BranchDTO> bList = branchService.getBranchList();
 		if(bList == null) bList = new ArrayList<>();
 		model.addAttribute("bList", bList);
-		bList = null;
-		
+		bList = null;*/
+		hMap = null;
 		log.info(this.getClass() + ".branchView end!!!");
 		return "/Lmin/company/branch";
 	}

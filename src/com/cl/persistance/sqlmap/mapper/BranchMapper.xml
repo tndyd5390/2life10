@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cl.persistance.mapper.BranchMapper">
 	
-	<select id="getBranchList" resultType="BranchDTO">
+	<select id="getBranchList" resultType="BranchDTO" parameterType="hashmap">
 		SELECT @ROWNUM := @ROWNUM + 1 	AS ROWNUM,
 			   BRANCH_NO				AS BRANCHNO,
 		       BRANCH_AREA_CODE 		AS BRANCHAREACODE,
@@ -16,9 +16,120 @@
 		       REG_MEMBER_NO 			AS REGMEMBERNO,
 		       REG_DT 					AS REGDT,
 		       CHG_MEMBER_NO 			AS CHGMEMBERNO,
-		       CHG_DT 					AS CHGDT
-		  FROM BRANCH_INFO, (SELECT @ROWNUM := 0) R
-      ORDER BY BRANCH_NO DESC
+		       CHG_DT 					AS CHGDT,
+		       P.PAGE					AS PAGE
+		  FROM BRANCH_INFO,
+		  	   (SELECT COUNT(*) AS PAGE FROM BRANCH_INFO
+		  	   	<where>
+				  	<if test="searchBox==1">
+						INSTR(BRANCH_NAME, #{search}) > 0 
+					</if>
+					<if test="searchBox==2">
+						BRANCH_AREA_CODE = '서울특별시' AND INSTR(BRANCH_NAME, #{search}) > 0 
+					</if>
+					<if test="searchBox==3">
+						BRANCH_AREA_CODE = '부산광역시' AND INSTR(BRANCH_NAME, #{search}) > 0 
+					</if>
+					<if test="searchBox==4">
+						BRANCH_AREA_CODE = '대구광역시' AND INSTR(BRANCH_NAME, #{search}) > 0 
+					</if>
+					<if test="searchBox==5">
+						BRANCH_AREA_CODE = '인천광역시' AND INSTR(BRANCH_NAME, #{search}) > 0 
+					</if>
+					<if test="searchBox==6">
+						BRANCH_AREA_CODE = '광주광역시' AND INSTR(BRANCH_NAME, #{search}) > 0 
+					</if>
+					<if test="searchBox==7">
+						BRANCH_AREA_CODE = '대전광역시' AND INSTR(BRANCH_NAME, #{search}) > 0 
+					</if>
+					<if test="searchBox==8">
+						BRANCH_AREA_CODE = '울산광역시' AND INSTR(BRANCH_NAME, #{search}) > 0
+					</if>
+					<if test="searchBox==9">
+						BRANCH_AREA_CODE = '경기도' AND INSTR(BRANCH_NAME, #{search}) > 0 
+					</if>
+					<if test="searchBox==10">
+						BRANCH_AREA_CODE = '강원도' AND INSTR(BRANCH_NAME, #{search}) > 0 
+					</if>
+					<if test="searchBox==11">
+						BRANCH_AREA_CODE = '충청북도' AND INSTR(BRANCH_NAME, #{search}) > 0 
+					</if>
+					<if test="searchBox==12">
+						BRANCH_AREA_CODE = '충청남도' AND INSTR(BRANCH_NAME, #{search}) > 0 
+					</if>
+					<if test="searchBox==13">
+						BRANCH_AREA_CODE = '전라북도' AND INSTR(BRANCH_NAME, #{search}) > 0 
+					</if>
+					<if test="searchBox==14">
+						BRANCH_AREA_CODE = '전라남도' AND INSTR(BRANCH_NAME, #{search}) > 0 
+					</if>
+					<if test="searchBox==15">
+						BRANCH_AREA_CODE = '경상북도' AND INSTR(BRANCH_NAME, #{search}) > 0 
+					</if>
+					<if test="searchBox==16">
+						BRANCH_AREA_CODE = '경상남도' AND INSTR(BRANCH_NAME, #{search}) > 0 
+					</if>
+					<if test="searchBox==17">
+						BRANCH_AREA_CODE = '제주특별자치도' AND INSTR(BRANCH_NAME, #{search}) > 0 
+					</if>
+		  	   	</where>
+		  	   ) P,
+		       (SELECT @ROWNUM := 0) R
+		<where>
+			<if test="searchBox==1">
+				INSTR(BRANCH_NAME, #{search}) > 0 
+			</if>
+			<if test="searchBox==2">
+				BRANCH_AREA_CODE = '서울특별시' AND INSTR(BRANCH_NAME, #{search}) > 0 
+			</if>
+			<if test="searchBox==3">
+				BRANCH_AREA_CODE = '부산광역시' AND INSTR(BRANCH_NAME, #{search}) > 0 
+			</if>
+			<if test="searchBox==4">
+				BRANCH_AREA_CODE = '대구광역시' AND INSTR(BRANCH_NAME, #{search}) > 0 
+			</if>
+			<if test="searchBox==5">
+				BRANCH_AREA_CODE = '인천광역시' AND INSTR(BRANCH_NAME, #{search}) > 0 
+			</if>
+			<if test="searchBox==6">
+				BRANCH_AREA_CODE = '광주광역시' AND INSTR(BRANCH_NAME, #{search}) > 0 
+			</if>
+			<if test="searchBox==7">
+				BRANCH_AREA_CODE = '대전광역시' AND INSTR(BRANCH_NAME, #{search}) > 0 
+			</if>
+			<if test="searchBox==8">
+				BRANCH_AREA_CODE = '울산광역시' AND INSTR(BRANCH_NAME, #{search}) > 0
+			</if>
+			<if test="searchBox==9">
+				BRANCH_AREA_CODE = '경기도' AND INSTR(BRANCH_NAME, #{search}) > 0 
+			</if>
+			<if test="searchBox==10">
+				BRANCH_AREA_CODE = '강원도' AND INSTR(BRANCH_NAME, #{search}) > 0 
+			</if>
+			<if test="searchBox==11">
+				BRANCH_AREA_CODE = '충청북도' AND INSTR(BRANCH_NAME, #{search}) > 0 
+			</if>
+			<if test="searchBox==12">
+				BRANCH_AREA_CODE = '충청남도' AND INSTR(BRANCH_NAME, #{search}) > 0 
+			</if>
+			<if test="searchBox==13">
+				BRANCH_AREA_CODE = '전라북도' AND INSTR(BRANCH_NAME, #{search}) > 0 
+			</if>
+			<if test="searchBox==14">
+				BRANCH_AREA_CODE = '전라남도' AND INSTR(BRANCH_NAME, #{search}) > 0 
+			</if>
+			<if test="searchBox==15">
+				BRANCH_AREA_CODE = '경상북도' AND INSTR(BRANCH_NAME, #{search}) > 0 
+			</if>
+			<if test="searchBox==16">
+				BRANCH_AREA_CODE = '경상남도' AND INSTR(BRANCH_NAME, #{search}) > 0 
+			</if>
+			<if test="searchBox==17">
+				BRANCH_AREA_CODE = '제주특별자치도' AND INSTR(BRANCH_NAME, #{search}) > 0 
+			</if>
+		</where>
+      ORDER BY ROWNUM DESC
+         LIMIT #{page}, #{splitPage}
 	</select>
 	
 	<insert id="insertBranch" parameterType="BranchDTO">
