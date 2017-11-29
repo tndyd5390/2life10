@@ -109,23 +109,8 @@
 	   		   REG_DT 					AS REGDT,
 	   		   CHG_MEMBER_NO 			AS CHGMEMBERNO,
 	   		   CHG_DT 					AS CHGDT
-  		  FROM (SELECT BRANCH_NO,
-					   BRANCH_AREA_CODE,
-	           		   BRANCH_NAME,		
-	           		   BRANCH_OFFICER_NAME,
-	           		   BRANCH_TEL_NO,
-	           		   BRANCH_POST_NO,
-	           		   BRANCH_ADDRESS,			
-	           		   BRANCH_ADDRESS_DETAIL,
-	           		   BRANCH_VIEW_CNT,	
-	           		   REG_MEMBER_NO,		
-	           		   REG_DT,			
-	           		   CHG_MEMBER_NO,
-	           		   CHG_DT
-		  		  FROM BRANCH_INFO
-		 		 WHERE BRANCH_AREA_CODE = #{searchArea}) SEARCH_TABLE, 
-		 		 	   (SELECT @ROWNUM := 0) R)
-   		   WHERE INSTR(BRANCH_NAME, #{searchWord}) > 0
+  		  FROM BRANCH_INFO, (SELECT @ROWNUM := 0) R
+   		   WHERE BRANCH_AREA_CODE = #{searchArea} AND INSTR(BRANCH_NAME, #{searchWord}) > 0
    		ORDER BY BRANCHNO DESC
 	
 	</select>

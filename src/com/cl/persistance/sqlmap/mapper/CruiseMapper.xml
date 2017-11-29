@@ -1,5 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cl.persistance.mapper.CruiseMapper">
-
+	<insert id="insertCruiseImg" parameterType="CruiseDTO">
+		INSERT INTO FILE_INFO
+		(
+			FILE_ORG_NAME,
+			FILE_NAME,
+			FILE_PATH,
+			REG_MEMBER_NO,
+			REG_DT
+		)
+		VALUES
+		(
+			#{cruiseImgFileOrgName},
+			#{cruiseImgFileName},
+			#{cruiseImgFilePath},
+			#{regMemberNo},
+			NOW()
+		)
+		<selectKey resultType="int" keyProperty="cruiseImgFileNo" order="AFTER">
+			SELECT LAST_INSERT_ID();
+		</selectKey>
+	</insert>
+	<insert id="insertCruiseScheFile" parameterType="CruiseDTO">
+		INSERT INTO FILE_INFO
+		(
+			FILE_ORG_NAME,
+			FILE_NAME,
+			FILE_PATH,
+			REG_MEMBER_NO,
+			REG_DT
+		)
+		VALUES
+		(
+			#{cruiseScheFileOrgName},
+			#{cruiseScheFileName},
+			#{cruiseScheFilePath},
+			#{regMemberNo},
+			NOW()
+		)
+		<selectKey resultType="int" keyProperty="cruiseScheFileNo" order="AFTER">
+			SELECT LAST_INSERT_ID();
+		</selectKey>
+	</insert>
+	<insert id="insertCruise" parameterType="CruiseDTO">
+		INSERT INTO CRUISE_INFO
+		(
+			CRUISE_IMGFILE_NO,
+			CRUISE_SCHEFILE_NO,
+			CRUISE_SHIP_NAME,
+			CRUISE_START_DAY,
+			CRUISE_END_DAY,
+			CRUISE_NAME,
+			CRUISE_ACCOMODATION,
+			CRUISE_CABIN_CODE,
+			CRUISE_ETC,
+			REG_MEMBER_NO,
+			REG_DT
+		)
+		VALUES
+		(
+			#{cruiseImgFileNo},
+			#{cruiseScheFileNo},
+			#{cruiseShipName},
+			#{cruiseStartDay},
+			#{cruiseEndDay},
+			#{cruiseName},
+			#{cruiseAccomodation},
+			#{cruiseCabinCode},
+			#{cruiseEtc},
+			#{regMemberNo},
+			NOW()
+		)
+	</insert>
+	
 </mapper>

@@ -2,8 +2,8 @@ package com.cl.dto;
 
 public class CruiseDTO {
 	private String cruiseNo;
-	private String cruiseImgFileNo;
-	private String cruiseScheFileNo;
+	private int cruiseImgFileNo;
+	private int cruiseScheFileNo;
 	private String cruiseShipName;
 	private String cruiseStartDay;
 	private String cruiseEndDay;
@@ -39,16 +39,16 @@ public class CruiseDTO {
 	public void setCruiseNo(String cruiseNo) {
 		this.cruiseNo = cruiseNo;
 	}
-	public String getCruiseImgFileNo() {
+	public int getCruiseImgFileNo() {
 		return cruiseImgFileNo;
 	}
-	public void setCruiseImgFileNo(String cruiseImgFileNo) {
+	public void setCruiseImgFileNo(int cruiseImgFileNo) {
 		this.cruiseImgFileNo = cruiseImgFileNo;
 	}
-	public String getCruiseScheFileNo() {
+	public int getCruiseScheFileNo() {
 		return cruiseScheFileNo;
 	}
-	public void setCruiseScheFileNo(String cruiseScheFileNo) {
+	public void setCruiseScheFileNo(int cruiseScheFileNo) {
 		this.cruiseScheFileNo = cruiseScheFileNo;
 	}
 	public String getCruiseShipName() {

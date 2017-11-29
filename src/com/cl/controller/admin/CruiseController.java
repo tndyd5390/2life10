@@ -123,7 +123,15 @@ public class CruiseController {
 		cDTO.setCruiseImgFilePath(imgSavePath);
 		cDTO.setCruiseScheFilePath(scheSavePath);
 		
+		int result = cruiseService.insertCruise(cDTO);
+		
+		if(result != 0){
+			model.addAttribute("msg", "크루즈 상품 등록에 성공했습니다.");
+		}else{
+			model.addAttribute("msg", "크루즈 상품 등록에 실패했습니다.");
+		}
+		model.addAttribute("url", "/Lmin/cruise/cruiseScheduleList.do");
 		log.info(this.getClass() + ".cruiseScheduleRegProc end!!!");
-		return null;
+		return "/alert";
 	}
 }
