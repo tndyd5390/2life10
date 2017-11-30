@@ -28,5 +28,26 @@ public class NoticeService implements INoticeService{
 		}
 		return hMap;
 	}
+
+	@Override
+	public int insertNotice(NoticeDTO nDTO) throws Exception {
+		return noticeMapper.insertNotice(nDTO);
+	}
+
+	@Override
+	public NoticeDTO getNoticeDetail(NoticeDTO nDTO) throws Exception {
+		noticeMapper.updateNoticeViewCnt(nDTO);
+		return noticeMapper.getNoticeDetail(nDTO);
+	}
+
+	@Override
+	public int updateNoticeDetail(NoticeDTO nDTO) throws Exception {
+		return noticeMapper.updateNoticeDetail(nDTO);
+	}
+
+	@Override
+	public int deleteNotice(String noticeNo) throws Exception {
+		return noticeMapper.deleteNotice(noticeNo);
+	}
 	
 }

@@ -8,7 +8,7 @@ import com.cl.dto.BranchDTO;
 
 @Mapper("BranchMapper")
 public interface BranchMapper {
-	public List<BranchDTO> getBranchList() throws Exception;
+	public List<BranchDTO> getBranchList(HashMap<String, Object> hMap) throws Exception;
 	public int insertBranch(BranchDTO bDTO) throws Exception;
 	public BranchDTO getBranchDetail(String branchNo) throws Exception;
 	public int deleteBranch(String branchNo) throws Exception;

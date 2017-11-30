@@ -63,7 +63,7 @@ public class MemberController {
 		
 		if(mDTO==null){
 			url = "/member/login.do";
-			msg = "���̵�� �н����带 Ȯ���ϼ���.";
+			msg = "아이디, 비밀번호를 확인하세요.";
 		}else{
 			memberNo = CmmUtil.nvl(mDTO.getMemberNo());
 			memberId = CmmUtil.nvl(mDTO.getMemberId());
@@ -84,7 +84,7 @@ public class MemberController {
 			session.setAttribute("ss_member_name", memberName);
 			session.setAttribute("ss_member_pre", memberPre);
 			url = "/main.do";
-			msg = memberName+"�� ȯ���մϴ�.";
+			msg = memberName+"님 환영합니다.";
 		}
 		
 		mDTO = null;
@@ -227,10 +227,10 @@ public class MemberController {
 		
 		if(result == 1){
 			url = "/member/login.do";
-			msg = "ȸ������ �Ϸ�";
+			msg = "회원가입 성공";
 		}else{
 			url = "/member/joinStep.do";
-			msg = "ȸ������ ����";
+			msg = "회원가입 실패";
 		}
 		
 		mDTO = null;
@@ -239,5 +239,12 @@ public class MemberController {
 		
 		log.info("joinProc Start!!");
 		return "/member/redirect";
+	}
+	
+	@RequestMapping("/Lmin/member/memberList")
+	public String memberList(HttpServletRequest req, Model model) throws Exception{
+		
+		
+		return "/Lmin/member/member_list";
 	}
 }

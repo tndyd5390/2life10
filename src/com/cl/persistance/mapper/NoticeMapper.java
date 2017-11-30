@@ -11,4 +11,14 @@ public interface NoticeMapper {
 
 	List<NoticeDTO> getNoticeList(HashMap<String, Object> hMap) throws Exception;
 
+	int insertNotice(NoticeDTO nDTO) throws Exception;
+
+	NoticeDTO getNoticeDetail(NoticeDTO nDTO) throws Exception;
+
+	void updateNoticeViewCnt(NoticeDTO nDTO) throws Exception;
+
+	int updateNoticeDetail(NoticeDTO nDTO) throws Exception;
+
+	int deleteNotice(String noticeNo) throws Exception;
+
 }
