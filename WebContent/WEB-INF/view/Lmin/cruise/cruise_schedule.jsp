@@ -1,4 +1,17 @@
+<%@page import="com.cl.util.CmmUtil"%>
+<%@page import="com.cl.util.TextUtil"%>
+<%@page import="com.cl.util.PageUtil"%>
+<%@page import="com.cl.dto.CruiseDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
+<%
+	HashMap<String, Object> hMap = (HashMap) request.getAttribute("hMap");
+	int pageBtnSplit = 5;
+	
+	List<CruiseDTO> cList = (List<CruiseDTO>) hMap.get("list");
+	
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -24,6 +37,38 @@
 	<script src="/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
+function doDelete(cruiseNo, imgFileNo, scheFileNo){
+	
+	if(confirm('해당 크루즈 상품을 삭제하시겠습니까?')){
+		var form = document.createElement("form");
+		form.setAttribute("method", "Post"); // Get 또는 Post 입력
+		form.setAttribute("action", "/Lmin/cruise/deleteCruise.do");
+		
+		var hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", "cruiseNo");
+		hiddenField.setAttribute("value", cruiseNo);
+		form.appendChild(hiddenField);
+		
+		hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", "cruiseImgFileNo");
+		hiddenField.setAttribute("value", imgFileNo);
+		form.appendChild(hiddenField);
+		
+		hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", "cruiseScheFileNo");
+		hiddenField.setAttribute("value", scheFileNo);
+		form.appendChild(hiddenField);
+		
+		document.body.appendChild(form);
+		form.submit();
+	}
+	 
+}
+
+
 </script>
 <body>
 <div id="skipnavi">
@@ -135,29 +180,38 @@
 
 			<div id="cruise_sch" class="contents"> <!-- 페이지별 ID -->
 
+				<%
+				if(cList.size() != 0){
+					for(CruiseDTO cDTO : cList){
+				%>
 				<section>
 					<h3 class="contTit">
 						<span>선사</span>
-						로얄캐리비안 마리너호
+						<%=TextUtil.exchangeEscapeNvl(cDTO.getCruiseShipName()) %>
 					</h3>
 					<div class="dashList">
 					    <ul>
-                            <li>날짜 : 2018년 3월 11일 (일) ~ 2018년 3월 16일 (금) </li>
-                            <li>상품 : 동남아 크루즈 4박 6일 (싱가포르, 말레이시아, 태국)</li>
-                            <li>인원 : 1명</li>
-                            <li>캐빈 : 내측</li>
-                            <li>비고 : 불포함사항 : 기타부대비용 및 선상팁</li>
+                            <li>날짜 : <%=CmmUtil.nvl(cDTO.getCruiseStartDay())%> ~ <%=CmmUtil.nvl(cDTO.getCruiseEndDay())%> </li>
+                            <li>상품 : <%=TextUtil.exchangeEscapeNvl(cDTO.getCruiseName()) %></li>
+                            <li>인원 : <%=TextUtil.exchangeEscapeNvl(cDTO.getCruiseAccomodation()) %>명</li>
+                            <li>캐빈 : <%=TextUtil.exchangeEscapeNvl(cDTO.getCruiseCabinCode()) %></li>
+                            <li>비고 : <%=TextUtil.exchangeEscapeNvl(cDTO.getCruiseEtc()) %></li>
                         </ul>
                     </div>
 					<div class="imgWrap">
-					    <img src="../../public/img/conts/img_c_01.png" alt="크루즈이미지" />
+					    <img src="<%="/cruiseImg/" + CmmUtil.nvl(cDTO.getCruiseImgFileName()) %>" alt="크루즈이미지" />
 					    <div class="btn_area">
 					        <button type="button" class="btnSearch">일정다운로드</button>
                         </div>
 					</div>
+					<a href="/Lmin/cruise/updateCruiseView.do?cruiseNo=<%=CmmUtil.nvl(cDTO.getCruiseNo()) %>" class="btn_active_small" style="float:right; margin-left: 10px;">수정</a>
+					<a href="#" class="btn_active_small" style="float:right;" onclick="doDelete('<%=CmmUtil.nvl(cDTO.getCruiseNo())%>', '<%=CmmUtil.nvl(cDTO.getCruiseImgFileNo() + "")%>', '<%=CmmUtil.nvl(cDTO.getCruiseScheFileNo() + "")%>')">삭제</a>
 				</section>
-
-				<section>
+				<%
+					}
+				}
+				%>
+				<!-- <section>
 					<h3 class="contTit">
 						<span>선사</span>
 						로얄캐리비안 마리너호
@@ -200,12 +254,12 @@
                             <button type="button" class="btnSearch">일정다운로드</button>
                         </div>
                     </div>
-				</section>
+				</section> -->
 				<a href="/Lmin/cruise/cruiseSchduleWriteView.do" class="btn_active_small" style="float:right;">크루즈 일정 등록</a>
 				<br/><br/>
 				<!-- pageArea -->
 				<div class="pageArea">
-					<a href='#none' class='btnFirst'><span>처음</span></a> <a href='#' class='btnPrev'><span>이전</span></a><strong>1</strong><a href="javascript:goPage('2','15')" >2</a><a href="javascript:goPage('3','15')" >3</a><a href="javascript:goPage('4','15')" >4</a><a href="javascript:goPage('5','15')" >5</a><a href="javascript:goPage('2','15')" class='btnNext'><span>다음</span></a> <a href="javascript:goPage('19','15')" class='btnLast'><span>마지막</span></a>
+					<%= PageUtil.frontPaging(hMap, pageBtnSplit)%>
 				</div>
 				<!-- // pageArea -->
 

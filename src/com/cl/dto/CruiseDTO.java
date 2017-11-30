@@ -21,6 +21,90 @@ public class CruiseDTO {
 	private String cruiseScheFileName;
 	private String cruiseScheFileOrgName;
 	private String cruiseScheFilePath;
+	private int page;
+	private int splitPage;
+	private String searchBox;
+	private String search;
+	private String[] fileNoArr;
+	private String startYear;
+	private String startMonth;
+	private String startDay;
+	private String endYear;
+	private String endMonth;
+	private String endDay;
+	private String cruisePrice;
+	public String getCruisePrice() {
+		return cruisePrice;
+	}
+	public void setCruisePrice(String cruisePrice) {
+		this.cruisePrice = cruisePrice;
+	}
+	public String getStartYear() {
+		return startYear;
+	}
+	public void setStartYear(String startYear) {
+		this.startYear = startYear;
+	}
+	public String getStartMonth() {
+		return startMonth;
+	}
+	public void setStartMonth(String startMonth) {
+		this.startMonth = startMonth;
+	}
+	public String getStartDay() {
+		return startDay;
+	}
+	public void setStartDay(String startDay) {
+		this.startDay = startDay;
+	}
+	public String getEndYear() {
+		return endYear;
+	}
+	public void setEndYear(String endYear) {
+		this.endYear = endYear;
+	}
+	public String getEndMonth() {
+		return endMonth;
+	}
+	public void setEndMonth(String endMonth) {
+		this.endMonth = endMonth;
+	}
+	public String getEndDay() {
+		return endDay;
+	}
+	public void setEndDay(String endDay) {
+		this.endDay = endDay;
+	}
+	public String[] getFileNoArr() {
+		return fileNoArr;
+	}
+	public void setFileNoArr(String[] fileNoArr) {
+		this.fileNoArr = fileNoArr;
+	}
+	public int getPage() {
+		return page;
+	}
+	public void setPage(int page) {
+		this.page = page;
+	}
+	public int getSplitPage() {
+		return splitPage;
+	}
+	public void setSplitPage(int splitPage) {
+		this.splitPage = splitPage;
+	}
+	public String getSearchBox() {
+		return searchBox;
+	}
+	public void setSearchBox(String searchBox) {
+		this.searchBox = searchBox;
+	}
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
 	public String getCruiseImgFileOrgName() {
 		return cruiseImgFileOrgName;
 	}
@@ -141,6 +225,4 @@ public class CruiseDTO {
 	public void setCruiseScheFilePath(String cruiseScheFilePath) {
 		this.cruiseScheFilePath = cruiseScheFilePath;
 	}
-	
-	
 }
