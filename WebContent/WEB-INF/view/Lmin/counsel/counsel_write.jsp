@@ -1,30 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.cl.util.CmmUtil" %>
-<%@ page import="com.cl.util.TextUtil" %>
-<%@ page import="com.cl.util.PageUtil" %>
-<%@ page import="com.cl.util.AES256Util" %>
-<%@ page import="com.cl.dto.CounselDTO" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.HashMap" %>
-<%
-	HashMap<String, Object> hMap = (HashMap<String, Object>) request.getAttribute("hMap");
-	
-	List<CounselDTO> cList = (List<CounselDTO>) hMap.get("list");
-	
-	int pageBtnSplit = 5;
-%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <title>관리자모드-크리스찬라이프</title>
-
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
 <link type="text/css" rel="stylesheet" href="/public/css/default.css" />
 <link type="text/css" rel="stylesheet" href="/public/css/layout_kor.css" />
+
 <link type="text/css" rel="stylesheet" href="/public/css/sub_kor.css" />
+
 <script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="/public/js/TweenMax.min.js"></script>
 <script type="text/javascript" src="/public/js/common.js"></script>
@@ -45,6 +31,7 @@
 <div class="wrap">
 	<div class="header">
 		<div class="container">
+			
 			<!-- heaer 인쿠르드 -->
 			<!--#include file="../include/inc_header.jsp"-->
 			<%@include file="/WEB-INF/view/include/inc_header.jsp"%>
@@ -54,7 +41,7 @@
 	<div id="contentsWrap">
 		<div class="container">
 			<div class="conTitWrap">
-				<h2>관리자/1:1상담</h2>
+				<h2>관리자/공지사항</h2>
 				<div class="location">
 					<span class="home">홈</span>
 					<span>관리자모드</span>
@@ -62,7 +49,6 @@
 				</div>
 			</div> <!-- // conTitWrap -->
 			<!-- 메뉴 영역 -->
-			
 
 
 
@@ -70,8 +56,8 @@
 	$(function() {
 		//메뉴 제어 
 		var lnb = $(".pcLnbWrap ul li a");
-		var menuId = "MN70800";
-		var mbId = "MO70800";
+		var menuId = "MN60300";
+		var mbId = "MO60300";
 		var mbId2 = "";
 		
 		console.log(menuId);
@@ -89,20 +75,76 @@
 		$("#subtitle").text($("#"+mbId).text());
 		$("#subtitle2").text($("#"+mbId2).text());
 		
-	});
+		
+		//메일 셀렉트박스 제어
+		$("#emailBox").change(function(){
+			if($(this).val()=="direct"){
+				$("#email2").val("");
+			}else{
+				$("#email2").val($(this).val())
+			}
+		});
+		$("#phone2,#phone3").focusout(function(){
+			var value = $(this).val();
+			var regex = /[^0-9]/g;
+			if(value==""){
 
-	function goDetail(cNo){
-		var f = $("#f");
-		var counselNo = $("#cNo");
-		f.attr("action", "/Lmin/counsel/counselDetail.do");
-		counselNo.val(cNo);
-		f.submit();	
-	}
+			}else if(regex.test(value)){
+				alert("숫자만 입력 가능합니다.");
+				$(this).val("");
+			}
+		});
+		
+		/* $("#email1,#email2").focusout(function(){
+			var value = $(this).val();
+			var regex = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
+			
+			if(value=""){
+				
+			}else if(!regex.test(value)){
+				alert("한글은 입력 불가능 합니다.");
+				$(this).val("");
+			}
+		}); */
+	});
 	
-	function goPage(page, lastPage){
+	function doSubmit(){
 		var f = $("#f");
-		$("#page").val(page);
-		f.submit();
+		var name = $('#name');
+		var phone1 = $("#phone1");
+		var phone2 = $("#phone2");
+		var phone3 = $("#phone3");
+		var pwd = $("#password");
+		var contents = $("#contents");
+		var agree = $('input:radio[name="agree"]:checked');
+		
+		if(name.val()==""){
+			alert("작성자를 입력하세요.");
+			name.focus();
+			return false;
+		}else if(phone2.val()==""){
+			alert("휴대전화를 입력하세요.");
+			phone2.focus();
+			return false;
+		}else if(phone2.val()==""){
+			alert("휴대전화를 입력하세요.");
+			phone2.focus();
+			return false;
+		}else if(pwd.val()==""){
+			alert("비밀번호를 입력하세요.");
+			pwd.focus();
+			return false;
+		}else if(contents.val()==""){
+			alert("문의내용을 입력하세요.");
+			contents.focus();
+			return false;
+		}else if(agree.val()=="N" || agree.val()==""){
+			alert("개인정보 수집.이용 동의가 필요합니다.");
+			return false;
+		}else{
+			f.submit();
+			return true;
+		}
 	};
 
 </script>
@@ -110,7 +152,6 @@
 <form action="#" name="menuFrm" method="post">
 	<input type="hidden" name="menuNum"/>
 </form>	
-
 			<div class="moLnbWrap">
 				<nav class="flexContainer">
 					<div class="flexItem3">
@@ -159,113 +200,133 @@
 
 			<!-- 메뉴 영역 -->
 
-			<div class="contents"> <!-- 페이지별 ID none -->
+			<div id="counsel" class="contents"> <!-- 페이지별 ID none -->
 				<h3 class="smallTit">1:1상담</h3>
-				
-				<form name="f" id="f" method="post" action="/Lmin/counsel/counselList.do">
-				<input type="hidden" id="cNo" name="cNo">
-				<input type="hidden" id="page" name="page">
-				<div class="tableBasicList">
-					<table class="defaultTable">
-						<caption></caption>
-						<colgroup>
-							<col style="width:10%">
-							<col style="width:auto%">
-							<col style="width:27%">
-							<col style="width:17%">
-						</colgroup>
-						<thead>
-							<tr>
-								<th scope="col">답변여부</th>
-								<th scope="col">제목</th>
-								<th scope="col">휴대전화</th>
-								<th scope="col">작성일</th>
-							</tr>
-						</thead>
-						<tbody>
-						<%if(cList.size()>0){%>
-							<%for(CounselDTO cDTO : cList){%>
-							<tr>
-								<%if(CmmUtil.nvl(cDTO.getCounselReply()).contentEquals("미답변")){%>
-									<td style="font-weight:bold;"><%=CmmUtil.nvl(cDTO.getCounselReply()) %></td>
-								<% }else{ %>
-									<td><%=CmmUtil.nvl(cDTO.getCounselReply()) %></td>
-								<% } %>
-								<td class="alignL"><a href="javascript:goDetail(<%=CmmUtil.nvl(cDTO.getCounselNo())%>);"><%=CmmUtil.nvl(cDTO.getCounselTitle())%></a></td>
-								<td><%=AES256Util.strDecode(CmmUtil.nvl(cDTO.getCounselPhoneNo()))%></td>
-								<td><%=CmmUtil.nvl(cDTO.getRegDt()) %></td>
-							</tr>
-							<% } %>
-						<% } %>
-							<!-- <tr>
-								<td>10</td>
-								<td class="alignL">상조서비스 문의</td>
-								<td>master@naver.com</td>
-								<td>2017-11-09</td>
-							</tr>
-							<tr>
-								<td>10</td>
-								<td class="alignL">상조서비스 문의</td>
-								<td>master@naver.com</td>
-								<td>2017-11-09</td>
-							</tr>
-							<tr>
-								<td>10</td>
-								<td class="alignL">상조서비스 문의</td>
-								<td>master@naver.com</td>
-								<td>2017-11-09</td>
-							</tr>
-							<tr>
-								<td>10</td>
-								<td class="alignL">상조서비스 문의</td>
-								<td>master@naver.com</td>
-								<td>2017-11-09</td>
-							</tr>
-							<tr>
-								<td>10</td>
-								<td class="alignL">상조서비스 문의</td>
-								<td>master@naver.com</td>
-								<td>2017-11-09</td>
-							</tr>
-							<tr>
-								<td>10</td>
-								<td class="alignL">상조서비스 문의</td>
-								<td>master@naver.com</td>
-								<td>2017-11-09</td>
-							</tr>
-							<tr>
-								<td>10</td>
-								<td class="alignL">상조서비스 문의</td>
-								<td>master@naver.com</td>
-								<td>2017-11-09</td>
-							</tr>
-							<tr>
-								<td>10</td>
-								<td class="alignL">상조서비스 문의</td>
-								<td>master@naver.com</td>
-								<td>2017-11-09</td>
-							</tr>
-							<tr>
-								<td>10</td>
-								<td class="alignL">상조서비스 문의</td>
-								<td>master@naver.com</td>
-								<td>2017-11-09</td>
-							</tr> -->
-						</tbody>
-					</table>
-				</div>
-				<!-- pageArea -->
-				<div class="pageArea">
-					<%=PageUtil.frontPaging(hMap, pageBtnSplit) %>
-				</div>
+
+				<form id="f" name="f" method="post" action="/Lmin/counsel/counselRegProc.do">
+					<input type="hidden" value="" id="" name="" />
+					<section  class="grayWrap">
+						<header>
+							<h4 class="subTit">고객정보</h4>
+							<p class="fr"><span class="compulsory">*</span> 전 항목 필수 입력 항목입니다.</p>
+						</header>
+
+						<div class="boardType2">
+							<table summary="">
+								<caption>회원가입</caption>
+								<colgroup>
+									<col width="20%">
+									<col width="80%">
+								</colgroup>
+								<tbody>
+									<tr>
+										<th scope="row">작성자</th>
+										<td>
+											<input type="text" name="name" id="name" class="inputType1" maxlength="8">
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">휴대전화</th>
+										<td>
+											<select id="phone1" name="phone1"  class="inputType3">
+												<option value="00">010</option>
+												<option value="01">011</option>
+											</select>
+											-
+											<input type="text" name="phone2" id="phone2" class="inputType2" maxlength="4">
+											-
+											<input type="text" name="phone3" id="phone3" class="inputType2" maxlength="4">
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">이메일 주소</th>
+										<td>
+											<input type="text" name="email1" id="email1" class="inputType2" maxlength="10"> @
+											<input type="text" name="email2" id="email2" class="inputType2" maxlength="15">
+											<select id="emailBox" name="emailBox" class="inputType2">
+												<option value="">선택하세요</option>
+												<option value="nate.com">nate.com</option>
+												<option value="hotmail.com">hotmail.com</option>
+												<option value="yahoo.co.kr">yahoo.co.kr</option>
+												<option value="naver.com">naver.com</option>
+												<option value="paran.com">paran.com</option>
+												<option value="dreamwiz.com">dreamwiz.com</option>
+												<option value="hanafos.com">hanafos.com</option>
+												<option value="lycos.co.kr">lycos.co.kr</option>
+												<option value="korea.com">korea.com</option>
+												<option value="unitel.co.kr">unitel.co.kr</option>
+												<option value="hanmail.net">hanmail.net</option>
+												<option value="gmail.com">gmail.com</option>
+												<option value="google.com">google.com</option>
+												<option value="empal.com">empal.com</option>
+												<option value="freechal.com">freechal.com</option>
+												<option value="empas.com">empas.com</option>
+												<option value="direct">직접입력</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">제목</th>
+										<td>
+											<input type="text" name="title" id="title" class="inputType5" maxlength="30">
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">문의내용</th>
+										<td>
+											<textarea id="contents" name="contents" cols="83" rows="10" class="textArea"></textarea>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">비밀번호</th>
+										<td>
+											<input type="password" name="password" class="inputType1" maxlength="25">
+											&nbsp;
+											<input type="checkbox" id="passwordYN" name="passwordYN"/> <label for="">비밀글</label>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+	
+						<div class="termsWrap">
+							<h5 class="blueTit">[필수] 개인정보 수집.이용 동의</h5>
+							<p>삼성물산은 고객님들의 의견 접수와 관련하여 성실한 답변을 드리기 위해 필요한 최소한의 개인정보를 수집하고 있습니다.</p>
+							<ul class="defaultGrayDotList">
+								<li>수집 항목 : 이메일</li>
+								<li>수집 및 이용목적 : 접수 문의에 대한 답변/안내</li>
+								<li>보유 및 이용기간 : 수집∙이용 목적 달성 시 까지</li>
+							</ul>
+	
+							<p class="noti">※ 문의에 대한 답변을 위해서 필요한 최소한의 개인정보 이므로 동의를 해 주셔야 서비스를 이용하실 수 있습니다.</p>
+	
+							<p class="pointSubColor">위 사항에 동의하십니까?</p>
+							<ul class="radioArea">
+								<li><input type="radio" id="agree1" name="agree" value="Y"> <label for="agree1">동의</label></li>
+								<li><input type="radio" id="agree2" name="agree" value="N"> <label for="agree2">동의하지 않음</label></li>
+							</ul>
+						</div>
+							
+						<div class="btnArea">
+							<button type="button" class="btnDefaultForm" onclick="return doSubmit()">완료</button>
+						</div>
+					</section>
 				</form>
-				<!-- // pageArea -->
+
+
+
 			</div> <!-- // contents -->
+
+
 		</div>
 	</div> <!-- // contentsWrap -->
 
+<!--#include file="../include/inc_footer.jsp"-->
 	<div class="footer">
 		<div class="container">
+			
+
+
 			<footer>
 				<div class="footMenuWrap">
 					<ul>

@@ -130,8 +130,8 @@
 						<li id="MO70400"><a href="javascript:goMenu('/Lmin/funeral/funeralInfoList.do', 'MO70400');">전국장례시설안내</a></li>
 						<li id="MO70500"><a href="javascript:goMenu('/Lmin/funeral/funeralNoticeList.do', 'M760500');">부고알림</a></li>
 						<li id="MO70600"><a href="javascript:goMenu('../cruise/cruise_schedule.jsp', 'MO70600');">크루즈일정</a></li>
-						<li id="MO70700"><a href="javascript:goMenu('../notice/notice_list.jsp', 'MO70700');">공지사항</a></li>
-						<li id="MO70800"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MO70800');">1:1상담</a></li>
+						<li id="MO70700"><a href="javascript:goMenu('/Lmin/notice/noticeList.do', 'MO70700');">공지사항</a></li>
+						<li id="MO70800"><a href="javascript:goMenu('/Lmin/counsel/counselList.do', 'MO70800');">1:1상담</a></li>
 						<li id="MO70900"><a href="javascript:goMenu('../regulation/regulation_list.jsp', 'MO0900');">상조관련법규</a></li>
 						<li id="MO71000"><a href="javascript:goMenu('../inquiry/inquiry_list.jsp', 'MO71000');">납부조회</a></li>
 						<li id="MO71200"><a href="javascript:goMenu('../appli/appli_form.jsp', 'MO71200');">가입신청</a></li>
@@ -150,8 +150,8 @@
 						<li id="MO70400"><a href="javascript:goMenu('/Lmin/funeral/funeralInfoList.do', 'MO70400');">전국장례시설안내</a></li>
 						<li id="MO70500"><a href="javascript:goMenu('/Lmin/funeral/funeralNoticeList.do', 'M760500');">부고알림</a></li>
 						<li id="MO70600"><a href="javascript:goMenu('../cruise/cruise_schedule.jsp', 'MO70600');">크루즈일정</a></li>
-						<li id="MO70700"><a href="javascript:goMenu('../notice/notice_list.jsp', 'MO70700');">공지사항</a></li>
-						<li id="MO70800"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MO70800');">1:1상담</a></li>
+						<li id="MO70700"><a href="javascript:goMenu('/Lmin/notice/noticeList.do', 'MO70700');">공지사항</a></li>
+						<li id="MO70800"><a href="javascript:goMenu('/Lmin/counsel/counselList.do', 'MO70800');">1:1상담</a></li>
 						<li id="MO70900"><a href="javascript:goMenu('../regulation/regulation_list.jsp', 'MO0900');">상조관련법규</a></li>
 						<li id="MO71000"><a href="javascript:goMenu('../inquiry/inquiry_list.jsp', 'MO71000');">납부조회</a></li>
 						<li id="MO71200"><a href="javascript:goMenu('../appli/appli_form.jsp', 'MO71200');">가입신청</a></li>

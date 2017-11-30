@@ -8,4 +8,5 @@ import com.cl.dto.CodeDTO;
 public interface ICodeService {
 
 	HashMap<String, List<CodeDTO>> getCodeList() throws Exception;
+
 }

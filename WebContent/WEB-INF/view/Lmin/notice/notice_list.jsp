@@ -11,6 +11,8 @@
 	HashMap<String, Object> hMap = (HashMap<String, Object>) request.getAttribute("hMap");
 	
 	List<NoticeDTO> nList = (List<NoticeDTO>) hMap.get("list");
+	
+	int pageBtnSplit = 5;
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -109,7 +111,12 @@
 		noticeNo.val(nNo);
 		f.submit();	
 	}
-
+	
+	function goPage(page, lastPage){
+		var f = $("#f");
+		$("#page").val(page);
+		f.submit();
+	};
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -134,7 +141,7 @@
 						<li id="MO70500"><a href="javascript:goMenu('/Lmin/funeral/funeralNoticeList.do', 'M760500');">부고알림</a></li>
 						<li id="MO70600"><a href="javascript:goMenu('../cruise/cruise_schedule.jsp', 'MO70600');">크루즈일정</a></li>
 						<li id="MO70700"><a href="javascript:goMenu('/Lmin/notice/noticeList.do', 'MO70700');">공지사항</a></li>
-						<li id="MO70800"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MO70800');">1:1상담</a></li>
+						<li id="MO70800"><a href="javascript:goMenu('/Lmin/counsel/counselList.do', 'MO70800');">1:1상담</a></li>
 						<li id="MO70900"><a href="javascript:goMenu('../regulation/regulation_list.jsp', 'MO0900');">상조관련법규</a></li>
 						<li id="MO71000"><a href="javascript:goMenu('../inquiry/inquiry_list.jsp', 'MO71000');">납부조회</a></li>
 						<li id="MO71200"><a href="javascript:goMenu('../appli/appli_form.jsp', 'MO71200');">가입신청</a></li>
@@ -154,7 +161,7 @@
 						<li id="MO70500"><a href="javascript:goMenu('/Lmin/funeral/funeralNoticeList.do', 'M760500');">부고알림</a></li>
 						<li id="MO70600"><a href="javascript:goMenu('../cruise/cruise_schedule.jsp', 'MO70600');">크루즈일정</a></li>
 						<li id="MO70700"><a href="javascript:goMenu('/Lmin/notice/noticeList.do', 'MO70700');">공지사항</a></li>
-						<li id="MO70800"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MO70800');">1:1상담</a></li>
+						<li id="MO70800"><a href="javascript:goMenu('/Lmin/counsel/counselList.do', 'MO70800');">1:1상담</a></li>
 						<li id="MO70900"><a href="javascript:goMenu('../regulation/regulation_list.jsp', 'MO0900');">상조관련법규</a></li>
 						<li id="MO71000"><a href="javascript:goMenu('../inquiry/inquiry_list.jsp', 'MO71000');">납부조회</a></li>
 						<li id="MO71200"><a href="javascript:goMenu('../appli/appli_form.jsp', 'MO71200');">가입신청</a></li>
@@ -168,6 +175,7 @@
 				<h3 class="smallTit">공지사항</h3>
 				<form name="f" id="f" method="post" action="/Lmin/notice/noticeList.do"> 
 				<input type="hidden" id="nNo" name="nNo">
+				<input type="hidden" id="page" name="page">
 				<div class="boardType2">
 					<table summary="">
 						<caption></caption>
@@ -272,7 +280,7 @@
 				
 				<!-- pageArea -->
 				<div class="pageArea">
-					<%=PageUtil.frontPaging(hMap, 5) %>
+					<%=PageUtil.frontPaging(hMap, pageBtnSplit) %>
 				</div>
 				</form>
 				<!-- // pageArea -->
