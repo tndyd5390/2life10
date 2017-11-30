@@ -1,4 +1,4 @@
-//°øÁö»çÇ× ÄÁÆ®·Ñ·¯
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½
 package com.cl.controller.admin;
 
 import java.util.HashMap;
@@ -75,9 +75,9 @@ public class NoticeController {
 		
 		url = "/Lmin/notice/noticeList.do";
 		if(result==0){
-			msg = "µî·Ï½ÇÆĞ";
+			msg = "ë“±ë¡ì‹¤íŒ¨";
 		}else{
-			msg = "µî·Ï¼º°ø";
+			msg = "ë“±ë¡ì„±ê³µ";
 		}
 		
 		model.addAttribute("url", url);
@@ -147,9 +147,9 @@ public class NoticeController {
 		
 		url = "/Lmin/notice/noticeList.do";
 		if(result==0){
-			msg = "¼öÁ¤½ÇÆĞ";
+			msg = "ìˆ˜ì •ì‹¤íŒ¨";
 		}else{
-			msg = "¼öÁ¤¼º°ø";
+			msg = "ìˆ˜ì •ì„±ê³µ";
 		}
 		
 		model.addAttribute("msg", msg);
@@ -170,9 +170,9 @@ public class NoticeController {
 		int result = noticeService.deleteNotice(noticeNo);
 		
 		if(result == 0){
-			msg = "»èÁ¦½ÇÆĞ";
+			msg = "ì‚­ì œì‹¤íŒ¨";
 		}else{
-			msg = "»èÁ¦¼º°ø";
+			msg = "ì‚­ì œì„±ê³µ";
 		}
 		url = "/Lmin/notice/noticeList.do";
 		

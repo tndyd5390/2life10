@@ -1,4 +1,4 @@
-//Àü±¹Àå·Ê½Ã¼³¾È³» ÄÁÆ®·Ñ·¯
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½Ã¼ï¿½ï¿½È³ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½
 package com.cl.controller.admin;
 
 import java.util.ArrayList;
@@ -103,10 +103,10 @@ public class FuneralInfoController {
 		
 		if(result==1){
 			url = "/Lmin/funeral/funeralInfoList.do";
-			msg = "µî·Ï¼º°ø";
+			msg = "ë“±ë¡ì„±ê³µ";
 		}else{
 			url = "/Lmin/funeral/funeralInfoWrite.do";
-			msg = "µî·Ï½ÇÆĞ";
+			msg = "ë“±ë¡ì‹¤íŒ¨";
 		}
 		
 		fDTO = null;
@@ -177,12 +177,11 @@ public class FuneralInfoController {
 		
 		int result = funeralInfoService.updateFuneralInfo(fDTO);
 		
+		url = "/Lmin/funeral/funeralInfoList.do";
 		if(result==1){
-			url = "/Lmin/funeral/funeralInfoList.do";
-			msg = "¼öÁ¤¼º°ø";
+			msg = "ìˆ˜ì •ì„±ê³µ";
 		}else{
-			url = "/Lmin/funeral/funeralInfoDetail.do?fNo="+funeralInfoNo;
-			msg = "¼öÁ¤½ÇÆĞ";
+			msg = "ìˆ˜ì •ì‹¤íŒ¨";
 		}
 		
 		fDTO = null;
@@ -205,12 +204,11 @@ public class FuneralInfoController {
 		log.info("funeralInfoNo : "+ funeralInfoNo);
 		
 		int result = funeralInfoService.deleteFuneralInfo(funeralInfoNo);
+		url = "/Lmin/funeral/funeralInfoList.do";
 		if(result == 0){
-			msg = "»èÁ¦½ÇÆĞ";
-			url = "/Lmin/funeral/funeralInfoList.do";
+			msg = "ì‚­ì œì‹¤íŒ¨";
 		}else{
-			msg = "»èÁ¦¼º°ø";
-			url = "/Lmin/funeral/funeralInfoList.do";
+			msg = "ì‚­ì œì„±ê³µ";
 		}
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
