@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.cl.util.CmmUtil" %>
-<%@ page import="com.cl.util.PageUtil" %>
 <%@ page import="com.cl.util.TextUtil" %>
-<%@ page import="com.cl.dto.FuneralNoticeDTO" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.HashMap" %>
+<%@ page import="com.cl.util.AES256Util" %>
+<%@ page import="com.cl.dto.NoticeDTO" %>
 <%
-	HashMap<String, Object> hMap = (HashMap) request.getAttribute("hMap");
-	int pageBtnSplit = 5;
+	NoticeDTO nDTO = (NoticeDTO) request.getAttribute("nDTO");
 	
-	List<FuneralNoticeDTO> fList = (List<FuneralNoticeDTO>) hMap.get("list");
+	if(nDTO == null){
+		nDTO = new NoticeDTO();
+	}
+
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -22,6 +21,7 @@
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
 <link type="text/css" rel="stylesheet" href="/public/css/default.css" />
 <link type="text/css" rel="stylesheet" href="/public/css/layout_kor.css" />
+
 <link type="text/css" rel="stylesheet" href="/public/css/sub_kor.css" />
 
 <script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
@@ -54,11 +54,11 @@
 	<div id="contentsWrap">
 		<div class="container">
 			<div class="conTitWrap">
-				<h2>관리자/부고알림</h2>
+				<h2>관리자/공지사항</h2>
 				<div class="location">
 					<span class="home">홈</span>
 					<span>관리자모드</span>
-					<strong>부고알림</strong>
+					<strong>공지사항</strong>
 				</div>
 			</div> <!-- // conTitWrap -->
 			<!-- 메뉴 영역 -->
@@ -70,8 +70,8 @@
 	$(function() {
 		//메뉴 제어 
 		var lnb = $(".pcLnbWrap ul li a");
-		var menuId = "MN70500";
-		var mbId = "MO70500";
+		var menuId = "MN70700";
+		var mbId = "MO70700";
 		var mbId2 = "";
 		
 		console.log(menuId);
@@ -91,28 +91,48 @@
 		
 	});
 	
-	function goPage(page, lastPage){
-		var f = $("#f");
-		$("#page").val(page);
-		f.submit();
-	};
-	
 	function doSubmit(){
 		var f = $("#f");
-		var search = $("#search");
+		var title = $("#title");
+		var contents = $("#contents");
+		var nNo = '<%=CmmUtil.nvl(nDTO.getNoticeNo())%>';
 		
-		if(search.val() == ""){
-			alert("검색어를 입력하세요.");
-			search.focus();
+		
+		
+		if(title.val()==""){
+			alert("제목을 입력하세요.");
+			title.focus();
+			return false;
+		}else if(contents.val()==""||contents.val()==null){
+			alert("내용을 입력하세요.");
+			contents.focus();
 			return false;
 		}else{
+			$("#nNo").val(nNo);
+			f.attr("action", "/Lmin/notice/noticeUpdateProc.do");
 			f.submit();
 			return true;
 		}
 	};
 	
+	function doDelete(){
+		var f = $("#f");
+		var nNo = '<%=CmmUtil.nvl(nDTO.getNoticeNo())%>';
+		
+		if(confirm("삭제 하시겠습니까?")){
+			$("#nNo").val(nNo);
+			f.attr("action", "/Lmin/notice/noticeDeleteProc.do");
+			f.submit();
+			return true;
+		}else{
+			return false;
+		}
+	}
 	
-
+	function goList(){
+		location.href="/Lmin/notice/noticeList.do";
+	}
+	
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -143,7 +163,6 @@
 						<li id="MO71200"><a href="javascript:goMenu('../appli/appli_form.jsp', 'MO71200');">가입신청</a></li>
 						</ul>
 					</div>
-								
 				</nav>
 			</div> <!-- // moLnbWrap -->
 
@@ -166,116 +185,43 @@
 			</div> <!-- // pcLnbWrap -->
 
 			<!-- 메뉴 영역 -->
+
 			<div class="contents"> <!-- 페이지별 ID none -->
-				<h3 class="smallTit">부고알림</h3>
-				<form name="f" id="f" method="post" action="/Lmin/funeral/funeralNoticeList.do">
-				<input type="hidden" name="page" id="page">
+				<h3 class="smallTit">공지사항</h3>
+				<form name="f" id="f" method="post" action="/Lmin/notice/noticeUpdateProc.do">
+				<input type="hidden" name="nNo" id="nNo" value="<%=CmmUtil.nvl(nDTO.getNoticeNo())%>">
 				<div class="boardType2">
 					<table summary="">
-						<caption></caption>
+						<caption>회원가입</caption>
 						<colgroup>
-							<col width="100%">
+							<col width="20%">
+							<col width="80%">
 						</colgroup>
 						<tbody>
 							<tr>
+								<th scope="row">제목</th>
 								<td>
-									<select id="searchBox" name="searchBox" class="inputType3">
-										<option value="00" <%=CmmUtil.select("00", CmmUtil.nvl((String) hMap.get("searchBox")))%>>전체</option>
-										<option value="01" <%=CmmUtil.select("01", CmmUtil.nvl((String) hMap.get("searchBox")))%>>소천인</option>
-										<option value="02" <%=CmmUtil.select("02", CmmUtil.nvl((String) hMap.get("searchBox")))%>>회원명</option>
-									</select>
-									<input type="text" name="search" id="search" class="inputType1" value="<%=CmmUtil.nvl((String) hMap.get("search"))%>" maxlength="25">
-									<a href="javascript:doSubmit();" class="btn_active_small">검색</a>
+									<input type="text" name="title" id="title" class="inputType5" value="<%=CmmUtil.nvl(nDTO.getNoticeTitle()) %>" maxlength="25">
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">내용</th>
+								<td>
+									<textarea id="contents" name="contents" cols="83" rows="10" class="textArea"><%=CmmUtil.nvl(nDTO.getNoticeContents()) %></textarea>
 								</td>
 							</tr>
 						</tbody>
 					</table>
-                </div>
-				</form>
-
-				<br/><br/>
-				<ul class="boradType4">
-				<%if(fList.size()!=0){%>
-				<%for(FuneralNoticeDTO fDTO : fList){%>
-					<li>
-						<p class="num">부고</p>
-						<div class="info">
-							<p class="txt">회원 <%=CmmUtil.nvl(fDTO.getFuneralNoticeMember()) %></p>
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="/Lmin/funeral/funeralNoticeDetail.do?fNo=<%=CmmUtil.nvl(fDTO.getFuneralNoticeNo())%>"><%=CmmUtil.nvl(fDTO.getFuneralNoticeName()) %>님 소천</a>
-							</p>
-							<p class="txt2">
-								소천일<span class="bar">&nbsp;:</span>
-								<span><%=CmmUtil.nvl(fDTO.getFuneralNoticeDay()) %></span>
-								<span class="bar">l</span>
-								<span><%=CmmUtil.nvl(fDTO.getFuneralNoticePlace()) %></span>
-							</p>
-						</div>
-					</li>
-				<%}%>
-				<% }%>
-					<!-- <li>
-						<p class="num">부고</p>
-						<div class="info">
-							<p class="txt">회원 이설희</p>
-							<p class="txt1">박성진수정
-								<a href="javascript:selectBoardDtl('480')">박춘심님 소천</a>
-							</p>
-							<p class="txt2">
-								소천일<span class="bar">&nbsp;:</span>
-								<span>2017-11-09</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">부고</p>
-						<div class="info">
-							<p class="txt">회원 이설희</p>
-							<p class="txt1">박성진수정
-								<a href="javascript:selectBoardDtl('480')">박춘심님 소천</a>
-							</p>
-							<p class="txt2">
-								소천일<span class="bar">&nbsp;:</span>
-								<span>2017-11-09</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">부고</p>
-						<div class="info">
-							<p class="txt">회원 이설희</p>
-							<p class="txt1">박성진수정
-								<a href="javascript:selectBoardDtl('480')">박춘심님 소천</a>
-							</p>
-							<p class="txt2">
-								소천일<span class="bar">&nbsp;:</span>
-								<span>2017-11-09</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">부고</p>
-						<div class="info">
-							<p class="txt">회원 이설희</p>
-							<p class="txt1">박성진수정
-								<a href="javascript:selectBoardDtl('480')">박춘심님 소천</a>
-							</p>
-							<p class="txt2">
-								소천일<span class="bar">&nbsp;:</span>
-								<span>2017-11-09</span>
-							</p>
-						</div>
-					</li> -->
-				</ul>
-				<br>
-				<a href="/Lmin/funeral/funeralNoticeWrite.do" class="btn_active_small" style="float:right;">부고 등록</a>
-				
-				<!-- pageArea -->
-				<div class="pageArea">
-					<%= PageUtil.frontPaging(hMap, pageBtnSplit)%>
 				</div>
-				<!-- // pageArea -->
-
+				<br/><br/>
+				<!-- btnArea -->
+				<div class="btnArea">
+					<button type="button" class="btnDefaultForm" id="listBtn" onclick="return doSubmit();">수정</button>
+					<button type="button" class="btnDefaultForm" id="listBtn" onclick="return doDelete();">삭제</button>
+					<button type="button" class="btnDefaultForm" id="listBtn" onclick="goPage()">목록</button>
+				</div>
+				</form>
+				<!-- // btnArea -->
 
 			</div> <!-- // contents -->
 

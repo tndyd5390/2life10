@@ -1,4 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.cl.util.CmmUtil" %>
+<%@ page import="com.cl.util.TextUtil" %>
+<%@ page import="com.cl.util.AES256Util" %>
+<%@ page import="com.cl.dto.NoticeDTO" %>
+<%
+	NoticeDTO nDTO = (NoticeDTO) request.getAttribute("nDTO");
+	
+	if(nDTO == null){
+		nDTO = new NoticeDTO();
+	}
+
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -7,17 +19,17 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
-<link type="text/css" rel="stylesheet" href="../../public/css/default.css" />
-<link type="text/css" rel="stylesheet" href="../../public/css/layout_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/default.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/layout_kor.css" />
 
-<link type="text/css" rel="stylesheet" href="../../public/css/sub_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/sub_kor.css" />
 
-<script type="text/javascript" src="../../public/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="../../public/js/TweenMax.min.js"></script>
-<script type="text/javascript" src="../../public/js/common.js"></script>
-<script type="text/javascript" src="../../public/js/contents.js"></script>
-<script type="text/javascript" src="../../public/js/jquery.form.js"></script>
-<script type="text/javascript" src="../../public/js/jquery.rss.js"></script>
+<script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/public/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="/public/js/common.js"></script>
+<script type="text/javascript" src="/public/js/contents.js"></script>
+<script type="text/javascript" src="/public/js/jquery.form.js"></script>
+<script type="text/javascript" src="/public/js/jquery.rss.js"></script>
 
 <!--[if lt IE 9]>
 	<script src="/js/html5.js"></script>
@@ -35,7 +47,7 @@
 			
 			<!-- heaer 인쿠르드 -->
 			<!--#include file="../include/inc_header.jsp"-->
-			<%@include file="../include/inc_header.jsp"%>
+			<%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 		</div>
 	</div> <!-- // header -->
 
@@ -78,7 +90,29 @@
 		$("#subtitle2").text($("#"+mbId2).text());
 		
 	});
-
+	
+	function doSubmit(){
+		var f = $("#f");
+		f.attr("action", "/Lmin/notice/noticeUpdate.do");
+		f.submit();
+	}
+	function goList(){
+		location.href="/Lmin/notice/noticeList.do";
+	}
+	
+	function doDelete(){
+		var f = $("#f");
+		var nNo = '<%=CmmUtil.nvl(nDTO.getNoticeNo())%>';
+		
+		if(confirm("삭제 하시겠습니까?")){
+			$("#nNo").val(nNo);
+			f.attr("action", "/Lmin/notice/noticeDeleteProc.do");
+			f.submit();
+			return true;
+		}else{
+			return false;
+		}
+	}
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -99,10 +133,10 @@
 						<li id="MO70100"><a href="javascript:goMenu('../company/branch.jsp', 'MO70100');">전국지사안내</a></li>
 						<li id="MO70200"><a href="javascript:goMenu('../company/advice.jsp', 'MO70200');">상담사조회</a></li>
 						<li id="MO70300"><a href="javascript:goMenu('../company/cyber.jsp', 'MO70300');">사이버홍보실</a></li>
-						<li id="MO70400"><a href="javascript:goMenu('../funeral/funeral_info_list.jsp', 'MO70400');">전국장례시설안내</a></li>
-						<li id="MO70500"><a href="javascript:goMenu('../funeral/funeral_notice.jsp', 'M760500');">부고알림</a></li>
+						<li id="MO70400"><a href="javascript:goMenu('/Lmin/funeral/funeralInfoList.do', 'MO70400');">전국장례시설안내</a></li>
+						<li id="MO70500"><a href="javascript:goMenu('/Lmin/funeral/funeralNoticeList.do', 'M760500');">부고알림</a></li>
 						<li id="MO70600"><a href="javascript:goMenu('../cruise/cruise_schedule.jsp', 'MO70600');">크루즈일정</a></li>
-						<li id="MO70700"><a href="javascript:goMenu('../notice/notice_list.jsp', 'MO70700');">공지사항</a></li>
+						<li id="MO70700"><a href="javascript:goMenu('/Lmin/notice/noticeList.do', 'MO70700');">공지사항</a></li>
 						<li id="MO70800"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MO70800');">1:1상담</a></li>
 						<li id="MO70900"><a href="javascript:goMenu('../regulation/regulation_list.jsp', 'MO0900');">상조관련법규</a></li>
 						<li id="MO71000"><a href="javascript:goMenu('../inquiry/inquiry_list.jsp', 'MO71000');">납부조회</a></li>
@@ -116,17 +150,17 @@
 			<div class="pcLnbWrap">
 				<nav>
 					<ul class="pcLnb">
-						<li id="MN70100"><a href="javascript:goMenu('../company/branch.jsp', 'MN70100');">전국지사안내</a></li>
-						<li id="MN70200"><a href="javascript:goMenu('../company/advice.jsp', 'MN70200');">상담사조회</a></li>
-						<li id="MN70300"><a href="javascript:goMenu('../company/cyber.jsp', 'MN70300');">사이버홍보실</a></li>
-						<li id="MN70400"><a href="javascript:goMenu('../funeral/funeral_info_list.jsp', 'MN70400');">전국장례시설안내</a></li>
-						<li id="MN70500"><a href="javascript:goMenu('../funeral/funeral_notice.jsp', 'M760500');">부고알림</a></li>
-						<li id="MN70600"><a href="javascript:goMenu('../cruise/cruise_schedule.jsp', 'MN70600');">크루즈일정</a></li>
-						<li id="MN70700"><a href="javascript:goMenu('../notice/notice_list.jsp', 'MN70700');">공지사항</a></li>
-						<li id="MN70800"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MN70800');">1:1상담</a></li>
-						<li id="MN70900"><a href="javascript:goMenu('../regulation/regulation_list.jsp', 'MN0900');">상조관련법규</a></li>
-						<li id="MN71000"><a href="javascript:goMenu('../inquiry/inquiry_list.jsp', 'MN71000');">납부조회</a></li>
-						<li id="MN71200"><a href="javascript:goMenu('../appli/appli_form.jsp', 'MN71200');">가입신청</a></li>
+						<li id="MO70100"><a href="javascript:goMenu('../company/branch.jsp', 'MO70100');">전국지사안내</a></li>
+						<li id="MO70200"><a href="javascript:goMenu('../company/advice.jsp', 'MO70200');">상담사조회</a></li>
+						<li id="MO70300"><a href="javascript:goMenu('../company/cyber.jsp', 'MO70300');">사이버홍보실</a></li>
+						<li id="MO70400"><a href="javascript:goMenu('/Lmin/funeral/funeralInfoList.do', 'MO70400');">전국장례시설안내</a></li>
+						<li id="MO70500"><a href="javascript:goMenu('/Lmin/funeral/funeralNoticeList.do', 'M760500');">부고알림</a></li>
+						<li id="MO70600"><a href="javascript:goMenu('../cruise/cruise_schedule.jsp', 'MO70600');">크루즈일정</a></li>
+						<li id="MO70700"><a href="javascript:goMenu('/Lmin/notice/noticeList.do', 'MO70700');">공지사항</a></li>
+						<li id="MO70800"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MO70800');">1:1상담</a></li>
+						<li id="MO70900"><a href="javascript:goMenu('../regulation/regulation_list.jsp', 'MO0900');">상조관련법규</a></li>
+						<li id="MO71000"><a href="javascript:goMenu('../inquiry/inquiry_list.jsp', 'MO71000');">납부조회</a></li>
+						<li id="MO71200"><a href="javascript:goMenu('../appli/appli_form.jsp', 'MO71200');">가입신청</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->
@@ -137,24 +171,21 @@
 				<h3 class="smallTit">공지사항</h3>
 				<br/><br/>
 				<!-- boardView -->
-				<form action="" id="" name="" method="post">
-				<input type="hidden" id="" name="" value=""/>
-				<input type="hidden" id="" name="" value=""/>
-			
+				<form id="f" name="f" method="post" action="/Lmin/notice/noticeUpdate.do" >
+				<input type="hidden" id="nNo" name="nNo" value="<%=CmmUtil.nvl(nDTO.getNoticeNo())%>"/>
 				<article class="boardView">
 					<header class="boardTit">
-						<h3>공지사항 제목입니다.</h3>
+						<h3><%=CmmUtil.nvl(nDTO.getNoticeTitle())%></h3>
 						<p class="txt">
-							<span class="date">2017.09.27</span>
-							<span class="hits">조회수 49</span>
-							<span class="writer">관리자</span>
+							<span class="date"><%=CmmUtil.nvl(nDTO.getRegDt()) %></span>
+							<span class="hits">조회수 <%=CmmUtil.nvl(nDTO.getNoticeViewCnt()) %></span>
+							<span class="writer"><%=AES256Util.strDecode(CmmUtil.nvl(nDTO.getMemberName()))%></span>
 						</p>
 					</header>
 					<article class="boardCont">
 						<div id="ckContent">
-									
 								<div class="editArea">								
-								<p>공지사항 내용입니다.</p>
+								<p><%=TextUtil.replaceBr(CmmUtil.nvl(nDTO.getNoticeContents())) %></p>
 								</div>				
 						</div>
 					</article>
@@ -164,7 +195,9 @@
 				<br/><br/>
 				<!-- btnArea -->
 				<div class="btnArea">
-					<button type="button" class="btnDefaultForm" id="listBtn">목록</button>
+					<button type="button" class="btnDefaultForm" id="listBtn" onclick="return doSubmit();">수정</button>
+					<button type="button" class="btnDefaultForm" id="listBtn" onclick="return doDelete();">삭제</button>
+					<button type="button" class="btnDefaultForm" id="listBtn" onclick="goList();">목록</button>
 				</div>
 				<!-- // btnArea -->
 
