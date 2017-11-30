@@ -16,10 +16,13 @@ public class MemberDTO {
 	private String memberPostNo;
 	private String memberAddress;
 	private String memberAddressDetail;
-	private String regNo;
+	private String regMemberNo;
 	private String redDt;
-	private String chgNo;
+	private String chgMemberNo;
 	private String chgDt;
+	private int page;
+	private int splitPage;
+	private String rowNum;
 	
 	public String getMemberNo() {
 		return memberNo;
@@ -94,10 +97,10 @@ public class MemberDTO {
 		this.memberAddress = memberAddress;
 	}
 	public String getRegNo() {
-		return regNo;
+		return regMemberNo;
 	}
 	public void setRegNo(String regNo) {
-		this.regNo = regNo;
+		this.regMemberNo = regNo;
 	}
 	public String getRedDt() {
 		return redDt;
@@ -106,10 +109,10 @@ public class MemberDTO {
 		this.redDt = redDt;
 	}
 	public String getChgNo() {
-		return chgNo;
+		return chgMemberNo;
 	}
 	public void setChgNo(String chgNo) {
-		this.chgNo = chgNo;
+		this.chgMemberNo = chgNo;
 	}
 	public String getChgDt() {
 		return chgDt;
@@ -128,6 +131,24 @@ public class MemberDTO {
 	}
 	public void setMemberAddressDetail(String memberAddressDetail) {
 		this.memberAddressDetail = memberAddressDetail;
+	}
+	public int getPage() {
+		return page;
+	}
+	public void setPage(int page) {
+		this.page = page;
+	}
+	public int getSplitPage() {
+		return splitPage;
+	}
+	public void setSplitPage(int splitPage) {
+		this.splitPage = splitPage;
+	}
+	public String getRowNum() {
+		return rowNum;
+	}
+	public void setRowNum(String rowNum) {
+		this.rowNum = rowNum;
 	}
 	
 }

@@ -1,5 +1,8 @@
 package com.cl.persistance.mapper;
 
+import java.util.HashMap;
+import java.util.List;
+
 import com.cl.config.Mapper;
 import com.cl.dto.MemberDTO;
 
@@ -11,5 +14,11 @@ public interface MemberMapper {
 	int insertMember(MemberDTO mDTO) throws Exception;
 
 	MemberDTO getMemberLogin(MemberDTO mDTO) throws Exception;
+
+	List<MemberDTO> getMemberList(HashMap<String, Object> hMap);
+
+	MemberDTO getMemberDetail(MemberDTO mDTO);
+
+	int deleteMember(String memberNo);
 
 }

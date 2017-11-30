@@ -1,9 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.cl.util.CmmUtil" %>
+<%@ page import="com.cl.util.TextUtil" %>
+<%@ page import="com.cl.util.PageUtil" %>
+<%@ page import="com.cl.util.AES256Util" %>
+<%@ page import="com.cl.dto.MemberDTO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.HashMap" %>
+<% 
+	HashMap<String, Object> hMap = (HashMap<String, Object>) request.getAttribute("hMap");
+	
+	List<MemberDTO> mList = (List<MemberDTO>) hMap.get("list");
+	
+	System.out.println("pl :" +hMap.get("pageList"));
+	System.out.println(hMap.get("nowPage"));
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <title>관리자모드-크리스찬라이프</title>
-
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
@@ -33,8 +49,8 @@
 	<div class="header">
 		<div class="container">
 			
-			<!-- heaer 인쿠르드 -->
-			<%@ include file="../include/inc_header.jsp" %>
+			<!-- Header Include -->
+			<%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 
 		</div>
 	</div> <!-- // header -->
@@ -42,18 +58,15 @@
 	<div id="contentsWrap">
 		<div class="container">
 			<div class="conTitWrap">
-				<h2>관리자/1:1상담</h2>
+				<h2>관리자/회원정보</h2>
 				<div class="location">
 					<span class="home">홈</span>
 					<span>관리자모드</span>
-					<strong>회원가입</strong>
+					<strong>회원정보</strong>
 				</div>
 			</div> <!-- // conTitWrap -->
 			<!-- 메뉴 영역 -->
 			
-
-
-
 <script type="text/javascript">
 	$(function() {
 		//메뉴 제어 
@@ -78,6 +91,22 @@
 		$("#subtitle2").text($("#"+mbId2).text());
 		
 	});
+	
+	function goDetail(mNo) {
+		var f = $("#f");
+		var memberNo = $("#mNo");
+		f.attr("action", "/Lmin/member/memberDetail.do");
+		memberNo.val(mNo);
+		f.submit();
+	};
+	
+	function gaPage(page, lastPage) {
+		var f = $("#f");
+		var goPage = $("#page");
+		f.attr("action", "/Lmin/member/memberList.do");
+		goPage.val(page);
+		f.submit();
+	};
 
 </script>
 
@@ -106,7 +135,7 @@
 						<li id="MO70800"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MO70800');">1:1상담</a></li>
 						<li id="MO70900"><a href="javascript:goMenu('../regulation/regulation_list.jsp', 'MO0900');">상조관련법규</a></li>
 						<li id="MO71200"><a href="javascript:goMenu('../appli/appli_list.jsp', 'MO71200');">가입신청</a></li>
-						<li id="MO71300"><a href="javascript:goMenu('../member/member_list.jsp', 'MO71200');">회원가입</a></li>
+						<li id="MO71300"><a href="javascript:goMenu('../member/member_list.jsp', 'MO71200');">회원정보</a></li>
 						</ul>
 					</div>
 								
@@ -126,15 +155,17 @@
 						<li id="MN70800"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MN70800');">1:1상담</a></li>
 						<li id="MN70900"><a href="javascript:goMenu('../regulation/regulation_list.jsp', 'MN0900');">상조관련법규</a></li>
 						<li id="MN71200"><a href="javascript:goMenu('../appli/appli_list.jsp', 'MN71200');">가입신청</a></li>
-						<li id="MN71300"><a href="javascript:goMenu('../member/member_list.jsp', 'MN71200');">회원가입</a></li>
+						<li id="MN71300"><a href="javascript:goMenu('../member/member_list.jsp', 'MN71200');">회원정보</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->
 
 			<!-- 메뉴 영역 -->
-
+			<form name="f" id="f" method="post" action="/Lmin/member/memberList.do">
+			<input type="hidden" name="mNo" id="mNo">
+			<input type="hidden" name="page" id="page">
 			<div class="contents"> <!-- 페이지별 ID none -->
-				<h3 class="smallTit">회원가입</h3>
+				<h3 class="smallTit">회원정보</h3>
 				
 				<div class="tableBasicList">
 					<table class="defaultTable">
@@ -154,79 +185,33 @@
 							</tr>
 						</thead>
 						<tbody>
+						<%if(mList.size() != 0) { %>
+							<%for(MemberDTO mDTO : mList) { %>
 							<tr>
-								<td>10</td>
-								<td class="alignL">김카다시안</td>
-								<td>010-1234-5678</td>
-								<td>master@naver.com</td>
+								<td><%=CmmUtil.nvl(mDTO.getMemberNo()) %></td>
+								<td class="alignL">																
+									<a href="javascript:goDetail('<%=CmmUtil.nvl(mDTO.getMemberNo()) %>')">
+									<%=AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberName())) %>
+									</a>								
+								</td>
+								<td><%=AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberPhoneNo())) %></td>
+								<td>
+								<%=AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberEmail1())) %>@<%=AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberEmail2())) %>
+								</td>
 							</tr>
-							<tr>
-								<td>10</td>
-								<td class="alignL">김카다시안</td>
-								<td>010-1234-5678</td>
-								<td>master@naver.com</td>
-							</tr>
-							<tr>
-								<td>10</td>
-								<td class="alignL">김카다시안</td>
-								<td>010-1234-5678</td>
-								<td>master@naver.com</td>
-							</tr>
-							<tr>
-								<td>10</td>
-								<td class="alignL">김카다시안</td>
-								<td>010-1234-5678</td>
-								<td>master@naver.com</td>
-							</tr>
-							<tr>
-								<td>10</td>
-								<td class="alignL">김카다시안</td>
-								<td>010-1234-5678</td>
-								<td>master@naver.com</td>
-							</tr>
-							<tr>
-								<td>10</td>
-								<td class="alignL">김카다시안</td>
-								<td>010-1234-5678</td>
-								<td>master@naver.com</td>
-							</tr>
-							<tr>
-								<td>10</td>
-								<td class="alignL">김카다시안</td>
-								<td>010-1234-5678</td>
-								<td>master@naver.com</td>
-							</tr>
-							<tr>
-								<td>10</td>
-								<td class="alignL">김카다시안</td>
-								<td>010-1234-5678</td>
-								<td>master@naver.com</td>
-							</tr>
-							<tr>
-								<td>10</td>
-								<td class="alignL">김카다시안</td>
-								<td>010-1234-5678</td>
-								<td>master@naver.com</td>
-							</tr>
-							<tr>
-								<td>10</td>
-								<td class="alignL">김카다시안</td>
-								<td>010-1234-5678</td>
-								<td>master@naver.com</td>
-							</tr>
-						</tbody>
+							<% } %>
+						<% } %>
+						</tbody>						
 					</table>
 				</div>
 
 				<!-- pageArea -->
 				<div class="pageArea">
-					<a href='#none' class='btnFirst'><span>처음</span></a> <a href='#' class='btnPrev'><span>이전</span></a><strong>1</strong><a href="javascript:goPage('2','15')" >2</a><a href="javascript:goPage('3','15')" >3</a><a href="javascript:goPage('4','15')" >4</a><a href="javascript:goPage('5','15')" >5</a><a href="javascript:goPage('2','15')" class='btnNext'><span>다음</span></a> <a href="javascript:goPage('19','15')" class='btnLast'><span>마지막</span></a>
+					<%=PageUtil.frontPaging(hMap, 5) %>
 				</div>
 				<!-- // pageArea -->
-
-
+			</form>
 			</div> <!-- // contents -->
-
 
 		</div>
 	</div> <!-- // contentsWrap -->
@@ -234,8 +219,6 @@
 	<div class="footer">
 		<div class="container">
 			
-
-
 			<footer>
 				<div class="footMenuWrap">
 					<ul>
@@ -269,8 +252,7 @@
 						</div>
 					</section>
 				</div>
-			</footer>
-			
+			</footer>			
 		</div>
 	</div> <!-- // footer -->
 </div> <!-- // wrap -->

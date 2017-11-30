@@ -1,4 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.cl.util.CmmUtil" %>
+<%@ page import="com.cl.util.TextUtil" %>
+<%@ page import="com.cl.util.AES256Util" %>
+<%@ page import="com.cl.dto.MemberDTO" %>
+<%
+	MemberDTO mDTO = (MemberDTO) request.getAttribute("mDTO");
+
+	if(mDTO == null) {
+		mDTO = new MemberDTO();
+	}
+	
+	System.out.println("mNo : " + mDTO.getMemberNo());
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -33,7 +46,7 @@
 	<div class="header">
 		<div class="container">
 			
-			<!-- heaer 인쿠르드 -->
+			<!-- Header Include -->
 			<%@ include file="../include/inc_header.jsp" %>
 
 		</div>
@@ -42,18 +55,15 @@
 	<div id="contentsWrap">
 		<div class="container">
 			<div class="conTitWrap">
-				<h2>관리자/1:1상담</h2>
+				<h2>관리자/회원정보</h2>
 				<div class="location">
 					<span class="home">홈</span>
 					<span>관리자모드</span>
-					<strong>회원가입</strong>
+					<strong>회원정보</strong>
 				</div>
 			</div> <!-- // conTitWrap -->
 			<!-- 메뉴 영역 -->
 			
-
-
-
 <script type="text/javascript">
 	$(function() {
 		//메뉴 제어 
@@ -78,6 +88,21 @@
 		$("#subtitle2").text($("#"+mbId2).text());
 		
 	});
+	
+	function goList() {
+		location.href="/Lmin/member/memberList.do";
+	}
+	
+	function doDelete() {
+		var f = $("#f");
+		
+		if(confirm("삭제 하시겠습니까?")) {
+			f.submit();
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 </script>
 
@@ -106,7 +131,7 @@
 						<li id="MO70800"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MO70800');">1:1상담</a></li>
 						<li id="MO70900"><a href="javascript:goMenu('../regulation/regulation_list.jsp', 'MO0900');">상조관련법규</a></li>
 						<li id="MO71200"><a href="javascript:goMenu('../appli/appli_list.jsp', 'MO71200');">가입신청</a></li>
-						<li id="MO71300"><a href="javascript:goMenu('../member/member_list.jsp', 'MO71200');">회원가입</a></li>
+						<li id="MO71300"><a href="javascript:goMenu('../member/member_list.jsp', 'MO71200');">회원정보</a></li>
 						</ul>
 					</div>
 								
@@ -126,19 +151,20 @@
 						<li id="MN70800"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MN70800');">1:1상담</a></li>
 						<li id="MN70900"><a href="javascript:goMenu('../regulation/regulation_list.jsp', 'MN0900');">상조관련법규</a></li>
 						<li id="MN71200"><a href="javascript:goMenu('../appli/appli_list.jsp', 'MN71200');">가입신청</a></li>
-						<li id="MN71300"><a href="javascript:goMenu('../member/member_list.jsp', 'MN71200');">회원가입</a></li>
+						<li id="MN71300"><a href="javascript:goMenu('../member/member_list.jsp', 'MN71200');">회원정보</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->
 
 			<!-- 메뉴 영역 -->
-
+			<form name="f" id="f" method="post" action="/Lmin/member/memberDeleteProc.do">
+			<input type="hidden" id="mNo" name="mNo" value="<%=CmmUtil.nvl(mDTO.getMemberNo()) %>" />
 			<div class="contents"> <!-- 페이지별 ID none -->
-				<h3 class="smallTit">회원가입</h3>
+				<h3 class="smallTit">회원정보</h3>
 				
 				<div class="boardType2">
 					<table summary="">
-						<caption>회원가입</caption>
+						<caption>회원정보</caption>
 						<colgroup>
 							<col width="20%">
 							<col width="80%">
@@ -147,42 +173,42 @@
 							<tr>
 								<th scope="row">성명</th>
 								<td>
-									김카다시안
+									<%=AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberName())) %>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">성별</th>
 								<td>
-									남
+									<%=CmmUtil.nvl(mDTO.getMemberSex()) %>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">자택전화</th>
 								<td>
-									02-6345-9900
+									<%=AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberHomeNo())) %>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">휴대전화</th>
 								<td>
-									010-1234-5678
+									<%=AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberPhoneNo())) %>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row" rowspan="2">주소</th>
 								<td>
-									서울 구로구 구로동 198
+									<%=TextUtil.exchangeEscape(AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberAddress()))) %>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									공구상가 25동 304-3호
+									<%=AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberAddressDetail())) %>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">이메일 주소</th>
 								<td>
-									master@naver.com
+									<%=AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberEmail1())) %>@<%=AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberEmail2())) %>
 								</td>
 							</tr>
 						</tbody>
@@ -190,12 +216,12 @@
 				</div>
 
 				<div class="btn_area">
-					<a href="#" id="submitLink" class="btn_active">목록</a>
+					<a href="#" id="submitLink" class="btn_active" onclick="goList();">목록</a>
+					<a href="#" id="submitLink" class="btn_active" onclick="return doDelete();">삭제</a>
 				</div>
 
-
+			</form>
 			</div> <!-- // contents -->
-
 
 		</div>
 	</div> <!-- // contentsWrap -->
@@ -203,8 +229,6 @@
 	<div class="footer">
 		<div class="container">
 			
-
-
 			<footer>
 				<div class="footMenuWrap">
 					<ul>

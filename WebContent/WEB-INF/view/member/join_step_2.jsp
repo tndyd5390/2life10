@@ -87,7 +87,7 @@
 			}
 		});
 		
-		$("#email1,#email2").focusout(function(){
+		/* $("#email1,#email2").focusout(function(){
 			var value = $(this).val();
 			var regex = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
 			
@@ -97,7 +97,7 @@
 				alert("한글은 입력 불가능 합니다.");
 				$(this).val("");
 			}
-		});
+		}); */
 	});
 	
 	//아이디 중복확인 ajax
@@ -302,8 +302,8 @@
 								<th scope="row">휴대전화</th>
 								<td>
 									<select id="phone1" name="phone1" title="" class="inputType3">
-										<option value="00">010</option>
-										<option value="01">011</option>
+										<option value="010">010</option>
+										<option value="011">011</option>
 									</select>
 									-
 									<input type="text" name="phone2" id="phone2" value="" title="이름" class="inputType2" style="" maxlength="4">
@@ -364,7 +364,7 @@
 							<tr>
 								<th scope="row">이메일 주소</th>
 								<td>
-									<input type="text" name="email1" id="email1" value="" title="이름" class="inputType2" style="" maxlength="5"> @
+									<input type="text" name="email1" id="email1" value="" title="이름" class="inputType2" style="" maxlength="20"> @
 									<input type="text" name="email2" id="email2" value="" title="이름" class="inputType2" style="" maxlength="5">
 									<select id="emailBox" name="emailBox" title="" class="inputType2">
 										<option value="">선택하세요</option>

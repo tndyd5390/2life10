@@ -1,45 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cl.persistance.mapper.MemberMapper">
+	
+	<!-- 아이디 중복확인 쿼리 -->
 	<select id="getIdCheck" parameterType="MemberDTO" resultType="int">
-		SELECT COUNT(*) FROM MEMBER_INFO WHERE MEMBER_ID = #{memberId}
+		SELECT COUNT(*) USER_EXISTS
+		  FROM MEMBER_INFO
+		 WHERE MEMBER_ID = #{memberId}
 	</select>
 	
+	<!-- 회원가입 쿼리 -->
 	<insert id="insertMember" parameterType="MemberDTO">
-		INSERT INTO MEMBER_INFO (
-			MEMBER_ID, 
-			MEMBER_PASSWORD, 
-			MEMBER_NAME, 
-			MEMBER_SEX, 
-			MEMBER_HOME_NO, 
-			MEMBER_PHONE_NO,
-			MEMBER_POST_NO, 
-			MEMBER_ADDRESS,
-			MEMBER_ADDRESS_DETAIL,
-			MEMBER_EMAIL1,
-			MEMBER_EMAIL2,
-			MEMBER_PRE,
-			REG_MEMBER_NO,
-			REG_DT) VALUES (
-			#{memberId},
-			#{memberPassword},
-			#{memberName},
-			#{memberSex},
-			#{memberHomeNo},
-			#{memberPhoneNo},
-			#{memberPostNo},
-			#{memberAddress},
-			#{memberAddressDetail},
-			#{memberEmail1},
-			#{memberEmail2},
-			'N',			
-			last_insert_id(),
-			now()
-			)
+		INSERT INTO MEMBER_INFO
+				(
+				 MEMBER_ID, 
+				 MEMBER_PASSWORD, 
+				 MEMBER_NAME, 
+				 MEMBER_SEX, 
+				 MEMBER_HOME_NO, 
+				 MEMBER_PHONE_NO,
+				 MEMBER_POST_NO, 
+				 MEMBER_ADDRESS,
+				 MEMBER_ADDRESS_DETAIL,
+				 MEMBER_EMAIL1,
+				 MEMBER_EMAIL2,
+				 MEMBER_PRE,
+				 REG_MEMBER_NO,
+				 REG_DT
+				)
+		VALUES  (
+				 #{memberId},
+				 #{memberPassword},
+				 #{memberName},
+				 #{memberSex},
+				 #{memberHomeNo},
+				 #{memberPhoneNo},
+				 #{memberPostNo},
+				 #{memberAddress},
+				 #{memberAddressDetail},
+				 #{memberEmail1},
+				 #{memberEmail2},
+				 'N',			
+				 last_insert_id(),
+				 now()
+				)
 	</insert>
 	
+	<!-- 로그인 쿼리 -->
 	<select id="getMemberLogin" parameterType="MemberDTO" resultType="MemberDTO">
-		SELECT MEMBER_NO AS MEMBERNO, MEMBER_ID AS MEMBERID, MEMBER_NAME AS MEMBERNAME, MEMBER_PRE AS MEMBERPRE FROM MEMBER_INFO
-		WHERE MEMBER_ID = #{memberId} AND MEMBER_PASSWORD = #{memberPassword}
+		SELECT MEMBER_NO			MEMBERNO,
+		       MEMBER_ID 			MEMBERID,
+		       MEMBER_NAME			MEMBERNAME, 
+		       MEMBER_PRE 			MEMBERPRE
+		  FROM MEMBER_INFO
+		 WHERE MEMBER_ID = 			#{memberId}
+		   AND MEMBER_PASSWORD = 	#{memberPassword}
 	</select>
+	
+	<!-- 회원리스트 쿼리 -->
+	<select id="getMemberList" parameterType="MemberDTO" resultType="MemberDTO">
+		SELECT M.MEMBER_NO				MEMBERNO,
+		       M.MEMBER_NAME			MEMBERNAME,
+		       M.MEMBER_PHONE_NO		MEMBERPHONENO,
+		       M.MEMBER_EMAIL1			MEMBEREMAIL1,
+		       M.MEMBER_EMAIL2			MEMBEREMAIL2,
+		       P.PAGE
+		  FROM MEMBER_INFO M
+		 INNER JOIN
+		       (
+		        SELECT COUNT(*)			PAGE
+		          FROM MEMBER_INFO
+		         WHERE DEL_YN = 'N'
+		       ) P
+		 WHERE M.DEL_YN = 'N'
+		 ORDER BY MEMBER_NO DESC
+		 LIMIT #{page}, #{splitPage}
+	</select>
+	
+	<!-- 회원정보 상세 쿼리 -->
+	<select id="getMemberDetail" parameterType="MemberDTO" resultType="MemberDTO">
+		SELECT MEMBER_NO					MEMBERNO,
+		       MEMBER_NAME					MEMBERNAME,
+			   IF(
+			      MEMBER_SEX = 'M',
+			      '남자',
+			      IF(
+			         MEMBER_SEX = 'F',
+			         '여자', ' '
+			        )
+			     )							MEMBERSEX,
+		       MEMBER_HOME_NO				MEMBERHOMENO,
+		       MEMBER_PHONE_NO				MEMBERPHONENO,
+		       MEMBER_ADDRESS				MEMBERADDRESS,
+		       MEMBER_ADDRESS_DETAIL		MEMBERADDRESSDETAIL,
+		       MEMBER_EMAIL1				MEMBEREMAIL1,
+		       MEMBER_EMAIL2				MEMBEREMAIL2
+		  FROM MEMBER_INFO
+		 WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 회원 삭제 쿼리 -->
+	<update id="deleteMember" parameterType="String">
+		UPDATE MEMBER_INFO
+		   SET  MEMBER_ID = ' '
+		       ,MEMBER_PASSWORD = ' '
+		       ,MEMBER_PRE = ' '
+		       ,MEMBER_EMAIL1 = ' '
+		       ,MEMBER_EMAIL2 = ' '
+		       ,MEMBER_SEX = ' '
+		       ,MEMBER_HOME_NO = ' '
+		       ,MEMBER_PHONE_NO = ' '
+		       ,MEMBER_POST_NO = ' '
+		       ,MEMBER_ADDRESS = ' '
+		       ,MEMBER_ADDRESS_DETAIL = ' '
+		       ,CHG_MEMBER_NO = '3'
+		       ,CHG_DT = NOW()
+		       ,DEL_YN = 'Y'
+		       ,DEL_DVCD =
+		       (
+		        SELECT C.CODE_ID
+		          FROM CODE C
+		         WHERE C.CODE_ID = 202
+		       )
+		 WHERE MEMBER_NO = #{memberNo}
+	</update>
 </mapper>
