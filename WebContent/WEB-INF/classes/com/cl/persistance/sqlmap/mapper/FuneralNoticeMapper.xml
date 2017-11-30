@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cl.persistance.mapper.FuneralNoticeMapper">
+
+	<select id="getFuneralNoticeList" parameterType="hashmap" resultType="funeralNoticeDTO">
+		 SELECT
+	    	@rownum:=@rownum+1			AS ROWNUM,
+	    	FUNERAL_NOTICE_NO			AS FUNERALNOTICENO,
+    	   	FUNERAL_NOTICE_NAME			AS FUNERALNOTICENAME,
+      		FUNERAL_NOTICE_MEMBER		AS FUNERALNOTICEMEMBER,
+      		FUNERAL_NOTICE_PLACE		AS FUNERALNOTICEPLACE,
+      		FUNERAL_NOTICE_DAY			AS FUNERALNOTICEDAY,
+      		P.PAGE						AS PAGE
+	    FROM 
+	    	FUNERAL_NOTICE,
+	    	(SELECT COUNT(*) AS PAGE FROM FUNERAL_NOTICE
+	    	<where>
+	    	<if test="searchBox==00">
+	    		FUNERAL_NOTICE_MEMBER LIKE CONCAT('%',#{search},'%')
+	    		OR FUNERAL_NOTICE_NAME	LIKE CONCAT('%',#{search},'%')
+	    	</if>
+	    	<if test="searchBox==01">
+	    		FUNERAL_NOTICE_NAME	LIKE CONCAT('%',#{search},'%')
+	    	</if>
+	    	<if test="searchBox==02">
+	    		FUNERAL_NOTICE_MEMBER LIKE CONCAT('%',#{search}},'%')
+	    	</if>
+	    	</where>
+	    	) P,
+	    	(SELECT @rownum:=0) TMP
+	    <where>
+	    	<if test="searchBox==00">
+	    		FUNERAL_NOTICE_MEMBER LIKE CONCAT('%',#{search},'%')
+	    		OR FUNERAL_NOTICE_NAME	LIKE CONCAT('%',#{search},'%')
+	    	</if>
+	    	<if test="searchBox==01">
+	    		FUNERAL_NOTICE_NAME	LIKE CONCAT('%',#{search},'%')
+	    	</if>
+	    	<if test="searchBox==02">
+	    		FUNERAL_NOTICE_MEMBER LIKE CONCAT('%',#{search},'%')
+	    	</if>
+	    </where>
+	    ORDER BY 
+	    	ROWNUM DESC
+	    LIMIT #{page}, #{splitPage}
+	</select>
+	
+	<insert id="insertFuneralNotice" parameterType="FuneralNoticeDTO">
+		INSERT INTO FUNERAL_NOTICE
+		(
+			FUNERAL_NOTICE_NAME,
+			FUNERAL_NOTICE_MEMBER,
+			FUNERAL_NOTICE_PLACE,
+			FUNERAL_NOTICE_DAY,
+			REG_MEMBER_NO,
+			REG_DT
+		) VALUES (
+			#{funeralNoticeName},
+			#{funeralNoticeMember},
+			#{funeralNoticePlace},
+			#{funeralNoticeDay},
+			'3',
+			NOW()
+		)
+	</insert>
+	
+	<select id="getFuneralNoticeDetail" parameterType="FuneralNoticeDTO" resultType="FuneralNoticeDTO">
+		SELECT
+			FUNERAL_NOTICE_NO			AS FUNERALNOTICENO,
+			FUNERAL_NOTICE_NAME			AS FUNERALNOTICENAME,
+			FUNERAL_NOTICE_MEMBER		AS FUNERALNOTICEMEMBER,
+			FUNERAL_NOTICE_PLACE		AS FUNERALNOTICEPLACE,
+			FUNERAL_NOTICE_DAY			AS FUNERALNOTICEDAY
+		FROM
+			FUNERAL_NOTICE
+		WHERE
+			FUNERAL_NOTICE_NO = #{funeralNoticeNo}
+	</select>
+	
+	<update id="updateFuneralNotice" parameterType="FuneralNoticeDTO">
+		UPDATE 
+			FUNERAL_NOTICE
+		SET 
+			FUNERAL_NOTICE_NAME 	 = #{funeralNoticeName},
+			FUNERAL_NOTICE_MEMBER 	 = #{funeralNoticeMember},
+			FUNERAL_NOTICE_PLACE 	 = #{funeralNoticePlace},
+			FUNERAL_NOTICE_DAY 		 = #{funeralNoticeDay},
+			CHG_MEMBER_NO			 = '3',
+			CHG_DT 					 = NOW()
+		WHERE
+			FUNERAL_NOTICE_NO		 = #{funeralNoticeNo}
+	</update>
+	
+	<delete id="deleteFuneralNotice" parameterType="String">
+		DELETE FROM
+			FUNERAL_NOTICE
+		WHERE 
+			FUNERAL_NOTICE_NO = #{funeralNoticeNo}
+	</delete>
+</mapper>

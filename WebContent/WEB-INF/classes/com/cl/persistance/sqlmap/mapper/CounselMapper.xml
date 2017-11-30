@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cl.persistance.mapper.CounselMapper">
+	
+	<select id="getCounselList" parameterType="hashmap" resultType="CounselDTO">
+		SELECT
+			@rownum:=@rownum+1								AS ROWNUM,
+			C.COUNSEL_NO									AS COUNSELNO,
+			C.COUNSEL_REG_NAME								AS COUNSELREGNAME,
+			C.COUNSEL_TITLE									AS COUNSELTITLE,
+			C.COUNSEL_CONTENTS								AS COUNSELCONTENTS,
+			IF(C.COUNSEL_REPLY = 'N', '미답변', '답변')		AS COUNSELREPLY,
+			C.COUNSEL_EMAIL1								AS COUNSELEMAIL1,
+			C.COUNSEL_EMAIL2								AS COUNSELEMAIL2,
+			C.COUNSEL_PHONE_NO								AS COUNSELPHONENO,
+			DATE_FORMAT(C.REG_DT,'%Y-%m-%d')				AS REGDT,
+			P.PAGE											AS PAGE
+		FROM
+			COUNSEL_INFO C,
+			(SELECT COUNT(*) AS PAGE FROM COUNSEL_INFO) P,
+			(SELECT @rownum:=0) TMP
+		ORDER BY
+			REGDT DESC, COUNSELREPLY DESC
+		LIMIT #{page}, #{splitPage}
+	</select>
+	
+	<insert id="insertCounsel" parameterType="CounselDTO">
+		INSERT INTO COUNSEL_INFO 
+		(
+			COUNSEL_REG_NAME,
+			COUNSEL_TITLE,
+			COUNSEL_CONTENTS,
+			COUNSEL_REPLY,
+			COUNSEL_PHONE_NO,
+			COUNSEL_EMAIL1,
+			COUNSEL_EMAIL2,
+			COUNSEL_PASSWORD,
+			REG_DT
+		) VALUES (
+			#{counselRegName},
+			#{counselTitle},
+			#{counselContents},
+			#{counselReply},
+			#{counselPhoneNo},
+			#{counselEmail1},
+			#{counselEmail2},
+			#{counselPassword},
+			NOW()
+		)
+	</insert>
+	
+	<select id="getCounselDetail" parameterType="CounselDTO" resultType="CounselDTO">
+		SELECT 
+			COUNSEL_NO								AS COUNSELNO,
+			COUNSEL_TITLE							AS COUNSELTITLE,
+			COUNSEL_CONTENTS						AS COUNSELCONTENTS,
+			COUNSEL_REG_NAME						AS COUNSELREGNAME,
+			DATE_FORMAT(REG_DT,'%Y-%m-%d')			AS REGDT,
+			COUNSEL_PHONE_NO						AS COUNSELPHONENO,
+			COUNSEL_EMAIL1							AS COUNSELEMAIL1,
+			COUNSEL_EMAIL2							AS COUNSELEMAIL2,
+			COUNSEL_REPLY							AS COUNSELREPLY
+		FROM
+			COUNSEL_INFO
+		WHERE
+			COUNSEL_NO = #{counselNo}
+	</select>
+	
+	<update id="updateReplyStat" parameterType="CounselDTO">
+		UPDATE
+			COUNSEL_INFO
+		SET
+			COUNSEL_REPLY 	= #{counselReply},
+			CHG_MEMEBER_NO	= '3',
+			CHG_DT			= NOW()
+		WHERE
+			COUNSEL_NO		= #{counselNo}	
+	</update>
+</mapper>
