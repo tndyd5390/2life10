@@ -3,6 +3,7 @@ package com.cl.controller.admin;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cl.dto.MemberDTO;
+import com.cl.dto.NoticeDTO;
 import com.cl.service.IMemberService;
 import com.cl.util.AES256Util;
 import com.cl.util.CmmUtil;
+import com.cl.util.PageUtil;
 import com.cl.util.SHA256Util;
 
 @Controller
@@ -242,9 +245,64 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/Lmin/member/memberList")
-	public String memberList(HttpServletRequest req, Model model) throws Exception{
+	public String memberList(HttpServletRequest req, Model model) throws Exception {
+		log.info("Lmin:memberList Start!!");
+
+		int splitPage = 10;
+	
+		HashMap<String, Object> hMap = new HashMap<>();
 		
+		hMap = PageUtil.paging(req, splitPage);
 		
+		hMap = memberService.getMemberList(hMap);
+		
+		model.addAttribute("hMap", hMap);
+		
+		log.info("Lmin:memberList End!!");					
 		return "/Lmin/member/member_list";
+	}
+	
+	@RequestMapping("/Lmin/member/memberDetail")
+	public String memberDetail(HttpServletRequest req, Model model) throws Exception {
+		log.info("Lmin:memberDetail Start!!");
+		
+		String memberNo = CmmUtil.nvl(req.getParameter("mNo"));
+		log.info("memberNo : " + memberNo);
+		
+		MemberDTO mDTO = new MemberDTO();
+		mDTO.setMemberNo(memberNo);
+		
+		mDTO = memberService.getMemberDetail(mDTO);
+		
+		model.addAttribute("mDTO", mDTO);
+		
+		mDTO = null;
+		log.info("Lmin:memberDetail End!!");
+		return "/Lmin/member/member_view";
+	}
+	
+	@RequestMapping("/Lmin/member/memberDeleteProc")
+	public String memberDeleteProc(HttpServletRequest req, Model model) throws Exception {
+		log.info("Lmin:memberDeleteProc Start!!");
+		
+		String url = "";
+		String msg = "";
+		String memberNo = CmmUtil.nvl(req.getParameter("mNo"));
+		log.info(" memberNo : " + memberNo);
+		
+		int result = memberService.deleteMember(memberNo);
+		
+		if(result == 0) {
+			msg = "삭제에 실패하였습니다.";
+		} else {
+			msg = "삭제되었습니다.";
+		}
+		url = "/Lmin/member/memberList.do";
+		
+		model.addAttribute("url", url);
+		model.addAttribute("msg", msg);
+		
+		log.info("Lmin:memberDeleteProc End!!");
+		return "/alert";
 	}
 }
