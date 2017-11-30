@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -121,17 +122,21 @@ public class CounselController {
 	}
 	
 	@RequestMapping("/Lmin/counsel/counselReplyProc")
-	public String counselReplyProc(HttpServletRequest req, Model model) throws Exception{
+	public String counselReplyProc(HttpServletRequest req, Model model, HttpSession session) throws Exception{
 		log.info("Lmin:counselReplyProc Start!!");
 		
 		String url = "";
 		String msg = "";
 		String counselNo = CmmUtil.nvl(req.getParameter("cNo"));
+		String chgMemberNo = CmmUtil.nvl((String) session.getAttribute("ss_member_no"));
+		
 		log.info("counselNo : "+counselNo);
+		log.info("chgMemberNo : "+chgMemberNo);
 		
 		CounselDTO cDTO = new CounselDTO();
 		cDTO.setCounselNo(counselNo);
 		cDTO.setCounselReply("Y");
+		cDTO.setChgMemberNo(chgMemberNo);
 		
 		int result = counselService.updateReplyStat(cDTO);
 		
