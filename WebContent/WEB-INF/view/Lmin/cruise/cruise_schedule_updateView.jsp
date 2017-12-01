@@ -1,4 +1,11 @@
+<%@page import="com.cl.util.CmmUtil"%>
+<%@page import="com.cl.dto.CruiseDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
+<%
+	CruiseDTO cDTO = (CruiseDTO)request.getAttribute("cDTO");
+	if(cDTO == null) cDTO = new CruiseDTO();
+%>
+<!-- updateView -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -24,7 +31,6 @@
 	<script src="/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
-/*<[CDATA[*/
 
 window.onload = function() {
     var frm = document.getElementById('cruiseForm');
@@ -33,12 +39,12 @@ window.onload = function() {
     var nowYear        = nowDate.getFullYear();
     var nowMonth       = eval(nowDate.getMonth()) +1;
     var nowDay         = eval(nowDate.getDate());
-    
+    var psyStartYear = <%=CmmUtil.nvl(cDTO.getStartYear())%>;
     /***************
      * 년 세팅
      ***************/
-    var startYear    = nowYear - 10;
-    for( var i=0; i<20; i++ ) {
+    var startYear    = psyStartYear - 10;
+    for( var i=0; i<40; i++ ) {
         frm['startYear'].options[i] = new Option(startYear+i, startYear+i);
         frm['endYear'].options[i] = new Option(startYear+i, startYear+i);
     }
@@ -56,17 +62,14 @@ window.onload = function() {
      * 먼저 현재 년과 월을 셋팅
      * 윤년계산과 월의 마지막 일자를 구하기 위해
      ***************************************/
-    frm['startYear'].value   = nowYear;
-    frm['endYear'].value     = nowYear;
-    frm['startMonth'].value  = nowMonth;
-    frm['endMonth'].value    = nowMonth;
+    frm['startYear'].value   = <%=CmmUtil.nvl(cDTO.getStartYear())%>;
+    frm['endYear'].value     = <%=CmmUtil.nvl(cDTO.getEndYear())%>;
+    frm['startMonth'].value  = <%=CmmUtil.nvl(cDTO.getStartMonth())%>;
+    frm['endMonth'].value    = <%=CmmUtil.nvl(cDTO.getEndMonth())%>;
     setStartDay();
     setEndDay();
-    /********************************************
-     * 일(day)의 select를 생성하고 현재 일자로 초기화
-     ********************************************/
-    frm['startDay'].value    = nowDay;
-    frm['endDay'].value      = nowDay;
+    frm['startDay'].value    = <%=CmmUtil.nvl(cDTO.getStartDay())%>;
+    frm['endDay'].value      = <%=CmmUtil.nvl(cDTO.getEndDay())%>;
 }
 
 /******************
@@ -164,10 +167,12 @@ function setEndDay() {
     }
 }
 
-function doCruiseReg(){
+function doCruiseUpdate(){
 	var form = document.getElementById('cruiseForm');
 	var imgExtension = ["jpg", "jpeg", "png"];
 	var pdfExtecsion = ["pdf"];
+	var imgFileName = '<%=CmmUtil.nvl(cDTO.getCruiseImgFileName())%>';
+	var scheFileName = '<%=CmmUtil.nvl(cDTO.getCruiseScheFileName())%>';
 	if(form.cruiseShipName.value == ""){
 		alert('선사명을 입력해 주세요.');
 		form.cruiseShipName.focus();
@@ -188,15 +193,31 @@ function doCruiseReg(){
 		alert('캐빈을 입력해 주세요.');
 		form.cruiseCabinCode.focus();
 		return;
-	}else if(form.cruiseScheFile.value == ""){
-		alert('일정 파일을 업로드 해주세요.');
-		form.cruiseScheFile.focus();
-		return;
-	}else if(form.cruiseImgFile.value == ""){
-		alert('이미지 파일을 업로드 해주세요.');
-		form.cruiseImgFile.focus();
-		return;
 	}else{
+		var hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", "cruiseImgFileNo");
+		hiddenField.setAttribute("value", <%=CmmUtil.nvl(cDTO.getCruiseImgFileNo() + "")%>);
+		form.appendChild(hiddenField);
+		 
+		hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", "cruiseScheFileNo");
+		hiddenField.setAttribute("value", <%=CmmUtil.nvl(cDTO.getCruiseScheFileNo() + "")%>);
+		form.appendChild(hiddenField);
+		
+		hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", "imgFileName");
+		hiddenField.setAttribute("value", imgFileName);
+		form.appendChild(hiddenField);
+		
+		hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", "scheFileName");
+		hiddenField.setAttribute("value", scheFileName);
+		form.appendChild(hiddenField);
+		
 		form.submit();
 	}
 }
@@ -219,6 +240,11 @@ function fileCheck(fileName, permissibleExtension){
 	}
 }
 
+function doCancel(){
+	if(confirm('작성하신 내용은 변경되지 않습니다. 취소하시겠습니까?')){
+		location.href="/Lmin/cruise/cruiseScheduleList.do";
+	}
+}
 </script>
 <body>
 <div id="skipnavi">
@@ -332,7 +358,8 @@ function fileCheck(fileName, permissibleExtension){
 				<h3 class="smallTit">크루즈일정</h3>
 
 				<div class="boardType2">
-				<form action="/Lmin/cruise/cruiseScheduleRegProc.do" method="post" enctype="multipart/form-data" id="cruiseForm">
+				<form action="/Lmin/cruise/cruiseScheduleUpdateProc.do" method="post" enctype="multipart/form-data" id="cruiseForm">
+				<input type="hidden" name="cruiseNo" value="<%=CmmUtil.nvl(cDTO.getCruiseNo()) %>">
 					<table summary="">
 						<caption></caption>
 						<colgroup>
@@ -343,65 +370,67 @@ function fileCheck(fileName, permissibleExtension){
 							<tr>
 								<th scope="row">선사명</th>
 								<td>
-									<input type="text" name="cruiseShipName" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<input type="text" name="cruiseShipName" value="<%=CmmUtil.nvl(cDTO.getCruiseShipName()) %>" class="inputType1" style="" maxlength="25">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">시작일</th>
 								<td>
-									<select name="startYear" onChange="setStartDay()" class="inputType3"></select>
-    								<select name="startMonth" onChange="setStartDay()" class="inputType3"></select>
-   									<select name="startDay" class="inputType3"></select>
+									<select name="startYear" id="startYear" onChange="setStartDay()" class="inputType3"></select>
+    								<select name="startMonth" id="startMonth" onChange="setStartDay()" class="inputType3"></select>
+   									<select name="startDay" id="startDay" class="inputType3"></select>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">완료일</th>
 								<td>
-									<select name="endYear" onChange="setEndDay()" class="inputType3"></select>
-    								<select name="endMonth" onChange="setEndDay()" class="inputType3"></select>
-   									<select name="endDay" class="inputType3"></select>
+									<select name="endYear" id="endYear" onChange="setEndDay()" class="inputType3"></select>
+    								<select name="endMonth" id="endMonth" onChange="setEndDay()" class="inputType3"></select>
+   									<select name="endDay" id="endDay" class="inputType3"></select>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">상품명</th>
 								<td>
-									<input type="text" name="cruiseName" class="inputType1" maxlength="25">
+									<input type="text" name="cruiseName" value="<%=CmmUtil.nvl(cDTO.getCruiseName()) %>" class="inputType1" maxlength="25">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">상품가</th>
 								<td>
-									<input type="text" name="cruisePrice" class="inputType1" maxlength="25">
+									<input type="text" name="cruisePrice" value="<%=CmmUtil.nvl(cDTO.getCruisePrice()) %>" class="inputType1" maxlength="25">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">인원</th>
 								<td>
-									<input type="text" name="cruiseAccomodation" class="inputType1" style="" maxlength="25">
+									<input type="text" name="cruiseAccomodation" value="<%=CmmUtil.nvl(cDTO.getCruiseAccomodation()) %>" class="inputType1" style="" maxlength="25">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">캐빈</th>
 								<td>
-									<input type="text" name="cruiseCabinCode" class="inputType1" style="" maxlength="25">
+									<input type="text" name="cruiseCabinCode" value="<%=CmmUtil.nvl(cDTO.getCruiseCabinCode()) %>" class="inputType1" style="" maxlength="25">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">비고</th>
 								<td>
-									<input type="text" name="cruiseEtc" class="inputType1" style="" maxlength="25">
+									<input type="text" name="cruiseEtc" value="<%=CmmUtil.nvl(cDTO.getCruiseEtc()) %>" class="inputType1" style="" maxlength="25">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">일정업로드</th>
 								<td>
 									<input type="file" name="cruiseScheFile" id="cruiseScheFile" onchange="javascript:fileCheck(this, ['pdf']);" class="inputType1" style="" maxlength="25">
+									일정파일 미 선택시 기존의 일정 파일이 유지 됩니다.
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">사진업로드</th>
 								<td>
 									<input type="file" name="cruiseImgFile" id="cruiseImgFile" onchange="javascript:fileCheck(this, ['jpg', 'jpeg', 'png']);" class="inputType1" style="" maxlength="25">
+									사진파일 미선택시 기존의 사진이 유지 됩니다.
 								</td>
 							</tr>
 						</tbody>
@@ -409,8 +438,8 @@ function fileCheck(fileName, permissibleExtension){
 					</form>
 				</div>
 				<div class="btn_area">
-					<a href="#" id="submitLink" class="btn_active" onclick="doCruiseReg();">등록</a>
-					<a href="#" id="btnCancel" class="btn_cancel">취소</a>
+					<a href="#" id="submitLink" class="btn_active" onclick="doCruiseUpdate();">수정</a>
+					<a href="#" id="btnCancel" class="btn_cancel" onclick="doCancel();">취소</a>
 				</div>
 			</div> <!-- // contents -->
 		</div>

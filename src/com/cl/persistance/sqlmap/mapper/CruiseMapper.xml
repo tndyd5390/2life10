@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cl.persistance.mapper.CruiseMapper">
+	<select id="getCruiseList" parameterType="hashmap" resultType="CruiseDTO">
+		  SELECT @ROWNUM:=@ROWNUM+1					AS ROWNUM,
+				 CI.CRUISE_NO						AS CRUISENO, 
+			     CI.CRUISE_IMGFILE_NO				AS CRUISEIMGFILENO, 
+		         CI.CRUISE_SCHEFILE_NO				AS CRUISESCHEFILENO,
+		         CI.CRUISE_SHIP_NAME				AS CRUISESHIPNAME,
+		         CI.CRUISE_NAME						AS CRUISENAME,
+		         CI.CRUISE_PRICE					AS CRUISEPRICE,
+		         CONCAT(SUBSTR(CI.CRUISE_START_DAY, 1, 4), '년 ',
+						SUBSTR(CI.CRUISE_START_DAY, 5, 2), '월 ',
+                        SUBSTR(CI.CRUISE_START_DAY, 7, 2), '일 ',
+                        '(', (CASE WEEKDAY(CI.CRUISE_START_DAY)
+							  	WHEN '0' THEN '월'
+							  	WHEN '1' THEN '화'
+							  	WHEN '2' THEN '수'
+							  	WHEN '3' THEN '목'
+							  	WHEN '4' THEN '금'
+							  	WHEN '5' THEN '토'
+							  	ELSE '일'
+							  END), ')')			AS CRUISESTARTDAY,
+		         CONCAT(SUBSTR(CI.CRUISE_END_DAY, 1, 4), '년 ',
+						SUBSTR(CI.CRUISE_END_DAY, 5, 2), '월 ',
+                        SUBSTR(CI.CRUISE_END_DAY, 7, 2), '일 ',
+                        '(', (CASE WEEKDAY(CI.CRUISE_END_DAY)
+							  	WHEN '0' THEN '월'
+								WHEN '1' THEN '화'
+								WHEN '2' THEN '수'
+								WHEN '3' THEN '목'
+								WHEN '4' THEN '금'
+								WHEN '5' THEN '토'
+								ELSE '일'
+							  END), ')')			AS CRUISEENDDAY,
+		         CI.CRUISE_ACCOMODATION				AS CRUISEACCOMODATION,
+		         CI.CRUISE_CABIN_CODE				AS CRUISECABINCODE,
+		         CI.CRUISE_ETC						AS CRUISEETC,
+		         CI.REG_MEMBER_NO					AS REGMEMBERNO,
+		         CI.REG_DT							AS REGDT,
+		         CI.CHG_MEMBER_NO					AS CHGMEMBERNO,
+		         CI.CHG_DT							AS CHGDT,
+		         IMGTABLE.FILE_NO					AS CRUISEIMGFILENO, 
+		         IMGTABLE.FILE_NAME					AS CRUISEIMGFILENAME, 
+		         IMGTABLE.FILE_PATH					AS CRUISEIMGFILEPATH,
+		         IMGTABLE.FILE_ORG_NAME 			AS CRUISEIMGFILEORGNAME,
+		         SCHETABLE.FILE_NO					AS CRUISESCHEFILENO, 
+		         SCHETABLE.FILE_NAME				AS CRUISESCHEFILENAME,
+		         SCHETABLE.FILE_ORG_NAME			AS CRUISESCHEFILEORGNAME,
+		         SCHETABLE.FILE_PATH				AS CRUISESCHEFILEPATH,
+		         P.PAGE								AS PAGE
+		    FROM CRUISE_INFO CI, 
+				 (SELECT FILE_NO, FILE_ORG_NAME, FILE_NAME, FILE_PATH FROM FILE_INFO FI, CRUISE_INFO CI WHERE CI.CRUISE_IMGFILE_NO = FI.FILE_NO) IMGTABLE,
+		         (SELECT FILE_NO, FILE_ORG_NAME, FILE_NAME, FILE_PATH FROM FILE_INFO FI, CRUISE_INFO CI WHERE CI.CRUISE_SCHEFILE_NO = FI.FILE_NO) SCHETABLE,
+		         (SELECT @ROWNUM:=0) R,
+		         (SELECT COUNT(*) AS PAGE FROM CRUISE_INFO) P
+		   WHERE CI.CRUISE_IMGFILE_NO = IMGTABLE.FILE_NO AND CI.CRUISE_SCHEFILE_NO = SCHETABLE.FILE_NO
+		ORDER BY ROWNUM DESC;
+	</select>
 	<insert id="insertCruiseImg" parameterType="CruiseDTO">
 		INSERT INTO FILE_INFO
 		(
@@ -55,6 +111,7 @@
 			CRUISE_ACCOMODATION,
 			CRUISE_CABIN_CODE,
 			CRUISE_ETC,
+			CRUISE_PRICE,
 			REG_MEMBER_NO,
 			REG_DT
 		)
@@ -69,9 +126,132 @@
 			#{cruiseAccomodation},
 			#{cruiseCabinCode},
 			#{cruiseEtc},
+			#{cruisePrice},
 			#{regMemberNo},
 			NOW()
 		)
 	</insert>
+	<select id="getFileFullPath" parameterType="string" resultType="string">
+		SELECT CONCAT(FILE_PATH, FILE_NAME)
+		  FROM FILE_INFO
+		 WHERE FILE_NO = #{fileNo}
+	</select>
+	<delete id="deleteCruise" parameterType="CruiseDTO">
+		DELETE FROM CRUISE_INFO
+		 WHERE CRUISE_NO = #{cruiseNo};
+		DELETE FROM FILE_INFO
+		 WHERE FILE_NO IN
+		 	<foreach collection="fileNoArr" index="index" item="fileNo" open="(" separator="," close=")">
+		 		#{fileNo}
+		 	</foreach>
+		;
+	</delete>
+	<select id="getCruise" parameterType="string" resultType="CruiseDTO">
+		SELECT CI.CRUISE_NO							AS CRUISENO, 
+			   CI.CRUISE_IMGFILE_NO					AS CRUISEIMGFILENO, 
+		       CI.CRUISE_SCHEFILE_NO				AS CRUISESCHEFILENO,
+		       CI.CRUISE_SHIP_NAME					AS CRUISESHIPNAME,
+		       CI.CRUISE_NAME						AS CRUISENAME,
+		       SUBSTR(CI.CRUISE_START_DAY, 1, 4) 	AS STARTYEAR,
+			   SUBSTR(CI.CRUISE_START_DAY, 5, 2) 	AS STARTMONTH,
+               SUBSTR(CI.CRUISE_START_DAY, 7, 2) 	AS STARTDAY,
+		       SUBSTR(CI.CRUISE_END_DAY, 1, 4) 		AS ENDYEAR,
+			   SUBSTR(CI.CRUISE_END_DAY, 5, 2) 		AS ENDMONTH,
+               SUBSTR(CI.CRUISE_END_DAY, 7, 2) 		AS ENDDAY,
+		       CI.CRUISE_ACCOMODATION				AS CRUISEACCOMODATION,
+		       CI.CRUISE_CABIN_CODE					AS CRUISECABINCODE,
+		       CI.CRUISE_ETC						AS CRUISEETC,
+		       CI.CRUISE_PRICE						AS CRUISEPRICE,
+		       CI.REG_MEMBER_NO						AS REGMEMBERNO,
+		       CI.REG_DT							AS REGDT,
+		       CI.CHG_MEMBER_NO						AS CHGMEMBERNO,
+		       CI.CHG_DT							AS CHGDT,
+		       IMGTABLE.FILE_NO						AS CRUISEIMGFILENO, 
+		       IMGTABLE.FILE_NAME					AS CRUISEIMGFILENAME, 
+		       IMGTABLE.FILE_PATH					AS CRUISEIMGFILEPATH,
+		       IMGTABLE.FILE_ORG_NAME 				AS CRUISEIMGFILEORGNAME,
+		       SCHETABLE.FILE_NO					AS CRUISESCHEFILENO, 
+		       SCHETABLE.FILE_NAME					AS CRUISESCHEFILENAME,
+		       SCHETABLE.FILE_ORG_NAME				AS CRUISESCHEFILEORGNAME,
+		       SCHETABLE.FILE_PATH					AS CRUISESCHEFILEPATH
+		  FROM CRUISE_INFO CI, 
+		  	   (SELECT FILE_NO, FILE_ORG_NAME, FILE_NAME, FILE_PATH FROM FILE_INFO FI, CRUISE_INFO CI WHERE CI.CRUISE_IMGFILE_NO = FI.FILE_NO) IMGTABLE,
+		       (SELECT FILE_NO, FILE_ORG_NAME, FILE_NAME, FILE_PATH FROM FILE_INFO FI, CRUISE_INFO CI WHERE CI.CRUISE_SCHEFILE_NO = FI.FILE_NO) SCHETABLE
+		 WHERE CI.CRUISE_IMGFILE_NO = IMGTABLE.FILE_NO 
+		   AND CI.CRUISE_SCHEFILE_NO = SCHETABLE.FILE_NO
+		   AND CI.CRUISE_NO = #{cruiseNo}
+	</select>
 	
+	<update id="updateCruise" parameterType="CruiseDTO">
+		<choose>
+			<when test="cruiseImgFileOrgName != null and cruiseScheFileName != null">
+			<!-- 둘 다 바꿀때-->
+				UPDATE CRUISE_INFO
+			   	   SET CRUISE_SHIP_NAME 	= #{cruiseShipName},
+			   	       CRUISE_IMGFILE_NO	= #{cruiseImgFileNo},
+			   	       CRUISE_SCHEFILE_NO	= #{cruiseScheFileNo},
+			   	   	   CRUISE_START_DAY 	= #{cruiseStartDay},
+			   	   	   CRUISE_END_DAY 		= #{cruiseEndDay},
+			   	   	   CRUISE_NAME 			= #{cruiseName},
+			   	   	   CRUISE_ACCOMODATION 	= #{cruiseAccomodation},
+			   	   	   CRUISE_CABIN_CODE 	= #{cruiseCabinCode},
+			   	   	   CRUISE_ETC 			= #{cruiseEtc},
+			   	   	   CHG_MEMBER_NO 		= #{chgMemberNo},
+			   	   	   CHG_DT 				= NOW()
+			 	 WHERE CRUISE_NO = #{cruiseNo}
+			</when>
+			<when test="cruiseImgFileOrgName != null and cruiseScheFileName == null">
+			<!-- 이미지만 바꿀경우 -->
+				UPDATE CRUISE_INFO
+			   	   SET CRUISE_SHIP_NAME 	= #{cruiseShipName},
+			   	   	   CRUISE_IMGFILE_NO	= #{cruiseImgFileNo},
+			   	   	   CRUISE_START_DAY 	= #{cruiseStartDay},
+			   	   	   CRUISE_END_DAY 		= #{cruiseEndDay},
+			   	   	   CRUISE_NAME 			= #{cruiseName},
+			   	   	   CRUISE_ACCOMODATION 	= #{cruiseAccomodation},
+			   	   	   CRUISE_CABIN_CODE 	= #{cruiseCabinCode},
+			   	   	   CRUISE_ETC 			= #{cruiseEtc},
+			   	   	   CHG_MEMBER_NO 		= #{chgMemberNo},
+			   	   	   CHG_DT 				= NOW()
+			 	 WHERE CRUISE_NO = #{cruiseNo}
+			</when>
+			<when test="cruiseImgFileOrgName == null and cruiseScheFileName != null">
+			<!-- 이미지만 바꿀경우 -->
+				UPDATE CRUISE_INFO
+			   	   SET CRUISE_SHIP_NAME 	= #{cruiseShipName},
+			   	   	   CRUISE_SCHEFILE_NO	= #{cruiseScheFileNo},
+			   	   	   CRUISE_START_DAY 	= #{cruiseStartDay},
+			   	   	   CRUISE_END_DAY 		= #{cruiseEndDay},
+			   	   	   CRUISE_NAME 			= #{cruiseName},
+			   	   	   CRUISE_ACCOMODATION 	= #{cruiseAccomodation},
+			   	   	   CRUISE_CABIN_CODE 	= #{cruiseCabinCode},
+			   	   	   CRUISE_ETC 			= #{cruiseEtc},
+			   	   	   CHG_MEMBER_NO 		= #{chgMemberNo},
+			   	   	   CHG_DT 				= NOW()
+			 	 WHERE CRUISE_NO = #{cruiseNo}
+			</when>
+			<otherwise>
+			<!-- 둘다 안바꿀때 -->
+				UPDATE CRUISE_INFO
+			   	   SET CRUISE_SHIP_NAME 	= #{cruiseShipName},
+			   	   	   CRUISE_START_DAY 	= #{cruiseStartDay},
+			   	   	   CRUISE_END_DAY 		= #{cruiseEndDay},
+			   	   	   CRUISE_NAME 			= #{cruiseName},
+			   	   	   CRUISE_ACCOMODATION 	= #{cruiseAccomodation},
+			   	   	   CRUISE_CABIN_CODE 	= #{cruiseCabinCode},
+			   	   	   CRUISE_ETC 			= #{cruiseEtc},
+			   	   	   CHG_MEMBER_NO 		= #{chgMemberNo},
+			   	   	   CHG_DT 				= NOW()
+			 	 WHERE CRUISE_NO = #{cruiseNo}
+			</otherwise>
+		</choose>
+	</update>
+	<delete id="deleteCruiseImgFile" parameterType="CruiseDTO">
+		DELETE FROM FILE_INFO
+		 WHERE FILE_NO = #{cruiseImgFileNo}
+	</delete>
+	<delete id="deleteCruiseScheFile" parameterType="CruiseDTO">
+		DELETE FROM FILE_INFO
+		 WHERE FILE_NO = #{cruiseScheFileNo}
+	</delete>
 </mapper>
