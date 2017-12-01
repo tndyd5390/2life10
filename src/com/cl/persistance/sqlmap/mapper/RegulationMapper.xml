@@ -1,5 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cl.persistance.mapper.RegulationMapper">
-
+	<insert id="insertRegulationFile" parameterType="RegulationDTO">
+		INSERT INTO FILE_INFO
+		(
+			FILE_ORG_NAME,
+			FILE_NAME,
+			FILE_PATH,
+			REG_MEMBER_NO,
+			REG_DT
+		)
+		VALUES
+		(
+			#{regulationFileOrgName},
+			#{regulationFileName},
+			#{regulationFilePath},
+			#{regMemberNo},
+			NOW()
+		)
+		<selectKey resultType="string" keyProperty="regulationFileNo" order="AFTER">
+			SELECT LAST_INSERT_ID();
+		</selectKey>
+	</insert>
+	
+	<insert id="insertRegulation" parameterType="RegulationDTO">
+		<choose>
+			<when test="regulationContents != null and regulationFileName != null">
+			<!-- 내용과 이미지 둘 다 올릴때 -->
+			INSERT INTO REGULATION_INFO
+			(	
+				REGULATION_FILE_NO,
+				REGULATION_TITLE,
+				REGULATION_CONTENTS,
+				REGULATION_VIEW_CNT,
+				REG_MEMBER_NO,
+				REG_DT
+			)
+			VALUES
+			(
+				
+				#{regulationFileNo},
+				#{regulationTitle},
+				#{regulationContents},
+				0,
+				#{regMemberNo},
+				NOW()
+			)
+			</when>
+			<when test="regulationContents != null and regulationFileName == null">
+			<!-- 내용만 올릴때 -->
+			INSERT INTO REGULATION_INFO
+			(
+				REGULATION_TITLE,
+				REGULATION_CONTENTS,
+				REGULATION_VIEW_CNT,
+				REG_MEMBER_NO,
+				REG_DT
+			)
+			VALUES
+			(
+				#{regulationTitle},
+				#{regulationContents},
+				0,
+				#{regMemberNo},
+				NOW()
+			)
+			</when>
+			<when test="regulationContents == null and regulationFileName != null">
+			<!-- 파일만 올릴때 -->
+			INSERT INTO REGULATION_INFO
+			(
+				REGULATION_FILE_NO,
+				REGULATION_TITLE,
+				REGULATION_VIEW_CNT,
+				REG_MEMBER_NO,
+				REG_DT
+			)
+			VALUES
+			(
+				#{regulationFileNo},
+				#{regulationTitle},
+				0,
+				#{regMemberNo},
+				NOW()
+			)
+			</when>
+		</choose>
+	</insert>
 </mapper>

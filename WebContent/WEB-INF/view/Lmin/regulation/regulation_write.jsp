@@ -24,6 +24,45 @@
 	<script src="/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
+function doRegRegulation(){
+	var form = document.getElementById('f');
+	if(form.regulationTitle.value == ""){
+		alert('제목을 입력해 주세요.');
+		form.regulationTitle.focus();
+		return;
+	}else if(form.regulationContents.value == "" && form.regulationFile.value ==""){
+		alert('사진이나 내용을 입력세 주세요.');
+		form.regulationContents.focus();
+		return;
+	}else{
+		f.submit();
+	}
+}
+
+function fileCheck(fileName, permissibleExtension){
+	var result = 0;
+	var fileExtension = fileName.value.slice(fileName.value.indexOf(".") + 1).toLowerCase();
+	var alertStr = permissibleExtension[0];
+	for(var i = 0; i<permissibleExtension.length; i++){
+		if(fileExtension == permissibleExtension[i]){
+			result++;
+		}
+		if(i>=1){
+			alertStr += ", " + permissibleExtension[i];
+		}
+	}
+	if(result == 0){
+		alert(alertStr + " 파일만 업로드 가능합니다.");
+		$(fileName).val("");
+	}
+}
+
+function strLengthCheck(textArea){
+	if(textArea.value.length > 4000){
+		alert('4000자를 초과 할 수 없습니다.');
+		textArea.value = textArea.value.substring(0, 4000);
+	}
+}
 </script>
 <body>
 <div id="skipnavi">
@@ -137,6 +176,7 @@
 				<h3 class="smallTit">상조관련법규</h3>
 
 				<div class="boardType2">
+				<form action="/Lmin/regulation/regulationRegProc.do" method="post" enctype="multipart/form-data" id="f">
 					<table summary="">
 						<caption></caption>
 						<colgroup>
@@ -147,21 +187,28 @@
 							<tr>
 								<th scope="row">제목</th>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<input type="text" name="regulationTitle" class="inputType1" style="" maxlength="25">
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">내용</th>
+								<td>
+									<textarea name="regulationContents" onkeyup="strLengthCheck(this);"></textarea>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">업로드</th>
 								<td>
-									<input type="file" name="name" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<input type="file" name="regulationFile" class="inputType1" style="" maxlength="25" onchange="fileCheck(this.value, ['jpg', 'jpeg', 'png']);">
 								</td>
 							</tr>
 						</tbody>
 					</table>
+					</form>
 				</div>
 
 				<div class="btn_area">
-					<a href="#" id="submitLink" class="btn_active">등록</a>
+					<a href="#" id="submitLink" class="btn_active" onclick="doRegRegulation();">등록</a>
 					<a href="#" id="btnCancel" class="btn_cancel">취소</a>
 				</div>
 
