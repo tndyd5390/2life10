@@ -51,5 +51,10 @@
 	<!-- 파일업로드 기능 -->		
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" 
 		p:maxUploadSize="104857600" p:maxInMemorySize="104857600" />
-
+	
+	<!-- 파일 다운로드 기능 -->
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="0"/>
+	</bean>
+	<bean id="download" class="com.cl.util.DownloadUtil"></bean>
 </beans>

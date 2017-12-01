@@ -7,17 +7,17 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
-<link type="text/css" rel="stylesheet" href="../../public/css/default.css" />
-<link type="text/css" rel="stylesheet" href="../../public/css/layout_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/default.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/layout_kor.css" />
 
-<link type="text/css" rel="stylesheet" href="../../public/css/sub_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/sub_kor.css" />
 
-<script type="text/javascript" src="../../public/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="../../public/js/TweenMax.min.js"></script>
-<script type="text/javascript" src="../../public/js/common.js"></script>
-<script type="text/javascript" src="../../public/js/contents.js"></script>
-<script type="text/javascript" src="../../public/js/jquery.form.js"></script>
-<script type="text/javascript" src="../../public/js/jquery.rss.js"></script>
+<script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/public/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="/public/js/common.js"></script>
+<script type="text/javascript" src="/public/js/contents.js"></script>
+<script type="text/javascript" src="/public/js/jquery.form.js"></script>
+<script type="text/javascript" src="/public/js/jquery.rss.js"></script>
 
 <!--[if lt IE 9]>
 	<script src="/js/html5.js"></script>
@@ -35,7 +35,7 @@
 			
 			<!-- heaer 인쿠르드 -->
 			<!--#include file="../include/inc_header.jsp"-->
-			<%@include file="../include/inc_header.jsp"%>
+			<%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 		</div>
 	</div> <!-- // header -->
 
@@ -231,7 +231,7 @@
 						</div>
 					</li>
 				</ul>
-
+				<a href="/Lmin/regulation/regulationRegView.do" class="btn_active_small" style="float:right;">상조관련법규등록</a>
 
 				<!-- pageArea -->
 				<div class="pageArea">

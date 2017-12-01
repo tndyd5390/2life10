@@ -82,6 +82,10 @@ function goPage(page, lastPage){
 	document.body.appendChild(form);
 	form.submit();
 };
+
+function downloadSche(cruiseNo){
+	location.href="/Lmin/cruise/cruiseDownloadSche.do?cruiseNo=" + cruiseNo;
+}
 </script>
 <body>
 <div id="skipnavi">
@@ -215,7 +219,7 @@ function goPage(page, lastPage){
 					<div class="imgWrap">
 					    <img src="<%="/cruiseImg/" + CmmUtil.nvl(cDTO.getCruiseImgFileName()) %>" alt="크루즈이미지" />
 					    <div class="btn_area">
-					        <button type="button" class="btnSearch">일정다운로드</button>
+					        <button type="button" class="btnSearch" onclick="downloadSche(<%=CmmUtil.nvl(cDTO.getCruiseNo())%>);">일정다운로드</button>
                         </div>
 					</div>
 					<a href="/Lmin/cruise/updateCruiseView.do?cruiseNo=<%=CmmUtil.nvl(cDTO.getCruiseNo()) %>" class="btn_active_small" style="float:right; margin-left: 10px;">수정</a>

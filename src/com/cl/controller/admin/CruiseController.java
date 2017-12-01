@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cl.dto.CruiseDTO;
 import com.cl.service.ICruiseService;
@@ -298,5 +299,28 @@ public class CruiseController {
 		
 		log.info(this.getClass() + ".updateCruiseProc end!!!");
 		return "/alert";
+	}
+	
+	@RequestMapping(value="Lmin/cruise/cruiseDownloadSche", method=RequestMethod.GET)
+	public ModelAndView crusieDownLoadSche(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+		log.info(this.getClass() + ".cruiseDownLoadSche start!!!");
+		
+		String cruiseNo = CmmUtil.nvl(req.getParameter("cruiseNo"));
+		log.info(" cruiseNo : " + cruiseNo);
+		
+		CruiseDTO cDTO = cruiseService.getCruise(cruiseNo);
+		if(cDTO == null) cDTO = new CruiseDTO();
+		
+		String path = CmmUtil.nvl(cDTO.getCruiseScheFilePath());
+		String fileName = CmmUtil.nvl(cDTO.getCruiseScheFileName());;
+		String fileOrgName = CmmUtil.nvl(cDTO.getCruiseScheFileOrgName());
+		
+		File file = new File(path + fileName);
+		
+		ModelAndView mav = new ModelAndView("download", "downloadFile", file);
+		mav.addObject("fileOrgName", fileOrgName);
+		log.info(this.getClass() + ".cruiseDownLoadSche end!!!");
+		
+		return mav;
 	}
 }
