@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cl.dto.CruiseDTO;
 import com.cl.service.ICruiseService;
 import com.cl.util.CmmUtil;
+import com.cl.util.FileUtil;
 import com.cl.util.PageUtil;
 
 @Controller
@@ -94,8 +95,8 @@ public class CruiseController {
 		log.info(" cruiseEtc : " + cruiseEtc);
 		
 		//다른이름으로 저장할 변수
-		String reScheFileName = "";
-		String reImgFileName = "";
+		String reScheFileName = FileUtil.fileSave(cruiseScheFile, scheSavePath);
+		String reImgFileName = FileUtil.fileSave(cruiseImgFile, imgSavePath);
 		
 		//원래 파일 이름들
 		String orgScheFileName = CmmUtil.nvl(cruiseScheFile.getOriginalFilename());
@@ -103,6 +104,7 @@ public class CruiseController {
 		String orgImgFileName = CmmUtil.nvl(cruiseImgFile.getOriginalFilename());
 		log.info(" cruiseImgFileName : " + orgImgFileName);
 		
+		/*
 		//각 파일의 확장자 추출
 		String scheExtended = orgScheFileName.substring(orgScheFileName.indexOf("."), orgScheFileName.length());
 		String imgExtended = orgImgFileName.substring(orgImgFileName.indexOf("."), orgImgFileName.length());
@@ -120,7 +122,7 @@ public class CruiseController {
 		
 		//파일 저장
 		cruiseScheFile.transferTo(newScheFile);
-		cruiseImgFile.transferTo(newImgFile);
+		cruiseImgFile.transferTo(newImgFile);*/
 		
 		CruiseDTO cDTO = new CruiseDTO();
 		cDTO.setCruiseShipName(cruiseShipName);
@@ -283,7 +285,7 @@ public class CruiseController {
 		String now = new SimpleDateFormat("yyyyMMddhmsS").format(new Date());
 		
 		if(!"".equals(orgScheFileName)){
-			//각 파일의 확장자 추출
+			/*//각 파일의 확장자 추출
 			String scheExtended = orgScheFileName.substring(orgScheFileName.indexOf("."), orgScheFileName.length());
 			//이름을 다시 지을 변수
 			reScheFileName = now + scheExtended;
@@ -291,8 +293,10 @@ public class CruiseController {
 			File newScheFile = new File(scheSavePath + reScheFileName);
 			//파일 저장
 			cruiseScheFile.transferTo(newScheFile);
-			newScheFile = new File(scheSavePath + scheFileName);
-			if(newScheFile.exists()) newScheFile.delete();
+			File newScheFile = new File(scheSavePath + scheFileName);
+			if(newScheFile.exists()) newScheFile.delete();*/
+			reScheFileName = FileUtil.fileSave(cruiseScheFile, scheSavePath);
+			FileUtil.deleteFile(scheSavePath, scheFileName);
 			cDTO.setCruiseScheFileName(reScheFileName);
 			cDTO.setCruiseScheFileOrgName(orgScheFileName);
 		}else{
@@ -301,7 +305,7 @@ public class CruiseController {
 		}
 		
 		if(!"".equals(orgImgFileName)){
-			//이미지 파일의 확장자 추출
+			/*//이미지 파일의 확장자 추출
 			String imgExtended = orgImgFileName.substring(orgImgFileName.indexOf("."), orgImgFileName.length());
 			//새로 지은 이미지 파일 이름
 			reImgFileName = now + imgExtended;
@@ -309,8 +313,10 @@ public class CruiseController {
 			File newImgFile = new File(imgSavePath + reImgFileName);
 			//이미지 파일 저장
 			cruiseImgFile.transferTo(newImgFile);
-			newImgFile = new File(imgSavePath + imgFileName);
-			if(newImgFile.exists()) newImgFile.delete();
+			File newImgFile = new File(imgSavePath + imgFileName);
+			if(newImgFile.exists()) newImgFile.delete();*/
+			reImgFileName = FileUtil.fileSave(cruiseImgFile, imgSavePath);
+			FileUtil.deleteFile(imgSavePath, imgFileName);
 			cDTO.setCruiseImgFileName(reImgFileName);
 			cDTO.setCruiseImgFileOrgName(orgImgFileName);
 		}else{
