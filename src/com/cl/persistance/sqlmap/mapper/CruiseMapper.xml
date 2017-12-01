@@ -55,7 +55,8 @@
 		         (SELECT @ROWNUM:=0) R,
 		         (SELECT COUNT(*) AS PAGE FROM CRUISE_INFO) P
 		   WHERE CI.CRUISE_IMGFILE_NO = IMGTABLE.FILE_NO AND CI.CRUISE_SCHEFILE_NO = SCHETABLE.FILE_NO
-		ORDER BY ROWNUM DESC;
+		ORDER BY ROWNUM DESC
+		   LIMIT #{page}, #{splitPage}
 	</select>
 	<insert id="insertCruiseImg" parameterType="CruiseDTO">
 		INSERT INTO FILE_INFO

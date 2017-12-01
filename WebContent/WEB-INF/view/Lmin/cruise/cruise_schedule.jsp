@@ -68,7 +68,20 @@ function doDelete(cruiseNo, imgFileNo, scheFileNo){
 	 
 }
 
-
+function goPage(page, lastPage){
+	var form = document.createElement('form');
+	form.setAttribute("method", "Post"); // Get 또는 Post 입력
+	form.setAttribute("action", "/Lmin/cruise/cruiseScheduleList.do");
+	
+	var hiddenField = document.createElement("input");
+	hiddenField.setAttribute("type", "hidden");
+	hiddenField.setAttribute("name", "page");
+	hiddenField.setAttribute("value", page);
+	form.appendChild(hiddenField);
+	
+	document.body.appendChild(form);
+	form.submit();
+};
 </script>
 <body>
 <div id="skipnavi">
@@ -194,6 +207,7 @@ function doDelete(cruiseNo, imgFileNo, scheFileNo){
                             <li>날짜 : <%=CmmUtil.nvl(cDTO.getCruiseStartDay())%> ~ <%=CmmUtil.nvl(cDTO.getCruiseEndDay())%> </li>
                             <li>상품 : <%=TextUtil.exchangeEscapeNvl(cDTO.getCruiseName()) %></li>
                             <li>인원 : <%=TextUtil.exchangeEscapeNvl(cDTO.getCruiseAccomodation()) %>명</li>
+                            <li>상품가 : <%=TextUtil.addComma(TextUtil.exchangeEscapeNvl(cDTO.getCruisePrice())) %>원</li>
                             <li>캐빈 : <%=TextUtil.exchangeEscapeNvl(cDTO.getCruiseCabinCode()) %></li>
                             <li>비고 : <%=TextUtil.exchangeEscapeNvl(cDTO.getCruiseEtc()) %></li>
                         </ul>

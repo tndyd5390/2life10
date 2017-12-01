@@ -9,18 +9,14 @@ public class TextUtil {
         return value;
 	}
 	public static String replaceBr(String str){
-		str = str.replaceAll("\n", "</br>");
-		return str;
+		return str.replaceAll("\n", "</br>");
 	}	
 	public static String exchangeEscapeNvl(String value){
-		value = CmmUtil.nvl(value);
-		value = exchangeEscape(value);
-		return value;
+		return exchangeEscape(CmmUtil.nvl(value));
 	}
 	
 	public static String addComma(int value){
-		DecimalFormat df = new DecimalFormat("#,##0");
-		return df.format(value);
+		return new DecimalFormat("#,##0").format(value);
 	}
 	
 	public static String addComma(String value){

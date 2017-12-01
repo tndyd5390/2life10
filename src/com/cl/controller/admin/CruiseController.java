@@ -38,7 +38,7 @@ public class CruiseController {
 	@RequestMapping(value="Lmin/cruise/cruiseScheduleList", method={RequestMethod.GET, RequestMethod.POST})
 	public String cruiseScheduleList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cruiseScheduleList start!!!");
-		int splitPage = 10;
+		int splitPage = 5;
 		
 		HashMap<String, Object> hMap = new HashMap<>();
 		
@@ -94,35 +94,15 @@ public class CruiseController {
 		String cruiseEtc = CmmUtil.nvl(req.getParameter("cruiseEtc"));
 		log.info(" cruiseEtc : " + cruiseEtc);
 		
-		//다른이름으로 저장할 변수
-		String reScheFileName = FileUtil.fileSave(cruiseScheFile, scheSavePath);
-		String reImgFileName = FileUtil.fileSave(cruiseImgFile, imgSavePath);
-		
 		//원래 파일 이름들
 		String orgScheFileName = CmmUtil.nvl(cruiseScheFile.getOriginalFilename());
 		log.info(" cruiseScheFileName : " + orgScheFileName);
 		String orgImgFileName = CmmUtil.nvl(cruiseImgFile.getOriginalFilename());
 		log.info(" cruiseImgFileName : " + orgImgFileName);
-		
-		/*
-		//각 파일의 확장자 추출
-		String scheExtended = orgScheFileName.substring(orgScheFileName.indexOf("."), orgScheFileName.length());
-		String imgExtended = orgImgFileName.substring(orgImgFileName.indexOf("."), orgImgFileName.length());
-		
-		//이름을 다시 지을 변수
-		String now = new SimpleDateFormat("yyyyMMddhmsS").format(new Date());
-		
-		//완성된 각 파일의 이름
-		reScheFileName = now + scheExtended;
-		reImgFileName = now + imgExtended;
-		
-		//각파일이름으로 파일 객체 생성
-		File newScheFile = new File(scheSavePath + reScheFileName);
-		File newImgFile = new File(imgSavePath + reImgFileName);
-		
-		//파일 저장
-		cruiseScheFile.transferTo(newScheFile);
-		cruiseImgFile.transferTo(newImgFile);*/
+
+		//저장된 파일의 이름
+		String reScheFileName = FileUtil.fileSave(cruiseScheFile, scheSavePath);
+		String reImgFileName = FileUtil.fileSave(cruiseImgFile, imgSavePath);
 		
 		CruiseDTO cDTO = new CruiseDTO();
 		cDTO.setCruiseShipName(cruiseShipName);
@@ -285,16 +265,7 @@ public class CruiseController {
 		String now = new SimpleDateFormat("yyyyMMddhmsS").format(new Date());
 		
 		if(!"".equals(orgScheFileName)){
-			/*//각 파일의 확장자 추출
-			String scheExtended = orgScheFileName.substring(orgScheFileName.indexOf("."), orgScheFileName.length());
-			//이름을 다시 지을 변수
-			reScheFileName = now + scheExtended;
-			//각파일이름으로 파일 객체 생성
-			File newScheFile = new File(scheSavePath + reScheFileName);
-			//파일 저장
-			cruiseScheFile.transferTo(newScheFile);
-			File newScheFile = new File(scheSavePath + scheFileName);
-			if(newScheFile.exists()) newScheFile.delete();*/
+			//저장된 파일의 이름
 			reScheFileName = FileUtil.fileSave(cruiseScheFile, scheSavePath);
 			FileUtil.deleteFile(scheSavePath, scheFileName);
 			cDTO.setCruiseScheFileName(reScheFileName);
@@ -305,16 +276,7 @@ public class CruiseController {
 		}
 		
 		if(!"".equals(orgImgFileName)){
-			/*//이미지 파일의 확장자 추출
-			String imgExtended = orgImgFileName.substring(orgImgFileName.indexOf("."), orgImgFileName.length());
-			//새로 지은 이미지 파일 이름
-			reImgFileName = now + imgExtended;
-			//이미지 파일 객체 생성
-			File newImgFile = new File(imgSavePath + reImgFileName);
-			//이미지 파일 저장
-			cruiseImgFile.transferTo(newImgFile);
-			File newImgFile = new File(imgSavePath + imgFileName);
-			if(newImgFile.exists()) newImgFile.delete();*/
+			//저장된 파일의 이름
 			reImgFileName = FileUtil.fileSave(cruiseImgFile, imgSavePath);
 			FileUtil.deleteFile(imgSavePath, imgFileName);
 			cDTO.setCruiseImgFileName(reImgFileName);
