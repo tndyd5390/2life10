@@ -1,4 +1,11 @@
+<%@page import="com.cl.util.CmmUtil"%>
+<%@page import="com.cl.util.TextUtil"%>
+<%@page import="com.cl.dto.RegulationDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	RegulationDTO rDTO = (RegulationDTO)request.getAttribute("rDTO");
+	if(rDTO == null) rDTO = new RegulationDTO();
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -18,21 +25,16 @@
 <script type="text/javascript" src="/public/js/contents.js"></script>
 <script type="text/javascript" src="/public/js/jquery.form.js"></script>
 <script type="text/javascript" src="/public/js/jquery.rss.js"></script>
-
 <!--[if lt IE 9]>
 	<script src="/js/html5.js"></script>
 	<script src="/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
-function doRegRegulation(){
+function doUpdateRegulation(){
 	var form = document.getElementById('f');
 	if(form.regulationTitle.value == ""){
 		alert('제목을 입력해 주세요.');
 		form.regulationTitle.focus();
-		return;
-	}else if(form.regulationContents.value == "" && form.regulationFile.value ==""){
-		alert('사진이나 내용을 입력세 주세요.');
-		form.regulationContents.focus();
 		return;
 	}else{
 		f.submit();
@@ -62,6 +64,34 @@ function strLengthCheck(textArea){
 		alert('4000자를 초과 할 수 없습니다.');
 		textArea.value = textArea.value.substring(0, 4000);
 	}
+}
+
+function updateImgNull(){
+	if(confirm('이미지를 삭제 하시겠습니까?')){
+		$.ajax({
+			url : "/Lmin/regulation/regulationDeleteImg.do",
+			type : "post",
+			data : {
+				'regulationNo' : '<%=CmmUtil.nvl(rDTO.getRegulationNo())%>',
+				'regulationFileNo' : '<%=CmmUtil.nvl(rDTO.getRegulationFileNo())%>'
+			},
+			success : function(data){
+				var contents = "";
+				if(data == 1){
+					alert('상조관련법규 사진이 삭제되었습니다.');
+					contents += "<th scope='row'>업로드</th>";
+					contents += "<td><input type='file' name='regulationFile' class='inputType1' maxlength='25' onchange='fileCheck(this.value, ['jpg', 'jpeg', 'png']);'></td>";
+					$('#regulationImgTr').html(contents);
+				}else{
+					alert('상조관련법규 사진 삭제에 실패했습닏다.');
+				}
+			}
+		})
+	}
+}
+
+function doChangeImg(){
+	 window.open("/Lmin/regulation/regulationImgChangeView.do?regulationNo=" + <%=CmmUtil.nvl(rDTO.getRegulationNo())%>,  "popupNo1", "width=500, height=500");
 }
 </script>
 <body>
@@ -176,7 +206,8 @@ function strLengthCheck(textArea){
 				<h3 class="smallTit">상조관련법규</h3>
 
 				<div class="boardType2">
-				<form action="/Lmin/regulation/regulationRegProc.do" method="post" enctype="multipart/form-data" id="f">
+				<form action="/Lmin/regulation/regulationUpdateProcWithoutImg.do" method="post" enctype="multipart/form-data" id="f">
+				<input type="hidden" name="regulationNo" value="<%=CmmUtil.nvl(rDTO.getRegulationNo()) %>">
 					<table summary="">
 						<caption></caption>
 						<colgroup>
@@ -187,20 +218,35 @@ function strLengthCheck(textArea){
 							<tr>
 								<th scope="row">제목</th>
 								<td>
-									<input type="text" name="regulationTitle" class="inputType1" style="" maxlength="25">
+									<input type="text" name="regulationTitle" class="inputType1" value="<%=TextUtil.exchangeEscapeNvl(rDTO.getRegulationTitle()) %>" style="" maxlength="25">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">내용</th>
 								<td>
-									<textarea name="regulationContents" onkeyup="strLengthCheck(this);"></textarea>
+									<textarea name="regulationContents" onkeyup="strLengthCheck(this);"><%=TextUtil.exchangeEscapeNvl(rDTO.getRegulationContents())%></textarea>
 								</td>
 							</tr>
-							<tr>
+							<tr id="regulationImgTr">
+							<%
+							if("".equals(CmmUtil.nvl(rDTO.getRegulationFileName()))){
+							%>
 								<th scope="row">업로드</th>
 								<td>
 									<input type="file" name="regulationFile" class="inputType1" style="" maxlength="25" onchange="fileCheck(this.value, ['jpg', 'jpeg', 'png']);">
 								</td>
+							<%
+							}else{
+							%>
+								<th scope="row">이미지</th>
+								<td>
+									<img src="<%="/regulationFile/" + CmmUtil.nvl(rDTO.getRegulationFileName())%>">
+									<a href="#" id="submitLink" class="btn_active" onclick="doChangeImg();">변경</a>
+									<a href="#" id="btnCancel" class="btn_cancel" onclick="updateImgNull();">삭제</a>
+								</td>
+							<%
+							}
+							%>
 							</tr>
 						</tbody>
 					</table>
@@ -208,7 +254,7 @@ function strLengthCheck(textArea){
 				</div>
 
 				<div class="btn_area">
-					<a href="#" id="submitLink" class="btn_active" onclick="doRegRegulation();">등록</a>
+					<a href="#" id="submitLink" class="btn_active" onclick="doUpdateRegulation();">수정</a>
 					<a href="#" id="btnCancel" class="btn_cancel">취소</a>
 				</div>
 

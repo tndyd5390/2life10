@@ -140,4 +140,55 @@
 			</when>
 		</choose>
 	</insert>
+	
+	<select id="getRegulationDetail" parameterType="string" resultType="RegulationDTO">
+		SELECT RI.REGULATION_NO			AS REGULATIONNO,
+			   FI.FILE_NO				AS REGULATIONFILENO,
+			   FI.FILE_ORG_NAME			AS REGULATIONFILEORGNAME,
+			   FI.FILE_NAME				AS REGULATIONFILENAME,
+			   FI.FILE_PATH				AS REGULATIONFILEPATH,
+			   RI.REGULATION_TITLE		AS REGULATIONTITLE,
+			   RI.REGULATION_CONTENTS	AS REGULATIONCONTENTS,
+			   RI.REGULATION_VIEW_CNT 	AS REGULATIONVIEWCNT,
+			   RI.REG_MEMBER_NO			AS REGMEMBERNO,
+			   RI.REG_DT				AS REGDT,
+			   RI.CHG_MEMBER_NO			AS CHGMEMBERNO,
+			   RI.CHG_DT				AS CHGDT,
+               MI.MEMBER_ID				AS MEMBER_ID
+		  FROM REGULATION_INFO RI
+         INNER JOIN MEMBER_INFO MI ON RI.REG_MEMBER_NO = MI.MEMBER_NO
+          LEFT OUTER JOIN FILE_INFO FI ON RI.REGULATION_FILE_NO = FI.FILE_NO
+         WHERE RI.REGULATION_NO = #{regulationNo}
+	</select>
+	
+	<delete id="deleteRegulation" parameterType="RegulationDTO">
+		DELETE FROM REGULATION_INFO WHERE REGULATION_NO = #{regulationNo};
+		DELETE FROM FILE_INFO WHERE FILE_NO = #{regulationFileNo};
+	</delete>
+	
+	<update id="updateRegulationImgNull" parameterType="hashmap">
+		UPDATE REGULATION_INFO
+		   SET REGULATION_FILE_NO = NULL,
+		       CHG_MEMBER_NO = #{chgMemberNo},
+		       CHG_DT = NOW()
+		 WHERE REGULATION_NO = #{regulationNo}
+	</update>
+	<delete id="deleteRegulationImg" parameterType="string">
+		DELETE FROM FILE_INFO WHERE FILE_NO = #{regulationFileNo}
+	</delete>
+	<update id="updateRegulationImg" parameterType="RegulationDTO">
+		UPDATE REGULATION_INFO
+		   SET REGULATION_FILE_NO = #{regulationFileNo},
+    	       CHG_MEMBER_NO = #{chgMemberNo},
+		       CHG_DT = NOW()
+		 WHERE REGULATION_NO = #{regulationNo}
+	</update>
+	<update id="updateRegulationWithoutImg" parameterType="RegulationDTO">
+		UPDATE REGULATION_INFO
+		   SET REGULATION_TITLE = #{regulationTitle},
+		       REGULATION_CONTENTS = #{regulationContents},
+    	       CHG_MEMBER_NO = #{chgMemberNo},
+		       CHG_DT = NOW()
+		 WHERE REGULATION_NO = #{regulationNo}
+	</update>
 </mapper>

@@ -201,7 +201,7 @@ function goPage(page, lastPage){
 						<p class="num"><%=TextUtil.exchangeEscapeNvl(rDTO.getRowNum()) %></p>
 						<div class="info">
 							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')"><%=TextUtil.exchangeEscapeNvl(rDTO.getRegulationTitle()) %></a>
+								<a href="/Lmin/regulation/regulationDetail.do?regulationNo=<%=CmmUtil.nvl(rDTO.getRegulationNo())%>"><%=TextUtil.exchangeEscapeNvl(rDTO.getRegulationTitle()) %></a>
 							</p>
 							<p class="txt2">
 								<%=TextUtil.exchangeEscapeNvl(rDTO.getMemberId()) %><span class="bar">&nbsp;|</span>
