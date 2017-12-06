@@ -19,6 +19,8 @@ public interface MemberMapper {
 
 	MemberDTO getMemberDetail(MemberDTO mDTO);
 
+	int updateMember(MemberDTO mDTO);
+	
 	int deleteMember(String memberNo);
 
 }

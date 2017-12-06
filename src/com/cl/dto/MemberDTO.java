@@ -17,7 +17,7 @@ public class MemberDTO {
 	private String memberAddress;
 	private String memberAddressDetail;
 	private String regMemberNo;
-	private String redDt;
+	private String regDt;
 	private String chgMemberNo;
 	private String chgDt;
 	private int page;
@@ -102,11 +102,11 @@ public class MemberDTO {
 	public void setRegNo(String regNo) {
 		this.regMemberNo = regNo;
 	}
-	public String getRedDt() {
-		return redDt;
+	public String getRegDt() {
+		return regDt;
 	}
 	public void setRedDt(String redDt) {
-		this.redDt = redDt;
+		this.regDt = redDt;
 	}
 	public String getChgNo() {
 		return chgMemberNo;

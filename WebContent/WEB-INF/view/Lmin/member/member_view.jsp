@@ -47,7 +47,7 @@
 		<div class="container">
 			
 			<!-- Header Include -->
-			<%@ include file="../include/inc_header.jsp" %>
+			<%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 
 		</div>
 	</div> <!-- // header -->
@@ -89,14 +89,23 @@
 		
 	});
 	
+	function doSubmit() {
+		var f = $("#f");
+		f.attr("action", "/Lmin/member/memberUpdate.do");
+		f.submit();
+	}
+	
 	function goList() {
 		location.href="/Lmin/member/memberList.do";
 	}
 	
 	function doDelete() {
 		var f = $("#f");
+		var mNo = '<%=CmmUtil.nvl(mDTO.getMemberNo()) %>';
 		
 		if(confirm("삭제 하시겠습니까?")) {
+			$("#mNo").val(mNo);
+			f.attr("action", "/Lmin/member/memberDeleteProc.do");
 			f.submit();
 			return true;
 		} else {
@@ -157,7 +166,7 @@
 			</div> <!-- // pcLnbWrap -->
 
 			<!-- 메뉴 영역 -->
-			<form name="f" id="f" method="post" action="/Lmin/member/memberDeleteProc.do">
+			<form name="f" id="f" method="post" action="/Lmin/member/memberUpdate.do">
 			<input type="hidden" id="mNo" name="mNo" value="<%=CmmUtil.nvl(mDTO.getMemberNo()) %>" />
 			<div class="contents"> <!-- 페이지별 ID none -->
 				<h3 class="smallTit">회원정보</h3>
@@ -171,7 +180,13 @@
 						</colgroup>
 						<tbody>
 							<tr>
-								<th scope="row">성명</th>
+								<th scope="row">아이디</th>
+								<td>
+									<%=CmmUtil.nvl(mDTO.getMemberId()) %>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">회원명</th>
 								<td>
 									<%=AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberName())) %>
 								</td>
@@ -195,7 +210,7 @@
 								</td>
 							</tr>
 							<tr>
-								<th scope="row" rowspan="2">주소</th>
+								<th scope="row" rowspan="2">주소</th>								
 								<td>
 									<%=TextUtil.exchangeEscape(AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberAddress()))) %>
 								</td>
@@ -217,6 +232,7 @@
 
 				<div class="btn_area">
 					<a href="#" id="submitLink" class="btn_active" onclick="goList();">목록</a>
+					<a href="#" id="submitLink" class="btn_active" onclick="doSubmit();">수정</a>
 					<a href="#" id="submitLink" class="btn_active" onclick="return doDelete();">삭제</a>
 				</div>
 
