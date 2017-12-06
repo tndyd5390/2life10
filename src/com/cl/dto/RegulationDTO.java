@@ -17,6 +17,20 @@ public class RegulationDTO {
 	private String regulationFilePath;
 	private String regulationFileName;
 	private String regulationFileOrgName;
+	private String rowNum;
+	private String memberId;
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+	public String getRowNum() {
+		return rowNum;
+	}
+	public void setRowNum(String rowNum) {
+		this.rowNum = rowNum;
+	}
 	public String getRegulationFileNo() {
 		return regulationFileNo;
 	}
