@@ -13,6 +13,7 @@
 	<insert id="insertMember" parameterType="MemberDTO">
 		INSERT INTO MEMBER_INFO
 				(
+				 MEMBER_NO,
 				 MEMBER_ID, 
 				 MEMBER_PASSWORD, 
 				 MEMBER_NAME, 
@@ -29,6 +30,10 @@
 				 REG_DT
 				)
 		VALUES  (
+		         (
+		          SELECT MAX(IFNULL(A.MEMBER_NO, 0)) + 1 MEMBER_NO
+		            FROM MEMBER_INFO A
+		         ),
 				 #{memberId},
 				 #{memberPassword},
 				 #{memberName},
