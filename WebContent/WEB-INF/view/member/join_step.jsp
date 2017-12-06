@@ -87,21 +87,21 @@
 					<div class="flexItem3">
 						<strong><button type="button" class="select">고객센터</button></strong>
 						<ul>
-							<li><a href="javascript:goMenu('../company/overview.jsp', '');">회사안내</a></li>
-							<li><a href="javascript:goMenu('../info/pro_info.jsp', '');">상조상품안내</a></li>
-							<li><a href="javascript:goMenu('../funeral/funeral_mark.jsp', '');">장례상품</a></li>
-							<li><a href="javascript:goMenu('../marry/marry_mark.jsp', '');">웨딩상품</a></li>
-							<li><a href="javascript:goMenu('../cruise/cruise_mark.jsp', '');">크루즈상품</a></li>
-							<li><a href="javascript:goMenu('../notice/notice_list.jsp', '');">고객센터</a></li>
+                            <li><a href="javascript:goMenu('/company/overView.do', '');">회사소개</a></li>
+                            <li><a href="javascript:goMenu('/info/proInfo.do', '');">상조상품특징</a></li>
+                            <li><a href="javascript:goMenu('/funeral/funeralMark.do', '');">장례상품</a></li>
+                            <li><a href="javascript:goMenu('/marry/marryMark.do', '');">웨딩상품</a></li>
+                            <li><a href="javascript:goMenu('/cruise/cruiseMark.do', '');">크루즈상품</a></li>
+                            <li><a href="javascript:goMenu('/notice/noticeList.do', '');">고객센터</a></li>
 						</ul>
 					</div>
 					<div class="flexItem4"> <!-- .select 버튼 클릭시 다중클래스 on 추가 -->
 						<strong><button type="button" class="select" id="subtitle">로그인</button></strong>
 						<ul>
-							<li id="MO70100"><a href="javascript:goMenu('../member/login.do', 'MO70100');">로그인</a></li>
-                            <li id="MO70200"><a href="javascript:goMenu('../member/joinStep.do', 'MO70200');">회원가입</a></li>
-                            <li id="MO70300"><a href="javascript:goMenu('../member/find_id.jsp', 'MO70300');">아이디찾기</a></li>
-                            <li id="MO70400"><a href="javascript:goMenu('../member/find_pass.jsp', 'MO70400');">패스워드찾기</a></li>
+							<li id="MO70100"><a href="javascript:goMenu('/member/login.do', 'MO70100');">로그인</a></li>
+                            <li id="MO70200"><a href="javascript:goMenu('/member/joinStep.do', 'MO70200');">회원가입</a></li>
+                            <li id="MO70300"><a href="javascript:goMenu('/member/findId.do', 'MO70300');">아이디찾기</a></li>
+                            <li id="MO70400"><a href="javascript:goMenu('/member/findPass.do', 'MO70400');">패스워드찾기</a></li>
 						</ul>
 					</div>
 								
@@ -111,10 +111,10 @@
 			<div class="pcLnbWrap">
 				<nav>
 					<ul class="pcLnb">
-						<li id="MN70100"><a href="javascript:goMenu('../member/login.do', 'MN70100');">로그인</a></li>
-                        <li id="MN70200"><a href="javascript:goMenu('../member/joinStep.do', 'MN70200');">회원가입</a></li>
-                        <li id="MN70300"><a href="javascript:goMenu('../member/find_id.jsp', 'MN70300');">아이디찾기</a></li>
-                        <li id="MN70400"><a href="javascript:goMenu('../member/find_pass.jsp', 'MN70400');">패스워드찾기</a></li>
+							<li id="MO70100"><a href="javascript:goMenu('/member/login.do', 'MO70100');">로그인</a></li>
+                            <li id="MO70200"><a href="javascript:goMenu('/member/joinStep.do', 'MO70200');">회원가입</a></li>
+                            <li id="MO70300"><a href="javascript:goMenu('/member/findId.do', 'MO70300');">아이디찾기</a></li>
+                            <li id="MO70400"><a href="javascript:goMenu('/member/findPass.do', 'MO70400');">패스워드찾기</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->

@@ -32,13 +32,6 @@ public class MemberController {
 	@Resource(name="MemberService")
 	private IMemberService memberService;
 	
-	@RequestMapping("/main")
-	public String main() throws Exception{
-		log.info("main Start!!");
-		
-		log.info("main End!!");
-		return "/index";
-	}
 	@RequestMapping("/member/login")
 	public String login() throws Exception{
 		log.info("login Start!!");

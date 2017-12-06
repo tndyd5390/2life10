@@ -71,21 +71,21 @@
 					<div class="flexItem3">
 						<strong><button type="button" class="select">고객센터</button></strong>
 						<ul>
-							<li><a href="javascript:goMenu('../company/overview.jsp', '');">회사안내</a></li>
-							<li><a href="javascript:goMenu('../info/pro_info.jsp', '');">상조상품안내</a></li>
-							<li><a href="javascript:goMenu('../funeral/funeral_mark.jsp', '');">장례상품</a></li>
-							<li><a href="javascript:goMenu('../marry/marry_mark.jsp', '');">웨딩상품</a></li>
-							<li><a href="javascript:goMenu('../cruise/cruise_mark.jsp', '');">크루즈상품</a></li>
-							<li><a href="javascript:goMenu('../notice/notice_list.jsp', '');">고객센터</a></li>
+                            <li><a href="javascript:goMenu('/company/overView.do', '');">회사소개</a></li>
+                            <li><a href="javascript:goMenu('/info/proInfo.do', '');">상조상품특징</a></li>
+                            <li><a href="javascript:goMenu('/funeral/funeralMark.do', '');">장례상품</a></li>
+                            <li><a href="javascript:goMenu('/marry/marryMark.do', '');">웨딩상품</a></li>
+                            <li><a href="javascript:goMenu('/cruise/cruiseMark.do', '');">크루즈상품</a></li>
+                            <li><a href="javascript:goMenu('/notice/noticeList.do', '');">고객센터</a></li>
 						</ul>
 					</div>
 					<div class="flexItem4"> <!-- .select 버튼 클릭시 다중클래스 on 추가 -->
 						<strong><button type="button" class="select" id="subtitle">로그인</button></strong>
 						<ul>
-							<li id="MO70100"><a href="javascript:goMenu('../login/login.jsp', 'MO70100');">로그인</a></li>
-                            <li id="MO70200"><a href="javascript:goMenu('../member/join_step.jsp', 'MO70200');">회원가입</a></li>
-                            <li id="MO70300"><a href="javascript:goMenu('../member/find_id.jsp', 'MO70300');">아이디찾기</a></li>
-                            <li id="MO70400"><a href="javascript:goMenu('../member/find_pass.jsp', 'MO70400');">패스워드찾기</a></li>
+							<li id="MO70100"><a href="javascript:goMenu('/member/login.do', 'MO70100');">로그인</a></li>
+                            <li id="MO70200"><a href="javascript:goMenu('/member/joinStep.do', 'MO70200');">회원가입</a></li>
+                            <li id="MO70300"><a href="javascript:goMenu('/member/findId.do', 'MO70300');">아이디찾기</a></li>
+                            <li id="MO70400"><a href="javascript:goMenu('/member/findPass.do', 'MO70400');">패스워드찾기</a></li>
 						</ul>
 					</div>
 								
@@ -95,10 +95,10 @@
 			<div class="pcLnbWrap">
 				<nav>
 					<ul class="pcLnb">
-						<li id="MN70100"><a href="javascript:goMenu('../login/login.jsp', 'MN70100');">로그인</a></li>
-                        <li id="MN70200"><a href="javascript:goMenu('../member/join_step.jsp', 'MN70200');">회원가입</a></li>
-                        <li id="MN70300"><a href="javascript:goMenu('../member/find_id.jsp', 'MN70300');">아이디찾기</a></li>
-                        <li id="MN70400"><a href="javascript:goMenu('../member/find_pass.jsp', 'MN70400');">패스워드찾기</a></li>
+							<li id="MO70100"><a href="javascript:goMenu('/member/login.do', 'MO70100');">로그인</a></li>
+                            <li id="MO70200"><a href="javascript:goMenu('/member/joinStep.do', 'MO70200');">회원가입</a></li>
+                            <li id="MO70300"><a href="javascript:goMenu('/member/findId.do', 'MO70300');">아이디찾기</a></li>
+                            <li id="MO70400"><a href="javascript:goMenu('/member/findPass.do', 'MO70400');">패스워드찾기</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->
@@ -125,8 +125,8 @@
                                 <div class="srchArea">
                                     <p class="txt">아이디, 비밀번호를 잊으셨나요?</p>
                                     <div class="bt">
-                                        <a href="../member/find_id.jsp" class="whtBt">아이디 찾기</a>
-                                        <a href="../member/find_pass.jsp" class="whtBt">비밀번호 찾기</a>
+                                        <a href="/member/findId.do" class="whtBt">아이디 찾기</a>
+                                        <a href="/member/findPass.do" class="whtBt">비밀번호 찾기</a>
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +135,7 @@
                         <div class="joinArea">
                             <div class="areaDiv">
                                 <p class="txt"><strong>아직 크리스찬상조(주) 회원이 아니신가요?</strong><br>회원이 되시면 다양한 서비스 이용이 가능합니다.</p>
-                                <a href="../member/joinStep.do" class="whtBt">회원가입</a>
+                                <a href="/member/joinStep.do" class="whtBt">회원가입</a>
                             </div>
                         </div>
                     </div>

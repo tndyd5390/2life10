@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="../include/inc_header.jsp"%>
+<%@page import="com.cl.util.PageUtil"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="com.cl.util.TextUtil"%>
+<%@page import="com.cl.util.CmmUtil"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.cl.dto.BranchDTO"%>
+<%@page import="java.util.List"%>
+<%
+	HashMap<String, Object> hMap = (HashMap) request.getAttribute("hMap");
+	int pageBtnSplit = 5;
+	
+	List<BranchDTO> bList = (List<BranchDTO>) hMap.get("list");
+%>
+
+<%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 <!--#include file="../include/inc_header.jsp"-->
 
 	<div id="contentsWrap">
@@ -41,6 +55,25 @@
 		$("#subtitle2").text($("#"+mbId2).text());
 		
 	});
+	
+	function goPage(page, lastPage){
+		var f = $("#f");
+		$("#page").val(page);
+		f.submit();
+	};
+	function doSearch(){
+		var f = $("#f");
+		var search = $("#search");
+		
+		if(search.val() == ""){
+			alert("검색어를 입력하세요.");
+			search.focus();
+			return false;
+		}else{
+			f.submit();
+			return true;
+		}
+	}
 
 </script>
 
@@ -64,12 +97,12 @@
                     <div class="flexItem4"> <!-- .select 버튼 클릭시 다중클래스 on 추가 -->
                         <strong><button type="button" class="select" id="subtitle">전국지사안내</button></strong>
                         <ul>
-                            <li id="MO10100"><a href="javascript:goMenu('../company/overview.jsp', 'MO10100');">인사말</a></li>
-                            <li id="MO10200"><a href="javascript:goMenu('../company/organ.jsp', 'MO10200');">조직도및연혁</a></li>
-                            <li id="MO10300"><a href="javascript:goMenu('../company/branch.jsp', 'MO10300');">전국지사안내</a></li>
-                            <li id="MO10400"><a href="javascript:goMenu('../company/advice.jsp', 'MO10400');">상담사조회</a></li>
-                            <li id="MO10500"><a href="javascript:goMenu('../company/cyber.jsp', 'MO10500');">사이버홍보실</a></li>
-                            <li id="MO10600"><a href="javascript:goMenu('../company/road.jsp', 'MO10600');">오시는길</a></li>
+                            <li id="MO10100"><a href="javascript:goMenu('/company/overView.do', 'MO10100');">인사말</a></li>
+                            <li id="MO10200"><a href="javascript:goMenu('/company/organ.do', 'MO10200');">조직도및연혁</a></li>
+                            <li id="MO10300"><a href="javascript:goMenu('/company/branchList.do', 'MO10300');">전국지사안내</a></li>
+                            <li id="MO10400"><a href="javascript:goMenu('/company/adviceList.do', 'MO10400');">상담사조회</a></li>
+                            <li id="MO10500"><a href="javascript:goMenu('/company/cyberList.do', 'MO10500');">사이버홍보실</a></li>
+                            <li id="MO10600"><a href="javascript:goMenu('/company/road.do', 'MO10600');">오시는길</a></li>
                         </ul>
                     </div>
 
@@ -79,12 +112,12 @@
             <div class="pcLnbWrap">
                 <nav>
                     <ul class="pcLnb">
-                        <li id="MN10100"><a href="javascript:goMenu('../company/overview.jsp', 'MN10100');">인사말</a></li>
-                        <li id="MN10200"><a href="javascript:goMenu('../company/organ.jsp', 'MN10200');">조직도및연혁</a></li>
-                        <li id="MN10300"><a href="javascript:goMenu('../company/branch.jsp', 'MN10300');">전국지사안내</a></li>
-                        <li id="MN10400"><a href="javascript:goMenu('../company/advice.jsp', 'MN10400');">상담사조회</a></li>
-                        <li id="MN10500"><a href="javascript:goMenu('../company/cyber.jsp', 'MN10500');">사이버홍보실</a></li>
-                        <li id="MN10600"><a href="javascript:goMenu('../company/road.jsp', 'MN10600');">오시는길</a></li>
+                            <li id="MO10100"><a href="javascript:goMenu('/company/overView.do', 'MO10100');">인사말</a></li>
+                            <li id="MO10200"><a href="javascript:goMenu('/company/organ.do', 'MO10200');">조직도및연혁</a></li>
+                            <li id="MO10300"><a href="javascript:goMenu('/company/branchList.do', 'MO10300');">전국지사안내</a></li>
+                            <li id="MO10400"><a href="javascript:goMenu('/company/adviceList.do', 'MO10400');">상담사조회</a></li>
+                            <li id="MO10500"><a href="javascript:goMenu('/company/cyberList.do', 'MO10500');">사이버홍보실</a></li>
+                            <li id="MO10600"><a href="javascript:goMenu('/company/road.do', 'MO10600');">오시는길</a></li>
                     </ul>
                 </nav>
             </div> <!-- // pcLnbWrap -->
@@ -93,7 +126,9 @@
 
 			<div class="contents"> <!-- 페이지별 ID none -->
 				<h4 class="smallTit">전국지사안내</h4>
-
+				<form action="/company/branchList.do" method="post" id="f">
+				<input type="hidden" name="page" id="page">
+				
 				<div class="boardType2">
 					<table summary="">
 						<caption></caption>
@@ -104,14 +139,27 @@
 							<tr>
 								<td>
 									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
-										<option value="00">지역명</option>
-										<option value="01">서울</option>
-										<option value="01">경기</option>
-									</select>
+										<option value="1" <%=CmmUtil.select("001", CmmUtil.nvl((String) hMap.get("searchBox")))%>>전체</option>
+										<option value="2" <%=CmmUtil.select("서울특별시", CmmUtil.nvl((String) hMap.get("searchBox")))%>>서울특별시</option>
+										<option value="3" <%=CmmUtil.select("부산광역시", CmmUtil.nvl((String) hMap.get("searchBox")))%>>부산광역시</option>
+										<option value="4" <%=CmmUtil.select("대구광역시", CmmUtil.nvl((String) hMap.get("searchBox")))%>>대구광역시</option>
+										<option value="5" <%=CmmUtil.select("인천광역시", CmmUtil.nvl((String) hMap.get("searchBox")))%>>인천광역시</option>
+										<option value="6" <%=CmmUtil.select("광주광역시", CmmUtil.nvl((String) hMap.get("searchBox")))%>>광주광역시</option>
+										<option value="7" <%=CmmUtil.select("대전광역시", CmmUtil.nvl((String) hMap.get("searchBox")))%>>대전광역시</option>
+										<option value="8" <%=CmmUtil.select("울산광역시", CmmUtil.nvl((String) hMap.get("searchBox")))%>>울산광역시</option>
+										<option value="9" <%=CmmUtil.select("경기도", CmmUtil.nvl((String) hMap.get("searchBox")))%>>경기도</option>
+										<option value="10" <%=CmmUtil.select("강원도", CmmUtil.nvl((String) hMap.get("searchBox")))%>>강원도</option>
+										<option value="11" <%=CmmUtil.select("충청북도", CmmUtil.nvl((String) hMap.get("searchBox")))%>>충청북도</option>
+										<option value="12" <%=CmmUtil.select("충청남도", CmmUtil.nvl((String) hMap.get("searchBox")))%>>충청남도</option>
+										<option value="13" <%=CmmUtil.select("전라북도", CmmUtil.nvl((String) hMap.get("searchBox")))%>>전라북도</option>
+										<option value="14" <%=CmmUtil.select("전라남도", CmmUtil.nvl((String) hMap.get("searchBox")))%>>전라남도</option>
+										<option value="15" <%=CmmUtil.select("경상북도", CmmUtil.nvl((String) hMap.get("searchBox")))%>>경상북도</option>
+										<option value="16" <%=CmmUtil.select("경상남도", CmmUtil.nvl((String) hMap.get("searchBox")))%>>경상남도</option>
+										<option value="17" <%=CmmUtil.select("제주특별자치도", CmmUtil.nvl((String) hMap.get("searchBox")))%>>제주특별자치도</option>									</select>
 									지사명
-									<input type="text" name="name" value="" title="" class="inputType6" style="" maxlength="25">
+									<input type="text" name="search" id="search" class="inputType1" value="<%=CmmUtil.nvl((String) hMap.get("search"))%>" maxlength="25">
 
-									<a href="#" class="btn_active_small">검색</a>
+									<a href="#" class="btn_active_small" onclick="doSearch()">검색</a>
 								</td>
 							</tr>
 						</tbody>
@@ -120,97 +168,59 @@
 
 				<br/><br/>
 				<ul class="boradType4">
-					<li>
-						<p class="num">1</p>
+						<%
+						if(bList.size()!=0){
+							for(BranchDTO bDTO : bList){
+						%>
+						<li>
+							<p class="num"><%=CmmUtil.nvl(bDTO.getRowNum()) %></p>
+							<div class="info">
+								<p class="txt"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchName()) %></p>
+								<p class="txt1"><!-- 박성진수정 -->
+									<a href="#"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
+								</p>
+								<p class="txt2">
+									<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchOfficerName()) %><span class="bar">&nbsp;|</span>
+									<span><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchTelNo()) %></span>
+									<span class="bar">|</span>
+									<span class="count"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAreaCode()) %></span>
+								</p>
+							</div>
+						</li>
+						<%
+							}
+						}else{%>
+							<li>
+						<p class="num"></p>
 						<div class="info">
-							<p class="txt">강남본점</p>
+							<p class="txt"></p>
 							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')">서울시 강남구 논현동 268-2</a>
+								검색 결과가 없습니다.
 							</p>
 							<p class="txt2">
-								김현재<span class="bar">&nbsp;|</span>
-								<span>1644-4491</span>
-								<span class="bar">|</span>
-								<span class="count">서울</span>
-							</p>
+								<span class="bar">&nbsp;</span>
+								<span></span>
+								<span class="bar"></span>
+								<span class="count"></span>
+						</p>
 						</div>
-					</li>
-					<li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt">강남본점</p>
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')">서울시 강남구 논현동 268-2</a>
-							</p>
-							<p class="txt2">
-								김현재<span class="bar">&nbsp;|</span>
-								<span>1644-4491</span>
-								<span class="bar">|</span>
-								<span class="count">서울</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt">강남본점</p>
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')">서울시 강남구 논현동 268-2</a>
-							</p>
-							<p class="txt2">
-								김현재<span class="bar">&nbsp;|</span>
-								<span>1644-4491</span>
-								<span class="bar">|</span>
-								<span class="count">서울</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt">강남본점</p>
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')">서울시 강남구 논현동 268-2</a>
-							</p>
-							<p class="txt2">
-								김현재<span class="bar">&nbsp;|</span>
-								<span>1644-4491</span>
-								<span class="bar">|</span>
-								<span class="count">서울</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt">강남본점</p>
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')">서울시 강남구 논현동 268-2</a>
-							</p>
-							<p class="txt2">
-								김현재<span class="bar">&nbsp;|</span>
-								<span>1644-4491</span>
-								<span class="bar">|</span>
-								<span class="count">서울</span>
-							</p>
-						</div>
-					</li>
+						</li>
+						<%
+						}
+						%>
 				</ul>
 
 
 
 				<!-- pageArea -->
 				<div class="pageArea">
-					<a href='#none' class='btnFirst'><span>처음</span></a> <a href='#' class='btnPrev'><span>이전</span></a><strong>1</strong><a href="javascript:goPage('2','15')" >2</a><a href="javascript:goPage('3','15')" >3</a><a href="javascript:goPage('4','15')" >4</a><a href="javascript:goPage('5','15')" >5</a><a href="javascript:goPage('2','15')" class='btnNext'><span>다음</span></a> <a href="javascript:goPage('19','15')" class='btnLast'><span>마지막</span></a>
+					<%= PageUtil.frontPaging(hMap, pageBtnSplit)%>
 				</div>
 				<!-- // pageArea -->
-
-
+			</form>
 			</div> <!-- // contents -->
-
-
 		</div>
 	</div> <!-- // contentsWrap -->
 
 <!--#include file="../include/inc_footer.jsp"-->
-<%@include file="../include/inc_footer.jsp"%>
+<%@include file="/WEB-INF/view/include/inc_footer.jsp"%>

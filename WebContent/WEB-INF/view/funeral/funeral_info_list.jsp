@@ -1,5 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="../include/inc_header.jsp"%>
+<%@ page import="com.cl.dto.CodeDTO" %>
+<%@ page import="com.cl.dto.FuneralInfoDTO" %>
+<%@ page import="com.cl.util.CmmUtil" %>
+<%@ page import="com.cl.util.PageUtil" %>
+<%@ page import="com.cl.util.TextUtil" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.List" %>
+<%
+	HashMap<String, Object> hMap = (HashMap) request.getAttribute("hMap");
+	HashMap<String ,List<CodeDTO>> hashMap = (HashMap) request.getAttribute("hashMap");
+	List<CodeDTO> fList = hashMap.get("funeralList");
+	List<CodeDTO> gList = hashMap.get("geoList");
+	int pageBtnSplit = 5;
+	
+	List<FuneralInfoDTO> fuList = (List<FuneralInfoDTO>) hMap.get("list");
+	
+%>
+<%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 <!--#include file="../include/inc_header.jsp"-->
 
 	<div id="contentsWrap">
@@ -42,6 +59,17 @@
 		
 	});
 
+
+	function goPage(page, lastPage){
+		var f = $("#f");
+		$("#page").val(page);
+		f.submit();
+	};
+	
+	function doSubmit(){
+		var f = $("#f");
+		f.submit();
+	}
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -53,21 +81,21 @@
 					<div class="flexItem3">
 						<strong><button type="button" class="select">장례상품</button></strong>
 						<ul>
-							<li><a href="javascript:goMenu('../company/overview.jsp', '');">회사안내</a></li>
-							<li><a href="javascript:goMenu('../info/pro_info.jsp', '');">상조상품안내</a></li>
-							<li><a href="javascript:goMenu('../funeral/funeral_mark.jsp', '');">장례상품</a></li>
-							<li><a href="javascript:goMenu('../marry/marry_mark.jsp', '');">웨딩상품</a></li>
-							<li><a href="javascript:goMenu('../cruise/cruise_mark.jsp', '');">크루즈상품</a></li>
-							<li><a href="javascript:goMenu('../notice/notice_list.jsp', '');">고객센터</a></li>
+                            <li><a href="javascript:goMenu('/company/overView.do', '');">회사소개</a></li>
+                            <li><a href="javascript:goMenu('/info/proInfo.do', '');">상조상품특징</a></li>
+                            <li><a href="javascript:goMenu('/funeral/funeralMark.do', '');">장례상품</a></li>
+                            <li><a href="javascript:goMenu('/marry/marryMark.do', '');">웨딩상품</a></li>
+                            <li><a href="javascript:goMenu('/cruise/cruiseMark.do', '');">크루즈상품</a></li>
+                            <li><a href="javascript:goMenu('/notice/noticeList.do', '');">고객센터</a></li>
 						</ul>
 					</div>
 					<div class="flexItem4"> <!-- .select 버튼 클릭시 다중클래스 on 추가 -->
 						<strong><button type="button" class="select" id="subtitle">장례상품</button></strong>
 						<ul>
-							<li id="MO10100"><a href="javascript:goMenu('../funeral/funeral_mark.jsp', 'MO10100');">장례상품특징</a></li>
-							<li id="MO11100"><a href="javascript:goMenu('../funeral/funeral_list_a.jsp', 'MO11100');">장례상품</a></li>
-							<li id="MO10200"><a href="javascript:goMenu('../funeral/funeral_info_a.jsp', 'MO10200');">장례정보</a></li>
-							<li id="MO10300"><a href="javascript:goMenu('../funeral/funeral_notice.jsp', 'MO10300');">부고알림</a></li>
+							<li id="MO30100"><a href="javascript:goMenu('/funeral/funeralMark.do', 'MO30100');">장례상품특징</a></li>
+							<li id="MO31100"><a href="javascript:goMenu('/funeral/funeralList_a.do', 'MO31100');">장례상품</a></li>
+							<li id="MO30200"><a href="javascript:goMenu('/funeral/funeralInfo_a.do', 'MO30200');">장례정보</a></li>
+							<li id="MO30300"><a href="javascript:goMenu('/funeral/funeralNotice.do', 'MO30300');">부고알림</a></li>
 						</ul>
 					</div>
 								
@@ -77,10 +105,10 @@
 			<div class="pcLnbWrap">
 				<nav>
 					<ul class="pcLnb">
-						<li id="MO10100"><a href="javascript:goMenu('../funeral/funeral_mark.jsp', '');">장례상품특징</a></li>
-						<li id="MO11100"><a href="javascript:goMenu('../funeral/funeral_list_a.jsp', '');">장례상품</a></li>
-						<li id="MO10200"><a href="javascript:goMenu('../funeral/funeral_info_a.jsp', '');">장례정보</a></li>
-						<li id="MO10300"><a href="javascript:goMenu('../funeral/funeral_notice.jsp', '');">부고알림</a></li>
+							<li id="MO30100"><a href="javascript:goMenu('/funeral/funeralMark.do', 'MO30100');">장례상품특징</a></li>
+							<li id="MO31100"><a href="javascript:goMenu('/funeral/funeralList_a.do', 'MO31100');">장례상품</a></li>
+							<li id="MO30200"><a href="javascript:goMenu('/funeral/funeralInfo_a.do', 'MO30200');">장례정보</a></li>
+							<li id="MO30300"><a href="javascript:goMenu('/funeral/funeralNotice.do', 'MO30300');">부고알림</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->
@@ -94,10 +122,10 @@
                         <button type="button">전국장례시설안내</button>
                     </strong>
 					<ul>
-						<li class="tab01"><a href="javascript:goMenu('../funeral/funeral_info_a.jsp', 'MN30300');">기독교장례 및 추도예매</a></li>
-                        <li class="tab02"><a href="javascript:goMenu('../funeral/funeral_info_b.jsp', 'MN30300');">장례구비서류 및 행정절차</a></li>
-                        <li class="tab03 active"><a href="javascript:goMenu('../funeral/funeral_info_list.jsp', 'MN30300');">전국장례시설안내</a></li>
-                        <li class="tab04"><a href="javascript:goMenu('../funeral/funeral_info_c.jsp', 'MN30300');">관련사이트</a></li>
+						<li class="tab01"><a href="javascript:goMenu('/funeral/funeralInfo_a.do', 'MN30300');">기독교장례 및 추도예매</a></li>
+                        <li class="tab02"><a href="javascript:goMenu('/funeral/funeralInfo_b.do', 'MN30300');">장례구비서류 및 행정절차</a></li>
+                        <li class="tab03 active"><a href="javascript:goMenu('/funeral/funeralInfoList.do', 'MN30300');">전국장례시설안내</a></li>
+                        <li class="tab04"><a href="javascript:goMenu('/funeral/funeralInfo_c.do', 'MN30300');">관련사이트</a></li>
 					</ul>
 				</div>
 
@@ -110,18 +138,19 @@
 						<tbody>
 							<tr>
 								<td>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
+								<select id="geoCode" name="searchBox" title="" class="inputType3">
 										<option value="00">지역명</option>
-										<option value="01">서울</option>
-										<option value="02">경기</option>
+									<% for(CodeDTO cDTO : gList){ %>
+										<option value='<%=CmmUtil.nvl(cDTO.getCodeId())%>' <%=CmmUtil.select(cDTO.getCodeId(), (String)hMap.get("searchBox")) %>><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
+									<% } %>
 									</select>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType5">
-										<option value="00">식장명</option>
-										<option value="01">병원 장례식장</option>
-										<option value="02">전문 장례식장</option>
+									<select id="funeral" name="search" title="" class="inputType5">
+										<option value="00">구분명</option>
+									<% for(CodeDTO cDTO : fList){ %>
+										<option value='<%=CmmUtil.nvl(cDTO.getCodeId())%>' <%=CmmUtil.select(cDTO.getCodeId(), (String)hMap.get("search")) %>><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
+									<% } %>
 									</select>
-
-									<a href="#" class="btn_active_small">검색</a>
+									<a href="javascript:doSubmit();" class="btn_active_small">검색</a>
 								</td>
 							</tr>
 						</tbody>
@@ -154,83 +183,27 @@
 							</tr>
 						</thead>
 						<tbody>
+						<%if(fuList.size()>0){%>
+						<%for(FuneralInfoDTO fDTO : fuList){%>
 							<tr>
-								<td>319</td>
-								<td>병원 장례식장</td>
-								<td>성모병원</td>
-								<td>경남 김해시 삼정동 615-6</td>
-								<td>055-336-4475</td>
+								<td><%=CmmUtil.nvl(fDTO.getRownum())%></td>
+								<td><%=CmmUtil.nvl(fDTO.getFuneralInfoCode())%></td>
+								<td>
+								<a href="/Lmin/funeral/funeralInfoDetail.do?fNo=<%=CmmUtil.nvl(fDTO.getFuneralInfoNo())%>">
+								<%=CmmUtil.nvl(fDTO.getFuneralInfoName())%></a>
+								</td>
+								<td><%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralAddress())%> <%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralAddressDetail())%></td>
+								<td><%=CmmUtil.nvl(fDTO.getFuneralInfoTelNo())%></td>
 							</tr>
-							<tr>
-								<td>319</td>
-								<td>병원 장례식장</td>
-								<td>성모병원</td>
-								<td>경남 김해시 삼정동 615-6</td>
-								<td>055-336-4475</td>
-							</tr>
-							<tr>
-								<td>319</td>
-								<td>병원 장례식장</td>
-								<td>성모병원</td>
-								<td>경남 김해시 삼정동 615-6</td>
-								<td>055-336-4475</td>
-							</tr>
-							<tr>
-								<td>319</td>
-								<td>병원 장례식장</td>
-								<td>성모병원</td>
-								<td>경남 김해시 삼정동 615-6</td>
-								<td>055-336-4475</td>
-							</tr>
-							<tr>
-								<td>319</td>
-								<td>병원 장례식장</td>
-								<td>성모병원</td>
-								<td>경남 김해시 삼정동 615-6</td>
-								<td>055-336-4475</td>
-							</tr>
-							<tr>
-								<td>319</td>
-								<td>병원 장례식장</td>
-								<td>성모병원</td>
-								<td>경남 김해시 삼정동 615-6</td>
-								<td>055-336-4475</td>
-							</tr>
-							<tr>
-								<td>319</td>
-								<td>병원 장례식장</td>
-								<td>성모병원</td>
-								<td>경남 김해시 삼정동 615-6</td>
-								<td>055-336-4475</td>
-							</tr>
-							<tr>
-								<td>319</td>
-								<td>병원 장례식장</td>
-								<td>성모병원</td>
-								<td>경남 김해시 삼정동 615-6</td>
-								<td>055-336-4475</td>
-							</tr>
-							<tr>
-								<td>319</td>
-								<td>병원 장례식장</td>
-								<td>성모병원</td>
-								<td>경남 김해시 삼정동 615-6</td>
-								<td>055-336-4475</td>
-							</tr>
-							<tr>
-								<td>319</td>
-								<td>병원 장례식장</td>
-								<td>성모병원</td>
-								<td>경남 김해시 삼정동 615-6</td>
-								<td>055-336-4475</td>
-							</tr>
+						<%}%>
+						<%} %>
 						</tbody>
 					</table>
 				</div>
 
 				<!-- pageArea -->
 				<div class="pageArea">
-					<a href='#none' class='btnFirst'><span>처음</span></a> <a href='#' class='btnPrev'><span>이전</span></a><strong>1</strong><a href="javascript:goPage('2','15')" >2</a><a href="javascript:goPage('3','15')" >3</a><a href="javascript:goPage('4','15')" >4</a><a href="javascript:goPage('5','15')" >5</a><a href="javascript:goPage('2','15')" class='btnNext'><span>다음</span></a> <a href="javascript:goPage('19','15')" class='btnLast'><span>마지막</span></a>
+					<%=PageUtil.frontPaging(hMap, pageBtnSplit) %>
 				</div>
 				<!-- // pageArea -->
 
@@ -241,4 +214,4 @@
 	</div> <!-- // contentsWrap -->
 
 <!--#include file="../include/inc_footer.jsp"-->
-<%@include file="../include/inc_footer.jsp"%>
+<%@include file="/WEB-INF/view/include/inc_footer.jsp"%>

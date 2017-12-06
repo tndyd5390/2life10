@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ include file="../include/inc_header.jsp" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/view/include/inc_header.jsp" %>
 
 	<div id="contentsWrap">
 		<div class="container">
@@ -52,19 +52,19 @@
                     <div class="flexItem3">
 						<strong><button type="button" class="select">웨딩상품</button></strong>
 						<ul>
-							<li><a href="javascript:goMenu('../company/overview.jsp', '');">회사안내</a></li>
-							<li><a href="javascript:goMenu('../info/pro_info.jsp', '');">상조상품안내</a></li>
-							<li><a href="javascript:goMenu('../funeral/funeral_mark.jsp', '');">장례상품</a></li>
-							<li><a href="javascript:goMenu('../marry/marry_mark.jsp', '');">웨딩상품</a></li>
-							<li><a href="javascript:goMenu('../cruise/cruise_mark.jsp', '');">크루즈상품</a></li>
-							<li><a href="javascript:goMenu('../notice/notice_list.jsp', '');">고객센터</a></li>
+                            <li><a href="javascript:goMenu('/company/overView.do', '');">회사소개</a></li>
+                            <li><a href="javascript:goMenu('/info/proInfo.do', '');">상조상품특징</a></li>
+                            <li><a href="javascript:goMenu('/funeral/funeralMark.do', '');">장례상품</a></li>
+                            <li><a href="javascript:goMenu('/marry/marryMark.do', '');">웨딩상품</a></li>
+                            <li><a href="javascript:goMenu('/cruise/cruiseMark.do', '');">크루즈상품</a></li>
+                            <li><a href="javascript:goMenu('/notice/noticeList.do', '');">고객센터</a></li>
 						</ul>
 					</div>
                     <div class="flexItem4"> <!-- .select 버튼 클릭시 다중클래스 on 추가 -->
                         <strong><button type="button" class="select" id="subtitle">웨딩상품</button></strong>
                         <ul>
-                            <li id="MO40100"><a href="javascript:goMenu('../marry/marry_mark.jsp', 'MN40100');">웨딩상품특징</a></li>
-                            <li id="MO40200"><a href="javascript:goMenu('../marry/marry_list_d.jsp', 'MN40200');">웨딩상품</a></li>
+                            <li id="MO40100"><a href="javascript:goMenu('/marry/marryMark.do', 'MN40100');">웨딩상품특징</a></li>
+                            <li id="MO40200"><a href="javascript:goMenu('/marry/marryList_d.do', 'MN40200');">웨딩상품</a></li>
                         </ul>
                     </div>
 
@@ -74,8 +74,8 @@
             <div class="pcLnbWrap">
                 <nav>
                     <ul class="pcLnb">
-                        <li id="MN40100"><a href="javascript:goMenu('../marry/marry_mark.jsp', 'MN40100');">웨딩상품특징</a></li>
-                        <li id="MN40200"><a href="javascript:goMenu('../marry/marry_list_d.jsp', 'MN40200');">웨딩상품</a></li>
+                            <li id="MO40100"><a href="javascript:goMenu('/marry/marryMark.do', 'MN40100');">웨딩상품특징</a></li>
+                            <li id="MO40200"><a href="javascript:goMenu('/marry/marryList_d.do', 'MN40200');">웨딩상품</a></li>
                     </ul>
                 </nav>
             </div> <!-- // pcLnbWrap -->
@@ -89,15 +89,15 @@
                         <button type="button">프라임(350)상품</button>
                     </strong>
 					<ul>
-						<li class="tab04 active"><a href="javascript:goMenu('../marry/marry_list_d.jsp', 'MN40200');">프라임(350)상품</a></li>
-						<li class="tab01"><a href="javascript:goMenu('../marry/marry_list_a.jsp', 'MN40200');">웨딩240</a></li>
-                        <li class="tab02"><a href="javascript:goMenu('../marry/marry_list_b.jsp', 'MN40200');">웨딩360</a></li>
-                        <li class="tab03"><a href="javascript:goMenu('../marry/marry_list_c.jsp', 'MN40200');">웨딩480</a></li>
+						<li class="tab04 active"><a href="javascript:goMenu('/marry/marryList_d.do', 'MN40200');">프라임(350)상품</a></li>
+						<li class="tab01"><a href="javascript:goMenu('/marry/marryList_a.do', 'MN40200');">웨딩240</a></li>
+						<li class="tab02"><a href="javascript:goMenu('/marry/marryList_b.do', 'MN40200');">웨딩360</a></li>
+						<li class="tab03"><a href="javascript:goMenu('/marry/marryList_c.do', 'MN40200');">웨딩480</a></li>
 					</ul>
 				</div>
 				
 				<header class="contInfoArea">
-					<p class="img"><img src="../public/img/conts/img_pro_b_p350.png" alt="프라임(350)상품 안내이미지" /></p>
+					<p class="img"><img src="/public/img/conts/img_pro_b_p350.png" alt="프라임(350)상품 안내이미지" /></p>
 					<div class="area">
 						<h3 class="contTit"><span>프라임(350)상품</span></h3>
 						<p class="subTxt">월 35,000원 X 100회 (3,500,000원)</p>
@@ -209,4 +209,4 @@
 		</div>
 	</div> <!-- // contentsWrap -->
 
-<%@ include file="../include/inc_footer.jsp" %>
+<%@ include file="/WEB-INF/view/include/inc_footer.jsp" %>

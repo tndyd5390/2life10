@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <header>
 	<h1 class="logo">
-		<a href="/index.jsp"><img src="/public/img/common/t_logo.png" alt="크리스찬라이프" /></a>
+		<a href="/main.do"><img src="/public/img/common/t_logo.png" alt="크리스찬라이프" /></a>
 	</h1>
 
 	<div class="topMenuWrap">
 		<ul>
-			<li><a href="./appli/appli_form.jsp">온라인가입신청</a></li>
-			<li><a href="./member/login.do">로그인</a></li>
-			<li><a href="./member/joinStep.do">회원가입</a></li>
+			<li><a href="/apply/applyForm.do">온라인가입신청</a></li>
+			<li><a href="/member/login.do">로그인</a></li>
+			<li><a href="/member/joinStep.do">회원가입</a></li>
 		</ul>
 	</div>
 
@@ -38,12 +38,12 @@
 
                                             <div class="depth02">
                                                 <ul class="sub_depth">
-                                                    <li><a href="javascript:goMenu('./company/overview.jsp', 'MN10100');">인사말</a></li>
-                                                    <li><a href="javascript:goMenu('./company/organ.jsp', 'MN10200');">조직도및연혁</a></li>
-                                                    <li><a href="javascript:goMenu('./company/branch.jsp', 'MN10300');">전국지사안내</a></li>
-                                                    <li><a href="javascript:goMenu('./company/advice.jsp', 'MN10400');">상담사조회</a></li>
-                                                    <li><a href="javascript:goMenu('./company/cyber.jsp', 'MN10500');">사이버홍보실</a></li>
-                                                    <li><a href="javascript:goMenu('./company/road.jsp', 'MN10600');">오시는길</a></li>
+													<li><a href="javascript:goMenu('/company/overView.do', 'MN10100');">인사말</a></li>
+													<li><a href="javascript:goMenu('/company/organ.do', 'MN10200');">조직도및연혁</a></li>
+													<li><a href="javascript:goMenu('/company/branchList.do', 'MN10300');">전국지사안내</a></li>
+													<li><a href="javascript:goMenu('/company/adviceList.do', 'MN10400');">상담사조회</a></li>
+													<li><a href="javascript:goMenu('/company/cyberList.do', 'MN10500');">사이버홍보실</a></li>
+													<li><a href="javascript:goMenu('/company/road.do', 'MN10600');">오시는길</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -55,10 +55,10 @@
                                         <div class="depthArea">
                                             <div class="depth02">
                                                 <ul class="sub_depth">
-                                                    <li><a href="javascript:goMenu('./info/pro_info.jsp', 'MN20100');">상조상품특징</a></li>
-                                                    <li><a href="javascript:goMenu('./info/join_step.jsp', 'MN20200');">가입절차</a></li>
-                                                    <li><a href="javascript:goMenu('./info/catalogue.jsp', 'MN20300');">웹카다로그</a></li>
-                                                    <li><a href="javascript:goMenu('./info/end_pro.jsp', 'MN20400');">단종상품안내</a></li>
+													<li><a href="javascript:goMenu('/info/proInfo.do', 'MN20100');">상조상품특징</a></li>
+													<li><a href="javascript:goMenu('/info/joinStep.do', 'MN20200');">가입절차</a></li>
+													<li><a href="javascript:goMenu('/info/catalogue.do', 'MN20300');">웹카다로그</a></li>
+													<li><a href="javascript:goMenu('/info/endPro.do', 'MN20400');">단종상품안내</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -70,10 +70,10 @@
                                         <div class="depthArea">
                                             <div class="depth02">
                                                 <ul class="sub_depth">
-                                                    <li><a href="javascript:goMenu('./funeral/funeral_mark.jsp', 'MN30100');">장례상품특징</a></li>
-                                                    <li><a href="javascript:goMenu('./funeral/funeral_list_a.jsp', 'MN30200');">장례상품</a></li>
-                                                    <li><a href="javascript:goMenu('./funeral/funeral_info_a.jsp', 'MN30300');">장례정보</a></li>
-                                                    <li><a href="javascript:goMenu('./funeral/funeral_notice.jsp', 'MN30400');">부고알림</a></li>
+													<li id="MO30100"><a href="javascript:goMenu('/funeral/funeralMark.do', 'MO30100');">장례상품특징</a></li>
+													<li id="MO31100"><a href="javascript:goMenu('/funeral/funeralList_a.do', 'MO31100');">장례상품</a></li>
+													<li id="MO30200"><a href="javascript:goMenu('/funeral/funeralInfo_a.do', 'MO30200');">장례정보</a></li>
+													<li id="MO30300"><a href="javascript:goMenu('/funeral/funeralNoticeList.do', 'MO30300');">부고알림</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -85,8 +85,8 @@
                                         <div class="depthArea">
                                             <div class="depth02">
                                                 <ul class="sub_depth">
-                                                    <li><a href="javascript:goMenu('./marry/marry_mark.jsp', 'MN40100');">웨딩상품특징</a></li>
-                                                    <li><a href="javascript:goMenu('./marry/marry_list_d.jsp', 'MN40200');">웨딩상품</a></li>
+                                                    <li><a href="javascript:goMenu('/marry/marryMark.do', 'MN40100');">웨딩상품특징</a></li>
+                                                    <li><a href="javascript:goMenu('/marry/marryList_d.do', 'MN40200');">웨딩상품</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -98,9 +98,9 @@
                                         <div class="depthArea">
                                             <div class="depth02">
                                                 <ul class="sub_depth">
-                                                    <li><a href="javascript:goMenu('./cruise/cruise_mark.jsp', 'MN50200');">크루즈상품특징</a></li>
-													<li><a href="javascript:goMenu('./cruise/cruise_pro.jsp', 'MN50200');">크루즈성지순례상품</a></li>
-                                                    <li><a href="javascript:goMenu('./cruise/cruise_schedule.jsp', 'MN50300');">크루즈일정</a></li>
+                                                    <li><a href="javascript:goMenu('/cruise/cruiseMark.do', 'MN50200');">크루즈상품특징</a></li>
+													<li><a href="javascript:goMenu('/cruise/cruisePro.do', 'MN50200');">크루즈성지순례상품</a></li>
+                                                    <li><a href="javascript:goMenu('/cruise/cruiseScheduleList.do', 'MN50300');">크루즈일정</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -112,14 +112,14 @@
                                         <div class="depthArea">
                                             <div class="depth02">
                                                 <ul class="sub_depth">
-                                                    <li><a href="javascript:goMenu('./notice/notice_list.jsp', 'MN60100');">공지사항</a></li>
-                                                    <li><a href="javascript:goMenu('./qna/qna_list.jsp', 'MN60200');">자주하는질문</a></li>
-                                                    <li><a href="javascript:goMenu('./counsel/counsel_list.jsp', 'MN60300');">1:1상담</a></li>
-                                                    <li><a href="javascript:goMenu('./infomation/infomation_a.jsp', 'MN60400');">주요정보고시사항</a></li>
-                                                    <li><a href="javascript:goMenu('./regulation/regulation_list.jsp', 'MN60500');">상조관련법규</a></li>
-                                                    <li><a href="javascript:goMenu('./agreement/agreement_list.jsp', 'MN60600');">이용약관</a></li>
-                                                    <li><a href="javascript:goMenu('./inquiry/inquiry_list.jsp', 'MN60700');">납부조회</a></li>
-                                                    <li><a href="javascript:goMenu('./appli/appli_form.jsp', 'MN60800');">가입신청</a></li>
+													<li id="MO60100"><a href="javascript:goMenu('/notice/noticeList.do', 'MO60100');">공지사항</a></li>
+						                            <li id="MO60200"><a href="javascript:goMenu('/qna/qnaList.do', 'MO60200');">자주하는질문</a></li>
+						                            <li id="MO60300"><a href="javascript:goMenu('/counsel/counselWrite.do', 'MO60300');">1:1상담</a></li>
+						                            <li id="MO60400"><a href="javascript:goMenu('/infomation/infomation_a.do', 'MO60400');">주요정보고시사항</a></li>
+						                            <li id="MO60500"><a href="javascript:goMenu('/regulation/regulationList.do', 'MO60500');">상조관련법규</a></li>
+						                            <li id="MO60600"><a href="javascript:goMenu('/agreement/agreementList.do', 'MO60600');">이용약관</a></li>
+						                            <li id="MO60700"><a href="javascript:goMenu('/inquiry/inquiryList.do', 'MO60700');">납부조회</a></li>
+						                            <li id="MO60800"><a href="javascript:goMenu('/apply/applyForm.do', 'MO60800');">가입신청</a></li>
                                                 </ul>
                                             </div>
                                         </div>

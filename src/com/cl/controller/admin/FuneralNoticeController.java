@@ -1,9 +1,7 @@
 //�ΰ�˸� ��Ʈ�ѷ�
 package com.cl.controller.admin;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +16,6 @@ import com.cl.dto.FuneralNoticeDTO;
 import com.cl.service.IFuneralNoticeService;
 import com.cl.util.CmmUtil;
 import com.cl.util.PageUtil;
-import com.sun.xml.internal.ws.resources.HttpserverMessages;
 
 @Controller
 public class FuneralNoticeController {
@@ -84,9 +81,9 @@ public class FuneralNoticeController {
 		
 		url = "/Lmin/funeral/funeralNoticeList.do";
 		if(result == 0){
-			msg = "등록성공";
-		}else{
 			msg = "등록실패";
+		}else{
+			msg = "등록성공";
 		}
 		
 		fDTO = null;
@@ -173,9 +170,9 @@ public class FuneralNoticeController {
 		
 		url = "/Lmin/funeral/funeralNoticeList.do";
 		if(result==0){
-			msg = "삭제성공";
-		}else{
 			msg = "삭제실패";
+		}else{
+			msg = "삭제성공";
 		}
 		
 		model.addAttribute("url", url);

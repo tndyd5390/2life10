@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="../include/inc_header.jsp"%>
+<%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 <!--#include file="../include/inc_header.jsp"-->
 
 	<div id="contentsWrap">
@@ -53,21 +53,21 @@
 					<div class="flexItem3">
 						<strong><button type="button" class="select">상조상품안내</button></strong>
 						<ul>
-							<li><a href="javascript:goMenu('../company/overview.jsp', '');">회사소개</a></li>
-							<li><a href="javascript:goMenu('../info/pro_info.jsp', '');">상조상품안내</a></li>
-							<li><a href="javascript:goMenu('../funeral/funeral_mark.jsp', '');">장례상품</a></li>
-							<li><a href="javascript:goMenu('../marry/marry_mark.jsp', '');">웨딩상품</a></li>
-							<li><a href="javascript:goMenu('../cruise/cruise_mark.jsp', '');">크루즈상품</a></li>
-							<li><a href="javascript:goMenu('../notice/notice_list.jsp', '');">고객센터</a></li>
+                            <li><a href="javascript:goMenu('/company/overView.do', '');">회사소개</a></li>
+                            <li><a href="javascript:goMenu('/info/proInfo.do', '');">상조상품특징</a></li>
+                            <li><a href="javascript:goMenu('/funeral/funeralMark.do', '');">장례상품</a></li>
+                            <li><a href="javascript:goMenu('/marry/marryMark.do', '');">웨딩상품</a></li>
+                            <li><a href="javascript:goMenu('/cruise/cruiseMark.do', '');">크루즈상품</a></li>
+                            <li><a href="javascript:goMenu('/notice/noticeList.do', '');">고객센터</a></li>
 						</ul>
 					</div>
 					<div class="flexItem4"> <!-- .select 버튼 클릭시 다중클래스 on 추가 -->
 						<strong><button type="button" class="select" id="subtitle">상조상품특징</button></strong>
 						<ul>
-							<li id="MO20100"><a href="javascript:goMenu('../info/pro_info.jsp', 'MO20100');">상조상품특징</a></li>
-							<li id="MO20200"><a href="javascript:goMenu('../info/join_step.jsp', 'MO20200');">가입절차</a></li>
-							<li id="MO20300"><a href="javascript:goMenu('../info/catalogue.jsp', 'MO20300');">웹카다로그</a></li>
-							<li id="MO20400"><a href="javascript:goMenu('../info/end_pro.jsp', 'MO20400');">단종상품안내</a></li>
+                            <li id="MO20100"><a href="javascript:goMenu('/info/proInfo.do', 'MO20100');">상조상품특징</a></li>
+                            <li id="MO20200"><a href="javascript:goMenu('/info/joinStep.do', 'MO20200');">가입절차</a></li>
+                            <li id="MO20300"><a href="javascript:goMenu('/info/catalogue.do', 'MO20300');">웹카다로그</a></li>
+                            <li id="MO20400"><a href="javascript:goMenu('/info/endPro.do', 'MO20400');">단종상품안내</a></li>
 						</ul>
 					</div>
 								
@@ -77,10 +77,10 @@
 			<div class="pcLnbWrap">
 				<nav>
 					<ul class="pcLnb">
-						<li id="MN20100"><a href="javascript:goMenu('../info/pro_info.jsp', 'MN20100');">상조상품특징</a></li>
-						<li id="MN20200"><a href="javascript:goMenu('../info/join_step.jsp', 'MN20200');">가입절차</a></li>
-						<li id="MN20300"><a href="javascript:goMenu('../info/catalogue.jsp', 'MN20300');">웹카다로그</a></li>
-						<li id="MN20400"><a href="javascript:goMenu('../info/end_pro.jsp', 'MN20400');">단종상품안내</a></li>
+                            <li id="MO20100"><a href="javascript:goMenu('/info/proInfo.do', 'MO20100');">상조상품특징</a></li>
+                            <li id="MO20200"><a href="javascript:goMenu('/info/joinStep.do', 'MO20200');">가입절차</a></li>
+                            <li id="MO20300"><a href="javascript:goMenu('/info/catalogue.do', 'MO20300');">웹카다로그</a></li>
+                            <li id="MO20400"><a href="javascript:goMenu('/info/endPro.do', 'MO20400');">단종상품안내</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->
@@ -95,8 +95,8 @@
 				<div class="businessUnit">
 					<li class="unitTit">
 						<div class="imgWrap">
-							<p class="moImg"><img src="../public/img/conts/img_proinfo_mo01.png" alt="크리스찬상조부금이미지" /></p>
-							<p class="pcImg"><img src="../public/img/conts/img_proinfo_pc01.png" alt="크리스찬상조부금이미지" /></p>
+							<p class="moImg"><img src="/public/img/conts/img_proinfo_mo01.png" alt="크리스찬상조부금이미지" /></p>
+							<p class="pcImg"><img src="/public/img/conts/img_proinfo_pc01.png" alt="크리스찬상조부금이미지" /></p>
 						</div>
 						<div class="txtWrap">
 							<strong>정성을 다하는 장의서비스</strong>
@@ -150,4 +150,4 @@
 	</div> <!-- // contentsWrap -->
 
 <!--#include file="../include/inc_footer.jsp"-->
-<%@include file="../include/inc_footer.jsp"%>
+<%@include file="/WEB-INF/view/include/inc_footer.jsp"%>

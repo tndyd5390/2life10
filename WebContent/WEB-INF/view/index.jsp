@@ -1,4 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.cl.util.CmmUtil" %>
+<%@ page import="com.cl.util.TextUtil" %>
+<%@ page import="com.cl.util.AES256Util" %>
+<%@ page import="com.cl.dto.FuneralNoticeDTO" %>
+<%@ page import="com.cl.dto.NoticeDTO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.HashMap" %>
+<%
+
+	HashMap<String, Object> hMap = (HashMap<String,Object>) request.getAttribute("hMap");
+	
+	List<NoticeDTO> nList = (List<NoticeDTO>) hMap.get("nList");
+	List<FuneralNoticeDTO> fList = (List<FuneralNoticeDTO>) hMap.get("fList");
+	
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -15,7 +32,6 @@
 <script type="text/javascript" src="/public/js/TweenMax.min.js"></script>
 <script type="text/javascript" src="/public/js/common.js"></script>
 <script type="text/javascript" src="/public/js/jquery.bxslider.js"></script>
-
 <script type="text/javascript" src="/public/js/contents.js"></script>
 <script type="text/javascript" src="/public/js/jquery.form.js"></script>
 <body>
@@ -59,13 +75,27 @@
             searchFrm.action = "/search.do";
             searchFrm.submit();
         }
+        
+        
+        function goNDT(nNo){
+        	var f = $("#f");
+        	var noticeNo = $("#nNo");
+        	noticeNo.val(nNo);
+        	f.attr("action", "/Lmin/notice/noticeDetail.do");
+        	f.submit();
+        }
         </script>
             <!-- heaer 인쿠르드 -->
             <!--#include file="include/inc_mheader.jsp"-->
 			<%@include file="/WEB-INF/view/include/inc_mheader.jsp" %>
         </div>
     </div> <!-- // header -->
-
+	
+	
+	<form name="f" id="f" method="post" action="">
+		<input type="hidden" name="nNo" id="nNo">
+	</form>
+	
 	<div class="main">
 		<div class="visualWrap">
                 <div class="slide-nav">
@@ -85,35 +115,42 @@
                         <div class="tab">
                             <span type="button" class="tab_cell on">
                                 <button type="button" class="tab_item">공지사항</button>
-                                <a href="#" class="btn_more">+</a>
+                                <a href="/notice/noticeList.do" class="btn_more">+</a>
                             </span>
                             <span type="button" class="tab_cell">
                                 <button type="button" class="tab_item">부고알림</button>
-                                <a href="#" class="btn_more">+</a>
+                                <a href="/funeral/funeralNoticeList.do" class="btn_more">+</a>
                             </span>
                         </div>
                         <!-- 공지사항 -->
                         <div id="notice" class="list on">
                             <ul class="list_inner">
-                                <li><a href="#">공지 1</a></li>
-                                <li><a href="#">공지 2</a></li>
-                                <li><a href="#">공지 3</a></li>
+                            <%if(nList.size()>0){%>
+								<%for(NoticeDTO nDTO : nList){%>
+	                                <li><a href="javascript:goNDT('<%=CmmUtil.nvl(nDTO.getNoticeNo())%>')"><%=CmmUtil.nvl(nDTO.getNoticeTitle()) %></a></li>
+								<%}%>                            	
+                                <!-- <li><a href="#">공지 2</a></li>
+                                <li><a href="#">공지 3</a></li> -->
+                           	<%}%>
                             </ul>
                         </div>
                         <!-- 부고알림 -->
                         <div id="report" class="list">
                             <ul class="list_inner">
-                                <li><a href="#">부고 1</a></li>
-                                <li><a href="#">부고 2</a></li>
-                                <li><a href="#">부고 3</a></li>
-                                <li><a href="#">부고 4</a></li>
-                            </ul>
+							 <%if(fList.size()>0){%>
+								<%for(FuneralNoticeDTO fDTO : fList){%>
+	                                <li><a href="#"><%=CmmUtil.nvl(fDTO.getFuneralNoticeName())%>소천 | <%=CmmUtil.nvl(fDTO.getFuneralNoticeDay())%> | <%=CmmUtil.nvl(fDTO.getFuneralNoticePlace()) %> | 회원 <%=CmmUtil.nvl(fDTO.getFuneralNoticeMember()) %></a></li>
+								<%}%>                            	
+                                <!-- <li><a href="#">공지 2</a></li>
+                                <li><a href="#">공지 3</a></li> -->
+                           	<%}%>                            
+                           	</ul>
                         </div>
                     </div>
                     <div class="customer">
                         <p class="center"><em>고객센터</em><strong>1644-4491</strong> <span>24시간 친절히 상담해드립니다.</span></p>
-                        <a href="#" class="btn_search"><span class="txt">가입신청</span></a>
-                        <a href="#" class="btn_member"><span class="txt">가입문의</span></a>
+                        <a href="/apply/applyForm.do" class="btn_search"><span class="txt">가입신청</span></a>
+                        <a href="/counsel/counselWrite.do" class="btn_member"><span class="txt">가입문의</span></a>
                     </div>
                 </div>
             </div>
@@ -205,10 +242,10 @@
 			<footer>
 				<div class="footMenuWrap">
 					<ul>
-						<li><a href="">채용정보</a></li>
-						<li><a href="">주요정보고시사항</a></li>
-						<li><a href="">오시는길</a></li>
-						<li><a href="">개인정보 취급방침</a></li>
+						<li><a href="#">채용정보</a></li>
+						<li><a href="/infomation/infomation_a.do">주요정보고시사항</a></li>
+						<li><a href="/company/road.do">오시는길</a></li>
+						<li><a href="/agreement/agreementList.do">개인정보 취급방침</a></li>
 					</ul>
 				</div>
 
@@ -225,7 +262,6 @@
                             <div class="container">
                                 <dl class="etc">
                                     <dt>기타</dt>
-
                                     <dd><a href="" target="_blank" title="새창">참조사이트1</a></dd>
                                     <dd><a href="" target="_blank" title="새창">참조사이트2</a></dd>
                                     <dd><a href="" target="_blank" title="새창">참조사이트3</a></dd>

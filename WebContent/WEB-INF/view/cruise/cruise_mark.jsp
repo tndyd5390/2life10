@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ include file="../include/inc_header.jsp" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/view/include/inc_header.jsp" %>
 
 	<div id="contentsWrap">
 		<div class="container">
@@ -52,20 +52,20 @@
 					<div class="flexItem3">
 						<strong><button type="button" class="select">크루즈상품</button></strong>
 						<ul>
-							<li><a href="javascript:goMenu('../company/overview.jsp', '');">회사안내</a></li>
-							<li><a href="javascript:goMenu('../info/pro_info.jsp', '');">상조상품안내</a></li>
-							<li><a href="javascript:goMenu('../funeral/funeral_mark.jsp', '');">장례상품</a></li>
-							<li><a href="javascript:goMenu('../marry/marry_mark.jsp', '');">웨딩상품</a></li>
-							<li><a href="javascript:goMenu('../cruise/cruise_mark.jsp', '');">크루즈상품</a></li>
-							<li><a href="javascript:goMenu('../notice/notice_list.jsp', '');">고객센터</a></li>
+                            <li><a href="javascript:goMenu('/company/overView.do', '');">회사소개</a></li>
+                            <li><a href="javascript:goMenu('/info/proInfo.do', '');">상조상품특징</a></li>
+                            <li><a href="javascript:goMenu('/funeral/funeralMark.do', '');">장례상품</a></li>
+                            <li><a href="javascript:goMenu('/marry/marryMark.do', '');">웨딩상품</a></li>
+                            <li><a href="javascript:goMenu('/cruise/cruiseMark.do', '');">크루즈상품</a></li>
+                            <li><a href="javascript:goMenu('/notice/noticeList.do', '');">고객센터</a></li>
 						</ul>
 					</div>
 					<div class="flexItem4"> <!-- .select 버튼 클릭시 다중클래스 on 추가 -->
 						<strong><button type="button" class="select" id="subtitle">장례상품</button></strong>
 						<ul>
-							<li id="MO50100"><a href="javascript:goMenu('../cruise/cruise_mark.jsp', '');">크루즈상품특징</a></li>
-							<li id="MO50200"><a href="javascript:goMenu('../cruise/cruise_pro.jsp', '');">크루즈성지순례상품</a></li>
-							<li id="MO50300"><a href="javascript:goMenu('../cruise/cruise_schedule.jsp', '');">크루즈일정</a></li>
+							<li id="MO50100"><a href="javascript:goMenu('/cruise/cruiseMark.do', '');">크루즈상품특징</a></li>
+							<li id="MO50200"><a href="javascript:goMenu('/cruise/cruisePro.do', '');">크루즈성지순례상품</a></li>
+							<li id="MO50300"><a href="javascript:goMenu('/cruise/cruiseScheduleList.do', '');">크루즈일정</a></li>
 						</ul>
 					</div>
 								
@@ -75,9 +75,9 @@
 			<div class="pcLnbWrap">
 				<nav>
 					<ul class="pcLnb">
-						<li id="MN50100"><a href="javascript:goMenu('../cruise/cruise_mark.jsp', '');">크루즈상품특징</a></li>
-						<li id="MN50200"><a href="javascript:goMenu('../cruise/cruise_pro.jsp', '');">크루즈성지순례상품</a></li>
-						<li id="MN50300"><a href="javascript:goMenu('../cruise/cruise_schedule.jsp', '');">크루즈일정</a></li>
+							<li id="MO50100"><a href="javascript:goMenu('/cruise/cruiseMark.do', '');">크루즈상품특징</a></li>
+							<li id="MO50200"><a href="javascript:goMenu('/cruise/cruisePro.do', '');">크루즈성지순례상품</a></li>
+							<li id="MO50300"><a href="javascript:goMenu('/cruise/cruiseScheduleList.do', '');">크루즈일정</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->
@@ -89,8 +89,8 @@
 				<div class="businessUnit">
 					<li class="unitTit">
 						<div class="imgWrap">
-							<p class="moImg"><img src="../public/img/conts/img_cruise_2mo01.png" alt="크루즈여행이미지" /></p>
-							<p class="pcImg"><img src="../public/img/conts/img_cruise_2pc01.png" alt="크루즈여행이미지" /></p>
+							<p class="moImg"><img src="/public/img/conts/img_cruise_2mo01.png" alt="크루즈여행이미지" /></p>
+							<p class="pcImg"><img src="/public/img/conts/img_cruise_2pc01.png" alt="크루즈여행이미지" /></p>
 						</div>
 						<div class="txtWrap">
 							<strong>최고급 시설을 갖춘 거대한 선박을 타고</strong>
@@ -120,8 +120,8 @@
 				<div class="businessUnit">
 					<li class="unitTit">
 						<div class="imgWrap">
-							<p class="moImg"><img src="../public/img/conts/img_cruise_mo02.png" alt="다양한 프로그램 Entertainment 이미지" /></p>
-							<p class="pcImg"><img src="../public/img/conts/img_cruise_pc02.png" alt="다양한 프로그램 Entertainment 이미지" /></p>
+							<p class="moImg"><img src="/public/img/conts/img_cruise_mo02.png" alt="다양한 프로그램 Entertainment 이미지" /></p>
+							<p class="pcImg"><img src="/public/img/conts/img_cruise_pc02.png" alt="다양한 프로그램 Entertainment 이미지" /></p>
 						</div>
 					</li>
 				</div>
@@ -136,8 +136,8 @@
 				<div class="businessUnit">
 					<li class="unitTit">
 						<div class="imgWrap">
-							<p class="moImg"><img src="../public/img/conts/img_cruise_mo03.png" alt="즐거운 음식의 향연 Restaurant 이미지" /></p>
-							<p class="pcImg"><img src="../public/img/conts/img_cruise_pc03.png" alt="즐거운 음식의 향연 Restaurant 이미지" /></p>
+							<p class="moImg"><img src="/public/img/conts/img_cruise_mo03.png" alt="즐거운 음식의 향연 Restaurant 이미지" /></p>
+							<p class="pcImg"><img src="/public/img/conts/img_cruise_pc03.png" alt="즐거운 음식의 향연 Restaurant 이미지" /></p>
 						</div>
 					</li>
 				</div>
@@ -147,4 +147,4 @@
 		</div>
 	</div> <!-- // contentsWrap -->
 
-<%@ include file="../include/inc_footer.jsp" %>
+<%@ include file="/WEB-INF/view/include/inc_footer.jsp" %>

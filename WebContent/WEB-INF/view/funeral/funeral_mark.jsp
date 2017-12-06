@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="../include/inc_header.jsp"%>
+<%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 <!--#include file="../include/inc_header.jsp"-->
 
 	<div id="contentsWrap">
@@ -53,21 +53,21 @@
                     <div class="flexItem3">
                         <strong><button type="button" class="select">장례상품</button></strong>
                         <ul>
-                            <li><a href="javascript:goMenu('../company/overview.jsp', '');">회사소개</a></li>
-                            <li><a href="javascript:goMenu('../info/pro_info.jsp', '');">상조상품안내</a></li>
-                            <li><a href="javascript:goMenu('../funeral/funeral_mark.jsp', '');">장례상품</a></li>
-                            <li><a href="javascript:goMenu('../marry/marry_mark.jsp', '');">웨딩상품</a></li>
-                            <li><a href="javascript:goMenu('../cruise/cruise_mark.jsp', '');">크루즈상품</a></li>
-                            <li><a href="javascript:goMenu('../notice/notice_list.jsp', '');">고객센터</a></li>
+                            <li><a href="javascript:goMenu('/company/overView.do', '');">회사소개</a></li>
+                            <li><a href="javascript:goMenu('/info/proInfo.do', '');">상조상품특징</a></li>
+                            <li><a href="javascript:goMenu('/funeral/funeralMark.do', '');">장례상품</a></li>
+                            <li><a href="javascript:goMenu('/marry/marryMark.do', '');">웨딩상품</a></li>
+                            <li><a href="javascript:goMenu('/cruise/cruiseMark.do', '');">크루즈상품</a></li>
+                            <li><a href="javascript:goMenu('/notice/noticeList.do', '');">고객센터</a></li>
                         </ul>
                     </div>
                     <div class="flexItem4"> <!-- .select 버튼 클릭시 다중클래스 on 추가 -->
                         <strong><button type="button" class="select" id="subtitle">장례상품특징</button></strong>
                         <ul>
-                            <li id="MO30100"><a href="javascript:goMenu('../funeral/funeral_mark.jsp', 'MO30100');">장례상품특징</a></li>
-                            <li id="MO30200"><a href="javascript:goMenu('../funeral/funeral_list_a.jsp', 'MO30200');">장례상품</a></li>
-                            <li id="MO30300"><a href="javascript:goMenu('../funeral/funeral_info_a.jsp', 'MO30300');">장례정보</a></li>
-                            <li id="MO30400"><a href="javascript:goMenu('../funeral/funeral_notice.jsp', 'MO30400');">부고알림</a></li>
+							<li id="MO30100"><a href="javascript:goMenu('/funeral/funeralMark.do', 'MO30100');">장례상품특징</a></li>
+							<li id="MO31100"><a href="javascript:goMenu('/funeral/funeralList_a.do', 'MO31100');">장례상품</a></li>
+							<li id="MO30200"><a href="javascript:goMenu('/funeral/funeralInfo_a.do', 'MO30200');">장례정보</a></li>
+							<li id="MO30300"><a href="javascript:goMenu('/funeral/funeralNoticeList.do', 'MO30300');">부고알림</a></li>
                         </ul>
                     </div>
 
@@ -77,10 +77,10 @@
             <div class="pcLnbWrap">
                 <nav>
                     <ul class="pcLnb">
-                        <li id="MN30100"><a href="javascript:goMenu('../funeral/funeral_mark.jsp', 'MN30100');">장례상품특징</a></li>
-                        <li id="MN30200"><a href="javascript:goMenu('../funeral/funeral_list_a.jsp', 'MN30200');">장례상품</a></li>
-                        <li id="MN30300"><a href="javascript:goMenu('../funeral/funeral_info_a.jsp', 'MN30300');">장례정보</a></li>
-                        <li id="MN30400"><a href="javascript:goMenu('../funeral/funeral_notice.jsp', 'MN30400');">부고알림</a></li>
+							<li id="MO30100"><a href="javascript:goMenu('/funeral/funeralMark.do', 'MO30100');">장례상품특징</a></li>
+							<li id="MO31100"><a href="javascript:goMenu('/funeral/funeralList_a.do', 'MO31100');">장례상품</a></li>
+							<li id="MO30200"><a href="javascript:goMenu('/funeral/funeralInfo_a.do', 'MO30200');">장례정보</a></li>
+							<li id="MO30300"><a href="javascript:goMenu('/funeral/funeralNoticeList.do', 'MO30300');">부고알림</a></li>
                     </ul>
                 </nav>
             </div> <!-- // pcLnbWrap -->
@@ -92,8 +92,8 @@
 				<div class="businessUnit">
 					<li class="unitTit">
 						<div class="imgWrap">
-							<p class="moImg"><img src="../public/img/conts/img_funeral_mo01.png" alt="장례상품특징이미지" /></p>
-							<p class="pcImg"><img src="../public/img/conts/img_funeral_pc01.png" alt="장례상품특징이미지" /></p>
+							<p class="moImg"><img src="/public/img/conts/img_funeral_mo01.png" alt="장례상품특징이미지" /></p>
+							<p class="pcImg"><img src="/public/img/conts/img_funeral_pc01.png" alt="장례상품특징이미지" /></p>
 						</div>
 						<div class="txtWrap">
 							<strong>정성을 다하는 장의서비스</strong>
@@ -146,8 +146,8 @@
 				<div class="businessUnit">
 					<li class="unitTit">
 						<div class="imgWrap">
-							<p class="moImg"><img src="../public/img/conts/img_funeral_mo02.png" alt="장례진행과정 이미지" /></p>
-							<p class="pcImg"><img src="../public/img/conts/img_funeral_pc02.png" alt="장례진행과정 이미지" /></p>
+							<p class="moImg"><img src="/public/img/conts/img_funeral_mo02.png" alt="장례진행과정 이미지" /></p>
+							<p class="pcImg"><img src="/public/img/conts/img_funeral_pc02.png" alt="장례진행과정 이미지" /></p>
 						</div>
 					</li>
 				</div>
@@ -159,4 +159,4 @@
 	</div> <!-- // contentsWrap -->
 
 <!--#include file="../include/inc_footer.jsp"-->
-<%@include file="../include/inc_footer.jsp"%>
+<%@include file="/WEB-INF/view/include/inc_footer.jsp"%>

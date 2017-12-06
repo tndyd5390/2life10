@@ -1,5 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="../include/inc_header.jsp"%>
+<%@ page import="com.cl.util.CmmUtil" %>
+<%@ page import="com.cl.util.PageUtil" %>
+<%@ page import="com.cl.util.TextUtil" %>
+<%@ page import="com.cl.dto.FuneralNoticeDTO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.HashMap" %>
+<%
+	HashMap<String, Object> hMap = (HashMap) request.getAttribute("hMap");
+	int pageBtnSplit = 5;
+	
+	List<FuneralNoticeDTO> fList = (List<FuneralNoticeDTO>) hMap.get("list");
+%>
+<%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 <!--#include file="../include/inc_header.jsp"-->
 
 	<div id="contentsWrap">
@@ -42,6 +55,26 @@
 		
 	});
 
+	function goPage(page, lastPage){
+		var f = $("#f");
+		$("#page").val(page);
+		f.submit();
+	};
+	
+	function doSubmit(){
+		var f = $("#f");
+		var search = $("#search");
+		
+		if(search.val() == ""){
+			alert("검색어를 입력하세요.");
+			search.focus();
+			return false;
+		}else{
+			f.submit();
+			return true;
+		}
+	};
+	
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -53,21 +86,21 @@
 					<div class="flexItem3">
 						<strong><button type="button" class="select">장례상품</button></strong>
 						<ul>
-							<li><a href="javascript:goMenu('../company/overview.jsp', '');">회사소개</a></li>
-							<li><a href="javascript:goMenu('../info/pro_info.jsp', '');">상조상품안내</a></li>
-							<li><a href="javascript:goMenu('../funeral/funeral_mark.jsp', '');">장례상품</a></li>
-							<li><a href="javascript:goMenu('../marry/marry_mark.jsp', '');">웨딩상품</a></li>
-							<li><a href="javascript:goMenu('../cruise/cruise_mark.jsp', '');">크루즈상품</a></li>
-							<li><a href="javascript:goMenu('../notice/notice_list.jsp', '');">고객센터</a></li>
+                            <li><a href="javascript:goMenu('/company/overView.do', '');">회사소개</a></li>
+                            <li><a href="javascript:goMenu('/info/proInfo.do', '');">상조상품특징</a></li>
+                            <li><a href="javascript:goMenu('/funeral/funeralMark.do', '');">장례상품</a></li>
+                            <li><a href="javascript:goMenu('/marry/marryMark.do', '');">웨딩상품</a></li>
+                            <li><a href="javascript:goMenu('/cruise/cruiseMark.do', '');">크루즈상품</a></li>
+                            <li><a href="javascript:goMenu('/notice/noticeList.do', '');">고객센터</a></li>
 						</ul>
 					</div>
 					<div class="flexItem4"> <!-- .select 버튼 클릭시 다중클래스 on 추가 -->
 						<strong><button type="button" class="select" id="subtitle">부고알림</button></strong>
 						<ul>
-							<li id="MO30100"><a href="javascript:goMenu('../funeral/funeral_mark.jsp', 'MO30100');">장례상품특징</a></li>
-							<li id="MO30200"><a href="javascript:goMenu('../funeral/funeral_list_a.jsp', 'MO30200');">장례상품</a></li>
-							<li id="MO30300"><a href="javascript:goMenu('../funeral/funeral_info_a.jsp', 'MO30300');">장례정보</a></li>
-							<li id="MO30400"><a href="javascript:goMenu('../funeral/funeral_notice.jsp', 'MO30400');">부고알림</a></li>
+							<li id="MO10100"><a href="javascript:goMenu('/funeral/funeralMark.do', 'MO10100');">장례상품특징</a></li>
+							<li id="MO11100"><a href="javascript:goMenu('/funeral/funeralList_a.do', 'MO11100');">장례상품</a></li>
+							<li id="MO10200"><a href="javascript:goMenu('/funeral/funeralInfo_a.do', 'MO10200');">장례정보</a></li>
+							<li id="MO30300"><a href="javascript:goMenu('/funeral/funeralNoticeList.do', 'MO30300');">부고알림</a></li>
 						</ul>
 					</div>
 								
@@ -77,10 +110,10 @@
 			<div class="pcLnbWrap">
 				<nav>
 					<ul class="pcLnb">
-						<li id="MN30100"><a href="javascript:goMenu('../funeral/funeral_mark.jsp', 'MN30100');">장례상품특징</a></li>
-						<li id="MN30200"><a href="javascript:goMenu('../funeral/funeral_list_a.jsp', 'MN30200');">장례상품</a></li>
-						<li id="MN30300"><a href="javascript:goMenu('../funeral/funeral_info_a.jsp', 'MN30300');">장례정보</a></li>
-						<li id="MN30400"><a href="javascript:goMenu('../funeral/funeral_notice.jsp', 'MN30400');">부고알림</a></li>
+							<li id="MO10100"><a href="javascript:goMenu('/funeral/funeralMark.do', 'MO10100');">장례상품특징</a></li>
+							<li id="MO11100"><a href="javascript:goMenu('/funeral/funeralList_a.do', 'MO11100');">장례상품</a></li>
+							<li id="MO10200"><a href="javascript:goMenu('/funeral/funeralInfo_a.do', 'MO10200');">장례정보</a></li>
+							<li id="MO30300"><a href="javascript:goMenu('/funeral/funeralNoticeList.do', 'MO30300');">부고알림</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->
@@ -89,6 +122,8 @@
 
 			<div class="contents"> <!-- 페이지별 ID none -->
 				<h3 class="smallTit">부고알림</h3>
+				<form name="f" id="f" method="post" action="/funeral/funeralNoticeList.do">
+				<input type="hidden" name="page" id="page">
 				
 				<div class="boardType2">
 					<table summary="">
@@ -99,94 +134,47 @@
 						<tbody>
 							<tr>
 								<td>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
-										<option value="00">전체</option>
-										<option value="01">소천인</option>
-										<option value="02">회원명</option>
+									<select id="searchBox" name="searchBox" class="inputType3">
+										<option value="00" <%=CmmUtil.select("00", CmmUtil.nvl((String) hMap.get("searchBox")))%>>전체</option>
+										<option value="01" <%=CmmUtil.select("01", CmmUtil.nvl((String) hMap.get("searchBox")))%>>소천인</option>
+										<option value="02" <%=CmmUtil.select("02", CmmUtil.nvl((String) hMap.get("searchBox")))%>>회원명</option>
 									</select>
-									<input type="text" name="name" value="" title="" class="inputType1" style="" maxlength="25">
-
-									<a href="#" class="btn_active_small">검색</a>
+									<input type="text" name="search" id="search" class="inputType1" value="<%=CmmUtil.nvl((String) hMap.get("search"))%>" maxlength="25">
+									<a href="javascript:doSubmit();" class="btn_active_small">검색</a>
 								</td>
 							</tr>
 						</tbody>
 					</table>
                 </div>
-
+				</form>
 				<br/><br/>
 				<ul class="boradType4">
+				<%if(fList.size()!=0){%>
+				<%for(FuneralNoticeDTO fDTO : fList){%>
 					<li>
 						<p class="num">부고</p>
 						<div class="info">
-							<p class="txt">회원 이설희</p>
+							<p class="txt">회원 <%=CmmUtil.nvl(fDTO.getFuneralNoticeMember()) %></p>
 							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')">박춘심님 소천</a>
+								<a href="#"><%=CmmUtil.nvl(fDTO.getFuneralNoticeName()) %>님 소천</a>
 							</p>
 							<p class="txt2">
 								소천일<span class="bar">&nbsp;:</span>
-								<span>2017-11-09</span>
+								<span><%=CmmUtil.nvl(fDTO.getFuneralNoticeDay()) %></span>
+								<span class="bar">l</span>
+								<span><%=CmmUtil.nvl(fDTO.getFuneralNoticePlace()) %></span>
 							</p>
 						</div>
 					</li>
-					<li>
-						<p class="num">부고</p>
-						<div class="info">
-							<p class="txt">회원 이설희</p>
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')">박춘심님 소천</a>
-							</p>
-							<p class="txt2">
-								소천일<span class="bar">&nbsp;:</span>
-								<span>2017-11-09</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">부고</p>
-						<div class="info">
-							<p class="txt">회원 이설희</p>
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')">박춘심님 소천</a>
-							</p>
-							<p class="txt2">
-								소천일<span class="bar">&nbsp;:</span>
-								<span>2017-11-09</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">부고</p>
-						<div class="info">
-							<p class="txt">회원 이설희</p>
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')">박춘심님 소천</a>
-							</p>
-							<p class="txt2">
-								소천일<span class="bar">&nbsp;:</span>
-								<span>2017-11-09</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">부고</p>
-						<div class="info">
-							<p class="txt">회원 이설희</p>
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')">박춘심님 소천</a>
-							</p>
-							<p class="txt2">
-								소천일<span class="bar">&nbsp;:</span>
-								<span>2017-11-09</span>
-							</p>
-						</div>
-					</li>
+				<%}%>
+				<% }%>
 				</ul>
 
 
 
 				<!-- pageArea -->
 				<div class="pageArea">
-					<a href='#none' class='btnFirst'><span>처음</span></a> <a href='#' class='btnPrev'><span>이전</span></a><strong>1</strong><a href="javascript:goPage('2','15')" >2</a><a href="javascript:goPage('3','15')" >3</a><a href="javascript:goPage('4','15')" >4</a><a href="javascript:goPage('5','15')" >5</a><a href="javascript:goPage('2','15')" class='btnNext'><span>다음</span></a> <a href="javascript:goPage('19','15')" class='btnLast'><span>마지막</span></a>
+					<%= PageUtil.frontPaging(hMap, pageBtnSplit)%>
 				</div>
 				<!-- // pageArea -->
 
@@ -198,4 +186,4 @@
 	</div> <!-- // contentsWrap -->
 
 <!--#include file="../include/inc_footer.jsp"-->
-<%@include file="../include/inc_footer.jsp"%>
+<%@include file="/WEB-INF/view/include/inc_footer.jsp"%>
