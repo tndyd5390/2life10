@@ -1,3 +1,4 @@
+<%@page import="com.cl.util.CmmUtil"%>
 <%@page import="com.cl.util.PageUtil"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.cl.util.MathUtil"%>
@@ -182,7 +183,7 @@ function adviceSearch(){
 							<tr>
 								<td>
 									상담사명
-									<input type="text" id="search" name="search" class="inputType1" maxlength="25">
+									<input type="text" id="search" name="search" class="inputType1" maxlength="25" value="<%=CmmUtil.nvl((String)hMap.get("search"))%>">
 
 									<a href="#" class="btn_active_small" onclick="adviceSearch();">검색</a>
 								</td>

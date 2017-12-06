@@ -1,6 +1,8 @@
 //���ù��� ��Ʈ�ѷ�
 package com.cl.controller.admin;
 
+import java.util.HashMap;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +20,7 @@ import com.cl.dto.RegulationDTO;
 import com.cl.service.IRegulationService;
 import com.cl.util.CmmUtil;
 import com.cl.util.FileUtil;
+import com.cl.util.PageUtil;
 
 @Controller
 public class RegulationController {
@@ -32,6 +35,14 @@ public class RegulationController {
 	public String regulationList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".regulationList start!!!");
 		
+		int splitPage = 10;
+		
+		HashMap<String, Object> hMap = new HashMap<>();
+		hMap = PageUtil.paging(req, splitPage);
+		hMap = regulationService.getRegulationList(hMap);
+		model.addAttribute("hMap", hMap);
+		
+		hMap = null;
 		log.info(this.getClass() + ".regulation end!!!");
 		return "/Lmin/regulation/regulation_list";
 	}

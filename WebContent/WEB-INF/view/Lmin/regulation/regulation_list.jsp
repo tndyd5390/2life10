@@ -1,4 +1,16 @@
+<%@page import="com.cl.util.CmmUtil"%>
+<%@page import="com.cl.util.TextUtil"%>
+<%@page import="com.cl.util.PageUtil"%>
+<%@page import="com.cl.dto.RegulationDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	HashMap<String, Object> hMap = (HashMap) request.getAttribute("hMap");
+	int pageBtnSplit = 5;
+	
+	List<RegulationDTO> rList = (List<RegulationDTO>) hMap.get("list");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -24,6 +36,24 @@
 	<script src="/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
+function searchRegulation(){
+	var f = $("#f");
+	var search = $("#search");
+	
+	if(search.val() == ""){
+		alert("검색어를 입력하세요.");
+		search.focus();
+		return false;
+	}else{
+		f.submit();
+		return true;
+	}
+}
+function goPage(page, lastPage){
+	var f = $("#f");
+	$("#page").val(page);
+	f.submit();
+};
 </script>
 <body>
 <div id="skipnavi">
@@ -137,6 +167,8 @@
 				<h3 class="smallTit">상조관련법규</h3>
 
 				<div class="boardType2">
+				<form action="/Lmin/regulation/regulationList.do" id="f" method="post">
+				<input type="hidden" name="page" id="page">
 					<table summary="">
 						<caption>회원가입</caption>
 						<colgroup>
@@ -145,25 +177,49 @@
 						<tbody>
 							<tr>
 								<td>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
-										<option value="00">전체</option>
-										<option value="01">제목</option>
+									<select id="searchBox" name="searchBox" class="inputType3">
+										<option value="00" <%=CmmUtil.select("00", CmmUtil.nvl((String) hMap.get("searchBox")))%>>전체</option>
+										<option value="01" <%=CmmUtil.select("01", CmmUtil.nvl((String) hMap.get("searchBox")))%>>제목</option>
+										<option value="02" <%=CmmUtil.select("02", CmmUtil.nvl((String) hMap.get("searchBox")))%>>글쓴이</option>
 									</select>
-									<input type="text" name="name" value="" title="" class="inputType1" style="" maxlength="25">
-
-									<a href="#" class="btn_active_small">검색</a>
+									<input type="text" name="search" id="search" class="inputType1" value="<%=CmmUtil.nvl((String) hMap.get("search"))%>" maxlength="25">
+									<a href="#" class="btn_active_small" onclick="searchRegulation();">검색</a>
 								</td>
 							</tr>
 						</tbody>
 					</table>
+					</form>
                 </div>
 
 				<br/><br/>
 				<ul class="boradType5">
+				<%
+				if(rList.size()!=0){
+					for(RegulationDTO rDTO : rList){
+				%>
 					<li>
+						<p class="num"><%=TextUtil.exchangeEscapeNvl(rDTO.getRowNum()) %></p>
+						<div class="info">
+							<p class="txt1"><!-- 박성진수정 -->
+								<a href="javascript:selectBoardDtl('480')"><%=TextUtil.exchangeEscapeNvl(rDTO.getRegulationTitle()) %></a>
+							</p>
+							<p class="txt2">
+								<%=TextUtil.exchangeEscapeNvl(rDTO.getMemberId()) %><span class="bar">&nbsp;|</span>
+								<span><%=TextUtil.exchangeEscapeNvl(rDTO.getRegDt()) %></span>
+								<span class="bar">|</span>
+								<span class="count"><%=TextUtil.exchangeEscapeNvl(rDTO.getRegulationViewCnt()) %></span>
+							</p>
+						</div>
+					</li>
+				
+				<%
+					}
+				}
+				%>
+					<!-- <li>
 						<p class="num">[공지]</p>
 						<div class="info">
-							<p class="txt1"><!-- 박성진수정 -->
+							<p class="txt1">박성진수정
 								<a href="javascript:selectBoardDtl('480')">통신판매업신고증</a>
 							</p>
 							<p class="txt2">
@@ -177,7 +233,7 @@
 					<li>
 						<p class="num">1</p>
 						<div class="info">
-							<p class="txt1"><!-- 박성진수정 -->
+							<p class="txt1">박성진수정
 								<a href="javascript:selectBoardDtl('480')">통신판매업신고증</a>
 							</p>
 							<p class="txt2">
@@ -191,7 +247,7 @@
 					<li>
 						<p class="num">1</p>
 						<div class="info">
-							<p class="txt1"><!-- 박성진수정 -->
+							<p class="txt1">박성진수정
 								<a href="javascript:selectBoardDtl('480')">통신판매업신고증</a>
 							</p>
 							<p class="txt2">
@@ -205,7 +261,7 @@
 					<li>
 						<p class="num">1</p>
 						<div class="info">
-							<p class="txt1"><!-- 박성진수정 -->
+							<p class="txt1">박성진수정
 								<a href="javascript:selectBoardDtl('480')">통신판매업신고증</a>
 							</p>
 							<p class="txt2">
@@ -219,7 +275,7 @@
 					<li>
 						<p class="num">1</p>
 						<div class="info">
-							<p class="txt1"><!-- 박성진수정 -->
+							<p class="txt1">박성진수정
 								<a href="javascript:selectBoardDtl('480')">통신판매업신고증</a>
 							</p>
 							<p class="txt2">
@@ -229,13 +285,13 @@
 								<span class="count">625</span>
 							</p>
 						</div>
-					</li>
+					</li> -->
 				</ul>
 				<a href="/Lmin/regulation/regulationRegView.do" class="btn_active_small" style="float:right;">상조관련법규등록</a>
 
 				<!-- pageArea -->
 				<div class="pageArea">
-					<a href='#none' class='btnFirst'><span>처음</span></a> <a href='#' class='btnPrev'><span>이전</span></a><strong>1</strong><a href="javascript:goPage('2','15')" >2</a><a href="javascript:goPage('3','15')" >3</a><a href="javascript:goPage('4','15')" >4</a><a href="javascript:goPage('5','15')" >5</a><a href="javascript:goPage('2','15')" class='btnNext'><span>다음</span></a> <a href="javascript:goPage('19','15')" class='btnLast'><span>마지막</span></a>
+					<%=PageUtil.frontPaging(hMap, pageBtnSplit) %>
 				</div>
 				<!-- // pageArea -->
 

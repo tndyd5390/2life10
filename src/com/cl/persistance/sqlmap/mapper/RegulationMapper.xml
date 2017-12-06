@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cl.persistance.mapper.RegulationMapper">
+	<select id="getRegulationList" parameterType="hashmap" resultType="RegulationDTO">
+		SELECT @ROWNUM := @ROWNUM + 1 				AS ROWNUM,
+			   RI.REGULATION_NO						AS REGULATIONNO,
+			   RI.REGULATION_TITLE					AS REGULATIONTITLE,
+			   RI.REGULATION_CONTENTS				AS REGULATIONCONTENTS,
+			   RI.REGULATION_VIEW_CNT 				AS REGULATIONVIEWCNT,
+			   RI.REG_MEMBER_NO						AS REGMEMBERNO,
+			   DATE_FORMAT(RI.REG_DT,'%Y-%m-%d')	AS REGDT,
+			   RI.CHG_MEMBER_NO						AS CHGMEMBERNO,
+			   RI.CHG_DT							AS CHGDT,
+			   FI.FILE_NO							AS REGULATIONFILENO,
+			   FI.FILE_ORG_NAME						AS REGULATIONFILEORGNAME,
+			   FI.FILE_NAME							AS REGULATIONFILENAME,
+			   FI.FILE_PATH							AS REGULATIONFILEPATH,
+			   P.PAGE								AS PAGE,
+			   MI.MEMBER_ID							AS MEMBERID
+		  FROM REGULATION_INFO RI
+		 INNER JOIN MEMBER_INFO MI
+		    ON RI.REG_MEMBER_NO = MI.MEMBER_NO
+		  LEFT OUTER JOIN FILE_INFO FI
+		    ON RI.REGULATION_FILE_NO = FI.FILE_NO,
+		  	   (SELECT COUNT(*) AS PAGE
+		  	   	  FROM REGULATION_INFO RI
+		  	     INNER JOIN MEMBER_INFO MI 
+		  	        ON RI.REG_MEMBER_NO = MI.MEMBER_NO
+		  	    <where>
+		  	    	<if test="searchBox==00">
+		  				INSTR(RI.REGULATION_TITLE, #{search}) > 0
+		  			 OR INSTR(MI.MEMBER_ID, #{search}) > 0
+		  			</if>
+		  			<if test="searchBox==01">
+		  				INSTR(RI.REGULATION_TITLE, #{search}) > 0
+		  			</if>
+		  			<if test="searchBox==02">
+		  			 	INSTR(MI.MEMBER_ID, #{search}) > 0
+		  			</if>
+		  	    </where>) P,
+		       (SELECT @ROWNUM := 0) R
+	   <where>
+		  <if test="searchBox==00">
+		  	   INSTR(RI.REGULATION_TITLE, #{search}) > 0
+		 	OR INSTR(MI.MEMBER_ID, #{search}) > 0
+		  </if>
+		  <if test="searchBox==01">
+		  	   INSTR(RI.REGULATION_TITLE, #{search}) > 0
+		  </if>
+		  <if test="searchBox==02">
+		       INSTR(MI.MEMBER_ID, #{search}) > 0
+		  </if>
+	  </where>
+	  ORDER BY ROWNUM DESC
+	     LIMIT #{page}, #{splitPage}
+	</select>
 	<insert id="insertRegulationFile" parameterType="RegulationDTO">
 		INSERT INTO FILE_INFO
 		(
