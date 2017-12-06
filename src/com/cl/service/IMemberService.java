@@ -16,6 +16,8 @@ public interface IMemberService {
 
 	MemberDTO getMemberDetail(MemberDTO mDTO) throws Exception;
 
-	int deleteMember(String memberNo) throws Exception;
+	int updateMember(MemberDTO mDTO) throws Exception;
+	
+	int deleteMember(String memberNo) throws Exception;	
 	
 }

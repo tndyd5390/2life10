@@ -30,8 +30,9 @@
 				 REG_DT
 				)
 		VALUES  (
+		         <!-- AUTO_INCREMENT 수정 작업 후 쿼리 수정 필요 -->
 		         (
-		          SELECT MAX(IFNULL(A.MEMBER_NO, 0)) + 1 MEMBER_NO
+		          SELECT (MAX(IFNULL(A.MEMBER_NO, 0)) + 1) MEMBER_NO
 		            FROM MEMBER_INFO A
 		         ),
 				 #{memberId},
@@ -46,8 +47,12 @@
 				 #{memberEmail1},
 				 #{memberEmail2},
 				 'N',			
-				 last_insert_id(),
-				 now()
+				 <!-- last_insert_id(), -->
+				 (
+				  SELECT (MAX(IFNULL(B.MEMBER_NO, 0)) + 1) MEMBER_NO
+				    FROM MEMBER_INFO B
+				 ),
+				 NOW()
 				)
 	</insert>
 	
@@ -64,16 +69,15 @@
 	
 	<!-- 회원리스트 쿼리 -->
 	<select id="getMemberList" parameterType="MemberDTO" resultType="MemberDTO">
-		SELECT M.MEMBER_NO				MEMBERNO,
-		       M.MEMBER_NAME			MEMBERNAME,
-		       M.MEMBER_PHONE_NO		MEMBERPHONENO,
-		       M.MEMBER_EMAIL1			MEMBEREMAIL1,
-		       M.MEMBER_EMAIL2			MEMBEREMAIL2,
+		SELECT M.MEMBER_NO								MEMBERNO,
+		       M.MEMBER_ID								MEMBERID,
+		       M.MEMBER_NAME							MEMBERNAME,
+		       DATE_FORMAT(M.REG_DT, '%Y.%m.%d')		REGDT,
 		       P.PAGE
 		  FROM MEMBER_INFO M
 		 INNER JOIN
 		       (
-		        SELECT COUNT(*)			PAGE
+		        SELECT COUNT(*)							PAGE
 		          FROM MEMBER_INFO
 		         WHERE DEL_YN = 'N'
 		       ) P
@@ -85,6 +89,7 @@
 	<!-- 회원정보 상세 쿼리 -->
 	<select id="getMemberDetail" parameterType="MemberDTO" resultType="MemberDTO">
 		SELECT MEMBER_NO					MEMBERNO,
+		       MEMBER_ID					MEMBERID,
 		       MEMBER_NAME					MEMBERNAME,
 			   IF(
 			      MEMBER_SEX = 'M',
@@ -96,6 +101,7 @@
 			     )							MEMBERSEX,
 		       MEMBER_HOME_NO				MEMBERHOMENO,
 		       MEMBER_PHONE_NO				MEMBERPHONENO,
+		       MEMBER_POST_NO				MEMBERPOSTNO,
 		       MEMBER_ADDRESS				MEMBERADDRESS,
 		       MEMBER_ADDRESS_DETAIL		MEMBERADDRESSDETAIL,
 		       MEMBER_EMAIL1				MEMBEREMAIL1,
@@ -104,7 +110,24 @@
 		 WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
-	<!-- 회원 삭제 쿼리 -->
+	<!-- 회원정보 수정 쿼리(관리자) -->
+	<update id="updateMember" parameterType="MemberDTO">
+		UPDATE MEMBER_INFO
+		   SET  MEMBER_NAME = #{memberName}
+		       ,MEMBER_SEX = #{memberSex}
+		       ,MEMBER_HOME_NO = #{memberHomeNo}
+		       ,MEMBER_PHONE_NO = #{memberPhoneNo}
+		       ,MEMBER_POST_NO = #{memberPostNo}
+		       ,MEMBER_ADDRESS = #{memberAddress}
+		       ,MEMBER_ADDRESS_DETAIL = #{memberAddressDetail}
+		       ,MEMBER_EMAIL1 = #{memberEmail1}
+		       ,MEMBER_EMAIL2 = #{memberEmail2}
+		       ,CHG_MEMBER_NO = '3'
+		       ,CHG_DT = NOW()
+		 WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 회원 삭제 쿼리(관리자) -->
 	<update id="deleteMember" parameterType="String">
 		UPDATE MEMBER_INFO
 		   SET  MEMBER_ID = ' '
@@ -125,7 +148,7 @@
 		       (
 		        SELECT C.CODE_ID
 		          FROM CODE C
-		         WHERE C.CODE_ID = 202
+		         WHERE C.CODE_NAME = '관리자삭제'
 		       )
 		 WHERE MEMBER_NO = #{memberNo}
 	</update>

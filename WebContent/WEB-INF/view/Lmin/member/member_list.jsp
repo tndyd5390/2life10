@@ -178,10 +178,10 @@
 						</colgroup>
 						<thead>
 							<tr>
-								<th scope="col">번호</th>
-								<th scope="col">성명</th>
-								<th scope="col">휴대전화</th>
-								<th scope="col">이메일</th>
+								<th scope="col">회원번호</th>
+								<th scope="col">아이디</th>
+								<th scope="col">회원명</th>
+								<th scope="col">가입일</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -191,12 +191,12 @@
 								<td><%=CmmUtil.nvl(mDTO.getMemberNo()) %></td>
 								<td class="alignL">																
 									<a href="javascript:goDetail('<%=CmmUtil.nvl(mDTO.getMemberNo()) %>')">
-									<%=AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberName())) %>
+									<%=CmmUtil.nvl(mDTO.getMemberId()) %>
 									</a>								
 								</td>
-								<td><%=AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberPhoneNo())) %></td>
+								<td><%=AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberName())) %></td>
 								<td>
-								<%=AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberEmail1())) %>@<%=AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberEmail2())) %>
+								<%=CmmUtil.nvl(mDTO.getRegDt()) %>
 								</td>
 							</tr>
 							<% } %>

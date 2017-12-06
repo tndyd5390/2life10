@@ -36,7 +36,7 @@ public class CmmUtil {
 	public static String select(String str,String com_str){
 		if(str.equals(com_str)){
 			return " selected";
-		}else{
+		}else{				
 			return "";
 		}
 	}

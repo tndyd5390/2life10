@@ -274,6 +274,88 @@ public class MemberController {
 		return "/Lmin/member/member_view";
 	}
 	
+	@RequestMapping("/Lmin/member/memberUpdate")
+	public String memberUpdate(HttpServletRequest req, Model model) throws Exception{
+		log.info("Lmin:memberUpdate Start!!");
+		
+		String memberNo = CmmUtil.nvl(req.getParameter("mNo"));
+		log.info("memberNo : " + memberNo);
+		
+		MemberDTO mDTO = new MemberDTO();
+		
+		mDTO.setMemberNo(memberNo);
+		
+		mDTO = memberService.getMemberDetail(mDTO);
+		
+		model.addAttribute("mDTO", mDTO);
+		mDTO = null;
+		log.info("Lmin:memberUpdate End!!");
+		return "/Lmin/member/member_update";
+	}
+	
+	@RequestMapping("/Lmin/member/memberUpdateProc")
+	public String memberUpdateProc(HttpServletRequest req, Model model, HttpSession session) throws Exception{
+		log.info("Lmin:memberUpdateProc Start!!");
+		
+		String url = "";
+		String msg = "";
+		String memberNo = CmmUtil.nvl(req.getParameter("mNo"));
+		String memberName = CmmUtil.nvl(req.getParameter("name"));
+		String memberSex = CmmUtil.nvl(req.getParameter("sex"));
+		String memberHomeNo = CmmUtil.nvl(req.getParameter("tel1")) + "-" + CmmUtil.nvl(req.getParameter("tel2")) + "-" + CmmUtil.nvl(req.getParameter("tel3"));
+		String memberPhoneNo = CmmUtil.nvl(req.getParameter("phone1")) + "-" + CmmUtil.nvl(req.getParameter("phone2")) + "-" + CmmUtil.nvl(req.getParameter("phone3"));
+		String memberPostNo = CmmUtil.nvl(req.getParameter("postcode"));
+		String memberAddress = CmmUtil.nvl(req.getParameter("address1"));
+		String memberAddressDetail = CmmUtil.nvl(req.getParameter("address2"));
+		String memberEmail1 = CmmUtil.nvl(req.getParameter("email1"));
+		String memberEmail2 = CmmUtil.nvl(req.getParameter("email2"));
+		
+		log.info("memberNo : " + memberNo);
+		log.info("memberName : " + memberName);
+		log.info("memberSex : " + memberSex);
+		log.info("memberHomeNo : " + memberHomeNo);
+		log.info("memberPhoneNo : " + memberPhoneNo);
+		log.info("memberPostNo : " + memberPostNo);
+		log.info("memberAddress : " + memberAddress);
+		log.info("memberAddressDetail : " + memberAddressDetail);
+		log.info("memberEmail1 : " + memberEmail1);
+		log.info("memberEmail2 : " + memberEmail2);
+		
+		MemberDTO mDTO = new MemberDTO();
+		
+		mDTO.setMemberNo(memberNo);
+		mDTO.setMemberName(AES256Util.strEncode(memberName));
+		mDTO.setMemberSex(memberSex);
+		mDTO.setMemberHomeNo(AES256Util.strEncode(memberHomeNo));
+		mDTO.setMemberPhoneNo(AES256Util.strEncode(memberPhoneNo));
+		mDTO.setMemberPostNo(AES256Util.strEncode(memberPostNo));
+		mDTO.setMemberAddress(AES256Util.strEncode(memberAddress));
+		if(!memberAddressDetail.equals("")) {
+			mDTO.setMemberAddressDetail(AES256Util.strEncode(memberAddressDetail));
+		} else {
+			mDTO.setMemberAddressDetail("");
+		}
+		mDTO.setMemberEmail1(AES256Util.strEncode(memberEmail1));
+		mDTO.setMemberEmail2(AES256Util.strEncode(memberEmail2));
+		
+		int result = memberService.updateMember(mDTO);
+		
+		url = "/Lmin/member/memberList.do";
+		
+		if(result == 0) {
+			msg = "수정에 실패하였습니다.";
+		} else {
+			msg = "수정되었습니다.";
+		}
+		
+		mDTO = null;
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		log.info("Lmin:memberUpdateProc End!!");
+		return "/alert";
+	}
+	
 	@RequestMapping("/Lmin/member/memberDeleteProc")
 	public String memberDeleteProc(HttpServletRequest req, Model model) throws Exception {
 		log.info("Lmin:memberDeleteProc Start!!");
