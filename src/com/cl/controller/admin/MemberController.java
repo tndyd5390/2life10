@@ -79,7 +79,12 @@ public class MemberController {
 			session.setAttribute("ss_member_id", memberId);
 			session.setAttribute("ss_member_name", memberName);
 			session.setAttribute("ss_member_pre", memberPre);
-			url = "/main.do";
+			
+			if(mDTO.getMemberId().equals("kangseokopo")){
+				url = "/Lmin/notice/noticeList.do";
+			}else{
+				url = "/main.do";
+			}
 			msg = memberName+"님 환영합니다.";
 		}
 		
