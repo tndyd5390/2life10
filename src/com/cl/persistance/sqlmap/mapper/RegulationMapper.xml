@@ -183,12 +183,31 @@
 		       CHG_DT = NOW()
 		 WHERE REGULATION_NO = #{regulationNo}
 	</update>
-	<update id="updateRegulationWithoutImg" parameterType="RegulationDTO">
+	<update id="updateRegulation" parameterType="RegulationDTO">
+		<choose>
+			<when test="regulationFileName==null">
+				UPDATE REGULATION_INFO
+		   		   SET REGULATION_TITLE = #{regulationTitle},
+		       		   REGULATION_CONTENTS = #{regulationContents},
+    	       		   CHG_MEMBER_NO = #{chgMemberNo},
+		       		   CHG_DT = NOW()
+		 		 WHERE REGULATION_NO = #{regulationNo}
+			</when>
+			<when test="regulationFileName!=null">
+				UPDATE REGULATION_INFO
+		   		   SET REGULATION_TITLE = #{regulationTitle},
+		       		   REGULATION_CONTENTS = #{regulationContents},
+		       		   REGULATION_FILE_NO = #{regulationFileNo},
+    	       		   CHG_MEMBER_NO = #{chgMemberNo},
+		       		   CHG_DT = NOW()
+		 		 WHERE REGULATION_NO = #{regulationNo}
+			</when>
+		</choose>
+	</update>
+	
+	<update id="updateRegulationViewCnt" parameterType="string">
 		UPDATE REGULATION_INFO
-		   SET REGULATION_TITLE = #{regulationTitle},
-		       REGULATION_CONTENTS = #{regulationContents},
-    	       CHG_MEMBER_NO = #{chgMemberNo},
-		       CHG_DT = NOW()
+		   SET REGULATION_VIEW_CNT = REGULATION_VIEW_CNT + 1
 		 WHERE REGULATION_NO = #{regulationNo}
 	</update>
 </mapper>

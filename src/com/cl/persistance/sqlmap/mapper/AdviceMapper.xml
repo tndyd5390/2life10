@@ -88,31 +88,4 @@
 		   	   CHG_DT = NOW()
 		 WHERE ADVICE_NO = #{adviceNo}
 	</update>
-	 
-	<select id="getAdviceRecordCnt" resultType="int">
-		SELECT COUNT(*) FROM ADVICE_INFO
-	</select>
-	
-	<select id="getAdviceSearch" parameterType="hashmap" resultType="AdviceDTO">
-		SELECT @ROWNUM := @ROWNUM + 1 	AS ROWNUM,
-			   ADVICE_NO				AS ADVICENO,
-			   ADVICE_NAME				AS ADVICENAME,
-			   ADVICE_PHONE_NO			AS ADVICEPHONENO,
-			   ADVICE_POST_NO			AS ADVICEPOSTNO,
-			   ADVICE_ADDRESS			AS ADVICEADDRESS,
-			   ADVICE_ADDRESS_DETAIL	AS ADVICEADDRESSDETAIL,
-			   ADVICE_VIEW_CNT			AS ADVICEVIEWCNT,
-			   REG_MEMBER_NO			AS REGMEMBERNO,
-			   REG_DT					AS REGDT,
-			   CHG_MEMBER_NO			AS CHGMEMBERNO,
-			   CHG_DT					AS CHGDT
-		  FROM ADVICE_INFO
-		 WHERE INSTR(ADVICE_NAME, #{searchWord}) > 0
-	  ORDER BY ADVICENO DESC
-	     LIMIT #{limit} OFFSET #{offset}
-	</select>
-	
-	<select id="getAdviceSearchRecordCnt" parameterType="string" resultType="int">
-		SELECT COUNT(*) FROM ADVICE_INFO WHERE INSTR(ADVICE_NAME, #{adviceSearchName}) > 0
-	</select>
 </mapper>

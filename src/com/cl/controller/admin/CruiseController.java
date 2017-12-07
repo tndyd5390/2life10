@@ -31,14 +31,28 @@ import com.cl.util.PageUtil;
 public class CruiseController {
 	
 	private Logger log = Logger.getLogger(this.getClass());
+	
+	//크루즈 일정파일이 저장될 경로
 	private String scheSavePath = "C:\\Users\\Data3811-32\\git\\2life10\\WebContent\\cruiseSchedule\\";
+	//크루즈 이미지 파일이 저장될 경로
 	private String imgSavePath = "C:\\Users\\Data3811-32\\git\\2life10\\WebContent\\cruiseImg\\";
+	
 	@Resource(name="CruiseService")
 	private ICruiseService cruiseService;
 	
+	/**
+	 * @param req
+	 * @param resp
+	 * @param model
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 * 크루즈 리스트 화면 메소드
+	 */
 	@RequestMapping(value="Lmin/cruise/cruiseScheduleList", method={RequestMethod.GET, RequestMethod.POST})
 	public String cruiseScheduleList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cruiseScheduleList start!!!");
+		//한 화면에 보여줄 크루즈 갯수
 		int splitPage = 5;
 		
 		HashMap<String, Object> hMap = new HashMap<>();
@@ -52,6 +66,15 @@ public class CruiseController {
 		return "/Lmin/cruise/cruise_schedule";
 	}
 	
+	/**
+	 * @param req
+	 * @param resp
+	 * @param model
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 * 크루즈 등록 화면으로 이동하는 메소드
+	 */
 	@RequestMapping(value="Lmin/cruise/cruiseSchduleWriteView", method=RequestMethod.GET)
 	public String cruiseSchduleWriteView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cruiseSchduleWriteView start!!!");
@@ -60,38 +83,62 @@ public class CruiseController {
 		return "/Lmin/cruise/cruise_schedule_write";
 	}
 	
+	/**
+	 * @param req
+	 * @param resp
+	 * @param model
+	 * @param session
+	 * @param cruiseScheFile
+	 * @param cruiseImgFile
+	 * @return
+	 * @throws Exception
+	 * 크루즈 등록 메소드
+	 */
 	@RequestMapping(value="Lmin/cruise/cruiseScheduleRegProc", method=RequestMethod.POST)
 	public String cruiseScheduleRegProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session, @RequestParam("cruiseScheFile") MultipartFile cruiseScheFile, @RequestParam("cruiseImgFile") MultipartFile cruiseImgFile) throws Exception{
 		log.info(this.getClass() + ".cruiseScheduleRegProc start!!!");
 		
+		//등록자 회원번호
 		String regMemberNo = CmmUtil.nvl((String)session.getAttribute("ss_member_no"));
 		log.info(" regMemberNo : " + regMemberNo);
+		//크루즈 이름
 		String cruiseName = CmmUtil.nvl(req.getParameter("cruiseName"));
 		log.info(" cruiseName : " + cruiseName);
+		//선사이름
 		String cruiseShipName = CmmUtil.nvl(req.getParameter("cruiseShipName"));
 		log.info(" cruiseShipName : " + cruiseShipName);
+		//가격
 		String cruisePrice = CmmUtil.nvl(req.getParameter("cruisePrice"));
 		log.info(" cruisePrice : "  + cruisePrice);
+		//탑승인원
 		String cruiseAccomodation = CmmUtil.nvl(req.getParameter("cruiseAccomodation"));
 		log.info(" cruiseAccomodation : " + cruiseAccomodation);
+		//캐빈
 		String cruiseCabinCode = CmmUtil.nvl(req.getParameter("cruiseCabinCode"));
 		log.info(" cruiseCabinCode : " + cruiseCabinCode);
+		//출발년도
 		String startYear = CmmUtil.nvl(req.getParameter("startYear"));
 		log.info(" startYear : " + startYear);
+		//출발월
 		String startMonth = CmmUtil.nvl(req.getParameter("startMonth"));
 		log.info(" startMonth : " + startMonth);
 		if(Integer.parseInt(startMonth) < 10) startMonth = "0" + startMonth;
+		//출발일
 		String startDay = CmmUtil.nvl(req.getParameter("startDay"));
 		log.info(" startDay : " + startDay);
 		if(Integer.parseInt(startDay) < 10) startDay = "0" + startDay;
+		//종료년도
 		String endYear = CmmUtil.nvl(req.getParameter("endYear"));
 		log.info(" endYear : " + endYear);
+		//종료월
 		String endMonth = CmmUtil.nvl(req.getParameter("endMonth"));
 		log.info(" endMonth : " + endMonth);
 		if(Integer.parseInt(endMonth) < 10) endMonth = "0" + endMonth;
+		//종료일
 		String endDay = CmmUtil.nvl(req.getParameter("endDay"));
 		log.info(" endDay : " + endDay);
 		if(Integer.parseInt(endDay) < 10) endDay = "0" + endDay;
+		//기다
 		String cruiseEtc = CmmUtil.nvl(req.getParameter("cruiseEtc"));
 		log.info(" cruiseEtc : " + cruiseEtc);
 		
@@ -105,6 +152,7 @@ public class CruiseController {
 		String reScheFileName = FileUtil.fileSave(cruiseScheFile, scheSavePath);
 		String reImgFileName = FileUtil.fileSave(cruiseImgFile, imgSavePath);
 		
+		//등록할 cruiseDTO세팅
 		CruiseDTO cDTO = new CruiseDTO();
 		cDTO.setCruiseShipName(cruiseShipName);
 		cDTO.setCruiseStartDay(startYear + startMonth + startDay);
@@ -122,6 +170,7 @@ public class CruiseController {
 		cDTO.setCruiseScheFilePath(scheSavePath);
 		cDTO.setCruisePrice(cruisePrice);
 		
+		//크루즈 등록
 		int result = cruiseService.insertCruise(cDTO);
 		
 		if(result != 0){
@@ -134,17 +183,30 @@ public class CruiseController {
 		return "/alert";
 	}
 	
+	/**
+	 * @param req
+	 * @param resp
+	 * @param model
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 * 크루즈 삭제 메소드
+	 */
 	@RequestMapping(value="Lmin/cruise/deleteCruise", method=RequestMethod.POST)
 	public String deleteCruise(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".deleteCruise start!!!");
 		
+		//크루즈 번호
 		String cruiseNo = CmmUtil.nvl(req.getParameter("cruiseNo"));
 		log.info(" cruiseNo : " + cruiseNo);
+		//크루즈 이미지 파일 번호
 		String cruiseImgFileNo = CmmUtil.nvl(req.getParameter("cruiseImgFileNo"));
 		log.info(" cruiseImgFileNo : " + cruiseImgFileNo);
+		//크루즈 일정 파일 번호
 		String cruiseScheFileNo = CmmUtil.nvl(req.getParameter("cruiseScheFileNo"));
 		log.info(" cruiseScheFileNo : " + cruiseScheFileNo);
 		
+		//삭제할 cruiseDTO세팅
 		CruiseDTO cDTO = new CruiseDTO();
 		cDTO.setCruiseNo(cruiseNo);
 		cDTO.setCruiseImgFileNo(Integer.parseInt(cruiseImgFileNo));
@@ -152,32 +214,39 @@ public class CruiseController {
 		String[] fileNoArr = {cruiseImgFileNo, cruiseScheFileNo};
 		cDTO.setFileNoArr(fileNoArr);
 		
+		//크루즈 이미지와 일정파일을 삭제하기 위해 delete후 각각의 파일이름을 가져온다.
 		Map<String, String> fileNames = cruiseService.deleteCruise(cDTO);
 		if(fileNames == null){
 			model.addAttribute("msg", "크루즈 상품 삭제에 실패했습니다.");
 			model.addAttribute("url", "/Lmin/cruise/cruiseScheduleList.do");
 			return "/alert";
 		}else{
-			File file = new File(fileNames.get("imgFullPath"));
-			if(file.exists()){
-				file.delete();
-			}
-			file = new File(fileNames.get("pdfFullPath"));
-			if(file.exists()){
-				file.delete();
-			}
+			//각각의 파일 삭제
+			FileUtil.deleteFile(fileNames.get("imgFullPath"));
+			FileUtil.deleteFile(fileNames.get("pdfFullPath"));
 		}
 		log.info(this.getClass() + ".deleteCruise end!!!");
 		return "redirect:/Lmin/cruise/cruiseScheduleList.do";
 	}
 	
+	/**
+	 * @param req
+	 * @param resp
+	 * @param model
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 * 크루즈 수정화면으로 이동할 메소드
+	 */
 	@RequestMapping(value="Lmin/cruise/updateCruiseView", method=RequestMethod.GET)
 	public String updateCruise(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".updateCruise start!!!");
 		
+		//크루즈 번호
 		String cruiseNo = CmmUtil.nvl(req.getParameter("cruiseNo"));
 		log.info(" cruiseNo : " + cruiseNo);
 		
+		//크루즈 상세 가져오기
 		CruiseDTO cDTO = cruiseService.getCruise(cruiseNo);
 		if(cDTO == null) cDTO = new CruiseDTO();
 		
@@ -187,6 +256,17 @@ public class CruiseController {
 		return "/Lmin/cruise/cruise_schedule_updateView";
 	}
 	
+	/**
+	 * @param req
+	 * @param resp
+	 * @param model
+	 * @param session
+	 * @param cruiseScheFile
+	 * @param cruiseImgFile
+	 * @return
+	 * @throws Exception
+	 * 크루즈 수정 메소드
+	 */
 	@RequestMapping(value="Lmin/cruise/cruiseScheduleUpdateProc", method=RequestMethod.POST)
 	public String updateCruiseProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session, @RequestParam("cruiseScheFile") MultipartFile cruiseScheFile, @RequestParam("cruiseImgFile") MultipartFile cruiseImgFile) throws Exception{
 		log.info(this.getClass() + ".updateCruiseProc start!!!");
@@ -261,10 +341,8 @@ public class CruiseController {
 		log.info(" cruiseScheFileName : " + orgScheFileName);
 		String orgImgFileName = CmmUtil.nvl(cruiseImgFile.getOriginalFilename());
 		log.info(" cruiseImgFileName : " + orgImgFileName);
-
-		//완성된 각 파일의 이름
-		String now = new SimpleDateFormat("yyyyMMddhmsS").format(new Date());
 		
+		//크루즈 일정 파일을 변경한다면
 		if(!"".equals(orgScheFileName)){
 			//저장된 파일의 이름
 			reScheFileName = FileUtil.fileSave(cruiseScheFile, scheSavePath);
@@ -276,6 +354,7 @@ public class CruiseController {
 			cDTO.setCruiseScheFileOrgName(null);
 		}
 		
+		//크루즈 이미지 파일을 변경한다면
 		if(!"".equals(orgImgFileName)){
 			//저장된 파일의 이름
 			reImgFileName = FileUtil.fileSave(cruiseImgFile, imgSavePath);
@@ -287,6 +366,7 @@ public class CruiseController {
 			cDTO.setCruiseImgFileOrgName(null);
 		}
 		
+		//크루즈 수정
 		boolean result = cruiseService.updateCruise(cDTO);
 		
 		if(result){
@@ -301,22 +381,38 @@ public class CruiseController {
 		return "/alert";
 	}
 	
+	/**
+	 * @param req
+	 * @param resp
+	 * @param model
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 * 크루즈 일정 다운로드 메소드
+	 */
 	@RequestMapping(value="Lmin/cruise/cruiseDownloadSche", method=RequestMethod.GET)
 	public ModelAndView crusieDownLoadSche(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cruiseDownLoadSche start!!!");
 		
+		//크루즈번호
 		String cruiseNo = CmmUtil.nvl(req.getParameter("cruiseNo"));
 		log.info(" cruiseNo : " + cruiseNo);
 		
+		//크루즈 상세를 가져온다 파일의 경로와 파일 이름
 		CruiseDTO cDTO = cruiseService.getCruise(cruiseNo);
 		if(cDTO == null) cDTO = new CruiseDTO();
 		
+		//파일 경로
 		String path = CmmUtil.nvl(cDTO.getCruiseScheFilePath());
+		//파일 이름
 		String fileName = CmmUtil.nvl(cDTO.getCruiseScheFileName());;
+		//파일의 원래이름
 		String fileOrgName = CmmUtil.nvl(cDTO.getCruiseScheFileOrgName());
 		
+		//파일 객체 생성하고
 		File file = new File(path + fileName);
 		
+		//ModelAndView클래스를 통해 DispatherServlet에 download라고 이름이 지어져있는 view클래스로 데이터를 던진다.
 		ModelAndView mav = new ModelAndView("download", "downloadFile", file);
 		mav.addObject("fileOrgName", fileOrgName);
 		log.info(this.getClass() + ".cruiseDownLoadSche end!!!");

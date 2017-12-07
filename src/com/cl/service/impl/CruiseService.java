@@ -23,7 +23,9 @@ public class CruiseService implements ICruiseService{
 
 	@Override
 	public int insertCruise(CruiseDTO cDTO) throws Exception {
+		//크루즈 이미지 등록
 		cruiseMapper.insertCruiseImg(cDTO);
+		//크루즈 일정 등록
 		cruiseMapper.insertCruiseScheFile(cDTO);
 		return cruiseMapper.insertCruise(cDTO);
 	}
@@ -43,8 +45,11 @@ public class CruiseService implements ICruiseService{
 
 	@Override
 	public Map<String, String> deleteCruise(CruiseDTO cDTO) throws Exception {
+		//크루즈 이미지 절대경로 가져오기
 		String imgFullPath = cruiseMapper.getFileFullPath(cDTO.getCruiseImgFileNo() + "");
+		//크루즈 일정파일 절대경로 가져오기
 		String pdfFullPath = cruiseMapper.getFileFullPath(cDTO.getCruiseScheFileNo() + "");
+		//크루즈 삭제
 		int result = cruiseMapper.deleteCruise(cDTO);
 		Map<String, String> fileNames = new HashMap<>();
 		if(result != 0){
@@ -53,6 +58,7 @@ public class CruiseService implements ICruiseService{
 		}else{
 			fileNames = null;	
 		}
+		//파일의 절대경로를 반환하여 contorller에서 삭제
 		return fileNames;
 	}
 
@@ -72,21 +78,21 @@ public class CruiseService implements ICruiseService{
 			if(queryResult != 0) result = true;
 		}else if((!CmmUtil.nvl(cDTO.getCruiseImgFileOrgName()).equals("")) && 
 				CmmUtil.nvl(cDTO.getCruiseScheFileOrgName()).equals("")){
-			//이미지만 바꿀경우
+			//이미지만 바꿀경우 기존 이미지 삭제후 새로 insert
 			cruiseMapper.deleteCruiseImgFile(cDTO);
 			cruiseMapper.insertCruiseImg(cDTO);
 			queryResult = cruiseMapper.updateCruise(cDTO);
 			if(queryResult != 0) result = true;
 		}else if(CmmUtil.nvl(cDTO.getCruiseImgFileOrgName()).equals("") && 
 				(!CmmUtil.nvl(cDTO.getCruiseScheFileOrgName()).equals(""))){
-			//일정만 바꿀경우
+			//일정만 바꿀경우 기존 일정 삭제후 새로 insert
 			cruiseMapper.deleteCruiseScheFile(cDTO);
 			cruiseMapper.insertCruiseScheFile(cDTO);
 			queryResult = cruiseMapper.updateCruise(cDTO);
 			if(queryResult != 0) result = true;
 		}else if((!CmmUtil.nvl(cDTO.getCruiseScheFileOrgName()).equals("")) &&
 				(!CmmUtil.nvl(cDTO.getCruiseImgFileOrgName()).equals(""))){
-			//둘다 바꿀경우
+			//둘다 바꿀경우 둘다 삭제후 새로 insert
 			cruiseMapper.deleteCruiseImgFile(cDTO);
 			cruiseMapper.deleteCruiseScheFile(cDTO);
 			cruiseMapper.insertCruiseImg(cDTO);
