@@ -83,8 +83,11 @@ public class RegulationService implements IRegulationService{
 	}
 
 	@Override
-	public int updateRegulationWithoutImg(RegulationDTO rDTO) throws Exception {
-		return regulationMapper.updateRegulationWithoutImg(rDTO);
+	public int updateRegulation(RegulationDTO rDTO) throws Exception {
+		if(!"".equals(CmmUtil.nvl(rDTO.getRegulationFileName()))) {
+			regulationMapper.insertRegulationFile(rDTO);
+		}
+		return regulationMapper.updateRegulation(rDTO);
 	}
 	
 }

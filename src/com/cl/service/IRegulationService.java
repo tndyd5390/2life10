@@ -12,5 +12,5 @@ public interface IRegulationService {
 	public RegulationDTO deleteRegulation(String regulationNo) throws Exception;
 	public int updateRegulationImgNull(Map<String, String> map) throws Exception;
 	public int updateRegulationImg(Map<String, Object> map) throws Exception;
-	public int updateRegulationWithoutImg(RegulationDTO rDTO) throws  Exception;
+	public int updateRegulation(RegulationDTO rDTO) throws  Exception;
 }

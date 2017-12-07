@@ -17,12 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
 
 import com.cl.dto.RegulationDTO;
-import com.cl.persistance.mapper.RegulationMapper;
 import com.cl.service.IRegulationService;
-import com.cl.service.impl.RegulationService;
 import com.cl.util.CmmUtil;
 import com.cl.util.FileUtil;
 import com.cl.util.PageUtil;
@@ -271,8 +268,8 @@ public class RegulationController {
 		log.info(this.getClass() + ".regualtionChangeImg end!!!");
 	}
 	
-	@RequestMapping(value="Lmin/regulation/regulationUpdateProcWithoutImg", method=RequestMethod.POST)
-	public String regulationUpdateProcWithoutImg(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+	@RequestMapping(value="Lmin/regulation/regulationUpdateProc", method=RequestMethod.POST)
+	public String regulationUpdateProcWithoutImg(MultipartHttpServletRequest mulReq, HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".regulationUpdateProcWithoutImg start!!"); 
 		
 		String regulationNo = CmmUtil.nvl(req.getParameter("regulationNo"));
@@ -284,13 +281,27 @@ public class RegulationController {
 		String chgMemberNo = (String)session.getAttribute("ss_member_no");
 		log.info(" memberNo : " + chgMemberNo);
 		
+		MultipartFile file = mulReq.getFile("regulationFile");
+		String regulationFileOrgName = "";
+		if(file !=  null) {
+			regulationFileOrgName = CmmUtil.nvl(file.getOriginalFilename());
+			log.info(" regulationFileName : " + regulationFileOrgName);
+		}
+
 		RegulationDTO rDTO = new RegulationDTO();
 		rDTO.setRegulationTitle(regulationTitle);
 		rDTO.setRegulationContents(regulationContents);
 		rDTO.setChgMemberNo(chgMemberNo);
 		rDTO.setRegulationNo(regulationNo);
 		
-		int result = regulationService.updateRegulationWithoutImg(rDTO);
+		if(!"".equals(regulationFileOrgName)) {
+			String regulationReFileName = FileUtil.fileSave(file, regulationSavePath);
+			rDTO.setRegulationFileName(regulationReFileName);
+			rDTO.setRegulationFileOrgName(regulationFileOrgName);
+			rDTO.setRegulationFilePath(regulationSavePath);
+		}
+		
+		int result = regulationService.updateRegulation(rDTO);
 		if(result != 0) {
 			model.addAttribute("msg", "상조관련법규 수정에 성공했습니다.");
 		}else {
