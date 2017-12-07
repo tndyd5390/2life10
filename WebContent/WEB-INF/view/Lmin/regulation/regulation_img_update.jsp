@@ -43,7 +43,7 @@ $(function(){
 			if(data != 0){
 				var contents = "";
 				contents += "<th scope='row'>이미지</th>";
-				contents += "<td><img src='/regulationFile/" + data + "'>";
+				contents += "<td><img src='/file/regulation/img/" + data + "'>";
 				contents += "<a href='#' id='submitLink' class='btn_active' onclick='doChangeImg();'>변경</a>";
 				contents += "<a href='#' id='btnCancel' class='btn_cancel' onclick='updateImgNull();'>삭제</a></td>";
 				opener.document.getElementById('regulationImgTr').innerHTML = contents;

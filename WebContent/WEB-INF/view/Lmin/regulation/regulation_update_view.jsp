@@ -196,7 +196,7 @@ function doChangeImg(){
 							%>
 								<th scope="row">이미지</th>
 								<td>
-									<img src="<%="/regulationFile/" + CmmUtil.nvl(rDTO.getRegulationFileName())%>">
+									<img src="<%="/file/regulation/file/" + CmmUtil.nvl(rDTO.getRegulationFileName())%>">
 									<a href="#" id="submitLink" class="btn_active" onclick="doChangeImg();">변경</a>
 									<a href="#" id="btnCancel" class="btn_cancel" onclick="updateImgNull();">삭제</a>
 								</td>
