@@ -140,7 +140,7 @@
 					<article class="boardCont">
 						<div id="ckContent">
 								<div class="editArea">								
-								<p><%=TextUtil.replaceBr(CmmUtil.nvl(nDTO.getNoticeContents())) %></p>
+								<p><%=TextUtil.replaceBr(TextUtil.exchangeEscapeNvl(nDTO.getNoticeContents())) %></p>
 								</div>				
 						</div>
 					</article>

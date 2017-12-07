@@ -164,21 +164,6 @@ function doSearch(){
 				</form>
 				<br/><br/>
 				<ul class="boradType4">
-						<li>
-						<p class="num"></p>
-						<div class="info">
-							<p class="txt"></p>
-							<p class="txt1"><!-- 박성진수정 -->
-								검색 결과가 없습니다.
-							</p>
-							<p class="txt2">
-								<span class="bar">&nbsp;</span>
-								<span></span>
-								<span class="bar"></span>
-								<span class="count"></span>
-						</p>
-						</div>
-						</li>
 						<%
 						if(bList.size()!=0){
 							for(BranchDTO bDTO : bList){
@@ -200,8 +185,27 @@ function doSearch(){
 						</li>
 						<%
 							}
-						}
+						}else{
+							
 						%>
+						<li>
+						<p class="num"></p>
+						<div class="info">
+							<p class="txt"></p>
+							<p class="txt1"><!-- 박성진수정 -->
+								검색 결과가 없습니다.
+							</p>
+							<p class="txt2">
+								<span class="bar">&nbsp;</span>
+								<span></span>
+								<span class="bar"></span>
+								<span class="count"></span>
+						</p>
+						</div>
+						</li>
+						<%
+						}
+					%>
 				</ul>
 				<a href="/Lmin/company/branchWriteView.do" class="btn_active_small" style="float:right;">전국 지사 등록</a>
 
