@@ -18,4 +18,5 @@ public interface RegulationMapper {
 	public int deleteRegulationImg(String regulationFileNo) throws Exception;
 	public int updateRegulationImg(RegulationDTO rDTO) throws Exception;
 	public int updateRegulation(RegulationDTO rDTO) throws Exception;
+	public int updateRegulationViewCnt(String regulationNo) throws Exception;
 }

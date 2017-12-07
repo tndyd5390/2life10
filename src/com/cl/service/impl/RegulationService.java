@@ -42,6 +42,7 @@ public class RegulationService implements IRegulationService{
 
 	@Override
 	public RegulationDTO getRegulationDetail(String regulationNo) throws Exception {
+		regulationMapper.updateRegulationViewCnt(regulationNo);
 		return regulationMapper.getRegulationDetail(regulationNo);
 	}
 

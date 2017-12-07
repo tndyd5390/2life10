@@ -204,4 +204,10 @@
 			</when>
 		</choose>
 	</update>
+	
+	<update id="updateRegulationViewCnt" parameterType="string">
+		UPDATE REGULATION_INFO
+		   SET REGULATION_VIEW_CNT = REGULATION_VIEW_CNT + 1
+		 WHERE REGULATION_NO = #{regulationNo}
+	</update>
 </mapper>
