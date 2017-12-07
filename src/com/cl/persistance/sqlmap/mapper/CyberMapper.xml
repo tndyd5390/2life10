@@ -93,4 +93,23 @@
 	  ORDER BY ROWNUM DESC
 	     LIMIT #{page}, #{splitPage}
 	</select>
+	<select id="getCyberDetail" parameterType="string" resultType="CyberDTO">
+		SELECT CI.CYBER_NO							AS CYBERNO,
+       		   CI.CYBER_FILE_NO						AS CYBERFILENO,
+       		   CI.CYBER_TITLE						AS CYBERTITLE,
+       		   CI.CYBER_CONTENTS					AS CYBERCONTENTS,
+       		   CI.CYBER_VIEW_CNT					AS CYBERVIEWCNT,
+       		   CI.REG_MEMBER_NO						AS REGMEMBERNO,
+       		   DATE_FORMAT(CI.REG_DT,'%Y-%m-%d')	AS REGDT,
+       		   MI.MEMBER_ID							AS MEMBERID,	
+       		   FI.FILE_NAME							AS CYBERFILENAME,
+       		   FI.FILE_PATH							AS CYBERFILEPATH,
+       		   FI.FILE_ORG_NAME						AS CYBERFILEORGNAME
+  		  FROM CYBER_INFO CI
+ 	INNER JOIN MEMBER_INFO MI
+    		ON CI.REG_MEMBER_NO = MI.MEMBER_NO
+    INNER JOIN FILE_INFO FI
+    		ON CI.CYBER_FILE_NO = FI.FILE_NO
+    	 WHERE CYBER_NO = #{cyberNo}
+	</select>
 </mapper>

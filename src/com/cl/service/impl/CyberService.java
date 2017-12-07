@@ -37,4 +37,9 @@ public class CyberService implements ICyberService{
 		}
 		return hMap;
 	}
+
+	@Override
+	public CyberDTO getCyberDetail(String cyberNo) throws Exception {
+		return cyberMapper.getCyberDetail(cyberNo);
+	}
 }

@@ -136,7 +136,7 @@
 						<p class="num"><%=CmmUtil.nvl(cDTO.getRowNum()) %></p>
 						<div class="info">
 							<p class="txt1"><!-- 박성진수정 -->
-								<a href="javascript:selectBoardDtl('480')"><%=TextUtil.exchangeEscapeNvl(cDTO.getCyberTitle()) %></a>
+								<a href="/Lmin/company/cyberDetail.do?cyberNo=<%=CmmUtil.nvl(cDTO.getCyberNo())%>"><%=TextUtil.exchangeEscapeNvl(cDTO.getCyberTitle()) %></a>
 							</p>
 							<p class="txt2">
 								<%=TextUtil.exchangeEscapeNvl(cDTO.getMemberId()) %><span class="bar">&nbsp;|</span>

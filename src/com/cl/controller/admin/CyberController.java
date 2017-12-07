@@ -91,4 +91,20 @@ public class CyberController {
 		log.info(this.getClass() + ".cyberRegProc end!!!");
 		return "/alert";
 	}
+	
+	@RequestMapping(value="Lmin/company/cyberDetail", method=RequestMethod.GET)
+	public String cyberDetail(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+		log.info(this.getClass() + ".cyberDetail start!!!");
+		
+		String cyberNo = CmmUtil.nvl(req.getParameter("cyberNo"));
+		log.info(" cyberNo : " + cyberNo);
+		
+		CyberDTO cDTO = cyberService.getCyberDetail(cyberNo);
+		if(cDTO == null) cDTO= new CyberDTO();
+		
+		model.addAttribute("cDTO", cDTO);
+		
+		log.info(this.getClass() + ".cyberDetail end!!!");
+		return "/Lmin/company/cyber_detail";
+	}
 }

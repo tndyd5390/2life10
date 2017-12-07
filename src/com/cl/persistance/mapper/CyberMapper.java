@@ -11,4 +11,5 @@ public interface CyberMapper {
 	public int insertCyberFile(CyberDTO cDTO) throws Exception;
 	public int insertCyber(CyberDTO cDTO) throws Exception;
 	public List<CyberDTO> getCyberList(HashMap<String, Object> hMap) throws Exception;
+	public CyberDTO getCyberDetail(String cyberNo) throws Exception;
 }
