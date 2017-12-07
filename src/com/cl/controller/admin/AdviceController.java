@@ -30,6 +30,15 @@ public class AdviceController {
 	@Resource(name="AdviceService")
 	private IAdviceService adviceService;
 	
+	/**
+	 * @param req
+	 * @param resp
+	 * @param model
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 * 상담사 리스트 메소드
+	 */
 	@RequestMapping(value="Lmin/company/adviceList", method={RequestMethod.GET, RequestMethod.POST})
 	public String adviceList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".adviceList start!!!");
@@ -45,6 +54,15 @@ public class AdviceController {
 		return "/Lmin/company/advice";
 	}
 	
+	/**
+	 * @param req
+	 * @param resp
+	 * @param model
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 * 상담사 등록화면 이동 메소드
+	 */
 	@RequestMapping(value="Lmin/company/adviceWriteView", method=RequestMethod.GET)
 	public String adviceWriteView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".adviceWriteView start!!!");
@@ -53,10 +71,20 @@ public class AdviceController {
 		return "/Lmin/company/advice_write";
 	}
 	
+	/**
+	 * @param req
+	 * @param resp
+	 * @param model
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 * 상담사 등록 메소드
+	 */
 	@RequestMapping(value="Lmin/company/adviceRegProc", method=RequestMethod.POST)
 	public String adviceRegProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".adviceRegProc start!!!");
 		
+		//등록자 회원번호
 		String regMemberNo = CmmUtil.nvl((String)session.getAttribute("ss_member_no"));
 		log.info(" regMemberNo : " + regMemberNo);
 		String adviceName = CmmUtil.nvl(req.getParameter("adviceName"));
@@ -218,46 +246,5 @@ public class AdviceController {
 		
 		log.info(this.getClass() + ".adviceUpdateProc end!!!");
 		return "/alert";
-	}
-	
-	@RequestMapping(value="Lmin/company/adviceSearch", method=RequestMethod.POST)
-	public String adviceSearch(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
-		log.info(this.getClass() + ".adviceSearch start!!!");
-		
-		String adviceSearchName = CmmUtil.nvl(req.getParameter("adviceSearchName"));
-		log.info(" adviceSearchName : " + adviceSearchName);
-		String pageNum = CmmUtil.nvl(req.getParameter("pageNum"));
-		log.info(" pageNum : " + pageNum);
-		Map<String, Object> startEndPage = new HashMap<>();
-		int viewCnt = 10;
-		
-		if("".equals(pageNum)){
-			startEndPage.put("limit", viewCnt);
-			startEndPage.put("offset", 0);
-			startEndPage.put("searchWord", adviceSearchName);
-			model.addAttribute("currPage", 1);
-		}else{
-			int startEndPageInt = Integer.parseInt(pageNum) - 1;
-			startEndPage.put("limit", viewCnt);
-			startEndPage.put("offset", startEndPageInt * viewCnt);
-			startEndPage.put("searchWord", adviceSearchName);
-			model.addAttribute("currPage", startEndPageInt + 1);
-		}
-		
-		Map<String, Object> aMap = adviceService.getAdivceSearch(startEndPage);
-		List<AdviceDTO> aList = (List<AdviceDTO>)aMap.get("aList");
-		int adviceRecordCnt = (int)aMap.get("adviceRecordCnt");
-		if(aList == null) aList = new ArrayList<>();
-		int pageCnt = adviceRecordCnt / viewCnt;
-		if(adviceRecordCnt % viewCnt > 0){
-			pageCnt++;
-		}
-		model.addAttribute("aList", aList);
-		model.addAttribute("adviceRecordCnt", adviceRecordCnt);
-		model.addAttribute("pageCnt", pageCnt);
-		model.addAttribute("searchWord", adviceSearchName);
-		
-		log.info(this.getClass() + ".adviceSearch end!!!");
-		return "/Lmin/company/advice_search";
 	}
 }
