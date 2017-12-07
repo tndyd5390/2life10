@@ -81,9 +81,8 @@ function uploadFile(){
 	<input type="hidden" name="preFileNo" value="<%=CmmUtil.nvl(rDTO.getRegulationFileNo()) %>">
 	<input type="hidden" name="preFilePath" value="<%=CmmUtil.nvl(rDTO.getRegulationFilePath()) %>">
 	<input type="hidden" name="preFileName" value="<%=CmmUtil.nvl(rDTO.getRegulationFileName()) %>"> 
-	<input type="file" name="regulationFile" class="inputType1" id="regulationFile" onchange="fileCheck(this.value, ['jpg', 'jpeg', 'png']);"/>
+	<input type="file" name="regulationFile" class="inputType1" id="regulationFile" onchange="fileCheck(this, ['jpg', 'jpeg', 'png']);"/>
 	<a href="javascript:uploadFile();" class="btn_active">등록</a>
-	<!-- <input type="submit" class="btn_active" value="등록"> --> 
 </form>
 </body>
 </html>

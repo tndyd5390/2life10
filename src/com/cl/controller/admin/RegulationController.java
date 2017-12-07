@@ -433,7 +433,10 @@ public class RegulationController {
 		//여기는 상조관련법규 이미지를 수정이 아닌 새로 등록시 파일을 가져오고
 		MultipartFile file = mulReq.getFile("regulationFile");
 		//파일의 원본 이름 변수 선언
-		String regulationFileOrgName = CmmUtil.nvl(file.getOriginalFilename());
+		String regulationFileOrgName = "";
+		if(file != null){
+			regulationFileOrgName = CmmUtil.nvl(file.getOriginalFilename());
+		}
 		//파일이 있다면
 		if(!"".equals(regulationFileOrgName)) {
 			//파일을 저장
