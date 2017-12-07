@@ -30,7 +30,24 @@
 	<script src="/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
-$(function(){ 
+function fileCheck(fileName, permissibleExtension){
+	var result = 0;
+	var fileExtension = fileName.value.slice(fileName.value.indexOf(".") + 1).toLowerCase();
+	var alertStr = permissibleExtension[0];
+	for(var i = 0; i<permissibleExtension.length; i++){
+		if(fileExtension == permissibleExtension[i]){
+			result++;
+		}
+		if(i>=1){
+			alertStr += ", " + permissibleExtension[i];
+		}
+	}
+	if(result == 0){
+		alert(alertStr + " 파일만 업로드 가능합니다.");
+		$(fileName).val("");
+	}
+}
+function uploadFile(){
 	$('#ajaxform').ajaxForm({ 
 		beforeSubmit: function (data, frm, opt) {
 			 if($("#regulationFile").val() == ""){
@@ -55,37 +72,17 @@ $(function(){
 		error: function(){ 
 			alert("에러발생!!"); 
 		} 
-	}); 
-});
-
-
-function fileCheck(fileName, permissibleExtension){
-	var result = 0;
-	var fileExtension = fileName.value.slice(fileName.value.indexOf(".") + 1).toLowerCase();
-	var alertStr = permissibleExtension[0];
-	for(var i = 0; i<permissibleExtension.length; i++){
-		if(fileExtension == permissibleExtension[i]){
-			result++;
-		}
-		if(i>=1){
-			alertStr += ", " + permissibleExtension[i];
-		}
-	}
-	if(result == 0){
-		alert(alertStr + " 파일만 업로드 가능합니다.");
-		$(fileName).val("");
-	}
+	}).submit();
 }
-
 </script>
 <body>
-<form id="ajaxform" action="/Lmin/regulation/regulationImgChange.do" method="post" enctype="multipart/form-data">
+<form id="ajaxform" action="/Lmin/regulation/regulationImgChange.do" method="post" enctype="multipart/form-data" >
 	<input type="hidden" name="regulationNo" value="<%=CmmUtil.nvl(rDTO.getRegulationNo()) %>">
 	<input type="hidden" name="preFileNo" value="<%=CmmUtil.nvl(rDTO.getRegulationFileNo()) %>">
 	<input type="hidden" name="preFilePath" value="<%=CmmUtil.nvl(rDTO.getRegulationFilePath()) %>">
 	<input type="hidden" name="preFileName" value="<%=CmmUtil.nvl(rDTO.getRegulationFileName()) %>"> 
-	<input type="file" name="regulationFile" id="regulationFile" onchange="fileCheck(this.value, ['jpg', 'jpeg', 'png']);"/> 
-	<input type="submit" value="Submit" /> 
+	<input type="file" name="regulationFile" class="inputType1" id="regulationFile" onchange="fileCheck(this, ['jpg', 'jpeg', 'png']);"/>
+	<a href="javascript:uploadFile();" class="btn_active">등록</a>
 </form>
 </body>
 </html>

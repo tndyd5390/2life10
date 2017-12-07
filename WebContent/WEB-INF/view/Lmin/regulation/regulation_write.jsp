@@ -153,7 +153,7 @@ function strLengthCheck(textArea){
 							<tr>
 								<th scope="row">업로드</th>
 								<td>
-									<input type="file" name="regulationFile" class="inputType1" style="" maxlength="25" onchange="fileCheck(this.value, ['jpg', 'jpeg', 'png']);">
+									<input type="file" name="regulationFile" class="inputType1" maxlength="25" onchange="javascript:fileCheck(this, ['jpg', 'jpeg', 'png']);">
 								</td>
 							</tr>
 						</tbody>

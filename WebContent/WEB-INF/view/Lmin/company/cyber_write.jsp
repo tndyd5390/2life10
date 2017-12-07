@@ -7,23 +7,55 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
-<link type="text/css" rel="stylesheet" href="../../public/css/default.css" />
-<link type="text/css" rel="stylesheet" href="../../public/css/layout_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/default.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/layout_kor.css" />
 
-<link type="text/css" rel="stylesheet" href="../../public/css/sub_kor.css" />
+<link type="text/css" rel="stylesheet" href="/public/css/sub_kor.css" />
 
-<script type="text/javascript" src="../../public/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="../../public/js/TweenMax.min.js"></script>
-<script type="text/javascript" src="../../public/js/common.js"></script>
-<script type="text/javascript" src="../../public/js/contents.js"></script>
-<script type="text/javascript" src="../../public/js/jquery.form.js"></script>
-<script type="text/javascript" src="../../public/js/jquery.rss.js"></script>
+<script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/public/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="/public/js/common.js"></script>
+<script type="text/javascript" src="/public/js/contents.js"></script>
+<script type="text/javascript" src="/public/js/jquery.form.js"></script>
+<script type="text/javascript" src="/public/js/jquery.rss.js"></script>
 
 <!--[if lt IE 9]>
 	<script src="/js/html5.js"></script>
 	<script src="/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
+function cyberReg(){
+	var form = document.getElementById('cyberForm');
+	if(form.cyberTitle.value==""){
+		alert('제목을 입력해 주세요.');
+		form.cyberTitle.focus();
+		return;
+	}else if(form.cyberFile.value == "" ){
+		alert('동영상을 선택해 주세요.');
+		form.cyberFile.focus();
+		return;
+	}else{
+		form.submit();
+	}
+}
+
+function fileCheck(fileName, permissibleExtension){
+	var result = 0;
+	var fileExtension = fileName.value.slice(fileName.value.indexOf(".") + 1).toLowerCase();
+	var alertStr = permissibleExtension[0];
+	for(var i = 0; i<permissibleExtension.length; i++){
+		if(fileExtension == permissibleExtension[i]){
+			result++;
+		}
+		if(i>=1){
+			alertStr += ", " + permissibleExtension[i];
+		}
+	}
+	if(result == 0){
+		alert(alertStr + " 파일만 업로드 가능합니다.");
+		$(fileName).val("");
+	}
+}
 </script>
 <body>
 <div id="skipnavi">
@@ -36,7 +68,7 @@
 			<!-- heaer 인쿠르드 -->
 			<!--#include file="../include/inc_header.jsp"-->
 
-			<%@include file="../include/inc_header.jsp"%>
+			<%@include file="/WEB-INF/view/Lmin/include/inc_header.jsp"%>
 		</div>
 	</div> <!-- // header -->
 
@@ -93,6 +125,7 @@
 				<h3 class="smallTit">사이버홍보실</h3>
 
 				<div class="boardType2">
+				<form action="/Lmin/company/cyberRegProc.do" method="post" enctype="multipart/form-data" id="cyberForm">
 					<table summary="">
 						<caption></caption>
 						<colgroup>
@@ -103,21 +136,28 @@
 							<tr>
 								<th scope="row">제목</th>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<input type="text" name="cyberTitle" class="inputType1">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">업로드</th>
 								<td>
-									<input type="file" name="name" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<textarea name="cyberContents"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">업로드</th>
+								<td>
+									<input type="file" name="cyberFile" class="inputType1" id="cyberFile" onchange="fileCheck(this, ['mp4', 'avi', 'wmv']);">
 								</td>
 							</tr>
 						</tbody>
 					</table>
+				</form>
 				</div>
 
 				<div class="btn_area">
-					<a href="#" id="submitLink" class="btn_active">등록</a>
+					<a href="javascript:cyberReg();" id="submitLink" class="btn_active">등록</a>
 					<a href="#" id="btnCancel" class="btn_cancel">취소</a>
 				</div>
 

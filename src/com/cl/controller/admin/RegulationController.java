@@ -432,9 +432,12 @@ public class RegulationController {
 		
 		//�뿬湲곕뒗 �긽議곌��젴踰뺢퇋 �씠誘몄�瑜� �닔�젙�씠 �븘�땶 �깉濡� �벑濡앹떆 �뙆�씪�쓣 媛��졇�삤怨�
 		MultipartFile file = mulReq.getFile("regulationFile");
-		//�뙆�씪�쓽 �썝蹂� �씠由� 蹂��닔 �꽑�뼵
-		String regulationFileOrgName = CmmUtil.nvl(file.getOriginalFilename());
-		//�뙆�씪�씠 �엳�떎硫�
+		//파일의 원본 이름 변수 선언
+		String regulationFileOrgName = "";
+		if(file != null){
+			regulationFileOrgName = CmmUtil.nvl(file.getOriginalFilename());
+		}
+		
 		if(!"".equals(regulationFileOrgName)) {
 			//�뙆�씪�쓣 ���옣
 			String regulationReFileName = FileUtil.fileSave(file, regulationSavePath);

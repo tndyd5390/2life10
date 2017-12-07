@@ -1,5 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cl.persistance.mapper.CyberMapper">
-
+	<insert id="insertCyberFile" parameterType="CyberDTO">
+		INSERT INTO FILE_INFO
+		(
+			FILE_ORG_NAME,
+			FILE_NAME,
+			FILE_PATH,
+			REG_MEMBER_NO,
+			REG_DT
+		)
+		VALUES
+		(
+			#{cyberFileOrgName},
+			#{cyberFileName},
+			#{cyberFilePath},
+			#{regMemberNo},
+			NOW()
+		)
+		<selectKey resultType="string" keyProperty="cyberFileNo" order="AFTER">
+			SELECT LAST_INSERT_ID();
+		</selectKey>
+	</insert>
+	<insert id="insertCyber" parameterType="CyberDTO">
+		INSERT INTO CYBER_INFO
+		(
+			CYBER_FILE_NO,
+			CYBER_TITLE,
+			CYBER_CONTENTS,
+			CYBER_VIEW_CNT,
+			REG_MEMBER_NO,
+			REG_DT
+		)
+		VALUES
+		(
+			#{cyberFileNo},
+			#{cyberTitle},
+			#{cyberContents},
+			0,
+			#{regMemberNo},
+			NOW()
+		)
+	</insert>
+	<select id="getCyberList" parameterType="hashmap" resultType="CyberDTO">
+		SELECT @ROWNUM := @ROWNUM + 1				AS ROWNUM,
+	   		   CI.CYBER_NO							AS CYBERNO,
+       		   CI.CYBER_FILE_NO						AS CYBERFILENO,
+       		   CI.CYBER_TITLE						AS CYBERTITLE,
+       		   CI.CYBER_CONTENTS					AS CYBERCONTENTS,
+       		   CI.CYBER_VIEW_CNT					AS CYBERVIEWCNT,
+       		   CI.REG_MEMBER_NO						AS REGMEMBERNO,
+       		   DATE_FORMAT(CI.REG_DT,'%Y-%m-%d')	AS REGDT,
+       		   MI.MEMBER_ID							AS MEMBERID,	
+       		   P.PAGE								AS PAGE,
+       		   FI.FILE_NAME							AS CYBERFILENAME,
+       		   FI.FILE_PATH							AS CYBERFILEPATH,
+       		   FI.FILE_ORG_NAME						AS CYBERFILEORGNAME
+  		  FROM CYBER_INFO CI
+ 	INNER JOIN MEMBER_INFO MI
+    		ON CI.REG_MEMBER_NO = MI.MEMBER_NO
+    LEFT OUTER JOIN FILE_INFO FI
+    		ON CI.CYBER_FILE_NO = FI.FILE_NO,
+    		   (SELECT COUNT(*) AS PAGE 
+       			  FROM CYBER_INFO CI
+	  		INNER JOIN MEMBER_INFO MI
+         			ON CI.REG_MEMBER_NO = MI.MEMBER_NO
+         			<where>
+		  	    	<if test="searchBox==00">
+		  				INSTR(CI.CYBER_TITLE, #{search}) > 0
+		  			 OR INSTR(MI.MEMBER_ID, #{search}) > 0
+		  			</if>
+		  			<if test="searchBox==01">
+		  				INSTR(RI.CYBER_TITLE, #{search}) > 0
+		  			</if>
+		  			<if test="searchBox==02">
+		  			 	INSTR(MI.MEMBER_ID, #{search}) > 0
+		  			</if>
+		  	    	</where>) P,
+	 		   (SELECT @ROWNUM := 0) R
+	 		   <where>
+		  	    	<if test="searchBox==00">
+		  				INSTR(CI.CYBER_TITLE, #{search}) > 0
+		  			 OR INSTR(MI.MEMBER_ID, #{search}) > 0
+		  			</if>
+		  			<if test="searchBox==01">
+		  				INSTR(RI.CYBER_TITLE, #{search}) > 0
+		  			</if>
+		  			<if test="searchBox==02">
+		  			 	INSTR(MI.MEMBER_ID, #{search}) > 0
+		  			</if>
+		  	    </where>
+	  ORDER BY ROWNUM DESC
+	     LIMIT #{page}, #{splitPage}
+	</select>
 </mapper>

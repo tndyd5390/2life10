@@ -1,4 +1,16 @@
+<%@page import="com.cl.util.PageUtil"%>
+<%@page import="com.cl.util.TextUtil"%>
+<%@page import="com.cl.dto.CyberDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="com.cl.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	HashMap<String, Object> hMap = (HashMap) request.getAttribute("hMap");
+	int pageBtnSplit = 5;
+	
+	List<CyberDTO> cList = (List<CyberDTO>) hMap.get("list");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -101,8 +113,9 @@
 							<tr>
 								<td>
 									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
-										<option value="00">전체</option>
-										<option value="01">제목</option>
+										<option value="00" <%=CmmUtil.select("00", CmmUtil.nvl((String) hMap.get("searchBox")))%>>전체</option>
+										<option value="01" <%=CmmUtil.select("01", CmmUtil.nvl((String) hMap.get("searchBox")))%>>제목</option>
+										<option value="02" <%=CmmUtil.select("02", CmmUtil.nvl((String) hMap.get("searchBox")))%>>글쓴이</option>
 									</select>
 									<input type="text" name="name" value="" title="" class="inputType1" style="" maxlength="25">
 
@@ -115,10 +128,32 @@
 
 				<br/><br/>
 				<ul class="boradType5">
+				<%
+				if(cList.size() != 0){
+					for(CyberDTO cDTO : cList){
+				%>	
 					<li>
-						<p class="num">1</p>
+						<p class="num"><%=CmmUtil.nvl(cDTO.getRowNum()) %></p>
 						<div class="info">
 							<p class="txt1"><!-- 박성진수정 -->
+								<a href="javascript:selectBoardDtl('480')"><%=TextUtil.exchangeEscapeNvl(cDTO.getCyberTitle()) %></a>
+							</p>
+							<p class="txt2">
+								<%=TextUtil.exchangeEscapeNvl(cDTO.getMemberId()) %><span class="bar">&nbsp;|</span>
+								<span><%=TextUtil.exchangeEscapeNvl(cDTO.getRegDT()) %></span>
+								<span class="bar">|</span>
+								<span class="count"><%=CmmUtil.nvl(cDTO.getCyberViewCnt()) %></span>
+							</p>
+						</div>
+					</li>
+				<%	
+					}
+				}
+				%>
+					<!-- <li>
+						<p class="num">1</p>
+						<div class="info">
+							<p class="txt1">박성진수정
 								<a href="javascript:selectBoardDtl('480')">크리스찬상조 실제 장례 행사 영상자료</a>
 							</p>
 							<p class="txt2">
@@ -132,7 +167,7 @@
 					<li>
 						<p class="num">1</p>
 						<div class="info">
-							<p class="txt1"><!-- 박성진수정 -->
+							<p class="txt1">박성진수정
 								<a href="javascript:selectBoardDtl('480')">크리스찬상조 실제 장례 행사 영상자료</a>
 							</p>
 							<p class="txt2">
@@ -146,7 +181,7 @@
 					<li>
 						<p class="num">1</p>
 						<div class="info">
-							<p class="txt1"><!-- 박성진수정 -->
+							<p class="txt1">박성진수정
 								<a href="javascript:selectBoardDtl('480')">크리스찬상조 실제 장례 행사 영상자료</a>
 							</p>
 							<p class="txt2">
@@ -160,7 +195,7 @@
 					<li>
 						<p class="num">1</p>
 						<div class="info">
-							<p class="txt1"><!-- 박성진수정 -->
+							<p class="txt1">박성진수정
 								<a href="javascript:selectBoardDtl('480')">크리스찬상조 실제 장례 행사 영상자료</a>
 							</p>
 							<p class="txt2">
@@ -174,7 +209,7 @@
 					<li>
 						<p class="num">1</p>
 						<div class="info">
-							<p class="txt1"><!-- 박성진수정 -->
+							<p class="txt1">박성진수정
 								<a href="javascript:selectBoardDtl('480')">크리스찬상조 실제 장례 행사 영상자료</a>
 							</p>
 							<p class="txt2">
@@ -184,13 +219,13 @@
 								<span class="count">625</span>
 							</p>
 						</div>
-					</li>
+					</li> -->
 				</ul>
 				<a href="/Lmin/company/cyberWrite.do" class="btn_active_small" style="float:right;">사이버 홍보 등록</a>
 				
 				<!-- pageArea -->
 				<div class="pageArea">
-					<a href='#none' class='btnFirst'><span>처음</span></a> <a href='#' class='btnPrev'><span>이전</span></a><strong>1</strong><a href="javascript:goPage('2','15')" >2</a><a href="javascript:goPage('3','15')" >3</a><a href="javascript:goPage('4','15')" >4</a><a href="javascript:goPage('5','15')" >5</a><a href="javascript:goPage('2','15')" class='btnNext'><span>다음</span></a> <a href="javascript:goPage('19','15')" class='btnLast'><span>마지막</span></a>
+					<%=PageUtil.frontPaging(hMap, pageBtnSplit) %>
 				</div>
 				<!-- // pageArea -->
 
