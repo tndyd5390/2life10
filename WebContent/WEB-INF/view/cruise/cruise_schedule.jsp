@@ -139,7 +139,7 @@
                         </ul>
                     </div>
 					<div class="imgWrap">
-					    <img src="<%="/cruiseImg/" + CmmUtil.nvl(cDTO.getCruiseImgFileName()) %>" alt="크루즈이미지" />
+					    <img src="<%="/file/cruise/img/" + CmmUtil.nvl(cDTO.getCruiseImgFileName()) %>" alt="크루즈이미지" />
 					    <div class="btn_area">
 					        <button type="button" class="btnSearch" onclick="downloadSche(<%=CmmUtil.nvl(cDTO.getCruiseNo())%>);">일정다운로드</button>
                         </div>

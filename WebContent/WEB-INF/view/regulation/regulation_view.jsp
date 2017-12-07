@@ -132,7 +132,7 @@
 								<%
 								if(!CmmUtil.nvl(rDTO.getRegulationFileName()).equals("")){
 								%>
-									<img src="<%="/regulationFile/" + CmmUtil.nvl(rDTO.getRegulationFileName()) %>" alt="상조관련법규 이미지" />
+									<img src="<%="/file/regulation/img/" + CmmUtil.nvl(rDTO.getRegulationFileName()) %>" alt="상조관련법규 이미지" />
 								<%
 								}
 								%>

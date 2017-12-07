@@ -1,3 +1,5 @@
 eclipse.preferences.version=1
 encoding//WebContent/WEB-INF/view/member/redirect.jsp=UTF-8
 encoding//src/com/cl/config/MapperConfigurer.java=UTF-8
+encoding//src/com/cl/controller/admin/CruiseController.java=UTF-8
+encoding//src/com/cl/controller/admin/RegulationController.java=UTF-8

@@ -1,4 +1,4 @@
-//ũ���� ��Ʈ�ѷ�
+//크占쏙옙占쏙옙 占쏙옙트占싼뤄옙
 package com.cl.controller.admin;
 
 import java.io.File;
@@ -32,10 +32,10 @@ public class CruiseController {
 	
 	private Logger log = Logger.getLogger(this.getClass());
 	
-	//크루즈 일정파일이 저장될 경로
-	private String scheSavePath = "C:\\Users\\Data3811-32\\git\\2life10\\WebContent\\cruiseSchedule\\";
-	//크루즈 이미지 파일이 저장될 경로
-	private String imgSavePath = "C:\\Users\\Data3811-32\\git\\2life10\\WebContent\\cruiseImg\\";
+	//�겕猷⑥쫰 �씪�젙�뙆�씪�씠 ���옣�맆 寃쎈줈
+	private String scheSavePath = "/www/thunder-edu_com/file/cruise/file/";
+	//�겕猷⑥쫰 �씠誘몄� �뙆�씪�씠 ���옣�맆 寃쎈줈
+	private String imgSavePath = "/www/thunder-edu_com/file/cruise/img/";
 	
 	@Resource(name="CruiseService")
 	private ICruiseService cruiseService;
@@ -47,12 +47,12 @@ public class CruiseController {
 	 * @param session
 	 * @return
 	 * @throws Exception
-	 * 크루즈 리스트 화면 메소드
+	 * �겕猷⑥쫰 由ъ뒪�듃 �솕硫� 硫붿냼�뱶
 	 */
 	@RequestMapping(value="Lmin/cruise/cruiseScheduleList", method={RequestMethod.GET, RequestMethod.POST})
 	public String cruiseScheduleList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cruiseScheduleList start!!!");
-		//한 화면에 보여줄 크루즈 갯수
+		//�븳 �솕硫댁뿉 蹂댁뿬以� �겕猷⑥쫰 媛��닔
 		int splitPage = 5;
 		
 		HashMap<String, Object> hMap = new HashMap<>();
@@ -73,7 +73,7 @@ public class CruiseController {
 	 * @param session
 	 * @return
 	 * @throws Exception
-	 * 크루즈 등록 화면으로 이동하는 메소드
+	 * �겕猷⑥쫰 �벑濡� �솕硫댁쑝濡� �씠�룞�븯�뒗 硫붿냼�뱶
 	 */
 	@RequestMapping(value="Lmin/cruise/cruiseSchduleWriteView", method=RequestMethod.GET)
 	public String cruiseSchduleWriteView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
@@ -92,67 +92,67 @@ public class CruiseController {
 	 * @param cruiseImgFile
 	 * @return
 	 * @throws Exception
-	 * 크루즈 등록 메소드
+	 * �겕猷⑥쫰 �벑濡� 硫붿냼�뱶
 	 */
 	@RequestMapping(value="Lmin/cruise/cruiseScheduleRegProc", method=RequestMethod.POST)
 	public String cruiseScheduleRegProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session, @RequestParam("cruiseScheFile") MultipartFile cruiseScheFile, @RequestParam("cruiseImgFile") MultipartFile cruiseImgFile) throws Exception{
 		log.info(this.getClass() + ".cruiseScheduleRegProc start!!!");
 		
-		//등록자 회원번호
+		//�벑濡앹옄 �쉶�썝踰덊샇
 		String regMemberNo = CmmUtil.nvl((String)session.getAttribute("ss_member_no"));
 		log.info(" regMemberNo : " + regMemberNo);
-		//크루즈 이름
+		//�겕猷⑥쫰 �씠由�
 		String cruiseName = CmmUtil.nvl(req.getParameter("cruiseName"));
 		log.info(" cruiseName : " + cruiseName);
-		//선사이름
+		//�꽑�궗�씠由�
 		String cruiseShipName = CmmUtil.nvl(req.getParameter("cruiseShipName"));
 		log.info(" cruiseShipName : " + cruiseShipName);
-		//가격
+		//媛�寃�
 		String cruisePrice = CmmUtil.nvl(req.getParameter("cruisePrice"));
 		log.info(" cruisePrice : "  + cruisePrice);
-		//탑승인원
+		//�깙�듅�씤�썝
 		String cruiseAccomodation = CmmUtil.nvl(req.getParameter("cruiseAccomodation"));
 		log.info(" cruiseAccomodation : " + cruiseAccomodation);
-		//캐빈
+		//罹먮퉰
 		String cruiseCabinCode = CmmUtil.nvl(req.getParameter("cruiseCabinCode"));
 		log.info(" cruiseCabinCode : " + cruiseCabinCode);
-		//출발년도
+		//異쒕컻�뀈�룄
 		String startYear = CmmUtil.nvl(req.getParameter("startYear"));
 		log.info(" startYear : " + startYear);
-		//출발월
+		//異쒕컻�썡
 		String startMonth = CmmUtil.nvl(req.getParameter("startMonth"));
 		log.info(" startMonth : " + startMonth);
 		if(Integer.parseInt(startMonth) < 10) startMonth = "0" + startMonth;
-		//출발일
+		//異쒕컻�씪
 		String startDay = CmmUtil.nvl(req.getParameter("startDay"));
 		log.info(" startDay : " + startDay);
 		if(Integer.parseInt(startDay) < 10) startDay = "0" + startDay;
-		//종료년도
+		//醫낅즺�뀈�룄
 		String endYear = CmmUtil.nvl(req.getParameter("endYear"));
 		log.info(" endYear : " + endYear);
-		//종료월
+		//醫낅즺�썡
 		String endMonth = CmmUtil.nvl(req.getParameter("endMonth"));
 		log.info(" endMonth : " + endMonth);
 		if(Integer.parseInt(endMonth) < 10) endMonth = "0" + endMonth;
-		//종료일
+		//醫낅즺�씪
 		String endDay = CmmUtil.nvl(req.getParameter("endDay"));
 		log.info(" endDay : " + endDay);
 		if(Integer.parseInt(endDay) < 10) endDay = "0" + endDay;
-		//기다
+		//湲곕떎
 		String cruiseEtc = CmmUtil.nvl(req.getParameter("cruiseEtc"));
 		log.info(" cruiseEtc : " + cruiseEtc);
 		
-		//원래 파일 이름들
+		//�썝�옒 �뙆�씪 �씠由꾨뱾
 		String orgScheFileName = CmmUtil.nvl(cruiseScheFile.getOriginalFilename());
 		log.info(" cruiseScheFileName : " + orgScheFileName);
 		String orgImgFileName = CmmUtil.nvl(cruiseImgFile.getOriginalFilename());
 		log.info(" cruiseImgFileName : " + orgImgFileName);
 
-		//저장된 파일의 이름
+		//���옣�맂 �뙆�씪�쓽 �씠由�
 		String reScheFileName = FileUtil.fileSave(cruiseScheFile, scheSavePath);
 		String reImgFileName = FileUtil.fileSave(cruiseImgFile, imgSavePath);
 		
-		//등록할 cruiseDTO세팅
+		//�벑濡앺븷 cruiseDTO�꽭�똿
 		CruiseDTO cDTO = new CruiseDTO();
 		cDTO.setCruiseShipName(cruiseShipName);
 		cDTO.setCruiseStartDay(startYear + startMonth + startDay);
@@ -170,13 +170,13 @@ public class CruiseController {
 		cDTO.setCruiseScheFilePath(scheSavePath);
 		cDTO.setCruisePrice(cruisePrice);
 		
-		//크루즈 등록
+		//�겕猷⑥쫰 �벑濡�
 		int result = cruiseService.insertCruise(cDTO);
 		
 		if(result != 0){
-			model.addAttribute("msg", "크루즈 상품 등록에 성공했습니다.");
+			model.addAttribute("msg", "�겕猷⑥쫰 �긽�뭹 �벑濡앹뿉 �꽦怨듯뻽�뒿�땲�떎.");
 		}else{
-			model.addAttribute("msg", "크루즈 상품 등록에 실패했습니다.");
+			model.addAttribute("msg", "�겕猷⑥쫰 �긽�뭹 �벑濡앹뿉 �떎�뙣�뻽�뒿�땲�떎.");
 		}
 		model.addAttribute("url", "/Lmin/cruise/cruiseScheduleList.do");
 		log.info(this.getClass() + ".cruiseScheduleRegProc end!!!");
@@ -190,23 +190,23 @@ public class CruiseController {
 	 * @param session
 	 * @return
 	 * @throws Exception
-	 * 크루즈 삭제 메소드
+	 * �겕猷⑥쫰 �궘�젣 硫붿냼�뱶
 	 */
 	@RequestMapping(value="Lmin/cruise/deleteCruise", method=RequestMethod.POST)
 	public String deleteCruise(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".deleteCruise start!!!");
 		
-		//크루즈 번호
+		//�겕猷⑥쫰 踰덊샇
 		String cruiseNo = CmmUtil.nvl(req.getParameter("cruiseNo"));
 		log.info(" cruiseNo : " + cruiseNo);
-		//크루즈 이미지 파일 번호
+		//�겕猷⑥쫰 �씠誘몄� �뙆�씪 踰덊샇
 		String cruiseImgFileNo = CmmUtil.nvl(req.getParameter("cruiseImgFileNo"));
 		log.info(" cruiseImgFileNo : " + cruiseImgFileNo);
-		//크루즈 일정 파일 번호
+		//�겕猷⑥쫰 �씪�젙 �뙆�씪 踰덊샇
 		String cruiseScheFileNo = CmmUtil.nvl(req.getParameter("cruiseScheFileNo"));
 		log.info(" cruiseScheFileNo : " + cruiseScheFileNo);
 		
-		//삭제할 cruiseDTO세팅
+		//�궘�젣�븷 cruiseDTO�꽭�똿
 		CruiseDTO cDTO = new CruiseDTO();
 		cDTO.setCruiseNo(cruiseNo);
 		cDTO.setCruiseImgFileNo(Integer.parseInt(cruiseImgFileNo));
@@ -214,14 +214,14 @@ public class CruiseController {
 		String[] fileNoArr = {cruiseImgFileNo, cruiseScheFileNo};
 		cDTO.setFileNoArr(fileNoArr);
 		
-		//크루즈 이미지와 일정파일을 삭제하기 위해 delete후 각각의 파일이름을 가져온다.
+		//�겕猷⑥쫰 �씠誘몄��� �씪�젙�뙆�씪�쓣 �궘�젣�븯湲� �쐞�빐 delete�썑 媛곴컖�쓽 �뙆�씪�씠由꾩쓣 媛��졇�삩�떎.
 		Map<String, String> fileNames = cruiseService.deleteCruise(cDTO);
 		if(fileNames == null){
-			model.addAttribute("msg", "크루즈 상품 삭제에 실패했습니다.");
+			model.addAttribute("msg", "�겕猷⑥쫰 �긽�뭹 �궘�젣�뿉 �떎�뙣�뻽�뒿�땲�떎.");
 			model.addAttribute("url", "/Lmin/cruise/cruiseScheduleList.do");
 			return "/alert";
 		}else{
-			//각각의 파일 삭제
+			//媛곴컖�쓽 �뙆�씪 �궘�젣
 			FileUtil.deleteFile(fileNames.get("imgFullPath"));
 			FileUtil.deleteFile(fileNames.get("pdfFullPath"));
 		}
@@ -236,17 +236,17 @@ public class CruiseController {
 	 * @param session
 	 * @return
 	 * @throws Exception
-	 * 크루즈 수정화면으로 이동할 메소드
+	 * �겕猷⑥쫰 �닔�젙�솕硫댁쑝濡� �씠�룞�븷 硫붿냼�뱶
 	 */
 	@RequestMapping(value="Lmin/cruise/updateCruiseView", method=RequestMethod.GET)
 	public String updateCruise(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".updateCruise start!!!");
 		
-		//크루즈 번호
+		//�겕猷⑥쫰 踰덊샇
 		String cruiseNo = CmmUtil.nvl(req.getParameter("cruiseNo"));
 		log.info(" cruiseNo : " + cruiseNo);
 		
-		//크루즈 상세 가져오기
+		//�겕猷⑥쫰 �긽�꽭 媛��졇�삤湲�
 		CruiseDTO cDTO = cruiseService.getCruise(cruiseNo);
 		if(cDTO == null) cDTO = new CruiseDTO();
 		
@@ -265,7 +265,7 @@ public class CruiseController {
 	 * @param cruiseImgFile
 	 * @return
 	 * @throws Exception
-	 * 크루즈 수정 메소드
+	 * �겕猷⑥쫰 �닔�젙 硫붿냼�뱶
 	 */
 	@RequestMapping(value="Lmin/cruise/cruiseScheduleUpdateProc", method=RequestMethod.POST)
 	public String updateCruiseProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session, @RequestParam("cruiseScheFile") MultipartFile cruiseScheFile, @RequestParam("cruiseImgFile") MultipartFile cruiseImgFile) throws Exception{
@@ -332,19 +332,19 @@ public class CruiseController {
 		cDTO.setCruiseScheFileNo(Integer.parseInt(cruiseScheFileNo));
 		cDTO.setRegMemberNo(regMemberNo);
 		
-		//다른이름으로 저장할 변수
+		//�떎瑜몄씠由꾩쑝濡� ���옣�븷 蹂��닔
 		String reScheFileName = "";
 		String reImgFileName = "";
 		
-		//원래 파일 이름들
+		//�썝�옒 �뙆�씪 �씠由꾨뱾
 		String orgScheFileName = CmmUtil.nvl(cruiseScheFile.getOriginalFilename());
 		log.info(" cruiseScheFileName : " + orgScheFileName);
 		String orgImgFileName = CmmUtil.nvl(cruiseImgFile.getOriginalFilename());
 		log.info(" cruiseImgFileName : " + orgImgFileName);
 		
-		//크루즈 일정 파일을 변경한다면
+		//�겕猷⑥쫰 �씪�젙 �뙆�씪�쓣 蹂�寃쏀븳�떎硫�
 		if(!"".equals(orgScheFileName)){
-			//저장된 파일의 이름
+			//���옣�맂 �뙆�씪�쓽 �씠由�
 			reScheFileName = FileUtil.fileSave(cruiseScheFile, scheSavePath);
 			FileUtil.deleteFile(scheSavePath, scheFileName);
 			cDTO.setCruiseScheFileName(reScheFileName);
@@ -354,9 +354,9 @@ public class CruiseController {
 			cDTO.setCruiseScheFileOrgName(null);
 		}
 		
-		//크루즈 이미지 파일을 변경한다면
+		//�겕猷⑥쫰 �씠誘몄� �뙆�씪�쓣 蹂�寃쏀븳�떎硫�
 		if(!"".equals(orgImgFileName)){
-			//저장된 파일의 이름
+			//���옣�맂 �뙆�씪�쓽 �씠由�
 			reImgFileName = FileUtil.fileSave(cruiseImgFile, imgSavePath);
 			FileUtil.deleteFile(imgSavePath, imgFileName);
 			cDTO.setCruiseImgFileName(reImgFileName);
@@ -366,14 +366,14 @@ public class CruiseController {
 			cDTO.setCruiseImgFileOrgName(null);
 		}
 		
-		//크루즈 수정
+		//�겕猷⑥쫰 �닔�젙
 		boolean result = cruiseService.updateCruise(cDTO);
 		
 		if(result){
-			model.addAttribute("msg", "수정되었습니다.");
+			model.addAttribute("msg", "�닔�젙�릺�뿀�뒿�땲�떎.");
 			model.addAttribute("url", "/Lmin/cruise/cruiseScheduleList.do");
 		}else{
-			model.addAttribute("msg", "실패하였습니다.");
+			model.addAttribute("msg", "�떎�뙣�븯���뒿�땲�떎.");
 			model.addAttribute("url", "/Lmin/cruise/updateCruiseView.do?cruiseNo=" + cruiseNo);
 		}
 		
@@ -388,31 +388,31 @@ public class CruiseController {
 	 * @param session
 	 * @return
 	 * @throws Exception
-	 * 크루즈 일정 다운로드 메소드
+	 * �겕猷⑥쫰 �씪�젙 �떎�슫濡쒕뱶 硫붿냼�뱶
 	 */
 	@RequestMapping(value="Lmin/cruise/cruiseDownloadSche", method=RequestMethod.GET)
 	public ModelAndView crusieDownLoadSche(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cruiseDownLoadSche start!!!");
 		
-		//크루즈번호
+		//�겕猷⑥쫰踰덊샇
 		String cruiseNo = CmmUtil.nvl(req.getParameter("cruiseNo"));
 		log.info(" cruiseNo : " + cruiseNo);
 		
-		//크루즈 상세를 가져온다 파일의 경로와 파일 이름
+		//�겕猷⑥쫰 �긽�꽭瑜� 媛��졇�삩�떎 �뙆�씪�쓽 寃쎈줈�� �뙆�씪 �씠由�
 		CruiseDTO cDTO = cruiseService.getCruise(cruiseNo);
 		if(cDTO == null) cDTO = new CruiseDTO();
 		
-		//파일 경로
+		//�뙆�씪 寃쎈줈
 		String path = CmmUtil.nvl(cDTO.getCruiseScheFilePath());
-		//파일 이름
+		//�뙆�씪 �씠由�
 		String fileName = CmmUtil.nvl(cDTO.getCruiseScheFileName());;
-		//파일의 원래이름
+		//�뙆�씪�쓽 �썝�옒�씠由�
 		String fileOrgName = CmmUtil.nvl(cDTO.getCruiseScheFileOrgName());
 		
-		//파일 객체 생성하고
+		//�뙆�씪 媛앹껜 �깮�꽦�븯怨�
 		File file = new File(path + fileName);
 		
-		//ModelAndView클래스를 통해 DispatherServlet에 download라고 이름이 지어져있는 view클래스로 데이터를 던진다.
+		//ModelAndView�겢�옒�뒪瑜� �넻�빐 DispatherServlet�뿉 download�씪怨� �씠由꾩씠 吏��뼱�졇�엳�뒗 view�겢�옒�뒪濡� �뜲�씠�꽣瑜� �뜕吏꾨떎.
 		ModelAndView mav = new ModelAndView("download", "downloadFile", file);
 		mav.addObject("fileOrgName", fileOrgName);
 		log.info(this.getClass() + ".cruiseDownLoadSche end!!!");
