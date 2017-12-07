@@ -58,10 +58,11 @@
 
             if ($("#searchText").val() != ""){
                 $(".searchArea").show();
-            }
+            };
             if ($("#searchText").val() == ""){
                 $(".searchArea").hide();
-            }
+            };
+            
         });
 
         function fn_searchText(){
