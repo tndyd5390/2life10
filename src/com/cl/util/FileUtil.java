@@ -47,4 +47,9 @@ public class FileUtil {
 		File file = new File(savePath + fileName);
 		if(file.exists()) file.delete();
 	}
+	
+	public static void deleteFile(String fullPath) {
+		File file = new File(fullPath);
+		if(file.exists()) file.delete();
+	}
 }

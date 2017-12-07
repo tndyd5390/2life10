@@ -162,7 +162,7 @@ function doChangeImg(){
 				<h3 class="smallTit">상조관련법규</h3>
 
 				<div class="boardType2">
-				<form action="/Lmin/regulation/regulationUpdateProcWithoutImg.do" method="post" enctype="multipart/form-data" id="f">
+				<form action="/Lmin/regulation/regulationUpdateProc.do" method="post" enctype="multipart/form-data" id="f">
 				<input type="hidden" name="regulationNo" value="<%=CmmUtil.nvl(rDTO.getRegulationNo()) %>">
 					<table summary="">
 						<caption></caption>

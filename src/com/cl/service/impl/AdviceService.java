@@ -52,12 +52,4 @@ public class AdviceService implements IAdviceService{
 	public int updateAdvice(AdviceDTO aDTO) throws Exception {
 		return adviceMapper.updateAdvice(aDTO);
 	}
-
-	@Override
-	public Map<String, Object> getAdivceSearch(Map<String, Object> startEndPage) throws Exception {
-		Map<String, Object> aMap = new HashMap<>();
-		aMap.put("aList", adviceMapper.getAdviceSearch(startEndPage));
-		aMap.put("adviceRecordCnt", adviceMapper.getAdviceSearchRecordCnt((String)startEndPage.get("searchWord")));
-		return aMap;
-	}
 }
