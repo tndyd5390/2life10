@@ -33,6 +33,15 @@ public class RegulationController {
 	private IRegulationService regulationService;
 	private String regulationSavePath = "C:\\Users\\Data3811-32\\git\\2life10\\WebContent\\regulationFile\\";
 	
+	/**
+	 * 
+	 * @param req
+	 * @param resp
+	 * @param model
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value="Lmin/regulation/regulationList", method= {RequestMethod.GET, RequestMethod.POST})
 	public String regulationList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".regulationList start!!!");
