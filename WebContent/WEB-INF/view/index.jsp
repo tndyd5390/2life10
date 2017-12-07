@@ -81,7 +81,7 @@
         	var f = $("#f");
         	var noticeNo = $("#nNo");
         	noticeNo.val(nNo);
-        	f.attr("action", "/Lmin/notice/noticeDetail.do");
+        	f.attr("action", "/notice/noticeDetail.do");
         	f.submit();
         }
         </script>

@@ -66,7 +66,7 @@
 			search.focus();
 			return false;
 		}else{
-			f.attr("action", "/Lmin/notice/noticeList.do");
+			f.attr("action", "/notice/noticeList.do");
 			f.submit();
 		}
 	}
@@ -75,7 +75,7 @@
 	function goDetail(nNo){
 		var f = $("#f");
 		var noticeNo = $("#nNo");
-		f.attr("action", "/Lmin/notice/noticeDetail.do");
+		f.attr("action", "/notice/noticeDetail.do");
 		noticeNo.val(nNo);
 		f.submit();	
 	}
