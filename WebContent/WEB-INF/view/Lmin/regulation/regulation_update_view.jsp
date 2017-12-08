@@ -91,7 +91,7 @@ function updateImgNull(){
 }
 
 function doChangeImg(){
-	 window.open("/Lmin/regulation/regulationImgChangeView.do?regulationNo=" + <%=CmmUtil.nvl(rDTO.getRegulationNo())%>,  "popupNo1", "width=500, height=500");
+	 window.open("/Lmin/regulation/regulationImgChangeView.do?regulationNo=" + <%=CmmUtil.nvl(rDTO.getRegulationNo())%>,  "popupNo1", "width=800, height=800");
 }
 </script>
 <body>
