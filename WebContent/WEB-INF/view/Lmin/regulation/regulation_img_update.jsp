@@ -45,6 +45,14 @@ function fileCheck(fileName, permissibleExtension){
 	if(result == 0){
 		alert(alertStr + " 파일만 업로드 가능합니다.");
 		$(fileName).val("");
+	}else{
+		var file = document.querySelector('#regulationFile');
+		var filelist = file.files;
+		var reader = new FileReader();
+		reader.readAsDataURL(filelist[0]);
+		reader.onload = function(){
+			document.querySelector('#preview').src = reader.result;
+		}
 	}
 }
 function uploadFile(){
@@ -76,6 +84,7 @@ function uploadFile(){
 }
 </script>
 <body>
+<img id="preview" alt="" src="https://dummyimage.com/600x600/#A4A4A/fff&text=이미지+미리보기" style="width: 600px" style="height:600px">
 <form id="ajaxform" action="/Lmin/regulation/regulationImgChange.do" method="post" enctype="multipart/form-data" >
 	<input type="hidden" name="regulationNo" value="<%=CmmUtil.nvl(rDTO.getRegulationNo()) %>">
 	<input type="hidden" name="preFileNo" value="<%=CmmUtil.nvl(rDTO.getRegulationFileNo()) %>">

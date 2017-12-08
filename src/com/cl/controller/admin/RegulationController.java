@@ -34,6 +34,7 @@ public class RegulationController {
 	
 	//�씠誘몄� �뙆�씪�씠 ���옣�맆 寃쎈줈
 	private String regulationSavePath = "/www/thunder-edu_com/file/regulation/img/";
+	//private String regulationSavePath = "C:\\Users\\Data3811-32\\git\\2life10\\WebContent\\regulationFile\\";
 	
 	/**
 	 * @param req
