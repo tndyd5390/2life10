@@ -309,7 +309,7 @@
 
 
 /* 이용약관박스 */
-#agreebox .wrap {height: 320px;	overflow: hidden;overflow-y: auto;border:1px solid #E6E6E6;padding:0 20px;}
+#agreebox .wrap {height: 200px;	overflow: hidden;overflow-y: auto;border:1px solid #E6E6E6;padding:0 20px;}
 #agreebox .wrap .defaultGrayDotList li {background-position:0 11px;}
 #agreebox .wrap .selectImg {margin-bottom:20px;}
 #agreebox .wrap .btnArea {display:none;}
@@ -324,6 +324,23 @@
 #agreebox .wrap .nonumList > li { list-style-type:decimal; text-indent:0;margin-left:24px;}
 #agreebox .wrap .nonumList > li {margin-left:24px;}
 #agreebox .wrap .roundNumList > li {padding-left:16px;text-indent:-16px;}
+
+#agreebox .wrap2 {height: 80px;	overflow: hidden;overflow-y: auto;border:1px solid #E6E6E6;padding:0 20px;}
+#agreebox .wrap2 .defaultGrayDotList li {background-position:0 11px;}
+#agreebox .wrap2 .selectImg {margin-bottom:20px;}
+#agreebox .wrap2 .btnArea {display:none;}
+#agreebox .wrap2 .blueTit {margin:20px 0 8px;line-height:1.6;}
+#agreebox .wrap2 .txt, #agreebox ul li {line-height:1.6;}
+#agreebox .wrap2 .txt + ul {margin-top:4px;}
+#agreebox .wrap2 section + .smallTit {margin-top:30px;}
+#agreebox .wrap2 ul li ul {margin-top:4px;}
+#agreebox .wrap2 .numList > li { list-style-type:decimal; text-indent:0;margin-left:24px;}
+#agreebox .wrap2 .numList > li:nth-child(9) ~ li {margin-left:24px;}
+#agreebox .wrap2 .numList > li:nth-child(99) ~ li {margin-left:32px;}
+#agreebox .wrap2 .nonumList > li { list-style-type:decimal; text-indent:0;margin-left:24px;}
+#agreebox .wrap2 .nonumList > li {margin-left:24px;}
+#agreebox .wrap2 .roundNumList > li {padding-left:16px;text-indent:-16px;}
+
 
 .boardType2{position:relative; margin-top:15px; border-top:2px solid #333;}
 .boardType2 th{border-bottom:1px solid #e5e5e5; background:#f7f7f7; font-size:11px; color:#333; padding:18px 3%; text-align:left; vertical-align:top}
@@ -407,7 +424,7 @@
 .loginDiv .inputArea .areaDiv .inputDiv label{display:block;margin:15px 0 5px;color:#105d99;font-size:13px;}
 .loginDiv .inputArea .areaDiv .inputDiv label:first-child{margin-top:0;}
 .loginDiv .inputArea .areaDiv .inputDiv .lginInput{width:272px; height:30px; padding:3px; font-size:11px; border:1px solid #e3e3e3;}
-.loginDiv .inputArea .areaDiv .inputDiv .lginInput:last-child{margin-top:5px;}
+.loginDiv .inputArea .areaDiv .inputDiv .lginInput:last-child{margin-top:5px;margin-bottom:5px;}
 .loginDiv .inputArea .areaDiv .loginBt{display:block; width:100px; height:45px; font-size:17px; line-height:45px; margin:10px auto 0; background:#105d99; color:#fff; text-align:center;}
 .loginDiv .inputArea .srchArea{margin-top:25px; padding-top:15px; overflow:hidden; border-top:1px solid #e3e2f4;}
 .loginDiv .inputArea .srchArea .txt{float:none; line-height:30px; text-align:center}
@@ -417,6 +434,25 @@
 .loginDiv .joinArea .txt strong{font-weight:bold;}
 .loginDiv .joinArea .whtBt{display:block; margin:5px auto 0; width:51px; text-align:center; border:0; border-radius:3px; background:#105d99; color:#fff;}
 .loginDiv ::-webkit-input-placeholder {color:#105d99;}
+
+/* 납부조회 */
+.intoDiv .inputArea{border:1px solid #e3e2f4; border-top:2px solid #333;padding:30px 0;}
+.intoDiv .areaDiv{width:280px; margin:auto; overflow:hidden}
+.intoDiv .whtBt {display:inline-block; border-radius:3px; background:#105d99; color:#fff; font-family:'NanumSquareB'; font-weight:normal; padding:7px 10px; font-size:12px;}
+.intoDiv .inputArea .areaDiv .inputDiv{width:280px; float:none;}
+.intoDiv .inputArea .areaDiv .inputDiv label{display:block;margin:15px 0 5px;color:#105d99;font-size:13px;}
+.intoDiv .inputArea .areaDiv .inputDiv label:first-child{margin-top:0;}
+.intoDiv .inputArea .areaDiv .inputDiv .lginInput{width:272px; height:30px; padding:3px; font-size:11px; border:1px solid #e3e3e3;margin-top:5px;}
+.intoDiv .inputArea .areaDiv .inputDiv .lginInput:last-child{margin-top:5px;}
+.intoDiv .inputArea .areaDiv .loginBt{display:block; width:100px; height:45px; font-size:17px; line-height:45px; margin:10px auto 0; background:#105d99; color:#fff; text-align:center;}
+.intoDiv .inputArea .srchArea{margin-top:25px; padding-top:15px; overflow:hidden; border-top:1px solid #e3e2f4;}
+.intoDiv .inputArea .srchArea .txt{float:none; line-height:30px; text-align:center;letter-spacing:-1px;}
+.intoDiv .inputArea .srchArea .bt{float:none; text-align:center}
+.intoDiv .joinArea{padding:20px 0;border-top:1px solid #e5e5e5; background:#efefef;}
+.intoDiv .joinArea .txt{width:auto; padding:0 0 0 35px; background:url('../../public/img/conts/login_icon1.gif') no-repeat 0 center; background-size:25px; float:none; line-height:20px; font-size:12px;}
+.intoDiv .joinArea .txt strong{font-weight:bold;}
+.intoDiv .joinArea .whtBt{display:block; margin:5px auto 0; width:51px; text-align:center; border:0; border-radius:3px; background:#105d99; color:#fff;}
+.intoDiv ::-webkit-input-placeholder {color:#105d99;}
 
 
 
@@ -637,7 +673,7 @@
 .loginDiv .areaDiv{width:440px; margin:auto; overflow:hidden}
 .loginDiv .inputArea .areaDiv .pBox{overflow:hidden;}
 .loginDiv .inputArea .areaDiv .inputDiv{position:relative;width:200px;float:left;padding-left:100px;}
-.loginDiv .inputArea .areaDiv .inputDiv label{position:absolute;top:50px;left:0;color:#105d99;font-size:15px;line-height:45px;}
+.loginDiv .inputArea .areaDiv .inputDiv label{position:absolute;top:35px;left:0;color:#105d99;font-size:15px;line-height:45px;}
 .loginDiv .inputArea .areaDiv .inputDiv label:first-child{top:0;}
 .loginDiv .inputArea .areaDiv .inputDiv .lginInput{width:192px;height:37px;}
 .loginDiv .inputArea .areaDiv .loginBt{width:130px; height:95px; margin:0; float:right; font-size:20px; text-align:center; line-height:95px;}
@@ -648,6 +684,25 @@
 .loginDiv .joinArea .txt{width:290px; padding:0 0 0 55px; background-size:45px; float:left; line-height:22px; color:#555}
 .loginDiv .joinArea .txt strong{color:#333}
 .loginDiv .joinArea .whtBt{float:right; margin-top:5px}
+
+/* 납입조회 */
+.intoDiv .inputArea{padding:60px 0;}
+.intoDiv .areaDiv{width:480px; margin:auto; overflow:hidden}
+.intoDiv .inputArea .areaDiv .pBox{overflow:hidden;}
+.intoDiv .inputArea .areaDiv .inputDiv{position:relative;width:200px;float:left;padding-left:140px;}
+.intoDiv .inputArea .areaDiv .inputDiv label.t1{position:absolute;top:0px;left:0;color:#105d99;font-size:15px;line-height:45px;}
+.intoDiv .inputArea .areaDiv .inputDiv label.t2{position:absolute;top:40px;left:0;color:#105d99;font-size:15px;line-height:45px;}
+.intoDiv .inputArea .areaDiv .inputDiv label.t3{position:absolute;top:90px;left:0;color:#105d99;font-size:15px;line-height:45px;}
+
+.intoDiv .inputArea .areaDiv .inputDiv .lginInput{width:192px;height:37px;}
+.intoDiv .inputArea .areaDiv .loginBt{width:130px; height:95px; margin:0; float:right; font-size:20px; text-align:center; line-height:95px;margin-top:25px;}
+.intoDiv .inputArea .srchArea{margin-top:30px; padding-top:30px; overflow:hidden; border-top:1px solid #e3e2f4}
+.intoDiv .inputArea .srchArea .txt{float:left; line-height:30px;}
+.intoDiv .inputArea .srchArea .bt{float:right;}
+.intoDiv .joinArea{border-top:1px solid #e5e5e5; background:#efefef; padding:39px 0}
+.intoDiv .joinArea .txt{width:290px; padding:0 0 0 55px; background-size:45px; float:left; line-height:22px; color:#555}
+.intoDiv .joinArea .txt strong{color:#333}
+.intoDiv .joinArea .whtBt{float:right; margin-top:5px}
 
 
 }

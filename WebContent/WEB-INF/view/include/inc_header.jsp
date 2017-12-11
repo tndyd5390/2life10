@@ -9,9 +9,7 @@
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
 <link type="text/css" rel="stylesheet" href="/public/css/default.css" />
 <link type="text/css" rel="stylesheet" href="/public/css/layout_kor.css" />
-
 <link type="text/css" rel="stylesheet" href="/public/css/sub_kor.css" />
-
 <script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="/public/js/TweenMax.min.js"></script>
 <script type="text/javascript" src="/public/js/common.js"></script>
