@@ -11,6 +11,7 @@
 		<typeAlias type="com.cl.dto.CounselDTO" alias="CounselDTO"/>
 		<typeAlias type="com.cl.dto.CruiseDTO" alias="CruiseDTO"/>
 		<typeAlias type="com.cl.dto.CyberDTO" alias="CyberDTO"/>
+		<typeAlias type="com.cl.dto.CatalogueDTO" alias="CatalogueDTO"/>
 		<typeAlias type="com.cl.dto.FuneralInfoDTO" alias="FuneralInfoDTO"/>
 		<typeAlias type="com.cl.dto.FuneralNoticeDTO" alias="FuneralNoticeDTO"/>
 		<typeAlias type="com.cl.dto.InquiryDTO" alias="InquiryDTO"/>

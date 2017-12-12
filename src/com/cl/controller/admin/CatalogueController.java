@@ -1,0 +1,204 @@
+//납부조회 컨트롤러
+package com.cl.controller.admin;
+
+import java.io.File;
+import java.util.HashMap;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.cl.dto.CatalogueDTO;
+import com.cl.service.ICatalogueService;
+import com.cl.util.CmmUtil;
+import com.cl.util.FileUtil;
+import com.cl.util.PageUtil;
+
+@Controller
+public class CatalogueController {
+	
+	private Logger log = Logger.getLogger(this.getClass());
+	
+	@Resource(name="CatalogueService")
+	private ICatalogueService catalogueService;
+	
+	String catalogueFileSavePath = "C:\\CLspace\\2life10\\2life10\\WebContent\\";
+		
+	@RequestMapping("/Lmin/catalogue/catalogueList")
+	public String catalogueList(HttpServletRequest req, Model model) throws Exception{
+		log.info("Lmin:catalogueList Start!!");
+
+		int splitPage = 10;
+	
+		HashMap<String, Object> hMap = new HashMap<>();
+		
+		hMap = PageUtil.paging(req, splitPage);
+		
+		hMap = catalogueService.getCatalogueList(hMap);
+		
+		model.addAttribute("hMap", hMap);
+		
+		
+		log.info("Lmin:catalogueList End!!");
+		return "/Lmin/catalogue/catalogue_list";
+	}
+	
+	@RequestMapping("/Lmin/catalogue/catalogueWrite")
+	public String catalogueWrite() throws Exception{
+		log.info("Lmin:catalogueWrite Start!!");
+		
+		log.info("Lmin:catalogueWrite End!!");
+		return "/Lmin/catalogue/catalogue_write";
+	}
+	
+	@RequestMapping("/Lmin/catalogue/catalogueRegProc")
+	public String catalogueRegProc(HttpServletRequest req, Model model, HttpSession session, MultipartHttpServletRequest mulReq) throws Exception{
+		log.info("Lmin:catalogueRegProc Start!!");
+		
+		MultipartFile file = mulReq.getFile("file");
+		String url = "";
+		String msg = "";
+		String regMemberNo = CmmUtil.nvl((String)session.getAttribute("ss_member_no"));
+		String catalogueName = CmmUtil.nvl(req.getParameter("name"));
+		String catalogueStart = CmmUtil.nvl(req.getParameter("start"));
+		String catalogueEnd = CmmUtil.nvl(req.getParameter("end"));
+		String catalogueFileOrgName = CmmUtil.nvl(file.getOriginalFilename());
+		String catalogueFileName = FileUtil.fileSave(file, catalogueFileSavePath);
+		
+		log.info("regMemberNo : " +regMemberNo);
+		log.info("catalogueName : " +catalogueName);
+		log.info("catalogueStart : " +catalogueStart);
+		log.info("catalogueEnd : " +catalogueEnd);
+		log.info("catalogueFileOrgName : " +catalogueFileOrgName);
+		log.info("catalogueFileName : " +catalogueFileName);
+		
+		CatalogueDTO cDTO = new CatalogueDTO();
+		cDTO.setCatalogueName(catalogueName);
+		cDTO.setCatalogueStart(catalogueStart);
+		if(!"".equals(catalogueEnd)){
+			cDTO.setCatalogueEnd(catalogueEnd);
+		};
+		cDTO.setRegMemberNo(regMemberNo);
+		cDTO.setCatalogueFileName(catalogueFileName);
+		cDTO.setCatalogueFileOrgName(catalogueFileOrgName);
+		cDTO.setCatalogueFilePath(catalogueFileSavePath);
+		
+		int result = catalogueService.insertCatalogue(cDTO);
+		
+		
+		url = "/Lmin/catalogue/catalogueList.do";
+		if(result == 0){
+			msg = "등록실패";
+		}else{
+			msg = "등록성공";
+		}
+		
+		model.addAttribute("url", url);
+		model.addAttribute("msg", msg);
+		log.info("Lmin:catalogueRegProc End!!");
+		return "/alert";
+	}
+	
+	@RequestMapping("/Lmin/catalogue/catalogueDownload")
+	public ModelAndView catalogueDownload(HttpServletRequest req) throws Exception{
+		log.info("Lmin:catalogueDownLoad Start!!");
+		
+		String catalogueNo = CmmUtil.nvl(req.getParameter("cNo"));
+		
+		log.info("catalogueNo : "+catalogueNo);
+		
+		CatalogueDTO cDTO = new CatalogueDTO();
+		cDTO = catalogueService.getCatalogueFile(catalogueNo);
+		
+		String path = CmmUtil.nvl(cDTO.getCatalogueFilePath());
+		String fileName = CmmUtil.nvl(cDTO.getCatalogueFileName());
+		String fileOrgName = CmmUtil.nvl(cDTO.getCatalogueFileOrgName());
+		
+		log.info("path : " +path);
+		log.info("fileName : " +fileName);
+		log.info("fileOrgName : " +fileOrgName);
+		File file = new File(path + fileName);
+		
+		ModelAndView mav = new ModelAndView("download", "downloadFile", file);
+		mav.addObject("fileOrgName", fileOrgName);
+		
+		log.info("Lmin:catalogueDownLoad End!!");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/Lmin/catalogue/catalogueDetail")
+	public String catalogueDetail(HttpServletRequest req, Model model) throws Exception{
+		log.info("Lmin:catalogueDetail Start!!");
+		
+		String catalogueNo = CmmUtil.nvl(req.getParameter("cNo"));
+		
+		log.info("catalogueNo : "+ catalogueNo);
+		
+		CatalogueDTO cDTO = new CatalogueDTO();
+		cDTO = catalogueService.getCatalogueDetail(catalogueNo);
+		
+		model.addAttribute("cDTO", cDTO);
+		log.info("Lmin:catalogueDetail End!!");
+		return "/Lmin/catalogue/catalogue_view";
+	}
+	
+	@RequestMapping("/Lmin/catalogue/catalogueUpdateProc")
+	public String catalogueUpdateProc(HttpServletRequest req, Model model, HttpSession session, MultipartHttpServletRequest mulReq) throws Exception{
+		log.info("Lmin:catalogueUpdateProc Start!!");
+		
+		MultipartFile file = mulReq.getFile("file");
+		String url = "";
+		String msg = "";
+		String chgMemberNo = CmmUtil.nvl((String) session.getAttribute("ss_member_no"));
+		String catalogueNo = CmmUtil.nvl(req.getParameter("cNo"));
+		String catalogueName = CmmUtil.nvl(req.getParameter("name"));
+		String catalogueStart = CmmUtil.nvl(req.getParameter("start"));
+		String catalogueEnd = CmmUtil.nvl(req.getParameter("end"));
+		String catalogueFileOrgName = CmmUtil.nvl(file.getOriginalFilename());
+		String catalogueFileName = FileUtil.fileSave(file, catalogueFileSavePath);
+		
+		log.info("chgMemberNo : " +chgMemberNo);
+		log.info("catalogueNo : " +catalogueNo);
+		log.info("catalogueName : " +catalogueName);
+		log.info("catalogueStart : " +catalogueStart);
+		log.info("catalogueEnd : " +catalogueEnd);
+		log.info("catalogueFileOrgName : " +catalogueFileOrgName);
+		log.info("catalogueFileName : " +catalogueFileName);
+		
+		CatalogueDTO cDTO = new CatalogueDTO();
+		cDTO.setChgMemberNo(chgMemberNo);
+		cDTO.setCatalogueNo(catalogueNo);
+		cDTO.setCatalogueName(catalogueName);
+		cDTO.setCatalogueStart(catalogueStart);
+		if(!"".equals(catalogueEnd)){
+			cDTO.setCatalogueEnd(catalogueEnd);
+		};
+		cDTO.setCatalogueFileName(catalogueFileName);
+		cDTO.setCatalogueFileOrgName(catalogueFileOrgName);
+		cDTO.setCatalogueFilePath(catalogueFileSavePath);	
+		
+		int result = catalogueService.updateCatalogue(cDTO);
+		
+		url = "/Lmin/catalogue/catalogueList.do";
+		if(result == 0){
+			msg = "수정실패";
+		}else{
+			msg = "수정성공";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		log.info("Lmin:catalogueUpdateProc End!!");
+		return "/alert";
+	}
+}

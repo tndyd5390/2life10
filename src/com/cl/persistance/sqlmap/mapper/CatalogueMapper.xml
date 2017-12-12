@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cl.persistance.mapper.CatalogueMapper">
+	<select id="getCatalogueList" parameterType="HashMap" resultType="CatalogueDTO">
+		SELECT
+			@rownum:=@rownum+1								  	 AS ROWNUM,
+			C.CATALOGUE_NO            							 AS CATALOGUENO,
+		   	C.CATALOGUE_NAME            						 AS CATALOGUENAME,
+		    DATE_FORMAT(C.CATALOGUE_START, '%Y.%m.%d')           AS CATALOGUESTART,
+		    DATE_FORMAT(C.CATALOGUE_END, '%Y.%m.%d')             AS CATALOGUEEND,
+		    C.CATALOGUE_FILE_NO         						 AS CATALOGUEFILENO,
+		    M.MEMBER_NAME               						 AS REGMEMBERNO,
+		    DATE_FORMAT(C.REG_DT, '%Y.%m.%d')                    AS REGDT,
+		    P.PAGE												 AS PAGE
+		FROM 
+			CATALOGUE_INFO C,
+			MEMBER_INFO M,
+			(SELECT COUNT(*) AS PAGE FROM CATALOGUE_INFO) P,
+			(SELECT @rownum:=0) TMP
+	 	WHERE
+			C.REG_MEMBER_NO = M.MEMBER_NO
+	  	ORDER BY
+		    ROWNUM DESC
+		LIMIT #{page}, #{splitPage}
+	</select>
+
+	<insert id="insertCatalogueFile" parameterType="CatalogueDTO">
+		INSERT INTO FILE_INFO
+		(
+			FILE_ORG_NAME,
+			FILE_NAME,
+			FILE_PATH,
+			REG_MEMBER_NO,
+			REG_DT
+		)
+		VALUES
+		(
+			#{catalogueFileOrgName},
+			#{catalogueFileName},
+			#{catalogueFilePath},
+			#{regMemberNo},
+			NOW()
+		)
+		<selectKey resultType="string" keyProperty="catalogueFileNo" order="AFTER">
+			SELECT LAST_INSERT_ID();
+		</selectKey>
+	</insert>
+	
+	<insert id="insertCatalogue" parameterType="CatalogueDTO">
+		INSERT INTO CATALOGUE_INFO
+		(
+			CATALOGUE_NAME,
+			CATALOGUE_START,
+			CATALOGUE_END,
+			CATALOGUE_FILE_NO,
+			REG_MEMBER_NO,
+			REG_DT
+		) 
+		VALUES
+		(
+			#{catalogueName},
+			#{catalogueStart},
+			#{catalogueEnd},
+			#{catalogueFileNo},
+			#{regMemberNo},
+			NOW()
+		)
+	</insert>
+	
+	<select id="getCatalogueFile" parameterType="String" resultType="CatalogueDTO">
+		 SELECT 
+		     C.CATALOGUE_NO			AS CATALOGUENO,
+		     C.CATALOGUE_FILE_NO	AS CATALGOUEFILENO,
+		     F.FILE_ORG_NAME		AS CATALOGUEFILEORGNAME,
+		     F.FILE_NAME			AS CATALOGUEFILENAME,
+		     F.FILE_PATH			AS CATALOGUEFILEPATH
+		 FROM
+		     CATALOGUE_INFO C,
+		     FILE_INFO F
+		 WHERE
+		     C.CATALOGUE_FILE_NO = F.FILE_NO
+		     AND
+		     C.CATALOGUE_NO = #{catalogueNo}
+	</select>
+	
+	<select id="getCatalogueDetail" parameterType="String" resultType="CatalogueDTO">
+		SELECT 
+		     C.CATALOGUE_NO									AS CATALOGUENO,
+		     C.CATALOGUE_FILE_NO							AS CATALOGUEFILENO,
+		     C.CATALOGUE_NAME								AS CATALOGUENAME,
+		     DATE_FORMAT(C.CATALOGUE_START, '%Y-%m-%d')		AS CATALOGUESTART,
+		     DATE_FORMAT(C.CATALOGUE_END, '%Y-%m-%d')		AS CATALOGUEEND,
+		     F.FILE_ORG_NAME								AS CATALOGUEFILEORGNAME,
+		     F.FILE_NAME									AS CATALOGUEFILENAME,
+		     F.FILE_PATH									AS CATALOGUEFILEPATH
+		 FROM
+		     CATALOGUE_INFO C,
+		     FILE_INFO F
+		 WHERE
+		     C.CATALOGUE_FILE_NO = F.FILE_NO
+		     AND
+		     C.CATALOGUE_NO = #{catalogueNo}
+		
+	</select>
+	
+	<update id="updateCatalogue" parameterType="CatalogueDTO">
+	</update>
+</mapper>
