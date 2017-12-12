@@ -22,4 +22,8 @@ public class TextUtil {
 	public static String addComma(String value){
 		return addComma(Integer.parseInt(value));
 	}
+	public static String getFileExtension(String fileName){
+		fileName = CmmUtil.nvl(fileName);
+		return fileName.substring(fileName.indexOf(".") + 1, fileName.length());
+	}
 }

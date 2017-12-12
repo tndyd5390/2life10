@@ -59,7 +59,7 @@
   		  FROM CYBER_INFO CI
  	INNER JOIN MEMBER_INFO MI
     		ON CI.REG_MEMBER_NO = MI.MEMBER_NO
-    LEFT OUTER JOIN FILE_INFO FI
+    INNER JOIN FILE_INFO FI
     		ON CI.CYBER_FILE_NO = FI.FILE_NO,
     		   (SELECT COUNT(*) AS PAGE 
        			  FROM CYBER_INFO CI
@@ -111,5 +111,37 @@
     INNER JOIN FILE_INFO FI
     		ON CI.CYBER_FILE_NO = FI.FILE_NO
     	 WHERE CYBER_NO = #{cyberNo}
+	</select>
+	
+	<delete id="deleteCyber" parameterType="CyberDTO">
+		DELETE FROM FILE_INFO WHERE FILE_NO = #{cyberFileNo};
+		DELETE FROM CYBER_INFO WHERE CYBER_NO = #{cyberNo};
+	</delete>
+	<delete id="deleteCyberFile" parameterType="string">
+		DELETE FROM FILE_INFO WHERE FILE_NO = #{fileNo}
+	</delete>
+	
+	<update id="updateCyberMovie" parameterType="CyberDTO">
+		UPDATE CYBER_INFO
+		   SET CYBER_FILE_NO = #{cyberFileNo},
+		       CHG_MEMBER_NO = #{chgMemberNo},
+		       CHG_DT = NOW()
+		 WHERE CYBER_NO = #{cyberNo}
+	</update>
+	<update id="updateCyber" parameterType="CyberDTO">
+		UPDATE CYBER_INFO
+		   SET CYBER_TITLE = #{cyberTitle},
+		       CYBER_CONTENTS = #{cyberContents},
+		       CHG_MEMBER_NO = #{chgMemberNo},
+		       CHG_DT = NOW()
+		 WHERE CYBER_NO = #{cyberNo}
+	</update>
+	<select id="getCyberFileInfo" parameterType="string">
+		SELECT FI.FILE_NAME		AS CYBERFILENAME,
+       		   FI.FILE_PATH		AS CYBERFILEPATH
+  		  FROM CYBER_INFO CI
+    INNER JOIN FILE_INFO FI
+    		ON CI.CYBER_FILE_NO = FI.FILE_NO 
+         WHERE CI.CYBER_NO = #{cyberNo}
 	</select>
 </mapper>
