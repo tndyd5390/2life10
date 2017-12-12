@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	CyberDTO cDTO = (CyberDTO)request.getAttribute("cDTO");
-	if(cDTO == null) cDTO = new CyberDTO();
+	if(cDTO == null) cDTO= new CyberDTO();
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -31,10 +31,24 @@
 	<script src="/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
-function deleteCyber(){
-	if(confirm('삭제하시겠습니까?')){
-		document.getElementById('deleteForm').submit();	
+function cyberUpdateCancel(){
+	if(confirm('현재 작성된 내용은 저장되지 않습니다. 취소하시겠습니까?')){
+		location.href="/Lmin/company/cyber.do";
 	}
+}
+function cyberUpdate(){
+	var form = document.getElementById('cyberForm');
+	if(form.cyberTitle.value==""){
+		alert('제목을 입력해 주세요.');
+		form.cyberTitle.focus();
+		return;
+	}else{
+		form.submit();
+	}
+}
+
+function cyberMovieUpdate(){
+	window.open("/Lmin/company/cyberMovieUpdateView.do?cyberNo=" + <%=CmmUtil.nvl(cDTO.getCyberNo())%>,  "popupNo1", "width=350, height=350");
 }
 </script>
 <body>
@@ -105,7 +119,8 @@ function deleteCyber(){
 				<h3 class="smallTit">사이버홍보실</h3>
 
 				<div class="boardType2">
-				<form action="/Lmin/company/cyberRegProc.do" method="post" enctype="multipart/form-data" id="cyberForm">
+				<form action="/Lmin/company/cyberUpdateProc.do" method="post" enctype="multipart/form-data" id="cyberForm">
+				<input type="hidden" name="cyberNo" value="<%=CmmUtil.nvl(cDTO.getCyberNo()) %>">
 					<table summary="">
 						<caption></caption>
 						<colgroup>
@@ -116,28 +131,22 @@ function deleteCyber(){
 							<tr>
 								<th scope="row">제목</th>
 								<td>
-									<%=TextUtil.exchangeEscapeNvl(cDTO.getCyberTitle()) %>
+									<input type="text" name="cyberTitle" class="inputType1" value="<%=TextUtil.exchangeEscapeNvl(cDTO.getCyberTitle())%>">
 								</td>
 							</tr>
-							<%
-							if(!"".equals(TextUtil.exchangeEscapeNvl(cDTO.getCyberContents()))){
-							
-							%>
 							<tr>
 								<th scope="row">내용</th>
 								<td>
-									<%=TextUtil.exchangeEscapeNvl(cDTO.getCyberContents()) %>
+									<textarea name="cyberContents"><%=TextUtil.exchangeEscapeNvl(cDTO.getCyberContents()) %></textarea>
 								</td>
 							</tr>
-							<%
-							}
-							%>
-							<tr>
+							<tr id="cyberMovieTr">
 								<th scope="row">업로드</th>
 								<td>
 									<video width="320" height="240" controls>
 										<source src="/cyberFile/<%=CmmUtil.nvl(cDTO.getCyberFileName()) %>" type="video/<%=TextUtil.getFileExtension(cDTO.getCyberFileName())%>">
-									</video>
+									</video> 동영상 있는  자리
+									<a href="javascript:cyberMovieUpdate();" id="submitLink" class="btn_active">동영상 수정</a>
 								</td>
 							</tr>
 						</tbody>
@@ -146,18 +155,12 @@ function deleteCyber(){
 				</div>
 
 				<div class="btn_area">
-					<a href="/Lmin/company/updateCyberView.do?cyberNo=<%=CmmUtil.nvl(cDTO.getCyberNo()) %>" class="btn_active">수정</a>
-					<%-- <a href="/Lmin/company/deleteCyber.do?cyberNo=<%=CmmUtil.nvl(cDTO.getCyberNo())%>&cyberFileNo=<%=CmmUtil.nvl(cDTO.getCyberFileNo())%>" id="btnCancel" class="btn_cancel">삭제</a> --%>
-					<a href="javascript:deleteCyber();" id="btnCancel" class="btn_cancel">삭제</a>
+					<a href="javascript:cyberUpdate();" id="submitLink" class="btn_active">수정</a>
+					<a href="javascript:cyberUpdateCancel();" id="btnCancel" class="btn_cancel">취소</a>
 				</div>
 
 			</div> <!-- // contents -->
-			<form action="/Lmin/company/deleteCyber.do" method="post" id="deleteForm">
-				<input type="hidden" name="cyberNo" value="<%=CmmUtil.nvl(cDTO.getCyberNo()) %>">
-				<input type="hidden" name="cyberFileNo" value="<%=CmmUtil.nvl(cDTO.getCyberFileNo()) %>">
-				<input type="hidden" name="filePath" value="<%=CmmUtil.nvl(cDTO.getCyberFilePath()) %>">
-				<input type="hidden" name="fileName" value="<%=CmmUtil.nvl(cDTO.getCyberFileName()) %>">
-			</form>
+
 
 		</div>
 	</div> <!-- // contentsWrap -->

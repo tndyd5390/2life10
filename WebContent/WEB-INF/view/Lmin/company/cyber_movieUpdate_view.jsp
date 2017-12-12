@@ -1,10 +1,11 @@
+<%@page import="com.cl.dto.CyberDTO"%>
 <%@page import="com.cl.util.CmmUtil"%>
 <%@page import="com.cl.util.TextUtil"%>
 <%@page import="com.cl.dto.RegulationDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	RegulationDTO rDTO = (RegulationDTO)request.getAttribute("rDTO");
-	if(rDTO == null) rDTO = new RegulationDTO();
+	CyberDTO cDTO = (CyberDTO)request.getAttribute("cDTO");
+	if(cDTO == null) cDTO = new CyberDTO();
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -30,6 +31,7 @@
 	<script src="/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
+
 function fileCheck(fileName, permissibleExtension){
 	var result = 0;
 	var fileExtension = fileName.value.slice(fileName.value.indexOf(".") + 1).toLowerCase();
@@ -46,20 +48,23 @@ function fileCheck(fileName, permissibleExtension){
 		alert(alertStr + " 파일만 업로드 가능합니다.");
 		$(fileName).val("");
 	}else{
-		var file = document.querySelector('#regulationFile');
+		var file = document.querySelector('#cyberFile');
 		var filelist = file.files;
 		var reader = new FileReader();
 		reader.readAsDataURL(filelist[0]);
-		console.log(reader.onload);
+		console.log(reader.result);
 		reader.onload = function(){
-			document.querySelector('#preview').src = reader.result;
+			var video = document.getElementsByTagName('video')[0];
+		    var sources = video.getElementsByTagName('source')[0];
+		    sources.src = reader.result;
+		    video.load();
 		}
 	}
 }
 function uploadFile(){
 	$('#ajaxform').ajaxForm({ 
 		beforeSubmit: function (data, frm, opt) {
-			 if($("#regulationFile").val() == ""){
+			 if($("#cyberFile").val() == ""){
 				 alert('파일을 선택해 주세요'); return false; 
 			 }else{
 				 return true;
@@ -68,11 +73,11 @@ function uploadFile(){
 		success: function(data){
 			if(data != 0){
 				var contents = "";
-				contents += "<th scope='row'>이미지</th>";
-				contents += "<td><img src='/file/regulation/img/" + data + "'>";
-				contents += "<a href='#' id='submitLink' class='btn_active' onclick='doChangeImg();'>변경</a>";
-				contents += "<a href='#' id='btnCancel' class='btn_cancel' onclick='updateImgNull();'>삭제</a></td>";
-				opener.document.getElementById('regulationImgTr').innerHTML = contents;
+				contents += "<th scope='row'>동영상</th>";
+				contents += "<td><video width='320' height='240' controls>";
+				contents += "<source src='/cyberFile/" + + "' type='video/" + + "'>";
+				contents += "<a href='javascript:cyberMovieUpdate();' id='submitLink' class='btn_active'>동영상 수정</a></td>";
+				opener.document.getElementById('cyberMovieTr').innerHTML = contents;
 				window.close();
 			}else{
 				alert("변경 실패!!");
@@ -85,13 +90,15 @@ function uploadFile(){
 }
 </script>
 <body>
-<img id="preview" alt="" src="https://dummyimage.com/600x600/#A4A4A/fff&text=이미지+미리보기" style="width: 600px" style="height:600px">
-<form id="ajaxform" action="/Lmin/regulation/regulationImgChange.do" method="post" enctype="multipart/form-data" >
-	<input type="hidden" name="regulationNo" value="<%=CmmUtil.nvl(rDTO.getRegulationNo()) %>">
-	<input type="hidden" name="preFileNo" value="<%=CmmUtil.nvl(rDTO.getRegulationFileNo()) %>">
-	<input type="hidden" name="preFilePath" value="<%=CmmUtil.nvl(rDTO.getRegulationFilePath()) %>">
-	<input type="hidden" name="preFileName" value="<%=CmmUtil.nvl(rDTO.getRegulationFileName()) %>"> 
-	<input type="file" name="regulationFile" class="inputType1" id="regulationFile" onchange="fileCheck(this, ['jpg', 'jpeg', 'png']);"/>
+<video width="320" height="240" controls>
+	<source id="preview" src="/cyberFile/<%=CmmUtil.nvl(cDTO.getCyberFileName()) %>" type="video/<%=TextUtil.getFileExtension(cDTO.getCyberFileName())%>">
+</video>
+<form id="ajaxform" action="/Lmin/company/cyberMovieUpdateProc.do" method="post" enctype="multipart/form-data" >
+	<input type="hidden" name="cyberNo" value="<%=CmmUtil.nvl(cDTO.getCyberNo()) %>">
+	<input type="hidden" name="preFileNo" value="<%=CmmUtil.nvl(cDTO.getCyberFileNo()) %>">
+	<input type="hidden" name="preFilePath" value="<%=CmmUtil.nvl(cDTO.getCyberFilePath()) %>">
+	<input type="hidden" name="preFileName" value="<%=CmmUtil.nvl(cDTO.getCyberFileName()) %>"> 
+	<input type="file" name="cyberFile" class="inputType1" id="cyberFile" onchange="fileCheck(this, ['mp4', 'avi']);"/>
 	<a href="javascript:uploadFile();" class="btn_active">등록</a>
 </form>
 </body>

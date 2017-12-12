@@ -219,6 +219,12 @@ function fileCheck(fileName, permissibleExtension){
 	}
 }
 
+
+function onlyNumber(obj) {
+    $(obj).focusout(function(){
+         $(this).val($(this).val().replace(/[^0-9]/g,""));
+    }); 
+}
 </script>
 <body>
 <div id="skipnavi">
@@ -326,13 +332,13 @@ function fileCheck(fileName, permissibleExtension){
 							<tr>
 								<th scope="row">상품가</th>
 								<td>
-									<input type="text" name="cruisePrice" class="inputType1" maxlength="25">
+									<input type="text" name="cruisePrice" class="inputType1" maxlength="25" onkeydown="onlyNumber(this)">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">인원</th>
 								<td>
-									<input type="text" name="cruiseAccomodation" class="inputType1" style="" maxlength="25">
+									<input type="text" name="cruiseAccomodation" class="inputType1" style="" maxlength="25" onkeydown="onlyNumber(this)">
 								</td>
 							</tr>
 							<tr>
