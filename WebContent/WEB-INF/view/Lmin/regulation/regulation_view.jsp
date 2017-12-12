@@ -144,6 +144,7 @@ function doUpdateRegulationView(regulationNo){
 				<div class="btn_area">
 					<a href="#" id="submitLink" class="btn_active" onclick="doDeleteRegulation(<%=CmmUtil.nvl(rDTO.getRegulationNo())%>);">삭제</a>
 					<a href="#" id="btnCancel" class="btn_cancel" onclick="doUpdateRegulationView(<%=CmmUtil.nvl(rDTO.getRegulationNo())%>);">수정</a>
+					<a href="/Lmin/regulation/regulationList.do" id="submitLink" class="btn_active">목록</a>
 				</div>
 
 			</div> <!-- // contents -->

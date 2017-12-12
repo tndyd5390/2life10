@@ -93,6 +93,12 @@ function updateImgNull(){
 function doChangeImg(){
 	 window.open("/Lmin/regulation/regulationImgChangeView.do?regulationNo=" + <%=CmmUtil.nvl(rDTO.getRegulationNo())%>,  "popupNo1", "width=800, height=800");
 }
+
+function cancelUpdate(){
+	if(confirm('상조관련법규 수정을 취소하시겠습니까?')){
+		location.href="/Lmin/regulation/regulationList.do";
+	}
+}
 </script>
 <body>
 <div id="skipnavi">
@@ -211,7 +217,7 @@ function doChangeImg(){
 
 				<div class="btn_area">
 					<a href="#" id="submitLink" class="btn_active" onclick="doUpdateRegulation();">수정</a>
-					<a href="#" id="btnCancel" class="btn_cancel">취소</a>
+					<a href="#" id="btnCancel" class="btn_cancel" onclick="cancelUpdate();">취소</a>
 				</div>
 
 			</div> <!-- // contents -->

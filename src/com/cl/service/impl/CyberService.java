@@ -3,6 +3,7 @@ package com.cl.service.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -41,5 +42,30 @@ public class CyberService implements ICyberService{
 	@Override
 	public CyberDTO getCyberDetail(String cyberNo) throws Exception {
 		return cyberMapper.getCyberDetail(cyberNo);
+	}
+
+	@Override
+	public int deleteCyber(CyberDTO cDTO) throws Exception {
+		return cyberMapper.deleteCyber(cDTO);
+	}
+
+	@Override
+	public int updateCyberMovie(Map<String, Object> map) throws Exception {
+		int result = 0;
+		CyberDTO cDTO = (CyberDTO)map.get("cDTO");
+		int deleteCyberFile = cyberMapper.deleteCyberFile((String)map.get("deleteFileNo"));
+		int insertCyberFile = cyberMapper.insertCyberFile(cDTO);
+		int updateCyber = cyberMapper.updateCyberMovie(cDTO);
+		if(deleteCyberFile != 0 &&
+				insertCyberFile != 0 &&
+				updateCyber != 0){
+			result = 1;
+		}
+		return result;
+	}
+
+	@Override
+	public int updateCyber(CyberDTO cDTO) throws Exception {
+		return cyberMapper.updateCyber(cDTO);
 	}
 }
