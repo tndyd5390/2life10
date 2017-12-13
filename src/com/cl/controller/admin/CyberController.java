@@ -109,16 +109,6 @@ public class CyberController {
 		return "/Lmin/company/cyber_detail";
 	}
 	
-	/**
-	 * @param req
-	 * @param resp
-	 * @param model
-	 * @param session
-	 * @return
-	 * @throws Exception
-	 * 이 메소드는 리눅스 경로 문제로인해 리눅스 환경에서만 동작할 것임...
-	 * 실서버에 올리고 꼭 동작하는지 확인 할 것
-	 */
 	@RequestMapping(value="Lmin/company/deleteCyber", method={RequestMethod.GET, RequestMethod.POST})
 	public String deleteCyber(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".deleteCyber start!!!");
