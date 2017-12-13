@@ -64,25 +64,37 @@
 	
 	function appliForSub(){
 		var form = document.getElementById('frm');
-		if(checkRadio('applyProdCode')){
+		if(checkRadio('appliProdCode')){
 			alert('상품을 선택해 주세요.');
 			form.product[0].focus();
 			return;
-		}else if(checkRadio('applyContractCode')){
+		}else if(checkRadio('appliContractCode')){
 			alert('계약구좌를 선택해 주세요.');;
 			form.contractAccount[0].focus();
 			return;
-		}else if(form.applyName.value == ""){
+		}else if(form.appliName.value == ""){
 			alert("성명을 입력해 주세요.");
-			form.applyName.focus();
+			form.appliName.focus();
 			return;
 		}else if(!telChk('tel1', 'tel2', 'tel3')){
 			return;
 		}else if(!telChk('phoneTel1', 'phoneTel2', 'phoneTel3')){
 			return;
-		}else if(form.applyRoute.value == ""){
+		}else if(form.appliPostNo.value == ""){
+			alert('우편번호를 입력해 주세요.');
+			form.appliPostNo.focus();
+			return;
+		}else if(form.appliAddress.value == ""){
+			alert('주소를 입력해주세요.');
+			form.appliAddress.focus();
+			return;
+		}else if(form.appliAddressDetail.value == ""){
+			alert('나머지 주소를 입력해 주세요.');
+			form.appliAddressDetial.focus();
+			return;
+		}else if(form.appliRoute.value == ""){
 			alert("가입 경로를 선택해 주세요");
-			form.applyRoute.focus();
+			form.appliRoute.focus();
 			return;
 		}else{
 			form.submit();
@@ -132,11 +144,11 @@
 	            }
 
 	            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-	            document.getElementById('applyPostNo').value = data.zonecode; //5자리 새우편번호 사용
-	            document.getElementById('applyAddress').value = fullAddr;
+	            document.getElementById('appliPostNo').value = data.zonecode; //5자리 새우편번호 사용
+	            document.getElementById('appliAddress').value = fullAddr;
 
 	            // 커서를 상세주소 필드로 이동한다.
-	            document.getElementById('applyAddressDetail').focus();
+	            document.getElementById('appliAddressDetail').focus();
 	        }
 	    }).open();
 	}
@@ -399,20 +411,20 @@
                                 <tr>
                                     <th scope="row">상품선택</th>
                                     <td>
-                                        <input type="radio" id="agree1" name="applyProdCode" value="41"> <label for="agree1">260상품</label>
-										<input type="radio" id="agree1" name="applyProdCode" value="42"> <label for="agree1">390상품</label>
-										<input type="radio" id="agree1" name="applyProdCode" value="43"> <label for="agree1">480상품</label>
-										<input type="radio" id="agree1" name="applyProdCode" value="44"> <label for="agree1">프라임(350)상품</label>
+                                        <input type="radio" id="agree1" name="appliProdCode" value="41"> <label for="agree1">260상품</label>
+										<input type="radio" id="agree1" name="appliProdCode" value="42"> <label for="agree1">390상품</label>
+										<input type="radio" id="agree1" name="appliProdCode" value="43"> <label for="agree1">480상품</label>
+										<input type="radio" id="agree1" name="appliProdCode" value="44"> <label for="agree1">프라임(350)상품</label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">계약구좌</th>
                                     <td>
-                                        <input type="radio" id="agree2" name="applyContractCode" value="45"> <label for="agree1">1구좌</label>
-										<input type="radio" id="agree2" name="applyContractCode" value="46"> <label for="agree1">2구좌</label>
-										<input type="radio" id="agree2" name="applyContractCode" value="47"> <label for="agree1">3구좌</label>
-										<input type="radio" id="agree2" name="applyContractCode" value="48"> <label for="agree1">4구좌</label>
-										<input type="radio" id="agree2" name="applyContractCode" value="49"> <label for="agree1">5구좌</label>
+                                        <input type="radio" id="agree2" name="appliContractCode" value="45"> <label for="agree1">1구좌</label>
+										<input type="radio" id="agree2" name="appliContractCode" value="46"> <label for="agree1">2구좌</label>
+										<input type="radio" id="agree2" name="appliContractCode" value="47"> <label for="agree1">3구좌</label>
+										<input type="radio" id="agree2" name="appliContractCode" value="48"> <label for="agree1">4구좌</label>
+										<input type="radio" id="agree2" name="appliContractCode" value="49"> <label for="agree1">5구좌</label>
                                     </td>
                                 </tr>
 							</tbody>
@@ -432,7 +444,7 @@
 								<tr>
 									<th scope="row">가입자명</th>
 									<td>
-										<input type="text" name="applyName" value="" title="이름" class="inputType1" style="" maxlength="25">
+										<input type="text" name="appliName" value="" title="이름" class="inputType1" style="" maxlength="25">
 									</td>
 								</tr>
 								<tr>
@@ -479,21 +491,21 @@
 								<tr>
 								<th scope="row" rowspan="2">주소</th>
 								<td>
-									<input type="text" name="applyPostNo" id="applyPostNo" value="" title="이름" class="inputType2" style="">
+									<input type="text" name="appliPostNo" id="appliPostNo" value="" title="이름" class="inputType2" style="">
 									<a href="#" class="btn_active_small"  onclick="sample6_execDaumPostcode();">우편번호</a>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<input type="text" name="applyAddress" id="applyAddress" value="" title="이름" class="inputType5" style="">
-									<input type="text" name="applyAddressDetail" id="applyAddressDetail" value="" title="이름" class="inputType5" style="">
+									<input type="text" name="appliAddress" id="appliAddress" value="" title="이름" class="inputType5" style="">
+									<input type="text" name="appliAddressDetail" id="appliAddressDetail" value="" title="이름" class="inputType5" style="">
 									나머지주소
 								</td>
 							</tr>
 							<tr>
 								<th scope="row" rowspan="0">가입유형</th>
 								<td>
-									<select id="applyRoute" name="applyRoute" class="inputType5">
+									<select id="appliRoute" name="appliRouteCode" class="inputType5">
 										<option value="">선택</option>
                                         <option value="50">본인 또는 가족이 크리스천상조(주) 상품 직접 이용</option>
                                         <option value="51">주위 분들의 크리스천상조(주) 상품 직접 이용</option>
