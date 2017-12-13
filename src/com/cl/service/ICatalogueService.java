@@ -15,5 +15,7 @@ public interface ICatalogueService {
 	CatalogueDTO getCatalogueDetail(String catalogueNo) throws Exception;
 
 	int updateCatalogue(CatalogueDTO cDTO) throws Exception;
+
+	int deleteCatalogue(CatalogueDTO cDTO) throws Exception;
 	
 }

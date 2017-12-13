@@ -35,46 +35,55 @@
 	<script src="/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
-function doSubmit(){
-	var f = $('#f');
-	var name = $('#name');
-	var start = $('#start');
-	var end = $('#end');
-	var file = $('#file');
-	
-	if(name.val()==""){
-		alert('상품명을 입력해 주세요.');
-		name.focus();
-		return false;
-	}else if(start.val() == "" ){
-		alert('게시일을 선택해 주세요.');
-		start.focus();
-		return false;
-	}else if(file.val() == ""){
-		alert('파일을 업로드 해주세요.');
-		return false;
-	}else{
-		f.submit();
+	function doSubmit(){
+		var f = $('#f');
+		var name = $('#name');
+		var start = $('#start');
+		var end = $('#end');
+		var file = $('#file');
+		
+		if(name.val()==""){
+			alert('상품명을 입력해 주세요.');
+			name.focus();
+			return false;
+		}else if(start.val() == "" ){
+			alert('게시일을 선택해 주세요.');
+			start.focus();
+			return false;
+		}else{
+			f.attr("action","/Lmin/catalogue/catalogueUpdateProc.do");
+			f.submit();
+		}
 	}
-}
+	function doDelete(){
+		var f = $('#f');
+		
+		if(confirm("삭제 하시겠습니까?")){
+			f.attr("action","/Lmin/catalogue/catalogueDeleteProc.do");
+			f.submit();
+		}else{
+			return false;
+		}
 
-function fileCheck(fileName, permissibleExtension){
-	var result = 0;
-	var fileExtension = fileName.value.slice(fileName.value.indexOf(".") + 1).toLowerCase();
-	var alertStr = permissibleExtension[0];
-	for(var i = 0; i<permissibleExtension.length; i++){
-		if(fileExtension == permissibleExtension[i]){
-			result++;
+	}
+	
+	function fileCheck(fileName, permissibleExtension){
+		var result = 0;
+		var fileExtension = fileName.value.slice(fileName.value.indexOf(".") + 1).toLowerCase();
+		var alertStr = permissibleExtension[0];
+		for(var i = 0; i<permissibleExtension.length; i++){
+			if(fileExtension == permissibleExtension[i]){
+				result++;
+			}
+			if(i>=1){
+				alertStr += ", " + permissibleExtension[i];
+			}
 		}
-		if(i>=1){
-			alertStr += ", " + permissibleExtension[i];
+		if(result == 0){
+			alert(alertStr + " 파일만 업로드 가능합니다.");
+			$(fileName).val("");
 		}
 	}
-	if(result == 0){
-		alert(alertStr + " 파일만 업로드 가능합니다.");
-		$(fileName).val("");
-	}
-}
 </script>
 <body>
 <div id="skipnavi">
@@ -143,7 +152,11 @@ function fileCheck(fileName, permissibleExtension){
 				<h3 class="smallTit">웹카타로그</h3>
 
 				<div class="boardType2">
-				<form action="/Lmin/catalogue/catalogueUpdate.do" method="post" enctype="multipart/form-data" id="f">
+				<form action="/Lmin/catalogue/catalogueUpdateProc.do" method="post" enctype="multipart/form-data" id="f">
+				<input type="hidden" name="cNo" value="<%=CmmUtil.nvl(cDTO.getCatalogueNo())%>">
+				<input type="hidden" name="fNo" value="<%=CmmUtil.nvl(cDTO.getCatalogueFileNo())%>">
+				<input type="hidden" name="delFileOrg" value="<%=CmmUtil.nvl(cDTO.getCatalogueFileOrgName())%>">
+				<input type="hidden" name="delFileName" value="<%=CmmUtil.nvl(cDTO.getCatalogueFileName())%>">
 					<table summary="">
 						<caption></caption>
 						<colgroup>
@@ -182,6 +195,7 @@ function fileCheck(fileName, permissibleExtension){
 
 				<div class="btn_area">
 					<a href="javascript:doSubmit();" id="submitLink" class="btn_active">수정</a>
+					<a href="javascript:doDelete();" id="submitLink" class="btn_active">삭제</a>
 					<a href="/Lmin/catalogue/catalogueList.do" id="btnCancel" class="btn_cancel">취소</a>
 				</div>
 

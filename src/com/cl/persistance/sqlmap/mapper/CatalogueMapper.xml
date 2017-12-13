@@ -100,9 +100,43 @@
 		     C.CATALOGUE_FILE_NO = F.FILE_NO
 		     AND
 		     C.CATALOGUE_NO = #{catalogueNo}
-		
 	</select>
 	
 	<update id="updateCatalogue" parameterType="CatalogueDTO">
+		<choose>
+			<when test="catalogueFileOrgName != null and catalogueFilePath !=null">
+				UPDATE 
+					CATALOGUE_INFO
+				SET
+					CATALOGUE_NAME = #{catalogueName},
+					CATALOGUE_START = #{catalogueStart},
+					CATALOGUE_END = #{catalogueEnd},
+					CATALOGUE_FILE_NO = #{catalogueFileNo},
+					CHG_MEMBER_NO = #{chgMemberNo},
+					CHG_DT = NOW()
+				WHERE
+					CATALOGUE_NO = #{catalogueNo}
+			</when>
+			<otherwise>
+				UPDATE 
+					CATALOGUE_INFO
+				SET
+					CATALOGUE_NAME = #{catalogueName},
+					CATALOGUE_START = #{catalogueStart},
+					CATALOGUE_END = #{catalogueEnd},
+					CHG_MEMBER_NO = #{chgMemberNo},
+					CHG_DT = NOW()
+				WHERE
+					CATALOGUE_NO = #{catalogueNo}
+			</otherwise>
+		</choose>
 	</update>
+	
+	<delete id="deleteCatalogueFile" parameterType="CatalogueDTO">
+		DELETE FROM FILE_INFO WHERE FILE_NO = #{deleteFileNo}
+	</delete>
+	
+	<delete id="deleteCatalogue" parameterType="CatalogueDTO">
+		DELETE FROM CATALOGUE_INFO WHERE CATALOGUE_NO = #{catalogueNo}
+	</delete>
 </mapper>

@@ -21,4 +21,8 @@ public interface CatalogueMapper {
 
 	int updateCatalogue(CatalogueDTO cDTO) throws Exception;
 
+	void deleteCatalogueFile(CatalogueDTO cDTO) throws Exception;
+
+	int deleteCatalogue(CatalogueDTO cDTO) throws Exception;
+
 }

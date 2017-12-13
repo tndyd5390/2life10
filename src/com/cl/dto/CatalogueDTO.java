@@ -13,9 +13,37 @@ public class CatalogueDTO {
 	private String regDt;
 	private String chgMemberNo;
 	private String chgDt;
+	private String deleteFileNo;
+	private String deleteFileName;
+	private String deleteFileOrgName;
+	private String deleteFilePath;
 	private int page;
 	private int splitPage;
 	
+	public String getDeleteFileNo() {
+		return deleteFileNo;
+	}
+	public void setDeleteFileNo(String deleteFileNo) {
+		this.deleteFileNo = deleteFileNo;
+	}
+	public String getDeleteFileName() {
+		return deleteFileName;
+	}
+	public void setDeleteFileName(String deleteFileName) {
+		this.deleteFileName = deleteFileName;
+	}
+	public String getDeleteFileOrgName() {
+		return deleteFileOrgName;
+	}
+	public void setDeleteFileOrgName(String deleteFileOrgName) {
+		this.deleteFileOrgName = deleteFileOrgName;
+	}
+	public String getDeleteFilePath() {
+		return deleteFilePath;
+	}
+	public void setDeleteFilePath(String deleteFilePath) {
+		this.deleteFilePath = deleteFilePath;
+	}
 	public String getCatalogueNo() {
 		return catalogueNo;
 	}

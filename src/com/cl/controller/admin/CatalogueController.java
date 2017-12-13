@@ -46,6 +46,7 @@ public class CatalogueController {
 		
 		model.addAttribute("hMap", hMap);
 		
+		hMap = null;
 		
 		log.info("Lmin:catalogueList End!!");
 		return "/Lmin/catalogue/catalogue_list";
@@ -101,6 +102,8 @@ public class CatalogueController {
 			msg = "등록성공";
 		}
 		
+		cDTO = null;
+		
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
 		log.info("Lmin:catalogueRegProc End!!");
@@ -130,8 +133,10 @@ public class CatalogueController {
 		ModelAndView mav = new ModelAndView("download", "downloadFile", file);
 		mav.addObject("fileOrgName", fileOrgName);
 		
-		log.info("Lmin:catalogueDownLoad End!!");
+		cDTO = null;
+		file = null;
 		
+		log.info("Lmin:catalogueDownLoad End!!");
 		return mav;
 	}
 	
@@ -147,6 +152,8 @@ public class CatalogueController {
 		cDTO = catalogueService.getCatalogueDetail(catalogueNo);
 		
 		model.addAttribute("cDTO", cDTO);
+		
+		cDTO = null;
 		log.info("Lmin:catalogueDetail End!!");
 		return "/Lmin/catalogue/catalogue_view";
 	}
@@ -163,32 +170,43 @@ public class CatalogueController {
 		String catalogueName = CmmUtil.nvl(req.getParameter("name"));
 		String catalogueStart = CmmUtil.nvl(req.getParameter("start"));
 		String catalogueEnd = CmmUtil.nvl(req.getParameter("end"));
-		String catalogueFileOrgName = CmmUtil.nvl(file.getOriginalFilename());
-		String catalogueFileName = FileUtil.fileSave(file, catalogueFileSavePath);
+		String deleteFileNo = CmmUtil.nvl(req.getParameter("fNo"));
 		
 		log.info("chgMemberNo : " +chgMemberNo);
 		log.info("catalogueNo : " +catalogueNo);
 		log.info("catalogueName : " +catalogueName);
 		log.info("catalogueStart : " +catalogueStart);
 		log.info("catalogueEnd : " +catalogueEnd);
-		log.info("catalogueFileOrgName : " +catalogueFileOrgName);
-		log.info("catalogueFileName : " +catalogueFileName);
+		log.info("deleteFileNo : " +deleteFileNo);
 		
 		CatalogueDTO cDTO = new CatalogueDTO();
 		cDTO.setChgMemberNo(chgMemberNo);
 		cDTO.setCatalogueNo(catalogueNo);
 		cDTO.setCatalogueName(catalogueName);
 		cDTO.setCatalogueStart(catalogueStart);
-		if(!"".equals(catalogueEnd)){
-			cDTO.setCatalogueEnd(catalogueEnd);
-		};
-		cDTO.setCatalogueFileName(catalogueFileName);
-		cDTO.setCatalogueFileOrgName(catalogueFileOrgName);
-		cDTO.setCatalogueFilePath(catalogueFileSavePath);	
+		cDTO.setCatalogueEnd(catalogueEnd);
+		
+		if(!file.getOriginalFilename().equals("")){
+			System.out.println("탐");
+			String deleteFileOrgName = CmmUtil.nvl(req.getParameter("delFileOrg"));
+			String deleteFileName = CmmUtil.nvl(req.getParameter("delFileName"));
+			String catalogueFileOrgName = CmmUtil.nvl(file.getOriginalFilename());
+			String catalogueFileName = FileUtil.fileSave(file, catalogueFileSavePath);
+			log.info("catalogueFileOrgName : " +catalogueFileOrgName);
+			log.info("catalogueFileName : " +catalogueFileName);
+			
+			cDTO.setDeleteFileNo(deleteFileNo);
+			cDTO.setDeleteFileName(deleteFileName);
+			cDTO.setDeleteFileOrgName(deleteFileOrgName);
+			cDTO.setCatalogueFileName(catalogueFileName);
+			cDTO.setCatalogueFileOrgName(catalogueFileOrgName);
+			cDTO.setCatalogueFilePath(catalogueFileSavePath);	
+		}
 		
 		int result = catalogueService.updateCatalogue(cDTO);
 		
 		url = "/Lmin/catalogue/catalogueList.do";
+		
 		if(result == 0){
 			msg = "수정실패";
 		}else{
@@ -198,7 +216,50 @@ public class CatalogueController {
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
 		
+		cDTO = null;
+		
 		log.info("Lmin:catalogueUpdateProc End!!");
+		return "/alert";
+	}
+	
+	@RequestMapping("/Lmin/catalogue/catalogueDeleteProc")
+	public String catalogueDeleteProc(HttpServletRequest req, Model model) throws Exception{
+		log.info("Lmin:catalogueDeleteProc Start!!");
+		
+		String url = "";
+		String msg = "";
+		String catalogueNo = CmmUtil.nvl(req.getParameter("cNo"));
+		String deleteFileNo = CmmUtil.nvl(req.getParameter("fNo"));
+		String deleteFileOrgName = CmmUtil.nvl(req.getParameter("delFileOrg"));
+		String deleteFileName = CmmUtil.nvl(req.getParameter("delFileName"));
+		
+		CatalogueDTO cDTO = new CatalogueDTO();
+		cDTO.setCatalogueNo(catalogueNo);
+		cDTO.setDeleteFileNo(deleteFileNo);
+		cDTO.setDeleteFileOrgName(deleteFileOrgName);
+		cDTO.setDeleteFileName(deleteFileName);
+		cDTO.setDeleteFilePath(catalogueFileSavePath);
+		
+		log.info("catalogueNo : "+catalogueNo);
+		log.info("deleteFileNo : "+deleteFileNo);
+		log.info("deleteFileOrgName : "+deleteFileOrgName);
+		log.info("deleteFileName : "+deleteFileName);
+		log.info("deleteFileFilePath : "+catalogueFileSavePath);
+		
+		int result = catalogueService.deleteCatalogue(cDTO);
+		
+		url = "/Lmin/catalogue/catalogueList.do";
+		
+		if(result == 0){
+			msg = "삭제실패";
+		}else{
+			msg = "삭제성공";
+		}
+		
+		model.addAttribute("url", url);
+		model.addAttribute("msg", msg);
+		
+		log.info("Lmin:catalogueDeleteProc End!!");
 		return "/alert";
 	}
 }

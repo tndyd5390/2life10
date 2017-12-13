@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.cl.dto.CatalogueDTO;
 import com.cl.persistance.mapper.CatalogueMapper;
 import com.cl.service.ICatalogueService;
+import com.cl.util.CmmUtil;
+import com.cl.util.FileUtil;
 
 @Service("CatalogueService")
 public class CatalogueService implements ICatalogueService{
@@ -48,7 +50,21 @@ public class CatalogueService implements ICatalogueService{
 
 	@Override
 	public int updateCatalogue(CatalogueDTO cDTO) throws Exception {
+		
+		if(!CmmUtil.nvl(cDTO.getDeleteFileNo()).equals("")){
+			FileUtil.deleteFile(cDTO.getCatalogueFilePath(), cDTO.getDeleteFileName());
+			catalogueMapper.deleteCatalogueFile(cDTO);
+			catalogueMapper.insertCatalogueFile(cDTO);
+		}
 		return catalogueMapper.updateCatalogue(cDTO);
+	}
+
+	@Override
+	public int deleteCatalogue(CatalogueDTO cDTO) throws Exception {
+		FileUtil.deleteFile(cDTO.getDeleteFilePath(), cDTO.getDeleteFileName());
+		catalogueMapper.deleteCatalogueFile(cDTO);
+
+		return catalogueMapper.deleteCatalogue(cDTO);
 	}
 	
 }
