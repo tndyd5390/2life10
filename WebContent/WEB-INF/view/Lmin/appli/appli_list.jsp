@@ -92,15 +92,8 @@
 		
 	});
 
-	function goDetail(cNo){
-		var f = $("#f");
-		var counselNo = $("#cNo");
-		f.attr("action", "/Lmin/counsel/counselDetail.do");
-		counselNo.val(cNo);
-		f.submit();	
-	}
-	
 	function goPage(page, lastPage){
+		console.log(page);
 		var f = $("#f");
 		$("#page").val(page);
 		f.submit();
@@ -115,10 +108,9 @@
 			<!-- 메뉴 영역 -->
 
 			<div class="contents"> <!-- 페이지별 ID none -->
-				<h3 class="smallTit">1:1상담</h3>
+				<h3 class="smallTit">가입신청</h3>
 				
-				<form name="f" id="f" method="post" action="/Lmin/counsel/counselList.do">
-				<input type="hidden" id="cNo" name="cNo">
+				<form name="f" id="f" method="post" action="/Lmin/appli/appliList.do">
 				<input type="hidden" id="page" name="page">
 				<div class="tableBasicList">
 					<table class="defaultTable">
@@ -214,6 +206,7 @@
 						</tbody>
 					</table>
 				</div>
+				<a href="/Lmin/appli/appliForm.do" class="btn_active_small" style="float:right;">가입신청 폼</a>
 				<!-- pageArea -->
 				<div class="pageArea">
 					<%=PageUtil.frontPaging(hMap, pageBtnSplit) %>

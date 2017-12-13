@@ -97,10 +97,12 @@ public class AppliController {
 	public String appliList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".appliList start!!!");
 		
-		int splitPage = 10;
+		int splitPage = 3;
 		
 		HashMap<String, Object> hMap = new HashMap<>();
 		hMap = PageUtil.paging(req, splitPage);
+		System.out.println(hMap.get("page"));
+		System.out.println(hMap.get("splitPage"));
 		hMap = appliService.getAppliList(hMap);
 		
 		model.addAttribute("hMap", hMap);

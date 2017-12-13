@@ -34,7 +34,8 @@
 		)
 	</insert>
 	<select id="getAppliList" parameterType="hashmap" resultType="AppliDTO">
-		SELECT AI.APPLI_NO							AS APPLINO,
+		SELECT @rownum:=@rownum+1					AS ROWNUM,
+			   AI.APPLI_NO							AS APPLINO,
        		   AI.APPLI_PROD_CODE 					AS APPLIPRODCODE,
        		   PROD.CODE_NAME 						AS APPLIPRODCODENAME,
        		   AI.APPLI_CONTRACT_CODE 				AS APPLICONTRACTCODE,
@@ -55,14 +56,17 @@
        		   AI.REG_MEMBER_NO 					AS REGMEMBERNO,
        		   DATE_FORMAT(AI.REG_DT,'%Y-%m-%d')	AS REGDT,
        		   AI.CHG_MEMBER_NO						AS CHGMEMBERNO,
-       		   DATE_FORMAT(AI.CHG_DT,'%Y-%m-%d')	AS CHGDT
+       		   DATE_FORMAT(AI.CHG_DT,'%Y-%m-%d')	AS CHGDT,
+       		   P.PAGE 								AS PAGE
   		  FROM APPLI_INFO AI
  		 INNER JOIN CODE PROD
     		ON AI.APPLI_PROD_CODE = PROD.CODE_ID
  		 INNER JOIN CODE CONTRACT
     		ON AI.APPLI_CONTRACT_CODE = CONTRACT.CODE_ID
  		 INNER JOIN CODE ROUTE
-    		ON AI.APPLI_ROUTE_CODE = ROUTE.CODE_ID
+    		ON AI.APPLI_ROUTE_CODE = ROUTE.CODE_ID,
+    		(SELECT @rownum:=0) TMP,
+    		(SELECT COUNT(*) AS PAGE FROM APPLI_INFO) P
       ORDER BY REGDT DESC, APPLIREPLY DESC
 		LIMIT #{page}, #{splitPage}
 	</select>
