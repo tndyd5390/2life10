@@ -93,7 +93,6 @@
 	});
 
 	function goPage(page, lastPage){
-		console.log(page);
 		var f = $("#f");
 		$("#page").val(page);
 		f.submit();
