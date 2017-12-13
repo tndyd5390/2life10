@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cl.persistance.mapper.AppliMapper">
+	<insert id="insertAppli" parameterType="AppliDTO">
+		INSERT INTO APPLI_INFO
+		(
+			APPLI_PROD_CODE,
+			APPLI_CONTRACT_CODE,
+			APPLI_NAME,
+			APPLI_HOME_NO,
+			APPLI_PHONE_NO,
+			APPLI_POST_NO,
+			APPLI_ADDRESS,
+			APPLI_ADDRESS_DETAIL,
+			APPLI_ROUTE_CODE,
+			APPLI_REPLY,
+			REG_MEMBER_NO,
+			REG_DT
+		)
+		VALUES
+		(
+			#{appliProdCode},
+			#{appliContractCode},
+			#{appliName},
+			#{appliHomeNo},
+			#{appliPhoneNo},
+			#{appliPostNo},
+			#{appliAddress},
+			#{appliAddressDetail},
+			#{appliRouteCode},
+			'N',
+			#{regMemberNo},
+			NOW()
+		)
+	</insert>
+	<select id="getAppliList" parameterType="hashmap" resultType="AppliDTO">
+		SELECT @rownum:=@rownum+1					AS ROWNUM,
+			   AI.APPLI_NO							AS APPLINO,
+       		   AI.APPLI_PROD_CODE 					AS APPLIPRODCODE,
+       		   PROD.CODE_NAME 						AS APPLIPRODCODENAME,
+       		   AI.APPLI_CONTRACT_CODE 				AS APPLICONTRACTCODE,
+       		   CONTRACT.CODE_NAME 					AS APPLICONTRACTCODENAME,
+       		   AI.APPLI_NAME 						AS APPLINAME,
+       		   AI.APPLI_HOME_NO 					AS APPLIHOMENO,
+       		   AI.APPLI_PHONE_NO 					AS APPLIPHONENO,
+       		   AI.APPLI_POST_NO 					AS APPLIPOSTNO,
+       		   AI.APPLI_ADDRESS 					AS APPLIADDRESS,
+       		   AI.APPLI_ADDRESS_DETAIL 				AS APPLIADDRESSDETAIL,
+       		   AI.APPLI_ROUTE_CODE 					AS APPLIROUTECODE,
+       		   ROUTE.CODE_NAME 						AS APPLIROUTECODENAME,
+       		   (CASE 
+       		   		 WHEN AI.APPLI_REPLY = 'N'
+       		   		 THEN '미답변'
+       		   		 ELSE '답변'
+       		   	 END) 								AS APPLIREPLY,
+       		   AI.REG_MEMBER_NO 					AS REGMEMBERNO,
+       		   DATE_FORMAT(AI.REG_DT,'%Y-%m-%d')	AS REGDT,
+       		   AI.CHG_MEMBER_NO						AS CHGMEMBERNO,
+       		   DATE_FORMAT(AI.CHG_DT,'%Y-%m-%d')	AS CHGDT,
+       		   P.PAGE 								AS PAGE
+  		  FROM APPLI_INFO AI
+ 		 INNER JOIN CODE PROD
+    		ON AI.APPLI_PROD_CODE = PROD.CODE_ID
+ 		 INNER JOIN CODE CONTRACT
+    		ON AI.APPLI_CONTRACT_CODE = CONTRACT.CODE_ID
+ 		 INNER JOIN CODE ROUTE
+    		ON AI.APPLI_ROUTE_CODE = ROUTE.CODE_ID,
+    		(SELECT @rownum:=0) TMP,
+    		(SELECT COUNT(*) AS PAGE FROM APPLI_INFO) P
+      ORDER BY REGDT DESC, APPLIREPLY DESC
+		LIMIT #{page}, #{splitPage}
+	</select>
+	<select id="getAppliDetail" parameterType="string" resultType="AppliDTO">
+		SELECT AI.APPLI_NO							AS APPLINO,
+       		   AI.APPLI_PROD_CODE 					AS APPLIPRODCODE,
+       		   PROD.CODE_NAME 						AS APPLIPRODCODENAME,
+       		   AI.APPLI_CONTRACT_CODE 				AS APPLICONTRACTCODE,
+       		   CONTRACT.CODE_NAME 					AS APPLICONTRACTCODENAME,
+       		   AI.APPLI_NAME 						AS APPLINAME,
+       		   AI.APPLI_HOME_NO 					AS APPLIHOMENO,
+       		   AI.APPLI_PHONE_NO 					AS APPLIPHONENO,
+       		   AI.APPLI_POST_NO 					AS APPLIPOSTNO,
+       		   AI.APPLI_ADDRESS 					AS APPLIADDRESS,
+       		   AI.APPLI_ADDRESS_DETAIL 				AS APPLIADDRESSDETAIL,
+       		   AI.APPLI_ROUTE_CODE 					AS APPLIROUTECODE,
+       		   ROUTE.CODE_NAME 						AS APPLIROUTECODENAME,
+       		   AI.APPLI_REPLY						AS APPLIREPLY,
+       		   AI.REG_MEMBER_NO 					AS REGMEMBERNO,
+       		   DATE_FORMAT(AI.REG_DT,'%Y-%m-%d')	AS REGDT,
+       		   AI.CHG_MEMBER_NO						AS CHGMEMBERNO,
+       		   DATE_FORMAT(AI.CHG_DT,'%Y-%m-%d')	AS CHGDT
+  		  FROM APPLI_INFO AI
+ 		 INNER JOIN CODE PROD
+    		ON AI.APPLI_PROD_CODE = PROD.CODE_ID
+ 		 INNER JOIN CODE CONTRACT
+    		ON AI.APPLI_CONTRACT_CODE = CONTRACT.CODE_ID
+ 		 INNER JOIN CODE ROUTE
+    		ON AI.APPLI_ROUTE_CODE = ROUTE.CODE_ID
+    	 WHERE AI.APPLI_NO = #{appliNo}
+	</select>
+	<update id="updateAppliReply" parameterType="string">
+		UPDATE APPLI_INFO
+		   SET APPLI_REPLY = 'Y'
+		 WHERE APPLI_NO = #{appliNo}
+	</update>
+</mapper>

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cl.dto.AdviceDTO;
 import com.cl.service.IAdviceService;
+import com.cl.util.AES256Util;
 import com.cl.util.CmmUtil;
 import com.cl.util.PageUtil;
 
