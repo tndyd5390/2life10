@@ -113,9 +113,8 @@
 							<li>-꽃바구니 2개 및 헌화 50송이 제공</li>
 						</ul>
 						<br/>
-						<a href="/downloadFile.do?fileSeqNum=eykinhybdvik" class="btnDefault">가입신청</a>
-						<a href="/downloadFile.do?fileSeqNum=eykinhybdvik" class="btnDefault">상담신청</a>
-						
+						<a href="/appli/appliForm.do" class="btnDefault">가입신청</a>
+						<a href="/counsel/counselWrite.do" class="btnDefault">상담신청</a>
 					</div>
 				</header>
 

@@ -107,8 +107,8 @@
 							<li>리허설촬영 및 본식진행 시 웨딩드레스 및 스튜디오 등 / 비디오촬영</li>
 						</ul>
 						<br/>
-						<a href="/downloadFile.do?fileSeqNum=eykinhybdvik" class="btnDefault">가입신청</a>
-						<a href="/downloadFile.do?fileSeqNum=eykinhybdvik" class="btnDefault">상담신청</a>
+						<a href="/appli/appliForm.do" class="btnDefault">가입신청</a>
+						<a href="/counsel/counselWrite.do" class="btnDefault">상담신청</a>
 						
 					</div>
 				</header>

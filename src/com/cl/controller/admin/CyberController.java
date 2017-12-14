@@ -1,4 +1,4 @@
-//���̹�ȫ�� ��Ʈ�ѷ�
+//占쏙옙占싱뱄옙홍占쏙옙 占쏙옙트占싼뤄옙
 package com.cl.controller.admin;
 
 import java.util.HashMap;
@@ -33,7 +33,7 @@ public class CyberController {
 	@Resource(name="CyberService")
 	private ICyberService cyberService;
 	
-	String cyberFileSavePath = "C:\\Users\\Data3811-32\\git\\2life10\\WebContent\\cyberFile\\";
+	String cyberFileSavePath = "/www/thunder-edu_com/file/cyber/movie/";
 	
 	@RequestMapping(value="/Lmin/company/cyber", method={RequestMethod.GET, RequestMethod.POST})
 	public String cyberList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
@@ -84,9 +84,9 @@ public class CyberController {
 		int result = cyberService.insertCyber(cDTO);
 		
 		if(result != 0){
-			model.addAttribute("msg", "사이버홍보글 등록에 성공했습니다.");
+			model.addAttribute("msg", "�궗�씠踰꾪솉蹂닿� �벑濡앹뿉 �꽦怨듯뻽�뒿�땲�떎.");
 		}else{
-			model.addAttribute("msg", "사이버홍보글 등록에 실패했습니다.");
+			model.addAttribute("msg", "�궗�씠踰꾪솉蹂닿� �벑濡앹뿉 �떎�뙣�뻽�뒿�땲�떎.");
 		}
 		model.addAttribute("url", "/Lmin/company/cyber.do");
 		log.info(this.getClass() + ".cyberRegProc end!!!");
@@ -128,9 +128,9 @@ public class CyberController {
 		int result = cyberService.deleteCyber(cDTO);
 		if(result != 0){
 			FileUtil.deleteFile(cyberFilePath, cyberFileName);
-			model.addAttribute("msg", "사이버 홍보 삭제에 성공했습니다.");
+			model.addAttribute("msg", "�궗�씠踰� �솉蹂� �궘�젣�뿉 �꽦怨듯뻽�뒿�땲�떎.");
 		}else{
-			model.addAttribute("msg", "사이버 홍보 삭제에 실패 했습니다.");
+			model.addAttribute("msg", "�궗�씠踰� �솉蹂� �궘�젣�뿉 �떎�뙣 �뻽�뒿�땲�떎.");
 		}
 		model.addAttribute("url", "/Lmin/company/cyber.do");
 		
@@ -203,7 +203,7 @@ public class CyberController {
 		map.put("cDTO", cDTO);
 		map.put("deleteFileNo", preFileNo);
 		
-		//이미지 지우고 이미지 넣고 사이버 업데이트하고 확인
+		//�씠誘몄� 吏��슦怨� �씠誘몄� �꽔怨� �궗�씠踰� �뾽�뜲�씠�듃�븯怨� �솗�씤
 		int result = cyberService.updateCyberMovie(map);
 		if(result != 0){
 			FileUtil.deleteFile(preFilePath, preFileName);
@@ -241,9 +241,9 @@ public class CyberController {
 		int result = cyberService.updateCyber(cDTO);
 		
 		if(result != 0){
-			model.addAttribute("msg", "사이버 홍보 수정에 성공했습니다.");
+			model.addAttribute("msg", "�궗�씠踰� �솉蹂� �닔�젙�뿉 �꽦怨듯뻽�뒿�땲�떎.");
 		}else{
-			model.addAttribute("msg", "사이버 홍보 수정에 실패했습니다.");
+			model.addAttribute("msg", "�궗�씠踰� �솉蹂� �닔�젙�뿉 �떎�뙣�뻽�뒿�땲�떎.");
 		}
 		model.addAttribute("url", "/Lmin/company/cyber.do");
 		

@@ -112,9 +112,8 @@
 							<li>-장례지도사 3일간 장례 진행, 도우미 2명</li>
 						</ul>
 						<br/>
-						<a href="/downloadFile.do?fileSeqNum=eykinhybdvik" class="btnDefault">가입신청</a>
-						<a href="/downloadFile.do?fileSeqNum=eykinhybdvik" class="btnDefault">상담신청</a>
-						
+						<a href="/appli/appliForm.do" class="btnDefault">가입신청</a>
+						<a href="/counsel/counselWrite.do" class="btnDefault">상담신청</a>
 					</div>
 				</header>
 

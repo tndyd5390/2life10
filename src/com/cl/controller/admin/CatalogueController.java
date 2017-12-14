@@ -30,7 +30,7 @@ public class CatalogueController {
 	@Resource(name="CatalogueService")
 	private ICatalogueService catalogueService;
 	
-	String catalogueFileSavePath = "C:\\CLspace\\2life10\\2life10\\WebContent\\";
+	String catalogueFileSavePath = "/www/thunder-edu_com/file/catalogue/file/";
 		
 	@RequestMapping("/Lmin/catalogue/catalogueList")
 	public String catalogueList(HttpServletRequest req, Model model) throws Exception{

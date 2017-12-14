@@ -38,7 +38,7 @@
 
 				<div class="topMenuWrap">
 					<ul>
-						<li><a href="/apply/applyForm.do">온라인가입신청</a></li>
+						<li><a href="/appli/appliForm.do">온라인가입신청</a></li>
 						<li><a href="/member/login.do">로그인</a></li>
 						<li><a href="/member/joinStep.do">회원가입</a></li>
 					</ul>
@@ -151,7 +151,7 @@
 									                            <li id="MO60500"><a href="javascript:goMenu('/regulation/regulationList.do', 'MO60500');">상조관련법규</a></li>
 									                            <li id="MO60600"><a href="javascript:goMenu('/agreement/agreementList.do', 'MO60600');">이용약관</a></li>
 									                            <li id="MO60700"><a href="javascript:goMenu('/inquiry/inquiryList.do', 'MO60700');">납부조회</a></li>
-									                            <li id="MO60800"><a href="javascript:goMenu('/apply/applyForm.do', 'MO60800');">가입신청</a></li>
+									                            <li id="MO60800"><a href="javascript:goMenu('/appli/appliForm.do', 'MO60800');">가입신청</a></li>
 															</ul>
 														</div>
 													</div>

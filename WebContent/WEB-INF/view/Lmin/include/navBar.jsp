@@ -12,16 +12,16 @@
 						<ul>
 						<li id="MO70100"><a href="javascript:goMenu('/Lmin/company/branchList.do', 'MO70100');">전국지사안내</a></li>
 						<li id="MO70200"><a href="javascript:goMenu('/Lmin/company/adviceList.do', 'MO70200');">상담사조회</a></li>
-						<li id="MO70300"><a href="javascript:goMenu('#', 'MO70300');">사이버홍보실</a></li>
+						<li id="MO70300"><a href="javascript:goMenu('/Lmin/cyber/cyberList.do', 'MO70300');">사이버홍보실</a></li>
 						<li id="MO70400"><a href="javascript:goMenu('/Lmin/funeral/funeralInfoList.do', 'MO70400');">전국장례시설안내</a></li>
 						<li id="MO70500"><a href="javascript:goMenu('/Lmin/funeral/funeralNoticeList.do', 'M760500');">부고알림</a></li>
 						<li id="MO70600"><a href="javascript:goMenu('/Lmin/cruise/cruiseScheduleList.do', 'MO70600');">크루즈일정</a></li>
 						<li id="MO70700"><a href="javascript:goMenu('/Lmin/notice/noticeList.do', 'MO70700');">공지사항</a></li>
 						<li id="MO70800"><a href="javascript:goMenu('/Lmin/counsel/counselList.do', 'MO70800');">1:1상담</a></li>
 						<li id="MO70900"><a href="javascript:goMenu('/Lmin/regulation/regulationList.do', 'MO0900');">상조관련법규</a></li>
-						<li id="MO71000"><a href="javascript:goMenu('#', 'MO71000');">납부조회</a></li>
-						<li id="MO71200"><a href="javascript:goMenu('#', 'MO71200');">가입신청</a></li>
+						<li id="MO71200"><a href="javascript:goMenu('/Lmin/appli/appliList.do', 'MO71200');">가입신청</a></li>
 						<li id="MO71300"><a href="javascript:goMenu('/Lmin/member/memberList.do', 'MO71200');">회원정보</a></li>
+						<li id="MO71400"><a href="javascript:goMenu('/Lmin/catalogue/catalogueList.do', 'MO71200');">카타로그</a></li>
 						</ul>
 					</div>
 								
@@ -33,16 +33,16 @@
 					<ul class="pcLnb">
 						<li id="MO70100"><a href="javascript:goMenu('/Lmin/company/branchList.do', 'MO70100');">전국지사안내</a></li>
 						<li id="MO70200"><a href="javascript:goMenu('/Lmin/company/adviceList.do', 'MO70200');">상담사조회</a></li>
-						<li id="MO70300"><a href="javascript:goMenu('#', 'MO70300');">사이버홍보실</a></li>
+						<li id="MO70300"><a href="javascript:goMenu('/Lmin/cyber/cyberList.do', 'MO70300');">사이버홍보실</a></li>
 						<li id="MO70400"><a href="javascript:goMenu('/Lmin/funeral/funeralInfoList.do', 'MO70400');">전국장례시설안내</a></li>
 						<li id="MO70500"><a href="javascript:goMenu('/Lmin/funeral/funeralNoticeList.do', 'M760500');">부고알림</a></li>
 						<li id="MO70600"><a href="javascript:goMenu('/Lmin/cruise/cruiseScheduleList.do', 'MO70600');">크루즈일정</a></li>
 						<li id="MO70700"><a href="javascript:goMenu('/Lmin/notice/noticeList.do', 'MO70700');">공지사항</a></li>
 						<li id="MO70800"><a href="javascript:goMenu('/Lmin/counsel/counselList.do', 'MO70800');">1:1상담</a></li>
 						<li id="MO70900"><a href="javascript:goMenu('/Lmin/regulation/regulationList.do', 'MO0900');">상조관련법규</a></li>
-						<li id="MO71000"><a href="javascript:goMenu('#', 'MO71000');">납부조회</a></li>
-						<li id="MO71200"><a href="javascript:goMenu('#', 'MO71200');">가입신청</a></li>
+						<li id="MO71200"><a href="javascript:goMenu('/Lmin/appli/appliList.do', 'MO71200');">가입신청</a></li>
 						<li id="MO71300"><a href="javascript:goMenu('/Lmin/member/memberList.do', 'MO71200');">회원정보</a></li>
+						<li id="MO71400"><a href="javascript:goMenu('/Lmin/catalogue/catalogueList.do', 'MO71200');">카타로그</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->

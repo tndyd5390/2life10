@@ -68,12 +68,12 @@
 					<div class="flexItem3">
 						<strong><button type="button" class="select">고객센터</button></strong>
 						<ul>
-							<li><a href="javascript:goMenu('../company/overview.jsp', '');">회사안내</a></li>
-							<li><a href="javascript:goMenu('../info/pro_info.jsp', '');">상조상품안내</a></li>
-							<li><a href="javascript:goMenu('../funeral/funeral_mark.jsp', '');">장례상품</a></li>
-							<li><a href="javascript:goMenu('../marry/marry_mark.jsp', '');">웨딩상품</a></li>
-							<li><a href="javascript:goMenu('../cruise/cruise_mark.jsp', '');">크루즈상품</a></li>
-							<li><a href="javascript:goMenu('../notice/notice_list.jsp', '');">고객센터</a></li>
+                            <li><a href="javascript:goMenu('/company/overView.do', '');">회사소개</a></li>
+                            <li><a href="javascript:goMenu('/info/proInfo.do', '');">상조상품특징</a></li>
+                            <li><a href="javascript:goMenu('/funeral/funeralMark.do', '');">장례상품</a></li>
+                            <li><a href="javascript:goMenu('/marry/marryMark.do', '');">웨딩상품</a></li>
+                            <li><a href="javascript:goMenu('/cruise/cruiseMark.do', '');">크루즈상품</a></li>
+                            <li><a href="javascript:goMenu('/notice/noticeList.do', '');">고객센터</a></li>
 						</ul>
 					</div>
 					<div class="flexItem4"> <!-- .select 버튼 클릭시 다중클래스 on 추가 -->
@@ -86,7 +86,7 @@
                             <li id="MO60500"><a href="javascript:goMenu('/regulation/regulationList.do', 'MO60500');">상조관련법규</a></li>
                             <li id="MO60600"><a href="javascript:goMenu('/agreement/agreementList.do', 'MO60600');">이용약관</a></li>
                             <li id="MO60700"><a href="javascript:goMenu('/inquiry/inquiryList.do', 'MO60700');">납부조회</a></li>
-                            <li id="MO60800"><a href="javascript:goMenu('/apply/applyForm.do', 'MO60800');">가입신청</a></li>
+                            <li id="MO60800"><a href="javascript:goMenu('/appli/appliForm.do', 'MO60800');">가입신청</a></li>
 						</ul>
 					</div>
 								
@@ -103,7 +103,7 @@
                             <li id="MO60500"><a href="javascript:goMenu('/regulation/regulationList.do', 'MO60500');">상조관련법규</a></li>
                             <li id="MO60600"><a href="javascript:goMenu('/agreement/agreementList.do', 'MO60600');">이용약관</a></li>
                             <li id="MO60700"><a href="javascript:goMenu('/inquiry/inquiryList.do', 'MO60700');">납부조회</a></li>
-                            <li id="MO60800"><a href="javascript:goMenu('/apply/applyForm.do', 'MO60800');">가입신청</a></li>
+                            <li id="MO60800"><a href="javascript:goMenu('/appli/appliForm.do', 'MO60800');">가입신청</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->

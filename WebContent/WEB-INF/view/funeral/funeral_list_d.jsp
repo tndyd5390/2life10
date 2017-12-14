@@ -113,8 +113,8 @@
 							<li>-유골함제공</li>
 						</ul>
 						<br/>
-						<a href="/downloadFile.do?fileSeqNum=eykinhybdvik" class="btnDefault">가입신청</a>
-						<a href="/downloadFile.do?fileSeqNum=eykinhybdvik" class="btnDefault">상담신청</a>
+						<a href="/appli/appliForm.do" class="btnDefault">가입신청</a>
+						<a href="/counsel/counselWrite.do" class="btnDefault">상담신청</a>
 						
 					</div>
 				</header>
