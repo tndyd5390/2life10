@@ -7,10 +7,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 <%
-	HashMap<String, Object> hMap = (HashMap) request.getAttribute("hMap");
-	int pageBtnSplit = 5;
-	
-	List<CyberDTO> cList = (List<CyberDTO>) hMap.get("list");
+	CyberDTO cDTO = (CyberDTO)request.getAttribute("cDTO");
+	if(cDTO == null) cDTO = new CyberDTO();
 %>
 <!--#include file="../include/inc_header.jsp"-->
 
@@ -105,133 +103,59 @@
 				<h3 class="smallTit">사이버홍보실</h3>
 
 				<div class="boardType2">
+				<form action="/Lmin/company/cyberRegProc.do" method="post" enctype="multipart/form-data" id="cyberForm">
 					<table summary="">
 						<caption></caption>
 						<colgroup>
-							<col width="100%">
+							<col width="20%">
+							<col width="80%">
 						</colgroup>
 						<tbody>
 							<tr>
+								<th scope="row">제목</th>
 								<td>
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
-										<option value="00" <%=CmmUtil.select("00", CmmUtil.nvl((String) hMap.get("searchBox")))%>>전체</option>
-										<option value="01" <%=CmmUtil.select("01", CmmUtil.nvl((String) hMap.get("searchBox")))%>>제목</option>
-										<option value="02" <%=CmmUtil.select("02", CmmUtil.nvl((String) hMap.get("searchBox")))%>>글쓴이</option>
-									</select>
-									<input type="text" name="name" value="" title="" class="inputType1" style="" maxlength="25">
-
-									<a href="#" class="btn_active_small">검색</a>
+									<%=TextUtil.exchangeEscapeNvl(cDTO.getCyberTitle()) %>
+								</td>
+							</tr>
+							<%
+							if(!"".equals(TextUtil.exchangeEscapeNvl(cDTO.getCyberContents()))){
+							
+							%>
+							<tr>
+								<th scope="row">내용</th>
+								<td>
+									<%=TextUtil.exchangeEscapeNvl(cDTO.getCyberContents()) %>
+								</td>
+							</tr>
+							<%
+							}
+							%>
+							<tr>
+								<th scope="row">업로드</th>
+								<td>
+									<video width="320" height="240" controls>
+										<source src="/cyberFile/<%=CmmUtil.nvl(cDTO.getCyberFileName()) %>" type="video/<%=TextUtil.getFileExtension(cDTO.getCyberFileName())%>">
+									</video>
 								</td>
 							</tr>
 						</tbody>
 					</table>
-                </div>
-
-				<br/><br/>
-				<ul class="boradType5">
-				<%
-				if(cList.size() != 0){
-					for(CyberDTO cDTO : cList){
-				%>	
-					<li>
-						<p class="num"><%=CmmUtil.nvl(cDTO.getRowNum()) %></p>
-						<div class="info">
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="/company/cyberDetail.do?cyberNo=<%=CmmUtil.nvl(cDTO.getCyberNo())%>"><%=TextUtil.exchangeEscapeNvl(cDTO.getCyberTitle()) %></a>
-							</p>
-							<p class="txt2">
-								<%=TextUtil.exchangeEscapeNvl(cDTO.getMemberId()) %><span class="bar">&nbsp;|</span>
-								<span><%=TextUtil.exchangeEscapeNvl(cDTO.getRegDT()) %></span>
-								<span class="bar">|</span>
-								<span class="count"><%=CmmUtil.nvl(cDTO.getCyberViewCnt()) %></span>
-							</p>
-						</div>
-					</li>
-				<%	
-					}
-				}
-				%>
-					<!-- <li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt1">박성진수정
-								<a href="javascript:selectBoardDtl('480')">크리스찬상조 실제 장례 행사 영상자료</a>
-							</p>
-							<p class="txt2">
-								관리자<span class="bar">&nbsp;|</span>
-								<span>2017-10-10</span>
-								<span class="bar">|</span>
-								<span class="count">625</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt1">박성진수정
-								<a href="javascript:selectBoardDtl('480')">크리스찬상조 실제 장례 행사 영상자료</a>
-							</p>
-							<p class="txt2">
-								관리자<span class="bar">&nbsp;|</span>
-								<span>2017-10-10</span>
-								<span class="bar">|</span>
-								<span class="count">625</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt1">박성진수정
-								<a href="javascript:selectBoardDtl('480')">크리스찬상조 실제 장례 행사 영상자료</a>
-							</p>
-							<p class="txt2">
-								관리자<span class="bar">&nbsp;|</span>
-								<span>2017-10-10</span>
-								<span class="bar">|</span>
-								<span class="count">625</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt1">박성진수정
-								<a href="javascript:selectBoardDtl('480')">크리스찬상조 실제 장례 행사 영상자료</a>
-							</p>
-							<p class="txt2">
-								관리자<span class="bar">&nbsp;|</span>
-								<span>2017-10-10</span>
-								<span class="bar">|</span>
-								<span class="count">625</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt1">박성진수정
-								<a href="javascript:selectBoardDtl('480')">크리스찬상조 실제 장례 행사 영상자료</a>
-							</p>
-							<p class="txt2">
-								관리자<span class="bar">&nbsp;|</span>
-								<span>2017-10-10</span>
-								<span class="bar">|</span>
-								<span class="count">625</span>
-							</p>
-						</div>
-					</li> -->
-				</ul>
-				<a href="/Lmin/company/cyberWrite.do" class="btn_active_small" style="float:right;">사이버 홍보 등록</a>
-				
-				<!-- pageArea -->
-				<div class="pageArea">
-					<%=PageUtil.frontPaging(hMap, pageBtnSplit) %>
+				</form>
 				</div>
-				<!-- // pageArea -->
 
+				<div class="btn_area">
+					<a href="/Lmin/company/updateCyberView.do?cyberNo=<%=CmmUtil.nvl(cDTO.getCyberNo()) %>" class="btn_active">수정</a>
+					<%-- <a href="/Lmin/company/deleteCyber.do?cyberNo=<%=CmmUtil.nvl(cDTO.getCyberNo())%>&cyberFileNo=<%=CmmUtil.nvl(cDTO.getCyberFileNo())%>" id="btnCancel" class="btn_cancel">삭제</a> --%>
+					<a href="javascript:deleteCyber();" id="btnCancel" class="btn_cancel">삭제</a>
+				</div>
 
 			</div> <!-- // contents -->
+			<form action="/Lmin/company/deleteCyber.do" method="post" id="deleteForm">
+				<input type="hidden" name="cyberNo" value="<%=CmmUtil.nvl(cDTO.getCyberNo()) %>">
+				<input type="hidden" name="cyberFileNo" value="<%=CmmUtil.nvl(cDTO.getCyberFileNo()) %>">
+				<input type="hidden" name="filePath" value="<%=CmmUtil.nvl(cDTO.getCyberFilePath()) %>">
+				<input type="hidden" name="fileName" value="<%=CmmUtil.nvl(cDTO.getCyberFileName()) %>">
+			</form>
 
 
 		</div>

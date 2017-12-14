@@ -12,8 +12,11 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.cl.dto.CyberDTO;
 import com.cl.service.ICyberService;
+import com.cl.util.CmmUtil;
 import com.cl.util.PageUtil;
 
 @Controller
@@ -24,7 +27,7 @@ public class UCyberController {
 	@Resource(name="CyberService")
 	private ICyberService cyberService;
 	
-	@RequestMapping("/company/cyber")
+	@RequestMapping("/company/cyberList")
 	public String cyber(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession sesion) throws Exception{
 		log.info(this.getClass() + ".cyberList Start!!");
 		int splitPage = 10;
@@ -37,5 +40,21 @@ public class UCyberController {
 		
 		log.info(this.getClass() + ".cyberList End!!");
 		return "/company/cyber";
+	}
+	
+	@RequestMapping(value="company/cyberDetail", method=RequestMethod.GET)
+	public String cyberDetail(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+		log.info(this.getClass() + ".cyberDetail start!!!");
+		
+		String cyberNo = CmmUtil.nvl(req.getParameter("cyberNo"));
+		log.info(" cyberNo : " + cyberNo);
+		
+		CyberDTO cDTO = cyberService.getCyberDetail(cyberNo);
+		if(cDTO == null) cDTO= new CyberDTO();
+		
+		model.addAttribute("cDTO", cDTO);
+		
+		log.info(this.getClass() + ".cyberDetail end!!!");
+		return "/company/cyber_detail";
 	}
 }
