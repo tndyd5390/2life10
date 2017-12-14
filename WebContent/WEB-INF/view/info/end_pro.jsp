@@ -1,4 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.cl.util.CmmUtil"%>
+<%@page import="com.cl.util.TextUtil"%>
+<%@page import="com.cl.util.PageUtil"%>
+<%@page import="com.cl.dto.CatalogueDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%
+	List<CatalogueDTO> cList = (List<CatalogueDTO>) request.getAttribute("cList");
+	
+	if(cList == null){
+		cList = new ArrayList<>();
+	}
+%>
 <%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 <!--#include file="../include/inc_header.jsp"-->
 
@@ -41,6 +54,15 @@
 		$("#subtitle2").text($("#"+mbId2).text());
 		
 	});
+	
+	
+	function download(cNo){
+		var f = $('#f');
+		var catalogueNo = $('#cNo');
+		f.attr("action", "/Lmin/catalogue/catalogueDownload.do");
+		catalogueNo.val(cNo);
+		f.submit();
+	}
 
 </script>
 
@@ -86,7 +108,9 @@
             </div> <!-- // pcLnbWrap -->
 
 			<!-- 메뉴 영역 -->
-
+			<form name="f" id="f" method="post" action="#">
+				<input type="hidden" name="cNo" id="cNo" value="">
+			</form>
 			<div id="" class="contents"> <!-- 페이지별 ID -->
 				<div class="businessIntro">
 					<h3 class="subTit">크리스찬상조 단종상품안내</h3>
@@ -113,7 +137,18 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
+							<%if(cList.size()>0){
+								for(CatalogueDTO cDTO : cList){
+							%>		
+								<tr>
+								<td><%=CmmUtil.nvl(cDTO.getCatalogueStart())%>~<%=CmmUtil.nvl(cDTO.getCatalogueEnd()) %></td>
+								<td class="alignL"><%=CmmUtil.nvl(cDTO.getCatalogueName()) %> <%=CmmUtil.nvl(cDTO.getCatalogueContents()) %></td>
+								<td><a href="javascript:download('<%=CmmUtil.nvl(cDTO.getCatalogueNo())%>')" class="btn_cancel_small"><span class="iconDownLoad"></span>다운로드</a></td>
+								</tr>									
+							<%	
+								}
+							} %>
+							<!-- <tr>
 								<td>2006.05.01~2008.03.31</td>
 								<td class="alignL">장례 (골드)</td>
 								<td>dn</td>
@@ -127,57 +162,7 @@
 								<td>2008.06.01~2008.12.31</td>
 								<td class="alignL">장례 / 성지순례 (실속형,고급형) </td>
 								<td>dn</td>
-							</tr>
-							<tr>
-								<td>2009.01.01~2009.05.31</td>
-								<td class="alignL">장례 / 성지순례 (실속형,고급형) </td>
-								<td>dn</td>
-							</tr>
-							<tr>
-								<td>2009.06.01~2009.08.31</td>
-								<td class="alignL">웨딩 / 여행 / 돌 / 칠순 / 장례 (240/360/480)</td>
-								<td>dn</td>
-							</tr>
-							<tr>
-								<td>2009.09.01~2009.12.31</td>
-								<td class="alignL">웨딩 / 여행 / 돌 / 칠순 / 장례 (240/360/480)</td>
-								<td>dn</td>
-							</tr>
-							<tr>
-								<td>2010.01.01~2010.05.31</td>
-								<td class="alignL">웨딩 / 여행 / 돌 / 칠순 / 장례 (240/360/480)</td>
-								<td>dn</td>
-							</tr>
-							<tr>
-								<td>2010.06.01~2010.09.31</td>
-								<td class="alignL">웨딩 / 장례 / 여행 (240/360/480)</td>
-								<td>dn</td>
-							</tr>
-							<tr>
-								<td>2010.07.01~2010.10.31</td>
-								<td class="alignL">스페셜 (300)</td>
-								<td>dn</td>
-							</tr>
-							<tr>
-								<td>2010.10.01~2010.12.31</td>
-								<td class="alignL">웨딩 (240/360/480), 장례 (360/480)</td>
-								<td>dn</td>
-							</tr>
-							<tr>
-								<td>2010.11.01~2011.02.28</td>
-								<td class="alignL">플러스(320)</td>
-								<td>dn</td>
-							</tr>
-							<tr>
-								<td>2011.01.01~2013.12.31</td>
-								<td class="alignL">프라임(340)</td>
-								<td>dn</td>
-							</tr>
-							<tr>
-								<td>2011.01.01~2013.12.31</td>
-								<td class="alignL">장례/웨딩상품</td>
-								<td>dn</td>
-							</tr>
+							</tr> -->
 						</tbody>
 					</table>
 				</div>

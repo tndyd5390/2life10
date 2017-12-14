@@ -66,5 +66,10 @@ public class CatalogueService implements ICatalogueService{
 
 		return catalogueMapper.deleteCatalogue(cDTO);
 	}
+
+	@Override
+	public List<CatalogueDTO> getUserCatalogueList(CatalogueDTO cDTO) throws Exception {
+		return catalogueMapper.getUserCatalogueList(cDTO);
+	}
 	
 }

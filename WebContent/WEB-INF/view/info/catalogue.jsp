@@ -1,4 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.cl.util.CmmUtil"%>
+<%@page import="com.cl.util.TextUtil"%>
+<%@page import="com.cl.util.PageUtil"%>
+<%@page import="com.cl.dto.CatalogueDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%
+	List<CatalogueDTO> cList = (List<CatalogueDTO>) request.getAttribute("cList");
+	
+	if(cList == null){
+		cList = new ArrayList<>();
+	}
+%>
 <%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 <!--#include file="../include/inc_header.jsp"-->
 
@@ -41,6 +54,14 @@
 		$("#subtitle2").text($("#"+mbId2).text());
 		
 	});
+	
+	function download(cNo){
+		var f = $('#f');
+		var catalogueNo = $('#cNo');
+		f.attr("action", "/Lmin/catalogue/catalogueDownload.do");
+		catalogueNo.val(cNo);
+		f.submit();
+	}
 
 </script>
 
@@ -94,12 +115,12 @@
 					<div class="area">
 						<h3 class="contTit"><span>크리스찬상조</span>상품 웹 카다로그</h3>
 						<p class="txt">다양한 상품을 확인하세요.</p>
-						
-						<a href="/downloadFile.do?fileSeqNum=eykinhybdvik" class="btnDefault">2017 장례상품 카다로그</a>
-						
+						<a href="javascript:download('<%=CmmUtil.nvl(cList.get(0).getCatalogueNo())%>')" class="btnDefault"><%=CmmUtil.nvl(cList.get(0).getCatalogueStart().split("\\.")[0]) %> 장례상품 카다로그</a>
 					</div>
 				</header>
-
+				<form name="f" id="f" method="post" action="#">
+					<input type="hidden" name="cNo" id="cNo" value="">
+				</form>
                 <div class="boardType2">
                     <table summary="">
                         <caption>카다로그</caption>
@@ -108,7 +129,21 @@
                             <col width="80%">
                         </colgroup>
                         <tbody>
-                            <tr>
+                       	<%if(cList.size()>0){
+                       		for(CatalogueDTO cDTO : cList){
+                       	%>
+                       		<tr>
+                                <th scope="row"><%=CmmUtil.nvl(cDTO.getCatalogueStart()).split("\\.")[0] %>년</th>
+                                <td>
+                                    <a href="javascript:download('<%=CmmUtil.nvl(cDTO.getCatalogueNo())%>')" class="btn_cancel_small"><span class="iconDownLoad"></span><%=CmmUtil.nvl(cDTO.getCatalogueName())%>상품 카다로그</a>
+                                    <span class="txt"><%=TextUtil.exchangeEscapeNvl(cDTO.getCatalogueContents()) %></span>
+                                </td>
+                            </tr>
+                       	<% 	};
+                       	  };
+                       	%> 
+                       
+<!--                             <tr>
                                 <th scope="row">2014년</th>
                                 <td>
                                     <a href="/downloadFile.do?fileSeqNum=eykinhybdvik" class="btn_cancel_small"><span class="iconDownLoad"></span>장례상품 카다로그</a>
@@ -121,7 +156,7 @@
                                     <a href="/downloadFile.do?fileSeqNum=eykinhybdvik" class="btn_cancel_small"><span class="iconDownLoad"></span>프라임상품 카다로그</a>
                                     <span class="txt">(350상품 내용)</span>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>

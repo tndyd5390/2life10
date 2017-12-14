@@ -25,4 +25,7 @@ public interface CatalogueMapper {
 
 	int deleteCatalogue(CatalogueDTO cDTO) throws Exception;
 
+	List<CatalogueDTO> getUserCatalogueList(CatalogueDTO cDTO) throws Exception;
+
+
 }

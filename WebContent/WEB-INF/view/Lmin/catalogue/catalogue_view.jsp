@@ -171,6 +171,12 @@
 								</td>
 							</tr>
 							<tr>
+								<th scope="row">내용</th>
+								<td>
+									<input type="text" name="contents" class="inputType1" value="<%=TextUtil.exchangeEscapeNvl(cDTO.getCatalogueContents())%>">
+								</td>
+							</tr>
+							<tr>
 								<th scope="row">시작일</th>
 								<td>
 									<input type="date" name="start" id="start" value="<%=CmmUtil.nvl(cDTO.getCatalogueStart())%>">

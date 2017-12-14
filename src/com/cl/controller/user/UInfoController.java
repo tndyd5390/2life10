@@ -34,20 +34,5 @@ public class UInfoController {
 		return "/info/join_step";
 	}
 	
-	@RequestMapping("/info/catalogue")
-	public String catalogue() throws Exception{
-		log.info("catalogue Start!!");
-		
-		log.info("catalogue End!!");
-		return "/info/catalogue";
-	}
-	
-	@RequestMapping("/info/endPro")
-	public String endPro() throws Exception{
-		log.info("endPro Start!!");
-		
-		log.info("endPro End!!");
-		return "/info/end_pro";
-	}
 	
 }

@@ -1,6 +1,7 @@
 package com.cl.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import com.cl.dto.CatalogueDTO;
 
@@ -17,5 +18,9 @@ public interface ICatalogueService {
 	int updateCatalogue(CatalogueDTO cDTO) throws Exception;
 
 	int deleteCatalogue(CatalogueDTO cDTO) throws Exception;
+
+	List<CatalogueDTO> getUserCatalogueList(CatalogueDTO cDTO) throws Exception;
+
+
 	
 }

@@ -155,7 +155,7 @@
 								<td><%=CmmUtil.nvl(cDTO.getCatalogueStart()) %>~<%=CmmUtil.nvl(cDTO.getCatalogueEnd()) %></td>
 								<td class="alignL">																
 									<a href="javascript:goDetail('<%=CmmUtil.nvl(cDTO.getCatalogueNo()) %>')">
-									<%=CmmUtil.nvl(cDTO.getCatalogueName()) %>
+									<%=CmmUtil.nvl(cDTO.getCatalogueName()) %> <%=TextUtil.exchangeEscapeNvl(cDTO.getCatalogueContents()) %>
 									</a>								
 								</td>
 								<td>

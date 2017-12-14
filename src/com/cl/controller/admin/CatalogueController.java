@@ -69,6 +69,7 @@ public class CatalogueController {
 		String msg = "";
 		String regMemberNo = CmmUtil.nvl((String)session.getAttribute("ss_member_no"));
 		String catalogueName = CmmUtil.nvl(req.getParameter("name"));
+		String catalogueContents = CmmUtil.nvl(req.getParameter("contents"));
 		String catalogueStart = CmmUtil.nvl(req.getParameter("start"));
 		String catalogueEnd = CmmUtil.nvl(req.getParameter("end"));
 		String catalogueFileOrgName = CmmUtil.nvl(file.getOriginalFilename());
@@ -76,6 +77,7 @@ public class CatalogueController {
 		
 		log.info("regMemberNo : " +regMemberNo);
 		log.info("catalogueName : " +catalogueName);
+		log.info("catalogueContents : " +catalogueContents);
 		log.info("catalogueStart : " +catalogueStart);
 		log.info("catalogueEnd : " +catalogueEnd);
 		log.info("catalogueFileOrgName : " +catalogueFileOrgName);
@@ -84,9 +86,8 @@ public class CatalogueController {
 		CatalogueDTO cDTO = new CatalogueDTO();
 		cDTO.setCatalogueName(catalogueName);
 		cDTO.setCatalogueStart(catalogueStart);
-		if(!"".equals(catalogueEnd)){
-			cDTO.setCatalogueEnd(catalogueEnd);
-		};
+		cDTO.setCatalogueContents(catalogueContents);
+		cDTO.setCatalogueEnd(catalogueEnd);
 		cDTO.setRegMemberNo(regMemberNo);
 		cDTO.setCatalogueFileName(catalogueFileName);
 		cDTO.setCatalogueFileOrgName(catalogueFileOrgName);
@@ -168,6 +169,7 @@ public class CatalogueController {
 		String chgMemberNo = CmmUtil.nvl((String) session.getAttribute("ss_member_no"));
 		String catalogueNo = CmmUtil.nvl(req.getParameter("cNo"));
 		String catalogueName = CmmUtil.nvl(req.getParameter("name"));
+		String catalogueContents = CmmUtil.nvl(req.getParameter("contents"));
 		String catalogueStart = CmmUtil.nvl(req.getParameter("start"));
 		String catalogueEnd = CmmUtil.nvl(req.getParameter("end"));
 		String deleteFileNo = CmmUtil.nvl(req.getParameter("fNo"));
@@ -175,6 +177,7 @@ public class CatalogueController {
 		log.info("chgMemberNo : " +chgMemberNo);
 		log.info("catalogueNo : " +catalogueNo);
 		log.info("catalogueName : " +catalogueName);
+		log.info("catalogueContents : " +catalogueContents);
 		log.info("catalogueStart : " +catalogueStart);
 		log.info("catalogueEnd : " +catalogueEnd);
 		log.info("deleteFileNo : " +deleteFileNo);
@@ -183,6 +186,7 @@ public class CatalogueController {
 		cDTO.setChgMemberNo(chgMemberNo);
 		cDTO.setCatalogueNo(catalogueNo);
 		cDTO.setCatalogueName(catalogueName);
+		cDTO.setCatalogueContents(catalogueContents);
 		cDTO.setCatalogueStart(catalogueStart);
 		cDTO.setCatalogueEnd(catalogueEnd);
 		

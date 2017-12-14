@@ -6,6 +6,7 @@
 			@rownum:=@rownum+1								  	 AS ROWNUM,
 			C.CATALOGUE_NO            							 AS CATALOGUENO,
 		   	C.CATALOGUE_NAME            						 AS CATALOGUENAME,
+		   	C.CATALOGUE_CONTENTS            						 AS CATALOGUECONTENTS,
 		    DATE_FORMAT(C.CATALOGUE_START, '%Y.%m.%d')           AS CATALOGUESTART,
 		    DATE_FORMAT(C.CATALOGUE_END, '%Y.%m.%d')             AS CATALOGUEEND,
 		    C.CATALOGUE_FILE_NO         						 AS CATALOGUEFILENO,
@@ -50,6 +51,7 @@
 		INSERT INTO CATALOGUE_INFO
 		(
 			CATALOGUE_NAME,
+			CATALOGUE_CONTENTS,
 			CATALOGUE_START,
 			CATALOGUE_END,
 			CATALOGUE_FILE_NO,
@@ -59,6 +61,7 @@
 		VALUES
 		(
 			#{catalogueName},
+			#{catalogueContents},
 			#{catalogueStart},
 			#{catalogueEnd},
 			#{catalogueFileNo},
@@ -88,6 +91,7 @@
 		     C.CATALOGUE_NO									AS CATALOGUENO,
 		     C.CATALOGUE_FILE_NO							AS CATALOGUEFILENO,
 		     C.CATALOGUE_NAME								AS CATALOGUENAME,
+		     C.CATALOGUE_CONTENTS								AS CATALOGUECONTENTS,
 		     DATE_FORMAT(C.CATALOGUE_START, '%Y-%m-%d')		AS CATALOGUESTART,
 		     DATE_FORMAT(C.CATALOGUE_END, '%Y-%m-%d')		AS CATALOGUEEND,
 		     F.FILE_ORG_NAME								AS CATALOGUEFILEORGNAME,
@@ -109,6 +113,7 @@
 					CATALOGUE_INFO
 				SET
 					CATALOGUE_NAME = #{catalogueName},
+					CATALOGUE_CONTENTS = #{catalogueContents},
 					CATALOGUE_START = #{catalogueStart},
 					CATALOGUE_END = #{catalogueEnd},
 					CATALOGUE_FILE_NO = #{catalogueFileNo},
@@ -122,6 +127,7 @@
 					CATALOGUE_INFO
 				SET
 					CATALOGUE_NAME = #{catalogueName},
+					CATALOGUE_CONTENTS = #{catalogueContents},
 					CATALOGUE_START = #{catalogueStart},
 					CATALOGUE_END = #{catalogueEnd},
 					CHG_MEMBER_NO = #{chgMemberNo},
@@ -139,4 +145,41 @@
 	<delete id="deleteCatalogue" parameterType="CatalogueDTO">
 		DELETE FROM CATALOGUE_INFO WHERE CATALOGUE_NO = #{catalogueNo}
 	</delete>
+	
+	<select id="getUserCatalogueList" parameterType="CatalogueDTO" resultType="CatalogueDTO">
+			SELECT 
+		      CT.ROWNUM            AS ROWNUM,
+		      CT.CATALOGUENO       AS CATALOGUENO,
+		      CT.CATALOGUENAME     AS CATALOGUENAME,
+		      CT.CATALOGUECONTENTS AS CATALOGUECONTENTS,
+		      CT.CATALOGUESTART    AS CATALOGUESTART,
+		      CT.CATALOGUEEND      AS CATALOGUEEND,
+		      CT.CATALOGUEFILENO   AS CATALOGUEFILENO
+		 	FROM
+		  		(SELECT
+					@rownum:=@rownum+1								  	 AS ROWNUM,
+					C.CATALOGUE_NO            							 AS CATALOGUENO,
+					C.CATALOGUE_NAME            						 AS CATALOGUENAME,
+					C.CATALOGUE_CONTENTS            					 AS CATALOGUECONTENTS,
+					DATE_FORMAT(C.CATALOGUE_START, '%Y.%m.%d')           AS CATALOGUESTART,
+					DATE_FORMAT(C.CATALOGUE_END, '%Y.%m.%d')             AS CATALOGUEEND,
+					C.CATALOGUE_FILE_NO         						 AS CATALOGUEFILENO,
+					DATE_FORMAT(C.REG_DT, '%Y.%m.%d')                    AS REGDT
+				FROM 
+					CATALOGUE_INFO C,
+					(SELECT @rownum:=0) TMP
+		        ORDER BY C.REG_DT DESC) CT
+		        
+		 	WHERE
+		 	<if test="rowNum == 3">
+		 	<![CDATA[
+		 		CT.ROWNUM < 3
+		 	]]>
+		 	</if>
+		 	<if test="rowNum == 2">
+		 	<![CDATA[
+		 		CT.ROWNUM < 2
+		 	]]>
+		 	</if>
+	</select>
 </mapper>

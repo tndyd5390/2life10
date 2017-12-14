@@ -3,6 +3,7 @@ package com.cl.dto;
 public class CatalogueDTO {
 	private String catalogueNo;
 	private String catalogueName;
+	private String catalogueContents;
 	private String catalogueStart;
 	private String catalogueEnd;
 	private String catalogueFileNo;
@@ -19,6 +20,7 @@ public class CatalogueDTO {
 	private String deleteFilePath;
 	private int page;
 	private int splitPage;
+	private int rowNum;
 	
 	public String getDeleteFileNo() {
 		return deleteFileNo;
@@ -127,6 +129,18 @@ public class CatalogueDTO {
 	}
 	public void setSplitPage(int splitPage) {
 		this.splitPage = splitPage;
+	}
+	public int getRowNum() {
+		return rowNum;
+	}
+	public void setRowNum(int rowNum) {
+		this.rowNum = rowNum;
+	}
+	public String getCatalogueContents() {
+		return catalogueContents;
+	}
+	public void setCatalogueContents(String catalogueContents) {
+		this.catalogueContents = catalogueContents;
 	}
 	
 }
