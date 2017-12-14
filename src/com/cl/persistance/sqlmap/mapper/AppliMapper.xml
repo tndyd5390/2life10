@@ -14,7 +14,6 @@
 			APPLI_ADDRESS_DETAIL,
 			APPLI_ROUTE_CODE,
 			APPLI_REPLY,
-			REG_MEMBER_NO,
 			REG_DT
 		)
 		VALUES
@@ -29,7 +28,6 @@
 			#{appliAddressDetail},
 			#{appliRouteCode},
 			'N',
-			#{regMemberNo},
 			NOW()
 		)
 	</insert>

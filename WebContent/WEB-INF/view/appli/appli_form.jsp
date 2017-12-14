@@ -2,7 +2,9 @@
 <!--#include file="../include/inc_header.jsp"-->
 <%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 <!--#include file="../include/inc_header.jsp"-->
-
+<script type="text/javascript" src="/public/js/samsungcnt.js"></script>
+<script type="text/javascript" src="/public/js/samsungcnt-jquery.js"></script>
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 	<div id="contentsWrap">
 		<div class="container">
 			<div class="conTitWrap">
@@ -43,6 +45,113 @@
 		
 	});
 
+	function agreeCheck(check){
+		if(check.checked){
+			document.getElementById('agree1').checked = true;
+			document.getElementById('agree').checked = true;
+		}else{
+			document.getElementById('agree1').checked = false;
+			document.getElementById('agree2').checked = true;
+		}
+	}
+	
+	function disAgree(check){
+		if(check.checked){
+			document.getElementById('agree1').checked = false;
+			document.getElementById('agree').checked = false;
+		}
+	}
+	
+	function appliForSub(){
+		var form = document.getElementById('frm');
+		if(checkRadio('appliProdCode')){
+			alert('상품을 선택해 주세요.');
+			form.product[0].focus();
+			return;
+		}else if(checkRadio('appliContractCode')){
+			alert('계약구좌를 선택해 주세요.');;
+			form.contractAccount[0].focus();
+			return;
+		}else if(form.appliName.value == ""){
+			alert("성명을 입력해 주세요.");
+			form.appliName.focus();
+			return;
+		}else if(!telChk('tel1', 'tel2', 'tel3')){
+			return;
+		}else if(!telChk('phoneTel1', 'phoneTel2', 'phoneTel3')){
+			return;
+		}else if(form.appliPostNo.value == ""){
+			alert('우편번호를 입력해 주세요.');
+			form.appliPostNo.focus();
+			return;
+		}else if(form.appliAddress.value == ""){
+			alert('주소를 입력해주세요.');
+			form.appliAddress.focus();
+			return;
+		}else if(form.appliAddressDetail.value == ""){
+			alert('나머지 주소를 입력해 주세요.');
+			form.appliAddressDetial.focus();
+			return;
+		}else if(form.appliRoute.value == ""){
+			alert("가입 경로를 선택해 주세요");
+			form.appliRoute.focus();
+			return;
+		}else{
+			form.submit();
+		}
+	}
+	
+	function checkRadio(tagName){
+		var tags = document.getElementsByName(tagName);
+		for(var i = 0; i< tags.length; i++){
+			if(tags[i].checked){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	function sample6_execDaumPostcode() {
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+	            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	            var fullAddr = ''; // 최종 주소 변수
+	            var extraAddr = ''; // 조합형 주소 변수
+
+	            // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                fullAddr = data.roadAddress;
+
+	            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                fullAddr = data.jibunAddress;
+	            }
+
+	            // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+	            if(data.userSelectedType === 'R'){
+	                //법정동명이 있을 경우 추가한다.
+	                if(data.bname !== ''){
+	                    extraAddr += data.bname;
+	                }
+	                // 건물명이 있을 경우 추가한다.
+	                if(data.buildingName !== ''){
+	                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                }
+	                // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+	                fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+	            }
+
+	            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	            document.getElementById('appliPostNo').value = data.zonecode; //5자리 새우편번호 사용
+	            document.getElementById('appliAddress').value = fullAddr;
+
+	            // 커서를 상세주소 필드로 이동한다.
+	            document.getElementById('appliAddressDetail').focus();
+	        }
+	    }).open();
+	}
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -54,25 +163,25 @@
 					<div class="flexItem3">
 						<strong><button type="button" class="select">고객센터</button></strong>
 						<ul>
-                            <li><a href="javascript:goMenu('/company/overView.do', '');">회사소개</a></li>
-                            <li><a href="javascript:goMenu('/info/proInfo.do', '');">상조상품특징</a></li>
-                            <li><a href="javascript:goMenu('/funeral/funeralMark.do', '');">장례상품</a></li>
-                            <li><a href="javascript:goMenu('/marry/marryMark.do', '');">웨딩상품</a></li>
-                            <li><a href="javascript:goMenu('/cruise/cruiseMark.do', '');">크루즈상품</a></li>
-                            <li><a href="javascript:goMenu('/notice/noticeList.do', '');">고객센터</a></li>
+							<li><a href="javascript:goMenu('../company/overview.jsp', '');">회사안내</a></li>
+							<li><a href="javascript:goMenu('../info/pro_info.jsp', '');">상조상품안내</a></li>
+							<li><a href="javascript:goMenu('../funeral/funeral_mark.jsp', '');">장례상품</a></li>
+							<li><a href="javascript:goMenu('../marry/marry_mark.jsp', '');">웨딩상품</a></li>
+							<li><a href="javascript:goMenu('../cruise/cruise_mark.jsp', '');">크루즈상품</a></li>
+							<li><a href="javascript:goMenu('../notice/notice_list.jsp', '');">고객센터</a></li>
 						</ul>
 					</div>
 					<div class="flexItem4"> <!-- .select 버튼 클릭시 다중클래스 on 추가 -->
 						<strong><button type="button" class="select" id="subtitle">상조관련법규</button></strong>
 						<ul>
-							<li id="MO60100"><a href="javascript:goMenu('/notice/noticeList.do', 'MO60100');">공지사항</a></li>
-                            <li id="MO60200"><a href="javascript:goMenu('/qna/qnaList.do', 'MO60200');">자주하는질문</a></li>
-                            <li id="MO60300"><a href="javascript:goMenu('/counsel/counselWrite.do', 'MO60300');">1:1상담</a></li>
-                            <li id="MO60400"><a href="javascript:goMenu('/infomation/infomation_a.do', 'MO60400');">주요정보고시사항</a></li>
-                            <li id="MO60500"><a href="javascript:goMenu('/regulation/regulationList.do', 'MO60500');">상조관련법규</a></li>
-                            <li id="MO60600"><a href="javascript:goMenu('/agreement/agreementList.do', 'MO60600');">이용약관</a></li>
-                            <li id="MO60700"><a href="javascript:goMenu('/inquiry/inquiryList.do', 'MO60700');">납부조회</a></li>
-                            <li id="MO60800"><a href="javascript:goMenu('/apply/applyForm.do', 'MO60800');">가입신청</a></li>
+							<li id="MO60100"><a href="javascript:goMenu('../notice/notice_list.jsp', 'MO60100');">공지사항</a></li>
+                            <li id="MO60200"><a href="javascript:goMenu('../qna/qna_list.jsp', 'MO60200');">자주하는질문</a></li>
+                            <li id="MO60300"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MO60300');">1:1상담</a></li>
+                            <li id="MO60400"><a href="javascript:goMenu('../infomation/infomation_a.jsp', 'MO60400');">주요정보고시사항</a></li>
+                            <li id="MO60500"><a href="javascript:goMenu('../regulation/regulation_list.jsp', 'MO60500');">상조관련법규</a></li>
+                            <li id="MO60600"><a href="javascript:goMenu('../agreement/agreement_list.jsp', 'MO60600');">이용약관</a></li>
+                            <li id="MO60700"><a href="javascript:goMenu('../inquiry/inquiry_list.jsp', 'MO60700');">납부조회</a></li>
+                            <li id="MO60800"><a href="javascript:goMenu('../appli/appli_list.jsp', 'MO60800');">가입신청</a></li>
 						</ul>
 					</div>
 								
@@ -82,14 +191,14 @@
 			<div class="pcLnbWrap">
 				<nav>
 					<ul class="pcLnb">
-							<li id="MO60100"><a href="javascript:goMenu('/notice/noticeList.do', 'MO60100');">공지사항</a></li>
-                            <li id="MO60200"><a href="javascript:goMenu('/qna/qnaList.do', 'MO60200');">자주하는질문</a></li>
-                            <li id="MO60300"><a href="javascript:goMenu('/counsel/counselWrite.do', 'MO60300');">1:1상담</a></li>
-                            <li id="MO60400"><a href="javascript:goMenu('/infomation/infomation_a.do', 'MO60400');">주요정보고시사항</a></li>
-                            <li id="MO60500"><a href="javascript:goMenu('/regulation/regulationList.do', 'MO60500');">상조관련법규</a></li>
-                            <li id="MO60600"><a href="javascript:goMenu('/agreement/agreementList.do', 'MO60600');">이용약관</a></li>
-                            <li id="MO60700"><a href="javascript:goMenu('/inquiry/inquiryList.do', 'MO60700');">납부조회</a></li>
-                            <li id="MO60800"><a href="javascript:goMenu('/apply/applyForm.do', 'MO60800');">가입신청</a></li>
+						<li id="MN60100"><a href="javascript:goMenu('../notice/notice_list.jsp', 'MN60100');">공지사항</a></li>
+                        <li id="MN60200"><a href="javascript:goMenu('../qna/qna_list.jsp', 'MN60200');">자주하는질문</a></li>
+                        <li id="MN60300"><a href="javascript:goMenu('../counsel/counsel_list.jsp', 'MN60300');">1:1상담</a></li>
+                        <li id="MN60400"><a href="javascript:goMenu('../infomation/infomation_a.jsp', 'MN60400');">주요정보고시사항</a></li>
+                        <li id="MN60500"><a href="javascript:goMenu('../regulation/regulation_list.jsp', 'MN60500');">상조관련법규</a></li>
+                        <li id="MN60600"><a href="javascript:goMenu('../agreement/agreement_list.jsp', 'MN60600');">이용약관</a></li>
+                        <li id="MN60700"><a href="javascript:goMenu('../inquiry/inquiry_list.jsp', 'MN60700');">납부조회</a></li>
+                        <li id="MN60800"><a href="javascript:goMenu('../appli/appli_form.jsp', 'MN60800');">가입신청</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->
@@ -105,7 +214,7 @@
 				<h3 class="smallTit">
 				    부금약관
 				    <div class="common_checkbox">
-				        <input type="checkbox" id="agree" class="inp_checkbox"><label class="inp_label" for="agree">동의합니다.</label>
+				        <input type="checkbox" id="agree" class="inp_checkbox" onclick="agreeCheck(this);"><label class="inp_label" for="agree">동의합니다.</label>
                     </div>
 				</h3>
 
@@ -284,13 +393,13 @@
 				</article>
 				<br/>
 				<ul class="radioArea">
-					<li><input type="radio" id="agree1" name="agree" value="Y"> <label for="agree1">동의</label></li>
-					<li><input type="radio" id="agree2" name="agree" value="N"> <label for="agree2">동의하지 않음</label></li>
+					<li><input type="radio" id="agree1" name="agree" value="Y" onclick="agreeCheck(this);"> <label for="agree1">동의</label></li>
+					<li><input type="radio" id="agree2" name="agree" value="N" onclick="disAgree(this)":> <label for="agree2">동의하지 않음</label></li>
 				</ul>
 
 				<br/><br/>
 				<h3 class="smallTit">가입상품선택</h3>
-				<form id="frm" method="post">
+				<form id="frm" method="post" action="/appli/appliProc.do">
                     <div class="boardType2">
                         <table summary="">
                             <caption>회원가입</caption>
@@ -302,20 +411,20 @@
                                 <tr>
                                     <th scope="row">상품선택</th>
                                     <td>
-                                        <input type="radio" id="agree1" name="agree" value="Y"> <label for="agree1">260상품</label>
-										<input type="radio" id="agree1" name="agree" value="Y"> <label for="agree1">390상품</label>
-										<input type="radio" id="agree1" name="agree" value="Y"> <label for="agree1">480상품</label>
-										<input type="radio" id="agree1" name="agree" value="Y"> <label for="agree1">프라임(350)상품</label>
+                                        <input type="radio" id="agree1" name="appliProdCode" value="41"> <label for="agree1">260상품</label>
+										<input type="radio" id="agree1" name="appliProdCode" value="42"> <label for="agree1">390상품</label>
+										<input type="radio" id="agree1" name="appliProdCode" value="43"> <label for="agree1">480상품</label>
+										<input type="radio" id="agree1" name="appliProdCode" value="44"> <label for="agree1">프라임(350)상품</label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">계약구좌</th>
                                     <td>
-                                        <input type="radio" id="agree1" name="agree" value="Y"> <label for="agree1">1구좌</label>
-										<input type="radio" id="agree1" name="agree" value="Y"> <label for="agree1">2구좌</label>
-										<input type="radio" id="agree1" name="agree" value="Y"> <label for="agree1">3구좌</label>
-										<input type="radio" id="agree1" name="agree" value="Y"> <label for="agree1">4구좌</label>
-										<input type="radio" id="agree1" name="agree" value="Y"> <label for="agree1">5구좌</label>
+                                        <input type="radio" id="agree2" name="appliContractCode" value="45"> <label for="agree1">1구좌</label>
+										<input type="radio" id="agree2" name="appliContractCode" value="46"> <label for="agree1">2구좌</label>
+										<input type="radio" id="agree2" name="appliContractCode" value="47"> <label for="agree1">3구좌</label>
+										<input type="radio" id="agree2" name="appliContractCode" value="48"> <label for="agree1">4구좌</label>
+										<input type="radio" id="agree2" name="appliContractCode" value="49"> <label for="agree1">5구좌</label>
                                     </td>
                                 </tr>
 							</tbody>
@@ -335,65 +444,91 @@
 								<tr>
 									<th scope="row">가입자명</th>
 									<td>
-										<input type="text" name="name" value="" title="이름" class="inputType1" style="" maxlength="25">
+										<input type="text" name="appliName" value="" title="이름" class="inputType1" style="" maxlength="25">
 									</td>
 								</tr>
 								<tr>
 									<th scope="row">자택전화</th>
 									<td>
-										<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
-                                            <option value="00">02</option>
-                                            <option value="01">031</option>
+										<select id="tel1" name="tel1" id="tel1" title="" class="inputType3">
+	                                        <option value="02">02</option>
+											<option value="031">031</option>
+											<option value="032">032</option>
+											<option value="033">033</option>
+											<option value="041">041</option>
+											<option value="042">042</option>
+											<option value="043">043</option>
+											<option value="051">051</option>
+											<option value="052">052</option>
+											<option value="053">053</option>
+											<option value="054">054</option>
+											<option value="055">055</option>
+											<option value="061">061</option>
+											<option value="062">062</option>
+											<option value="063">063</option>
+											<option value="064">064</option>
+											<option value="010">010</option>
+											<option value="011">011</option>
                                         </select>
 										-
-										<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
+										<input type="text" name="tel2" id="tel2" class="inputType2" style="" maxlength="5">
 										-
-										<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
+										<input type="text" name="tel3" id="tel3" class="inputType2" style="" maxlength="5">
 									</td>
 								</tr>
 								<tr>
 									<th scope="row">휴대전화</th>
 									<td>
-										<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
-                                            <option value="00">010</option>
-                                            <option value="01">011</option>
+										<select id="phoneTel1" name="phoneTel1" id="phoneTel1" title="" class="inputType3">
+                                            <option value="010">010</option>
+                                            <option value="011">011</option>
+                                            <option value="016">016</option>
+                                            <option value="017">017</option>
+                                            <option value="019">019</option>
                                         </select>
 										-
-										<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
+										<input type="text" name="phoneTel2" id="phoneTel2" class="inputType2" style="" maxlength="5">
 										-
-										<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
+										<input type="text" name="phoneTel3" id="phoneTel3" class="inputType2" style="" maxlength="5">
 									</td>
 								</tr>
+								
 								<tr>
-									<th scope="row" rowspan="2">주소</th>
-									<td>
-										<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
-										-
-										<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
-										<a href="#" class="btn_active_small">우편번호</a>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<input type="text" name="name" value="" title="이름" class="inputType5" style="" maxlength="5">
-										나머지주소
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">가입유형</th>
-									<td>
-										<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType3">
-                                            <option value="00">TV광고</option>
-                                            <option value="01">영업사원</option>
-                                        </select>
-									</td>
-								</tr>
+								<th scope="row" rowspan="2">주소</th>
+								<td>
+									<input type="text" name="appliPostNo" id="appliPostNo" value="" title="이름" class="inputType2" style="">
+									<a href="#" class="btn_active_small"  onclick="sample6_execDaumPostcode();">우편번호</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="text" name="appliAddress" id="appliAddress" value="" title="이름" class="inputType5" style="">
+									<input type="text" name="appliAddressDetail" id="appliAddressDetail" value="" title="이름" class="inputType5" style="">
+									나머지주소
+								</td>
+							</tr>
+							<tr>
+								<th scope="row" rowspan="0">가입유형</th>
+								<td>
+									<select id="appliRoute" name="appliRouteCode" class="inputType5">
+										<option value="">선택</option>
+                                        <option value="50">본인 또는 가족이 크리스천상조(주) 상품 직접 이용</option>
+                                        <option value="51">주위 분들의 크리스천상조(주) 상품 직접 이용</option>
+                                        <option value="52">가족 및 친인척 소개</option>
+                                        <option value="53">영업사원</option>
+                                        <option value="54">주위사람(동료, 친구, 선후배 등)</option>
+                                        <option value="55">TV광고</option>
+                                        <option value="56">인터넷 검색</option>
+                                        <option value="57">기타</option>
+                                    </select>
+								</td>
+							</tr>
 							</tbody>
 						</table>
 					</div>
 
 					<br/><br/>
-					<h3 class="smallTit">CMS신청</h3>
+					<!-- <h3 class="smallTit">CMS신청</h3>
 					<div class="boardType2">
 						<table summary="">
 							<caption>회원가입</caption>
@@ -442,11 +577,11 @@
 								</tr>
 							</tbody>
 						</table>
-					</div>
+					</div> -->
 
 
                     <div class="btn_area">
-                        <a href="#" id="submitLink" class="btn_active">가입신청</a>
+                        <a href="javascript:appliForSub();" id="submitLink" class="btn_active">가입신청</a>
                         <a href="#" id="btnCancel" class="btn_cancel">취소</a>
                     </div>
                 </form>
