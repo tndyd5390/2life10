@@ -16,6 +16,9 @@
 				</div>
 			</div> <!-- // conTitWrap -->
 			<!-- 메뉴 영역 -->
+			
+
+
 
 <script type="text/javascript">
 	$(function() {
@@ -36,12 +39,10 @@
 				$("#"+menuId).parents("li").addClass("active");
 			}
 		}
-
 		$("#subtitle").text($("#"+mbId).text());
 		$("#subtitle2").text($("#"+mbId2).text());
 		
 	});
-
 	function agreeCheck(check){
 		if(check.checked){
 			document.getElementById('agree1').checked = true;
@@ -116,20 +117,16 @@
 	    new daum.Postcode({
 	        oncomplete: function(data) {
 	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
 	            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
 	            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
 	            var fullAddr = ''; // 최종 주소 변수
 	            var extraAddr = ''; // 조합형 주소 변수
-
 	            // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
 	            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
 	                fullAddr = data.roadAddress;
-
 	            } else { // 사용자가 지번 주소를 선택했을 경우(J)
 	                fullAddr = data.jibunAddress;
 	            }
-
 	            // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
 	            if(data.userSelectedType === 'R'){
 	                //법정동명이 있을 경우 추가한다.
@@ -143,11 +140,9 @@
 	                // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
 	                fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
 	            }
-
 	            // 우편번호와 주소 정보를 해당 필드에 넣는다.
 	            document.getElementById('appliPostNo').value = data.zonecode; //5자리 새우편번호 사용
 	            document.getElementById('appliAddress').value = fullAddr;
-
 	            // 커서를 상세주소 필드로 이동한다.
 	            document.getElementById('appliAddressDetail').focus();
 	        }
@@ -159,50 +154,47 @@
 	<input type="hidden" name="menuNum"/>
 </form>	
 
-		<div class="moLnbWrap">
-				<nav class="flexContainer">
-					<div class="flexItem3">
-						<strong><button type="button" class="select">고객센터</button></strong>
-						<ul>
+			<div class="moLnbWrap">
+                <nav class="flexContainer">
+                    <div class="flexItem3">
+                        <strong><button type="button" class="select">회사소개</button></strong>
+                        <ul>
                             <li><a href="javascript:goMenu('/company/overView.do', '');">회사소개</a></li>
                             <li><a href="javascript:goMenu('/info/proInfo.do', '');">상조상품특징</a></li>
                             <li><a href="javascript:goMenu('/funeral/funeralMark.do', '');">장례상품</a></li>
                             <li><a href="javascript:goMenu('/marry/marryMark.do', '');">웨딩상품</a></li>
                             <li><a href="javascript:goMenu('/cruise/cruiseMark.do', '');">크루즈상품</a></li>
                             <li><a href="javascript:goMenu('/notice/noticeList.do', '');">고객센터</a></li>
-						</ul>
-					</div>
-					<div class="flexItem4"> <!-- .select 버튼 클릭시 다중클래스 on 추가 -->
-						<strong><button type="button" class="select" id="subtitle">이용약관</button></strong>
-						<ul>
-							<li id="MO60100"><a href="javascript:goMenu('/notice/noticeList.do', 'MO60100');">공지사항</a></li>
-                            <li id="MO60200"><a href="javascript:goMenu('/qna/qnaList.do', 'MO60200');">자주하는질문</a></li>
-                            <li id="MO60300"><a href="javascript:goMenu('/counsel/counselWrite.do', 'MO60300');">1:1상담</a></li>
-                            <li id="MO60400"><a href="javascript:goMenu('/infomation/infomation_a.do', 'MO60400');">주요정보고시사항</a></li>
-                            <li id="MO60500"><a href="javascript:goMenu('/regulation/regulationList.do', 'MO60500');">상조관련법규</a></li>
-                            <li id="MO60600"><a href="javascript:goMenu('/agreement/agreementList.do', 'MO60600');">이용약관</a></li>
-                            <li id="MO60700"><a href="javascript:goMenu('/inquiry/inquiryList.do', 'MO60700');">납부조회</a></li>
-                            <li id="MO60800"><a href="javascript:goMenu('/appli/appliForm.do', 'MO60800');">가입신청</a></li>
-						</ul>
-					</div>
-								
-				</nav>
-			</div> <!-- // moLnbWrap -->
+                        </ul>
+                    </div>
+                    <div class="flexItem4"> <!-- .select 버튼 클릭시 다중클래스 on 추가 -->
+                        <strong><button type="button" class="select" id="subtitle">상담사조회</button></strong>
+                        <ul>
+                            <li id="MO10100"><a href="javascript:goMenu('/company/overView.do', 'MO10100');">인사말</a></li>
+                            <li id="MO10200"><a href="javascript:goMenu('/company/organ.do', 'MO10200');">조직도및연혁</a></li>
+                            <li id="MO10300"><a href="javascript:goMenu('/company/branchList.do', 'MO10300');">전국지사안내</a></li>
+                            <li id="MO10400"><a href="javascript:goMenu('/company/adviceList.do', 'MO10400');">상담사조회</a></li>
+                            <li id="MO10500"><a href="javascript:goMenu('/company/cyberList.do', 'MO10500');">사이버홍보실</a></li>
+                            <li id="MO10600"><a href="javascript:goMenu('/company/road.do', 'MO10600');">오시는길</a></li>
+                        </ul>
+                    </div>
 
-			<div class="pcLnbWrap">
-				<nav>
-					<ul class="pcLnb">
-							<li id="MO60100"><a href="javascript:goMenu('/notice/noticeList.do', 'MO60100');">공지사항</a></li>
-                            <li id="MO60200"><a href="javascript:goMenu('/qna/qnaList.do', 'MO60200');">자주하는질문</a></li>
-                            <li id="MO60300"><a href="javascript:goMenu('/counsel/counselWrite.do', 'MO60300');">1:1상담</a></li>
-                            <li id="MO60400"><a href="javascript:goMenu('/infomation/infomation_a.do', 'MO60400');">주요정보고시사항</a></li>
-                            <li id="MO60500"><a href="javascript:goMenu('/regulation/regulationList.do', 'MO60500');">상조관련법규</a></li>
-                            <li id="MO60600"><a href="javascript:goMenu('/agreement/agreementList.do', 'MO60600');">이용약관</a></li>
-                            <li id="MO60700"><a href="javascript:goMenu('/inquiry/inquiryList.do', 'MO60700');">납부조회</a></li>
-                            <li id="MO60800"><a href="javascript:goMenu('/appli/appliForm.do', 'MO60800');">가입신청</a></li>
-					</ul>
-				</nav>
-			</div> <!-- // pcLnbWrap -->
+                </nav>
+            </div> <!-- // moLnbWrap -->
+
+            <div class="pcLnbWrap">
+                <nav>
+                    <ul class="pcLnb">
+                            <li id="MO10100"><a href="javascript:goMenu('/company/overView.do', 'MO10100');">인사말</a></li>
+                            <li id="MO10200"><a href="javascript:goMenu('/company/organ.do', 'MO10200');">조직도및연혁</a></li>
+                            <li id="MO10300"><a href="javascript:goMenu('/company/branchList.do', 'MO10300');">전국지사안내</a></li>
+                            <li id="MO10400"><a href="javascript:goMenu('/company/adviceList.do', 'MO10400');">상담사조회</a></li>
+                            <li id="MO10500"><a href="javascript:goMenu('/company/cyberList.do', 'MO10500');">사이버홍보실</a></li>
+                            <li id="MO10600"><a href="javascript:goMenu('/company/road.do', 'MO10600');">오시는길</a></li>
+                    </ul>
+                </nav>
+            </div> <!-- // pcLnbWrap -->
+
 			<!-- 메뉴 영역 -->
 
 			<div id="agreebox" class="contents"> <!-- 페이지별 ID none -->
