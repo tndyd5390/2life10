@@ -25,10 +25,6 @@
 				</div>
 			</div> <!-- // conTitWrap -->
 			<!-- 메뉴 영역 -->
-			
-
-
-
 <script type="text/javascript">
 	$(function() {
 		//메뉴 제어 
@@ -222,7 +218,6 @@
 						</div>
 					</li> -->
 				</ul>
-				<a href="/Lmin/company/cyberWrite.do" class="btn_active_small" style="float:right;">사이버 홍보 등록</a>
 				
 				<!-- pageArea -->
 				<div class="pageArea">

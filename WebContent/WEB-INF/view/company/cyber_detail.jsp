@@ -103,7 +103,6 @@
 				<h3 class="smallTit">사이버홍보실</h3>
 
 				<div class="boardType2">
-				<form action="/Lmin/company/cyberRegProc.do" method="post" enctype="multipart/form-data" id="cyberForm">
 					<table summary="">
 						<caption></caption>
 						<colgroup>
@@ -134,29 +133,19 @@
 								<th scope="row">업로드</th>
 								<td>
 									<video width="320" height="240" controls>
-										<source src="/cyberFile/<%=CmmUtil.nvl(cDTO.getCyberFileName()) %>" type="video/<%=TextUtil.getFileExtension(cDTO.getCyberFileName())%>">
+										<source src="/file/cyber/movie/<%=CmmUtil.nvl(cDTO.getCyberFileName()) %>" type="video/<%=TextUtil.getFileExtension(cDTO.getCyberFileName())%>">
 									</video>
 								</td>
 							</tr>
 						</tbody>
 					</table>
-				</form>
 				</div>
 
 				<div class="btn_area">
-					<a href="/Lmin/company/updateCyberView.do?cyberNo=<%=CmmUtil.nvl(cDTO.getCyberNo()) %>" class="btn_active">수정</a>
-					<%-- <a href="/Lmin/company/deleteCyber.do?cyberNo=<%=CmmUtil.nvl(cDTO.getCyberNo())%>&cyberFileNo=<%=CmmUtil.nvl(cDTO.getCyberFileNo())%>" id="btnCancel" class="btn_cancel">삭제</a> --%>
-					<a href="javascript:deleteCyber();" id="btnCancel" class="btn_cancel">삭제</a>
+				
 				</div>
 
 			</div> <!-- // contents -->
-			<form action="/Lmin/company/deleteCyber.do" method="post" id="deleteForm">
-				<input type="hidden" name="cyberNo" value="<%=CmmUtil.nvl(cDTO.getCyberNo()) %>">
-				<input type="hidden" name="cyberFileNo" value="<%=CmmUtil.nvl(cDTO.getCyberFileNo()) %>">
-				<input type="hidden" name="filePath" value="<%=CmmUtil.nvl(cDTO.getCyberFilePath()) %>">
-				<input type="hidden" name="fileName" value="<%=CmmUtil.nvl(cDTO.getCyberFileName()) %>">
-			</form>
-
 
 		</div>
 	</div> <!-- // contentsWrap -->
