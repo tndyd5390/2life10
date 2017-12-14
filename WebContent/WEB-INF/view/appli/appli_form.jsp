@@ -64,7 +64,11 @@
 	
 	function appliForSub(){
 		var form = document.getElementById('frm');
-		if(checkRadio('appliProdCode')){
+		if(!document.getElementById('agree1').checked || !document.getElementById('agree').checked){
+			alert('가입신청 약관에 동의해주세요.')
+			document.getElementById('agree1').focus();
+			return;
+		}else if(checkRadio('appliProdCode')){
 			alert('상품을 선택해 주세요.');
 			form.product[0].focus();
 			return;
