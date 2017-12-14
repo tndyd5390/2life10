@@ -478,8 +478,11 @@
 									<th scope="row">휴대전화</th>
 									<td>
 										<select id="phoneTel1" name="phoneTel1" id="phoneTel1" title="" class="inputType3">
-                                            <option value="00">010</option>
-                                            <option value="01">011</option>
+                                            <option value="010">010</option>
+                                            <option value="011">011</option>
+                                            <option value="016">016</option>
+                                            <option value="017">017</option>
+                                            <option value="019">019</option>
                                         </select>
 										-
 										<input type="text" name="phoneTel2" id="phoneTel2" class="inputType2" style="" maxlength="5">
