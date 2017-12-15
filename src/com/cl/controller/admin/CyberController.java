@@ -57,7 +57,7 @@ public class CyberController {
 		return "/Lmin/company/cyber_write";
 	}
 	
-	@RequestMapping(value="Lmin/company/cyberRegProc", method=RequestMethod.POST)
+	@RequestMapping(value="/Lmin/company/cyberRegProc", method=RequestMethod.POST)
 	public String cyberRegProd(MultipartHttpServletRequest mulReq, HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cyberRegProc start!!!");
 		
@@ -93,7 +93,7 @@ public class CyberController {
 		return "/alert";
 	}
 	
-	@RequestMapping(value="Lmin/company/cyberDetail", method=RequestMethod.GET)
+	@RequestMapping(value="/Lmin/company/cyberDetail", method=RequestMethod.GET)
 	public String cyberDetail(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cyberDetail start!!!");
 		
@@ -109,7 +109,7 @@ public class CyberController {
 		return "/Lmin/company/cyber_detail";
 	}
 	
-	@RequestMapping(value="Lmin/company/deleteCyber", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/Lmin/company/deleteCyber", method={RequestMethod.GET, RequestMethod.POST})
 	public String deleteCyber(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".deleteCyber start!!!");
 		String cyberNo = CmmUtil.nvl(req.getParameter("cyberNo"));
@@ -138,7 +138,7 @@ public class CyberController {
 		return "alert";
 	}
 	
-	@RequestMapping(value="Lmin/company/updateCyberView", method=RequestMethod.GET)
+	@RequestMapping(value="/Lmin/company/updateCyberView", method=RequestMethod.GET)
 	public String updateCyberView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".updateCyberView start!!!");
 		
@@ -154,7 +154,7 @@ public class CyberController {
 		return "/Lmin/company/cyber_update_view";
 	}
 	
-	@RequestMapping(value="Lmin/company/cyberMovieUpdateView", method=RequestMethod.GET)
+	@RequestMapping(value="/Lmin/company/cyberMovieUpdateView", method=RequestMethod.GET)
 	public String cyberMovieUpdateView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cyberMovieUpdateView start!!!");
 		String cyberNo = CmmUtil.nvl(req.getParameter("cyberNo"));
@@ -168,7 +168,7 @@ public class CyberController {
 		return "/Lmin/company/cyber_movieUpdate_view";
 	}
 	
-	@RequestMapping(value="Lmin/company/cyberMovieUpdateProc", method=RequestMethod.POST)
+	@RequestMapping(value="/Lmin/company/cyberMovieUpdateProc", method=RequestMethod.POST)
 	public void cyberMovieUpdateProc(MultipartHttpServletRequest mulReq, HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cyberMovieUpdateProc start!!!");
 		
@@ -215,7 +215,7 @@ public class CyberController {
 		log.info(this.getClass() + ".cyberMovieUpdateProc end!!!");
 	}
 	
-	@RequestMapping(value="Lmin/company/cyberUpdateProc", method=RequestMethod.POST)
+	@RequestMapping(value="/Lmin/company/cyberUpdateProc", method=RequestMethod.POST)
 	public String cyberUpdateProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cyberUpdateProc start!!!");
 		
