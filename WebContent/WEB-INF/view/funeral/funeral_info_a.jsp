@@ -65,9 +65,9 @@
                         <strong><button type="button" class="select" id="subtitle">장례정보</button></strong>
                         <ul>
 							<li id="MO30100"><a href="javascript:goMenu('/funeral/funeralMark.do', 'MO30100');">장례상품특징</a></li>
-							<li id="MO31100"><a href="javascript:goMenu('/funeral/funeralList_a.do', 'MO31100');">장례상품</a></li>
-							<li id="MO30200"><a href="javascript:goMenu('/funeral/funeralInfo_a.do', 'MO30200');">장례정보</a></li>
-							<li id="MO30300"><a href="javascript:goMenu('/funeral/funeralNoticeList.do', 'MO30300');">부고알림</a></li>
+							<li id="MO30200"><a href="javascript:goMenu('/funeral/funeralList_a.do', 'MO30200');">장례상품</a></li>
+							<li id="MO30300"><a href="javascript:goMenu('/funeral/funeralInfo_a.do', 'MO30300');">장례정보</a></li>
+							<li id="MO30400"><a href="javascript:goMenu('/funeral/funeralNoticeList.do', 'MO30400');">부고알림</a></li>
                         </ul>
                     </div>
 
@@ -77,10 +77,10 @@
             <div class="pcLnbWrap">
                 <nav>
                     <ul class="pcLnb">
-							<li id="MO30100"><a href="javascript:goMenu('/funeral/funeralMark.do', 'MO30100');">장례상품특징</a></li>
-							<li id="MO31100"><a href="javascript:goMenu('/funeral/funeralList_a.do', 'MO31100');">장례상품</a></li>
-							<li id="MO30200"><a href="javascript:goMenu('/funeral/funeralInfo_a.do', 'MO30200');">장례정보</a></li>
-							<li id="MO30300"><a href="javascript:goMenu('/funeral/funeralNoticeList.do', 'MO30300');">부고알림</a></li>
+							<li id="MN30100"><a href="javascript:goMenu('/funeral/funeralMark.do', 'MN30100');">장례상품특징</a></li>
+							<li id="MN30200"><a href="javascript:goMenu('/funeral/funeralList_a.do', 'MN30200');">장례상품</a></li>
+							<li id="MN30300"><a href="javascript:goMenu('/funeral/funeralInfo_a.do', 'MN30300');">장례정보</a></li>
+							<li id="MN30400"><a href="javascript:goMenu('/funeral/funeralNoticeList.do', 'MN30400');">부고알림</a></li>
                     </ul>
                 </nav>
             </div> <!-- // pcLnbWrap -->
