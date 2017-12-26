@@ -20,6 +20,7 @@ import com.cl.dto.BranchDTO;
 import com.cl.service.IBranchService;
 import com.cl.util.CmmUtil;
 import com.cl.util.PageUtil;
+import com.cl.util.SessionUtil;
 
 @Controller
 public class BranchController {
@@ -32,6 +33,7 @@ public class BranchController {
 	@RequestMapping(value="Lmin/company/branchList", method={RequestMethod.GET, RequestMethod.POST})
 	public String branchList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".branchView start!!!");
+		SessionUtil.sessionCheck(resp, session);
 		int splitPage = 10;
 		
 		HashMap<String, Object> hMap = new HashMap<>();
@@ -51,6 +53,7 @@ public class BranchController {
 	@RequestMapping(value="Lmin/company/branchWriteView", method=RequestMethod.GET)
 	public String branchWriteView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".branchWriteView start!!!");
+		SessionUtil.sessionCheck(resp, session);
 		log.info(this.getClass() + ".branchWriteView end!!!");
 		return "/Lmin/company/branch_write";
 	}
@@ -58,7 +61,7 @@ public class BranchController {
 	@RequestMapping(value="Lmin/company/branchRegProc", method=RequestMethod.POST)
 	public String branchRegProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".branchRegProc start!!!");
-
+		SessionUtil.sessionCheck(resp, session);
 		String regMemberNo = CmmUtil.nvl((String)session.getAttribute("ss_member_no"));
 		log.info(" regNo : " + regMemberNo);
 		String branchAreaCode = CmmUtil.nvl(req.getParameter("branchAreaCode"));
@@ -119,7 +122,7 @@ public class BranchController {
 	@RequestMapping(value="Lmin/company/branchDetail", method=RequestMethod.GET)
 	public String branchDetailView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".branchDetailVeiw start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String branchNo = CmmUtil.nvl(req.getParameter("branchNo"));
 		log.info(" branchNo : " + branchNo);
 		
@@ -138,7 +141,7 @@ public class BranchController {
 	@RequestMapping(value="Lmin/company/branchDeleteProc", method=RequestMethod.GET)
 	public String branchDeleteProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".branchDeleteProc start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String branchNo = CmmUtil.nvl(req.getParameter("branchNo"));
 		log.info(" branchNo : " + branchNo);
 		
@@ -160,7 +163,7 @@ public class BranchController {
 	@RequestMapping(value="Lmin/company/branchUpdateView", method=RequestMethod.GET)
 	public String branchUpdateView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".branchUpdateView start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String branchNo = CmmUtil.nvl(req.getParameter("branchNo"));
 		log.info(" branchNo : " + branchNo);
 		
@@ -179,7 +182,7 @@ public class BranchController {
 	@RequestMapping(value="Lmin/company/branchUpdateProc", method=RequestMethod.POST)
 	public String branchUpcateProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".branchUpdateProc start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String branchNo = CmmUtil.nvl(req.getParameter("branchNo"));
 		log.info(" branchNo : " + branchNo);
 		String chgMemberNo = CmmUtil.nvl((String)session.getAttribute("memberNo"));
@@ -243,7 +246,7 @@ public class BranchController {
 	@RequestMapping(value="Lmin/company/branchSearch", method=RequestMethod.POST)
 	public String branchSearch(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".branchSearch start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String searchArea = CmmUtil.nvl(req.getParameter("searchArea"));
 		log.info(" searchArea : " + searchArea);
 		String searchWord = CmmUtil.nvl(req.getParameter("searchWord"));

@@ -10,10 +10,7 @@
 <% 
 	HashMap<String, Object> hMap = (HashMap<String,Object>) request.getAttribute("hMap");
 	List<CatalogueDTO> cList = (List<CatalogueDTO>) hMap.get("list");
-	
 	int pageBtnSplit = 5;
-
-
 %>
 
 <!DOCTYPE html>

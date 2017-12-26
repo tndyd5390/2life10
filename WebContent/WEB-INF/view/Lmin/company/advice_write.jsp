@@ -236,8 +236,8 @@ function sample6_execDaumPostcode() {
 				</div>
 
 				<div class="btn_area">
-					<a href="#" id="submitLink" class="btn_active" onclick="doAdviceReg();">등록</a>
-					<a href="#" id="btnCancel" class="btn_cancel" onclick="doAdviceRegCancel();">취소</a>
+					<a href="javascript:doAdviceReg();" id="submitLink" class="btn_active">등록</a>
+					<a href="javascript:doAdviceRegCancel();" id="btnCancel" class="btn_cancel">취소</a>
 				</div>
 
 			</div> <!-- // contents -->

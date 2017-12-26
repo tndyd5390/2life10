@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -16,6 +17,7 @@ import com.cl.dto.NoticeDTO;
 import com.cl.service.INoticeService;
 import com.cl.util.CmmUtil;
 import com.cl.util.PageUtil;
+import com.cl.util.SessionUtil;
 
 @Controller
 public class NoticeController {
@@ -26,9 +28,9 @@ public class NoticeController {
 	private INoticeService noticeService;
 	
 	@RequestMapping("/Lmin/notice/noticeList")
-	public String noticeList(HttpServletRequest req, Model model) throws Exception{
+	public String noticeList(HttpServletRequest req, Model model, HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("Lmin:noticeList Start!!");
-
+		SessionUtil.sessionCheck(resp, session);
 		int splitPage = 10;
 	
 		HashMap<String, Object> hMap = new HashMap<>();
@@ -43,18 +45,16 @@ public class NoticeController {
 		return "/Lmin/notice/notice_list";
 	}
 	@RequestMapping("/Lmin/notice/noticeWrite")
-	public String noticeWrite()throws Exception{
+	public String noticeWrite(HttpServletResponse resp, HttpSession session)throws Exception{
 		log.info("Lmin:noticeWrite Start!!");
-		
-		
-		
+		SessionUtil.sessionCheck(resp, session);
 		log.info("Lmin:noticeWrite End!!");
 		return "/Lmin/notice/notice_write";
 	}
 	@RequestMapping("/Lmin/notice/noticeRegProc")
-	public String noticeRegProc(HttpServletRequest req, Model model, HttpSession session) throws Exception{
+	public String noticeRegProc(HttpServletRequest req, Model model, HttpSession session, HttpServletResponse resp) throws Exception{
 		log.info("Lmin:noticeRegProc Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String url = "";
 		String msg = "";
 		String title = CmmUtil.nvl(req.getParameter("title"));
@@ -87,9 +87,9 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/Lmin/notice/noticeDetail")
-	public String noticeDetail(HttpServletRequest req, Model model) throws Exception{
+	public String noticeDetail(HttpServletRequest req, Model model, HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("Lmin:noticeDetail Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String noticeNo = CmmUtil.nvl(req.getParameter("nNo"));
 		log.info("noticeNo : "+noticeNo);
 		
@@ -105,9 +105,9 @@ public class NoticeController {
 		return "/Lmin/notice/notice_view";
 	}
 	@RequestMapping("/Lmin/notice/noticeUpdate")
-	public String noticeUpdate(HttpServletRequest req, Model model) throws Exception{
+	public String noticeUpdate(HttpServletRequest req, Model model, HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("Lmin:noticeUpdate Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String noticeNo = CmmUtil.nvl(req.getParameter("nNo"));
 		log.info("noticeNo : "+noticeNo);
 		
@@ -123,9 +123,9 @@ public class NoticeController {
 		return "/Lmin/notice/notice_update";
 	}
 	@RequestMapping("/Lmin/notice/noticeUpdateProc")
-	public String noticeUpdateProc(HttpServletRequest req, Model model, HttpSession session) throws Exception{
+	public String noticeUpdateProc(HttpServletRequest req, Model model, HttpSession session, HttpServletResponse resp) throws Exception{
 		log.info("Lmin:noticeUpdateProc Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String url = "";
 		String msg = "";
 		String noticeNo = CmmUtil.nvl(req.getParameter("nNo"));
@@ -160,9 +160,9 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/Lmin/notice/noticeDeleteProc")
-	public String noticeDeleteProc(HttpServletRequest req, Model model) throws Exception{
+	public String noticeDeleteProc(HttpServletRequest req, Model model, HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("Lmin:noticeDeleteProc Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String url = "";
 		String msg = "";
 		String noticeNo = CmmUtil.nvl(req.getParameter("nNo"));

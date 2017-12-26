@@ -8,7 +8,6 @@
 	if(cDTO==null){
 		cDTO = new CatalogueDTO();
 	}
-
 %>
 <!DOCTYPE html>
 <html lang="ko">

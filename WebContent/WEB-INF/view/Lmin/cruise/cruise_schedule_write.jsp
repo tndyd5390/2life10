@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -225,6 +225,12 @@ function onlyNumber(obj) {
          $(this).val($(this).val().replace(/[^0-9]/g,""));
     }); 
 }
+
+function doCancel(){
+	if(confirm('작성하지 내용은 저장되지 않습니다. 취소하시겠습니까?')){
+		location.href="/Lmin/cruise/cruiseScheduleList.do";
+	}
+}
 </script>
 <body>
 <div id="skipnavi">
@@ -370,8 +376,8 @@ function onlyNumber(obj) {
 					</form>
 				</div>
 				<div class="btn_area">
-					<a href="#" id="submitLink" class="btn_active" onclick="doCruiseReg();">등록</a>
-					<a href="#" id="btnCancel" class="btn_cancel">취소</a>
+					<a href="javascript:doCruiseReg();" id="submitLink" class="btn_active">등록</a>
+					<a href="javascript:doCancel();" id="btnCancel" class="btn_cancel">취소</a>
 				</div>
 			</div> <!-- // contents -->
 		</div>

@@ -22,6 +22,7 @@ import com.cl.service.IAdviceService;
 import com.cl.util.AES256Util;
 import com.cl.util.CmmUtil;
 import com.cl.util.PageUtil;
+import com.cl.util.SessionUtil;
 
 @Controller
 public class AdviceController {
@@ -43,6 +44,8 @@ public class AdviceController {
 	@RequestMapping(value="Lmin/company/adviceList", method={RequestMethod.GET, RequestMethod.POST})
 	public String adviceList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".adviceList start!!!");
+		
+		SessionUtil.sessionCheck(resp, session);
 		int splitPage = 10;
 		
 		HashMap<String, Object> hMap = new HashMap<>();
@@ -67,7 +70,7 @@ public class AdviceController {
 	@RequestMapping(value="Lmin/company/adviceWriteView", method=RequestMethod.GET)
 	public String adviceWriteView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".adviceWriteView start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		log.info(this.getClass() + ".acviceWriteView end!!!");
 		return "/Lmin/company/advice_write";
 	}
@@ -84,7 +87,7 @@ public class AdviceController {
 	@RequestMapping(value="Lmin/company/adviceRegProc", method=RequestMethod.POST)
 	public String adviceRegProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".adviceRegProc start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		//등록자 회원번호
 		String regMemberNo = CmmUtil.nvl((String)session.getAttribute("ss_member_no"));
 		log.info(" regMemberNo : " + regMemberNo);
@@ -136,7 +139,7 @@ public class AdviceController {
 	@RequestMapping(value="Lmin/company/adviceDetail", method=RequestMethod.GET)
 	public String adviceDetail(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".adviceDetail start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String adviceNo = CmmUtil.nvl(req.getParameter("adviceNo"));
 		log.info(" adviceNo : " + adviceNo);
 		
@@ -155,7 +158,7 @@ public class AdviceController {
 	@RequestMapping(value="Lmin/company/adviceDelete", method=RequestMethod.GET)
 	public String adviceDelete(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".adviceDelete start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String adviceNo = CmmUtil.nvl(req.getParameter("adviceNo"));
 		log.info(" adviceNo : " + adviceNo);
 		
@@ -178,7 +181,7 @@ public class AdviceController {
 	@RequestMapping(value="Lmin/company/adviceUpdateView", method=RequestMethod.GET)
 	public String adviceUpdateView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".adviceUpdateView start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String adviceNo = CmmUtil.nvl(req.getParameter("adviceNo"));
 		log.info(" adviceNo : " + adviceNo);
 		
@@ -196,7 +199,7 @@ public class AdviceController {
 	@RequestMapping(value="Lmin/company/adviceUpdateProc", method=RequestMethod.POST)
 	public String adviceUpdateProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".adviceUpdatProc start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String chgMemberNo = CmmUtil.nvl((String)session.getAttribute("ss_member_no"));
 		log.info(" chgMemberNo : " + chgMemberNo);
 		String adviceNo = CmmUtil.nvl(req.getParameter("adviceNo"));

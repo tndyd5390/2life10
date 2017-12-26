@@ -1,4 +1,4 @@
-//³³ºÎÁ¶È¸ ÄÁÆ®·Ñ·¯
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¸ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½
 package com.cl.controller.admin;
 
 import java.io.File;
@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -21,6 +22,7 @@ import com.cl.service.ICatalogueService;
 import com.cl.util.CmmUtil;
 import com.cl.util.FileUtil;
 import com.cl.util.PageUtil;
+import com.cl.util.SessionUtil;
 
 @Controller
 public class CatalogueController {
@@ -33,9 +35,9 @@ public class CatalogueController {
 	String catalogueFileSavePath = "/www/thunder-edu_com/file/catalogue/file/";
 		
 	@RequestMapping("/Lmin/catalogue/catalogueList")
-	public String catalogueList(HttpServletRequest req, Model model) throws Exception{
+	public String catalogueList(HttpServletRequest req, Model model, HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("Lmin:catalogueList Start!!");
-
+		SessionUtil.sessionCheck(resp, session);
 		int splitPage = 10;
 	
 		HashMap<String, Object> hMap = new HashMap<>();
@@ -53,17 +55,17 @@ public class CatalogueController {
 	}
 	
 	@RequestMapping("/Lmin/catalogue/catalogueWrite")
-	public String catalogueWrite() throws Exception{
+	public String catalogueWrite(HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("Lmin:catalogueWrite Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		log.info("Lmin:catalogueWrite End!!");
 		return "/Lmin/catalogue/catalogue_write";
 	}
 	
 	@RequestMapping("/Lmin/catalogue/catalogueRegProc")
-	public String catalogueRegProc(HttpServletRequest req, Model model, HttpSession session, MultipartHttpServletRequest mulReq) throws Exception{
+	public String catalogueRegProc(HttpServletRequest req,HttpServletResponse resp, Model model, HttpSession session, MultipartHttpServletRequest mulReq) throws Exception{
 		log.info("Lmin:catalogueRegProc Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		MultipartFile file = mulReq.getFile("file");
 		String url = "";
 		String msg = "";
@@ -98,9 +100,9 @@ public class CatalogueController {
 		
 		url = "/Lmin/catalogue/catalogueList.do";
 		if(result == 0){
-			msg = "µî·Ï½ÇÆÐ";
+			msg = "ï¿½ï¿½Ï½ï¿½ï¿½ï¿½";
 		}else{
-			msg = "µî·Ï¼º°ø";
+			msg = "ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½";
 		}
 		
 		cDTO = null;
@@ -112,9 +114,9 @@ public class CatalogueController {
 	}
 	
 	@RequestMapping("/Lmin/catalogue/catalogueDownload")
-	public ModelAndView catalogueDownload(HttpServletRequest req) throws Exception{
+	public ModelAndView catalogueDownload(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("Lmin:catalogueDownLoad Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String catalogueNo = CmmUtil.nvl(req.getParameter("cNo"));
 		
 		log.info("catalogueNo : "+catalogueNo);
@@ -142,9 +144,9 @@ public class CatalogueController {
 	}
 	
 	@RequestMapping("/Lmin/catalogue/catalogueDetail")
-	public String catalogueDetail(HttpServletRequest req, Model model) throws Exception{
+	public String catalogueDetail(HttpServletRequest req, Model model, HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("Lmin:catalogueDetail Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String catalogueNo = CmmUtil.nvl(req.getParameter("cNo"));
 		
 		log.info("catalogueNo : "+ catalogueNo);
@@ -160,9 +162,9 @@ public class CatalogueController {
 	}
 	
 	@RequestMapping("/Lmin/catalogue/catalogueUpdateProc")
-	public String catalogueUpdateProc(HttpServletRequest req, Model model, HttpSession session, MultipartHttpServletRequest mulReq) throws Exception{
+	public String catalogueUpdateProc(HttpServletRequest req, Model model, HttpSession session, MultipartHttpServletRequest mulReq, HttpServletResponse resp) throws Exception{
 		log.info("Lmin:catalogueUpdateProc Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		MultipartFile file = mulReq.getFile("file");
 		String url = "";
 		String msg = "";
@@ -212,9 +214,9 @@ public class CatalogueController {
 		url = "/Lmin/catalogue/catalogueList.do";
 		
 		if(result == 0){
-			msg = "¼öÁ¤½ÇÆÐ";
+			msg = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 		}else{
-			msg = "¼öÁ¤¼º°ø";
+			msg = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 		}
 		
 		model.addAttribute("msg", msg);
@@ -227,9 +229,9 @@ public class CatalogueController {
 	}
 	
 	@RequestMapping("/Lmin/catalogue/catalogueDeleteProc")
-	public String catalogueDeleteProc(HttpServletRequest req, Model model) throws Exception{
+	public String catalogueDeleteProc(HttpServletRequest req, Model model, HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("Lmin:catalogueDeleteProc Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String url = "";
 		String msg = "";
 		String catalogueNo = CmmUtil.nvl(req.getParameter("cNo"));
@@ -255,9 +257,9 @@ public class CatalogueController {
 		url = "/Lmin/catalogue/catalogueList.do";
 		
 		if(result == 0){
-			msg = "»èÁ¦½ÇÆÐ";
+			msg = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 		}else{
-			msg = "»èÁ¦¼º°ø";
+			msg = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 		}
 		
 		model.addAttribute("url", url);

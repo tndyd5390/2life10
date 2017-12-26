@@ -70,11 +70,11 @@
 			return;
 		}else if(checkRadio('appliProdCode')){
 			alert('상품을 선택해 주세요.');
-			form.product[0].focus();
+			form.appliProdCode[0].focus();
 			return;
 		}else if(checkRadio('appliContractCode')){
 			alert('계약구좌를 선택해 주세요.');;
-			form.contractAccount[0].focus();
+			form.appliContractCode[0].focus();
 			return;
 		}else if(form.appliName.value == ""){
 			alert("성명을 입력해 주세요.");
@@ -495,7 +495,7 @@
 								<th scope="row" rowspan="2">주소</th>
 								<td>
 									<input type="text" name="appliPostNo" id="appliPostNo" value="" title="이름" class="inputType2" style="">
-									<a href="#" class="btn_active_small"  onclick="sample6_execDaumPostcode();">우편번호</a>
+									<a href="javascript:sample6_execDaumPostcode();" class="btn_active_small">우편번호</a>
 								</td>
 							</tr>
 							<tr>

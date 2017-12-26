@@ -108,6 +108,12 @@ function sample6_execDaumPostcode() {
         }
     }).open();
 }
+
+function doCancel(){
+	if(confirm('작성하지 내용은 저장되지 않습니다. 취소하시겠습니까?')){
+		location.href="/Lmin/company/branchList.do";
+	}
+}
 </script>
 <body>
 <div id="skipnavi">
@@ -264,8 +270,8 @@ function sample6_execDaumPostcode() {
 				</div>
 
 				<div class="btn_area">
-					<a href="#" id="submitLink" class="btn_active" onclick="branchReg();">등록</a>
-					<a href="#" id="btnCancel" class="btn_cancel">취소</a>
+					<a href="javascript:branchReg();" id="submitLink" class="btn_active">등록</a>
+					<a href="javascript:doCancel();" id="btnCancel" class="btn_cancel">취소</a>
 				</div>
 
 			</div> <!-- // contents -->
