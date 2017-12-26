@@ -61,7 +61,7 @@
 		SELECT MEMBER_NO			MEMBERNO,
 		       MEMBER_ID 			MEMBERID,
 		       MEMBER_NAME			MEMBERNAME, 
-		       MEMBER_PRE 			MEMBERPRE
+		       MEMBER_AUTH 			MEMBERAUTH
 		  FROM MEMBER_INFO
 		 WHERE MEMBER_ID = 			#{memberId}
 		   AND MEMBER_PASSWORD = 	#{memberPassword}

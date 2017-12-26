@@ -229,8 +229,6 @@
 						</div>
 					</li> -->
 				</ul>
-				<a href="/Lmin/regulation/regulationRegView.do" class="btn_active_small" style="float:right;">상조관련법규등록</a>
-
 				<!-- pageArea -->
 				<div class="pageArea">
 					<%=PageUtil.frontPaging(hMap, pageBtnSplit) %>

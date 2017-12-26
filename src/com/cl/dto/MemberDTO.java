@@ -16,6 +16,7 @@ public class MemberDTO {
 	private String memberPostNo;
 	private String memberAddress;
 	private String memberAddressDetail;
+	private String memberAuth;
 	private String regMemberNo;
 	private String regDt;
 	private String chgMemberNo;
@@ -149,6 +150,12 @@ public class MemberDTO {
 	}
 	public void setRowNum(String rowNum) {
 		this.rowNum = rowNum;
+	}
+	public String getMemberAuth() {
+		return memberAuth;
+	}
+	public void setMemberAuth(String memberAuth) {
+		this.memberAuth = memberAuth;
 	}
 	
 }

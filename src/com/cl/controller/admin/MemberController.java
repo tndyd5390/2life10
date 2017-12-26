@@ -48,7 +48,7 @@ public class MemberController {
 		String memberId = CmmUtil.nvl(req.getParameter("id"));
 		String memberPassword = SHA256Util.sha256(CmmUtil.nvl(req.getParameter("password")));
 		String memberNo = "";
-		String memberPre = "";
+		String memberAuth = "";
 		String memberName = "";
 		
 		log.info("memberId : "+memberId);
@@ -64,7 +64,7 @@ public class MemberController {
 			memberNo = CmmUtil.nvl(mDTO.getMemberNo());
 			memberId = CmmUtil.nvl(mDTO.getMemberId());
 			memberName = AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberName()));
-			memberPre = CmmUtil.nvl(mDTO.getMemberPre());
+			memberAuth = CmmUtil.nvl(mDTO.getMemberPre());
 			long time = System.currentTimeMillis(); 
 			SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String timeStr = dayTime.format(new Date(time));
@@ -72,15 +72,15 @@ public class MemberController {
 			log.info("login No : " +memberNo);
 			log.info("login Id : " +memberId);
 			log.info("login Name : " +memberName);
-			log.info("login Pre : " +memberPre);
+			log.info("login Auth : " +memberAuth);
 			log.info("login Time : "+timeStr);
 			
 			session.setAttribute("ss_member_no", memberNo);
 			session.setAttribute("ss_member_id", memberId);
 			session.setAttribute("ss_member_name", memberName);
-			session.setAttribute("ss_member_pre", memberPre);
+			session.setAttribute("ss_member_auth", memberAuth);
 			
-			if(mDTO.getMemberId().equals("kangseokopo")){
+			if(mDTO.getMemberAuth().equals("A")){
 				url = "/Lmin/notice/noticeList.do";
 			}else{
 				url = "/main.do";
@@ -102,7 +102,7 @@ public class MemberController {
 		String memeberNo = CmmUtil.nvl((String)session.getAttribute("ss_member_no"));
 		String memeberId = CmmUtil.nvl((String)session.getAttribute("ss_member_id"));
 		String memeberName = CmmUtil.nvl((String)session.getAttribute("ss_member_name"));
-		String memeberPre = CmmUtil.nvl((String)session.getAttribute("ss_member_pre"));
+		String memeberAuth = CmmUtil.nvl((String)session.getAttribute("ss_member_auth"));
 		long time = System.currentTimeMillis(); 
 		SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String timeStr = dayTime.format(new Date(time));
@@ -110,13 +110,13 @@ public class MemberController {
 		log.info("logout No : "+memeberNo);
 		log.info("logout Id : "+memeberId);
 		log.info("logout Name : "+memeberName);
-		log.info("logout Pre : "+memeberPre);
+		log.info("logout Auth : "+memeberAuth);
 		log.info("logout Time : "+timeStr);
 		
 		session.setAttribute("ss_memeber_no", "");
 		session.setAttribute("ss_memeber_id", "");
 		session.setAttribute("ss_memeber_name", "");
-		session.setAttribute("ss_memeber_pre", "");
+		session.setAttribute("ss_memeber_auth", "");
 		session.invalidate();
 		
 		log.info("logout End!!");
