@@ -95,7 +95,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/logout")
-	public String logout(HttpSession session) throws Exception{
+	public String logout(HttpSession session, Model model) throws Exception{
 		log.info("logout Start!!");
 		
 		String memeberNo = CmmUtil.nvl((String)session.getAttribute("ss_member_no"));
@@ -118,6 +118,8 @@ public class MemberController {
 		session.setAttribute("ss_memeber_auth", "");
 		session.invalidate();
 		
+		model.addAttribute("msg", "로그아웃 성공");
+		model.addAttribute("url", "/main.do");
 		log.info("logout End!!");
 		return "/member/redirect";
 	}
