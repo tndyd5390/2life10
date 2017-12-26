@@ -21,6 +21,7 @@ import com.cl.service.IAppliService;
 import com.cl.util.AES256Util;
 import com.cl.util.CmmUtil;
 import com.cl.util.PageUtil;
+import com.cl.util.SessionUtil;
 
 @Controller
 public class AppliController {
@@ -33,7 +34,7 @@ public class AppliController {
 	@RequestMapping(value="Lmin/appli/appliForm", method=RequestMethod.GET)
 	public String appliForm(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".appliForm start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		log.info(this.getClass() + ".appliForm end!!!");
 		return "/Lmin/appli/appli_form";
 	}
@@ -41,6 +42,7 @@ public class AppliController {
 	@RequestMapping(value="Lmin/appli/appliProc", method=RequestMethod.POST)
 	public String appliProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".appliProc start!!!");
+		SessionUtil.sessionCheck(resp, session);
 		String regMemberNo = CmmUtil.nvl((String)session.getAttribute("ss_member_no"));
 		log.info(" regMemberNo : " + regMemberNo);
 		String appliProdCode = CmmUtil.nvl(req.getParameter("appliProdCode"));
@@ -96,7 +98,7 @@ public class AppliController {
 	@RequestMapping(value="Lmin/appli/appliList", method={RequestMethod.GET, RequestMethod.POST})
 	public String appliList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".appliList start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		int splitPage = 3;
 		
 		HashMap<String, Object> hMap = new HashMap<>();
@@ -113,7 +115,7 @@ public class AppliController {
 	@RequestMapping(value="Lmin/appli/appliDetail", method=RequestMethod.GET)
 	public String appliDetail(HttpServletRequest req, HttpServletResponse resp, HttpSession session, Model model) throws Exception{
 		log.info(this.getClass() + ".appliDetail start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String appliNo = CmmUtil.nvl(req.getParameter("appliNo"));
 		log.info(" appliNo : " + appliNo);
 		
@@ -128,7 +130,7 @@ public class AppliController {
 	@RequestMapping(value="Lmin/appli/appliReplyProc", method=RequestMethod.POST)
 	public String appliReplyProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".appliReplyProc start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String appliNo = CmmUtil.nvl(req.getParameter("appliNo"));
 		log.info(" appliNo : " + appliNo);
 		

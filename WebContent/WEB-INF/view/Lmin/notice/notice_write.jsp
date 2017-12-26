@@ -24,6 +24,11 @@
 	<script src="/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
+function doCancel(){
+	if(confirm('작성하신 내용은 저장되지 않습니다. 취소하시겠습니까?')){
+		location.href="/Lmin/notice/noticeList.do";
+	}
+}
 </script>
 <body>
 <div id="skipnavi">
@@ -137,7 +142,7 @@
 				<!-- btnArea -->
 				<div class="btnArea">
 					<button type="submit" class="btnDefaultForm" id="listBtn" onclick="return doSubmit();">등록</button>
-					<button type="button" class="btnDefaultForm" id="listBtn">목록</button>
+					<button type="button" class="btnDefaultForm" id="listBtn" onclick="doCancel();">취소</button>
 				</div>
 				</form>
 				<!-- // btnArea -->

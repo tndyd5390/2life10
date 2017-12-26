@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -20,6 +21,7 @@ import com.cl.service.ICodeService;
 import com.cl.service.IFuneralInfoService;
 import com.cl.util.CmmUtil;
 import com.cl.util.PageUtil;
+import com.cl.util.SessionUtil;
 
 @Controller
 public class FuneralInfoController {
@@ -33,8 +35,9 @@ public class FuneralInfoController {
 	private ICodeService codeService;
 	
 	@RequestMapping("/Lmin/funeral/funeralInfoList")
-	public String funeralInfoList(HttpServletRequest req, Model model) throws Exception{
+	public String funeralInfoList(HttpServletRequest req, Model model, HttpSession session, HttpServletResponse resp) throws Exception{
 		log.info("Lmin:funeralInfoList Start!!");
+		SessionUtil.sessionCheck(resp, session);
 		int splitPage = 10;
 		
 		HashMap<String, Object> hMap = new HashMap<>();
@@ -54,9 +57,9 @@ public class FuneralInfoController {
 	}
 	
 	@RequestMapping("/Lmin/funeral/funeralInfoWrite")
-	public String funeralInfoWrite(Model model) throws Exception{
+	public String funeralInfoWrite(Model model, HttpSession session, HttpServletResponse resp) throws Exception{
 		log.info("Lmin:funeralInfoWrite Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		HashMap<String ,List<CodeDTO>> hashMap = new HashMap<>();
 		hashMap = codeService.getCodeList();
 		
@@ -65,9 +68,9 @@ public class FuneralInfoController {
 		return "/Lmin/funeral/funeral_info_write";
 	}
 	@RequestMapping("/Lmin/funeral/fueralInfoRegProc")
-	public String funeralInfoRegProc(HttpServletRequest req, Model model, HttpSession session) throws Exception{
+	public String funeralInfoRegProc(HttpServletRequest req, Model model, HttpSession session, HttpServletResponse resp) throws Exception{
 		log.info("Lmin:funeralInfoRegProc Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String url = "";
 		String msg = "";
 		String funeralInfoCode = CmmUtil.nvl(req.getParameter("funeral"));
@@ -118,9 +121,9 @@ public class FuneralInfoController {
 	}
 	
 	@RequestMapping("/Lmin/funeral/funeralInfoDetail")
-	public String funeralInfoDetail(HttpServletRequest req, Model model) throws Exception{
+	public String funeralInfoDetail(HttpServletRequest req, Model model, HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("Lmin:funeralInfoDetail Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String funeralInfoNo = CmmUtil.nvl(req.getParameter("fNo"));
 		log.info("funeralInfoNo : "+funeralInfoNo);
 		
@@ -138,9 +141,9 @@ public class FuneralInfoController {
 	}
 	
 	@RequestMapping("/Lmin/funeral/funeralInfoUpdateProc")
-	public String funeralInfoUpdateProc(HttpServletRequest req, Model model, HttpSession session) throws Exception{
+	public String funeralInfoUpdateProc(HttpServletRequest req, Model model, HttpSession session, HttpServletResponse resp) throws Exception{
 		log.info("Lmin:funeralInfoUpdateProc Start!!");
-
+		SessionUtil.sessionCheck(resp, session);
 		String url = "";
 		String msg = "";
 		String funeralInfoNo = CmmUtil.nvl(req.getParameter("fNo"));
@@ -194,9 +197,9 @@ public class FuneralInfoController {
 	}
 	
 	@RequestMapping("/Lmin/funeral/funeralInfoDelete")
-	public String funeralInfoDelete(HttpServletRequest req, Model model) throws Exception{
+	public String funeralInfoDelete(HttpServletRequest req, Model model, HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("Lmin:funeralInfoDelete Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String url = "";
 		String msg = "";
 		String funeralInfoNo = CmmUtil.nvl(req.getParameter("fNo"));

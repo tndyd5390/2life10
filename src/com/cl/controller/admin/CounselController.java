@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -19,6 +20,7 @@ import com.cl.util.AES256Util;
 import com.cl.util.CmmUtil;
 import com.cl.util.PageUtil;
 import com.cl.util.SHA256Util;
+import com.cl.util.SessionUtil;
 
 @Controller
 public class CounselController {
@@ -31,9 +33,9 @@ public class CounselController {
 	private ICodeService codeService;
 	
 	@RequestMapping("/Lmin/counsel/counselList")
-	public String counselList(HttpServletRequest req, Model model) throws Exception{
+	public String counselList(HttpServletRequest req, Model model, HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("Lmin:counselList Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		int splitPage = 10;
 		
 		HashMap<String, Object> hMap = new HashMap<>();
@@ -47,18 +49,18 @@ public class CounselController {
 	}
 	
 	@RequestMapping("/Lmin/counsel/counselWrite")
-	public String counselWrite(HttpServletRequest req, Model model) throws Exception{
+	public String counselWrite(HttpServletRequest req, Model model, HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("Lmin:counselWrite Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		
 		log.info("Lmin:counselWrite End!!");
 		return "/Lmin/counsel/counsel_write";
 	}
 	
 	@RequestMapping("/Lmin/counsel/counselRegProc")
-	public String counselRegProc(HttpServletRequest req, Model model) throws Exception{
+	public String counselRegProc(HttpServletRequest req, Model model, HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("Lmin:counselRegProc Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String url = "";
 		String msg = "";
 		String counselReply = "N";
@@ -105,9 +107,9 @@ public class CounselController {
 	}
 	
 	@RequestMapping("/Lmin/counsel/counselDetail")
-	public String counselDetail(HttpServletRequest req, Model model) throws Exception{
+	public String counselDetail(HttpServletRequest req, Model model, HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("Lmin:counselDetail Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String counselNo = CmmUtil.nvl(req.getParameter("cNo"));
 		log.info("counselNo : "+counselNo);
 		
@@ -122,9 +124,9 @@ public class CounselController {
 	}
 	
 	@RequestMapping("/Lmin/counsel/counselReplyProc")
-	public String counselReplyProc(HttpServletRequest req, Model model, HttpSession session) throws Exception{
+	public String counselReplyProc(HttpServletRequest req, Model model, HttpSession session, HttpServletResponse resp) throws Exception{
 		log.info("Lmin:counselReplyProc Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String url = "";
 		String msg = "";
 		String counselNo = CmmUtil.nvl(req.getParameter("cNo"));

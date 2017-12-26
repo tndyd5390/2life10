@@ -1,6 +1,6 @@
 <%@page import="com.cl.util.CmmUtil"%>
 <%@page import="com.cl.dto.CruiseDTO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	CruiseDTO cDTO = (CruiseDTO)request.getAttribute("cDTO");
 	if(cDTO == null) cDTO = new CruiseDTO();

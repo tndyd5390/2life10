@@ -23,6 +23,7 @@ import com.cl.service.IRegulationService;
 import com.cl.util.CmmUtil;
 import com.cl.util.FileUtil;
 import com.cl.util.PageUtil;
+import com.cl.util.SessionUtil;
 
 @Controller
 public class RegulationController {
@@ -48,6 +49,7 @@ public class RegulationController {
 	@RequestMapping(value="Lmin/regulation/regulationList", method= {RequestMethod.GET, RequestMethod.POST})
 	public String regulationList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".regulationList start!!!");
+		SessionUtil.sessionCheck(resp, session);
 		//�솕硫댁뿉 蹂댁뿬以� �빆紐⑹쓽 媛��닔
 		int splitPage = 10;
 		
@@ -73,7 +75,7 @@ public class RegulationController {
 	@RequestMapping(value="Lmin/regulation/regulationRegView", method=RequestMethod.GET)
 	public String regulationRegView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".regulationRegView start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		log.info(this.getClass() + ".regulationRegView end!!!");
 		return "/Lmin/regulation/regulation_write";
 	}
@@ -91,7 +93,7 @@ public class RegulationController {
 	@RequestMapping(value="Lmin/regulation/regulationRegProc", method=RequestMethod.POST)
 	public String regulationRegProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session, @RequestParam("regulationFile") MultipartFile regulationFile)throws Exception{
 		log.info(this.getClass() + ".regulationRegProc start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		//�긽議곌��젴踰뺢퇋 �젣紐�
 		String regulationTitle = CmmUtil.nvl(req.getParameter("regulationTitle"));
 		log.info(" regulationTitle : " + regulationTitle);
@@ -157,9 +159,9 @@ public class RegulationController {
 	 * �긽議곌��젴踰뺢퇋 �긽�꽭蹂닿린 硫붿냼�뱶
 	 */
 	@RequestMapping(value="Lmin/regulation/regulationDetail", method=RequestMethod.GET)
-	public String regulationDetail(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession sessino) throws Exception{
+	public String regulationDetail(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".regulationDetail start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		//�긽議곌��젴踰뺢퇋 踰덊샇
 		String regulationNo = CmmUtil.nvl(req.getParameter("regulationNo"));
 		log.info(" regulationNo : " + regulationNo);
@@ -189,7 +191,7 @@ public class RegulationController {
 	@RequestMapping(value="Lmin/regulation/regulationDelete", method=RequestMethod.GET)
 	public String regulationDeleteProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".regulationDelete start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		//�긽議곌��젴踰뺢퇋 踰덊샇
 		String regulationNo = CmmUtil.nvl(req.getParameter("regulationNo"));
 		log.info(" regulationNo : " + regulationNo);
@@ -226,7 +228,7 @@ public class RegulationController {
 	@RequestMapping(value="Lmin/regulation/regulationUpdateView", method=RequestMethod.GET)
 	public String regulationUpdateView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".regulationUpdateView start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		//�긽議곌��젴踰뺢퇋 踰덊샇
 		String regulationNo = CmmUtil.nvl(req.getParameter("regulationNo"));
 		log.info(" regulationNo : " + regulationNo);
@@ -255,7 +257,7 @@ public class RegulationController {
 	@RequestMapping(value="Lmin/regulation/regulationDeleteImg", method=RequestMethod.POST)
 	public void regulationDeleteImg(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".regulationDeleteImg start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		//�긽議곌��젴踰뺢퇋踰덊샇
 		String regulationNo = CmmUtil.nvl(req.getParameter("regulationNo"));
 		log.info(" regulationNo : " + regulationNo);
@@ -298,7 +300,7 @@ public class RegulationController {
 	@RequestMapping(value="Lmin/regulation/regulationImgChangeView")
 	public String regulationImgChangeView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".regulationImgChangeView start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		//�긽議곌��젴踰뺢퇋 踰덊샇
 		String regulationNo = CmmUtil.nvl(req.getParameter("regulationNo"));
 		log.info(" regulationNo : " + regulationNo);
@@ -328,7 +330,7 @@ public class RegulationController {
 	@RequestMapping(value="Lmin/regulation/regulationImgChange")
 	public void regulationImgChange(MultipartHttpServletRequest mulReq, HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".regulationChangeImg start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		//�긽議곌��젴踰뺢퇋踰덊샇
 		String regulationNo = CmmUtil.nvl(req.getParameter("regulationNo"));
 		log.info(" regulationNo : " + regulationNo);
@@ -410,7 +412,7 @@ public class RegulationController {
 	@RequestMapping(value="Lmin/regulation/regulationUpdateProc", method=RequestMethod.POST)
 	public String regulationUpdateProcWithoutImg(MultipartHttpServletRequest mulReq, HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".regulationUpdateProcWithoutImg start!!"); 
-		
+		SessionUtil.sessionCheck(resp, session);
 		//�긽議곌��젴踰뺢퇋 踰덊샇
 		String regulationNo = CmmUtil.nvl(req.getParameter("regulationNo"));
 		log.info(" regulationNo : " + regulationNo);
