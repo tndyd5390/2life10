@@ -1,7 +1,6 @@
 package com.cl.service;
 
 import java.util.HashMap;
-import java.util.List;
 
 import com.cl.dto.FuneralNoticeDTO;
 
@@ -16,5 +15,7 @@ public interface IFuneralNoticeService {
 	int updateFuneralNotice(FuneralNoticeDTO fDTO) throws Exception;
 
 	int deleteFuneralNotice(String funeralNoticeNo) throws Exception;
+
+	HashMap<String, Object> getUserFuneralNoticeList(HashMap<String, Object> hMap) throws Exception;
 	
 }

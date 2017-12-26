@@ -51,5 +51,13 @@ public class FuneralNoticeService implements IFuneralNoticeService{
 		}
 		return hMap;
 	}
+
+	@Override
+	public HashMap<String, Object> getUserFuneralNoticeList(HashMap<String, Object> hMap) throws Exception {
+		List<FuneralNoticeDTO> fList = new ArrayList<>();
+		fList = funeralNoticeMapper.getUserFuneralNoticeList(hMap);
+		hMap.put("list", fList);
+		return hMap;
+	}
 	
 }

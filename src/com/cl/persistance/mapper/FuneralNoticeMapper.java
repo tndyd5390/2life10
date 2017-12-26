@@ -19,4 +19,6 @@ public interface FuneralNoticeMapper {
 
 	int deleteFuneralNotice(String funeralNoticeNo) throws Exception;
 
+	List<FuneralNoticeDTO> getUserFuneralNoticeList(HashMap<String, Object> hMap) throws Exception;
+
 }

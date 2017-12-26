@@ -31,7 +31,7 @@
                                                 <aside>
                                                     <strong><img src="./public/img/gnb/img_online.png" alt="온라인상품가입" /></strong>
                                                     <div class="btnArea">
-                                                        <a href="javascript:goMenu('/overview/info.do', 'MN10100');" class="btnDefault">바로가기<span class="iconGoArrow"></span></a>
+                                                        <a href="javascript:goMenu('/appli/appliForm.do', 'MN10100');" class="btnDefault">바로가기<span class="iconGoArrow"></span></a>
                                                     </div>
                                                 </aside>
                                             </div>

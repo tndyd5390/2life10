@@ -1,4 +1,4 @@
-//�ΰ�˸� ��Ʈ�ѷ�
+//占싸곤옙舡占� 占쏙옙트占싼뤄옙
 package com.cl.controller.user;
 
 import java.util.HashMap;
@@ -26,12 +26,12 @@ public class UFuneralNoticeController {
 	public String funeralNoticeList(HttpServletRequest req, Model model) throws Exception{
 		log.info("funeralNoticeList Start!!");
 		
-		int splitPage = 10;
+		int viewCount = 10;
 		
 		HashMap<String, Object> hMap = new HashMap<>();
 		
-		hMap = PageUtil.paging(req, splitPage);
-		hMap = funeralNoticeService.getFuneralNoticeList(hMap);
+		hMap.put("page", viewCount);
+		hMap = funeralNoticeService.getUserFuneralNoticeList(hMap);
 		
 		model.addAttribute("hMap", hMap);
 		

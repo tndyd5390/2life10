@@ -25,6 +25,6 @@
 		ORDER BY
 			FUNERAL_NOTICE_NO DESC
 		LIMIT
-			0, 5
+			0, 10
 	</select>
 </mapper>
