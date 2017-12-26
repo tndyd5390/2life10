@@ -33,6 +33,13 @@ public class CruiseDTO {
 	private String endMonth;
 	private String endDay;
 	private String cruisePrice;
+	private String cruiseOrderBy;
+	public String getCruiseOrderBy() {
+		return cruiseOrderBy;
+	}
+	public void setCruiseOrderBy(String cruiseOrderBy) {
+		this.cruiseOrderBy = cruiseOrderBy;
+	}
 	public String getCruisePrice() {
 		return cruisePrice;
 	}
