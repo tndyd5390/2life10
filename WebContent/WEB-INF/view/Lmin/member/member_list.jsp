@@ -7,7 +7,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.HashMap" %>
-<% 
+<%
 	HashMap<String, Object> hMap = (HashMap<String, Object>) request.getAttribute("hMap");
 	
 	List<MemberDTO> mList = (List<MemberDTO>) hMap.get("list");

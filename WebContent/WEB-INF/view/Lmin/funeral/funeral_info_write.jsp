@@ -29,7 +29,8 @@
 <script type="text/javascript" src="/public/js/contents.js"></script>
 <script type="text/javascript" src="/public/js/jquery.form.js"></script>
 <script type="text/javascript" src="/public/js/jquery.rss.js"></script>
-
+<script type="text/javascript" src="/public/js/samsungcnt.js"></script>
+<script type="text/javascript" src="/public/js/samsungcnt-jquery.js"></script>
 <!--[if lt IE 9]>
 	<script src="/js/html5.js"></script>
 	<script src="/js/respond.js"></script>
@@ -105,8 +106,18 @@
 
 	
 	function doSubmit(){
-		var f = $("#f");
-		var name = $("#name");
+		var f = document.getElementById('f');
+		
+		if(f.name.value==""){
+			alert("식장명을 입력하세요.");
+			f.name.focus();
+			return;
+		}else if(!telChk('funeralInfoTel1', 'funeralInfoTel2', 'funeralInfoTel3')){
+			return;
+		}else{
+			f.submit();
+		}
+		/* var name = $("#name");
 		var tel2 = $("#tel2");
 		var tel3 = $("#tel3");
 		
@@ -121,7 +132,7 @@
 		}else{
 			f.submit();
 			return true;
-		}
+		} */
 	};
 </script>
 
@@ -172,14 +183,14 @@
 							<tr>
 								<th scope="row">전화번호</th>
 								<td>
-									<select id="tel1" name="tel1" class="inputType3">
+									<select id="funeralInfoTel1" name="tel1" class="inputType3">
 									<% for(CodeDTO cDTO : tList){ %>
 										<option value=<%=CmmUtil.nvl(cDTO.getCodeName())%>><%=CmmUtil.nvl(cDTO.getCodeName())%></option>
 									<% } %>									</select>
 									-
-									<input type="text" name="tel2" value="" class="inputType2" maxlength="4">
+									<input type="text" id="funeralInfoTel2" name="tel2" value="" class="inputType2" maxlength="4">
 									-
-									<input type="text" name="tel3" value="" class="inputType2" maxlength="4">
+									<input type="text" id="funeralInfoTel3" name="tel3" value="" class="inputType2" maxlength="4">
 								</td>
 							</tr>
 							<tr>

@@ -26,6 +26,7 @@ import com.cl.service.ICruiseService;
 import com.cl.util.CmmUtil;
 import com.cl.util.FileUtil;
 import com.cl.util.PageUtil;
+import com.cl.util.SessionUtil;
 
 @Controller
 public class CruiseController {
@@ -54,6 +55,7 @@ public class CruiseController {
 	@RequestMapping(value="Lmin/cruise/cruiseScheduleList", method={RequestMethod.GET, RequestMethod.POST})
 	public String cruiseScheduleList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cruiseScheduleList start!!!");
+		SessionUtil.sessionCheck(resp, session);
 		//�븳 �솕硫댁뿉 蹂댁뿬以� �겕猷⑥쫰 媛��닔
 		int splitPage = 5;
 		
@@ -80,7 +82,7 @@ public class CruiseController {
 	@RequestMapping(value="Lmin/cruise/cruiseSchduleWriteView", method=RequestMethod.GET)
 	public String cruiseSchduleWriteView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cruiseSchduleWriteView start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		log.info(this.getClass() + ".cruiseSchduleWriteView end!!!");
 		return "/Lmin/cruise/cruise_schedule_write";
 	}
@@ -99,7 +101,7 @@ public class CruiseController {
 	@RequestMapping(value="Lmin/cruise/cruiseScheduleRegProc", method=RequestMethod.POST)
 	public String cruiseScheduleRegProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session, @RequestParam("cruiseScheFile") MultipartFile cruiseScheFile, @RequestParam("cruiseImgFile") MultipartFile cruiseImgFile) throws Exception{
 		log.info(this.getClass() + ".cruiseScheduleRegProc start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		//�벑濡앹옄 �쉶�썝踰덊샇
 		String regMemberNo = CmmUtil.nvl((String)session.getAttribute("ss_member_no"));
 		log.info(" regMemberNo : " + regMemberNo);
@@ -197,7 +199,7 @@ public class CruiseController {
 	@RequestMapping(value="Lmin/cruise/deleteCruise", method=RequestMethod.POST)
 	public String deleteCruise(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".deleteCruise start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		//�겕猷⑥쫰 踰덊샇
 		String cruiseNo = CmmUtil.nvl(req.getParameter("cruiseNo"));
 		log.info(" cruiseNo : " + cruiseNo);
@@ -243,7 +245,7 @@ public class CruiseController {
 	@RequestMapping(value="Lmin/cruise/updateCruiseView", method=RequestMethod.GET)
 	public String updateCruise(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".updateCruise start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		//�겕猷⑥쫰 踰덊샇
 		String cruiseNo = CmmUtil.nvl(req.getParameter("cruiseNo"));
 		log.info(" cruiseNo : " + cruiseNo);
@@ -272,7 +274,7 @@ public class CruiseController {
 	@RequestMapping(value="Lmin/cruise/cruiseScheduleUpdateProc", method=RequestMethod.POST)
 	public String updateCruiseProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session, @RequestParam("cruiseScheFile") MultipartFile cruiseScheFile, @RequestParam("cruiseImgFile") MultipartFile cruiseImgFile) throws Exception{
 		log.info(this.getClass() + ".updateCruiseProc start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String cruiseNo = CmmUtil.nvl(req.getParameter("cruiseNo"));
 		log.info(" cruiseNo : " + cruiseNo);
 		String chgMemberNo = CmmUtil.nvl((String)session.getAttribute("ss_member_no"));
@@ -395,7 +397,7 @@ public class CruiseController {
 	@RequestMapping(value="Lmin/cruise/cruiseDownloadSche", method=RequestMethod.GET)
 	public ModelAndView crusieDownLoadSche(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cruiseDownLoadSche start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		//�겕猷⑥쫰踰덊샇
 		String cruiseNo = CmmUtil.nvl(req.getParameter("cruiseNo"));
 		log.info(" cruiseNo : " + cruiseNo);
@@ -425,6 +427,7 @@ public class CruiseController {
 	@RequestMapping(value="Lmin/cruise/cruiseChangeOrder", method=RequestMethod.GET)
 	public String cruiseChangeOrder(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cruiseChangeOrder start!!!");
+		SessionUtil.sessionCheck(resp, session);
 		//�븳 �솕硫댁뿉 蹂댁뿬以� �겕猷⑥쫰 媛��닔
 		int splitPage = 5;
 		
@@ -442,7 +445,7 @@ public class CruiseController {
 	@RequestMapping(value="Lmin/cruise/doOrderByCruise", method=RequestMethod.POST)
 	public String orderByCruise(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".orderByCruise start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String[] cruiseList = req.getParameterValues("cruiseNo");
 		
 		boolean result = cruiseService.orderByCruise(cruiseList);

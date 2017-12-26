@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -25,6 +24,11 @@
 	<script src="/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
+function doCancel(){
+	if(confirm('작성하신 내용은 저장되지 않습니다. 취소하시겠습니까?')){
+		location.href="/Lmin/funeral/funeralNoticeList.do";
+	}
+}
 </script>
 <body>
 <div id="skipnavi">
@@ -81,13 +85,28 @@
 	});
 	
 	function doSubmit(){
-		var f = $("#f");
-		var name = $("#name");
-		var member = $("#member");
-		var place = $("#place");
-		var date = $("#date");
+		var f = document.getElementById('f');
+		if(f.name.value == ""){
+			alert("소천인을 입력하세요.");
+			f.name.focus();
+			return;
+		}else if(f.member.value == ""){
+			alert("회원명을 입력하세요.");
+			f.member.focus();
+			return;
+		}else if(f.place.value == ""){
+			alert("장소를 입력하세요.");
+			f.place.focus();
+			return;
+		}else if(f.date.value == ""){
+			alert("소천일을 선택하세요.");
+			f.date.focus();
+			return;
+		}else{
+			f.submit();
+		}
 		
-		if(name.val()==""){
+		/* if(name.val()==""){
 			alert("소천인을 입력하세요.");
 			name.focus();
 			return false;
@@ -105,7 +124,7 @@
 		}else{
 			f.submit();
 			return true;
-		}
+		} */
 	}
 
 </script>
@@ -168,7 +187,7 @@
 
 				<div class="btn_area">
 					<a href="javascript:doSubmit();" id="submitLink" class="btn_active">등록</a>
-					<a href="/Lmin/funeral/funeralNoticeList.do" id="btnCancel" class="btn_cancel">취소</a>
+					<a href="javascript:doCancel();" id="btnCancel" class="btn_cancel">취소</a>
 				</div>
 			</form>
 

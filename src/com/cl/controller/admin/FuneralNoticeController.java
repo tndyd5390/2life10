@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -16,6 +17,7 @@ import com.cl.dto.FuneralNoticeDTO;
 import com.cl.service.IFuneralNoticeService;
 import com.cl.util.CmmUtil;
 import com.cl.util.PageUtil;
+import com.cl.util.SessionUtil;
 
 @Controller
 public class FuneralNoticeController {
@@ -26,9 +28,9 @@ public class FuneralNoticeController {
 	private IFuneralNoticeService funeralNoticeService;
 	
 	@RequestMapping("/Lmin/funeral/funeralNoticeList")
-	public String funeralNoticeList(HttpServletRequest req, Model model) throws Exception{
+	public String funeralNoticeList(HttpServletRequest req, Model model, HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("Lmin:funeralNoticeList Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		int splitPage = 10;
 		
 		HashMap<String, Object> hMap = new HashMap<>();
@@ -44,17 +46,17 @@ public class FuneralNoticeController {
 	}
 	
 	@RequestMapping("/Lmin/funeral/funeralNoticeWrite")
-	public String funeralNoticeWrite() throws Exception{
+	public String funeralNoticeWrite(HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("Lmin:funeralNoticeWrite Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		log.info("Lmin:funeralNoticeWrite End!!");
 		return "/Lmin/funeral/funeral_notice_write";
 	}
 	
 	@RequestMapping("/Lmin/funeral/funeralNoticeRegProc")
-	public String funeralNoticeReg(HttpServletRequest req, Model model, HttpSession session) throws Exception{
+	public String funeralNoticeReg(HttpServletRequest req, Model model, HttpSession session, HttpServletResponse resp) throws Exception{
 		log.info("Lmin:funeralInfoRegProc Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String url = "";
 		String msg = "";
 		String funeralNoticeName = CmmUtil.nvl(req.getParameter("name"));
@@ -94,9 +96,9 @@ public class FuneralNoticeController {
 	}
 	
 	@RequestMapping("/Lmin/funeral/funeralNoticeDetail")
-	public String funeralNoticeDetail(HttpServletRequest req, Model model) throws Exception{
+	public String funeralNoticeDetail(HttpServletRequest req, Model model, HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("Lmin:funeralInfoDetail Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String funeralNoticeNo = CmmUtil.nvl(req.getParameter("fNo"));
 		
 		log.info("funeralNoticeNo : "+funeralNoticeNo);
@@ -112,9 +114,9 @@ public class FuneralNoticeController {
 	}
 	
 	@RequestMapping("/Lmin/funeral/funeralNoticeUpdateProc")
-	public String funeralNoticeUpdateProc(HttpServletRequest req, Model model, HttpSession session) throws Exception{
+	public String funeralNoticeUpdateProc(HttpServletRequest req, Model model, HttpSession session, HttpServletResponse resp) throws Exception{
 		log.info("Lmin:funeralNoticeUpdateProc Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String url = "";
 		String msg = "";
 		String funeralNoticeNo = CmmUtil.nvl(req.getParameter("fNo"));
@@ -157,9 +159,9 @@ public class FuneralNoticeController {
 	}
 	
 	@RequestMapping("/Lmin/funeral/funeralNoticeDelete")
-	public String funeralNoticeDelete(HttpServletRequest req, Model model) throws Exception{
+	public String funeralNoticeDelete(HttpServletRequest req, Model model, HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("Lmin:funeralNoticeDelete Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String url = "";
 		String msg = "";
 		String funeralNoticeNo = CmmUtil.nvl(req.getParameter("fNo"));

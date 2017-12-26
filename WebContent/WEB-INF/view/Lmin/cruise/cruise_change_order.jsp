@@ -4,7 +4,7 @@
 <%@page import="com.cl.dto.CruiseDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	HashMap<String, Object> hMap = (HashMap) request.getAttribute("hMap");
 	int pageBtnSplit = 5;

@@ -24,6 +24,7 @@ import com.cl.service.impl.CyberService;
 import com.cl.util.CmmUtil;
 import com.cl.util.FileUtil;
 import com.cl.util.PageUtil;
+import com.cl.util.SessionUtil;
 
 @Controller
 public class CyberController {
@@ -38,6 +39,7 @@ public class CyberController {
 	@RequestMapping(value="/Lmin/company/cyber", method={RequestMethod.GET, RequestMethod.POST})
 	public String cyberList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cyberList Start!!");
+		SessionUtil.sessionCheck(resp, session);
 		int splitPage = 10;
 		
 		HashMap<String, Object> hMap = new HashMap<>();
@@ -50,9 +52,9 @@ public class CyberController {
 		return "/Lmin/company/cyber";
 	}
 	@RequestMapping(value="/Lmin/company/cyberWrite", method={RequestMethod.GET, RequestMethod.POST})
-	public String cyberWrite() throws Exception{
+	public String cyberWrite(HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cyberWrite Start!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		log.info(this.getClass() + ".cyberWrite End!!");
 		return "/Lmin/company/cyber_write";
 	}
@@ -60,7 +62,7 @@ public class CyberController {
 	@RequestMapping(value="/Lmin/company/cyberRegProc", method=RequestMethod.POST)
 	public String cyberRegProd(MultipartHttpServletRequest mulReq, HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cyberRegProc start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String regMemberNo = CmmUtil.nvl((String)session.getAttribute("ss_member_no"));
 		log.info(" regMemberNo : " + regMemberNo);
 		String cyberTitle = CmmUtil.nvl(req.getParameter("cyberTitle"));
@@ -96,7 +98,7 @@ public class CyberController {
 	@RequestMapping(value="/Lmin/company/cyberDetail", method=RequestMethod.GET)
 	public String cyberDetail(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cyberDetail start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String cyberNo = CmmUtil.nvl(req.getParameter("cyberNo"));
 		log.info(" cyberNo : " + cyberNo);
 		
@@ -112,6 +114,7 @@ public class CyberController {
 	@RequestMapping(value="/Lmin/company/deleteCyber", method={RequestMethod.GET, RequestMethod.POST})
 	public String deleteCyber(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".deleteCyber start!!!");
+		SessionUtil.sessionCheck(resp, session);
 		String cyberNo = CmmUtil.nvl(req.getParameter("cyberNo"));
 		log.info(" cyberNo : " + cyberNo);
 		String cyberFileNo = CmmUtil.nvl(req.getParameter("cyberFileNo"));
@@ -141,7 +144,7 @@ public class CyberController {
 	@RequestMapping(value="/Lmin/company/updateCyberView", method=RequestMethod.GET)
 	public String updateCyberView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".updateCyberView start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String cyberNo = CmmUtil.nvl(req.getParameter("cyberNo"));
 		log.info(" cyberNo : " + cyberNo);
 		
@@ -157,6 +160,7 @@ public class CyberController {
 	@RequestMapping(value="/Lmin/company/cyberMovieUpdateView", method=RequestMethod.GET)
 	public String cyberMovieUpdateView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cyberMovieUpdateView start!!!");
+		SessionUtil.sessionCheck(resp, session);
 		String cyberNo = CmmUtil.nvl(req.getParameter("cyberNo"));
 		log.info(" cyberNo : " + cyberNo);
 		
@@ -171,7 +175,7 @@ public class CyberController {
 	@RequestMapping(value="/Lmin/company/cyberMovieUpdateProc", method=RequestMethod.POST)
 	public void cyberMovieUpdateProc(MultipartHttpServletRequest mulReq, HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cyberMovieUpdateProc start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String cyberNo = CmmUtil.nvl(req.getParameter("cyberNo"));
 		log.info(" cyberNo : " + cyberNo);
 		String preFileNo = CmmUtil.nvl(req.getParameter("preFileNo"));
@@ -218,7 +222,7 @@ public class CyberController {
 	@RequestMapping(value="/Lmin/company/cyberUpdateProc", method=RequestMethod.POST)
 	public String cyberUpdateProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cyberUpdateProc start!!!");
-		
+		SessionUtil.sessionCheck(resp, session);
 		String chgMemberNo = CmmUtil.nvl((String)session.getAttribute("ss_member_no"));
 		log.info(" chgMemberNo : " + chgMemberNo);
 		String cyberTitle = CmmUtil.nvl(req.getParameter("cyberTitle"));
