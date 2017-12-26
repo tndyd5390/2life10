@@ -55,7 +55,7 @@
 		         (SELECT @ROWNUM:=0) R,
 		         (SELECT COUNT(*) AS PAGE FROM CRUISE_INFO) P
 		   WHERE CI.CRUISE_IMGFILE_NO = IMGTABLE.FILE_NO AND CI.CRUISE_SCHEFILE_NO = SCHETABLE.FILE_NO
-		ORDER BY ROWNUM DESC
+		ORDER BY CRUISE_ORDER_BY ASC
 		   LIMIT #{page}, #{splitPage}
 	</select>
 	<insert id="insertCruiseImg" parameterType="CruiseDTO">
@@ -114,7 +114,8 @@
 			CRUISE_ETC,
 			CRUISE_PRICE,
 			REG_MEMBER_NO,
-			REG_DT
+			REG_DT,
+			CRUISE_ORDER_BY
 		)
 		VALUES
 		(
@@ -129,7 +130,8 @@
 			#{cruiseEtc},
 			#{cruisePrice},
 			#{regMemberNo},
-			NOW()
+			NOW(),
+			(SELECT IFNULL(MIN(CRUISE_ORDER_BY), 0)-1 FROM CRUISE_INFO TMP)
 		)
 	</insert>
 	<select id="getFileFullPath" parameterType="string" resultType="string">
@@ -255,4 +257,10 @@
 		DELETE FROM FILE_INFO
 		 WHERE FILE_NO = #{cruiseScheFileNo}
 	</delete>
+	
+	<update id="updateCruiseOrderBy" parameterType="hashmap">
+		UPDATE CRUISE_INFO
+		   SET CRUISE_ORDER_BY = #{cruiseOrderNo}
+		 WHERE CRUISE_NO = #{cruiseNo}
+	</update>
 </mapper>
