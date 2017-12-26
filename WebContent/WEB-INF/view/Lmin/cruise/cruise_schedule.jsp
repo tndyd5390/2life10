@@ -37,6 +37,9 @@
 	<script src="/js/respond.js"></script>
 <![endif]-->
 <script type="text/javascript">
+function changeOrder(){
+	location.href="/Lmin/cruise/cruiseChangeOrder.do";
+}
 function doDelete(cruiseNo, imgFileNo, scheFileNo){
 	
 	if(confirm('해당 크루즈 상품을 삭제하시겠습니까?')){
@@ -67,7 +70,6 @@ function doDelete(cruiseNo, imgFileNo, scheFileNo){
 	}
 	 
 }
-
 function goPage(page, lastPage){
 	var form = document.createElement('form');
 	form.setAttribute("method", "Post"); // Get 또는 Post 입력
@@ -82,7 +84,6 @@ function goPage(page, lastPage){
 	document.body.appendChild(form);
 	form.submit();
 };
-
 function downloadSche(cruiseNo){
 	location.href="/Lmin/cruise/cruiseDownloadSche.do?cruiseNo=" + cruiseNo;
 }
@@ -135,12 +136,10 @@ function downloadSche(cruiseNo){
 				$("#"+menuId).parents("li").addClass("active");
 			}
 		}
-
 		$("#subtitle").text($("#"+mbId).text());
 		$("#subtitle2").text($("#"+mbId2).text());
 		
 	});
-
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -172,7 +171,7 @@ function downloadSche(cruiseNo){
                         </ul>
                     </div>
 					<div class="imgWrap">
-					    <img src="<%="/file/cruise/img/" + CmmUtil.nvl(cDTO.getCruiseImgFileName()) %>" alt="크루즈이미지" />
+					    <img src="<%="/cruiseFile/" + CmmUtil.nvl(cDTO.getCruiseImgFileName()) %>" alt="크루즈이미지" />
 					    <div class="btn_area">
 					        <button type="button" class="btnSearch" onclick="downloadSche(<%=CmmUtil.nvl(cDTO.getCruiseNo())%>);">일정다운로드</button>
                         </div>
@@ -206,7 +205,6 @@ function downloadSche(cruiseNo){
                         </div>
                     </div>
 				</section>
-
 				<section>
 					<h3 class="contTit">
 						<span>선사</span>
@@ -229,6 +227,7 @@ function downloadSche(cruiseNo){
                     </div>
 				</section> -->
 				<a href="/Lmin/cruise/cruiseSchduleWriteView.do" class="btn_active_small" style="float:right;">크루즈 일정 등록</a>
+				<a href="javascript:changeOrder();" class="btn_active_small" style="float:right; margin-right: 10px;">크루즈 일정 정렬</a>
 				<br/><br/>
 				<!-- pageArea -->
 				<div class="pageArea">

@@ -2,6 +2,7 @@ package com.cl.persistance.mapper;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.cl.config.Mapper;
 import com.cl.dto.CruiseDTO;
@@ -28,4 +29,6 @@ public interface CruiseMapper {
 	public int deleteCruiseImgFile(CruiseDTO cDTO) throws Exception;
 	//크루즈 일정 delete
 	public int deleteCruiseScheFile(CruiseDTO cDTO) throws Exception;
+	//크루즈 정렬 update
+	public int updateCruiseOrderBy(Map<String, String> hMap) throws Exception;
 }

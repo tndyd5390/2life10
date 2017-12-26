@@ -33,9 +33,11 @@ public class CruiseController {
 	private Logger log = Logger.getLogger(this.getClass());
 	
 	//�겕猷⑥쫰 �씪�젙�뙆�씪�씠 ���옣�맆 寃쎈줈
-	private String scheSavePath = "/www/thunder-edu_com/file/cruise/file/";
+	//private String scheSavePath = "/www/thunder-edu_com/file/cruise/file/";
+	private String scheSavePath = "C:\\Users\\Data3811-32\\git\\2life10\\WebContent\\cruiseFile\\";
 	//�겕猷⑥쫰 �씠誘몄� �뙆�씪�씠 ���옣�맆 寃쎈줈
-	private String imgSavePath = "/www/thunder-edu_com/file/cruise/img/";
+	//private String imgSavePath = "/www/thunder-edu_com/file/cruise/img/";
+	private String imgSavePath = "C:\\Users\\Data3811-32\\git\\2life10\\WebContent\\cruiseFile\\";
 	
 	@Resource(name="CruiseService")
 	private ICruiseService cruiseService;
@@ -419,4 +421,42 @@ public class CruiseController {
 		
 		return mav;
 	}
+	
+	@RequestMapping(value="Lmin/cruise/cruiseChangeOrder", method=RequestMethod.GET)
+	public String cruiseChangeOrder(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+		log.info(this.getClass() + ".cruiseChangeOrder start!!!");
+		//�븳 �솕硫댁뿉 蹂댁뿬以� �겕猷⑥쫰 媛��닔
+		int splitPage = 5;
+		
+		HashMap<String, Object> hMap = new HashMap<>();
+		
+		hMap = PageUtil.paging(req, splitPage);
+		hMap = cruiseService.getCruiseList(hMap);
+		model.addAttribute("hMap", hMap);
+		
+		hMap = null;
+		log.info(this.getClass() + ".cruiseChangeOrder end!!!");
+		return "/Lmin/cruise/cruise_change_order";
+	}
+	
+	@RequestMapping(value="Lmin/cruise/doOrderByCruise", method=RequestMethod.POST)
+	public String orderByCruise(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+		log.info(this.getClass() + ".orderByCruise start!!!");
+		
+		String[] cruiseList = req.getParameterValues("cruiseNo");
+		
+		boolean result = cruiseService.orderByCruise(cruiseList);
+		if(result){
+			//order success
+			model.addAttribute("msg", "크루즈 정렬에 성공했습니다.");
+		}else{
+			//order fail
+			model.addAttribute("msg", "크루즈 정렬에 실패했습니다.");
+		}
+		model.addAttribute("url", "/Lmin/cruise/cruiseScheduleList.do");
+		
+		log.info(this.getClass() + ".orderByCruise end!!!");
+		return "/alert";
+	}
+	
 }

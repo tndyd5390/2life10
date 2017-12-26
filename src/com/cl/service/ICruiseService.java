@@ -11,4 +11,5 @@ public interface ICruiseService {
 	public Map<String, String> deleteCruise(CruiseDTO cDTO) throws Exception;
 	public CruiseDTO getCruise(String cruiseNo) throws Exception;
 	public boolean updateCruise(CruiseDTO cDTO) throws Exception;
+	public boolean orderByCruise(String[] cruiseList) throws Exception;
 }
