@@ -305,6 +305,7 @@ public class MemberController {
 		String url = "";
 		String msg = "";
 		String memberNo = CmmUtil.nvl(req.getParameter("mNo"));
+		String memberPassword = CmmUtil.nvl(req.getParameter("password"));
 		String memberName = CmmUtil.nvl(req.getParameter("name"));
 		String memberSex = CmmUtil.nvl(req.getParameter("sex"));
 		String memberHomeNo = CmmUtil.nvl(req.getParameter("tel1")) + "-" + CmmUtil.nvl(req.getParameter("tel2")) + "-" + CmmUtil.nvl(req.getParameter("tel3"));
@@ -314,6 +315,7 @@ public class MemberController {
 		String memberAddressDetail = CmmUtil.nvl(req.getParameter("address2"));
 		String memberEmail1 = CmmUtil.nvl(req.getParameter("email1"));
 		String memberEmail2 = CmmUtil.nvl(req.getParameter("email2"));
+		String chgMemberNo = CmmUtil.nvl((String) session.getAttribute("ss_member_no"));
 		
 		log.info("memberNo : " + memberNo);
 		log.info("memberName : " + memberName);
@@ -325,10 +327,12 @@ public class MemberController {
 		log.info("memberAddressDetail : " + memberAddressDetail);
 		log.info("memberEmail1 : " + memberEmail1);
 		log.info("memberEmail2 : " + memberEmail2);
+		log.info("chgMemberNo : " + chgMemberNo);
 		
 		MemberDTO mDTO = new MemberDTO();
 		
 		mDTO.setMemberNo(memberNo);
+		mDTO.setMemberPassword(SHA256Util.sha256(memberPassword));
 		mDTO.setMemberName(AES256Util.strEncode(memberName));
 		mDTO.setMemberSex(memberSex);
 		mDTO.setMemberHomeNo(AES256Util.strEncode(memberHomeNo));
@@ -342,15 +346,16 @@ public class MemberController {
 		}
 		mDTO.setMemberEmail1(AES256Util.strEncode(memberEmail1));
 		mDTO.setMemberEmail2(AES256Util.strEncode(memberEmail2));
+		mDTO.setChgMemberNo(chgMemberNo);
 		
 		int result = memberService.updateMember(mDTO);
 		
 		url = "/Lmin/member/memberList.do";
 		
 		if(result == 0) {
-			msg = "수정성공.";
-		} else {
 			msg = "수정실패.";
+		} else {
+			msg = "수정성공.";
 		}
 		
 		mDTO = null;

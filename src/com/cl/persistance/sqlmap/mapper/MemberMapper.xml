@@ -112,6 +112,25 @@
 	
 	<!-- 회원정보 수정 쿼리(관리자) -->
 	<update id="updateMember" parameterType="MemberDTO">
+	<choose>
+		<when test="memberPassword != null">
+		UPDATE MEMBER_INFO
+		   SET  MEMBER_NAME = #{memberName}
+		   	   ,MEMBER_PASSWORD = #{memberPassword}
+		       ,MEMBER_SEX = #{memberSex}
+		       ,MEMBER_HOME_NO = #{memberHomeNo}
+		       ,MEMBER_PHONE_NO = #{memberPhoneNo}
+		       ,MEMBER_POST_NO = #{memberPostNo}
+		       ,MEMBER_ADDRESS = #{memberAddress}
+		       ,MEMBER_ADDRESS_DETAIL = #{memberAddressDetail}
+		       ,MEMBER_EMAIL1 = #{memberEmail1}
+		       ,MEMBER_EMAIL2 = #{memberEmail2}
+		       ,CHG_MEMBER_NO = #{chgMemberNo}
+		       ,CHG_DT = NOW()
+		 WHERE MEMBER_NO = #{memberNo}
+		
+		</when>
+		<otherwise>
 		UPDATE MEMBER_INFO
 		   SET  MEMBER_NAME = #{memberName}
 		       ,MEMBER_SEX = #{memberSex}
@@ -122,9 +141,12 @@
 		       ,MEMBER_ADDRESS_DETAIL = #{memberAddressDetail}
 		       ,MEMBER_EMAIL1 = #{memberEmail1}
 		       ,MEMBER_EMAIL2 = #{memberEmail2}
-		       ,CHG_MEMBER_NO = '3'
+		       ,CHG_MEMBER_NO = #{chgMemberNo}
 		       ,CHG_DT = NOW()
 		 WHERE MEMBER_NO = #{memberNo}
+		
+		</otherwise>
+	</choose>
 	</update>
 	
 	<!-- 회원 삭제 쿼리(관리자) -->
@@ -141,7 +163,7 @@
 		       ,MEMBER_POST_NO = ' '
 		       ,MEMBER_ADDRESS = ' '
 		       ,MEMBER_ADDRESS_DETAIL = ' '
-		       ,CHG_MEMBER_NO = '3'
+		       ,CHG_MEMBER_NO = #{chgMemberNo}
 		       ,CHG_DT = NOW()
 		       ,DEL_YN = 'Y'
 		       ,DEL_DVCD =

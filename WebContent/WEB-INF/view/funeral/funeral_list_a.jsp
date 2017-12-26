@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 <!--#include file="../include/inc_header.jsp"-->
-
+<script type="text/javascript" src="/public/js/jquery-ui.min.js"></script>
+<link type="text/css" rel="stylesheet" href="/public/css/jquery-ui.theme.min.css" />
 	<div id="contentsWrap">
 		<div class="container">
 			<div class="conTitWrap">
@@ -13,9 +14,6 @@
 				</div>
 			</div> <!-- // conTitWrap -->
 			<!-- 메뉴 영역 -->
-			
-
-
 
 <script type="text/javascript">
 	$(function() {
@@ -24,7 +22,6 @@
 		var menuId = "MN30200";
 		var mbId = "MO30200";
 		var mbId2 = "";
-		
 		console.log(menuId);
 		if ( menuId != '' ){
 			var temp = menuId.substring((menuId.length-2), menuId.length);
@@ -40,6 +37,16 @@
 		$("#subtitle").text($("#"+mbId).text());
 		$("#subtitle2").text($("#"+mbId2).text());
 		
+		$(document).tooltip({
+			items:'[data-photo]',
+			tooltipClass : "my-tooltip",
+			content:function(){
+				var img = $(this).data('photo');
+				return "<img src='/public/img/conts/fu_img_"+img+".jpg' width='100%'>";
+			}
+		})
+		$(".ui-helper-hidden-accessible").hide();
+
 	});
 
 </script>
@@ -141,16 +148,16 @@
 							</tr>
 							<tr>
 								<td rowspan="2">인력지원</td>
-								<td colspan="2">장례전문지도사 2명</td>
+								<td colspan="2" data-photo="01">장례전문지도사 2명</td>
 								<td class="alignL">장례진행의 제반절차를 예법에 따라 장례진행</td>
 							</tr>
 							<tr>
-								<td colspan="2">장례전문도우미 2명</td>
+								<td colspan="2" data-photo="01">장례전문도우미 2명</td>
 								<td class="alignL">장례기간 중 -> 10시간/1일 봉사<br/>-장례기간 중 총2명(총20시간)</td>
 							</tr>
 							<tr>
 								<td rowspan="6">고인용품 및<br/>입관 수시용품</td>
-								<td rowspan="2">관</td>
+								<td rowspan="2" data-photo="02">관</td>
 								<td>화장시</td>
 								<td class="alignL">오동나무 0.5치</td>
 							</tr>
@@ -159,15 +166,15 @@
 								<td class="alignL">오동나무 1.5치</td>
 							</tr>
 							<tr>
-								<td colspan="2">수의</td>
+								<td colspan="2" data-photo="03">수의</td>
 								<td class="alignL">저마</td>
 							</tr>
 							<tr>
-								<td colspan="2">도포,원삼</td>
+								<td colspan="2" data-photo="03">도포,원삼</td>
 								<td class="alignL">저마</td>
 							</tr>
 							<tr>
-								<td colspan="2">멧베(탈관시)</td>
+								<td colspan="2" data-photo="04">멧베(탈관시)</td>
 								<td class="alignL">탈관시 제공</td>
 							</tr>
 							<tr>
@@ -176,17 +183,17 @@
 							</tr>
 							<tr>
 								<td>빈소용품</td>
-								<td colspan="2">액자리본,명패,양초,부의록</td>
+								<td colspan="2" data-photo="08">액자리본,명패,양초,부의록</td>
 								<td class="alignL">제공</td>
 							</tr>
 							<tr>
 								<td>꽃장식</td>
-								<td colspan="2">영정 및 제단</td>
+								<td colspan="2" data-photo="10">영정 및 제단</td>
 								<td class="alignL">꽃바구니2개</td>
 							</tr>
 							<tr>
 								<td rowspan="8">의전용품<br/>(현대식/전통식 중 택일)</td>
-								<td rowspan="3">현대식</td>
+								<td rowspan="3" data-photo="05">현대식</td>
 								<td>남상복 대여</td>
 								<td class="alignL">3벌 (상,하의검정색 정장, Y셔츠, 넥타이포함)</td>
 							</tr>
@@ -199,7 +206,7 @@
 								<td class="alignL">필요량제공</td>
 							</tr>
 							<tr>
-								<td rowspan="5">전통식</td>
+								<td rowspan="5" data-photo="06">전통식</td>
 								<td>굴건제복</td>
 								<td class="alignL">직계상주 제공</td>
 							</tr>
@@ -221,17 +228,17 @@
 							</tr>
 							<tr>
 								<td>발인용품</td>
-								<td colspan="2">운구용장갑, 선도차리본</td>
+								<td colspan="2" data-photo="07">운구용장갑, 선도차리본</td>
 								<td class="alignL">제공</td>
 							</tr>
 							<tr>
 								<td>장의차량</td>
-								<td colspan="2">캐딜락리무진 또는 장의버스 중 택일</td>
+								<td colspan="2" data-photo="11">캐딜락리무진 또는 장의버스 중 택일</td>
 								<td class="alignL">택일(왕복200Km이내)</td>
 							</tr>
 							<tr>
-								<td rowspan="5">의전용품<br/>(현대식/전통식 중 택일)</td>
-								<td colspan="2">고인운구 전용차량</td>
+								<td rowspan="5">서비스</td>
+								<td colspan="2" data-photo="12">고인운구 전용차량</td>
 								<td class="alignL">24시간 앰블런스 대기(관내무료)</td>
 							</tr>
 							<tr>
@@ -253,23 +260,22 @@
 						</tbody>
 					</table>
 				</div>
-
 							<article class="businessUnit">
 					<ul>
 						<li class="unit01">
-							<div class="imgWrap"><img src="../public/img/conts/fu_img_01.jpg" alt="장례전문지도사" /></div>
+							<div class="imgWrap"><img src="/public/img/conts/fu_img_01.jpg" alt="장례전문지도사" /></div>
 							<div class="txtWrap">
 								<strong>장례전문지도사</strong>
 							</div>
 						</li>
 						<li class="unit02">
-							<div class="imgWrap"><img src="../public/img/conts/fu_img_02.jpg" alt="오동나무관" /></div>
+							<div class="imgWrap"><img src="/public/img/conts/fu_img_02.jpg" alt="오동나무관" /></div>
 							<div class="txtWrap">
 								<strong>오동나무관</strong>
 							</div>
 						</li>
 						<li class="unit03">
-							<div class="imgWrap"><img src="../public/img/conts/fu_img_03.jpg" alt="수의" /></div>
+							<div class="imgWrap"><img src="/public/img/conts/fu_img_03.jpg" alt="수의" /></div>
 							<div class="txtWrap">
 								<strong>수의</strong>
 							</div>
@@ -280,19 +286,19 @@
 				<article class="businessUnit">
 					<ul>
 						<li class="unit01">
-							<div class="imgWrap"><img src="../public/img/conts/fu_img_04.jpg" alt="멧베" /></div>
+							<div class="imgWrap"><img src="/public/img/conts/fu_img_04.jpg" alt="멧베" /></div>
 							<div class="txtWrap">
 								<strong>멧베</strong>
 							</div>
 						</li>
 						<li class="unit02">
-							<div class="imgWrap"><img src="../public/img/conts/fu_img_05.jpg" alt="현대식의전복" /></div>
+							<div class="imgWrap"><img src="/public/img/conts/fu_img_05.jpg" alt="현대식의전복" /></div>
 							<div class="txtWrap">
 								<strong>현대식의전복</strong>
 							</div>
 						</li>
 						<li class="unit03">
-							<div class="imgWrap"><img src="../public/img/conts/fu_img_06.jpg" alt="전통식의전복" /></div>
+							<div class="imgWrap"><img src="/public/img/conts/fu_img_06.jpg" alt="전통식의전복" /></div>
 							<div class="txtWrap">
 								<strong>전통식의전복</strong>
 							</div>

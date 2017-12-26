@@ -216,7 +216,13 @@
 								<td>
 									<input type="text" name="id" id="id" value="<%=CmmUtil.nvl(mDTO.getMemberId()) %>" title="이름" class="inputType1" style="" readonly>									
 								</td>
-							</tr>							
+							</tr>
+							<tr>
+								<th scope="row">비밀번호</th>
+								<td>
+									<input type="password" name="password" id="password" class="inputType1" style="" maxlength="25">
+								</td>
+							</tr>
 							<tr>
 								<th scope="row">성명</th>
 								<td>
