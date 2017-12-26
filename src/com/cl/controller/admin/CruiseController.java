@@ -33,11 +33,11 @@ public class CruiseController {
 	private Logger log = Logger.getLogger(this.getClass());
 	
 	//�겕猷⑥쫰 �씪�젙�뙆�씪�씠 ���옣�맆 寃쎈줈
-	//private String scheSavePath = "/www/thunder-edu_com/file/cruise/file/";
-	private String scheSavePath = "C:\\Users\\Data3811-32\\git\\2life10\\WebContent\\cruiseFile\\";
+	private String scheSavePath = "/www/thunder-edu_com/file/cruise/file/";
+	//private String scheSavePath = "C:\\Users\\Data3811-32\\git\\2life10\\WebContent\\cruiseFile\\";
 	//�겕猷⑥쫰 �씠誘몄� �뙆�씪�씠 ���옣�맆 寃쎈줈
-	//private String imgSavePath = "/www/thunder-edu_com/file/cruise/img/";
-	private String imgSavePath = "C:\\Users\\Data3811-32\\git\\2life10\\WebContent\\cruiseFile\\";
+	private String imgSavePath = "/www/thunder-edu_com/file/cruise/img/";
+	//private String imgSavePath = "C:\\Users\\Data3811-32\\git\\2life10\\WebContent\\cruiseFile\\";
 	
 	@Resource(name="CruiseService")
 	private ICruiseService cruiseService;
