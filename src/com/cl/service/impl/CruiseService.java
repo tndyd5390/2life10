@@ -108,15 +108,18 @@ public class CruiseService implements ICruiseService{
 	@Override
 	public boolean orderByCruise(String[] cruiseList) throws Exception {
 		int i = 1;
-		for(String cruiseNo : cruiseList){
-			Map<String, String> hMap = new HashMap<>();
-			hMap.put("cruiseNo", cruiseNo);
-			hMap.put("cruiseOrderNo", i + "");
-			i++;
-			cruiseMapper.updateCruiseOrderBy(hMap);
+		try{
+			for(String cruiseNo : cruiseList){
+				Map<String, String> hMap = new HashMap<>();
+				hMap.put("cruiseNo", cruiseNo);
+				hMap.put("cruiseOrderNo", i + "");
+				i++;
+				cruiseMapper.updateCruiseOrderBy(hMap);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
 		}
 		return true;
 	}
-
-	
 }
