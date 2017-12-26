@@ -1,4 +1,4 @@
-//��� ��Ʈ�ѷ�
+//占쏙옙占� 占쏙옙트占싼뤄옙
 package com.cl.controller.admin;
 
 import java.text.SimpleDateFormat;
@@ -59,7 +59,7 @@ public class MemberController {
 		
 		if(mDTO==null){
 			url = "/member/login.do";
-			msg = "아이디, 비밀번호를 확인하세요.";
+			msg = "아이디, 패스워드를 확인하세요.";
 		}else{
 			memberNo = CmmUtil.nvl(mDTO.getMemberNo());
 			memberId = CmmUtil.nvl(mDTO.getMemberId());
@@ -148,7 +148,7 @@ public class MemberController {
 		log.info("memberEmail = "+ memberEmail1+"@"+memberEmail2);
 		
 		url = "/member/joinStep2.do";
-		msg = "��ġ�ϴ� ȸ���� �����ϴ�. ������������ �̵��մϴ�.";
+		msg = "다음 단계로 넘어갑니다. 계속진행하세요.";
 		
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
@@ -348,9 +348,9 @@ public class MemberController {
 		url = "/Lmin/member/memberList.do";
 		
 		if(result == 0) {
-			msg = "수정에 실패하였습니다.";
+			msg = "수정성공.";
 		} else {
-			msg = "수정되었습니다.";
+			msg = "수정실패.";
 		}
 		
 		mDTO = null;
@@ -373,9 +373,9 @@ public class MemberController {
 		int result = memberService.deleteMember(memberNo);
 		
 		if(result == 0) {
-			msg = "삭제에 실패하였습니다.";
+			msg = "삭제성공.";
 		} else {
-			msg = "삭제되었습니다.";
+			msg = "삭제실패.";
 		}
 		url = "/Lmin/member/memberList.do";
 		

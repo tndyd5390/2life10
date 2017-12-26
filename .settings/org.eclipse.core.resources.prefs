@@ -3,5 +3,6 @@ encoding//WebContent/WEB-INF/view/member/redirect.jsp=UTF-8
 encoding//src/com/cl/config/MapperConfigurer.java=UTF-8
 encoding//src/com/cl/controller/admin/CruiseController.java=UTF-8
 encoding//src/com/cl/controller/admin/CyberController.java=UTF-8
+encoding//src/com/cl/controller/admin/MemberController.java=UTF-8
 encoding//src/com/cl/controller/admin/RegulationController.java=UTF-8
 encoding//src/com/cl/controller/user/UFuneralNoticeController.java=UTF-8
