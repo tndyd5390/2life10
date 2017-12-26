@@ -133,18 +133,21 @@
 							</tr>
 						</thead>
 						<tbody>
-						<%
+						<%if(aList.size()>0){
 						for(AppliDTO aDTO : aList){
 						%>
-							<tr>
-								<td><%=CmmUtil.nvl(aDTO.getAppliReply()) %></td>
+							<tr><%if(CmmUtil.nvl(aDTO.getAppliReply()).equals("미답변")){%>
+									<td style="font-weight:bold;"><%=CmmUtil.nvl(aDTO.getAppliReply()) %></td>
+								<%}else{%>
+									<td><%=CmmUtil.nvl(aDTO.getAppliReply()) %></td>
+								<%}%>
 								<td class="alignL"><a href="/Lmin/appli/appliDetail.do?appliNo=<%=CmmUtil.nvl(aDTO.getAppliNo())%>"><%=AES256Util.strDecode(CmmUtil.nvl(aDTO.getAppliName())) %></a></td>
 								<td><%=AES256Util.strDecode(CmmUtil.nvl(aDTO.getAppliPhoneNo()))%></td>
 								<td><%=CmmUtil.nvl(aDTO.getAppliProdCodeName())%></td>
 								<td><%=CmmUtil.nvl(aDTO.getAppliContractCodeName())%></td>
 								<td><%=CmmUtil.nvl(aDTO.getRegDt()) %></td>
 							</tr>
-						<%	
+						<%}
 						}
 						%>
 						

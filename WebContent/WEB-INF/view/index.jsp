@@ -243,7 +243,7 @@
 			<footer>
 				<div class="footMenuWrap">
 					<ul>
-						<li><a href="#">채용정보</a></li>
+						<!-- <li><a href="#">채용정보</a></li> -->
 						<li><a href="/infomation/infomation_a.do">주요정보고시사항</a></li>
 						<li><a href="/company/road.do">오시는길</a></li>
 						<li><a href="/agreement/agreementList.do">개인정보 취급방침</a></li>

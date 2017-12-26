@@ -90,7 +90,7 @@
 	});
 	
 	function goList(){
-		location.href = "/Lmin/counsel/counselList.do";		
+		location.href = "/Lmin/appli/appliList.do";		
 	}
 	function doSubmit(){
 		var f = $("#f");

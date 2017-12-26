@@ -140,7 +140,7 @@
 						<%if(cList.size()>0){%>
 							<%for(CounselDTO cDTO : cList){%>
 							<tr>
-								<%if(CmmUtil.nvl(cDTO.getCounselReply()).contentEquals("미답변")){%>
+								<%if(CmmUtil.nvl(cDTO.getCounselReply()).equals("미답변")){%>
 									<td style="font-weight:bold;"><%=CmmUtil.nvl(cDTO.getCounselReply()) %></td>
 								<% }else{ %>
 									<td><%=CmmUtil.nvl(cDTO.getCounselReply()) %></td>

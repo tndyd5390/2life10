@@ -8,6 +8,7 @@
 		<ul>
 			<li><a href="/appli/appliForm.do">온라인가입신청</a></li>
 			<li><a href="/member/login.do">로그인</a></li>
+			<li><a href="/member/joinStep.do">회원가입</a></li>
 		</ul>
 	</div>
 

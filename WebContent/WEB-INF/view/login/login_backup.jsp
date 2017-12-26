@@ -83,6 +83,9 @@
 						<strong><button type="button" class="select" id="subtitle">로그인</button></strong>
 						<ul>
 							<li id="MO70100"><a href="javascript:goMenu('/member/login.do', 'MO70100');">로그인</a></li>
+                            <li id="MO70200"><a href="javascript:goMenu('/member/joinStep.do', 'MO70200');">회원가입</a></li>
+                            <li id="MO70300"><a href="javascript:goMenu('/member/findId.do', 'MO70300');">아이디찾기</a></li>
+                            <li id="MO70400"><a href="javascript:goMenu('/member/findPass.do', 'MO70400');">패스워드찾기</a></li>
 						</ul>
 					</div>
 								
@@ -93,6 +96,9 @@
 				<nav>
 					<ul class="pcLnb">
 							<li id="MO70100"><a href="javascript:goMenu('/member/login.do', 'MO70100');">로그인</a></li>
+                            <<li id="MO70200"><a href="javascript:goMenu('/member/joinStep.do', 'MO70200');">회원가입</a></li>
+                            <li id="MO70300"><a href="javascript:goMenu('/member/findId.do', 'MO70300');">아이디찾기</a></li>
+                            <li id="MO70400"><a href="javascript:goMenu('/member/findPass.do', 'MO70400');">패스워드찾기</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->
@@ -117,13 +123,19 @@
                                 </div>
 
                                 <div class="srchArea">
-
+                                    <!-- <p class="txt">아이디, 비밀번호를 잊으셨나요?</p>
+                                    <div class="bt">
+                                        <a href="/member/findId.do" class="whtBt">아이디 찾기</a>
+                                        <a href="/member/findPass.do" class="whtBt">비밀번호 찾기</a>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
 
                         <div class="joinArea">
                             <div class="areaDiv">
+                                <!-- <p class="txt"><strong>아직 크리스찬상조(주) 회원이 아니신가요?</strong><br>회원이 되시면 다양한 서비스 이용이 가능합니다.</p>
+                                <a href="/member/joinStep.do" class="whtBt">회원가입</a> -->
                             </div>
                         </div>
                     </div>
