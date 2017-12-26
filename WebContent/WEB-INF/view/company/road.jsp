@@ -102,9 +102,23 @@
 						<li><strong>팩스</strong> <span>02-556-4439</span></li>
 					</ul>
 					<!-- mapArea -->
-					<div class="mapArea" id="map_view1">크리스찬라이프 지도영역</div>
-					<!-- // mapArea -->
-
+					<!-- <div class="mapArea" id="map_view1">크리스찬라이프 지도영역</div> -->
+					<!--
+					<!-- 1. 약도 노드 -->
+					<div id="map" align="center">
+					<div id="daumRoughmapContainer1514267214116" class="root_daum_roughmap root_daum_roughmap_landing" style="width:90%; height:auto;"></div>
+					
+					<!-- 2. 설치 스크립트 -->
+					<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://spi.maps.daum.net/imap/map_js_init/roughmapLoader.js"></script>
+					
+					<!-- 3. 실행 스크립트 -->
+					<script charset="UTF-8">
+						new daum.roughmap.Lander({
+							"timestamp" : "1514267214116",
+							"key" : "m3oe"
+						}).render();
+					</script>
+					</div>
 				</div>
 
 			</div> <!-- // contents -->
