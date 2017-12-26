@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cl.dto.MemberDTO;
-import com.cl.dto.NoticeDTO;
 import com.cl.service.IMemberService;
 import com.cl.util.AES256Util;
 import com.cl.util.CmmUtil;
@@ -64,7 +63,7 @@ public class MemberController {
 			memberNo = CmmUtil.nvl(mDTO.getMemberNo());
 			memberId = CmmUtil.nvl(mDTO.getMemberId());
 			memberName = AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberName()));
-			memberAuth = CmmUtil.nvl(mDTO.getMemberPre());
+			memberAuth = CmmUtil.nvl(mDTO.getMemberAuth());
 			long time = System.currentTimeMillis(); 
 			SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String timeStr = dayTime.format(new Date(time));

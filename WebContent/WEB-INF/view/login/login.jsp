@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import = "com.cl.util.SessionUtil" %>
 <%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 <!--#include file="../include/inc_header.jsp"-->
 
+<% SessionUtil.loginCheck(response, session); %>
 	<div id="contentsWrap">
 		<div class="container">
 			<div class="conTitWrap">
