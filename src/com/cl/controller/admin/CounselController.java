@@ -94,9 +94,9 @@ public class CounselController {
 		int result = counselService.insertCounsel(cDTO);
 		
 		if(result==0){
-			msg = "등록실패";
+			msg = "상담사 등록에 실패했습니다.";
 		}else{
-			msg = "등록성공";
+			msg = "상담사 등록에 성공했습니다.";
 		}
 		url = "/Lmin/counsel/counselList.do";
 		model.addAttribute("url", url);
@@ -143,9 +143,9 @@ public class CounselController {
 		int result = counselService.updateReplyStat(cDTO);
 		
 		if(result==0){
-			msg = "변경실패";
+			msg = "상담사 수정에 실패했습니다.";
 		}else{
-			msg = "변경성공";
+			msg = "상담사 수정에 성공했습니다.";
 		}
 		url = "/Lmin/counsel/counselList.do";
 		

@@ -75,9 +75,9 @@ public class NoticeController {
 		
 		url = "/Lmin/notice/noticeList.do";
 		if(result==0){
-			msg = "등록실패";
+			msg = "공지사항 등록에 실패했습니다.";
 		}else{
-			msg = "등록성공";
+			msg = "공지사항 등록에 성공했습니다.";
 		}
 		
 		model.addAttribute("url", url);
@@ -147,9 +147,9 @@ public class NoticeController {
 		
 		url = "/Lmin/notice/noticeList.do";
 		if(result==0){
-			msg = "수정실패";
+			msg = "공지사항 수정에 실패했습니다.";
 		}else{
-			msg = "수정성공";
+			msg = "공지사항 수정에 성공했습니다.";
 		}
 		
 		model.addAttribute("msg", msg);
@@ -170,9 +170,9 @@ public class NoticeController {
 		int result = noticeService.deleteNotice(noticeNo);
 		
 		if(result == 0){
-			msg = "삭제실패";
+			msg = "공지사항 삭제에 실패했습니다.";
 		}else{
-			msg = "삭제성공";
+			msg = "공지사항 삭제에 성공했습니다.";
 		}
 		url = "/Lmin/notice/noticeList.do";
 		

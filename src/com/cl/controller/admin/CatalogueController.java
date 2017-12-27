@@ -100,9 +100,9 @@ public class CatalogueController {
 		
 		url = "/Lmin/catalogue/catalogueList.do";
 		if(result == 0){
-			msg = "��Ͻ���";
+			msg = "카달로그 등록에 실패했습니다.";
 		}else{
-			msg = "��ϼ���";
+			msg = "카달로그 등록에 성공했습니다.";
 		}
 		
 		cDTO = null;
@@ -214,9 +214,9 @@ public class CatalogueController {
 		url = "/Lmin/catalogue/catalogueList.do";
 		
 		if(result == 0){
-			msg = "��������";
+			msg = "카달로그 수정에 실패했습니다.";
 		}else{
-			msg = "��������";
+			msg = "카달로그 수정에 성공했습니다.";
 		}
 		
 		model.addAttribute("msg", msg);
@@ -257,9 +257,9 @@ public class CatalogueController {
 		url = "/Lmin/catalogue/catalogueList.do";
 		
 		if(result == 0){
-			msg = "��������";
+			msg = "카달로그 삭제에 성공했습니다.";
 		}else{
-			msg = "��������";
+			msg = "카달로그 삭제에 실패했습니다.";
 		}
 		
 		model.addAttribute("url", url);
