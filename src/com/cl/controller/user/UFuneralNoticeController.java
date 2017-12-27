@@ -27,9 +27,11 @@ public class UFuneralNoticeController {
 		log.info("funeralNoticeList Start!!");
 		
 		int viewCount = 10;
+		int splitPage = 5;
 		
 		HashMap<String, Object> hMap = new HashMap<>();
 		
+		hMap = PageUtil.paging(req, splitPage);
 		hMap.put("page", viewCount);
 		hMap = funeralNoticeService.getUserFuneralNoticeList(hMap);
 		

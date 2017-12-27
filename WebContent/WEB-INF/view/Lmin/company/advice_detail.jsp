@@ -132,7 +132,7 @@ function doAdviceDelete(){
 								</td>
 							</tr>
 							<tr>
-								<th scope="row" rowspan="3">주소</th>
+								<th scope="row">주소</th>
 								<td>
 									<%=TextUtil.exchangeEscapeNvl(aDTO.getAdviceAddress() + " " + aDTO.getAdviceAddressDetail()) %>
 								</td>

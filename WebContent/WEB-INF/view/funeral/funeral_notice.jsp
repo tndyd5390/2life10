@@ -122,7 +122,6 @@
 				<h3 class="smallTit">부고알림</h3>
 				<form name="f" id="f" method="post" action="/funeral/funeralNoticeList.do">
 				<input type="hidden" name="page" id="page">
-				
 				<div class="boardType2">
 					<table summary="">
 						<caption></caption>
