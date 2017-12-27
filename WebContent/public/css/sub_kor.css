@@ -343,6 +343,7 @@
 
 
 .boardType2{position:relative; margin-top:15px; border-top:2px solid #333;}
+.boardType2 table{width:100%;}
 .boardType2 th{border-bottom:1px solid #e5e5e5; background:#f7f7f7; font-size:11px; color:#333; padding:18px 3%; text-align:left; vertical-align:top}
 .boardType2 th span{display:inline-block; padding-left:20px}
 .boardType2 th span.essen{padding-left:20px; background:url('../../public/img/conts/essential_icon.gif') no-repeat 0 3px; background-size:10px;}
@@ -372,6 +373,7 @@
 .boardType2 td .date{width:100%; float:none; margin-right:0; margin-bottom:5px; height:30px; border:1px solid #ddd; float:left; margin-right:6px}
 .boardType2 td .date input{border:none; width:85%; height:25px;}
 .boardType2 td .date img{vertical-align:middle}
+.boardType2 .btn_active_small{min-width:auto;}
 
 .btn_area{margin-top:20px;text-align:center;}
 .btn_area.left{text-align:left;}
@@ -407,6 +409,10 @@
 .boradType4 li .info .txt1{margin-bottom:10px; overflow:hidden;}
 .boradType4 li .info .txt1 a{font-weight:bold;}
 .boradType4 li .info .txt2{display:block; width:100%; float:none; margin:0; text-align:left; font-size:12px;}
+.boradType4 li .info .writer{display:inline-block;padding-right:20px;font-size:12px;}
+.boradType4 li .info .date{display:inline-block;padding-right:20px;font-size:12px;}
+.boradType4 li .info .count{display:inline-block;padding-right:20px;font-size:12px;}
+
 
 .boradType5{border-top:2px solid #333;}
 .boradType5 li{padding:13px 0; font-size:13px; border-bottom:1px solid #e5e5e5;}
@@ -414,7 +420,10 @@
 .boradType5 li .info{width:90%; overflow:hidden;}
 .boradType5 li .info .txt1{margin-bottom:10px; overflow:hidden;}
 .boradType5 li .info .txt1 a{font-weight:bold;}
-.boradType5 li .info .txt2{display:block; width:100%; float:none; margin:0; text-align:left; font-size:12px;}
+.boradType5 li .info .txt2{display:block; width:100%; float:none; margin:0; text-align:left; font-size:0;white-space:nowrap;}
+.boradType5 li .info .writer{display:inline-block;padding-right:20px;font-size:12px;}
+.boradType5 li .info .date{display:inline-block;padding-right:20px;font-size:12px;}
+.boradType5 li .info .count{display:inline-block;padding-right:20px;font-size:12px;}
 
 /* 로그인 */
 .loginDiv .inputArea{border:1px solid #e3e2f4; border-top:2px solid #333;padding:30px 0;}
@@ -624,9 +633,6 @@
 #agreement .revision ul {overflow:hidden;}
 #agreement .revision ul li {float:left;width:33%;}
 
-
-
-.boardType2 table{width:100%;}
 .boardType2 th{border-bottom:1px solid #e5e5e5; background:#f7f7f7; font-size:16px; color:#333; padding:19px 3%; text-align:left; vertical-align:top}
 .boardType2 th span{display:inline-block; padding-left:20px}
 .boardType2 th span.essen{padding-left:20px; background-position:0 3px; background-size:10px;}
@@ -654,19 +660,27 @@
 .boardType2 td .date{width:118px; height:30px; border:1px solid #ddd; float:left; margin-right:6px}
 .boardType2 td .date input{border:none; width:87px;}
 .boardType2 td .date img{vertical-align:middle}
+.boardType2 .btn_active_small{min-width:90px;}
 
 .boradType4 li{padding:13px 0; font-size:15px;}
 .boradType4 li .num{width:10%;}
 .boradType4 li .info{width:90%; overflow:hidden;}
 .boradType4 li .info .txt{width:15%; margin-right:0; float:left; text-align:left;}
-.boradType4 li .info .txt1{float:left; width:50%; margin-bottom:0;}
-.boradType4 li .info .txt2{float:left; width:35%; padding-right:10px; text-align:right; font-size:14px; box-sizing:border-box; color:#777;}
+.boradType4 li .info .txt1{float:left; width:45%; margin-bottom:0;}
+.boradType4 li .info .txt2{float:left; width:40%; padding-right:10px; text-align:right; font-size:14px; box-sizing:border-box; color:#777;}
+.boradType4 li .info .writer{display:inline-block;width:30%;padding:0;font-size:15px;}
+.boradType4 li .info .date{display:inline-block;width:40%;padding:0;font-size:15px;}
+.boradType4 li .info .count{display:inline-block;width:25%;padding:0;font-size:15px;}
+
 
 .boradType5 li{padding:13px 0; font-size:15px;}
 .boradType5 li .num{width:10%;}
 .boradType5 li .info{width:90%; overflow:hidden;}
 .boradType5 li .info .txt1{float:left; width:65%; margin-bottom:0;}
-.boradType5 li .info .txt2{float:left; width:35%; padding-right:10px; text-align:right; font-size:15px; box-sizing:border-box; color:#777;}
+.boradType5 li .info .txt2{float:left; width:35%; padding-right:10px; text-align:right; box-sizing:border-box; color:#777;font-size:0;white-space:nowrap}
+.boradType5 li .info .writer{display:inline-block;width:23%;padding:0;font-size:15px;}
+.boradType5 li .info .date{display:inline-block;width:49%;padding:0;font-size:15px;}
+.boradType5 li .info .count{display:inline-block;width:28%;padding:0;font-size:15px;}
 
 /* 로그인 */
 .loginDiv .inputArea{padding:60px 0;}
