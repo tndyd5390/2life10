@@ -92,7 +92,7 @@
 			<div class="moLnbWrap">
                 <nav class="flexContainer">
                     <div class="flexItem3">
-                        <strong><button type="button" class="select">회사소개</button></strong>
+                        <strong><button type="button" class="select">고객센터</button></strong>
                         <ul>
                             <li><a href="javascript:goMenu('/company/overView.do', '');">회사소개</a></li>
                             <li><a href="javascript:goMenu('/info/proInfo.do', '');">상조상품특징</a></li>

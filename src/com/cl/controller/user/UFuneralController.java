@@ -2,6 +2,7 @@
 package com.cl.controller.user;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,7 @@ public class UFuneralController {
 	}
 	
 	@RequestMapping("/funeral/funeralList_a")
-	public String funeralList_a() throws Exception{
+	public String funeralList_a(HttpServletRequest req) throws Exception{
 		log.info("funeralList_a Start!!");
 		
 		log.info("funeralList_a End!!");
@@ -34,9 +35,9 @@ public class UFuneralController {
 	}
 	
 	@RequestMapping("/funeral/funeralList_b")
-	public String funeralList_b() throws Exception{
+	public String funeralList_b(HttpServletRequest req) throws Exception{
 		log.info("funeralList_b Start!!");
-		
+		log.info("test" + req.getParameter("menuNum"));
 		log.info("funeralList_b End!!");
 		return "/funeral/funeral_list_b";
 	}	
@@ -60,7 +61,6 @@ public class UFuneralController {
 	@RequestMapping("/funeral/funeralInfo_a")
 	public String funeralInfo_a() throws Exception{
 		log.info("funeralInfo_a Start!!");
-		
 		log.info("funeralInfo_a End!!");
 		return "/funeral/funeral_info_a";
 	}

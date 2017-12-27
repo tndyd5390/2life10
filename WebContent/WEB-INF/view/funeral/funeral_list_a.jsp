@@ -20,7 +20,7 @@
 		//메뉴 제어 
 		var lnb = $(".pcLnbWrap ul li a");
 		var menuId = "MN30200";
-		var mbId = "MO30200";
+		var mbId = "MO31100";
 		var mbId2 = "";
 		console.log(menuId);
 		if ( menuId != '' ){

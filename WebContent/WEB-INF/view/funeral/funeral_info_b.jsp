@@ -18,29 +18,26 @@
 
 
 <script type="text/javascript">
-	$(function() {
-		//메뉴 제어 
-		var lnb = $(".pcLnbWrap ul li a");
-		var menuId = "MN30300";
-		var mbId = "MO30300";
-		var mbId2 = "";
-		
-		console.log(menuId);
-		if ( menuId != '' ){
-			var temp = menuId.substring((menuId.length-2), menuId.length);
-			if ( temp == '00'){//대메뉴 // class="active"
-				$("#"+menuId).addClass("active");
-				$("#"+menuId).children().find("li:eq(0)").addClass("active");
-			}else{//소메뉴
-				$("#"+menuId).addClass("active");
-				$("#"+menuId).parents("li").addClass("active");
-			}
+$(function() {
+	//메뉴 제어 
+	var lnb = $(".pcLnbWrap ul li a");
+	var menuId = "MN30300";
+	var mbId = "MO30300";
+	var mbId2 = "";
+	
+	console.log(menuId);
+	if ( menuId != '' ){
+		var temp = menuId.substring((menuId.length-2), menuId.length);
+		if ( temp == '00'){//대메뉴 // class="active"
+			$("#"+menuId).addClass("active");
+			$("#"+menuId).children().find("li:eq(0)").addClass("active");
+		}else{//소메뉴
+			$("#"+menuId).addClass("active");
+			$("#"+menuId).parents("li").addClass("active");
 		}
-
-		$("#subtitle").text($("#"+mbId).text());
-		$("#subtitle2").text($("#"+mbId2).text());
-		
-	});
+	}
+	
+});
 
 </script>
 

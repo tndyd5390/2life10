@@ -772,7 +772,7 @@ conApp.openSelectHide = function(){
 	
 };
 
-//formToggle & Focus
+formToggle & Focus
 conApp.formToggle = function(){
 	$(".btnDefaultForm").on("click",function(){
 		$(".grayWrap").toggle();
