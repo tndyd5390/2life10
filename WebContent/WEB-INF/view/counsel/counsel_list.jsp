@@ -75,29 +75,28 @@
 		if(name.val()==""){
 			alert("작성자를 입력하세요.");
 			name.focus();
-			return false;
+			return;
 		}else if(phone2.val()==""){
 			alert("휴대전화를 입력하세요.");
 			phone2.focus();
-			return false;
+			return;
 		}else if(phone2.val()==""){
 			alert("휴대전화를 입력하세요.");
 			phone2.focus();
-			return false;
+			return;
 		}else if(pwd.val()==""){
 			alert("비밀번호를 입력하세요.");
 			pwd.focus();
-			return false;
+			return;
 		}else if(contents.val()==""){
 			alert("문의내용을 입력하세요.");
 			contents.focus();
-			return false;
-		}else if(agree.val()=="N" || agree.val()==""){
+			return;
+		}else if(agree.val()=="N" || agree.val()=="" || agree.val()==null){
 			alert("개인정보 수집.이용 동의가 필요합니다.");
-			return false;
+			return;
 		}else{
 			f.submit();
-			return true;
 		}
 	};
 
@@ -156,9 +155,7 @@
 
 			<div id="counsel" class="contents"> <!-- 페이지별 ID none -->
 				<h3 class="smallTit">1:1상담</h3>
-
 				<form id="f" name="f" method="post" action="/counsel/counselRegProc.do">
-					<input type="hidden" value="" id="" name="" />
 					
 					<section  class="grayWrap">
 						<header>
@@ -167,7 +164,7 @@
 
 						<div class="boardType2">
 							<table summary="">
-								<caption>회원가입</caption>
+								<caption>1:1 상담</caption>
 								<colgroup>
 									<col width="20%">
 									<col width="80%">

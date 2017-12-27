@@ -52,6 +52,37 @@
 		$("#subtitle2").text($("#"+mbId2).text());
 		
 	});
+	
+
+	function goDetail(rNo){
+		var f = $("#f");
+		var regulationNo = $("#regulationNo");
+		f.attr("action", "/regulation/regulationDetail.do");
+		regulationNo.val(rNo);
+		f.submit();	
+	}
+	
+
+	function doSubmit(){
+		var f = $("#f");
+		var search = $('#search');
+		
+		if(search.val()==""){
+			alert("검색어를 입력하세요.");
+			search.focus();
+			return false;
+		}else{
+			f.attr("action", "/regulation/regulationList.do");
+			f.submit();
+		}
+	}
+	
+	function goPage(page, lastPage){
+		var f = $("#f");
+		$("#page").val(page);
+		f.submit();
+	};
+
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -109,8 +140,9 @@
 				<h3 class="smallTit">상조관련법규</h3>
 
 				<div class="boardType2">
-				<form action="/Lmin/regulation/regulationList.do" id="f" method="post">
+				<form action="/regulation/regulationList.do" id="f" method="post">
 				<input type="hidden" name="page" id="page">
+				<input type="hidden" name="regulationNo" id="regulationNo">
 					<table summary="">
 						<caption>회원가입</caption>
 						<colgroup>
@@ -125,7 +157,7 @@
 										<option value="02" <%=CmmUtil.select("02", CmmUtil.nvl((String) hMap.get("searchBox")))%>>글쓴이</option>
 									</select>
 									<input type="text" name="search" id="search" class="inputType1" value="<%=CmmUtil.nvl((String) hMap.get("search"))%>" maxlength="25">
-									<a href="#" class="btn_active_small" onclick="searchRegulation();">검색</a>
+									<a href="javasciprt:doSubmit();" class="btn_active_small">검색</a>
 								</td>
 							</tr>
 						</tbody>
@@ -143,7 +175,7 @@
 						<p class="num"><%=TextUtil.exchangeEscapeNvl(rDTO.getRowNum()) %></p>
 						<div class="info">
 							<p class="txt1"><!-- 박성진수정 -->
-								<a href="/Lmin/regulation/regulationDetail.do?regulationNo=<%=CmmUtil.nvl(rDTO.getRegulationNo())%>"><%=TextUtil.exchangeEscapeNvl(rDTO.getRegulationTitle()) %></a>
+								<a href="javascript:goDetail(<%=CmmUtil.nvl(rDTO.getRegulationNo())%>);"><%=TextUtil.exchangeEscapeNvl(rDTO.getRegulationTitle()) %></a>
 							</p>
 							<p class="txt2">
 								<%=TextUtil.exchangeEscapeNvl(rDTO.getMemberId()) %><span class="bar">&nbsp;|</span>
