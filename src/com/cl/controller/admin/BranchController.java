@@ -96,11 +96,11 @@ public class BranchController {
 		int result = branchService.insertBranch(bDTO);
 		if(result != 0){
 			//성공
-			model.addAttribute("msg", "지사등록에 성공했습니다.");
+			model.addAttribute("msg", "전국지사 등록에 성공했습니다.");
 			model.addAttribute("url", "/Lmin/company/branchList.do");
 		}else{
 			//실패
-			model.addAttribute("msg", "지사등록에 실패했습니다.");
+			model.addAttribute("msg", "전국지사 등록에 실패했습니다.");
 			model.addAttribute("url", "/Lmin/company/branchList.do");
 		}
 		
@@ -149,11 +149,11 @@ public class BranchController {
 		
 		if(result != 0){
 			//성공
-			model.addAttribute("msg", "삭제되었습니다.");
+			model.addAttribute("msg", "전국지사 삭제에 성공했습니다.");
 			model.addAttribute("url", "/Lmin/company/branchList.do");
 		}else{
 			//실패
-			model.addAttribute("msg", "삭제에 실패했습니다.");
+			model.addAttribute("msg", "전국지사 삭제에 실패했습니다.");
 			model.addAttribute("url", "/Lmin/company/branchDetail.do?branchNo=" + branchNo);
 		}
 		log.info(this.getClass() + ".branchDeleteProc end!!!");
@@ -220,10 +220,10 @@ public class BranchController {
 		int result = branchService.updateBranch(bDTO);
 		
 		if(result != 0){
-			model.addAttribute("msg", "수정에 성공했습니다.");
+			model.addAttribute("msg", "전국지사 수정에 성공했습니다.");
 			model.addAttribute("url", "/Lmin/company/branchList.do");
 		}else{
-			model.addAttribute("msg", "수정에 실패했습니다.");
+			model.addAttribute("msg", "전국지사 수정에 실패했습니다.");
 			model.addAttribute("url", "/Lmin/company/branchUpdateView.do?branchNo=" + branchNo);
 		}
 		

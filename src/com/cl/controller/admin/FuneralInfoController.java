@@ -106,10 +106,10 @@ public class FuneralInfoController {
 		
 		if(result==1){
 			url = "/Lmin/funeral/funeralInfoList.do";
-			msg = "등록성공";
+			msg = "전국장례시설 등록에 성공했습니다.";
 		}else{
 			url = "/Lmin/funeral/funeralInfoWrite.do";
-			msg = "등록실패";
+			msg = "전국장례시설 등록에 실패했습니다.";
 		}
 		
 		fDTO = null;
@@ -182,9 +182,9 @@ public class FuneralInfoController {
 		
 		url = "/Lmin/funeral/funeralInfoList.do";
 		if(result==1){
-			msg = "수정성공";
+			msg = "전국장례시설 수정에 성공했습니다.";
 		}else{
-			msg = "수정실패";
+			msg = "전국장례시설 수정에 실패했습니다.";
 		}
 		
 		fDTO = null;
@@ -209,9 +209,9 @@ public class FuneralInfoController {
 		int result = funeralInfoService.deleteFuneralInfo(funeralInfoNo);
 		url = "/Lmin/funeral/funeralInfoList.do";
 		if(result == 0){
-			msg = "삭제실패";
+			msg = "전국장례시설 삭제에 성공했습니다.";
 		}else{
-			msg = "삭제성공";
+			msg = "전국장례시설 삭제에 실패했습니다.";
 		}
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);

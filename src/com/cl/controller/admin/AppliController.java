@@ -86,9 +86,9 @@ public class AppliController {
 		
 		int result = appliService.insertAppli(aDTO);
 		if(result != 0){
-			model.addAttribute("msg", "媛��엯 �떊泥��씠 �셿猷� �릺�뿀�뒿�땲�떎.");
+			model.addAttribute("msg", "가입신청되었습니다.");
 		}else{
-			model.addAttribute("msg", "媛��엯 �떊泥��뿉 �떎�뙣�뻽�뒿�땲�떎.");
+			model.addAttribute("msg", "가입신청에 실패했습니다.");
 		}
 		model.addAttribute("url", "/Lmin/appli/appliList.do");
 		log.info(this.getClass() + ".appliProc end!!!");
@@ -134,9 +134,9 @@ public class AppliController {
 		
 		int result = appliService.updateAppliReply(appliNo);
 		if(result != 0){
-			model.addAttribute("msg", "�떟蹂��씠 �셿猷� �릺�뿀�뒿�땲�떎.");
+			model.addAttribute("msg", "답변이 완료되었습니다.");
 		}else{
-			model.addAttribute("msg", "�떟蹂� �셿猷뚯뿉 �떎�뙣�뻽�뒿�땲�떎. �떎�떆�떆�룄�빐二쇱꽭�슂.");
+			model.addAttribute("msg", "답변완료에 실패했습니다.");
 		}
 		model.addAttribute("url", "/Lmin/appli/appliList.do");
 		log.info(this.getClass() + ".appliReplyProc end!!!");
