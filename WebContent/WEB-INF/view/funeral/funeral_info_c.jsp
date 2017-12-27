@@ -113,28 +113,28 @@
 								<p class="moImg"><img src="/public/img/conts/img_etc_mo01.png" alt="서울특별시" /></p>
 								<p class="pcImg"><img src="/public/img/conts/img_etc_pc01.png" alt="서울특별시" /></p>
 							</div>
-							<a href="javascript:goMenu('/business/construction.do', 'MN10401');">서울특별시<span>바로가기</span></a>
+							<a href="javascript:goMenu('http://www.seoul.go.kr', 'MN10401');">서울특별시<span>바로가기</span></a>
 						</li>
 						<li class="sector2">
 							<div class="imgWrap">
 								<p class="moImg"><img src="/public/img/conts/img_etc_mo02.png" alt="사이버추모의집 이미지" /></p>
 								<p class="pcImg"><img src="/public/img/conts/img_etc_pc02.png" alt="사이버추모의집 이미지" /></p>
 							</div>
-							<a href="javascript:goMenu('/business/trading.do', 'MN10402');">사이버추모의집<span>바로가기</span></a>
+							<a href="javascript:goMenu('http://www.sisul.or.kr/open_content/memorial/', 'MN10402');">사이버추모의집<span>바로가기</span></a>
 						</li>
 						<li class="sector3">
 							<div class="imgWrap">
 								<p class="moImg"><img src="/public/img/conts/img_etc_mo03.png" alt="장묘공원 이미지" /></p>
 								<p class="pcImg"><img src="/public/img/conts/img_etc_pc03.png" alt="장묘공원 이미지" /></p>
 							</div>
-							<a href="javascript:goMenu('/business/fashion.do', 'MN10403');">장묘공원<span>바로가기</span></a>
+							<a href="javascript:goMenu('http://skyland.seongnam.go.kr/', 'MN10403');">성남시 영생관리 사업소<span>바로가기</span></a>
 						</li>
 						<li class="sector4">
 							<div class="imgWrap">
 								<p class="moImg"><img src="/public/img/conts/img_etc_mo04.png" alt="성남시 영생관리 사업소문 이미지" /></p>
 								<p class="pcImg"><img src="/public/img/conts/img_etc_pc04.png" alt="성남시 영생관리 사업소 이미지" /></p>
 							</div>
-							<a href="javascript:goMenu('/business/resort.do', 'MN10404');">성남시 영생관리 사업소<span>바로가기</span></a>
+							<a href="javascript:goMenu('https://www.suwonfmc.or.kr/mainPage.do', 'MN10404');">수원시 시설관리 공단<span>바로가기</span></a>
 						</li>
 					</ul>
 				</div>
@@ -146,14 +146,14 @@
 								<p class="moImg"><img src="/public/img/conts/img_etc_mo05.png" alt="건설부문 이미지" /></p>
 								<p class="pcImg"><img src="/public/img/conts/img_etc_pc05.png" alt="건설부문 이미지" /></p>
 							</div>
-							<a href="javascript:goMenu('/business/construction.do', 'MN10401');">수원시 시설관리 공단<span>바로가기</span></a>
+							<a href="javascript:goMenu('http://www.kca.go.kr/index.do', 'MN10401');">한국소비자원<span>바로가기</span></a>
 						</li>
 						<li class="sector2">
 							<div class="imgWrap">
 								<p class="moImg"><img src="/public/img/conts/img_etc_mo06.png" alt="상사부문 이미지" /></p>
 								<p class="pcImg"><img src="/public/img/conts/img_etc_pc06.png" alt="상사부문 이미지" /></p>
 							</div>
-							<a href="javascript:goMenu('/business/trading.do', 'MN10402');">보건복지부<span>바로가기</span></a>
+							<a href="javascript:goMenu('http://www.kmaca.or.kr', 'MN10402');">한국상조공제조합<span>바로가기</span></a>
 						</li>
 					</ul>
 				</div>

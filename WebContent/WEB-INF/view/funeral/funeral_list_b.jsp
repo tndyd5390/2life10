@@ -48,7 +48,7 @@
 			tooltipClass : "my-tooltip",
 			content:function(){
 				var img = $(this).data('photo');
-				return "<img src='/public/img/conts/fu_img_"+img+".jpg' width='100%'>";
+				return "<img src='/public/img/conts/funeral/"+img+".jpg' width='100%'>";
 			}
 		})
 		$(".ui-helper-hidden-accessible").hide();
@@ -154,16 +154,16 @@
 							</tr>
 							<tr>
 								<td rowspan="2">인력지원</td>
-								<td colspan="2" data-photo="01">장례전문지도사 2명</td>
+								<td colspan="2" data-photo="101">장례전문지도사 2명</td>
 								<td class="alignL">장례진행의 제반절차를 예법에 따라 장례진행</td>
 							</tr>
 							<tr>
-								<td colspan="2" data-photo="01">장례전문도우미 2명</td>
+								<td colspan="2" data-photo="102">장례전문도우미 2명</td>
 								<td class="alignL">장례기간 중 -> 10시간/1일 봉사<br/>-장례기간 중 총4명(총40시간)</td>
 							</tr>
 							<tr>
 								<td rowspan="6">고인용품 및<br/>입관 수시용품</td>
-								<td rowspan="2" data-photo="02">관</td>
+								<td rowspan="2" data-photo="103">관</td>
 								<td>화장시</td>
 								<td class="alignL">오동나무 0.5치</td>
 							</tr>
@@ -172,99 +172,99 @@
 								<td class="alignL">오동나무 1.5치</td>
 							</tr>
 							<tr>
-								<td colspan="2" data-photo="03">수의</td>
+								<td colspan="2" data-photo="104">수의</td>
 								<td class="alignL">대마</td>
 							</tr>
 							<tr>
-								<td colspan="2" data-photo="03">도포,원삼</td>
+								<td colspan="2" data-photo="104">도포,원삼</td>
 								<td class="alignL">대마</td>
 							</tr>
 							<tr>
-								<td colspan="2" data-photo="04">멧베(탈관시)</td>
+								<td colspan="2" data-photo="105">멧베(탈관시)</td>
 								<td class="alignL">탈관시 제공</td>
 							</tr>
 							<tr>
-								<td colspan="2">받침대, 베게, 수세포, 관보, 명정, 결관포,한지, 탈지면, 알코올, 예단, 습신, 보공 등</td>
+								<td colspan="2" data-photo="106">받침대, 베게, 수세포, 관보, 명정, 결관포,한지, 탈지면, 알코올, 예단, 습신, 보공 등</td>
 								<td class="alignL">규격품 제공</td>
 							</tr>
 							<tr>
 								<td>빈소용품</td>
-								<td colspan="2" data-photo="08">액자리본,명패,양초,부의록</td>
+								<td colspan="2" data-photo="107">액자리본,명패,양초,부의록</td>
 								<td class="alignL">제공</td>
 							</tr>
 							<tr>
 								<td>꽃장식</td>
-								<td colspan="2" data-photo="10">영정 및 제단</td>
+								<td colspan="2" data-photo="201">영정 및 제단</td>
 								<td class="alignL">생화2단장식, 꽃바구니2개, 헌화50송이 제공<br/>(장례서비스 장소의 사정으로 제단 미제공시 현금30만원지급 )</td>
 							</tr>
 							<tr>
 								<td rowspan="8">의전용품<br/>(현대식/전통식 중 택일)</td>
-								<td rowspan="3" data-photo="05">현대식</td>
-								<td>남상복 대여</td>
+								<td rowspan="3">현대식</td>
+								<td data-photo="109">남상복 대여</td>
 								<td class="alignL">5벌 (상,하의검정색 정장, Y셔츠, 넥타이포함)</td>
 							</tr>
 							<tr>
-								<td>여성복 대여</td>
+								<td data-photo="110">여성복 대여</td>
 								<td class="alignL">필요량제공</td>
 							</tr>
 							<tr>
-								<td>완장</td>
+								<td data-photo="111">완장</td>
 								<td class="alignL">필요량제공</td>
 							</tr>
 							<tr>
-								<td rowspan="5" data-photo="06">전통식</td>
-								<td>굴건제복</td>
+								<td rowspan="5">전통식</td>
+								<td data-photo="112">굴건제복</td>
 								<td class="alignL">직계상주 제공</td>
 							</tr>
 							<tr>
-								<td>두루마기</td>
+								<td data-photo="112">두루마기</td>
 								<td class="alignL">10벌</td>
 							</tr>
 							<tr>
-								<td>중단</td>
+								<td data-photo="112">중단</td>
 								<td class="alignL">10벌</td>
 							</tr>
 							<tr>
-								<td>치마저고리</td>
+								<td data-photo="112">치마저고리</td>
 								<td class="alignL">10벌</td>
 							</tr>
 							<tr>
-								<td>두건,행전 등</td>
+								<td data-photo="112">두건,행전 등</td>
 								<td class="alignL">필요량제공</td>
 							</tr>
 							<tr>
 								<td>발인용품</td>
-								<td colspan="2" data-photo="07">운구용장갑, 선도차리본</td>
+								<td colspan="2" data-photo="113">운구용장갑, 선도차리본</td>
 								<td class="alignL">제공</td>
 							</tr>
 							<tr>
 								<td rowspan="2">장의차량</td>
-								<td colspan="2" data-photo="11">장의버스</td>
+								<td colspan="2" data-photo="203">장의버스</td>
 								<td class="alignL">택일(왕복200Km이내)</td>
 							</tr>
 							<tr>
-								<td colspan="2" data-photo="11">캐딜락리무진</td>
+								<td colspan="2" data-photo="202">캐딜락리무진</td>
 								<td class="alignL">택일(왕복200Km이내)</td>
 							</tr>
 							<tr>
 								<td rowspan="5">서비스</td>
-								<td colspan="2" data-photo="12">고인운구 전용차량</td>
+								<td colspan="2" data-photo="115">고인운구 전용차량</td>
 								<td class="alignL">24시간 앰블런스 대기(관내무료)</td>
 							</tr>
 							<tr>
-								<td colspan="2">예약</td>
+								<td colspan="2"  data-photo="116">예약</td>
 								<td class="alignL">화장장 예약</td>
 							</tr>
 							<tr>
-								<td colspan="2">알선</td>
+								<td colspan="2"  data-photo="116">알선</td>
 								<td class="alignL">납골,산역(장지행사)</td>
 							</tr>
 							<tr>
-								<td colspan="2">회장지원</td>
+								<td colspan="2"  data-photo="116">화장지원</td>
 								<td class="alignL">납골당의뢰시 할인 및 유골함 제공</td>
 							</tr>
 							<tr>
-								<td colspan="2">행정안내</td>
+								<td colspan="2"  data-photo="116">행정안내</td>
 								<td class="alignL">각종행정절차안내<br/>필요한서류 안내</td>
 							</tr>
 						</tbody>

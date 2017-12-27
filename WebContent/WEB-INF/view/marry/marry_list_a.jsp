@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/include/inc_header.jsp" %>
+<script type="text/javascript" src="/public/js/jquery-ui.min.js"></script>
+<link type="text/css" rel="stylesheet" href="/public/css/jquery-ui.theme.min.css" />
 
 	<div id="contentsWrap">
 		<div class="container">
@@ -39,6 +41,15 @@
 		$("#subtitle").text($("#"+mbId).text());
 		$("#subtitle2").text($("#"+mbId2).text());
 		
+		$(document).tooltip({
+			items:'[data-photo]',
+			tooltipClass : "my-tooltip",
+			content:function(){
+				var img = $(this).data('photo');
+				return "<img src='/public/img/conts/marry/"+img+".jpg' width='100%'>";
+			}
+		})
+		$(".ui-helper-hidden-accessible").hide();
 	});
 
 </script>
@@ -137,66 +148,66 @@
 							</tr>
 							<tr>
 								<td>인력지원</td>
-								<td colspan="2">웨딩플래너 1명</td>
+								<td colspan="2" data-photo="101">웨딩플래너 1명</td>
 								<td class="alignL">전문 웨딩플래너를 통해 웨딩계획과 업체선정에 도움을 드립니다.</td>
 							</tr>
 							<tr>
 								<td rowspan="5">리허설촬영</td>
-								<td colspan="2">신부드레스</td>
+								<td colspan="2" data-photo="102">신부드레스</td>
 								<td class="alignL">메인드레스2벌, 파티복1벌</td>
 							</tr>
 							<tr>
-								<td colspan="2">신랑예복</td>
+								<td colspan="2" data-photo="103">신랑예복</td>
 								<td class="alignL">제공(대여)</td>
 							</tr>
 							<tr>
-								<td colspan="2">사진</td>
+								<td colspan="2" data-photo="104">사진</td>
 								<td class="alignL">11R20P 앨범1권</td>
 							</tr>
 							<tr>
-								<td colspan="2">액자</td>
+								<td colspan="2" data-photo="105">액자</td>
 								<td class="alignL">20R 액자1개</td>
 							</tr>
 							<tr>
-								<td colspan="2">헤어/메이크업</td>
+								<td colspan="2" data-photo="106">헤어/메이크업</td>
 								<td class="alignL">제공(신랑/신부)</td>
 							</tr>
 							<tr>
 								<td rowspan="9">웨딩본식</td>
-								<td colspan="2">신부드레스</td>
+								<td colspan="2" data-photo="107">신부드레스</td>
 								<td class="alignL">제공(대여)</td>
 							</tr>
 							<tr>
-								<td colspan="2">신랑예복</td>
+								<td colspan="2" data-photo="108">신랑예복</td>
 								<td class="alignL">제공(대여)</td>
 							</tr>
 							<tr>
 								<td rowspan="3">사진</td>
-								<td>신랑신부</td>
+								<td data-photo="104">신랑신부</td>
 								<td class="alignL">11R20P 앨범1권</td>
 							</tr>
 							<tr>
-								<td>신랑혼주</td>
+								<td data-photo="104">신랑혼주</td>
 								<td class="alignL">11R10P 앨범1권</td>
 							</tr>
 							<tr>
-								<td>신부혼주</td>
+								<td data-photo="104">신부혼주</td>
 								<td class="alignL">11R10P 앨범1권</td>
 							</tr>
 							<tr>
-								<td colspan="2">헤어/메이크업</td>
+								<td colspan="2" data-photo="106">헤어/메이크업</td>
 								<td class="alignL">제공(신랑/신부)</td>
 							</tr>
 							<tr>
-								<td colspan="2">부케</td>
+								<td colspan="2" data-photo="109">부케</td>
 								<td class="alignL">부케/부토니아/코사지</td>
 							</tr>
 							<tr>
-								<td colspan="2">폐백의상</td>
+								<td colspan="2" data-photo="110">폐백의상</td>
 								<td class="alignL">제공(대여)</td>
 							</tr>
 							<tr>
-								<td colspan="2">혼구용품</td>
+								<td colspan="2" data-photo="111">혼구용품</td>
 								<td class="alignL">혼인서약서, 성혼선언문, 방명록, 축지, 장갑 등</td>
 							</tr>
 						</tbody>
