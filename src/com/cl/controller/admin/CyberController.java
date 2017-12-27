@@ -86,9 +86,9 @@ public class CyberController {
 		int result = cyberService.insertCyber(cDTO);
 		
 		if(result != 0){
-			model.addAttribute("msg", "�궗�씠踰꾪솉蹂닿� �벑濡앹뿉 �꽦怨듯뻽�뒿�땲�떎.");
+			model.addAttribute("msg", "사이버홍보 등록에 성공했습니다.");
 		}else{
-			model.addAttribute("msg", "�궗�씠踰꾪솉蹂닿� �벑濡앹뿉 �떎�뙣�뻽�뒿�땲�떎.");
+			model.addAttribute("msg", "사이버홍보 등록에 실패했습니다.");
 		}
 		model.addAttribute("url", "/Lmin/company/cyber.do");
 		log.info(this.getClass() + ".cyberRegProc end!!!");
@@ -131,9 +131,9 @@ public class CyberController {
 		int result = cyberService.deleteCyber(cDTO);
 		if(result != 0){
 			FileUtil.deleteFile(cyberFilePath, cyberFileName);
-			model.addAttribute("msg", "�궗�씠踰� �솉蹂� �궘�젣�뿉 �꽦怨듯뻽�뒿�땲�떎.");
+			model.addAttribute("msg", "사이버홍보 삭제에 성공했습니다.");
 		}else{
-			model.addAttribute("msg", "�궗�씠踰� �솉蹂� �궘�젣�뿉 �떎�뙣 �뻽�뒿�땲�떎.");
+			model.addAttribute("msg", "사이버홍보 삭제에 실패했습니다.");
 		}
 		model.addAttribute("url", "/Lmin/company/cyber.do");
 		

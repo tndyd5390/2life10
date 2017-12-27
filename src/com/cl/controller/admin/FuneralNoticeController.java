@@ -83,9 +83,9 @@ public class FuneralNoticeController {
 		
 		url = "/Lmin/funeral/funeralNoticeList.do";
 		if(result == 0){
-			msg = "등록실패";
+			msg = "부고알림 등록에 실패했습니다.";
 		}else{
-			msg = "등록성공";
+			msg = "부고알림 등록에 실패했습니다.";
 		}
 		
 		fDTO = null;
@@ -145,9 +145,9 @@ public class FuneralNoticeController {
 		
 		url = "/Lmin/funeral/funeralNoticeList.do";
 		if(result==0){
-			msg = "수정실패";
+			msg = "부고알림 수정에 실패했습니다.";
 		}else{
-			msg = "수정성공";
+			msg = "부고알림 수정에 성공했습니다.";
 		}
 		
 		fDTO = null;
@@ -172,9 +172,9 @@ public class FuneralNoticeController {
 		
 		url = "/Lmin/funeral/funeralNoticeList.do";
 		if(result==0){
-			msg = "삭제실패";
+			msg = "부고알림 삭제에 실패했습니다.";
 		}else{
-			msg = "삭제성공";
+			msg = "부고알림 삭제에 성공했습니다.";
 		}
 		
 		model.addAttribute("url", url);

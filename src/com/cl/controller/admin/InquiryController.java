@@ -1,4 +1,4 @@
-//³³ºÎÁ¶È¸ ÄÁÆ®·Ñ·¯
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¸ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½
 package com.cl.controller.admin;
 
 import javax.annotation.Resource;
@@ -23,7 +23,7 @@ public class InquiryController {
 		log.info("inquiryList Start!!");
 		
 		String url = "/main.do";
-		String msg = "ÁØºñÁß ÀÔ´Ï´Ù.";
+		String msg = "ì¤€ë¹„ì¤‘ìž…ë‹ˆë‹¤.";
 		
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
