@@ -36,12 +36,6 @@
 				$("#"+menuId).parents("li").addClass("active");
 			}
 		}
-
-		$("#subtitle").text($("#"+mbId).text());
-		$("#subtitle2").text($("#"+mbId2).text());
-		
-		$("#subtitle").text($("#"+mbId).text());
-		$("#subtitle2").text($("#"+mbId2).text());
 		
 		$(document).tooltip({
 			items:'[data-photo]',
