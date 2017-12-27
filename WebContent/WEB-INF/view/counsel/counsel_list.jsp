@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/include/inc_header.jsp" %>
-
+<script type="text/javascript" src="/public/js/samsungcnt.js"></script>
+<script type="text/javascript" src="/public/js/samsungcnt-jquery.js"></script>
 	<div id="contentsWrap">
 		<div class="container">
 			<div class="conTitWrap">
@@ -41,38 +42,9 @@
 		
 	});
 	
-
-	//메일 셀렉트박스 제어
-	$("#emailBox").change(function(){
-		if($(this).val()=="direct"){
-			$("#email2").val("");
-		}else{
-			$("#email2").val($(this).val())
-		}
-	});
-	$("#phone2,#phone3").focusout(function(){
-		var value = $(this).val();
-		var regex = /[^0-9]/g;
-		if(value==""){
-
-		}else if(regex.test(value)){
-			alert("숫자만 입력 가능합니다.");
-			$(this).val("");
-		}
-	});
-	
-
 	function doSubmit(){
-		var f = $("#f");
-		var name = $('#name');
-		var phone1 = $("#phone1");
-		var phone2 = $("#phone2");
-		var phone3 = $("#phone3");
-		var pwd = $("#password");
-		var contents = $("#contents");
-		var agree = $('input:radio[name="agree"]:checked');
-		
-		if(name.val()==""){
+		 var f = document.getElementById('f');
+		if(f.name.value == ""){
 			alert("작성자를 입력하세요.");
 			name.focus();
 			return;
@@ -89,17 +61,56 @@
 			pwd.focus();
 			return;
 		}else if(contents.val()==""){
+			f.name.focus();
+			return;
+		}else if(!telChk('phone1', 'phone2', 'phone3')){
+			return;
+		}else if(f.email1.value==""){
+			alert("이메일 주소를 입력하세요.");
+			f.email1.focus();
+			return;
+		}else if(f.email2.value == ""){
+			alert("이메일 주소를 선택하세요.");
+			f.email2.focus();
+			return;
+		}else if(f.title.value == ""){
+			alert("제목을 입력하세요.");
+			f.title.focus();
+			return;
+		}else if(f.contents.value == ""){
 			alert("문의내용을 입력하세요.");
 			contents.focus();
 			return;
 		}else if(agree.val()=="N" || agree.val()=="" || agree.val()==null){
+			f.contents.focus();
+			return;
+		}else if(f.password.value == ""){
+			alert("비밀번호를 입력하세요.");
+			f.password.focus();
+			return;
+		}else if(checkRadio()){
 			alert("개인정보 수집.이용 동의가 필요합니다.");
+			document.getElementById('agree1').focus();
 			return;
 		}else{
 			f.submit();
-		}
+		} 
 	};
-
+	
+	function checkRadio(){
+		var radio = document.getElementById('agree1');
+		if(radio.checked){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
+	function doEmailChange(){
+		var email = document.getElementById('emailBox').value;
+		if(email == "direct")document.getElementById('email2').value = "";
+		else document.getElementById('email2').value = email;
+	}
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -157,7 +168,7 @@
 				<h3 class="smallTit">1:1상담</h3>
 				<form id="f" name="f" method="post" action="/counsel/counselRegProc.do">
 					
-					<section  class="grayWrap">
+					<section  class="grayWrap" id="section">
 						<header>
 							<h4 class="subTit">고객정보</h4>
 						</header>
@@ -184,9 +195,9 @@
 												<option value="01">011</option>
 											</select>
 											-
-											<input type="text" name="phone2" id="phone2" class="inputType2" maxlength="4">
+											<input type="text" name="phone2" id="phone2" class="numPhn inputType2" maxlength="4">
 											-
-											<input type="text" name="phone3" id="phone3" class="inputType2" maxlength="4">
+											<input type="text" name="phone3" id="phone3" class="numPhn inputType2" maxlength="4">
 										</td>
 									</tr>
 									<tr>
@@ -194,7 +205,7 @@
 										<td>
 											<input type="text" name="email1" id="email1" class="inputType2" maxlength="10"> @
 											<input type="text" name="email2" id="email2" class="inputType2" maxlength="15">
-											<select id="emailBox" name="emailBox" class="inputType2">
+											<select id="emailBox" name="emailBox" class="inputType2" onchange="doEmailChange();">
 												<option value="">선택하세요</option>
 												<option value="nate.com">nate.com</option>
 												<option value="hotmail.com">hotmail.com</option>
@@ -259,7 +270,9 @@
 						</div>
 							
 						<div class="btnArea">
-							<button type="button" class="btnDefaultForm" onclick="return doSubmit()">완료</button>
+							<!-- <a href="#" class="btnDefaultForm">완료</a> -->
+							<button type="button" class="psyBtnDefaultForm" onclick="doSubmit();">완료</button>
+							<!-- <button type="button" class="btnDefaultForm">완료</button> -->
 						</div>
 					</section>
 				</form>

@@ -7,6 +7,27 @@
 .my-tooltip{
 	max-width:300px;
 }
+#counsel .psyBtnDefaultForm {
+    width: 160px;
+    margin-right: 0;
+    padding: 15px 30px;
+}
+.btnArea a, .btnArea button {
+    margin-right: 6px;
+}
+.psyBtnDefaultForm, a.psyBtnDefaultForm {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #105d99;
+    font-size: 1.5rem;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    margin-top: 5px;
+}
+
+
+
 </style>
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
