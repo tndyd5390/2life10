@@ -227,7 +227,9 @@ function downloadSche(cruiseNo){
                     </div>
 				</section> -->
 				<a href="/Lmin/cruise/cruiseSchduleWriteView.do" class="btn_active_small" style="float:right;">크루즈 일정 등록</a>
-				<a href="javascript:changeOrder();" class="btn_active_small" style="float:right; margin-right: 10px;">크루즈 일정 정렬</a>
+				<%if(cList.size()>2){%>
+					<a href="javascript:changeOrder();" class="btn_active_small" style="float:right; margin-right: 10px;">크루즈 일정 정렬</a>
+				<%} %>
 				<br/><br/>
 				<!-- pageArea -->
 				<div class="pageArea">

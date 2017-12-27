@@ -97,23 +97,12 @@ public class MemberDTO {
 	public void setMemberAddress(String memberAddress) {
 		this.memberAddress = memberAddress;
 	}
-	public String getRegNo() {
-		return regMemberNo;
-	}
-	public void setRegNo(String regNo) {
-		this.regMemberNo = regNo;
-	}
+
 	public String getRegDt() {
 		return regDt;
 	}
-	public void setRedDt(String redDt) {
-		this.regDt = redDt;
-	}
-	public String getChgNo() {
-		return chgMemberNo;
-	}
-	public void setChgNo(String chgNo) {
-		this.chgMemberNo = chgNo;
+	public void setRegDt(String regDt) {
+		this.regDt = regDt;
 	}
 	public String getChgDt() {
 		return chgDt;
@@ -156,6 +145,18 @@ public class MemberDTO {
 	}
 	public void setMemberAuth(String memberAuth) {
 		this.memberAuth = memberAuth;
+	}
+	public String getRegMemberNo() {
+		return regMemberNo;
+	}
+	public void setRegMemberNo(String regMemberNo) {
+		this.regMemberNo = regMemberNo;
+	}
+	public String getChgMemberNo() {
+		return chgMemberNo;
+	}
+	public void setChgMemberNo(String chgMemberNo) {
+		this.chgMemberNo = chgMemberNo;
 	}
 	
 }

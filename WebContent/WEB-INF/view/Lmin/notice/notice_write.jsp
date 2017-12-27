@@ -102,7 +102,6 @@ function doCancel(){
 			return true;
 		}
 	}
-	
 </script>
 
 <form action="#" name="menuFrm" method="post">

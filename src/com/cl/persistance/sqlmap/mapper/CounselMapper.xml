@@ -71,7 +71,7 @@
 			COUNSEL_INFO
 		SET
 			COUNSEL_REPLY 	= #{counselReply},
-			CHG_MEMEBER_NO	= '3',
+			CHG_MEMBER_NO	= '3',
 			CHG_DT			= NOW()
 		WHERE
 			COUNSEL_NO		= #{counselNo}	
