@@ -64,7 +64,7 @@ public class MemberController {
 			memberNo = CmmUtil.nvl(mDTO.getMemberNo());
 			memberId = CmmUtil.nvl(mDTO.getMemberId());
 			memberName = AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberName()));
-			memberAuth = CmmUtil.nvl(mDTO.getMemberPre());
+			memberAuth = CmmUtil.nvl(mDTO.getMemberAuth());
 			long time = System.currentTimeMillis(); 
 			SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String timeStr = dayTime.format(new Date(time));
