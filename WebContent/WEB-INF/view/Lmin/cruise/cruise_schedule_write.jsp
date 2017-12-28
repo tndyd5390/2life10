@@ -197,6 +197,7 @@ function doCruiseReg(){
 		form.cruiseImgFile.focus();
 		return;
 	}else{
+		form.cruisePrice.value = unComma(form.cruisePrice.value);
 		form.submit();
 	}
 }
@@ -222,14 +223,25 @@ function fileCheck(fileName, permissibleExtension){
 
 function onlyNumber(obj) {
     $(obj).focusout(function(){
-         $(this).val($(this).val().replace(/[^0-9]/g,""));
+         $(this).val($(this).val().replace(/[^0-9|,]/g,""));
     }); 
 }
 
+function priceFormat(){
+	$("#price").val(addComma($("#price").val().replace(/[^0-9|,]/g,"")));
+}
 function doCancel(){
 	if(confirm('작성하지 내용은 저장되지 않습니다. 취소하시겠습니까?')){
 		location.href="/Lmin/cruise/cruiseScheduleList.do";
 	}
+}
+
+function addComma(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+function unComma(str) {
+    str = String(str);
+    return str.replace(/[^\d]+/g, '');
 }
 </script>
 <body>
@@ -287,7 +299,8 @@ function doCancel(){
 	});
 
 </script>
-
+<script type="text/javascript" src="/public/js/samsungcnt.js"></script>
+<script type="text/javascript" src="/public/js/samsungcnt-jquery.js"></script>
 <form action="#" name="menuFrm" method="post">
 	<input type="hidden" name="menuNum"/>
 </form>	
@@ -338,13 +351,13 @@ function doCancel(){
 							<tr>
 								<th scope="row">상품가</th>
 								<td>
-									<input type="text" name="cruisePrice" class="inputType1" maxlength="25" onkeydown="onlyNumber(this)">
+									<input type="text" name="cruisePrice" id="price" class="numPhn inputType1" onblur="priceFormat();" maxlength="25" placeholder="원단위 입력">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">인원</th>
 								<td>
-									<input type="text" name="cruiseAccomodation" class="inputType1" style="" maxlength="25" onkeydown="onlyNumber(this)">
+									<input type="text" name="cruiseAccomodation" class="numPhn inputType1" style="" maxlength="25">
 								</td>
 							</tr>
 							<tr>
