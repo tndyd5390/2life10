@@ -48,6 +48,14 @@
 		$("#subtitle2").text($("#"+mbId2).text());
 		
 	});
+	
+	function goDetail(cNo){
+		var f = $('#f');
+		var cyberNo = $('#cyberNo');
+		
+		cyberNo.val(cNo);
+		f.submit();
+	}
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -99,7 +107,10 @@
 
 			<div class="contents"> <!-- 페이지별 ID none -->
 				<h3 class="smallTit">사이버홍보실</h3>
-
+				
+				<form name="f" id="f" method="post" action="/company/cyberDetail.do">
+					<input type="hidden" name="cyberNo" id="cyberNo">
+				</form>
 				<div class="boardType2">
 					<table summary="">
 						<caption></caption>
@@ -133,7 +144,7 @@
 						<p class="num"><%=CmmUtil.nvl(cDTO.getRowNum()) %></p>
 						<div class="info">
 							<p class="txt1"><!-- 박성진수정 -->
-								<a href="/company/cyberDetail.do?cyberNo=<%=CmmUtil.nvl(cDTO.getCyberNo())%>"><%=TextUtil.exchangeEscapeNvl(cDTO.getCyberTitle()) %></a>
+								<a href="javascript:goDetail('<%=CmmUtil.nvl(cDTO.getCyberNo())%>');"><%=TextUtil.exchangeEscapeNvl(cDTO.getCyberTitle()) %></a>
 							</p>
 							<p class="txt2">
 								<%=TextUtil.exchangeEscapeNvl(cDTO.getMemberId()) %><span class="bar">&nbsp;|</span>

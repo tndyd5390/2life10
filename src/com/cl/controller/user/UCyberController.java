@@ -42,7 +42,7 @@ public class UCyberController {
 		return "/company/cyber";
 	}
 	
-	@RequestMapping(value="company/cyberDetail", method=RequestMethod.GET)
+	@RequestMapping(value="/company/cyberDetail")
 	public String cyberDetail(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cyberDetail start!!!");
 		
