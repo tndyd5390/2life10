@@ -102,7 +102,7 @@ public class CyberController {
 		String cyberNo = CmmUtil.nvl(req.getParameter("cyberNo"));
 		log.info(" cyberNo : " + cyberNo);
 		
-		CyberDTO cDTO = cyberService.getCyberDetail(cyberNo);
+		CyberDTO cDTO = cyberService.updateCyberDetailCnt(cyberNo);
 		if(cDTO == null) cDTO= new CyberDTO();
 		
 		model.addAttribute("cDTO", cDTO);

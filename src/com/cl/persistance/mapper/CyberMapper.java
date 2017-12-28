@@ -17,4 +17,5 @@ public interface CyberMapper {
 	public int updateCyberMovie(CyberDTO cDTO) throws Exception;
 	public int updateCyber(CyberDTO cDTO) throws Exception;
 	public CyberDTO getCyberFileInfo(String cyberNo) throws Exception;
+	public int updateCyberCnt(String cyberNo) throws Exception;
 }

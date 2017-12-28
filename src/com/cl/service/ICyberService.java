@@ -13,4 +13,5 @@ public interface ICyberService {
 	public int deleteCyber(CyberDTO cDTO) throws Exception;
 	public int updateCyberMovie(Map<String, Object> map) throws Exception;
 	public int updateCyber(CyberDTO cDTO) throws Exception;
+	public CyberDTO updateCyberDetailCnt(String cyberNo) throws Exception;
 }

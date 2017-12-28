@@ -68,4 +68,10 @@ public class CyberService implements ICyberService{
 	public int updateCyber(CyberDTO cDTO) throws Exception {
 		return cyberMapper.updateCyber(cDTO);
 	}
+
+	@Override
+	public CyberDTO updateCyberDetailCnt(String cyberNo) throws Exception {
+		cyberMapper.updateCyberCnt(cyberNo);
+		return cyberMapper.getCyberDetail(cyberNo);
+	}
 }

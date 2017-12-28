@@ -144,4 +144,10 @@
     		ON CI.CYBER_FILE_NO = FI.FILE_NO 
          WHERE CI.CYBER_NO = #{cyberNo}
 	</select>
+	
+	<update id="updateCyberCnt" parameterType="string">
+		UPDATE CYBER_INFO
+		   SET CYBER_VIEW_CNT = CYBER_VIEW_CNT + 1
+		 WHERE CYBER_NO = #{cyberNo}
+	</update>
 </mapper>
