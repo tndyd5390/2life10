@@ -108,9 +108,9 @@
 			<div class="pcLnbWrap">
 				<nav>
 					<ul class="pcLnb">
-							<li id="MO50100"><a href="javascript:goMenu('/cruise/cruiseMark.do', '');">크루즈상품특징</a></li>
-							<li id="MO50200"><a href="javascript:goMenu('/cruise/cruisePro.do', '');">크루즈성지순례상품</a></li>
-							<li id="MO50300"><a href="javascript:goMenu('/cruise/cruiseScheduleList.do', '');">크루즈일정</a></li>
+							<li id="MN50100"><a href="javascript:goMenu('/cruise/cruiseMark.do', '');">크루즈상품특징</a></li>
+							<li id="MN50200"><a href="javascript:goMenu('/cruise/cruisePro.do', '');">크루즈성지순례상품</a></li>
+							<li id="MN50300"><a href="javascript:goMenu('/cruise/cruiseScheduleList.do', '');">크루즈일정</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->

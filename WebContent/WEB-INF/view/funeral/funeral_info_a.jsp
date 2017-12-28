@@ -21,8 +21,8 @@
 	$(function() {
 		//메뉴 제어 
 		var lnb = $(".pcLnbWrap ul li a");
-		var menuId = "MN30200";
-		var mbId = "MO30200";
+		var menuId = "MN30300";
+		var mbId = "MO30300";
 		var mbId2 = "";
 		
 		console.log(menuId);
@@ -37,8 +37,6 @@
 			}
 		}
 
-		$("#subtitle").text($("#"+mbId).text());
-		$("#subtitle2").text($("#"+mbId2).text());
 		
 	});
 
@@ -62,7 +60,7 @@
                         </ul>
                     </div>
                     <div class="flexItem4"> <!-- .select 버튼 클릭시 다중클래스 on 추가 -->
-                        <strong><button type="button" class="select" id="subtitle">장례상품</button></strong>
+                        <strong><button type="button" class="select" id="subtitle">장례정보</button></strong>
                         <ul>
 							<li id="MO30100"><a href="javascript:goMenu('/funeral/funeralMark.do', 'MO30100');">장례상품특징</a></li>
 							<li id="MO30200"><a href="javascript:goMenu('/funeral/funeralList_a.do', 'MO30200');">장례상품</a></li>

@@ -18,29 +18,32 @@
 
 
 <script type="text/javascript">
-	$(function() {
-		//메뉴 제어 
-		var lnb = $(".pcLnbWrap ul li a");
-		var menuId = "MN10100";
-		var mbId = "MO10100";
-		var mbId2 = "";
-		
-		console.log(menuId);
-		if ( menuId != '' ){
-			var temp = menuId.substring((menuId.length-2), menuId.length);
-			if ( temp == '00'){//대메뉴 // class="active"
-				$("#"+menuId).addClass("active");
-				$("#"+menuId).children().find("li:eq(0)").addClass("active");
-			}else{//소메뉴
-				$("#"+menuId).addClass("active");
-				$("#"+menuId).parents("li").addClass("active");
-			}
-		}
 
-		$("#subtitle").text($("#"+mbId).text());
-		$("#subtitle2").text($("#"+mbId2).text());
-		
-	});
+$(function() {
+	//메뉴 제어 
+	var lnb = $(".pcLnbWrap ul li a");
+	var menuId = "MN10100";
+	var mbId = "MO10100";
+	var mbId2 = "";
+	
+	console.log(menuId);
+	if ( menuId != '' ){
+		var temp = menuId.substring((menuId.length-2), menuId.length);
+		if ( temp == '00'){//대메뉴 // class="active"
+			$("#"+menuId).addClass("active");
+			$("#"+menuId).children().find("li:eq(0)").addClass("active");
+		}else{//소메뉴
+			$("#"+menuId).addClass("active");
+			$("#"+menuId).parents("li").addClass("active");
+		}
+	}
+
+	$("#subtitle").text($("#"+mbId).text());
+	$("#subtitle2").text($("#"+mbId2).text());
+	
+});
+
+
 
 </script>
 
@@ -79,12 +82,12 @@
             <div class="pcLnbWrap">
                 <nav>
                     <ul class="pcLnb">
-                            <li id="MO10100"><a href="javascript:goMenu('/company/overView.do', 'MO10100');">인사말</a></li>
-                            <li id="MO10200"><a href="javascript:goMenu('/company/organ.do', 'MO10200');">조직도및연혁</a></li>
-                            <li id="MO10300"><a href="javascript:goMenu('/company/branchList.do', 'MO10300');">전국지사안내</a></li>
-                            <li id="MO10400"><a href="javascript:goMenu('/company/adviceList.do', 'MO10400');">상담사조회</a></li>
-                            <li id="MO10500"><a href="javascript:goMenu('/company/cyberList.do', 'MO10500');">사이버홍보실</a></li>
-                            <li id="MO10600"><a href="javascript:goMenu('/company/road.do', 'MO10600');">오시는길</a></li>
+                            <li id="MN10100"><a href="javascript:goMenu('/company/overView.do', 'MO10100');">인사말</a></li>
+                            <li id="MN10200"><a href="javascript:goMenu('/company/organ.do', 'MO10200');">조직도및연혁</a></li>
+                            <li id="MN10300"><a href="javascript:goMenu('/company/branchList.do', 'MO10300');">전국지사안내</a></li>
+                            <li id="MN10400"><a href="javascript:goMenu('/company/adviceList.do', 'MO10400');">상담사조회</a></li>
+                            <li id="MN10500"><a href="javascript:goMenu('/company/cyberList.do', 'MO10500');">사이버홍보실</a></li>
+                            <li id="MN10600"><a href="javascript:goMenu('/company/road.do', 'MO10600');">오시는길</a></li>
                     </ul>
                 </nav>
             </div> <!-- // pcLnbWrap -->
