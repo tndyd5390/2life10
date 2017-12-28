@@ -187,14 +187,14 @@
             <div class="pcLnbWrap">
                 <nav>
                     <ul class="pcLnb">
-							<li id="MO60100"><a href="javascript:goMenu('/notice/noticeList.do', 'MO60100');">공지사항</a></li>
-                            <li id="MO60200"><a href="javascript:goMenu('/qna/qnaList.do', 'MO60200');">자주하는질문</a></li>
-                            <li id="MO60300"><a href="javascript:goMenu('/counsel/counselWrite.do', 'MO60300');">1:1상담</a></li>
-                            <li id="MO60400"><a href="javascript:goMenu('/infomation/infomation_a.do', 'MO60400');">주요정보고시사항</a></li>
-                            <li id="MO60500"><a href="javascript:goMenu('/regulation/regulationList.do', 'MO60500');">상조관련법규</a></li>
-                            <li id="MO60600"><a href="javascript:goMenu('/agreement/agreementList.do', 'MO60600');">이용약관</a></li>
-                            <li id="MO60700"><a href="javascript:goMenu('/inquiry/inquiryList.do', 'MO60700');">납부조회</a></li>
-                            <li id="MO60800"><a href="javascript:goMenu('/appli/appliForm.do', 'MO60800');">가입신청</a></li>
+							<li id="MN60100"><a href="javascript:goMenu('/notice/noticeList.do', 'MO60100');">공지사항</a></li>
+                            <li id="MN60200"><a href="javascript:goMenu('/qna/qnaList.do', 'MO60200');">자주하는질문</a></li>
+                            <li id="MN60300"><a href="javascript:goMenu('/counsel/counselWrite.do', 'MO60300');">1:1상담</a></li>
+                            <li id="MN60400"><a href="javascript:goMenu('/infomation/infomation_a.do', 'MO60400');">주요정보고시사항</a></li>
+                            <li id="MN60500"><a href="javascript:goMenu('/regulation/regulationList.do', 'MO60500');">상조관련법규</a></li>
+                            <li id="MN60600"><a href="javascript:goMenu('/agreement/agreementList.do', 'MO60600');">이용약관</a></li>
+                            <li id="MN60700"><a href="javascript:goMenu('/inquiry/inquiryList.do', 'MO60700');">납부조회</a></li>
+                            <li id="MN60800"><a href="javascript:goMenu('/appli/appliForm.do', 'MO60800');">가입신청</a></li>
                     </ul>
                 </nav>
             </div> <!-- // pcLnbWrap -->
@@ -446,7 +446,7 @@
 								<tr>
 									<th scope="row">자택전화</th>
 									<td>
-										<select id="tel1" name="tel1" id="tel1" title="" class="inputType3">
+										<select id="tel1" name="tel1" id="tel1" title="" class="numPhn inputType3">
 	                                        <option value="02">02</option>
 											<option value="031">031</option>
 											<option value="032">032</option>
@@ -467,15 +467,15 @@
 											<option value="011">011</option>
                                         </select>
 										-
-										<input type="text" name="tel2" id="tel2" class="inputType2" style="" maxlength="5">
+										<input type="text" name="tel2" id="tel2" class="numPhn inputType2" style="" maxlength="5">
 										-
-										<input type="text" name="tel3" id="tel3" class="inputType2" style="" maxlength="5">
+										<input type="text" name="tel3" id="tel3" class="numPhn inputType2" style="" maxlength="5">
 									</td>
 								</tr>
 								<tr>
 									<th scope="row">휴대전화</th>
 									<td>
-										<select id="phoneTel1" name="phoneTel1" id="phoneTel1" title="" class="inputType3">
+										<select id="phoneTel1" name="phoneTel1" id="numPhn phoneTel1" title="" class="inputType3">
                                             <option value="010">010</option>
                                             <option value="011">011</option>
                                             <option value="016">016</option>
@@ -483,9 +483,9 @@
                                             <option value="019">019</option>
                                         </select>
 										-
-										<input type="text" name="phoneTel2" id="phoneTel2" class="inputType2" style="" maxlength="5">
+										<input type="text" name="phoneTel2" id="numPhn phoneTel2" class="inputType2" style="" maxlength="5">
 										-
-										<input type="text" name="phoneTel3" id="phoneTel3" class="inputType2" style="" maxlength="5">
+										<input type="text" name="phoneTel3" id="numPhn phoneTel3" class="inputType2" style="" maxlength="5">
 									</td>
 								</tr>
 								

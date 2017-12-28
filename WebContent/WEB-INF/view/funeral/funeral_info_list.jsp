@@ -38,8 +38,8 @@
 	$(function() {
 		//메뉴 제어 
 		var lnb = $(".pcLnbWrap ul li a");
-		var menuId = "MN10200";
-		var mbId = "MO10200";
+		var menuId = "MN30300";
+		var mbId = "MN30300";
 		var mbId2 = "";
 		
 		console.log(menuId);
@@ -56,7 +56,8 @@
 
 	});
 
-
+	$("#subtitle").text($("#"+mbId).text());
+	$("#subtitle2").text($("#"+mbId2).text());
 	function goPage(page, lastPage){
 		var f = $("#f");
 		$("#page").val(page);

@@ -36,6 +36,8 @@
 				$("#"+menuId).parents("li").addClass("active");
 			}
 		}
+		$("#subtitle").text($("#"+mbId).text());
+		$("#subtitle2").text($("#"+mbId2).text());
 	});
 
 </script>

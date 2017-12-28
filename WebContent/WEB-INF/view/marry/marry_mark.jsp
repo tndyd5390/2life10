@@ -74,8 +74,8 @@
 			<div class="pcLnbWrap">
 				<nav>
 					<ul class="pcLnb">
-                            <li id="MO40100"><a href="javascript:goMenu('/marry/marryMark.do', 'MN40100');">웨딩상품특징</a></li>
-                            <li id="MO40200"><a href="javascript:goMenu('/marry/marryList_d.do', 'MN40200');">웨딩상품</a></li>
+                            <li id="MN40100"><a href="javascript:goMenu('/marry/marryMark.do', 'MN40100');">웨딩상품특징</a></li>
+                            <li id="MN40200"><a href="javascript:goMenu('/marry/marryList_d.do', 'MN40200');">웨딩상품</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->

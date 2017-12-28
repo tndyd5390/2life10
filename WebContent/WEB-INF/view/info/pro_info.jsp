@@ -77,10 +77,10 @@
 			<div class="pcLnbWrap">
 				<nav>
 					<ul class="pcLnb">
-                            <li id="MO20100"><a href="javascript:goMenu('/info/proInfo.do', 'MO20100');">상조상품특징</a></li>
-                            <li id="MO20200"><a href="javascript:goMenu('/info/joinStep.do', 'MO20200');">가입절차</a></li>
-                            <li id="MO20300"><a href="javascript:goMenu('/info/catalogue.do', 'MO20300');">웹카다로그</a></li>
-                            <li id="MO20400"><a href="javascript:goMenu('/info/endPro.do', 'MO20400');">단종상품안내</a></li>
+                            <li id="MN20100"><a href="javascript:goMenu('/info/proInfo.do', 'MO20100');">상조상품특징</a></li>
+                            <li id="MN20200"><a href="javascript:goMenu('/info/joinStep.do', 'MO20200');">가입절차</a></li>
+                            <li id="MN20300"><a href="javascript:goMenu('/info/catalogue.do', 'MO20300');">웹카다로그</a></li>
+                            <li id="MN20400"><a href="javascript:goMenu('/info/endPro.do', 'MO20400');">단종상품안내</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->
