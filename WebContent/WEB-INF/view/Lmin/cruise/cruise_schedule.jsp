@@ -167,11 +167,17 @@ function downloadSche(cruiseNo){
                             <li>인원 : <%=TextUtil.exchangeEscapeNvl(cDTO.getCruiseAccomodation()) %>명</li>
                             <li>상품가 : <%=TextUtil.addComma(TextUtil.exchangeEscapeNvl(cDTO.getCruisePrice())) %>원</li>
                             <li>캐빈 : <%=TextUtil.exchangeEscapeNvl(cDTO.getCruiseCabinCode()) %></li>
+                            <%
+                            if(!"".equals(CmmUtil.nvl(cDTO.getCruiseEtc()))){
+                            %>
                             <li>비고 : <%=TextUtil.exchangeEscapeNvl(cDTO.getCruiseEtc()) %></li>
+                            <%
+                            }
+                            %>
                         </ul>
                     </div>
 					<div class="imgWrap">
-					    <img src="<%="/file/cruise/img/" + CmmUtil.nvl(cDTO.getCruiseImgFileName()) %>" alt="크루즈이미지" />
+					    <img src="<%="/cruiseFile/" + CmmUtil.nvl(cDTO.getCruiseImgFileName()) %>" alt="크루즈이미지" />
 					    <div class="btn_area">
 					        <button type="button" class="btnSearch" onclick="downloadSche(<%=CmmUtil.nvl(cDTO.getCruiseNo())%>);">일정다운로드</button>
                         </div>

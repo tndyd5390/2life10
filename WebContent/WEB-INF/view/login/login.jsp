@@ -45,19 +45,16 @@
 	});
 	
 	function doSubmit(){
-		var id = $("#id");
-		var pwd = $("#password");
-		
-		if(id.val()==""){
-			alert("아이디를 입력하세요.");
-			id.focus();
+		var f = document.getElementById('f');
+		if(f.id.value == ""){
+			alert('아이디를 입력하세요.');
+			f.id.focus();
 			return false;
-		}else if(pwd.val()==""){
-			alert("패스워드를 입력하세요.");
-			pwd.focus();
+		}else if(f.password.value == ""){
+			alert('비밀번호를 입력하세요.');
+			f.password.focus();
 			return false;
 		}else{
-			f.submit();
 			return true;
 		}
 	}
@@ -104,7 +101,7 @@
 			<div class="contents"> <!-- 페이지별 ID none -->
 				<h3 class="smallTit">로그인</h3>
 
-                <form name="f" id="f" method="post" action="/member/loginProc.do">
+                <form name="f" id="f" method="post" action="/member/loginProc.do" onsubmit="return doSubmit();">
                     <div class="loginDiv">
                         <div class="inputArea">
                             <div class="areaDiv">
@@ -115,7 +112,8 @@
                                         <label for="password">패스워드</label>
                                         <input type="password" id="password" name="password" value="" title="비밀번호" class="lginInput">
                                     </div>
-                                    <a href="javascript:doSubmit();" id="submit" class="loginBt">로그인</a>
+                                    <button class="loginBt">로그인</button>
+                                    <!-- <a href="javascript:doSubmit();" id="submit" class="loginBt">로그인</a> -->
                                 </div>
 
                                 <div class="srchArea">
