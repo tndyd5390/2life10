@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cl.dto.CatalogueDTO;
 import com.cl.service.ICatalogueService;
 import com.cl.util.CmmUtil;
-import com.cl.util.SessionUtil;
 
 @Controller
 public class UCatalogueController {
