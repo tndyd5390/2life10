@@ -493,7 +493,7 @@
 								<th scope="row" rowspan="2">주소</th>
 								<td>
 									<input type="text" name="appliPostNo" id="appliPostNo" value="" title="이름" class="inputType2" style="">
-									<a href="#" class="btn_active_small"  onclick="sample6_execDaumPostcode();">우편번호</a>
+									<a href="javascript:sample6_execDaumPostcode();" class="btn_active_small">우편번호</a>
 								</td>
 							</tr>
 							<tr>

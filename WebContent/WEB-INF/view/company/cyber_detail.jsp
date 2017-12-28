@@ -123,20 +123,16 @@
 							<tr>
 								<th scope="row">내용</th>
 								<td>
-									<%=TextUtil.exchangeEscapeNvl(cDTO.getCyberContents()) %>
+									<video width="320" height="240" controls>
+										<source src="/file/cyber/movie/<%=CmmUtil.nvl(cDTO.getCyberFileName()) %>" type="video/<%=TextUtil.getFileExtension(cDTO.getCyberFileName())%>">
+									</video>
+									<br><br><br>
+									<%=TextUtil.replaceBr(TextUtil.exchangeEscapeNvl(cDTO.getCyberContents())) %>
 								</td>
 							</tr>
 							<%
 							}
 							%>
-							<tr>
-								<th scope="row">업로드</th>
-								<td>
-									<video width="320" height="240" controls>
-										<source src="/file/cyber/movie/<%=CmmUtil.nvl(cDTO.getCyberFileName()) %>" type="video/<%=TextUtil.getFileExtension(cDTO.getCyberFileName())%>">
-									</video>
-								</td>
-							</tr>
 						</tbody>
 					</table>
 				</div>

@@ -20,7 +20,7 @@
 			(SELECT COUNT(*) AS PAGE FROM COUNSEL_INFO) P,
 			(SELECT @rownum:=0) TMP
 		ORDER BY
-			REGDT DESC, COUNSELREPLY DESC
+			COUNSELREPLY DESC, REGDT DESC
 		LIMIT #{page}, #{splitPage}
 	</select>
 	
@@ -34,7 +34,6 @@
 			COUNSEL_PHONE_NO,
 			COUNSEL_EMAIL1,
 			COUNSEL_EMAIL2,
-			COUNSEL_PASSWORD,
 			REG_DT
 		) VALUES (
 			#{counselRegName},
@@ -44,7 +43,6 @@
 			#{counselPhoneNo},
 			#{counselEmail1},
 			#{counselEmail2},
-			#{counselPassword},
 			NOW()
 		)
 	</insert>

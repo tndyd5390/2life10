@@ -43,25 +43,19 @@
 	});
 	
 	function doSubmit(){
-		 var f = document.getElementById('f');
+		var f = document.getElementById('f');
+		
 		if(f.name.value == ""){
 			alert("작성자를 입력하세요.");
 			name.focus();
 			return;
-		}else if(phone2.val()==""){
+		}else if(f.phone2.value ==""){
 			alert("휴대전화를 입력하세요.");
 			phone2.focus();
 			return;
-		}else if(phone2.val()==""){
+		}else if(f.phone3.value==""){
 			alert("휴대전화를 입력하세요.");
 			phone2.focus();
-			return;
-		}else if(pwd.val()==""){
-			alert("비밀번호를 입력하세요.");
-			pwd.focus();
-			return;
-		}else if(contents.val()==""){
-			f.name.focus();
 			return;
 		}else if(!telChk('phone1', 'phone2', 'phone3')){
 			return;
@@ -80,13 +74,6 @@
 		}else if(f.contents.value == ""){
 			alert("문의내용을 입력하세요.");
 			contents.focus();
-			return;
-		}else if(agree.val()=="N" || agree.val()=="" || agree.val()==null){
-			f.contents.focus();
-			return;
-		}else if(f.password.value == ""){
-			alert("비밀번호를 입력하세요.");
-			f.password.focus();
 			return;
 		}else if(checkRadio()){
 			alert("개인정보 수집.이용 동의가 필요합니다.");
@@ -191,8 +178,8 @@
 										<th scope="row">휴대전화</th>
 										<td>
 											<select id="phone1" name="phone1"  class="inputType3">
-												<option value="00">010</option>
-												<option value="01">011</option>
+												<option value="010">010</option>
+												<option value="011">011</option>
 											</select>
 											-
 											<input type="text" name="phone2" id="phone2" class="numPhn inputType2" maxlength="4">
@@ -239,14 +226,6 @@
 											<textarea id="contents" name="contents" cols="83" rows="10" class="textArea"></textarea>
 										</td>
 									</tr>
-									<tr>
-										<th scope="row">비밀번호</th>
-										<td>
-											<input type="password" name="password" class="inputType1" maxlength="25">
-											&nbsp;
-											<input type="checkbox" id="passwordYN" name="passwordYN"/> <label for="">비밀글</label>
-										</td>
-									</tr>
 								</tbody>
 							</table>
 						</div>
@@ -255,7 +234,7 @@
 							<h5 class="blueTit">[필수] 개인정보 수집.이용 동의</h5>
 							<p>삼성물산은 고객님들의 의견 접수와 관련하여 성실한 답변을 드리기 위해 필요한 최소한의 개인정보를 수집하고 있습니다.</p>
 							<ul class="defaultGrayDotList">
-								<li>수집 항목 : 이메일</li>
+								<li>수집 항목 : 이름, 이메일, 휴대전화</li>
 								<li>수집 및 이용목적 : 접수 문의에 대한 답변/안내</li>
 								<li>보유 및 이용기간 : 수집∙이용 목적 달성 시 까지</li>
 							</ul>

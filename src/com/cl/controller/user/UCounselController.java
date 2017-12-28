@@ -47,7 +47,6 @@ public class UCounselController {
 		String counselContents = CmmUtil.nvl(req.getParameter("contents"));
 		String counselEmail1 = CmmUtil.nvl(req.getParameter("email1"));
 		String counselEmail2 = CmmUtil.nvl(req.getParameter("email2"));
-		String counselPassword = SHA256Util.sha256(CmmUtil.nvl(req.getParameter("password")));
 		String counselPhoneNo = CmmUtil.nvl(req.getParameter("phone1"))+"-"+CmmUtil.nvl(req.getParameter("phone2"))+"-"+CmmUtil.nvl(req.getParameter("phone3"));
 		
 		log.info("counselRegName : "+counselRegName);
@@ -56,7 +55,6 @@ public class UCounselController {
 		log.info("counselRegEmail1 : "+counselEmail1);
 		log.info("counselRegEmail2 : "+counselEmail2);
 		log.info("counselPhoneNo : "+counselPhoneNo);
-		log.info("counselPassword : "+counselPassword);
 		
 		CounselDTO cDTO = new CounselDTO();
 		
@@ -67,7 +65,6 @@ public class UCounselController {
 		cDTO.setCounselEmail1(AES256Util.strEncode(counselEmail1));
 		cDTO.setCounselEmail2(AES256Util.strEncode(counselEmail2));
 		cDTO.setCounselPhoneNo(AES256Util.strEncode(counselPhoneNo));
-		cDTO.setCounselPassword(counselPassword);
 		
 		int result = counselService.insertCounsel(cDTO);
 		
