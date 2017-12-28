@@ -135,7 +135,13 @@
                             <li>인원 : <%=TextUtil.exchangeEscapeNvl(cDTO.getCruiseAccomodation()) %>명</li>
                             <li>상품가 : <%=TextUtil.addComma(TextUtil.exchangeEscapeNvl(cDTO.getCruisePrice())) %>원</li>
                             <li>캐빈 : <%=TextUtil.exchangeEscapeNvl(cDTO.getCruiseCabinCode()) %></li>
+                            <%
+                            if(!"".equals(CmmUtil.nvl(cDTO.getCruiseEtc()))){
+                            %>
                             <li>비고 : <%=TextUtil.exchangeEscapeNvl(cDTO.getCruiseEtc()) %></li>
+                            <%
+                            }
+                            %>
                         </ul>
                     </div>
 					<div class="imgWrap">
