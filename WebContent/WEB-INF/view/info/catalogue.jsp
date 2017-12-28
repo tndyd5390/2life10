@@ -58,7 +58,7 @@
 	function download(cNo){
 		var f = $('#f');
 		var catalogueNo = $('#cNo');
-		f.attr("action", "/Lmin/catalogue/catalogueDownload.do");
+		f.attr("action", "/catalogue/catalogueDownload.do");
 		catalogueNo.val(cNo);
 		f.submit();
 	}
