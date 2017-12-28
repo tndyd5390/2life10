@@ -136,9 +136,6 @@ public class CatalogueController {
 		ModelAndView mav = new ModelAndView("download", "downloadFile", file);
 		mav.addObject("fileOrgName", fileOrgName);
 		
-		cDTO = null;
-		file = null;
-		
 		log.info("Lmin:catalogueDownLoad End!!");
 		return mav;
 	}

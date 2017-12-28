@@ -56,7 +56,7 @@
 	});
 	
 	function download(cNo){
-		ocation.href="/catalogue/catalogueDownload.do?cNo=" + cNo;
+		location.href="/catalogue/catalogueDownload.do?cNo=" + cNo;
 	}
 
 </script>

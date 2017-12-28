@@ -73,7 +73,6 @@ public class UCatalogueController {
 	@RequestMapping("/catalogue/catalogueDownload")
 	public ModelAndView catalogueDownload(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("catalogueDownLoad Start!!");
-		SessionUtil.sessionCheck(resp, session);
 		String catalogueNo = CmmUtil.nvl(req.getParameter("cNo"));
 		
 		log.info("catalogueNo : "+catalogueNo);
@@ -92,9 +91,6 @@ public class UCatalogueController {
 		
 		ModelAndView mav = new ModelAndView("download", "downloadFile", file);
 		mav.addObject("fileOrgName", fileOrgName);
-		
-		cDTO = null;
-		file = null;
 		
 		log.info("catalogueDownLoad End!!");
 		return mav;
