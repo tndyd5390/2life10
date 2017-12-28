@@ -56,11 +56,7 @@
 	});
 	
 	function download(cNo){
-		var f = $('#f');
-		var catalogueNo = $('#cNo');
-		f.attr("action", "/catalogue/catalogueDownload.do");
-		catalogueNo.val(cNo);
-		f.submit();
+		ocation.href="/catalogue/catalogueDownload.do?cNo=" + cNo;
 	}
 
 </script>
