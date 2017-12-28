@@ -111,8 +111,7 @@
 					<p><strong class="pointColor">상조는 '서로돕는다'라는 의미로서,</strong><br/>미래에 필요한 용역서비스나 물품을 현 시점에서 작은 할부금 형식으로 구매하는 방식으로서, 상조회원들이 회비를 납부하여 대량구매, 원가절감 효과로 10년후 또는 20년후에라도 가입금액 그대로 혜택을 받을 수 있는 물가보상시스템입니다.<br/><br/></p>
 					
 					<div class="signArea">
-						<p class="smallTit">크리스찬라이프 대표</p>
-						<strong class="subTit">김 현 재 </strong>
+						<p class="smallTit">크리스찬상조(주) 직원 일동</p>
 					</div>
 				</div>
 

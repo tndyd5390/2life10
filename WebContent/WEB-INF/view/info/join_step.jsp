@@ -186,17 +186,17 @@
 
 				<div class="tableBasicList">
 					<table class="defaultTable">
-						<caption>사업부문 별 SNS모음</caption>
+						<caption></caption>
 						<colgroup>
-							<col style="width:15%;">
+							<col style="width:20%;">
 							<col style="width:auto%;">
 						</colgroup>
-						<thead>
+						<head>
 							<tr>
 								<th scope="row">일정</th>
 								<th scope="row">장례행사진행안내(24시간 대기)</th>
 							</tr>
-						</thead>
+						</head>
 						<tbody>
 							<tr>
 								<td>임종전</td>
@@ -217,7 +217,6 @@
 						</tbody>
 					</table>
 				</div>
-
 			</div> <!-- // contents -->
 
 

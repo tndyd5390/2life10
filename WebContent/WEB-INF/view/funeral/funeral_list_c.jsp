@@ -267,98 +267,25 @@
 						</tbody>
 					</table>
 				</div>
-										<article class="businessUnit">
-					<ul>
-						<li class="unit01">
-							<div class="imgWrap"><img src="../public/img/conts/fu_img_01.jpg" alt="장례전문지도사" /></div>
-							<div class="txtWrap">
-								<strong>장례전문지도사</strong>
-							</div>
-						</li>
-						<li class="unit02">
-							<div class="imgWrap"><img src="../public/img/conts/fu_img_02.jpg" alt="오동나무관" /></div>
-							<div class="txtWrap">
-								<strong>오동나무관</strong>
-							</div>
-						</li>
-						<li class="unit03">
-							<div class="imgWrap"><img src="../public/img/conts/fu_img_03.jpg" alt="수의" /></div>
-							<div class="txtWrap">
-								<strong>수의</strong>
-							</div>
-						</li>
-					</ul>
-				</article> <!-- // businessUnit -->
-
-				<article class="businessUnit">
-					<ul>
-						<li class="unit01">
-							<div class="imgWrap"><img src="../public/img/conts/fu_img_04.jpg" alt="멧베" /></div>
-							<div class="txtWrap">
-								<strong>멧베</strong>
-							</div>
-						</li>
-						<li class="unit02">
-							<div class="imgWrap"><img src="../public/img/conts/fu_img_05.jpg" alt="현대식의전복" /></div>
-							<div class="txtWrap">
-								<strong>현대식의전복</strong>
-							</div>
-						</li>
-						<li class="unit03">
-							<div class="imgWrap"><img src="../public/img/conts/fu_img_06.jpg" alt="전통식의전복" /></div>
-							<div class="txtWrap">
-								<strong>전통식의전복</strong>
-							</div>
-						</li>
-					</ul>
-				</article> <!-- // businessUnit -->
-
-				<article class="businessUnit">
-					<ul>
-						<li class="unit01">
-							<div class="imgWrap"><img src="/public/img/conts/fu_img_07.jpg" alt="발인용품" /></div>
-							<div class="txtWrap">
-								<strong>발인용품</strong>
-							</div>
-						</li>
-						<li class="unit02">
-							<div class="imgWrap"><img src="/public/img/conts/fu_img_08.jpg" alt="빈소용품" /></div>
-							<div class="txtWrap">
-								<strong>빈소용품</strong>
-							</div>
-						</li>
-						<li class="unit03">
-							<div class="imgWrap"><img src="/public/img/conts/fu_img_09.jpg" alt="헌화" /></div>
-							<div class="txtWrap">
-								<strong>헌화</strong>
-							</div>
-						</li>
-					</ul>
-				</article> <!-- // businessUnit -->
-
-				<article class="businessUnit">
-					<ul>
-						<li class="unit01">
-							<div class="imgWrap"><img src="/public/img/conts/fu_img_10.jpg" alt="꽃바구니" /></div>
-							<div class="txtWrap">
-								<strong>꽃바구니</strong>
-							</div>
-						</li>
-						<li class="unit02">
-							<div class="imgWrap"><img src="/public/img/conts/fu_img_11.jpg" alt="캐디락리무진,장의버스" /></div>
-							<div class="txtWrap">
-								<strong>캐디락리무진,장의버스</strong>
-							</div>
-						</li>
-						<li class="unit03">
-							<div class="imgWrap"><img src="/public/img/conts/fu_img_12.jpg" alt="고인운구전용차량" /></div>
-							<div class="txtWrap">
-								<strong>고인운구전용차량</strong>
-							</div>
-						</li>
-					</ul>
-				</article> <!-- // businessUnit -->
-			
+				
+				<br/><br/>
+				<strong class="blueTit">참고사항</strong>
+				<article>
+					<section>
+						<ul class="nonumList">
+							<li>장례식장 시설사용료(빈소, 안치실, 수시 및 약품처리) 및 식대는 별도입니다.</li>
+							<li>납입도중 장례발생 시 나머지 부금액을 장례행사 종료와 동시에 완납해야 합니다.</li>
+							<li>수의 준비시 꽃관보(매장시), 유골함 또는 도우미 추가 등 택일하여 대체 제공합니다.</li>
+							<li>화장시 화장용수의를 사용합니다.</li>
+							<li>원산지표시 :
+								<ul class="roundNumList">
+									<li>관- 재질:오동나무(원산지-중국), 완제품제조-대한민국</li>
+									<li>수의- 390, 480상품 [원단:대마(원산지-중국), 완제품제조-대한민국, 기계식] , 260상품 [원단:저마(원산지-중국), 완제품제조-대한민국, 기계식]</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+				</article>
 
 
 			</div> <!-- // contents -->

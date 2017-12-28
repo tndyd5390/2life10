@@ -106,8 +106,8 @@
 					<!-- 2017 ~2012 -->
 					<article>
 						<section>
-							<h3 class="contTit">크리스찬라이프 새로운 도전</h3>
-							<p>2017년 크리스찬라이프가 새로운 도전을 시작합니다.</p>
+							<h3 class="contTit">크리스찬상조(주) 새로운 도전</h3>
+							<p>2017년 크리스찬상조가 새로운 도전을 시작합니다.</p>
 						</section>
 						<ul class="history">
 							<li>
@@ -364,6 +364,18 @@
 							</li>
 						</ul>
 					</article>
+				</div>
+				<br/><br/>
+				<section>
+					<h3 class="contTit">조직도</h3>
+				</section>
+				<div class="businessUnit">
+					<li class="unitTit">
+						<div class="imgWrap">
+							<p class="moImg"><img src="../public/img/conts/img_org_mo.jpg" alt="조직도 이미지" /></p>
+							<p class="pcImg"><img src="../public/img/conts/img_org_pc.jpg" alt="조직도 이미지" /></p>
+						</div>
+					</li>
 				</div>
 
 

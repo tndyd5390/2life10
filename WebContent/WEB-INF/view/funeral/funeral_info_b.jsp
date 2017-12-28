@@ -140,7 +140,79 @@ $(function() {
 					<li>회장장 관할지 수입인지(해당시 화장요금)</li>
 				</ul>
 				<br/><br/>
+				
+				
+				<div class="businessIntro">
+					<h3 class="subTit">장례 후 확인사항</h3>
+				</div>
+				<br/>
+				
+				<strong class="blueTit">사망신고 및 호적정리</strong><br/>
+				<strong class="blueTit2">구비서류</strong>
+				<ul class="defaultGrayDotList mt-10">
+					<li>사망신고서 2부(시,읍,면,동사무소에 비치)</li>
+					<li>사망진단서(검안서), 검사필증</li>
+				</ul>
+				<br/><br/>
+				<strong class="blueTit2">신고기한</strong>
+				<ul class="defaultGrayDotList mt-10">
+					<li>사망일로부터 30일 이내</li>
+				</ul>
+				<br/><br/>
 
+				<strong class="blueTit">재산상속</strong><br/>
+				<strong class="blueTit2">법원 상속지분에 의한 재산상속</strong>
+				<ul class="defaultGrayDotList mt-10">
+					<li>망인제적등본, 말소주민등록초본 각1부</li>
+					<li>망인자녀 모두의 호적등본, 주민등록 초본 각1부</li>
+					<li>인감도장 및 인감증명 1부</li>
+					<li>상속재산 등기부등본 1부</li>
+					<li>토지대장, 개별 공시지가확인원 각1부</li>
+				</ul>
+				<br/><br/>
+				<strong class="blueTit2">협의분할에 의한 재산상속</strong>
+				<ul class="defaultGrayDotList mt-10">
+					<li>위 구비서류 중 인감 증명 제외</li>
+				</ul>
+				<br/><br/>
+
+				<strong class="blueTit">각종보험</strong><br/>
+				<strong class="blueTit2">가입보험료 청구</strong>
+				<ul class="defaultGrayDotList mt-10">
+					<li>해당 보험회사별 관련 구비서류</li>
+				</ul>
+				<br/><br/>
+
+				<strong class="blueTit">차량소유자상속이전</strong><br/>
+				<strong class="blueTit2">차량이전</strong>
+				<ul class="defaultGrayDotList mt-10">
+					<li>망인제적등본1부</li>
+					<li>상속인 및 상속포기인 인감증명 각1부</li>
+					<li>상속인 주민등록등본 1부 및 신분증</li>
+					<li>자동차등록증</li>
+					<li>책임보험영수증</li>
+					<li>자동차세 완납증명 1부(대리인신고시 상속인 인감증명서 첨부위임장 작성)</li>
+				</ul>
+				<br/><br/>
+				<strong class="blueTit2">신고기한</strong>
+				<ul class="defaultGrayDotList mt-10">
+					<li>2개월이내</li>
+				</ul>
+				<br/><br/>
+
+				<strong class="blueTit">국민연금</strong><br/>
+				<strong class="blueTit2">국민연금 가입자 연금수령인 명의변경</strong>
+				<ul class="defaultGrayDotList mt-10">
+					<li>사망진단서(검안서) 1부</li>
+					<li>수급자 주민등록등본 1부, 심분증, 통장사본</li>
+					<li>망인 주민등록 말소등본, 제적등본 1부</li>
+				</ul>
+				<br/><br/>
+				<strong class="blueTit2">대리인신고</strong>
+				<ul class="defaultGrayDotList mt-10">
+					<li>수급자의 인감증명 1부, 인감도장지참</li>
+				</ul>
+				<br/><br/>
 			</div> <!-- // contents -->
 
 
