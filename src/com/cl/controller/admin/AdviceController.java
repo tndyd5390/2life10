@@ -54,6 +54,7 @@ public class AdviceController {
 		hMap = adviceService.getAdviceList(hMap);
 		model.addAttribute("hMap", hMap);
 		
+		hMap = null;
 		log.info(this.getClass() + ".adviceList end!!!");
 		return "/Lmin/company/advice";
 	}

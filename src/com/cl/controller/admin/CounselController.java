@@ -101,6 +101,17 @@ public class CounselController {
 		url = "/Lmin/counsel/counselList.do";
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
+		
+		url = null;
+		msg = null;
+		counselReply = null;
+		counselRegName = null;
+		counselTitle = null;
+		counselContents = null;;
+		counselEmail1 = null;
+		counselEmail2 = null;
+		counselPassword = null;
+		counselPhoneNo = null;
 		cDTO = null;
 		log.info("Lmin:counselRegProc End!!");
 		return "/alert";
@@ -118,6 +129,7 @@ public class CounselController {
 		cDTO = counselService.getCounselDetail(cDTO);
 		
 		model.addAttribute("cDTO", cDTO);
+		counselNo = null;
 		cDTO = null;
 		log.info("Lmin:counselDetail End!!");
 		return "/Lmin/counsel/counsel_view";
@@ -151,6 +163,12 @@ public class CounselController {
 		
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
+		
+		url = null;
+		msg = null;
+		counselNo = null;
+		chgMemberNo = null;;
+		cDTO = null;
 		log.info("Lmin:counselReplyProc End!!");
 		return "/alert";
 	}

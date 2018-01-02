@@ -156,6 +156,8 @@ public class BranchController {
 			model.addAttribute("msg", "전국지사 삭제에 실패했습니다.");
 			model.addAttribute("url", "/Lmin/company/branchDetail.do?branchNo=" + branchNo);
 		}
+		
+		branchNo = null;
 		log.info(this.getClass() + ".branchDeleteProc end!!!");
 		return "/alert";
 	}
@@ -261,6 +263,10 @@ public class BranchController {
 		
 		model.addAttribute("bList", bList);
 		model.addAttribute("bySearch", "y");
+		
+		sMap = null;
+		searchArea = null;
+		searchWord = null;
 		log.info(this.getClass() + ".branchSearch end!!!");
 		return "/Lmin/company/branch";
 	}

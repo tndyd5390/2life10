@@ -21,7 +21,6 @@ public class UInfoController {
 	@RequestMapping("/info/proInfo")
 	public String proInfo() throws Exception{
 		log.info("proInfo Start!!");
-		
 		log.info("proInfo End!!");
 		return "/info/pro_info";
 	}
@@ -29,7 +28,6 @@ public class UInfoController {
 	@RequestMapping("/info/joinStep")
 	public String joinStep() throws Exception{
 		log.info("joinStep Start!!");
-		
 		log.info("joinStep End!!");
 		return "/info/join_step";
 	}

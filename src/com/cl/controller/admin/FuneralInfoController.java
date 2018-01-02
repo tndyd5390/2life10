@@ -64,6 +64,9 @@ public class FuneralInfoController {
 		hashMap = codeService.getCodeList();
 		
 		model.addAttribute("hashMap", hashMap);
+		
+		hashMap = null;
+		
 		log.info("Lmin:funeralInfoWrite End!!");
 		return "/Lmin/funeral/funeral_info_write";
 	}
@@ -112,10 +115,22 @@ public class FuneralInfoController {
 			msg = "전국장례시설 등록에 실패했습니다.";
 		}
 		
-		fDTO = null;
 		
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
+		
+		fDTO = null;
+		url = null;
+		msg = null;
+		funeralInfoCode = null;
+		funeralInfoName = null;
+		funeralInfoArea = null;
+		funeralInfoTel = null;
+		funeralInfoPostno = null;
+		funeralInfoAddr1 = null;
+		funeralInfoAddr2 = null;
+		regMemberNo = null;
+		
 		log.info("Lmin:funeralInfoRegProc End!!");
 		return "/alert";
 	}
@@ -136,6 +151,11 @@ public class FuneralInfoController {
 		
 		model.addAttribute("fDTO", fDTO);
 		model.addAttribute("hashMap", hashMap);
+		
+		funeralInfoNo = null;
+		fDTO = null;
+		hashMap = null;
+		
 		log.info("Lmin:funeralInfoDetail End!!");
 		return "/Lmin/funeral/funeral_info_detail";
 	}
@@ -187,10 +207,22 @@ public class FuneralInfoController {
 			msg = "전국장례시설 수정에 실패했습니다.";
 		}
 		
-		fDTO = null;
 		
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
+		
+		fDTO = null;
+		url = null;
+		msg = null;
+		funeralInfoNo = null;
+		funeralInfoCode = null;
+		funeralInfoName = null;
+		funeralInfoArea = null;
+		funeralInfoTel = null;
+		funeralInfoPostno = null;
+		funeralInfoAddr1 = null;
+		funeralInfoAddr2 = null;
+		chgMemberNo = null;
 		
 		log.info("Lmin:funeralInfoUpdateProc End!!");
 		return "/alert";
@@ -215,6 +247,10 @@ public class FuneralInfoController {
 		}
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
+		
+		url = null;
+		msg = null;
+		funeralInfoNo = null;
 		
 		log.info("Lmin:funeralInfoDelete End!!");
 		return "/alert";

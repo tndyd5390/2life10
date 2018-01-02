@@ -88,9 +88,18 @@ public class FuneralNoticeController {
 			msg = "부고알림 등록에 실패했습니다.";
 		}
 		
-		fDTO = null;
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
+		
+		fDTO = null;
+		url = null;
+		msg = null;
+		funeralNoticeName = null;
+		funeralNoticeMember = null;
+		funeralNoticePlace = null;
+		funeralNoticeDay = null;
+		regMemberNo = null;
+		
 		log.info("Lmin:funeralInfoRegProc End!!");
 		return "/alert";
 	}
@@ -108,7 +117,10 @@ public class FuneralNoticeController {
 		fDTO = funeralNoticeService.getFuneralNoticeDetail(fDTO);
 		
 		model.addAttribute("fDTO", fDTO);
+		
 		fDTO = null;
+		funeralNoticeNo = null;
+		
 		log.info("Lmin:funeralInfoDetail End!!");
 		return "/Lmin/funeral/funeral_notice_detail";
 	}
@@ -150,10 +162,20 @@ public class FuneralNoticeController {
 			msg = "부고알림 수정에 성공했습니다.";
 		}
 		
-		fDTO = null;
 		
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
+		
+		fDTO = null;
+		url = null;
+		msg = null;
+		funeralNoticeNo = null;
+		funeralNoticeName = null;
+		funeralNoticeMember = null;
+		funeralNoticePlace = null;
+		funeralNoticeDay = null;
+		chgMemberNo = null;
+		
 		log.info("Lmin:funeralNoticeUpdateProc End!!");
 		return "/alert";
 	}
@@ -179,6 +201,11 @@ public class FuneralNoticeController {
 		
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
+		
+		url = null;
+		msg = null;
+		funeralNoticeNo = null;
+		
 		log.info("Lmin:funeralNoticeDelete End!!");
 		return "/alert";
 	}

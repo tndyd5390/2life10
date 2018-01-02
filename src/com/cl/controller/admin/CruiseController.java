@@ -1,4 +1,3 @@
-//크占쏙옙占쏙옙 占쏙옙트占싼뤄옙
 package com.cl.controller.admin;
 
 import java.io.File;
@@ -48,7 +47,6 @@ public class CruiseController {
 	 * @param session
 	 * @return
 	 * @throws Exception
-	 * �겕猷⑥쫰 由ъ뒪�듃 �솕硫� 硫붿냼�뱶
 	 */
 	@RequestMapping(value="Lmin/cruise/cruiseScheduleList", method={RequestMethod.GET, RequestMethod.POST})
 	public String cruiseScheduleList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
@@ -74,7 +72,6 @@ public class CruiseController {
 	 * @param session
 	 * @return
 	 * @throws Exception
-	 * �겕猷⑥쫰 �벑濡� �솕硫댁쑝濡� �씠�룞�븯�뒗 硫붿냼�뱶
 	 */
 	@RequestMapping(value="Lmin/cruise/cruiseSchduleWriteView", method=RequestMethod.GET)
 	public String cruiseSchduleWriteView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
@@ -93,7 +90,6 @@ public class CruiseController {
 	 * @param cruiseImgFile
 	 * @return
 	 * @throws Exception
-	 * �겕猷⑥쫰 �벑濡� 硫붿냼�뱶
 	 */
 	@RequestMapping(value="Lmin/cruise/cruiseScheduleRegProc", method=RequestMethod.POST)
 	public String cruiseScheduleRegProc(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session, @RequestParam("cruiseScheFile") MultipartFile cruiseScheFile, @RequestParam("cruiseImgFile") MultipartFile cruiseImgFile) throws Exception{
@@ -163,6 +159,25 @@ public class CruiseController {
 			model.addAttribute("msg", "크루즈일정 등록에 실패했습니다.");
 		}
 		model.addAttribute("url", "/Lmin/cruise/cruiseScheduleList.do");
+		
+		regMemberNo = null;
+		cruiseName = null;
+		cruiseShipName = null;
+		cruisePrice = null;
+		cruiseAccomodation = null;
+		cruiseCabinCode = null;
+		startYear = null;
+		startMonth = null;
+		startDay = null;
+		endYear = null;
+		endMonth = null;
+		endDay = null;
+		cruiseEtc = null;
+		orgScheFileName = null;
+		orgImgFileName = null;
+		reScheFileName = null;
+		reImgFileName = null;
+		cDTO = null;
 		log.info(this.getClass() + ".cruiseScheduleRegProc end!!!");
 		return "/alert";
 	}
@@ -203,6 +218,14 @@ public class CruiseController {
 			FileUtil.deleteFile(fileNames.get("pdfFullPath"));
 		}
 		log.info(this.getClass() + ".deleteCruise end!!!");
+		
+		cruiseNo = null;
+		cruiseImgFileNo = null;
+		cruiseScheFileNo = null;
+		cDTO = null;
+		fileNoArr = null;
+		fileNames = null;
+		
 		return "redirect:/Lmin/cruise/cruiseScheduleList.do";
 	}
 	
@@ -226,6 +249,8 @@ public class CruiseController {
 		
 		model.addAttribute("cDTO", cDTO);
 		
+		cruiseNo = null;;
+		cDTO = null;
 		log.info(this.getClass() + ".updateCruise end!!!");
 		return "/Lmin/cruise/cruise_schedule_updateView";
 	}
@@ -343,6 +368,27 @@ public class CruiseController {
 			model.addAttribute("url", "/Lmin/cruise/updateCruiseView.do?cruiseNo=" + cruiseNo);
 		}
 		
+		cruiseNo = null;
+		chgMemberNo = null;
+		regMemberNo = null;
+		cruiseName = null;
+		cruiseShipName = null;;
+		cruisePrice = null;
+		cruiseAccomodation = null;
+		cruiseCabinCode = null;
+		startYear = null;
+		startMonth = null;
+		startDay = null;
+		endYear = null;
+		endMonth = null;
+		endDay = null;
+		cruiseEtc = null;
+		cruiseImgFileNo = null;
+		cruiseScheFileNo = null;
+		imgFileName = null;
+		scheFileName = null;
+		cDTO = null;
+		
 		log.info(this.getClass() + ".updateCruiseProc end!!!");
 		return "/alert";
 	}
@@ -354,7 +400,6 @@ public class CruiseController {
 	 * @param session
 	 * @return
 	 * @throws Exception
-	 * �겕猷⑥쫰 �씪�젙 �떎�슫濡쒕뱶 硫붿냼�뱶
 	 */
 	@RequestMapping(value="Lmin/cruise/cruiseDownloadSche", method=RequestMethod.GET)
 	public ModelAndView crusieDownLoadSche(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
@@ -383,7 +428,6 @@ public class CruiseController {
 	public String cruiseChangeOrder(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cruiseChangeOrder start!!!");
 		SessionUtil.sessionCheck(resp, session);
-		//�븳 �솕硫댁뿉 蹂댁뿬以� �겕猷⑥쫰 媛��닔
 		int splitPage = 5;
 		
 		HashMap<String, Object> hMap = new HashMap<>();
@@ -412,6 +456,8 @@ public class CruiseController {
 			model.addAttribute("msg", "크루즈일정 정렬에 실패했습니다.");
 		}
 		model.addAttribute("url", "/Lmin/cruise/cruiseScheduleList.do");
+		
+		cruiseList = null;
 		
 		log.info(this.getClass() + ".orderByCruise end!!!");
 		return "/alert";

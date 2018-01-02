@@ -76,7 +76,19 @@ public class UCounselController {
 		url = "/counsel/counselWrite.do";
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
+		
 		cDTO = null;
+		url = null;
+		msg = null;
+		counselReply = null;
+		counselRegName = null;
+		counselTitle = null;
+		counselContents = null;
+		counselEmail1 = null;
+		counselEmail2 = null;
+		counselPhoneNo = null;
+		cDTO = null;
+		
 		log.info("counselRegProc End!!");
 		return "/alert";
 	}

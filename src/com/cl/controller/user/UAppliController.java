@@ -83,6 +83,22 @@ public class UAppliController {
 			model.addAttribute("msg", "가입 신청에 실패했습니다.");
 		}
 		model.addAttribute("url", "/main.do");
+		
+		regMemberNo = null;
+		appliProdCode = null;
+		appliContractCode = null;
+		appliName = null;
+		tel1 = null;
+		tel2 = null;
+		tel3 = null;
+		phoneTel1 = null;
+		phoneTel2 = null;
+		phoneTel3 = null;
+		appliPostNo = null;
+		appliAddress = null;
+		appliAddressDetail = null;
+		aDTO = null;
+		
 		log.info(this.getClass() + ".appliProc end!!!");
 		return "/alert";
 	}

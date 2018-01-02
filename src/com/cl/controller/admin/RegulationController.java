@@ -48,7 +48,6 @@ public class RegulationController {
 	public String regulationList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".regulationList start!!!");
 		SessionUtil.sessionCheck(resp, session);
-		//�솕硫댁뿉 蹂댁뿬以� �빆紐⑹쓽 媛��닔
 		int splitPage = 10;
 		
 		HashMap<String, Object> hMap = new HashMap<>();
