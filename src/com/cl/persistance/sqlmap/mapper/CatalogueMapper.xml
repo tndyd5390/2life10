@@ -178,7 +178,7 @@
 		 	</if>
 		 	<if test="rowNum == 2">
 		 	<![CDATA[
-		 		CT.ROWNUM < 2
+		 		CT.ROWNUM > 2
 		 	]]>
 		 	</if>
 	</select>
