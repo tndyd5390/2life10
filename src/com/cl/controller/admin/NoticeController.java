@@ -82,6 +82,14 @@ public class NoticeController {
 		
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
+		
+		url = null;
+		msg = null;
+		title = null;
+		contents = null;
+		regMemberNo = null;
+		nDTO = null;
+		
 		log.info("Lmin:noticeRegProc End!!");
 		return "/alert";
 	}
@@ -101,6 +109,7 @@ public class NoticeController {
 		model.addAttribute("nDTO", nDTO);
 		
 		nDTO = null;
+		noticeNo = null;
 		log.info("Lmin:noticeDetail End!!");
 		return "/Lmin/notice/notice_view";
 	}
@@ -118,7 +127,10 @@ public class NoticeController {
 		nDTO = noticeService.getNoticeDetail(nDTO);
 		
 		model.addAttribute("nDTO", nDTO);
+
 		nDTO = null;
+		noticeNo = null;
+
 		log.info("Lmin:noticeUpdate End!!");
 		return "/Lmin/notice/notice_update";
 	}
@@ -155,6 +167,13 @@ public class NoticeController {
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
 		
+		msg = null;
+		url = null;
+		noticeNo = null;
+		noticeTitle = null;
+		noticeContents = null;
+		chgMemberNo = null;
+		nDTO = null;
 		log.info("Lmin:noticeUpdateProc End!!");
 		return "/alert";
 	}
@@ -178,6 +197,10 @@ public class NoticeController {
 		
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
+		
+		url = null;
+		msg = null;
+		noticeNo = null;
 		
 		log.info("Lmin:noticeDeleteProc End!!");
 		return "/alert";

@@ -28,6 +28,9 @@ public class InquiryController {
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
 		
+		url = null;
+		msg = null;
+		
 		log.info("inquiryList End!!");
 		return "/alert";
 	}

@@ -47,7 +47,7 @@ public class CyberController {
 		hMap = cyberService.getCyberList(hMap);
 
 		model.addAttribute("hMap", hMap);
-		
+		hMap = null;
 		log.info(this.getClass() + ".cyberList End!!");
 		return "/Lmin/company/cyber";
 	}
@@ -91,6 +91,15 @@ public class CyberController {
 			model.addAttribute("msg", "사이버홍보 등록에 실패했습니다.");
 		}
 		model.addAttribute("url", "/Lmin/company/cyber.do");
+		
+		regMemberNo = null;
+		cyberTitle = null;
+		cyberContents = null;
+		file = null;
+		cyberFileOrgName = null;
+		cyberFileName = null;
+		cDTO = null;
+		
 		log.info(this.getClass() + ".cyberRegProc end!!!");
 		return "/alert";
 	}
@@ -106,6 +115,9 @@ public class CyberController {
 		if(cDTO == null) cDTO= new CyberDTO();
 		
 		model.addAttribute("cDTO", cDTO);
+		
+		cyberNo = null;
+		cDTO = null;
 		
 		log.info(this.getClass() + ".cyberDetail end!!!");
 		return "/Lmin/company/cyber_detail";
@@ -137,6 +149,12 @@ public class CyberController {
 		}
 		model.addAttribute("url", "/Lmin/company/cyber.do");
 		
+		cyberNo = null;
+		cyberFileNo = null;
+		cyberFilePath = null;
+		cyberFileName = null;
+		cDTO= null;
+		
 		log.info(this.getClass() + ".deleteCyber end!!!");
 		return "alert";
 	}
@@ -153,6 +171,8 @@ public class CyberController {
 		
 		model.addAttribute("cDTO", cDTO);
 		
+		cDTO= null;
+		
 		log.info(this.getClass() + ".updateCyberView end!!!");
 		return "/Lmin/company/cyber_update_view";
 	}
@@ -168,6 +188,10 @@ public class CyberController {
 		if(cDTO == null) cDTO = new CyberDTO();
 		
 		model.addAttribute("cDTO", cDTO);
+		
+		cyberNo = null;
+		cDTO = null;
+		
 		log.info(this.getClass() + ".cyberMovieUpdateView end!!!");
 		return "/Lmin/company/cyber_movieUpdate_view";
 	}
@@ -207,7 +231,6 @@ public class CyberController {
 		map.put("cDTO", cDTO);
 		map.put("deleteFileNo", preFileNo);
 		
-		//�씠誘몄� 吏��슦怨� �씠誘몄� �꽔怨� �궗�씠踰� �뾽�뜲�씠�듃�븯怨� �솗�씤
 		int result = cyberService.updateCyberMovie(map);
 		if(result != 0){
 			FileUtil.deleteFile(preFilePath, preFileName);
@@ -215,6 +238,16 @@ public class CyberController {
 		}else{
 			resp.getWriter().println(0);
 		}
+		
+		cyberNo = null;
+		preFileNo = null;
+		preFilePath = null;
+		preFileName = null;
+		chgMemberNo = null;
+		file = null;
+		fileOrgName = null;
+		reFileName = null;
+		cDTO = null;
 		
 		log.info(this.getClass() + ".cyberMovieUpdateProc end!!!");
 	}
@@ -250,6 +283,12 @@ public class CyberController {
 			model.addAttribute("msg", "�궗�씠踰� �솉蹂� �닔�젙�뿉 �떎�뙣�뻽�뒿�땲�떎.");
 		}
 		model.addAttribute("url", "/Lmin/company/cyber.do");
+		
+		chgMemberNo = null;
+		cyberTitle = null;
+		cyberContents = null;
+		cyberNo = null;
+		cDTO = null;
 		
 		log.info(this.getClass() + ".cyberUpdateProc end!!!");
 		

@@ -1,4 +1,3 @@
-//������ȸ ��Ʈ�ѷ�
 package com.cl.controller.admin;
 
 import java.io.File;
@@ -105,10 +104,21 @@ public class CatalogueController {
 			msg = "카달로그 등록에 성공했습니다.";
 		}
 		
-		cDTO = null;
-		
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
+		
+		file = null;
+		url = null;
+		msg = null;
+		regMemberNo = null;;
+		catalogueName = null;
+		catalogueContents = null;
+		catalogueStart = null;
+		catalogueEnd = null;
+		catalogueFileOrgName = null;
+		catalogueFileName = null;
+		cDTO = null;
+		
 		log.info("Lmin:catalogueRegProc End!!");
 		return "/alert";
 	}
@@ -153,7 +163,9 @@ public class CatalogueController {
 		
 		model.addAttribute("cDTO", cDTO);
 		
+		catalogueNo = null;
 		cDTO = null;
+		
 		log.info("Lmin:catalogueDetail End!!");
 		return "/Lmin/catalogue/catalogue_view";
 	}
@@ -219,6 +231,15 @@ public class CatalogueController {
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
 		
+		file = null;
+		url = null;
+		msg = null;
+		chgMemberNo = null;
+		catalogueName = null;
+		catalogueContents = null;
+		catalogueStart = null;
+		catalogueEnd= null;
+		deleteFileNo = null;
 		cDTO = null;
 		
 		log.info("Lmin:catalogueUpdateProc End!!");
@@ -261,6 +282,14 @@ public class CatalogueController {
 		
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
+		
+		url = null;;
+		msg = null;
+		catalogueNo = null;
+		deleteFileNo = null;
+		deleteFileOrgName = null;
+		deleteFileName = null;
+		cDTO = null;
 		
 		log.info("Lmin:catalogueDeleteProc End!!");
 		return "/alert";

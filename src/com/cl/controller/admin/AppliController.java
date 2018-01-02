@@ -91,6 +91,22 @@ public class AppliController {
 			model.addAttribute("msg", "가입신청에 실패했습니다.");
 		}
 		model.addAttribute("url", "/Lmin/appli/appliList.do");
+		
+		regMemberNo = null;
+		appliProdCode = null;
+		appliContractCode = null;
+		appliName = null;
+		tel1 = null;
+		tel2 = null;
+		tel3 = null;
+		phoneTel1 = null;
+		phoneTel2 = null;
+		phoneTel3 = null;
+		appliRouteCode = null;
+		appliPostNo = null;
+		appliAddress= null;
+		appliAddressDetail = null;
+		
 		log.info(this.getClass() + ".appliProc end!!!");
 		return "/alert";
 	}
@@ -107,6 +123,7 @@ public class AppliController {
 		
 		model.addAttribute("hMap", hMap);
 		
+		hMap = null;
 		log.info(this.getClass() + ".appliList end!!!");
 		return "/Lmin/appli/appli_list";
 	}
@@ -121,6 +138,8 @@ public class AppliController {
 		if(aDTO == null) aDTO = new AppliDTO();
 		model.addAttribute("aDTO", aDTO);
 		
+		aDTO = null;
+		appliNo = null;
 		log.info(this.getClass() + ".appliDetail end!!!");
 		return "/Lmin/appli/appli_view";
 	}
@@ -139,6 +158,8 @@ public class AppliController {
 			model.addAttribute("msg", "답변완료에 실패했습니다.");
 		}
 		model.addAttribute("url", "/Lmin/appli/appliList.do");
+		
+		appliNo = null;
 		log.info(this.getClass() + ".appliReplyProc end!!!");
 		return "/alert";
 	}
