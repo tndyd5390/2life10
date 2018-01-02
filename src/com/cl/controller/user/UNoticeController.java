@@ -40,6 +40,7 @@ public class UNoticeController {
 		
 		model.addAttribute("hMap", hMap);
 		
+		hMap = null;
 		log.info(":noticeList End!!");
 		return "/notice/notice_list";
 	}
@@ -59,6 +60,7 @@ public class UNoticeController {
 		model.addAttribute("nDTO", nDTO);
 		
 		nDTO = null;
+		noticeNo = null;
 		log.info("noticeDetail End!!");
 		return "/notice/notice_view";
 	}

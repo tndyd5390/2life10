@@ -21,7 +21,6 @@ public class UFuneralController {
 	@RequestMapping("/funeral/funeralMark")
 	public String funeralMark() throws Exception{
 		log.info("funeralMark Start!!");
-		
 		log.info("funeralMark End!!");
 		return "/funeral/funeral_mark";
 	}
@@ -29,7 +28,6 @@ public class UFuneralController {
 	@RequestMapping("/funeral/funeralList_a")
 	public String funeralList_a(HttpServletRequest req) throws Exception{
 		log.info("funeralList_a Start!!");
-		
 		log.info("funeralList_a End!!");
 		return "/funeral/funeral_list_a";
 	}
@@ -37,7 +35,6 @@ public class UFuneralController {
 	@RequestMapping("/funeral/funeralList_b")
 	public String funeralList_b(HttpServletRequest req) throws Exception{
 		log.info("funeralList_b Start!!");
-		log.info("test" + req.getParameter("menuNum"));
 		log.info("funeralList_b End!!");
 		return "/funeral/funeral_list_b";
 	}	
@@ -45,7 +42,6 @@ public class UFuneralController {
 	@RequestMapping("/funeral/funeralList_c")
 	public String funeralList_c() throws Exception{
 		log.info("funeralList_c Start!!");
-		
 		log.info("funeralList_c End!!");
 		return "/funeral/funeral_list_c";
 	}	
@@ -68,7 +64,6 @@ public class UFuneralController {
 	@RequestMapping("/funeral/funeralInfo_b")
 	public String funeralInfo_b() throws Exception{
 		log.info("funeralInfo_b Start!!");
-		
 		log.info("funeralInfo_b End!!");
 		return "/funeral/funeral_info_b";
 	}
@@ -76,7 +71,6 @@ public class UFuneralController {
 	@RequestMapping("/funeral/funeralInfo_c")
 	public String funeralInfo_c() throws Exception{
 		log.info("funeralInfo_c Start!!");
-		
 		log.info("funeralInfo_c End!!");
 		return "/funeral/funeral_info_c";
 	}

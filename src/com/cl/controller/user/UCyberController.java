@@ -54,6 +54,9 @@ public class UCyberController {
 		
 		model.addAttribute("cDTO", cDTO);
 		
+		cyberNo = null;
+		cDTO = null;
+		
 		log.info(this.getClass() + ".cyberDetail end!!!");
 		return "/company/cyber_detail";
 	}
