@@ -34,10 +34,10 @@ public class CruiseController {
 	
 	private Logger log = Logger.getLogger(this.getClass());
 	
-	private String scheSavePath = "/www/thunder-edu_com/file/cruise/file/";
-	//private String scheSavePath = "C:\\Users\\Data3811-32\\git\\2life10\\WebContent\\cruiseFile\\";
-	private String imgSavePath = "/www/thunder-edu_com/file/cruise/img/";
-	//private String imgSavePath = "C:\\Users\\Data3811-32\\git\\2life10\\WebContent\\cruiseFile\\";
+	//private String scheSavePath = "/www/thunder-edu_com/file/cruise/file/";
+	private String scheSavePath = "C:\\Users\\Data3811-32\\git\\2life10\\WebContent\\cruiseFile\\";
+	//private String imgSavePath = "/www/thunder-edu_com/file/cruise/img/";
+	private String imgSavePath = "C:\\Users\\Data3811-32\\git\\2life10\\WebContent\\cruiseFile\\";
 	
 	@Resource(name="CruiseService")
 	private ICruiseService cruiseService;
