@@ -45,6 +45,8 @@ public class DownloadUtil extends AbstractView{
 	        		} encodedFileName = sb.toString(); 
 	        } else if(browser.equals("Trident")){
 	        	encodedFileName = URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", "%20");
+	        }else if(browser.equals("Safari")){
+	        	encodedFileName = "\"" + new String(fileName.getBytes("UTF-8"), "8859_1") + "\"";
 	        }else { 
 	        	throw new RuntimeException("Not supported browser"); 
 	        }
@@ -80,6 +82,8 @@ public class DownloadUtil extends AbstractView{
 			returnString ="Opera"; 
 		} else if (header.indexOf("Trident") > -1) {   // IE11 ¹®ÀÚ¿­ ±úÁü ¹æÁö
             returnString ="Trident";
+		}else if(header.indexOf("Safari") > -1){
+			returnString ="Safari";
 		}else{
 			returnString ="FireFox";
 		}
