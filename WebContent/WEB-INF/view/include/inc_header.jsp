@@ -97,8 +97,8 @@
 															<ul class="sub_depth">
 																<li><a href="javascript:goMenu('/company/overView.do', 'MN10100');">인사말</a></li>
 																<li><a href="javascript:goMenu('/company/organ.do', 'MN10200');">조직도및연혁</a></li>
-																<li><a href="javascript:goMenu('/company/branchList.do', 'MN10300');">전국지사안내</a></li>
-																<li><a href="javascript:goMenu('/company/adviceList.do', 'MN10400');">상담사조회</a></li>
+																<!-- <li><a href="javascript:goMenu('/company/branchList.do', 'MN10300');">전국지사안내</a></li>
+																<li><a href="javascript:goMenu('/company/adviceList.do', 'MN10400');">상담사조회</a></li> -->
 																<li><a href="javascript:goMenu('/company/cyberList.do', 'MN10500');">사이버홍보실</a></li>
 																<li><a href="javascript:goMenu('/company/road.do', 'MN10600');">오시는길</a></li>
 															</ul>
