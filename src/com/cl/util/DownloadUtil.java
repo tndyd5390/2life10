@@ -85,6 +85,8 @@ public class DownloadUtil extends AbstractView{
             returnString ="Trident";
 		}else if(header.indexOf("Safari") > -1){
 			returnString ="Safari";
+		}else if(header.indexOf("iPhone") > -1){
+			returnString ="Safari";
 		}else{
 			returnString ="FireFox";
 		}
