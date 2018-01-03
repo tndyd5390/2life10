@@ -2,8 +2,10 @@ package com.cl.controller.admin;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -427,16 +429,16 @@ public class CruiseController {
 	@RequestMapping(value="Lmin/cruise/cruiseChangeOrder", method=RequestMethod.GET)
 	public String cruiseChangeOrder(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".cruiseChangeOrder start!!!");
+		
 		SessionUtil.sessionCheck(resp, session);
-		int splitPage = 5;
 		
-		HashMap<String, Object> hMap = new HashMap<>();
+		List<CruiseDTO> cList = cruiseService.getCruiseListWithoutPaging();
+		if(cList == null) cList = new ArrayList<>(); 
 		
-		hMap = PageUtil.paging(req, splitPage);
-		hMap = cruiseService.getCruiseList(hMap);
-		model.addAttribute("hMap", hMap);
+		model.addAttribute("cList", cList);
 		
-		hMap = null;
+		cList = null;
+		
 		log.info(this.getClass() + ".cruiseChangeOrder end!!!");
 		return "/Lmin/cruise/cruise_change_order";
 	}

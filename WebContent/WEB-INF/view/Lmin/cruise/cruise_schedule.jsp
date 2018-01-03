@@ -8,7 +8,8 @@
 <%
 	HashMap<String, Object> hMap = (HashMap) request.getAttribute("hMap");
 	int pageBtnSplit = 5;
-	
+	int nowPage = Integer.parseInt(CmmUtil.nvl((String)hMap.get("nowPage")));
+	System.out.println(nowPage);
 	List<CruiseDTO> cList = (List<CruiseDTO>) hMap.get("list");
 	
 %>
@@ -233,7 +234,7 @@ function downloadSche(cruiseNo){
                     </div>
 				</section> -->
 				<a href="/Lmin/cruise/cruiseSchduleWriteView.do" class="btn_active_small" style="float:right;">크루즈 일정 등록</a>
-				<%if(cList.size()>=2){%>
+				<%if(cList.size()>=2 || nowPage > 1){%>
 					<a href="javascript:changeOrder();" class="btn_active_small" style="float:right; margin-right: 10px;">크루즈 일정 정렬</a>
 				<%} %>
 				<br/><br/>

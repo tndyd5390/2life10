@@ -31,4 +31,6 @@ public interface CruiseMapper {
 	public int deleteCruiseScheFile(CruiseDTO cDTO) throws Exception;
 	//크루즈 정렬 update
 	public int updateCruiseOrderBy(Map<String, String> hMap) throws Exception;
+	//크루즈 list select 페이징 없이
+	public List<CruiseDTO> getCruiseListWithoutPaging() throws Exception;
 }

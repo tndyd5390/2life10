@@ -122,4 +122,9 @@ public class CruiseService implements ICruiseService{
 		}
 		return true;
 	}
+
+	@Override
+	public List<CruiseDTO> getCruiseListWithoutPaging() throws Exception {
+		return cruiseMapper.getCruiseListWithoutPaging();
+	}
 }

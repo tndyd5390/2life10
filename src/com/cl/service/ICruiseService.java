@@ -1,6 +1,7 @@
 package com.cl.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.cl.dto.CruiseDTO;
@@ -12,4 +13,5 @@ public interface ICruiseService {
 	public CruiseDTO getCruise(String cruiseNo) throws Exception;
 	public boolean updateCruise(CruiseDTO cDTO) throws Exception;
 	public boolean orderByCruise(String[] cruiseList) throws Exception;
+	public List<CruiseDTO> getCruiseListWithoutPaging() throws Exception;
 }

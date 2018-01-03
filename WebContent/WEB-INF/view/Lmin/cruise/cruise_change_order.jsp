@@ -6,11 +6,7 @@
 <%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	HashMap<String, Object> hMap = (HashMap) request.getAttribute("hMap");
-	int pageBtnSplit = 5;
-	
-	List<CruiseDTO> cList = (List<CruiseDTO>) hMap.get("list");
-	
+	List<CruiseDTO> cList = (List<CruiseDTO>)request.getAttribute("cList");
 %>
 <!DOCTYPE html>
 <html lang="ko">
