@@ -21,12 +21,13 @@ public class DownloadUtil extends AbstractView{
 	            HttpServletRequest request, HttpServletResponse response) throws Exception {
 	        File file = (File)model.get("downloadFile");
 	        String fileName = CmmUtil.nvl((String)model.get("fileOrgName"));
+	        
 	        response.setContentType(getContentType());
 	        response.setContentLength((int)file.length());
-	        String userAgent = request.getHeader("User-Agent");
-	        boolean ie = userAgent.indexOf("MSIE") > -1;
+	        
 	        String browser = getBrowser(request);
 	        String encodedFileName = null; 
+	        
 	        if (browser.equals("MSIE")) {
 	        	encodedFileName = URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", "%20"); 
 	        } else if (browser.equals("Firefox")) {
@@ -53,7 +54,10 @@ public class DownloadUtil extends AbstractView{
 	        	throw new RuntimeException("Not supported browser"); 
 	        }
 	        
-	        response.setHeader("Content-Type","application/pdf");
+	        if(fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()).equals("pdf")){
+	        	response.setHeader("Content-Type","application/pdf");
+	        }
+	        
 	        response.setHeader("Content-Disposition", "attachment; fileName=\"" + encodedFileName + "\";");
 	        response.setHeader("Content-Transfer-Encoding", "binary");
 	        OutputStream out = response.getOutputStream();
