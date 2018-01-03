@@ -40,10 +40,6 @@ function doAdviceReg(){
 		alert("주소를 확인해 주세요.");
 		form.adviceAddress.focus();
 		return;
-	}else if(form.adviceAddressDetail.value == ""){
-		alert("나머지 주소를 확인해 주세요.");
-		form.adviceAddressDetail.focus();
-		return;
 	}else if(form.advicePostNo.value == ""){
 		alert("우편번호를 확인해 주세요.");
 		form.advicePostNo.focus();
