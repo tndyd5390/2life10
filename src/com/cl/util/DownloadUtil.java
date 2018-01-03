@@ -45,12 +45,15 @@ public class DownloadUtil extends AbstractView{
 	        		} encodedFileName = sb.toString(); 
 	        } else if(browser.equals("Trident")){
 	        	encodedFileName = URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", "%20");
+	        }else if(browser.equals("iPhone")){
+	        	encodedFileName = "\"" + new String(fileName.getBytes("UTF-8"), "8859_1") + "\"";
 	        }else if(browser.equals("Safari")){
 	        	encodedFileName = "\"" + new String(fileName.getBytes("UTF-8"), "8859_1") + "\"";
 	        }else { 
 	        	throw new RuntimeException("Not supported browser"); 
 	        }
-
+	        
+	        response.setHeader("Content-Type","application/pdf");
 	        response.setHeader("Content-Disposition", "attachment; fileName=\"" + encodedFileName + "\";");
 	        response.setHeader("Content-Transfer-Encoding", "binary");
 	        OutputStream out = response.getOutputStream();
@@ -86,7 +89,7 @@ public class DownloadUtil extends AbstractView{
 		}else if(header.indexOf("Safari") > -1){
 			returnString ="Safari";
 		}else if(header.indexOf("iPhone") > -1){
-			returnString ="Safari";
+			returnString ="iPhone";
 		}else{
 			returnString ="FireFox";
 		}
