@@ -179,7 +179,7 @@
 				<!-- // 주요정보고시사항 -->
 
 				<div class="btn_area">
-					<a href="#" id="submitLink" class="btn_active">회계감사보고서 다운로드</a>
+					<a href="/file/auditing/auditing.pdf" id="submitLink" class="btn_active">회계감사보고서 다운로드</a>
 				</div>
 			
 
