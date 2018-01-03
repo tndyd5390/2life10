@@ -323,7 +323,7 @@ function unComma(str) {
 							<tr>
 								<th scope="row">선사명</th>
 								<td>
-									<input type="text" name="cruiseShipName" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<input type="text" name="cruiseShipName" value="" title="이름" class="inputType1" style="">
 								</td>
 							</tr>
 							<tr>
@@ -345,13 +345,13 @@ function unComma(str) {
 							<tr>
 								<th scope="row">상품명</th>
 								<td>
-									<input type="text" name="cruiseName" class="inputType1" maxlength="25">
+									<input type="text" name="cruiseName" class="inputType1">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">상품가</th>
 								<td>
-									<input type="text" name="cruisePrice" id="price" class="numPhn inputType1" onblur="priceFormat();" maxlength="25" placeholder="원단위 입력">
+									<input type="text" name="cruisePrice" id="price" class="numPhn inputType1" onblur="priceFormat();" placeholder="원단위 입력">
 								</td>
 							</tr>
 							<tr>
@@ -363,13 +363,13 @@ function unComma(str) {
 							<tr>
 								<th scope="row">캐빈</th>
 								<td>
-									<input type="text" name="cruiseCabinCode" class="inputType1" style="" maxlength="25">
+									<input type="text" name="cruiseCabinCode" class="inputType1" style="">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">비고</th>
 								<td>
-									<input type="text" name="cruiseEtc" class="inputType1" style="" maxlength="25">
+									<input type="text" name="cruiseEtc" class="inputType1" style="">
 								</td>
 							</tr>
 							<tr>
