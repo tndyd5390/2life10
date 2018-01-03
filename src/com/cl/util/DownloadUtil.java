@@ -72,7 +72,8 @@ public class DownloadUtil extends AbstractView{
 	    }// render() end;
 	 
 	private String getBrowser(HttpServletRequest request) { 
-		String header = request.getHeader("User-Agent"); 
+		String header = request.getHeader("User-Agent");
+		System.out.println("header : " + header);
 		String returnString = "";
 		if (header.indexOf("MSIE") > -1) { 
 			returnString ="MSIE"; 
