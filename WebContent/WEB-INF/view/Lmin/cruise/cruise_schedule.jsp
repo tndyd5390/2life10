@@ -9,7 +9,6 @@
 	HashMap<String, Object> hMap = (HashMap) request.getAttribute("hMap");
 	int pageBtnSplit = 5;
 	int nowPage = Integer.parseInt(CmmUtil.nvl((String)hMap.get("nowPage")));
-	System.out.println(nowPage);
 	List<CruiseDTO> cList = (List<CruiseDTO>) hMap.get("list");
 	
 %>

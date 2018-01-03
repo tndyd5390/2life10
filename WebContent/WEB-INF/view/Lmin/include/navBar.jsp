@@ -10,8 +10,8 @@
 					<div class="flexItem4"> <!-- .select 버튼 클릭시 다중클래스 on 추가 -->
 						<strong><button type="button" class="select" id="subtitle">고객센터</button></strong>
 						<ul>
-						<li id="MO70100"><a href="javascript:goMenu('/Lmin/company/branchList.do', 'MO70100');">전국지사안내</a></li>
-						<li id="MO70200"><a href="javascript:goMenu('/Lmin/company/adviceList.do', 'MO70200');">상담사조회</a></li>
+						<!-- <li id="MO70100"><a href="javascript:goMenu('/Lmin/company/branchList.do', 'MO70100');">전국지사안내</a></li>
+						<li id="MO70200"><a href="javascript:goMenu('/Lmin/company/adviceList.do', 'MO70200');">상담사조회</a></li> -->
 						<li id="MO70300"><a href="javascript:goMenu('/Lmin/company/cyber.do', 'MO70300');">사이버홍보실</a></li>
 						<li id="MO70400"><a href="javascript:goMenu('/Lmin/funeral/funeralInfoList.do', 'MO70400');">전국장례시설안내</a></li>
 						<li id="MO70500"><a href="javascript:goMenu('/Lmin/funeral/funeralNoticeList.do', 'M760500');">부고알림</a></li>
@@ -31,8 +31,8 @@
 			<div class="pcLnbWrap">
 				<nav>
 					<ul class="pcLnb">
-						<li id="MO70100"><a href="javascript:goMenu('/Lmin/company/branchList.do', 'MO70100');">전국지사안내</a></li>
-						<li id="MO70200"><a href="javascript:goMenu('/Lmin/company/adviceList.do', 'MO70200');">상담사조회</a></li>
+						<!-- <li id="MO70100"><a href="javascript:goMenu('/Lmin/company/branchList.do', 'MO70100');">전국지사안내</a></li>
+						<li id="MO70200"><a href="javascript:goMenu('/Lmin/company/adviceList.do', 'MO70200');">상담사조회</a></li> -->
 						<li id="MO70300"><a href="javascript:goMenu('/Lmin/company/cyber.do', 'MO70300');">사이버홍보실</a></li>
 						<li id="MO70400"><a href="javascript:goMenu('/Lmin/funeral/funeralInfoList.do', 'MO70400');">전국장례시설안내</a></li>
 						<li id="MO70500"><a href="javascript:goMenu('/Lmin/funeral/funeralNoticeList.do', 'M760500');">부고알림</a></li>
