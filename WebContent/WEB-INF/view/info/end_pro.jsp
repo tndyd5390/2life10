@@ -139,7 +139,7 @@
 								<tr>
 								<td><%=CmmUtil.nvl(cDTO.getCatalogueStart())%>~<%=CmmUtil.nvl(cDTO.getCatalogueEnd()) %></td>
 								<td class="alignL"><%=CmmUtil.nvl(cDTO.getCatalogueName()) %> <%=CmmUtil.nvl(cDTO.getCatalogueContents()) %></td>
-								<td><a href="javascript:download('<%=CmmUtil.nvl(cDTO.getCatalogueNo())%>')" class="btn_cancel_small"><span class="iconDownLoad"></span>받기</a></td>
+								<td><a href="javascript:download('<%=CmmUtil.nvl(cDTO.getCatalogueNo())%>')" class="btn_cancel_small">받기</a></td>
 								</tr>									
 							<%	
 								}
