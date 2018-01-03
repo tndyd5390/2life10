@@ -34,14 +34,18 @@ function doSubmit(){
 	if(name.val()==""){
 		alert('상품명을 입력해 주세요.');
 		name.focus();
-		return false;
+		return;
 	}else if(start.val() == "" ){
 		alert('게시일을 선택해 주세요.');
 		start.focus();
-		return false;
+		return;
+	}else if(end.val() == "" ){
+		alert('종료일을 선택해 주세요.');
+		end.focus();
+		return;
 	}else if(file.val() == ""){
 		alert('파일을 업로드 해주세요.');
-		return false;
+		return;
 	}else{
 		f.submit();
 	}
