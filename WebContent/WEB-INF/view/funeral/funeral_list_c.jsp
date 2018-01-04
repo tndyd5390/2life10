@@ -117,9 +117,9 @@
 						<h3 class="contTit"><span>장례480</span></h3>
 						<p class="subTxt">월 40,000원 X 120회 (4,800,000원)</p>
 						<ul class="defaultGrayDotList mt-10">
-							<li>-캐딜락리무진 또는 장의버스 택일 (전국무료)</li>
-							<li>-대마수위, 관, 생화특별장식, 헌화 50송이</li>
-							<li>-장례지도사 3일간 행사진행, 장례도우미 6명</li>
+							<li>캐딜락리무진 또는 장의버스 택일 (전국무료)</li>
+							<li>대마수위, 관, 생화특별장식, 헌화 50송이</li>
+							<li>장례지도사 3일간 행사진행, 장례도우미 6명</li>
 						</ul>
 						<br/>
 						<a href="/appli/appliForm.do" class="btnDefault">가입신청</a>

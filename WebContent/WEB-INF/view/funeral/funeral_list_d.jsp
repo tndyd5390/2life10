@@ -117,10 +117,10 @@
 						<h3 class="contTit"><span>프라임(350)상품</span></h3>
 						<p class="subTxt">월 35,000원 X 100회 (3,500,000원)</p>
 						<ul class="defaultGrayDotList mt-10">
-							<li>-캐딜락리무진 전국무료!</li>
-							<li>-수의, 관, 생화 1단 장식, 헌화 30송이 제공</li>
-							<li>-장례지도사 3일간 행사진행, 장례도우미 3명</li>
-							<li>-유골함제공</li>
+							<li>캐딜락리무진 전국무료!</li>
+							<li>수의, 관, 생화 1단 장식, 헌화 30송이 제공</li>
+							<li>장례지도사 3일간 행사진행, 장례도우미 3명</li>
+							<li>유골함제공</li>
 						</ul>
 						<br/>
 						<a href="/appli/appliForm.do" class="btnDefault">가입신청</a>

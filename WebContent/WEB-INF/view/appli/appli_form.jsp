@@ -463,8 +463,6 @@
 											<option value="062">062</option>
 											<option value="063">063</option>
 											<option value="064">064</option>
-											<option value="010">010</option>
-											<option value="011">011</option>
                                         </select>
 										-
 										<input type="text" name="tel2" id="tel2" class="numPhn inputType2" style="" maxlength="5">
