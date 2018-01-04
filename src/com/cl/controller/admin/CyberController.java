@@ -278,9 +278,9 @@ public class CyberController {
 		int result = cyberService.updateCyber(cDTO);
 		
 		if(result != 0){
-			model.addAttribute("msg", "�궗�씠踰� �솉蹂� �닔�젙�뿉 �꽦怨듯뻽�뒿�땲�떎.");
+			model.addAttribute("msg", "사이버홍보 수정에 성공하였습니다.");
 		}else{
-			model.addAttribute("msg", "�궗�씠踰� �솉蹂� �닔�젙�뿉 �떎�뙣�뻽�뒿�땲�떎.");
+			model.addAttribute("msg", "사이버홍보 수정에 실패하였습니다.");
 		}
 		model.addAttribute("url", "/Lmin/company/cyber.do");
 		

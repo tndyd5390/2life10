@@ -202,7 +202,6 @@ public class CatalogueController {
 		cDTO.setCatalogueEnd(catalogueEnd);
 		
 		if(!file.getOriginalFilename().equals("")){
-			System.out.println("Ž");
 			String deleteFileOrgName = CmmUtil.nvl(req.getParameter("delFileOrg"));
 			String deleteFileName = CmmUtil.nvl(req.getParameter("delFileName"));
 			String catalogueFileOrgName = CmmUtil.nvl(file.getOriginalFilename());
@@ -275,9 +274,9 @@ public class CatalogueController {
 		url = "/Lmin/catalogue/catalogueList.do";
 		
 		if(result == 0){
-			msg = "카달로그 삭제에 성공했습니다.";
-		}else{
 			msg = "카달로그 삭제에 실패했습니다.";
+		}else{
+			msg = "카달로그 삭제에 성공했습니다.";
 		}
 		
 		model.addAttribute("url", url);

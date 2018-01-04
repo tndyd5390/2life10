@@ -5,23 +5,24 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 
 public class PageUtil {
+	// SQL문의 LIMIT , OFFSET을 구해주는 메소드
 	public static HashMap<String, Object> paging(HttpServletRequest req, int splitPage){
 		int page;
 		String nowPage = CmmUtil.nvl(req.getParameter("page"));
-		// 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙
+		// 현재 페이지를 받음
 		String selBox = CmmUtil.nvl(req.getParameter("searchBox"));
-		// 占싯삼옙占쏙옙 占쌓몌옙 占쏙옙
+		// 검색조건 받음
 		String search = CmmUtil.nvl(req.getParameter("search"));
-		// 占싯삼옙占쏙옙 占쏙옙
+		// 검색어 받음
 		
 		if(!nowPage.equals("")){
 			page = (Integer.parseInt(nowPage)-1) * splitPage;
-			// 占쏙옙占시몌옙占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏘서 (page=limit) 占쏙옙占쏙옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占실댐옙 占쏙옙 
+			// 페이지 갯수를 구함
 		}else{
 			nowPage = "1";
-			// 첫 占쏙옙占쏙옙占쏙옙占쏙옙 占십깍옙화
+			// 첫 페이지로 초기화
 			page = 0;
-			// limit 占쏙옙 0占쏙옙占쏙옙 占십깍옙화
+			// limit 를 0으로 초기화
 		}
 		
 		HashMap<String, Object> hMap = new HashMap<>();
@@ -31,8 +32,7 @@ public class PageUtil {
 		hMap.put("splitPage", splitPage);
 		
 		if(!search.equals("")){
-			// 占싯삼옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쌔쏙옙占십울옙 占쏙옙占쏙옙 占쌍억옙 占쏙옙
-			// 占싯삼옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 SQL占쏙옙 占쏙옙占쏙옙 WHERE 占쏙옙占쏙옙占쏙옙 占쏙옙占� 占쏙옙
+			// 검색어가 있을 때
 			hMap.put("searchBox", selBox);
 			hMap.put("search", search);
 		}
@@ -40,17 +40,17 @@ public class PageUtil {
 		return hMap;
 	}
 	
+	// JSP 하단의 페이징을 처리하는 메소드
 	public static String frontPaging(HashMap<String, Object> hMap, int pageBtnSplit){
 		int splitPage=0;
 		int nowPage=0;
 		int pageBtn=0;
 		int pageBtnLast=0;
 		int pageList = (int) hMap.get("pageList");
-		// 占쏙옙占쏟스울옙占쏙옙 占쌩곤옙占쏙옙 占쏙옙占쏙옙 占쏙옙 占쌉시깍옙 占쏙옙占쏙옙占쏙옙 占쌨억옙 占쏙옙
+		// 필요한 변수를 선언하고, 해쉬맵에 담겨있는 pageList를 받음
 		String result = "";
-		
+		// JSP에 뿌려줄 문자열 선언
 		if(pageList!=0){
-			// 占쌉시깍옙占쏙옙 占쏙옙占쏙옙 占쏙옙
 			splitPage = (int) hMap.get("splitPage");
 			nowPage = Integer.parseInt((String) hMap.get("nowPage"));
 			
@@ -60,26 +60,31 @@ public class PageUtil {
 				pageList = (pageList / splitPage);
 			}
 			pageBtn = 1;
-			// 첫 占쏙옙占쏙옙占쏙옙 占쏙옙
+			// 첫 페이징 버튼을 1로 선언
 			pageBtnLast = pageBtn+4;
-			// 화占썽에 占쏙옙占싱댐옙 占쏙옙튼占쏙옙 占쏙옙占쏙옙
+			// 첫 버튼에 4을 더한 값을 마지막 버튼으로 선언
 			
 			if((nowPage/(pageBtnSplit+1))<1){
+				// 자를 버튼의 수보다 페이지 수가 작을 때
 				pageBtn = 1;
-				// 占쏙옙튼占쏙옙 1占쏙옙占쏙옙 占쏙옙占쏙옙
+				// 첫 페이지이기 때문에 첫 버튼은 1로 초기화
 				if(pageList<pageBtnSplit){
 					pageBtnLast = pageList;
-					// 占쏙옙튼占쏙옙 占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占쏙옙큼 占쏙옙占쏙옙
+					// 마지막 페이지는 최종 페이지 갯수로 초기화
 				}
 			}else{
+				// 자를 버튼의 수보다 페이지 수가 많을 때 ex) 5개의 버튼으로 나눌때, 6페이지 이상
 				if((nowPage/pageBtnSplit)==0){
+					// 현재페이지가 자를 버튼의 수보다 작을 때 ex) 5개의 버튼으로 나눌때, 현재페이지 1~4
 					pageBtn = ((nowPage/(pageBtnSplit+1))*5)+1;
 				}else if((nowPage%pageBtnSplit)==0){
+					// 현재페이지를 자를 버튼의 수로 나눈 나머지가 0일때 ex) 5개의 버튼으로 나눌때, 현재페이지 5의 배수
 					pageBtn = ((nowPage/pageBtnSplit)*5)-4;
 				}else{
 					pageBtn = ((nowPage/pageBtnSplit)*5)+1;
 				}
 				pageBtnLast = pageBtn + 4;
+				// 마지막 버튼은 항상 생성할 첫 버튼의 4를 더한 값으로 초기화
 				if(pageList<=pageBtnLast){
 					pageBtnLast = pageList;
 				}
@@ -87,21 +92,23 @@ public class PageUtil {
 		}
 		
 		if(nowPage!=1){
-			result += "<a href='javascript:goPage(1,"+pageList+")' class='btnFirst'><span>처占쏙옙</span></a>";
-			result += "<a href='javascript:goPage("+(nowPage-1)+","+pageList+")' class='btnPrev'><span>占쏙옙占쏙옙</span></a>";
+			// 현재페이지가 첫페이지가 아니면 처음페이지, 이전페이지를 생성
+			result += "<a href='javascript:goPage(1,"+pageList+")' class='btnFirst'><span>처음페이지</span></a>";
+			result += "<a href='javascript:goPage("+(nowPage-1)+","+pageList+")' class='btnPrev'><span>이전페이지</span></a>";
 		}
 		for(int i=pageBtn;i<=pageBtnLast;i++){
-			System.out.println("zz" +nowPage);
-			System.out.println("dd" +pageBtn);
+			// 위에서 연산한 첫 버튼에서 마지막 버튼까지 버튼을 생성 함
 			if(i == nowPage){
+				// 현재페이지 일시 strong으로 버튼 색을 바꿔 줌
 				result += "<strong>"+i+"</strong>";
 			}else{
 				result += "<a href='javascript:goPage("+i+","+pageList+")'>"+i+"</a>";
 			}
 		}
 		if(nowPage!=pageList){
-			result += "<a href='javascript:goPage("+(nowPage+1)+","+pageList+")' class='btnNext'><span>占쏙옙占쏙옙</span></a>";
-			result += "<a href='javascript:goPage("+pageList+","+pageList+")' class='btnLast'><span>占쏙옙占쏙옙占쏙옙</span></a>";
+			// 현재페이지가 마지막페이지 아니면 처음페이지, 이전페이지를 생성
+			result += "<a href='javascript:goPage("+(nowPage+1)+","+pageList+")' class='btnNext'><span>다음페이지</span></a>";
+			result += "<a href='javascript:goPage("+pageList+","+pageList+")' class='btnLast'><span>마지막페이지</span></a>";
 		}
 		return result;
 	}
