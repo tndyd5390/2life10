@@ -176,7 +176,7 @@
 								<td><%=CmmUtil.nvl(fDTO.getFuneralInfoCode())%></td>
 								<td>
 								<a href="/Lmin/funeral/funeralInfoDetail.do?fNo=<%=CmmUtil.nvl(fDTO.getFuneralInfoNo())%>">
-								<%=CmmUtil.nvl(fDTO.getFuneralInfoName())%></a>
+								<%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralInfoName())%></a>
 								</td>
 								<td><%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralAddress())%> <%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralAddressDetail())%></td>
 								<td><%=CmmUtil.nvl(fDTO.getFuneralInfoTelNo())%></td>

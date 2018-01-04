@@ -190,7 +190,7 @@
 								<td><%=CmmUtil.nvl(fDTO.getRownum())%></td>
 								<td><%=CmmUtil.nvl(fDTO.getFuneralInfoCode())%></td>
 								<td>
-								<%=CmmUtil.nvl(fDTO.getFuneralInfoName())%>
+								<%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralInfoName()) %>
 								</td>
 								<td><%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralAddress())%> <%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralAddressDetail())%></td>
 								<td><%=CmmUtil.nvl(fDTO.getFuneralInfoTelNo())%></td>
