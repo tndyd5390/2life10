@@ -72,7 +72,13 @@ public class PageUtil {
 					// 占쏙옙튼占쏙옙 占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占쏙옙큼 占쏙옙占쏙옙
 				}
 			}else{
-				pageBtn = ((nowPage/(pageBtnSplit+1))*5)+1;
+				if((nowPage/pageBtnSplit)==0){
+					pageBtn = ((nowPage/(pageBtnSplit+1))*5)+1;
+				}else if((nowPage%pageBtnSplit)==0){
+					pageBtn = ((nowPage/pageBtnSplit)*5)-4;
+				}else{
+					pageBtn = ((nowPage/pageBtnSplit)*5)+1;
+				}
 				pageBtnLast = pageBtn + 4;
 				if(pageList<=pageBtnLast){
 					pageBtnLast = pageList;
@@ -85,6 +91,8 @@ public class PageUtil {
 			result += "<a href='javascript:goPage("+(nowPage-1)+","+pageList+")' class='btnPrev'><span>占쏙옙占쏙옙</span></a>";
 		}
 		for(int i=pageBtn;i<=pageBtnLast;i++){
+			System.out.println("zz" +nowPage);
+			System.out.println("dd" +pageBtn);
 			if(i == nowPage){
 				result += "<strong>"+i+"</strong>";
 			}else{
