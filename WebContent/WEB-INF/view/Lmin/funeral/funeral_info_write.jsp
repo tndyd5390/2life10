@@ -248,7 +248,7 @@
 				</form>
 				<div class="btn_area">
 					<a href="javascript:doSubmit();" id="submitLink" class="btn_active">등록</a>
-					<a href="#" id="btnCancel" class="btn_cancel">취소</a>
+					<a href="/Lmin/funeral/funeralInfoList.do" id="btnCancel" class="btn_cancel">취소</a>
 				</div>
 
 			</div> <!-- // contents -->
