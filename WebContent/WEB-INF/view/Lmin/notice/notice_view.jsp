@@ -141,6 +141,13 @@
 						<div id="ckContent">
 								<div class="editArea">								
 								<p><%=TextUtil.replaceBr(TextUtil.exchangeEscapeNvl(nDTO.getNoticeContents())) %></p>
+								<%
+								if(!CmmUtil.nvl(nDTO.getNoticeFileName()).equals("")){
+								%>
+									<img src="<%="/file/notice/img/" + CmmUtil.nvl(nDTO.getNoticeFileName()) %>" alt="공지사항 이미지" />
+								<%
+								}
+								%>
 								</div>				
 						</div>
 					</article>

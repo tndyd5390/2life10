@@ -1,6 +1,7 @@
 package com.cl.service;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import com.cl.dto.NoticeDTO;
 
@@ -16,4 +17,7 @@ public interface INoticeService {
 
 	int deleteNotice(String noticeNo) throws Exception;
 	
+	public int updateNoticeImgNull(Map<String, String> map) throws Exception;
+	
+	public int updateNoticeImg(Map<String, Object> map) throws Exception;
 }

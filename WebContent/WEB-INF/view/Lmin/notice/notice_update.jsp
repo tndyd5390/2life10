@@ -115,6 +115,12 @@
 		}
 	};
 	
+	function strLengthCheck(textArea){
+		if(textArea.value.length > 4000){
+			alert('4000자를 초과 할 수 없습니다.');
+			textArea.value = textArea.value.substring(0, 4000);
+		}
+	}
 	function doDelete(){
 		var f = $("#f");
 		var nNo = '<%=CmmUtil.nvl(nDTO.getNoticeNo())%>';
@@ -129,10 +135,39 @@
 		}
 	}
 	
-	function goList(){
-		location.href="/Lmin/notice/noticeList.do";
+	function updateImgNull(){
+		if(confirm('이미지를 삭제 하시겠습니까?')){
+			$.ajax({
+				url : "/Lmin/notice/noticeDeleteImg.do",
+				type : "post",
+				data : {
+					'noticeNo' : '<%=CmmUtil.nvl(nDTO.getNoticeNo())%>',
+					'noticeFileNo' : '<%=CmmUtil.nvl(nDTO.getNoticeFileNo())%>'
+				},
+				success : function(data){
+					var contents = "";
+					if(data == 1){
+						alert('공지사항 사진이 삭제되었습니다.');
+						contents += "<th scope='row'>업로드</th>";
+						contents += "<td><input type='file' name='noticeFile' class='inputType1' onchange='fileCheck(this.value, ['jpg', 'jpeg', 'png']);'></td>";
+						$('#noticeImgTr').html(contents);
+					}else{
+						alert('공지사항 사진 삭제에 실패했습닏다.');
+					}
+				}
+			})
+		}
 	}
 	
+	function doChangeImg(){
+		 window.open("/Lmin/notice/noticeImgChangeView.do?noticeNo=" + <%=CmmUtil.nvl(nDTO.getNoticeNo())%>,  "popupNo1", "width=800, height=800");
+	}
+
+	function cancelUpdate(){
+		if(confirm('공지사항 수정을 취소하시겠습니까?')){
+			location.href="/Lmin/notice/noticeList.do";
+		}
+	}
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -144,7 +179,7 @@
 
 			<div class="contents"> <!-- 페이지별 ID none -->
 				<h3 class="smallTit">공지사항</h3>
-				<form name="f" id="f" method="post" action="/Lmin/notice/noticeUpdateProc.do">
+				<form name="f" id="f" method="post" action="/Lmin/notice/noticeUpdateProc.do" enctype="multipart/form-data">
 				<input type="hidden" name="nNo" id="nNo" value="<%=CmmUtil.nvl(nDTO.getNoticeNo())%>">
 				<div class="boardType2">
 					<table summary="">
@@ -163,8 +198,29 @@
 							<tr>
 								<th scope="row">내용</th>
 								<td>
-									<textarea id="contents" name="contents" cols="83" rows="10" class="textArea"><%=CmmUtil.nvl(nDTO.getNoticeContents()) %></textarea>
+									<textarea id="contents" name="contents" cols="83" rows="10" class="textArea" onkeyup="strLengthCheck(this);"><%=CmmUtil.nvl(nDTO.getNoticeContents()) %></textarea>
 								</td>
+							</tr>
+							<tr id="noticeImgTr">
+							<%
+							if("".equals(CmmUtil.nvl(nDTO.getNoticeFileName()))){
+							%>
+								<th scope="row">업로드</th>
+								<td>
+									<input type="file" name="noticeFile" class="inputType1" style="" onchange="fileCheck(this, ['jpg', 'jpeg', 'png']);">
+								</td>
+							<%
+							}else{
+							%>
+								<th scope="row">이미지</th>
+								<td>
+									<img src="<%="/file/notice/img/" + CmmUtil.nvl(nDTO.getNoticeFileName())%>">
+									<a href="#" id="submitLink" class="btn_active" onclick="doChangeImg();">변경</a>
+									<a href="#" id="btnCancel" class="btn_cancel" onclick="updateImgNull();">삭제</a>
+								</td>
+							<%
+							}
+							%>
 							</tr>
 						</tbody>
 					</table>
@@ -173,8 +229,7 @@
 				<!-- btnArea -->
 				<div class="btnArea">
 					<button type="button" class="btnDefaultForm" id="listBtn" onclick="return doSubmit();">수정</button>
-					<button type="button" class="btnDefaultForm" id="listBtn" onclick="return doDelete();">삭제</button>
-					<button type="button" class="btnDefaultForm" id="listBtn" onclick="goPage()">목록</button>
+					<button type="button" class="btnDefaultForm" id="listBtn" onclick="cancelUpdate()">취소</button>
 				</div>
 				</form>
 				<!-- // btnArea -->
