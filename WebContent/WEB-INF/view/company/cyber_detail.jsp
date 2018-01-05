@@ -11,6 +11,9 @@
 	if(cDTO == null) cDTO = new CyberDTO();
 %>
 <!--#include file="../include/inc_header.jsp"-->
+<link href="//vjs.zencdn.net/5.19/video-js.min.css" rel="stylesheet">
+<script src="//vjs.zencdn.net/5.19/video.min.js"></script>
+
 
 	<div id="contentsWrap">
 		<div class="container">
@@ -123,10 +126,12 @@
 							<tr>
 								<th scope="row">내용</th>
 								<td>
-									<video width="320" height="240" controls>
+								
+									<!-- <video width="320" height="240" controls> -->
+									<video id="myvideo" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" controls data-setup='{"fluid": true}'>
 										<source src="/file/cyber/movie/<%=CmmUtil.nvl(cDTO.getCyberFileName()) %>" type="video/<%=TextUtil.getFileExtension(cDTO.getCyberFileName())%>">
 									</video>
-									<br><br><br>
+									<br><br>
 									<%=TextUtil.replaceBr(TextUtil.exchangeEscapeNvl(cDTO.getCyberContents())) %>
 								</td>
 							</tr>

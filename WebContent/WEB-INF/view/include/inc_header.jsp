@@ -7,6 +7,14 @@
 .my-tooltip{
 	max-width:300px;
 }
+
+@media screen and (max-width:800px){
+	.my-tooltip{
+		max-width:150px;
+	}
+}
+
+
 #counsel .psyBtnDefaultForm {
     width: 160px;
     margin-right: 0;
