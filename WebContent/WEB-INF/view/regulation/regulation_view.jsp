@@ -128,7 +128,7 @@
 						<div id="ckContent">
 								<div class="editArea">								
 								<p><span style='font-family: "나눔고딕코딩",NanumGothicCoding,Sans-serif; font-size: 12pt;'>
-								<%=TextUtil.exchangeEscapeNvl(rDTO.getRegulationContents()) + "<br>" %>
+								<%=TextUtil.replaceBr(TextUtil.exchangeEscapeNvl(rDTO.getRegulationContents())) + "<br>" %>
 								<%
 								if(!CmmUtil.nvl(rDTO.getRegulationFileName()).equals("")){
 								%>

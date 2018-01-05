@@ -126,7 +126,7 @@ function doUpdateRegulationView(regulationNo){
 							<tr>
 								<th scope="row">내용</th>
 								<td>
-								<%=TextUtil.exchangeEscapeNvl(rDTO.getRegulationContents()) + "<br>" %>
+								<%=TextUtil.replaceBr(TextUtil.exchangeEscapeNvl(rDTO.getRegulationContents())) + "<br>" %>
 								<%
 								if(!CmmUtil.nvl(rDTO.getRegulationFileName()).equals("")){
 								%>
