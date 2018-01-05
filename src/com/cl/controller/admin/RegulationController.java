@@ -235,7 +235,7 @@ public class RegulationController {
 		log.info(" regulationNo : " + regulationNo);
 		String regulationFileNo = CmmUtil.nvl(req.getParameter("regulationFileNo"));
 		log.info(" regulationFileNo : " + regulationFileNo);
-		String chgMemberNo = (String)session.getAttribute("ss_member_no");
+		String chgMemberNo = CmmUtil.nvl((String)session.getAttribute("ss_member_no"));
 		log.info(" memberNo : " + chgMemberNo);
 		
 		Map<String, String> map = new HashMap<>();

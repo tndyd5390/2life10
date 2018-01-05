@@ -15,8 +15,34 @@ public class NoticeDTO {
 	private String search;
 	private String memberName;
 	private String rowNum;
-	
-	
+	private String noticeFileNo;
+	private String noticeFilePath;
+	private String noticeFileOrgName;
+	private String noticeFileName;
+	public String getNoticeFileNo() {
+		return noticeFileNo;
+	}
+	public void setNoticeFileNo(String noticeFileNo) {
+		this.noticeFileNo = noticeFileNo;
+	}
+	public String getNoticeFilePath() {
+		return noticeFilePath;
+	}
+	public void setNoticeFilePath(String noticeFilePath) {
+		this.noticeFilePath = noticeFilePath;
+	}
+	public String getNoticeFileOrgName() {
+		return noticeFileOrgName;
+	}
+	public void setNoticeFileOrgName(String noticeFileOrgName) {
+		this.noticeFileOrgName = noticeFileOrgName;
+	}
+	public String getNoticeFileName() {
+		return noticeFileName;
+	}
+	public void setNoticeFileName(String noticeFileName) {
+		this.noticeFileName = noticeFileName;
+	}
 	public String getNoticeNo() {
 		return noticeNo;
 	}

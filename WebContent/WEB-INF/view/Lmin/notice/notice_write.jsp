@@ -102,6 +102,31 @@ function doCancel(){
 			return true;
 		}
 	}
+	
+	function fileCheck(fileName, permissibleExtension){
+		var result = 0;
+		var fileExtension = fileName.value.slice(fileName.value.indexOf(".") + 1).toLowerCase();
+		var alertStr = permissibleExtension[0];
+		for(var i = 0; i<permissibleExtension.length; i++){
+			if(fileExtension == permissibleExtension[i]){
+				result++;
+			}
+			if(i>=1){
+				alertStr += ", " + permissibleExtension[i];
+			}
+		}
+		if(result == 0){
+			alert(alertStr + " 파일만 업로드 가능합니다.");
+			$(fileName).val("");
+		}
+	}
+	
+	function strLengthCheck(textArea){
+		if(textArea.value.length > 4000){
+			alert('4000자를 초과 할 수 없습니다.');
+			textArea.value = textArea.value.substring(0, 4000);
+		}
+	}
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -114,7 +139,7 @@ function doCancel(){
 
 			<div class="contents"> <!-- 페이지별 ID none -->
 				<h3 class="smallTit">공지사항</h3>
-				<form name="f" id="f" method="post" action="/Lmin/notice/noticeRegProc.do">
+				<form name="f" id="f" method="post" action="/Lmin/notice/noticeRegProc.do" enctype="multipart/form-data">
 				<div class="boardType2">
 					<table summary="">
 						<caption>회원가입</caption>
@@ -126,13 +151,19 @@ function doCancel(){
 							<tr>
 								<th scope="row">제목</th>
 								<td>
-									<input type="text" name="title" id="title" class="inputType5" maxlength="25">
+									<input type="text" name="title" id="title" class="inputType5">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">내용</th>
 								<td>
-									<textarea id="contents" name="contents" cols="83" rows="10" class="textArea"></textarea>
+									<textarea id="contents" name="contents" cols="83" rows="10" class="textArea" onkeyup="strLengthCheck(this);"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">이미지 업로드</th>
+								<td>
+									<input type="file" name="noticeFile" id="noticeFile" class="inputType5" onchange="javascript:fileCheck(this, ['jpg', 'jpeg', 'png']);">
 								</td>
 							</tr>
 						</tbody>
