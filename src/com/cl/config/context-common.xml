@@ -12,7 +12,7 @@
        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 	
-	 
+	<!-- quartz 배치설정 -->
 	<bean id="dummyTask" class="com.cl.quartz.DummyTask"/>
  
     <bean name="dummyJob" class="org.springframework.scheduling.quartz.JobDetailBean"
