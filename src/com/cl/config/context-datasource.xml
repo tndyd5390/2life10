@@ -14,4 +14,11 @@
         <property name="username" value="clinfo" />
         <property name="password" value="epdlxjqnstjr!16" />
     </bean>
+    <bean id="dataSourceForMS" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	    <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+	    <!-- <property name="url" value="jdbc:jtds:sqlserver://115.68.52.11:4433/OkSangjo003"/> -->
+		<property name="url" value="jdbc:sqlserver://115.68.52.11:1433"/>
+	    <property name="username" value="webguest"/>
+	    <property name="password" value="#123$"/>
+	</bean>
 </beans>

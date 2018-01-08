@@ -28,4 +28,22 @@
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="requiredTx" />
 	</aop:config>
 	
+	<!-- <bean id="txManagerForMS" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSourceForMS" ref="dataSourceForMS"/>
+	</bean>
+
+	<tx:advice id="txAdviceForMS" transaction-manager="txManagerForMS">
+		<tx:attributes>
+            <tx:method name="get*" read-only="true" />조회 함수는 트랜젝션 사용 안함
+			<tx:method name="save*" rollback-for="Exception"/>
+			<tx:method name="insert*" rollback-for="Exception"/>
+			<tx:method name="update*" rollback-for="Exception"/>
+			<tx:method name="delete*" rollback-for="Exception"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:pointcut id="requiredTxForMS" expression="bean(*Service)"/>
+		<aop:advisor advice-ref="txAdviceForMS" pointcut-ref="requiredTx" />
+	</aop:config> -->
 </beans>

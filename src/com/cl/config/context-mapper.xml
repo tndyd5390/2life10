@@ -15,5 +15,14 @@
  	<bean class="com.cl.config.MapperConfigurer">
 		<property name="basePackage" value="com.cl.persistance.mapper" />
 	</bean>
-    
+	
+	<bean id="sqlSessionForMS" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSourceForMS" />
+		<property name="configLocation" value="classpath:/com/cl/persistance/sqlmapForMS/sql-mapperForMS-config.xml" />
+		<property name="mapperLocations" value="classpath:/com/cl/persistance/sqlmapForMS/mapperForMS/*.xml" />
+	</bean>
+
+ 	<bean class="com.cl.config.MapperConfigurerForMS">
+		<property name="basePackage" value="com.cl.persistance.mapperForMS" />
+	</bean>
 </beans>
