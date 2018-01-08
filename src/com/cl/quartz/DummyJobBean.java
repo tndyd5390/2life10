@@ -1,8 +1,15 @@
 package com.cl.quartz;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.QuartzJobBean;
+
+import com.cl.dto.NoticeDTO;
+import com.cl.service.impl.MainService;
 
 public class DummyJobBean extends QuartzJobBean{
 	private DummyTask dummyTask;
