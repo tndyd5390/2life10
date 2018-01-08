@@ -141,7 +141,7 @@
 
 			<div class="contents"> <!-- 페이지별 ID none -->
 				<h3 class="smallTit">공지사항</h3>
-				<form name="f" id="f" method="post" action="/Lmin/notice/noticeList.do"> 
+				<form name="f" id="f" method="post" action="/notice/noticeList.do"> 
 				<input type="hidden" id="nNo" name="nNo">
 				<input type="hidden" id="page" name="page">
 				
