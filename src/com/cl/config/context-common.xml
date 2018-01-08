@@ -3,11 +3,37 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xmlns:context="http://www.springframework.org/schema/context"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+       xmlns:batch="http://www.springframework.org/schema/batch"
+       xmlns:p="http://www.springframework.org/schema/p">
 
 	<!-- 소스 스캔 설정 -->
     <context:component-scan base-package="Controller">
        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
-
+	
+	 
+	<bean id="dummyTask" class="com.cl.quartz.DummyTask"/>
+ 
+    <bean name="dummyJob" class="org.springframework.scheduling.quartz.JobDetailBean"
+          p:jobClass="com.cl.quartz.DummyJobBean">
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="dummyTask" value-ref="dummyTask"/>
+            </map>
+        </property>
+    </bean>
+ 
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean"
+          p:jobDetail-ref="dummyJob"
+          p:startDelay="1000"
+          p:cronExpression="0/3 * * * * ?"/>
+ 
+    <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="cronTrigger"/>
+            </list>
+        </property>
+    </bean>
 </beans>

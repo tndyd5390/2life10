@@ -26,6 +26,7 @@
 
 	<context:component-scan base-package="com.cl.service" />
 	<context:component-scan base-package="com.cl.persistance.mapper" />
+ 	<context:component-scan base-package="com.cl.quartz" />
  	
 	<!-- ViewResolver : 뷰 선택자 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
