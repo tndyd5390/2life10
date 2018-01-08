@@ -126,6 +126,11 @@
 					</header>
 					<article class="boardCont">
 						<div id="ckContent">
+						<%if(CmmUtil.nvl(nDTO.getNoticeNo()).equals("33")){%>
+							<a href="/file/notice/file/name.hwp">개명신청서 다운로드</a><br><br>
+							<a href="/file/notice/file/transfer.hwp">양도양수신청서 다운로드</a><br><br>
+							<a href="/notice/file/cancel.hwp">해약신청서 다운로드</a><br><br><br><br>
+						<%}%>
 								<div class="editArea">								
 								<p><%=TextUtil.replaceBr(TextUtil.exchangeEscapeNvl(nDTO.getNoticeContents())) %></p>
 								</div>				
