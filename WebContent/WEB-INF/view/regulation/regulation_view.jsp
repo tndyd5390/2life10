@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.cl.util.CmmUtil"%>
 <%@page import="com.cl.util.TextUtil"%>
+<%@page import="com.cl.util.AES256Util"%>
 <%@page import="com.cl.dto.RegulationDTO"%>
 <%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 <%
@@ -121,7 +122,7 @@
 						<p class="txt">
 							<span class="date"><%=CmmUtil.nvl(rDTO.getRegDt()) %></span>
 							<span class="hits">조회수 <%=CmmUtil.nvl(rDTO.getRegulationViewCnt()) %></span>
-							<span class="writer"><%=CmmUtil.nvl(rDTO.getMemberId()) %></span>
+							<span class="writer"><%=AES256Util.strDecode(CmmUtil.nvl(rDTO.getMemberName())) %></span>
 						</p>
 					</header>
 					<article class="boardCont">

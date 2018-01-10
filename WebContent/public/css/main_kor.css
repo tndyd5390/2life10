@@ -40,7 +40,7 @@
 .visualWrap .info .notice .list{overflow:hidden;visibility:hidden;width:50%;margin-top:0;height:0;padding:0 16px;box-sizing:border-box;}
 .visualWrap .info .notice .list.on{visibility:visible;height:auto;margin-top:32px;}
 .visualWrap .info .notice .list_inner li{width:100%!important;height:auto;vertical-align:top;}
-.visualWrap .info .notice .list_inner a{display:block;overflow:hidden;color:#0189b1;line-height:15px;text-overflow:ellipsis;white-space:nowrap;font-size:11px;margin-bottom:4px;}
+.visualWrap .info .notice .list_inner a{display:block;overflow:hidden;color:#0189b1;line-height:15px;text-overflow:ellipsis;white-space:nowrap;font-size:11px;}
 .visualWrap .info .customer .btn_search,
 .visualWrap .info .customer .btn_member{position:absolute;top:33px;left:50%;right:20px;height:71px;padding:0 17px;box-sizing:border-box;background:#ff734d;color:#fff;font-size:14px;line-height:71px;}
 .visualWrap .info .customer .btn_search:before{content:'';position:absolute;bottom:0;left:9px;right:9px;border-top:1px solid #fff;}

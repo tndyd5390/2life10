@@ -145,29 +145,37 @@
                 </div>
 				</form>
 				<br/><br/>
-				<ul class="boradType4">
+				
+				<div class="boradType6">
+                    <div class="title">
+                        <span class="num">부고</span>
+                        <div class="info">
+                            <span class="txt">회원명</span>
+                            <span class="txt1">소천인</span>
+                            <span class="txt2">
+                                <span class="date">소천일</span>
+                                <span class="count">장례식장명</span>
+                            </span>
+                        </div>
+                    </div>
+				<ul>
 				<%if(fList.size()!=0){%>
 				<%for(FuneralNoticeDTO fDTO : fList){%>
 					<li>
 						<p class="num">부고</p>
 						<div class="info">
-							<p class="txt">회원 <%=CmmUtil.nvl(fDTO.getFuneralNoticeMember()) %></p>
-							<p class="txt1"><!-- 박성진수정 -->
-								<a href="#"><%=CmmUtil.nvl(fDTO.getFuneralNoticeName()) %>님 소천</a>
-							</p>
-							<p class="txt2">
-								소천일<span class="bar">&nbsp;:</span>
-								<span><%=CmmUtil.nvl(fDTO.getFuneralNoticeDay()) %></span>
-								<span class="bar">l</span>
-								<span><%=CmmUtil.nvl(fDTO.getFuneralNoticePlace()) %></span>
-							</p>
+							<span class="txt">회원 <%=CmmUtil.nvl(fDTO.getFuneralNoticeMember()) %></span>
+							<span class="txt1"><%=CmmUtil.nvl(fDTO.getFuneralNoticeName()) %>님 소천</span>
+							<span class="txt2">
+								<span class="date"><%=CmmUtil.nvl(fDTO.getFuneralNoticeDay()) %></span>
+								<span class="count"><%=CmmUtil.nvl(fDTO.getFuneralNoticePlace()) %></span>
+							</span>
 						</div>
 					</li>
 				<%}%>
 				<% }%>
 				</ul>
-
-
+				</div>
 
 				<!-- pageArea -->
 				<%-- <div class="pageArea">

@@ -19,6 +19,7 @@ public class RegulationDTO {
 	private String regulationFileOrgName;
 	private String rowNum;
 	private String memberId;
+	private String memberName;
 	public String getMemberId() {
 		return memberId;
 	}
@@ -126,5 +127,11 @@ public class RegulationDTO {
 	}
 	public void setSearch(String search) {
 		this.search = search;
+	}
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 }

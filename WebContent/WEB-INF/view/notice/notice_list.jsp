@@ -167,7 +167,19 @@
                 </div>
 
 				<br/><br/>
-				<ul class="boradType5">
+				<div class="boradType5">
+					<div class="title">
+						<span class="num">번호</span>
+						<div class="info">
+							<span class="txt1">제목</span>
+							<span class="txt2">
+								<span class="writer">작성자</span>
+								<span class="date">등록일</span>
+								<span class="count">조회수</span>
+							</span>
+						</div>
+					</div>
+					<ul>
 					<%if(nList.size()>0){%>
 					<%for(NoticeDTO nDTO : nList){%>
 					<li>
@@ -177,18 +189,16 @@
 								<a href="javascript:goDetail('<%=CmmUtil.nvl(nDTO.getNoticeNo())%>')"><%=CmmUtil.nvl(nDTO.getNoticeTitle()) %></a>
 							</p>
 							<p class="txt2">
-								<%=AES256Util.strDecode(CmmUtil.nvl(nDTO.getMemberName())) %>
-								<span class="bar">&nbsp;|</span>
-								<span><%=CmmUtil.nvl(nDTO.getRegDt()) %></span>
-								<span class="bar">|</span>
+								<span class="writer"><%=AES256Util.strDecode(CmmUtil.nvl(nDTO.getMemberName())) %></span>
+								<span class="date"><%=CmmUtil.nvl(nDTO.getRegDt()) %></span>
 								<span class="count"><%=CmmUtil.nvl(nDTO.getNoticeViewCnt()) %></span>
 							</p>
 						</div>
 					</li>
 					<%}%>
-				<%}%>
-				</ul>
-
+					<%}%>
+					</ul>
+				</div>
 
 
 				<!-- pageArea -->
