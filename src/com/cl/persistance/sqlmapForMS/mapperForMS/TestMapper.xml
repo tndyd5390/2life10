@@ -4,6 +4,6 @@
 	<select id="getTestList" resultType="TestDTO">
 		SELECT 회원번호   AS MEMBERNO,
 	   		          회원명   AS MEMBERNAME
-	      FROM CUSTOMVIEW;
+	      FROM CUSTOMVIEW WHERE 회원번호 = 100001;
 	</select>
 </mapper>
