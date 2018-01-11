@@ -38,6 +38,7 @@ public class UInquiryController {
 			model.addAttribute("url", "/");
 			return "/alert";
 		}
+		//if("".equals(memberPreNo)) memberPreNo = "213783";
 		
 		Map<String, Object> map = inquiryService.getInquiryTotal(memberPreNo);
 		if(map == null) map = new HashMap<>();

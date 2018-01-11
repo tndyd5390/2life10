@@ -1,3 +1,4 @@
+<%@page import="com.cl.util.TextUtil"%>
 <%@page import="com.cl.util.CmmUtil"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.cl.dto.InquiryDTO"%>
@@ -138,9 +139,9 @@
 							</tr>
 							<tr>
 								<th scope="row">만기계약금</th>
-								<td><%=CmmUtil.nvl(iDTO.getFullPayment()) + "원" %></td>
+								<td><%=TextUtil.addComma(CmmUtil.nvl(iDTO.getFullPayment())) + "원" %></td>
 								<th scope="row">월부금액</th>
-								<td><%=CmmUtil.nvl(iDTO.getPaymentMoney()) + "원" %></td>
+								<td><%=TextUtil.addComma(CmmUtil.nvl(iDTO.getPaymentMoney())) + "원" %></td>
 							</tr>
 							<tr>
 								<th scope="row">가입일자</th>
@@ -162,7 +163,7 @@
 							</tr>
 							<tr>
 								<th scope="row">불입총금액</th>
-								<td><%=CmmUtil.nvl(iDTO.getTotalPayment()) %></td>
+								<td><%=TextUtil.addComma(CmmUtil.nvl(iDTO.getTotalPayment())) %></td>
 								<th scope="row">영업사원</th>
 								<td><%=CmmUtil.nvl(iDTO.getSalesPerson()) %></td>
 							</tr>
