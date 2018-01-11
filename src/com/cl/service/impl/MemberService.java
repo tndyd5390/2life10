@@ -59,4 +59,9 @@ public class MemberService implements IMemberService{
 	public int deleteMember(String memberNo) throws Exception {
 		return memberMapper.deleteMember(memberNo);
 	}
+
+	@Override
+	public MemberDTO getMemberId(MemberDTO mDTO) throws Exception {
+		return memberMapper.getMemberId(mDTO);
+	}
 }

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/view/include/inc_header.jsp"%>
+<%
+	String mNo = (String) request.getAttribute("mNo");
+	
+%>
 <!--#include file="../include/inc_header.jsp"-->
 
 	<div id="contentsWrap">
@@ -231,10 +235,10 @@
 			<div class="pcLnbWrap">
 				<nav>
 					<ul class="pcLnb">
-							<li id="MO70100"><a href="javascript:goMenu('/member/login.do', 'MO70100');">로그인</a></li>
-                            <li id="MO70200"><a href="javascript:goMenu('/member/joinStep.do', 'MO70200');">회원가입</a></li>
-                            <li id="MO70300"><a href="javascript:goMenu('/member/findId.do', 'MO70300');">아이디찾기</a></li>
-                            <li id="MO70400"><a href="javascript:goMenu('/member/findPass.do', 'MO70400');">패스워드찾기</a></li>
+							<li id="MN70100"><a href="javascript:goMenu('/member/login.do', 'MN70100');">로그인</a></li>
+                            <li id="MN70200"><a href="javascript:goMenu('/member/joinStep.do', 'MN70200');">회원가입</a></li>
+                            <li id="MN70300"><a href="javascript:goMenu('/member/findId.do', 'MN70300');">아이디찾기</a></li>
+                            <li id="MN70400"><a href="javascript:goMenu('/member/findPass.do', 'MN70400');">패스워드찾기</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->
@@ -245,6 +249,7 @@
 				<h3 class="smallTit">회원가입</h3>
 			
 			<form name="f" id="f" method="post" action="/member/joinProc.do" >
+			<input type="hidden" name="pre" id="pre" value="<%=mNo%>">
                 <div class="boardType2">
 					<table summary="">
 						<caption>회원가입</caption>

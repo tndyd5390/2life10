@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cl.persistance.mapperForMS.MsCustomMapper">
+
+	<select id="getMemberYN" parameterType="MsCustomDTO" resultType="MsCustomDTO">
+		SELECT
+			회원번호   AS MEMBERNO	    	  
+	    FROM 
+	    	CUSTOMVIEW
+	    WHERE
+	    	회원명 = #{memberName} AND
+	    	LEFT(주민등록번호, 6) = #{memberRrn} AND
+	    	RIGHT(휴대폰, 4) = #{phoneNo},
+	    	관리구분 = '가입'
+	    ORDER BY
+	        회원번호 DESC
+	</select>
+	
+</mapper>

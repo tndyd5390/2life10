@@ -82,6 +82,9 @@
 						<strong><button type="button" class="select" id="subtitle">로그인</button></strong>
 						<ul>
 							<li id="MO70100"><a href="javascript:goMenu('/member/login.do', 'MO70100');">로그인</a></li>
+							<li id="MO70200"><a href="javascript:goMenu('/member/joinStep.do', 'MO70200');">회원가입</a></li>
+                            <li id="MO70300"><a href="javascript:goMenu('/member/findId.do', 'MO70300');">아이디찾기</a></li>
+                            <li id="MO70400"><a href="javascript:goMenu('/member/findPass.do', 'MO70400');">패스워드찾기</a></li>
 						</ul>
 					</div>
 								
@@ -91,7 +94,10 @@
 			<div class="pcLnbWrap">
 				<nav>
 					<ul class="pcLnb">
-							<li id="MO70100"><a href="javascript:goMenu('/member/login.do', 'MO70100');">로그인</a></li>
+							<li id="MN70100"><a href="javascript:goMenu('/member/login.do', 'MN70100');">로그인</a></li>
+                            <li id="MN70200"><a href="javascript:goMenu('/member/joinStep.do', 'MN70200');">회원가입</a></li>
+                            <li id="MN70300"><a href="javascript:goMenu('/member/findId.do', 'MN70300');">아이디찾기</a></li>
+                            <li id="MN70400"><a href="javascript:goMenu('/member/findPass.do', 'MN70400');">패스워드찾기</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->

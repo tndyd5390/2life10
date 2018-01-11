@@ -26,6 +26,7 @@
 				 MEMBER_EMAIL1,
 				 MEMBER_EMAIL2,
 				 MEMBER_PRE,
+				 MEMBER_AUTH,
 				 REG_MEMBER_NO,
 				 REG_DT
 				)
@@ -46,7 +47,8 @@
 				 #{memberAddressDetail},
 				 #{memberEmail1},
 				 #{memberEmail2},
-				 'N',			
+				 #{memberPre},
+				 #{memberAuth},	
 				 <!-- last_insert_id(), -->
 				 (
 				  SELECT (MAX(IFNULL(B.MEMBER_NO, 0)) + 1) MEMBER_NO
@@ -61,7 +63,8 @@
 		SELECT MEMBER_NO			MEMBERNO,
 		       MEMBER_ID 			MEMBERID,
 		       MEMBER_NAME			MEMBERNAME, 
-		       MEMBER_AUTH 			MEMBERAUTH
+		       MEMBER_AUTH 			MEMBERAUTH,
+		       MEMBER_PRE			MEMBERPRE
 		  FROM MEMBER_INFO
 		 WHERE MEMBER_ID = 			#{memberId}
 		   AND MEMBER_PASSWORD = 	#{memberPassword}
@@ -174,4 +177,14 @@
 		       )
 		 WHERE MEMBER_NO = #{memberNo}
 	</update>
+	<select id="getMemberId" parameterType="MemberDTO" resultType="MemberDTO">
+		SELECT
+			MEMBER_ID AS MEMBERID
+		FROM 
+			MEMBER_INFO
+		WHERE
+			MEMBER_NAME = #{memberName} AND
+			MEMBER_EMAIL1 = #{memberEmail1} AND
+			MEMBER_EMAIL2 = #{memberEmail2}
+	</select>
 </mapper>

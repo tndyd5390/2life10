@@ -17,10 +17,12 @@ public interface MemberMapper {
 
 	List<MemberDTO> getMemberList(HashMap<String, Object> hMap);
 
-	MemberDTO getMemberDetail(MemberDTO mDTO);
+	MemberDTO getMemberDetail(MemberDTO mDTO) throws Exception;
 
-	int updateMember(MemberDTO mDTO);
+	int updateMember(MemberDTO mDTO) throws Exception;
 	
-	int deleteMember(String memberNo);
+	int deleteMember(String memberNo) throws Exception;
+
+	MemberDTO getMemberId(MemberDTO mDTO) throws Exception;
 
 }

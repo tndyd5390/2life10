@@ -41,39 +41,31 @@
 		$("#subtitle2").text($("#"+mbId2).text());
 		
 		
-		// 이메일2 셀렉트박스 값 제어
-		$("#emailBox").change(function(){
-			if($(this).val()=="direct"){
-				$("#email2").val("");
-			}else{
-				$("#email2").val($(this).val())
-			}
-		});
 	});
 	
 	
 	function doSubmit(){
 		var name = $("#name");
-		var email1 = $("#email1");
-		var email2 = $("#email2");
+		var birthday = $("#birthday");
+		var phone = $("#phone");
 		var f = $("#f");
 		console.log(name.val());
 		if(name.val()==""){
 			alert("이름을 입력해주세요.");
 			name.focus();
-			return false;
-		}else if(email1.val()== ""){
-			alert("이메일을 입력해주세요.");
-			email1.focus();
-			return false;
-		}else if(email2.val()== ""){
-			alert("이메일을 입력해주세요.");
-			email2.focus();
-			return false;
+			return;
+		}else if(birthday.val()== ""){
+			alert("생년월일을 입력해주세요.");
+			birthday.focus();
+			return;
+		}else if(phone.val()== ""){
+			alert("휴대폰번호 뒷자리를 입력해주세요.");
+			phone.focus();
+			return;
 		}else{
 			f.submit();
 			return true;
-		}
+		};
 	};
 
 </script>
@@ -111,10 +103,10 @@
 			<div class="pcLnbWrap">
 				<nav>
 					<ul class="pcLnb">
-							<li id="MO70100"><a href="javascript:goMenu('/member/login.do', 'MO70100');">로그인</a></li>
-                            <li id="MO70200"><a href="javascript:goMenu('/member/joinStep.do', 'MO70200');">회원가입</a></li>
-                            <li id="MO70300"><a href="javascript:goMenu('/member/findId.do', 'MO70300');">아이디찾기</a></li>
-                            <li id="MO70400"><a href="javascript:goMenu('/member/findPass.do', 'MO70400');">패스워드찾기</a></li>
+							<li id="MN70100"><a href="javascript:goMenu('/member/login.do', 'MN70100');">로그인</a></li>
+                            <li id="MN70200"><a href="javascript:goMenu('/member/joinStep.do', 'MN70200');">회원가입</a></li>
+                            <li id="MN70300"><a href="javascript:goMenu('/member/findId.do', 'MN70300');">아이디찾기</a></li>
+                            <li id="MN70400"><a href="javascript:goMenu('/member/findPass.do', 'MN70400');">패스워드찾기</a></li>
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->
@@ -139,32 +131,18 @@
 								</td>
 							</tr>
 							<tr>
-								<th scope="row">이메일 주소</th>
+								<th scope="row">생년월일(yymmdd)</th>
 								<td>
-									<input type="text" id="email1" name="email1" value="" title="아이디" class="inputType2" style="" maxlength="15"> @
-									<input type="text" id="email2" name="email2" value="" title="메일" class="inputType2" style="" maxlength="15">
-									<select id="emailBox" name="emailBox" title="" class="inputType2">
-										<option value="">선택하세요</option>
-										<option value="nate.com">nate.com</option>
-										<option value="hotmail.com">hotmail.com</option>
-										<option value="yahoo.co.kr">yahoo.co.kr</option>
-										<option value="naver.com">naver.com</option>
-										<option value="paran.com">paran.com</option>
-										<option value="dreamwiz.com">dreamwiz.com</option>
-										<option value="hanafos.com">hanafos.com</option>
-										<option value="lycos.co.kr">lycos.co.kr</option>
-										<option value="korea.com">korea.com</option>
-										<option value="unitel.co.kr">unitel.co.kr</option>
-										<option value="hanmail.net">hanmail.net</option>
-										<option value="gmail.com">gmail.com</option>
-										<option value="google.com">google.com</option>
-										<option value="empal.com">empal.com</option>
-										<option value="freechal.com">freechal.com</option>
-										<option value="empas.com">empas.com</option>
-										<option value="direct">직접입력</option>
-									</select>
+									<input type="text" id="birthday" name="birthday" class="inputType1" style="" maxlength="6">
 								</td>
 							</tr>
+							<tr>
+								<th scope="row">휴대폰번호 뒷자리</th>
+								<td>
+									<input type="text" id="phone" name="phone" class="inputType1" style="" maxlength="4">
+								</td>
+							</tr>
+							
 						</tbody>
 					</table>
 				</div>

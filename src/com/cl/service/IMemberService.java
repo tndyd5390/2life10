@@ -18,6 +18,8 @@ public interface IMemberService {
 
 	int updateMember(MemberDTO mDTO) throws Exception;
 	
-	int deleteMember(String memberNo) throws Exception;	
+	int deleteMember(String memberNo) throws Exception;
+
+	MemberDTO getMemberId(MemberDTO mDTO) throws Exception;	
 	
 }

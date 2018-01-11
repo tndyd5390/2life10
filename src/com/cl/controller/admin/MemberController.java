@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -17,11 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cl.dto.MemberDTO;
+import com.cl.dto.MsCustomDTO;
 import com.cl.service.IMemberService;
+import com.cl.service.IMsCustomService;
 import com.cl.util.AES256Util;
 import com.cl.util.CmmUtil;
 import com.cl.util.PageUtil;
 import com.cl.util.SHA256Util;
+import com.cl.util.SessionUtil;
 
 @Controller
 public class MemberController {
@@ -30,6 +34,10 @@ public class MemberController {
 	
 	@Resource(name="MemberService")
 	private IMemberService memberService;
+	@Resource(name="MsCustomService")
+	private IMsCustomService msCustomService;
+	
+	
 	
 	@RequestMapping("/member/login")
 	public String login() throws Exception{
@@ -49,6 +57,7 @@ public class MemberController {
 		String memberNo = "";
 		String memberAuth = "";
 		String memberName = "";
+		String memberPre = "";
 		
 		log.info("memberId : "+memberId);
 		MemberDTO mDTO = new MemberDTO();
@@ -64,6 +73,7 @@ public class MemberController {
 			memberId = CmmUtil.nvl(mDTO.getMemberId());
 			memberName = AES256Util.strDecode(CmmUtil.nvl(mDTO.getMemberName()));
 			memberAuth = CmmUtil.nvl(mDTO.getMemberAuth());
+			memberPre = CmmUtil.nvl(mDTO.getMemberPre());
 			long time = System.currentTimeMillis(); 
 			SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String timeStr = dayTime.format(new Date(time));
@@ -72,12 +82,14 @@ public class MemberController {
 			log.info("login Id : " +memberId);
 			log.info("login Name : " +memberName);
 			log.info("login Auth : " +memberAuth);
+			log.info("login Pre : " +memberPre);
 			log.info("login Time : "+timeStr);
 			
 			session.setAttribute("ss_member_no", memberNo);
 			session.setAttribute("ss_member_id", memberId);
 			session.setAttribute("ss_member_name", memberName);
 			session.setAttribute("ss_member_auth", memberAuth);
+			session.setAttribute("ss_member_pre", memberPre);
 			
 			if(mDTO.getMemberAuth().equals("A")){
 				url = "/Lmin/notice/noticeList.do";
@@ -102,6 +114,7 @@ public class MemberController {
 		String memeberId = CmmUtil.nvl((String)session.getAttribute("ss_member_id"));
 		String memeberName = CmmUtil.nvl((String)session.getAttribute("ss_member_name"));
 		String memeberAuth = CmmUtil.nvl((String)session.getAttribute("ss_member_auth"));
+		String memeberPre = CmmUtil.nvl((String)session.getAttribute("ss_member_pre"));
 		long time = System.currentTimeMillis(); 
 		SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String timeStr = dayTime.format(new Date(time));
@@ -110,12 +123,14 @@ public class MemberController {
 		log.info("logout Id : "+memeberId);
 		log.info("logout Name : "+memeberName);
 		log.info("logout Auth : "+memeberAuth);
+		log.info("logout Pre : "+memeberPre);
 		log.info("logout Time : "+timeStr);
 		
 		session.setAttribute("ss_memeber_no", "");
 		session.setAttribute("ss_memeber_id", "");
 		session.setAttribute("ss_memeber_name", "");
 		session.setAttribute("ss_memeber_auth", "");
+		session.setAttribute("ss_memeber_pre", "");
 		session.invalidate();
 		
 		model.addAttribute("msg", "로그아웃 성공");
@@ -140,26 +155,51 @@ public class MemberController {
 		String url = "";
 		String msg = "";
 		String memberName = CmmUtil.nvl(req.getParameter("name"));
-		String memberEmail1 = CmmUtil.nvl(req.getParameter("email1"));
-		String memberEmail2 = CmmUtil.nvl(req.getParameter("email2"));
+		String memberBirthday = CmmUtil.nvl(req.getParameter("birthday"));
+		String memberPhone = CmmUtil.nvl(req.getParameter("phone"));
 		
 		log.info("memberName = "+memberName);
-		log.info("memberEmail1 = "+memberEmail1);
-		log.info("memberEmail2 = "+memberEmail2);
-		log.info("memberEmail = "+ memberEmail1+"@"+memberEmail2);
+		log.info("memberBirthday = "+memberBirthday);
+		log.info("memberPhone = "+ memberPhone);
 		
+		
+		MsCustomDTO msDTO = new MsCustomDTO();
+		msDTO.setMemberName(memberName);
+		msDTO.setMemberRrn(memberBirthday);
+		msDTO.setPhoneNo(memberPhone);
+		
+		msDTO = msCustomService.getMemberYN(msDTO);
+		
+		if(msDTO != null){
+			
+			if(msDTO.getMemberNo() == null){
+				model.addAttribute("memberNo", "N");
+				msg = "일치하는 회원이 없습니다. 계속 진행하세요.";
+				log.info("memberNo : N");
+			}else{
+				model.addAttribute("memberNo", msDTO.getMemberNo());
+				log.info("memberNo : "+ msDTO.getMemberNo());
+				msg = "회원정보가 확인 되었습니다. 계속 진행하세요.";
+			}
+		}
 		url = "/member/joinStep2.do";
-		msg = "다음 단계로 넘어갑니다. 계속진행하세요.";
 		
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
 		
 		log.info("joinCheckProc End!!");
-		return "/member/redirect";
+		return "/member/redirectY";
 	}
 	@RequestMapping("/member/joinStep2")
-	public String joinStep2()throws Exception{
+	public String joinStep2(HttpServletRequest req, Model model)throws Exception{
 		log.info("joinStep2 Start!!");
+		
+		String mNo = (String) CmmUtil.nvl(req.getParameter("mNo"));
+		log.info("mNo = " + mNo);
+		
+		if(!mNo.equals("") || mNo != null){
+			model.addAttribute("mNo", mNo);
+		}
 		
 		log.info("joinStep2 End!!");
 		return "/member/join_step_2";
@@ -195,6 +235,7 @@ public class MemberController {
 		String memberAddressDetail = CmmUtil.nvl(req.getParameter("address2"));
 		String memberEmail1 = CmmUtil.nvl(req.getParameter("email1"));
 		String memberEmail2 = CmmUtil.nvl(req.getParameter("email2"));
+		String memberPre = CmmUtil.nvl(req.getParameter("pre"));
 		
 		log.info("id : "+ memberId);
 		log.info("name : "+ memberName);
@@ -206,6 +247,7 @@ public class MemberController {
 		log.info("addressDetail : "+ memberAddressDetail);
 		log.info("email1 : "+ memberEmail1);
 		log.info("email2 : "+ memberEmail2);
+		log.info("memberPre : "+ memberPre);
 
 		MemberDTO mDTO = new MemberDTO();
 		
@@ -224,6 +266,8 @@ public class MemberController {
 		}
 		mDTO.setMemberEmail1(AES256Util.strEncode(memberEmail1));
 		mDTO.setMemberEmail2(AES256Util.strEncode(memberEmail2));
+		mDTO.setMemberPre(memberPre);
+		mDTO.setMemberAuth("U");
 		
 		int result = memberService.insertMember(mDTO);
 		
@@ -390,5 +434,61 @@ public class MemberController {
 		
 		log.info("Lmin:memberDeleteProc End!!");
 		return "/alert";
+	}
+	
+	@RequestMapping("/member/findId")
+	public String findId(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws Exception{
+		log.info("findId Start!!");
+		SessionUtil.loginCheck(resp, session);
+		
+		
+		log.info("findId End!!");
+		return "/member/find_id";
+	}
+	@RequestMapping("/member/findIdProc")
+	public String findIdProc(HttpServletRequest req, HttpServletResponse resp, HttpSession session,Model model) throws Exception{
+		log.info("findIdProc Start!!");
+		SessionUtil.loginCheck(resp, session);
+		String msg = "";
+		String url = "";
+		String memberName = CmmUtil.nvl(req.getParameter("name"));
+		String memberEmail1 = CmmUtil.nvl(req.getParameter("email1"));
+		String memberEmail2 = CmmUtil.nvl(req.getParameter("email2"));
+		log.info("memberName : "+memberName);
+		log.info("memberEmail1 : "+memberEmail1);
+		log.info("memberEmail2 : "+memberEmail2);
+		
+		MemberDTO mDTO = new MemberDTO();
+		mDTO.setMemberName(AES256Util.strDecode(memberName));
+		mDTO.setMemberEmail1(AES256Util.strDecode(memberEmail1));
+		mDTO.setMemberEmail2(AES256Util.strDecode(memberEmail2));
+		
+		mDTO = memberService.getMemberId(mDTO);
+		
+		if(mDTO !=null){
+			if(mDTO.getMemberId() == null){
+				msg = "일치하는 회원이 없습니다.";
+				url = "/member/findId.do";
+			}else{
+				msg = "회원님의 아이디는 "+mDTO.getMemberId()+" 입니다.";
+				url = "/member/login.do";
+			};
+		};
+		model.addAttribute("url" ,url);
+		model.addAttribute("msg" ,msg);
+		mDTO = null;
+		log.info("findIdProc End!!");
+		return "/member/redirect";
+	}
+	
+	@RequestMapping("/member/findPass")
+	public String findPw() throws Exception{
+		
+		return "/member/find_pass";
+	}
+	@RequestMapping("/member/chgPass")
+	public String chgPass() throws Exception{
+		
+		return "/member/change_pass";
 	}
 }
