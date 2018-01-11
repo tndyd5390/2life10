@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cl.persistance.mapperForMS.AccMapperForMS">
+	<select id="getAccBeforeToday" resultType="AccDTO">
+		SELECT 회원번호 		AS MEMBERNO,
+		                불입일자 		AS PAYMENTDAY,
+		                불입횟수 		AS PAYMENTCOUNT,
+		                불입금 			AS PAYMENTMONEY,
+		                불입최종회차 		AS LASTPAYMENTCOUNT,
+		                불입방법		AS PAYMENTROUTE,
+		                실불입일 		AS REALPAYMENTDAY,
+		                할인액 			AS DISCOUNTMONEY,
+		                비고사항		AS ETC
+		  FROM AccView WHERE 불입일자 = convert(varchar, getdate()-1, 102);
+	</select>
+	<select id="getAccBetweenAnd" resultType="AccDTO" parameterType="string">
+		SELECT 회원번호 		AS MEMBERNO,
+		                불입일자 		AS PAYMENTDAY,
+		                불입횟수 		AS PAYMENTCOUNT,
+		                불입금 			AS PAYMENTMONEY,
+		                불입최종회차 		AS LASTPAYMENTCOUNT,
+		                불입방법		AS PAYMENTROUTE,
+		                실불입일 		AS REALPAYMENTDAY,
+		                할인액 			AS DISCOUNTMONEY,
+		                비고사항		AS ETC
+		  FROM (select row_number() over(order by 회원번호) as rownum, * from AccView) tmp 
+		 WHERE tmp.rownum between #{start} and #{end};
+	</select>
+	
+	<select id="getAccSize" resultType="string">
+		SELECT COUNT(*) FROM AccView
+	</select>
+</mapper>

@@ -21,5 +21,6 @@
 		<typeAlias type="com.cl.dto.CodeDTO" alias="CodeDTO"/>
 		<typeAlias type="com.cl.dto.TestDTO" alias="TestDTO"/>
 		<typeAlias type="com.cl.dto.MsCustomDTO" alias="MsCustomDTO"/>
+		<typeAlias type="com.cl.dto.AccDTO" alias="AccDTO"/>
     </typeAliases>
 </configuration>
