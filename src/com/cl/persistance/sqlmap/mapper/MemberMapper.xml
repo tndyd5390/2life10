@@ -187,4 +187,16 @@
 			MEMBER_EMAIL1 = #{memberEmail1} AND
 			MEMBER_EMAIL2 = #{memberEmail2}
 	</select>
+	
+	<update id="updateTmpPass" parameterType="MemberDTO">
+		UPDATE
+			MEMBER_INFO
+		SET
+			MEMBER_PASSWORD = #{memberPassword}
+		WHERE
+			MEMBER_ID = #{memberId} AND
+			MEMBER_NAME = #{memberName} AND
+			MEMBER_EMAIL1 = #{memberEmail1} AND
+			MEMBER_EMAIL2 = #{memberEmail2}
+	</update>
 </mapper>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,8 @@ import com.cl.service.IMemberService;
 import com.cl.service.IMsCustomService;
 import com.cl.util.AES256Util;
 import com.cl.util.CmmUtil;
+import com.cl.util.Email;
+import com.cl.util.EmailSender;
 import com.cl.util.PageUtil;
 import com.cl.util.SHA256Util;
 import com.cl.util.SessionUtil;
@@ -37,7 +40,8 @@ public class MemberController {
 	@Resource(name="MsCustomService")
 	private IMsCustomService msCustomService;
 	
-	
+	@Autowired
+	private EmailSender emailSender;
 	
 	@RequestMapping("/member/login")
 	public String login() throws Exception{
@@ -439,8 +443,6 @@ public class MemberController {
 	@RequestMapping("/member/findId")
 	public String findId(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("findId Start!!");
-		SessionUtil.loginCheck(resp, session);
-		
 		
 		log.info("findId End!!");
 		return "/member/find_id";
@@ -459,32 +461,81 @@ public class MemberController {
 		log.info("memberEmail2 : "+memberEmail2);
 		
 		MemberDTO mDTO = new MemberDTO();
-		mDTO.setMemberName(AES256Util.strDecode(memberName));
-		mDTO.setMemberEmail1(AES256Util.strDecode(memberEmail1));
-		mDTO.setMemberEmail2(AES256Util.strDecode(memberEmail2));
+		mDTO.setMemberName(AES256Util.strEncode(memberName));
+		mDTO.setMemberEmail1(AES256Util.strEncode(memberEmail1));
+		mDTO.setMemberEmail2(AES256Util.strEncode(memberEmail2));
 		
 		mDTO = memberService.getMemberId(mDTO);
-		
-		if(mDTO !=null){
-			if(mDTO.getMemberId() == null){
-				msg = "일치하는 회원이 없습니다.";
-				url = "/member/findId.do";
-			}else{
-				msg = "회원님의 아이디는 "+mDTO.getMemberId()+" 입니다.";
-				url = "/member/login.do";
-			};
+		if(mDTO != null){
+			msg = "회원님의 아이디는 "+mDTO.getMemberId()+" 입니다.";
+			url = "/member/login.do";
+		}else{
+			msg = "일치하는 회원이 없습니다.";
+			url = "/member/findId.do";
 		};
+		
 		model.addAttribute("url" ,url);
 		model.addAttribute("msg" ,msg);
+		
 		mDTO = null;
 		log.info("findIdProc End!!");
 		return "/member/redirect";
 	}
 	
 	@RequestMapping("/member/findPass")
-	public String findPw() throws Exception{
-		
+	public String findPass() throws Exception{
+		log.info("findPass Start!!");
+
+		log.info("findPass End!!");
 		return "/member/find_pass";
+	}
+	
+	@RequestMapping("/member/findPassProc")
+	public String findPassProc(HttpServletRequest req, HttpServletResponse resp, HttpSession session,Model model) throws Exception{
+		log.info("findPassProc Start!!");
+		SessionUtil.loginCheck(resp, session);
+		String msg = "";
+		String url = "";
+		String memberId = CmmUtil.nvl(req.getParameter("id"));
+		String memberName = CmmUtil.nvl(req.getParameter("name"));
+		String memberEmail1 = CmmUtil.nvl(req.getParameter("email1"));
+		String memberEmail2 = CmmUtil.nvl(req.getParameter("email2"));
+		Email sendEmail = new Email();
+		
+		log.info("memberId : "+memberId);
+		log.info("memberName : "+memberName);
+		log.info("memberEmail1 : "+memberEmail1);
+		log.info("memberEmail2 : "+memberEmail2);
+		
+		MemberDTO mDTO = new MemberDTO();
+		mDTO.setMemberId(memberId);
+		mDTO.setMemberName(AES256Util.strEncode(memberName));
+		mDTO.setMemberEmail1(AES256Util.strEncode(memberEmail1));
+		mDTO.setMemberEmail2(AES256Util.strEncode(memberEmail2));
+		
+		HashMap<String, Object> hMap = new HashMap<>();
+		hMap.put("mDTO", mDTO);
+		
+		hMap = memberService.updateTmpPass(hMap);
+		
+		int result = (int) hMap.get("result");
+		if(result == 0){
+			msg = "회원정보가 일치하지 않습니다.";
+			url = "/member/findPass.do";
+		}else{
+			System.out.println(memberEmail1+"@"+memberEmail2);
+			sendEmail.setReciver(memberEmail1+"@"+memberEmail2);
+			sendEmail.setSubject(memberName+"님 크리스찬 상조 임시비밀번호");
+			sendEmail.setContent(sendEmail.setContents(hMap));
+			emailSender.SendEmail(sendEmail);
+			msg = "가입하신 이메일로 임시비밀번호가 전송되었습니다.";
+			url = "/member/login.do";
+		}
+		model.addAttribute("url", url);
+		model.addAttribute("msg", msg);
+		
+		log.info("findPassProc End!!");
+		return "/member/redirect";
 	}
 	@RequestMapping("/member/chgPass")
 	public String chgPass() throws Exception{

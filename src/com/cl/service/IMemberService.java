@@ -20,6 +20,8 @@ public interface IMemberService {
 	
 	int deleteMember(String memberNo) throws Exception;
 
-	MemberDTO getMemberId(MemberDTO mDTO) throws Exception;	
+	MemberDTO getMemberId(MemberDTO mDTO) throws Exception;
+
+	HashMap<String, Object> updateTmpPass(HashMap<String, Object> hMap) throws Exception;	
 	
 }

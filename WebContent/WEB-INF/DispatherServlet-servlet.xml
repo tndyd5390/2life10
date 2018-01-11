@@ -56,4 +56,24 @@
 		<property name="order" value="0"/>
 	</bean>
 	<bean id="download" class="com.cl.util.DownloadUtil"></bean>
+	
+	<!-- 이메일 보내기 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="defaultEncoding" value="utf-8"/>
+		<property name="username" value="kangseokopo@gmail.com" />
+		<property name="password" value="vhfflxpr" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.auth">true</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="email" class="com.cl.util.Email">
+	</bean>
+	<bean id="emailSender" class="com.cl.util.EmailSender">
+	</bean>
+	
 </beans>

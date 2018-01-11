@@ -8,9 +8,9 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.cl.dto.MemberDTO;
-import com.cl.dto.NoticeDTO;
 import com.cl.persistance.mapper.MemberMapper;
 import com.cl.service.IMemberService;
+import com.cl.util.SHA256Util;
 
 @Service("MemberService")
 public class MemberService implements IMemberService{
@@ -63,5 +63,20 @@ public class MemberService implements IMemberService{
 	@Override
 	public MemberDTO getMemberId(MemberDTO mDTO) throws Exception {
 		return memberMapper.getMemberId(mDTO);
+	}
+
+	@Override
+	public HashMap<String, Object> updateTmpPass(HashMap<String, Object> hMap) throws Exception {
+		MemberDTO mDTO = (MemberDTO) hMap.get("mDTO");
+		long temp_Pw = (long)(Math.random()*9000000000l) + 1000000000l;
+		String temp_password = Long.toHexString(temp_Pw);
+		mDTO.setMemberPassword(SHA256Util.sha256(temp_password));
+		
+		int result = memberMapper.updateTmpPass(mDTO);
+		
+		hMap.put("tmpPass", temp_password);
+		hMap.put("result", result);
+		
+		return hMap;
 	}
 }

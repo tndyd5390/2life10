@@ -40,8 +40,49 @@
 		$("#subtitle").text($("#"+mbId).text());
 		$("#subtitle2").text($("#"+mbId2).text());
 		
-	});
 
+		//메일 셀렉트박스 제어
+		$("#emailBox").change(function(){
+			if($(this).val()=="direct"){
+				$("#email2").val("");
+			}else{
+				$("#email2").val($(this).val())
+			}
+		});
+
+	});
+	
+	function doSubmit(){
+		var name = $("#name");
+		var id = $("#id");
+		var email1 = $("#email1");
+		var email2 = $("#email2");
+		var f = $("#f");
+		console.log(name.val());
+		if(name.val()==""){
+			alert("이름을 입력해주세요.");
+			name.focus();
+			return;
+		}else if(email1.val()== ""){
+			alert("이메일을 입력해주세요.");
+			email1.focus();
+			return;
+		}else if(email2.val()== ""){
+			alert("이메일을 입력해주세요.");
+			email2.focus();
+			return;
+		}else if(id.val() == ""){
+			alert("아이디를 입력해주세요.");
+			id.focus();
+			return;
+		}else{
+			f.attr("action", "/member/findPassProc.do");
+			f.submit();
+			return true;
+		};
+	};
+
+	
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -91,6 +132,7 @@
 				<h3 class="smallTit">패스워드찾기</h3>
 
                 <div class="boardType2">
+                <form name="f" id="f" method="post" action="/member/findPassProc.do">
 					<table summary="">
 						<caption>회원가입</caption>
 						<colgroup>
@@ -101,15 +143,21 @@
 							<tr>
 								<th scope="row">아이디</th>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<input type="text" name="id" id="id" class="inputType1" maxlength="25">
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">이름</th>
+								<td>
+									<input type="text" name="name" name="name" class="inputType1" maxlength="25">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">이메일 주소</th>
 								<td>
-									<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5"> @
-									<input type="text" name="name" value="" title="이름" class="inputType2" style="" maxlength="5">
-									<select id="telAbleEndTime" name="telAbleEndTime" title="" class="inputType2">
+									<input type="text" name="email1" id="email1" class="inputType2"> @
+									<input type="text" name="email2" id="email2" class="inputType2">
+									<select id="emailBox" name="emailBox" title="" class="inputType2">
 										<option value="">선택하세요</option>
 										<option value="nate.com">nate.com</option>
 										<option value="hotmail.com">hotmail.com</option>
@@ -133,11 +181,12 @@
 							</tr>
 						</tbody>
 					</table>
+                </form>
 				</div>
 
 				<div class="btn_area">
-					<a href="#" id="submitLink" class="btn_active">패스워드찾기</a>
-					<a href="#" id="btnCancel" class="btn_cancel">취소</a>
+					<a href="javascript:doSubmit();" id="submitLink" class="btn_active">패스워드찾기</a>
+					<a href="/main.do" id="btnCancel" class="btn_cancel">취소</a>
 				</div>
 
 			</div> <!-- // contents -->
@@ -147,4 +196,4 @@
 	</div> <!-- // contentsWrap -->
 
 <!--#include file="../include/inc_footer.jsp"-->
-<%@include file="../include/inc_footer.jsp"%>
+<%@include file="/WEB-INF/view/include/inc_footer.jsp"%>

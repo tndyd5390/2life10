@@ -50,6 +50,31 @@
 		});
 
 	});
+	
+	function doSubmit(){
+		var name = $("#name");
+		var email1 = $("#email1");
+		var email2 = $("#email2");
+		var f = $("#f");
+		console.log(name.val());
+		if(name.val()==""){
+			alert("이름을 입력해주세요.");
+			name.focus();
+			return;
+		}else if(email1.val()== ""){
+			alert("이메일을 입력해주세요.");
+			email1.focus();
+			return;
+		}else if(email2.val()== ""){
+			alert("이메일을 입력해주세요.");
+			email2.focus();
+			return;
+		}else{
+			f.attr("action", "/member/findIdProc.do");
+			f.submit();
+			return true;
+		};
+	};
 
 </script>
 
@@ -100,8 +125,9 @@
 				<h3 class="smallTit">아이디찾기</h3>
 
                 <div class="boardType2">
+				<form name="f" id="f" method="post" action="/member/findIdProc.do">
 					<table summary="">
-						<caption>회원가입</caption>
+						<caption>아이디찾기</caption>
 						<colgroup>
 							<col width="20%">
 							<col width="80%">
@@ -110,14 +136,14 @@
 							<tr>
 								<th scope="row">성명</th>
 								<td>
-									<input type="text" name="name" id="name" value="" title="이름" class="inputType1" style="" maxlength="25">
+									<input type="text" name="name" id="name" value="" title="이름" class="inputType1" maxlength="25">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">이메일 주소</th>
 								<td>
-									<input type="text" name="email1" value="" title="이름" class="inputType2" style=""> @
-									<input type="text" name="email2" value="" title="이름" class="inputType2" style="">
+									<input type="text" name="email1" id="email1" value="" title="이름" class="inputType2" style=""> @
+									<input type="text" name="email2" id="email2" value="" title="이름" class="inputType2" style="">
 									<select id="emailBox" name="emailBox" title="" class="inputType2">
 										<option value="">선택하세요</option>
 										<option value="nate.com">nate.com</option>
@@ -142,11 +168,12 @@
 							</tr>
 						</tbody>
 					</table>
+				</form>
 				</div>
 
 				<div class="btn_area">
-					<a href="#" id="submitLink" class="btn_active">아이디찾기</a>
-					<a href="#" id="btnCancel" class="btn_cancel">취소</a>
+					<a href="javascript:doSubmit();" id="submitLink" class="btn_active">아이디찾기</a>
+					<a href="/main.do" id="btnCancel" class="btn_cancel">취소</a>
 				</div>
 
 			</div> <!-- // contents -->
@@ -156,4 +183,4 @@
 	</div> <!-- // contentsWrap -->
 
 <!--#include file="../include/inc_footer.jsp"-->
-<%@include file="../include/inc_footer.jsp"%>
+<%@include file="/WEB-INF/view/include/inc_footer.jsp"%>
