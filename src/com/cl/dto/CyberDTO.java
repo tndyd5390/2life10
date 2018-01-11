@@ -19,6 +19,7 @@ public class CyberDTO {
 	private String search;
 	private String rowNum;
 	private String memberId;
+	private String memberName;
 	
 	public String getMemberId() {
 		return memberId;
@@ -127,5 +128,11 @@ public class CyberDTO {
 	}
 	public void setRowNum(String rowNum) {
 		this.rowNum = rowNum;
+	}
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 }

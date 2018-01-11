@@ -1,6 +1,7 @@
 <%@page import="com.cl.util.CmmUtil"%>
 <%@page import="com.cl.util.TextUtil"%>
 <%@page import="com.cl.util.PageUtil"%>
+<%@page import="com.cl.util.AES256Util"%>
 <%@page import="com.cl.dto.RegulationDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
@@ -144,7 +145,7 @@
 				<input type="hidden" name="page" id="page">
 				<input type="hidden" name="regulationNo" id="regulationNo">
 					<table summary="">
-						<caption>회원가입</caption>
+						<caption>상조관련법규</caption>
 						<colgroup>
 							<col width="100%">
 						</colgroup>
@@ -166,7 +167,19 @@
                 </div>
 
 				<br/><br/>
-				<ul class="boradType5">
+				<div class="boradType5">
+					<div class="title">
+						<span class="num">번호</span>
+						<div class="info">
+							<span class="txt1">제목</span>
+							<span class="txt2">
+								<span class="writer">작성자</span>
+								<span class="date">등록일</span>
+								<span class="count">조회수</span>
+							</span>
+						</div>
+					</div>
+				<ul>
 				<%
 				if(rList.size()!=0){
 					for(RegulationDTO rDTO : rList){
@@ -178,9 +191,8 @@
 								<a href="javascript:goDetail(<%=CmmUtil.nvl(rDTO.getRegulationNo())%>);"><%=TextUtil.exchangeEscapeNvl(rDTO.getRegulationTitle()) %></a>
 							</p>
 							<p class="txt2">
-								<%=TextUtil.exchangeEscapeNvl(rDTO.getMemberId()) %><span class="bar">&nbsp;|</span>
-								<span><%=TextUtil.exchangeEscapeNvl(rDTO.getRegDt()) %></span>
-								<span class="bar">|</span>
+								<span class="writer"><%=AES256Util.strDecode(CmmUtil.nvl(rDTO.getMemberName())) %></span>
+								<span class="date"><%=TextUtil.exchangeEscapeNvl(rDTO.getRegDt()) %></span>
 								<span class="count"><%=TextUtil.exchangeEscapeNvl(rDTO.getRegulationViewCnt()) %></span>
 							</p>
 						</div>
@@ -261,6 +273,7 @@
 						</div>
 					</li> -->
 				</ul>
+				</div>
 				<!-- pageArea -->
 				<div class="pageArea">
 					<%=PageUtil.frontPaging(hMap, pageBtnSplit) %>

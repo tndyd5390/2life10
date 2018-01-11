@@ -1,6 +1,7 @@
 <%@page import="com.cl.util.PageUtil"%>
 <%@page import="com.cl.util.TextUtil"%>
 <%@page import="com.cl.util.CmmUtil"%>
+<%@page import="com.cl.util.AES256Util"%>
 <%@page import="com.cl.dto.CyberDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
@@ -135,101 +136,43 @@
                 </div>
 
 				<br/><br/>
-				<ul class="boradType5">
+				<div class="boradType5">
+					<div class="title">
+						<span class="num">번호</span>
+						<div class="info">
+							<span class="txt1">제목</span>
+							<span class="txt2">
+								<span class="writer">작성자</span>
+								<span class="date">등록일</span>
+								<span class="count">조회수</span>
+							</span>
+						</div>
+					</div>
+				
+				<ul>
 				<%
 				if(cList.size() != 0){
 					for(CyberDTO cDTO : cList){
 				%>	
 					<li>
-						<p class="num"><%=CmmUtil.nvl(cDTO.getRowNum()) %></p>
+						<span class="num"><%=CmmUtil.nvl(cDTO.getRowNum()) %></span>
 						<div class="info">
-							<p class="txt1"><!-- 박성진수정 -->
+							<span class="txt1"><!-- 박성진수정 -->
 								<a href="javascript:goDetail('<%=CmmUtil.nvl(cDTO.getCyberNo())%>');"><%=TextUtil.exchangeEscapeNvl(cDTO.getCyberTitle()) %></a>
-							</p>
-							<p class="txt2">
-								<%=TextUtil.exchangeEscapeNvl(cDTO.getMemberId()) %><span class="bar">&nbsp;|</span>
-								<span><%=TextUtil.exchangeEscapeNvl(cDTO.getRegDT()) %></span>
-								<span class="bar">|</span>
+							</span>
+							<span class="txt2">
+								<span class="writer"><%=AES256Util.strDecode(CmmUtil.nvl(cDTO.getMemberName())) %></span>
+								<span class="date"><%=TextUtil.exchangeEscapeNvl(cDTO.getRegDT()) %></span>
 								<span class="count"><%=CmmUtil.nvl(cDTO.getCyberViewCnt()) %></span>
-							</p>
+							</span>
 						</div>
 					</li>
 				<%	
 					}
 				}
 				%>
-					<!-- <li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt1">박성진수정
-								<a href="javascript:selectBoardDtl('480')">크리스찬상조 실제 장례 행사 영상자료</a>
-							</p>
-							<p class="txt2">
-								관리자<span class="bar">&nbsp;|</span>
-								<span>2017-10-10</span>
-								<span class="bar">|</span>
-								<span class="count">625</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt1">박성진수정
-								<a href="javascript:selectBoardDtl('480')">크리스찬상조 실제 장례 행사 영상자료</a>
-							</p>
-							<p class="txt2">
-								관리자<span class="bar">&nbsp;|</span>
-								<span>2017-10-10</span>
-								<span class="bar">|</span>
-								<span class="count">625</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt1">박성진수정
-								<a href="javascript:selectBoardDtl('480')">크리스찬상조 실제 장례 행사 영상자료</a>
-							</p>
-							<p class="txt2">
-								관리자<span class="bar">&nbsp;|</span>
-								<span>2017-10-10</span>
-								<span class="bar">|</span>
-								<span class="count">625</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt1">박성진수정
-								<a href="javascript:selectBoardDtl('480')">크리스찬상조 실제 장례 행사 영상자료</a>
-							</p>
-							<p class="txt2">
-								관리자<span class="bar">&nbsp;|</span>
-								<span>2017-10-10</span>
-								<span class="bar">|</span>
-								<span class="count">625</span>
-							</p>
-						</div>
-					</li>
-					<li>
-						<p class="num">1</p>
-						<div class="info">
-							<p class="txt1">박성진수정
-								<a href="javascript:selectBoardDtl('480')">크리스찬상조 실제 장례 행사 영상자료</a>
-							</p>
-							<p class="txt2">
-								관리자<span class="bar">&nbsp;|</span>
-								<span>2017-10-10</span>
-								<span class="bar">|</span>
-								<span class="count">625</span>
-							</p>
-						</div>
-					</li> -->
 				</ul>
-				
+				</div>
 				<!-- pageArea -->
 				<div class="pageArea">
 					<%=PageUtil.frontPaging(hMap, pageBtnSplit) %>

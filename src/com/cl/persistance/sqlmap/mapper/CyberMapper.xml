@@ -51,7 +51,7 @@
        		   CI.CYBER_VIEW_CNT					AS CYBERVIEWCNT,
        		   CI.REG_MEMBER_NO						AS REGMEMBERNO,
        		   DATE_FORMAT(CI.REG_DT,'%Y-%m-%d')	AS REGDT,
-       		   MI.MEMBER_ID							AS MEMBERID,	
+       		   MI.MEMBER_NAME						AS MEMBERNAME,
        		   P.PAGE								AS PAGE,
        		   FI.FILE_NAME							AS CYBERFILENAME,
        		   FI.FILE_PATH							AS CYBERFILEPATH,
@@ -101,7 +101,7 @@
        		   CI.CYBER_VIEW_CNT					AS CYBERVIEWCNT,
        		   CI.REG_MEMBER_NO						AS REGMEMBERNO,
        		   DATE_FORMAT(CI.REG_DT,'%Y-%m-%d')	AS REGDT,
-       		   MI.MEMBER_ID							AS MEMBERID,	
+       		   MI.MEMBER_NAME						AS MEMBERNAME,	
        		   FI.FILE_NAME							AS CYBERFILENAME,
        		   FI.FILE_PATH							AS CYBERFILEPATH,
        		   FI.FILE_ORG_NAME						AS CYBERFILEORGNAME
