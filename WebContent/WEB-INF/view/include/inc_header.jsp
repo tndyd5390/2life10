@@ -73,12 +73,13 @@
 				<div class="topMenuWrap">
 					<ul>
 						<li><a href="/appli/appliForm.do">온라인가입신청</a></li>
-						<li><a href="/member/login.do">로그인</a></li>
-						<li><a href="/member/joinStep.do">회원가입</a></li>
 						<%if("".equals((String)session.getAttribute("ss_member_no"))||session.getAttribute("ss_member_no")!=null){%>
 							<li><a href="/member/chgPass.do">회원정보변경</a></li>
 							<li><a href="/member/logout.do">로그아웃</a></li>
-						<%} %>
+						<%}else{%>
+							<li><a href="/member/login.do">로그인</a></li>
+							<li><a href="/member/joinStep.do">회원가입</a></li>
+						<%}%>
 					</ul>
 				</div>
 				<button type="button" class="btnMenuView"><span>전체메뉴 열기</span></button> <!-- .btnMenuView 클릭시 megaMenu에 다중클래스 open, .menuWrap .depth01 li:first-child에 클래스 on 추가 -->
