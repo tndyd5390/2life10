@@ -16,5 +16,36 @@
 	    ORDER BY
 	        회원번호 DESC
 	</select>
-	
+	<select id="getMemberBetweenAnd" resultType="MsCustomDTO" parameterType="hashmap">
+		SELECT 회원번호 					AS MEMBERNO,
+		                회원명						AS MEMBERNAME,
+		                주민등록번호					AS MEMBERRRN,
+		                이체일						AS TRANSFERDT,
+		                이체은행 					AS BANK,
+		                계좌번호					AS ACCTNO,
+		                이체주민등록번호 				AS TRANSFERRRN,
+		                집전화 						AS TELNO,
+		                주소 						AS ADDR,
+		                우편번호 					AS POSTNO,
+		                가입일 						AS REGDT,
+		                관리일 						AS CHGDT,
+		                상품 						AS ITEM,
+		                납부방법 					AS PAYMENT,
+		                해약사유					AS CANCELREASON,
+		                관리구분 					AS CLASSIFICATION,
+		                영업사원 					AS SALESPERSON,
+		                첫불입시작회차 				AS FIRSTTRANSFERTURN,
+		                후할인회차 					AS AFTERDISCOUNTTURN,
+		                해약금 						AS CANCELFEE,
+		                영업조직 					AS SALESORG,
+		                휴대폰 						AS PHONENO,
+		                전입일자 					AS MOVEDT,
+		                단체						AS MEMBERGROUP,
+		                비고사항 					AS ETC
+		  FROM (SELECT ROW_NUMBER() OVER(ORDER BY 회원번호) AS ROWNUM, * FROM CustomView) TMP
+		 WHERE TMP.ROWNUM BETWEEN #{start} AND #{end};
+	</select>
+	<select id="getMemberSize" resultType="string">
+		SELECT COUNT(*) FROM CustomView
+	</select>
 </mapper>
