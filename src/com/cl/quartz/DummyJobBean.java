@@ -17,7 +17,8 @@ public class DummyJobBean extends QuartzJobBean{
 	@Override
 	protected void executeInternal(JobExecutionContext arg0) throws JobExecutionException {
 			try {
-				dummyTask.truncateAndInsertMember();
+				//dummyTask.truncateAndInsertMember();
+				dummyTask.print();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

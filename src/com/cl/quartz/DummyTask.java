@@ -45,6 +45,13 @@ public class DummyTask {
 	@Resource(name="CustomMapper")
 	private CustomMapper customMapper;
 	
+	public void insertAccYesterdayData() throws Exception{
+		log.info("insertAccYesterdayData cron start!!");
+		long start = System.currentTimeMillis();
+		
+		log.info("insertAccYesterdayData cron end!!");
+	}
+	
 	public void truncateAndInsertMember() throws Exception{
 		log.info("custom Cron start!!!");
 		long start = System.currentTimeMillis();
@@ -80,8 +87,8 @@ public class DummyTask {
 				for(int j = i; i <= size; i++ )
 			}*/
 			Map<String, Object> map = new HashMap<>();
-			map.put("start", i);
-			map.put("end", (i + 4999));
+			map.put("start", i + "");
+			map.put("end", (i + 4999) + "");
 			log.info("---------------------");
 			log.info("Start : "+i);
 			log.info("End : "+(i+4999));
