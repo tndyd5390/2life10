@@ -192,7 +192,8 @@
 		UPDATE
 			MEMBER_INFO
 		SET
-			MEMBER_PASSWORD = #{memberPassword}
+			MEMBER_PASSWORD = #{memberPassword},
+			CHG_DT = NOW()
 		WHERE
 			MEMBER_ID = #{memberId} AND
 			MEMBER_NAME = #{memberName} AND
@@ -204,7 +205,9 @@
 		UPDATE
 			MEMBER_INFO
 		SET
-			MEMBER_PASSWORD = #{newPassword}
+			MEMBER_PASSWORD = #{newPassword},
+			CHG_MEMBER_NO = #{memberNo},
+			CHG_DT = NOW()
 		WHERE
 			MEMBER_NO = #{memberNo} AND
 			MEMBER_PASSWORD = #{memberPassword}
