@@ -32,6 +32,11 @@ public class UInquiryController {
 		
 		String memberPreNo = CmmUtil.nvl((String)session.getAttribute("ss_member_pre"));
 		log.info("memberPreNo : " + memberPreNo);
+		if("".equals(memberPreNo)){
+			model.addAttribute("msg", "로그인을 해주세요.");
+			model.addAttribute("url", "/member/login.do");
+			return "/alert";
+		}
 		
 		if("N".equals(memberPreNo) || "".equals(memberPreNo)){
 			model.addAttribute("msg", "납부조회가 되지 않습니다. 전화로 문의해 주세요.");
