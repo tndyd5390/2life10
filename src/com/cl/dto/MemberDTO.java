@@ -21,6 +21,7 @@ public class MemberDTO {
 	private String regDt;
 	private String chgMemberNo;
 	private String chgDt;
+	private String newPassword;
 	private int page;
 	private int splitPage;
 	private String rowNum;
@@ -157,6 +158,12 @@ public class MemberDTO {
 	}
 	public void setChgMemberNo(String chgMemberNo) {
 		this.chgMemberNo = chgMemberNo;
+	}
+	public String getNewPassword() {
+		return newPassword;
+	}
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
 	}
 	
 }

@@ -18,7 +18,7 @@ public class EmailSender  {
     public void SendEmail(Email email) throws Exception {
         MimeMessage msg = mailSender.createMimeMessage();
         msg.setSubject(email.getSubject());
-        msg.setText(email.getContent());
+        msg.setContent(email.getContent(), "text/html; charset=UTF-8");
         msg.setRecipient(RecipientType.TO , new InternetAddress(email.getReciver()));
          
         mailSender.send(msg);

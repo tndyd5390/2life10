@@ -167,7 +167,21 @@
                 </div>
 
 				<br/><br/>
-				<ul class="boradType4">
+				<div class="boradType7">
+                    <div class="title">
+                        <span class="num">번호</span>
+                        <div class="info">
+                            <span class="txt">지사명</span>
+                            <span class="txt1">주소</span>
+                            <span class="txt2">
+								<span class="writer">대표자</span>
+                                <span class="date">전화번호</span>
+                                <span class="count">지역</span>
+                            </span>
+                        </div>
+                    </div>
+				
+				<ul>
 						<%
 						if(bList.size()!=0){
 							for(BranchDTO bDTO : bList){
@@ -177,12 +191,11 @@
 							<div class="info">
 								<p class="txt"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchName()) %></p>
 								<p class="txt1"><!-- 박성진수정 -->
-									<a href="#"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %></a>
+									<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAddress()) + " " + TextUtil.exchangeEscapeNvl(bDTO.getBranchAddressDetail()) %>
 								</p>
 								<p class="txt2">
-									<%=TextUtil.exchangeEscapeNvl(bDTO.getBranchOfficerName()) %><span class="bar">&nbsp;|</span>
-									<span><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchTelNo()) %></span>
-									<span class="bar">|</span>
+									<span class="writer"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchOfficerName()) %></span>
+									<span class="date"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchTelNo()) %></span>
 									<span class="count"><%=TextUtil.exchangeEscapeNvl(bDTO.getBranchAreaCode()) %></span>
 								</p>
 							</div>
@@ -198,9 +211,8 @@
 								검색 결과가 없습니다.
 							</p>
 							<p class="txt2">
-								<span class="bar">&nbsp;</span>
-								<span></span>
-								<span class="bar"></span>
+								<span class="writer"></span>
+								<span class="date"></span>
 								<span class="count"></span>
 						</p>
 						</div>
@@ -209,8 +221,7 @@
 						}
 						%>
 				</ul>
-
-
+				</div>
 
 				<!-- pageArea -->
 				<div class="pageArea">

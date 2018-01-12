@@ -199,4 +199,14 @@
 			MEMBER_EMAIL1 = #{memberEmail1} AND
 			MEMBER_EMAIL2 = #{memberEmail2}
 	</update>
+	
+	<update id="updateMemberPassword" parameterType="MemberDTO">
+		UPDATE
+			MEMBER_INFO
+		SET
+			MEMBER_PASSWORD = #{newPassword}
+		WHERE
+			MEMBER_NO = #{memberNo} AND
+			MEMBER_PASSWORD = #{memberPassword}
+	</update>
 </mapper>

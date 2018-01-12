@@ -443,8 +443,45 @@
 .boradType6 li .info .txt1{margin-bottom:10px; overflow:hidden;}
 .boradType6 li .info .txt1 a{font-weight:bold;}
 .boradType6 li .info .txt2{display:block; width:100%; float:none; margin:0; text-align:left; font-size:12px;}
-.boradType6 li .info .date{display:inline-block;padding-right:20px;font-size:12px;}
-.boradType6 li .info .count{display:inline-block;padding-right:20px;font-size:12px;}
+.boradType6 li .info .date{display:inline-block;padding-right:10px;font-size:12px;}
+.boradType6 li .info .count{display:inline-block;padding-right:10px;font-size:12px;}
+
+.boradType7{border-top:2px solid #333;}
+.boradType7 .title{display:none;}
+.boradType7 li{padding:13px 0; font-size:13px; border-bottom:1px solid #e5e5e5;}
+.boradType7 li .num{float:left; width:10%; text-align:center;}
+.boradType7 li .info{width:90%; overflow:hidden;}
+.boradType7 li .info .txt{margin-right:10px; float:left; text-align:left;}
+.boradType7 li .info .txt1{margin-bottom:10px; overflow:hidden;}
+.boradType7 li .info .txt1 a{font-weight:bold;}
+.boradType7 li .info .txt2{display:block; width:100%; float:none; margin:0; text-align:left; font-size:12px;}
+.boradType7 li .info .writer{display:inline-block;padding-right:10px;font-size:12px;}
+.boradType7 li .info .date{display:inline-block;padding-right:10px;font-size:12px;}
+.boradType7 li .info .count{display:inline-block;padding-right:10px;font-size:12px;}
+
+.boradType8{border-top:2px solid #333;}
+.boradType8 .title{display:none;}
+.boradType8 li{padding:13px 0; font-size:13px; border-bottom:1px solid #e5e5e5;}
+.boradType8 li .num{float:left; width:10%; text-align:center;}
+.boradType8 li .info{width:90%; overflow:hidden;}
+.boradType8 li .info .txt{margin-right:10px; float:left; text-align:left;}
+.boradType8 li .info .txt1{margin-bottom:10px; overflow:hidden;}
+.boradType8 li .info .txt1 a{font-weight:bold;}
+.boradType8 li .info .txt2{display:block; width:100%; float:none; margin:0; text-align:left; font-size:12px;}
+.boradType8 li .info .date{display:inline-block;padding-right:10px;font-size:12px;}
+
+.boradType9{border-top:2px solid #333;}
+.boradType9 .title{display:none;}
+.boradType9 li{padding:13px 0; font-size:13px; border-bottom:1px solid #e5e5e5;}
+.boradType9 li .num{float:left; width:10%; text-align:center;}
+.boradType9 li .info{width:90%; overflow:hidden;}
+.boradType9 li .info .txt1{margin-bottom:10px; overflow:hidden;}
+.boradType9 li .info .txt1 a{font-weight:bold;}
+.boradType9 li .info .txt2{display:block; width:100%; float:none; margin:0; text-align:left; font-size:0;white-space:nowrap;}
+.boradType9 li .info .writer{display:inline-block;padding-right:20px;font-size:12px;}
+.boradType9 li .info .date{display:inline-block;padding-right:20px;font-size:12px;}
+.boradType9 li .info .count{display:inline-block;padding-right:20px;font-size:12px;}
+
 
 /* 로그인 */
 .loginDiv .inputArea{border:1px solid #e3e2f4; border-top:2px solid #333;padding:30px 0;}
@@ -734,6 +771,57 @@
 .boradType6 li .info .txt2{float:left; width:40%; padding-right:10px; text-align:center; font-size:14px; box-sizing:border-box; color:#777;}
 .boradType6 li .info .date{display:inline-block;width:40%;padding:0;font-size:15px;}
 .boradType6 li .info .count{display:inline-block;width:50%;padding:0;font-size:15px;}
+
+.boradType7 .title{display:block;border-bottom:1px solid #e5e5e5;font-weight:bold;text-align:center;padding:13px 0;font-size:15px;}
+.boradType7 .title .num{float:left; width:10%;}
+.boradType7 .title .info{overflow:hidden;width:90%;}
+.boradType7 .title .txt{float:left;width:15%;}
+.boradType7 .title .txt1{float:left; width:45%;}
+.boradType7 .title .txt2{float:left; width:40%;padding-right:10px;margin:0;box-sizing:border-box;color:#555;text-align:center;}
+.boradType7 .title .writer{display:inline-block;width:25%;}
+.boradType7 .title .date{display:inline-block;width:46%;}
+.boradType7 .title .count{display:inline-block;width:25%;}
+.boradType7 li{padding:13px 0; font-size:15px;}
+.boradType7 li .num{width:10%;}
+.boradType7 li .info{width:90%; overflow:hidden;}
+.boradType7 li .info .txt{width:15%; margin-right:0; float:left; text-align:left;}
+.boradType7 li .info .txt1{float:left; width:45%; margin-bottom:0;}
+.boradType7 li .info .txt2{float:left; width:40%; padding-right:10px; text-align:center; font-size:14px; box-sizing:border-box; color:#777;}
+.boradType7 li .info .writer{display:inline-block;width:25%;padding:0;font-size:15px;}
+.boradType7 li .info .date{display:inline-block;width:46%;padding:0;font-size:15px;}
+.boradType7 li .info .count{display:inline-block;width:25%;padding:0;font-size:15px;}
+
+.boradType8 .title{display:block;border-bottom:1px solid #e5e5e5;font-weight:bold;text-align:center;padding:13px 0;font-size:15px;}
+.boradType8 .title .num{float:left; width:10%;}
+.boradType8 .title .info{overflow:hidden;width:90%;}
+.boradType8 .title .txt{float:left;width:15%;}
+.boradType8 .title .txt1{float:left; width:65%;}
+.boradType8 .title .txt2{float:left; width:20%;padding-right:10px;margin:0;box-sizing:border-box;color:#555;text-align:center;}
+.boradType8 .title .date{display:inline-block;width:46%;}
+.boradType8 li{padding:13px 0; font-size:15px;}
+.boradType8 li .num{width:10%;}
+.boradType8 li .info{width:90%; overflow:hidden;}
+.boradType8 li .info .txt{width:15%; margin-right:0; float:left; text-align:left;}
+.boradType8 li .info .txt1{float:left; width:65%; margin-bottom:0;}
+.boradType8 li .info .txt2{float:left; width:20%; padding-right:10px; text-align:center; font-size:14px; box-sizing:border-box; color:#777;}
+.boradType8 li .info .date{display:inline-block;width:46%;padding:0;font-size:15px;}
+
+.boradType9 .title{display:block;border-bottom:1px solid #e5e5e5;font-weight:bold;text-align:center;padding:13px 0;font-size:15px;}
+.boradType9 .title .num{float:left; width:10%;}
+.boradType9 .title .info{overflow:hidden;width:90%;}
+.boradType9 .title .txt1{float:left; width:65%;}
+.boradType9 .title .txt2{float:left; width:35%;padding-right:10px;margin:0;box-sizing:border-box;color:#555;font-size:0;white-space:nowrap;text-align:center;}
+.boradType9 .title .date{display:inline-block;width:72%;font-size:15px;}
+.boradType9 .title .count{display:inline-block;width:28%;font-size:15px;}
+.boradType9 li{padding:13px 0; font-size:15px;}
+.boradType9 li .num{width:10%;}
+.boradType9 li .info{width:90%; overflow:hidden;}
+.boradType9 li .info .txt1{float:left; width:65%; margin-bottom:0;}
+.boradType9 li .info .txt2{float:left; width:35%; padding-right:10px; text-align:center; box-sizing:border-box; color:#777;font-size:0;white-space:nowrap}
+.boradType9 li .info .date{display:inline-block;width:72%;padding:0;font-size:15px;}
+.boradType9 li .info .count{display:inline-block;width:28%;padding:0;font-size:15px;}
+
+
 
 /* 로그인 */
 .loginDiv .inputArea{padding:60px 0;}

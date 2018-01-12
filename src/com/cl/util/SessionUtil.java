@@ -24,5 +24,14 @@ public class SessionUtil {
 			e.printStackTrace();
 		}
 	}
+	public static void memberCheck(HttpServletResponse response, HttpSession session){
+		try{
+			if("".equals(CmmUtil.nvl((String) session.getAttribute("ss_member_no")))){
+				response.sendRedirect("/main.do");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 
 }

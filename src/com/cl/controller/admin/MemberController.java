@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -450,7 +451,7 @@ public class MemberController {
 	@RequestMapping("/member/findIdProc")
 	public String findIdProc(HttpServletRequest req, HttpServletResponse resp, HttpSession session,Model model) throws Exception{
 		log.info("findIdProc Start!!");
-		SessionUtil.loginCheck(resp, session);
+		SessionUtil.memberCheck(resp, session);
 		String msg = "";
 		String url = "";
 		String memberName = CmmUtil.nvl(req.getParameter("name"));
@@ -523,7 +524,6 @@ public class MemberController {
 			msg = "회원정보가 일치하지 않습니다.";
 			url = "/member/findPass.do";
 		}else{
-			System.out.println(memberEmail1+"@"+memberEmail2);
 			sendEmail.setReciver(memberEmail1+"@"+memberEmail2);
 			sendEmail.setSubject(memberName+"님 크리스찬 상조 임시비밀번호");
 			sendEmail.setContent(sendEmail.setContents(hMap));
@@ -538,8 +538,52 @@ public class MemberController {
 		return "/member/redirect";
 	}
 	@RequestMapping("/member/chgPass")
-	public String chgPass() throws Exception{
+	public String chgPass(HttpServletResponse resp, HttpSession session) throws Exception{
+		log.info("chgPass Start!!");
+		SessionUtil.memberCheck(resp, session);
 		
+		log.info("chgPass End!!");
 		return "/member/change_pass";
+	}
+	
+	@RequestMapping("/member/chgPassProc")
+	public String chgPassProc(HttpServletRequest req, HttpSession session, Model model) throws Exception{
+		log.info("chgPassProc Start!!");
+		
+		String url = "";
+		String msg = "";
+		String memberNo = CmmUtil.nvl((String) session.getAttribute("ss_member_no"));
+		String exPassword = SHA256Util.sha256(CmmUtil.nvl(req.getParameter("exPassword")));
+		String newPassword = SHA256Util.sha256(CmmUtil.nvl(req.getParameter("newPassword")));
+		
+		log.info("memberNo : "+memberNo);
+		
+		MemberDTO mDTO = new MemberDTO();
+		
+		mDTO.setMemberNo(memberNo);
+		mDTO.setMemberPassword(exPassword);
+		mDTO.setNewPassword(newPassword);
+		
+		int result = memberService.updateMemberPassword(mDTO);
+		
+		if(result == 0){
+			msg = "회원정보가 일치하지 않습니다.";
+			url = "/member/chgPass.do";
+		}else{
+			msg = "변경완료 되었습니다.";
+			url = "/member/login.do";
+			session.setAttribute("ss_memeber_no", "");
+			session.setAttribute("ss_memeber_id", "");
+			session.setAttribute("ss_memeber_name", "");
+			session.setAttribute("ss_memeber_auth", "");
+			session.setAttribute("ss_memeber_pre", "");
+			session.invalidate();
+		}
+		
+		model.addAttribute("url", url);
+		model.addAttribute("msg", msg);
+		
+		log.info("chgPassProc End!!");
+		return "/member/redirect";
 	}
 }

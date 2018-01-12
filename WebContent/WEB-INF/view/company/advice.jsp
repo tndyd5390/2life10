@@ -150,7 +150,19 @@
                 </div>
 
 				<br/><br/>
-				<ul class="boradType4">
+				<div class="boradType8">
+                    <div class="title">
+                        <span class="num">번호</span>
+                        <div class="info">
+                            <span class="txt">상담사명</span>
+                            <span class="txt1">주소</span>
+                            <span class="txt2">
+                                <span class="date">전화번호</span>
+                            </span>
+                        </div>
+                    </div>
+				
+				<ul>
 				<%
 				if(aList.size()!=0){
 					for(AdviceDTO aDTO : aList){
@@ -160,9 +172,7 @@
 						<div class="info">
 							<p class="txt"><%=TextUtil.exchangeEscapeNvl(aDTO.getAdviceName()) %></p>
 							<p class="txt1"><!-- 박성진수정 -->
-								<a href="#">
 									<%=TextUtil.exchangeEscapeNvl(aDTO.getAdviceAddress() + " " + aDTO.getAdviceAddressDetail()) %>
-								</a>
 							</p>
 							<p class="txt2">
 								<span><%=TextUtil.exchangeEscapeNvl(aDTO.getAdvicePhoneNo()) %></span>
@@ -174,7 +184,7 @@
 				}
 				%>			
 				</ul>
-	
+				</div>
 
 
 				<!-- pageArea -->

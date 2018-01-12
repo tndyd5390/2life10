@@ -163,42 +163,45 @@
 					<h3 class="subTit">전국 장례시설 안내</h3>
 				</div>
 				<br/>
-				
-				<div class="tableBasicList">
-					<table class="defaultTable">
-						<caption></caption>
-						<colgroup>
-							<col style="width:10%;">
-							<col style="width:16%;">
-							<col style="width:20%;">
-							<col style="width:auto%;">
-							<col style="width:20%;">
-						</colgroup>
-						<thead>
-							<tr>
-								<th scope="row">번호</th>
-								<th scope="row">구분</th>
-								<th scope="row">식장명</th>
-								<th scope="row">지역(식장주소)</th>
-								<th scope="row">전화번호</th>
-							</tr>
-						</thead>
-						<tbody>
+				<br/><br/>
+				<div class="boradType6">
+                    <div class="title">
+                        <span class="num">번호</span>
+                        <div class="info">
+                            <span class="txt">장례식장명</span>
+                            <span class="txt1">지역(식장주소)</span>
+                            <span class="txt2">
+                                <span class="date">구분</span>
+                                <span class="count">전화번호</span>
+                            </span>
+                        </div>
+                    </div>
+					<ul>
+
 						<%if(fuList.size()>0){%>
 						<%for(FuneralInfoDTO fDTO : fuList){%>
-							<tr>
-								<td><%=CmmUtil.nvl(fDTO.getRownum())%></td>
-								<td><%=CmmUtil.nvl(fDTO.getFuneralInfoCode())%></td>
-								<td>
-								<%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralInfoName()) %>
-								</td>
-								<td><%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralAddress())%> <%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralAddressDetail())%></td>
-								<td><%=CmmUtil.nvl(fDTO.getFuneralInfoTelNo())%></td>
-							</tr>
+						<li>
+								<p class="num"><%=CmmUtil.nvl(fDTO.getRownum())%></p>
+								<div class="info">
+								<p class="txt" style="text-align:center;">
+									<%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralInfoName()) %>
+								</p>
+								<p class="txt1" style="text-align:center;">
+									<%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralAddress())%> <%=TextUtil.exchangeEscapeNvl(fDTO.getFuneralAddressDetail())%>
+								</p>
+								<p class="txt2">
+									<span class="date">
+									<%=CmmUtil.nvl(fDTO.getFuneralInfoCode())%>
+									</span>
+									<span class="count">
+									<%=CmmUtil.nvl(fDTO.getFuneralInfoTelNo())%>
+									</span>
+								</p>
+								</div>
+						</li>
 						<%}%>
 						<%} %>
-						</tbody>
-					</table>
+						</ul>
 				</div>
 
 				<!-- pageArea -->

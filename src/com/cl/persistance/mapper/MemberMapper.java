@@ -27,4 +27,6 @@ public interface MemberMapper {
 
 	int updateTmpPass(MemberDTO mDTO) throws Exception;
 
+	int updateMemberPassword(MemberDTO mDTO) throws Exception;
+
 }

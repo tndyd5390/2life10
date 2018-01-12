@@ -117,50 +117,39 @@
 					<li>가입된 상품이 단종되었다해도 가입했던 상품내용과 금액 그대로 언제든지 이용가능하며, 신규가입만 받지 않습니다.</li>
 				</ul>
 				<br/><br/>
-				<div class="tableBasicList">
-					<table class="defaultTable">
-						<caption>사업부문 별 SNS모음</caption>
-						<colgroup>
-							<col style="width:30%;">
-							<col style="width:auto%;">
-							<col style="width:15%;">
-						</colgroup>
-						<thead>
-							<tr>
-								<th scope="row">상품개시일</th>
-								<th scope="row">상품명</th>
-								<th scope="row">다운로드</th>
-							</tr>
-						</thead>
-						<tbody>
+				<div class="boradType9">
+					<div class="title">
+						<span class="num">번호</span>
+						<div class="info">
+							<span class="txt1">상품명</span>
+							<span class="txt2">
+								<span class="date">상품개시일</span>
+								<span class="count">다운로드</span>
+							</span>
+						</div>
+					</div>
+					<ul>
 							<%if(cList.size()>0){
 								for(CatalogueDTO cDTO : cList){
 							%>		
-								<tr>
-								<td><%=CmmUtil.nvl(cDTO.getCatalogueStart())%>~<%=CmmUtil.nvl(cDTO.getCatalogueEnd()) %></td>
-								<td class="alignL"><%=CmmUtil.nvl(cDTO.getCatalogueName()) %> <%=CmmUtil.nvl(cDTO.getCatalogueContents()) %></td>
-								<td><a href="javascript:download('<%=CmmUtil.nvl(cDTO.getCatalogueNo())%>')">받기</a></td>
-								</tr>									
+								<li>
+								<p class="num"><%=CmmUtil.nvl((cDTO.getRowNum()-2)+"") %></p>
+								<div class="info">
+								<p class="txt1"><%=CmmUtil.nvl(cDTO.getCatalogueName()) %> <%=CmmUtil.nvl(cDTO.getCatalogueContents()) %></p>
+								<p class="txt2">
+									<span class="date">
+									<%=CmmUtil.nvl(cDTO.getCatalogueStart())%>~<%=CmmUtil.nvl(cDTO.getCatalogueEnd()) %>
+									</span>
+									<span class="count">
+									<a href="javascript:download('<%=CmmUtil.nvl(cDTO.getCatalogueNo())%>')">받기</a>
+									</span>
+								</p>								
+								</div>
+								</li>									
 							<%	
 								}
 							} %>
-							<!-- <tr>
-								<td>2006.05.01~2008.03.31</td>
-								<td class="alignL">장례 (골드)</td>
-								<td>dn</td>
-							</tr>
-							<tr>
-								<td>2008.04.01~2008.05.31</td>
-								<td class="alignL">장례 (실속형,고급형)</td>
-								<td>dn</td>
-							</tr>
-							<tr>
-								<td>2008.06.01~2008.12.31</td>
-								<td class="alignL">장례 / 성지순례 (실속형,고급형) </td>
-								<td>dn</td>
-							</tr> -->
-						</tbody>
-					</table>
+					</ul>
 				</div>
 
 			</div> <!-- // contents -->

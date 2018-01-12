@@ -79,4 +79,9 @@ public class MemberService implements IMemberService{
 		
 		return hMap;
 	}
+
+	@Override
+	public int updateMemberPassword(MemberDTO mDTO) throws Exception {
+		return memberMapper.updateMemberPassword(mDTO);
+	}
 }
