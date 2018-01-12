@@ -20,7 +20,7 @@ public class EmailSender  {
         msg.setSubject(email.getSubject());
         msg.setText(email.getContent());
         msg.setRecipient(RecipientType.TO , new InternetAddress(email.getReciver()));
-         
+        
         mailSender.send(msg);
     }
 }
