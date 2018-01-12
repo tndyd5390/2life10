@@ -7,7 +7,7 @@ public class MsCustomDTO {
 	private String transferDt;
 	private String bank;
 	private String acctNo;
-	private String tranferRrn;
+	private String transferRrn;
 	private String telNo;
 	private String addr;
 	private String postNo;
@@ -18,15 +18,33 @@ public class MsCustomDTO {
 	private String cancelReason;
 	private String classification;
 	private String salesPerson;
-	private String firstTransferTrun;
+	private String firstTransferTurn;
 	private String afterDiscountTurn;
 	private String cancelFee;
 	private String salesOrg;
 	private String phoneNo;
 	private String moveDt;
-	private String group;
+	private String memberGroup;
 	private String etc;
 	
+	public String getFirstTransferTurn() {
+		return firstTransferTurn;
+	}
+	public void setFirstTransferTurn(String firstTransferTurn) {
+		this.firstTransferTurn = firstTransferTurn;
+	}
+	public String getTransferRrn() {
+		return transferRrn;
+	}
+	public void setTransferRrn(String transferRrn) {
+		this.transferRrn = transferRrn;
+	}
+	public String getMemberGroup() {
+		return memberGroup;
+	}
+	public void setMemberGroup(String memberGroup) {
+		this.memberGroup = memberGroup;
+	}
 	public String getMemberNo() {
 		return memberNo;
 	}
@@ -62,12 +80,6 @@ public class MsCustomDTO {
 	}
 	public void setAcctNo(String acctNo) {
 		this.acctNo = acctNo;
-	}
-	public String getTranferRrn() {
-		return tranferRrn;
-	}
-	public void setTranferRrn(String tranferRrn) {
-		this.tranferRrn = tranferRrn;
 	}
 	public String getTelNo() {
 		return telNo;
@@ -129,12 +141,6 @@ public class MsCustomDTO {
 	public void setSalesPerson(String salesPerson) {
 		this.salesPerson = salesPerson;
 	}
-	public String getFirstTransferTrun() {
-		return firstTransferTrun;
-	}
-	public void setFirstTransferTrun(String firstTransferTrun) {
-		this.firstTransferTrun = firstTransferTrun;
-	}
 	public String getAfterDiscountTurn() {
 		return afterDiscountTurn;
 	}
@@ -164,12 +170,6 @@ public class MsCustomDTO {
 	}
 	public void setMoveDt(String moveDt) {
 		this.moveDt = moveDt;
-	}
-	public String getGroup() {
-		return group;
-	}
-	public void setGroup(String group) {
-		this.group = group;
 	}
 	public String getEtc() {
 		return etc;

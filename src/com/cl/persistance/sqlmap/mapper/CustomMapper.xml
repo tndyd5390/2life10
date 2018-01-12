@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cl.persistance.mapper.CustomMapper">
+	<delete id="deleteCustomAll">
+		DELETE 
+		  FROM CUSTOM 
+	</delete>
+	<insert id="insertCustoms" parameterType="hashmap">
+		INSERT INTO CUSTOM
+		(
+			MEMBER_NO,
+			MEMBER_NAME,
+			MEMBER_RRN,
+			TRANSFER_DT,
+			BANK,
+			ACCT_NO,
+			TRANSFER_RRN,
+			TEL_NO,
+			ADDR,
+			POST_NO,
+			REG_DT,
+			CHG_DT,
+			ITEM,
+			PAYMENT,
+			CANCEL_REASON,
+			CLASSIFICATION,
+			SALESPERSON,
+			FIRST_TRANSFER_TURN,
+			AFTER_DISCOUNT_TURN,
+			CANCEL_FEE,
+			SALES_ORG,
+			PHONE_NO,
+			MOVE_DT,
+			MEMBER_GROUP,
+			ETC
+		)
+		VALUES
+		<foreach collection="customList" item="item" separator=",">
+		(
+			#{item.memberNo},
+			#{item.memberName},
+			#{item.memberRrn},
+			#{item.transferDt},
+			#{item.bank},
+			#{item.acctNo},
+			#{item.transferRrn},
+			#{item.telNo},
+			#{item.addr},
+			#{item.postNo},
+			#{item.regDt},
+			#{item.chgDt},
+			#{item.item},
+			#{item.payment},
+			#{item.cancelReason},
+			#{item.classification},
+			#{item.salesPerson},
+			#{item.firstTransferTurn},
+			#{item.afterDiscountTurn},
+			#{item.cancelFee},
+			#{item.salesOrg},
+			#{item.phoneNo},
+			#{item.moveDt},
+			#{item.memberGroup},
+			#{item.etc}
+		)
+		</foreach>
+	</insert>
+</mapper>

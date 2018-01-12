@@ -16,13 +16,17 @@ import org.springframework.stereotype.Service;
 import com.cl.dto.AccDTO;
 import com.cl.dto.AdviceDTO;
 import com.cl.dto.FuneralInfoDTO;
+import com.cl.dto.MsCustomDTO;
 import com.cl.dto.NoticeDTO;
 import com.cl.dto.TestDTO;
 import com.cl.persistance.mapper.AccMapper;
 import com.cl.persistance.mapper.AdviceMapper;
+import com.cl.persistance.mapper.CustomMapper;
 import com.cl.persistance.mapper.FuneralInfoMapper;
 import com.cl.persistance.mapper.MainMapper;
+import com.cl.persistance.mapper.MemberMapper;
 import com.cl.persistance.mapperForMS.AccMapperForMS;
+import com.cl.persistance.mapperForMS.MsCustomMapper;
 import com.cl.persistance.mapperForMS.TestMapper;
 import com.cl.service.impl.MainService;
 import com.cl.util.CmmUtil;
@@ -36,6 +40,36 @@ public class DummyTask {
 	private AccMapperForMS accMapperForMS;
 	@Resource(name="AccMapper")
 	private AccMapper accMapper;
+	@Resource(name="MsCustomMapper")
+	private MsCustomMapper msCustomMapper;
+	@Resource(name="CustomMapper")
+	private CustomMapper customMapper;
+	
+	public void truncateAndInsertMember() throws Exception{
+		log.info("custom Cron start!!!");
+		long start = System.currentTimeMillis();
+		int size = Integer.parseInt(msCustomMapper.getMemberSize());
+		log.info("size : " + size);
+		customMapper.deleteCustomAll();
+		for(int i = 1; i< size; i+=1000){
+			Map<String, Object> map = new HashMap<>();
+			map.put("start", i);
+			map.put("end", (i + 999));
+			log.info("---------------------");
+			log.info("Start : "+i);
+			log.info("End : "+(i+4999));
+			log.info("---------------------");
+			List<MsCustomDTO> mList = msCustomMapper.getMemberBetweenAnd(map);
+			map.put("customList", mList);
+			customMapper.insertCustoms(map);
+			log.info("i : " + i);
+		}
+		long end = System.currentTimeMillis();
+		long take = end - start;
+		log.info("it takes " + take + "ms");
+		log.info("custon Cron end!!!");
+	}
+	
 	public void print() throws Exception{
 		log.info("cron start!!!");
 		long start = System.currentTimeMillis();
@@ -46,8 +80,8 @@ public class DummyTask {
 				for(int j = i; i <= size; i++ )
 			}*/
 			Map<String, Object> map = new HashMap<>();
-			map.put("start", i + "");
-			map.put("end", (i + 4999) + "");
+			map.put("start", i);
+			map.put("end", (i + 4999));
 			log.info("---------------------");
 			log.info("Start : "+i);
 			log.info("End : "+(i+4999));
