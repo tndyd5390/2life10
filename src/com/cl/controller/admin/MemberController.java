@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -284,9 +283,9 @@ public class MemberController {
 			msg = "회원가입 실패";
 		}
 		
-		mDTO = null;
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
+		mDTO = null;
 		
 		log.info("joinProc Start!!");
 		return "/member/redirect";
@@ -305,7 +304,7 @@ public class MemberController {
 		hMap = memberService.getMemberList(hMap);
 		
 		model.addAttribute("hMap", hMap);
-		
+		hMap = null;
 		log.info("Lmin:memberList End!!");					
 		return "/Lmin/member/member_list";
 	}
@@ -408,9 +407,9 @@ public class MemberController {
 			msg = "수정성공.";
 		}
 		
-		mDTO = null;
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
+		mDTO = null;
 		
 		log.info("Lmin:memberUpdateProc End!!");
 		return "/alert";
@@ -531,9 +530,11 @@ public class MemberController {
 			msg = "가입하신 이메일로 임시비밀번호가 전송되었습니다.";
 			url = "/member/login.do";
 		}
+		
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
-		
+		hMap = null;
+		mDTO = null;
 		log.info("findPassProc End!!");
 		return "/member/redirect";
 	}
@@ -582,6 +583,7 @@ public class MemberController {
 		
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
+		mDTO = null;
 		
 		log.info("chgPassProc End!!");
 		return "/member/redirect";
