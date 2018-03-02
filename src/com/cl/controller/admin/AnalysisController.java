@@ -26,7 +26,6 @@ public class AnalysisController {
 	public String analysisList(HttpServletResponse resp, HttpSession session) throws Exception{
 		log.info("Lmin:analysisList Start!!");
 		SessionUtil.sessionCheck(resp, session);
-
 		log.info("Lmin:analysisList End!!");
 		return "/Lmin/analysis/analysis_list";
 	}

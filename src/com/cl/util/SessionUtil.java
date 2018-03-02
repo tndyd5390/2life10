@@ -47,11 +47,12 @@ public class SessionUtil {
 		HttpServletRequest req = sra.getRequest();
 		HttpSession session = req.getSession();
 		
-		String memberNo = session.getAttribute("ss_member_no").toString();
-		String memberId = session.getAttribute("ss_member_id").toString();
-		String memberName = session.getAttribute("ss_member_name").toString();
-		String memberAuth = session.getAttribute("ss_member_auth").toString();
-		String memberPre = session.getAttribute("ss_member_pre").toString();
+		
+		String memberNo = CmmUtil.nvl(session.getAttribute("ss_member_no").toString());
+		String memberId = CmmUtil.nvl(session.getAttribute("ss_member_id").toString());
+		String memberName = CmmUtil.nvl(session.getAttribute("ss_member_name").toString());
+		String memberAuth = CmmUtil.nvl(session.getAttribute("ss_member_auth").toString());
+		String memberPre = CmmUtil.nvl(session.getAttribute("ss_member_pre").toString());
 		
 		if(str.equals("memberNo")){
 			result = memberNo;
@@ -64,7 +65,6 @@ public class SessionUtil {
 		}else if(str.equals("memberPre")){
 			result = memberPre;
 		}
-		
 		return result;
 	}
 }

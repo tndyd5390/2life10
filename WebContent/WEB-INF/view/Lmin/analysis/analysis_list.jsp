@@ -7,7 +7,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.HashMap" %>
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
