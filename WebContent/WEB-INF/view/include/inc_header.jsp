@@ -77,6 +77,9 @@
 						<%if("".equals((String)session.getAttribute("ss_member_no"))||session.getAttribute("ss_member_no")!=null){%>
 							<li><a href="/member/chgPass.do">회원정보변경</a></li>
 							<li><a href="/member/logout.do">로그아웃</a></li>
+							<%if( ("A".equals((String)session.getAttribute("ss_member_auth")) || "CEO".equals((String)session.getAttribute("ss_member_auth"))) ){%>
+								<li><a href="/Lmin/notice/noticeList.do">관리자페이지</a></li>
+							<%}%>
 						<%}else{%>
 							<li><a href="/member/login.do">로그인</a></li>
 							<li><a href="/member/joinStep.do">회원가입</a></li>
