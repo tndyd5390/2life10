@@ -34,7 +34,7 @@ public class CyberController {
 	@Resource(name="CyberService")
 	private ICyberService cyberService;
 	
-	String cyberFileSavePath = "/www/thunder-edu_com/file/cyber/movie/";
+	String cyberFileSavePath = "/home/CL/file/cyber/movie/";
 	
 	@RequestMapping(value="/Lmin/company/cyber", method={RequestMethod.GET, RequestMethod.POST})
 	public String cyberList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
