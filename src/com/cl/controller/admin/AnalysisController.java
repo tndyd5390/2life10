@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cl.dto.AnalysisDTO;
@@ -67,5 +68,20 @@ public class AnalysisController {
 		
 		log.info("Lmin:stateAnalysis End!!");	
 		return analysisService.getStateAnalysis();
+	}
+	
+	@RequestMapping(value="/Lmin/analysis/itemAnalysis")
+	public @ResponseBody List<AnalysisDTO> itemAnalysis() throws Exception{
+		log.info("Lmin:itemAnalysis Start!!");
+		
+		log.info("Lmin:itemAnalysis End!!");	
+		return analysisService.getItemAnalysis();
+	}
+	@RequestMapping(value="/Lmin/analysis/cityAnalysis")
+	public @ResponseBody List<AnalysisDTO> cityAnalysis(@RequestParam(value="state") String state) throws Exception{
+		log.info("Lmin:cityAnalysis Start!!");
+		
+		log.info("Lmin:cityAnalysis End!!");	
+		return analysisService.getCityAnalysis(state);
 	}
 }

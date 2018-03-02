@@ -40,5 +40,15 @@ public class AnalysisService implements IAnalysisService {
 	public List<AnalysisDTO> getStateAnalysis() throws Exception {
 		return analysisMapper.getStateAnalysis();
 	}
+
+	@Override
+	public List<AnalysisDTO> getItemAnalysis() throws Exception {
+		return analysisMapper.getItemAnalysis();
+	}
+
+	@Override
+	public List<AnalysisDTO> getCityAnalysis(String state) throws Exception {
+		return analysisMapper.getCityAnalysis(state);
+	}
 	
 }

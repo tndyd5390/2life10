@@ -1,4 +1,5 @@
 <%@ page import = "com.cl.util.SessionUtil"%>
+<%@ page import = "com.cl.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <header>
 	<h1 class="logo">
@@ -132,6 +133,14 @@
 						                            <li id="MO60600"><a href="javascript:goMenu('/agreement/agreementList.do', 'MO60600');">이용약관</a></li>
 						                            <li id="MO60700"><a href="javascript:goMenu('/inquiry/inquiryList.do', 'MO60700');">납부조회</a></li>
 						                            <li id="MO60800"><a href="javascript:goMenu('/appli/appliForm.do', 'MO60800');">가입신청</a></li>
+						                            <%if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_member_no")))){%>
+							                            <li id="MO60900"><a href="javascript:goMenu('/member/login.do', 'MO60900');">로그인</a></li>
+						                            <% }else{%>
+						                            	<li id="MO60900"><a href="javascript:goMenu('/member/logout.do', 'MO60900');">로그아웃</a></li>
+						                            	<%if( ("A".equals((String)session.getAttribute("ss_member_auth")) || "CEO".equals((String)session.getAttribute("ss_member_auth"))) ){%>
+															<li id="MO61000"><a href="javascript:goMenu('/Lmin/notice/noticeList.do', 'MO61000');">관리자페이지</a></li>
+														<%}%>
+						                            <% } %>
                                                 </ul>
                                             </div>
                                         </div>

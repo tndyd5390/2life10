@@ -132,6 +132,8 @@
 					regYearChart(rslt);
 				}else if(str == 'state'){
 					stateChart(rslt);
+				}else if(str == 'item'){
+					itemChart(rslt);
 				}
 			}
 		});
@@ -179,11 +181,64 @@
 				labels : label
 			},
 			options : {
-				
-			}
+				onClick : function(event, item){
+					if(item !=null){
+						if(item[0]!=null){
+							var state = item[0]._model.label;
+							$.ajax({
+								url : '/Lmin/analysis/cityAnalysis.do',
+								method : 'post',
+								data : {'state' : state},
+								success : function(rslt){
+									$('#small_title').text(state);
+									cityChart(rslt);
+								}
+							});							
+						}
+					}
+				}
+			},
+
 		});
 		toastGrid(gridHeader, gridData);
 	};
+	
+	function cityChart(rslt){
+		var label = new Array();
+		var data1 = new Array();
+		
+		var gridHeader = new Array();
+		var gridData = new Array();
+		
+		gridHeader.push({title : '지역', name : 'addr2', align:'center'});
+		gridHeader.push({title : '가입자수', name : 'cnt',  align:'center'});
+		$.each(rslt, function(key, value){
+			label.push(value.addr2);
+			data1.push(value.cnt);
+			gridData.push({addr2 : value.addr2, cnt : addComma(value.cnt)});
+		});
+		
+		$('#chartArea').html("<canvas id='cityChart'></canvas>");
+		var ctx1 = $('#cityChart').get(0).getContext('2d');
+
+		var myChart = new Chart(ctx1, {
+			type : 'bar',
+			data : {
+				datasets : [{
+					label : '인원수',
+					data : data1,
+					backgroundColor:'rgb(54, 162, 235)'
+				}],
+				labels : label
+			},
+			options : {
+
+			},
+
+		});
+		toastGrid(gridHeader, gridData);
+	};
+	
 	
 	function sexChart(rslt){
 		var label = new Array();
@@ -387,6 +442,60 @@
 		});
 		toastGrid(gridHeader, gridData);
 	};
+	
+	function itemChart(rslt){
+		var label = new Array();
+		var male = new Array();
+		var female = new Array();
+		
+		var gridHeader = new Array();
+		var gridData = new Array();
+		
+		gridHeader.push({title : '상품명', name : 'item', align:'center'});
+		gridHeader.push({title : '남자', name : 'm', align:'right'});
+		gridHeader.push({title : '여자', name : 'f',align:'right'});
+		gridHeader.push({title : '총합', name : 'cnt',align:'right'});
+		
+		$.each(rslt, function(key, value){
+			label.push(value.item.toLowerCase());
+			male.push(value.m);
+			female.push(value.f);
+			gridData.push({item : value.item.toLowerCase(), m : addComma(value.m), f : addComma(value.f), cnt : addComma(value.cnt)});
+		});
+		
+		$('#chartArea').html("<canvas id='itemChart'></canvas>");
+		var ctx1 = $('#itemChart').get(0).getContext('2d');
+		
+		var myChart = new Chart(ctx1, {
+			type : 'bar',
+			data : {
+				datasets : [{
+					label : '남자',
+					data : male,
+					backgroundColor:'rgb(54, 162, 235)'
+				},{
+					label : '여자',
+					data : female,
+					backgroundColor:'rgb(222, 83, 71)'
+        			
+				}],
+				labels : label
+			},
+			options : {
+				scales : {
+					xAxes : [{
+						stacked : true
+					}],
+					yAxes : [{
+						stacked : true
+					}]
+				}
+			}
+		});
+		toastGrid(gridHeader, gridData);
+	};
+	
+	
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -411,11 +520,11 @@
 										<option value="age">연령대별</option>
 										<option value="reReg">재가입율</option>
 										<option value="regYear">연별가입자</option>
+										<option value="item">상품별가입자</option>
 									</select>
 								</td>
 							</tr>
 						</tbody>
-						
 					</table>
                 </div>
                 <br><br>
