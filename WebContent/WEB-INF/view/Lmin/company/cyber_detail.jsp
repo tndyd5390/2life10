@@ -136,7 +136,7 @@ function deleteCyber(){
 								<th scope="row">업로드</th>
 								<td>
 									<video width="320" height="240" controls>
-										<source src="/cyberFile/<%=CmmUtil.nvl(cDTO.getCyberFileName()) %>" type="video/<%=TextUtil.getFileExtension(cDTO.getCyberFileName())%>">
+										<source src="/file/cyber/movie/<%=CmmUtil.nvl(cDTO.getCyberFileName()) %>" type="video/<%=TextUtil.getFileExtension(cDTO.getCyberFileName())%>">
 									</video>
 								</td>
 							</tr>
