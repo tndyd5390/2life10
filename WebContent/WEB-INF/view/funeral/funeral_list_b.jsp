@@ -114,7 +114,7 @@
 						<h3 class="contTit"><span>장례390</span></h3>
 						<p class="subTxt">월 30,000원 X 130회 (3,900,000원)</p>
 						<ul class="defaultGrayDotList mt-10">
-							<li>캐딜락리무진 또는 장의버스 택일 (왕복200Km제공)</li>
+							<li>캐딜락리무진, 장의버스 제공 (왕복200Km제공)</li>
 							<li>수의, 관, 꽃바구니 2개 제공</li>
 							<li>장례지도사 3일간 장례 진행, 도우미 2명</li>
 							<li>꽃바구니 2개 및 헌화 50송이 제공</li>
@@ -160,7 +160,7 @@
 								<td rowspan="6">고인용품 및<br/>입관 수시용품</td>
 								<td rowspan="2" data-photo="103">관</td>
 								<td>화장시</td>
-								<td class="alignL">오동나무 0.5치</td>
+								<td class="alignL">오동나무 0.6치</td>
 							</tr>
 							<tr>
 								<td>매장시</td>
@@ -199,7 +199,7 @@
 								<td class="alignL">5벌 (상,하의검정색 정장, Y셔츠, 넥타이포함)</td>
 							</tr>
 							<tr>
-								<td data-photo="110">여성복 대여</td>
+								<td data-photo="110">여상복 대여</td>
 								<td class="alignL">필요량제공</td>
 							</tr>
 							<tr>
@@ -235,11 +235,11 @@
 							<tr>
 								<td rowspan="2">장의차량</td>
 								<td colspan="2" data-photo="203">장의버스</td>
-								<td class="alignL">택일(왕복200Km이내)</td>
+								<td class="alignL">제공(왕복200Km이내)</td>
 							</tr>
 							<tr>
 								<td colspan="2" data-photo="202">캐딜락리무진</td>
-								<td class="alignL">택일(왕복200Km이내)</td>
+								<td class="alignL">제공(왕복200Km이내)</td>
 							</tr>
 							<tr>
 								<td rowspan="5">서비스</td>
@@ -281,6 +281,7 @@
 									<li>수의- 390, 480상품 [원단:대마(원산지-중국), 완제품제조-대한민국, 기계식] , 260상품 [원단:저마(원산지-중국), 완제품제조-대한민국, 기계식]</li>
 								</ul>
 							</li>
+							
 						</ul>
 					</section>
 				</article>

@@ -117,7 +117,7 @@
 						<h3 class="contTit"><span>장례480</span></h3>
 						<p class="subTxt">월 40,000원 X 120회 (4,800,000원)</p>
 						<ul class="defaultGrayDotList mt-10">
-							<li>캐딜락리무진 또는 장의버스 택일 (전국무료)</li>
+							<li>캐딜락리무진, 장의버스 제공 (전국무료)</li>
 							<li>대마수위, 관, 생화특별장식, 헌화 50송이</li>
 							<li>장례지도사 3일간 행사진행, 장례도우미 6명</li>
 						</ul>
@@ -163,7 +163,7 @@
 								<td rowspan="6">고인용품 및<br/>입관 수시용품</td>
 								<td rowspan="2" data-photo="103">관</td>
 								<td>화장시</td>
-								<td class="alignL">오동나무 0.5치</td>
+								<td class="alignL">오동나무 0.6치</td>
 							</tr>
 							<tr>
 								<td>매장시</td>
@@ -202,7 +202,7 @@
 								<td class="alignL">7벌 (상,하의검정색 정장, Y셔츠, 넥타이포함)</td>
 							</tr>
 							<tr>
-								<td data-photo="110">여성복 대여</td>
+								<td data-photo="110">여상복 대여</td>
 								<td class="alignL">필요량제공</td>
 							</tr>
 							<tr>

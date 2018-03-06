@@ -117,7 +117,7 @@
 						<h3 class="contTit"><span>프라임(350)상품</span></h3>
 						<p class="subTxt">월 35,000원 X 100회 (3,500,000원)</p>
 						<ul class="defaultGrayDotList mt-10">
-							<li>캐딜락리무진 전국무료!</li>
+							<li>캐딜락리무진 또는 장의버스 택일(전국무료)</li>
 							<li>수의, 관, 생화 1단 장식, 헌화 30송이 제공</li>
 							<li>장례지도사 3일간 행사진행, 장례도우미 3명</li>
 							<li>유골함제공</li>
@@ -164,7 +164,7 @@
 								<td rowspan="6">고인용품 및<br/>입관 수시용품</td>
 								<td rowspan="2" data-photo="103">관</td>
 								<td>화장시</td>
-								<td class="alignL">오동나무 0.5치</td>
+								<td class="alignL">오동나무 0.6치</td>
 							</tr>
 							<tr>
 								<td>매장시</td>
@@ -203,7 +203,7 @@
 								<td class="alignL">직계가족<br/>(아들, 사위 / Y셔츠, 넥타이 포함)</td>
 							</tr>
 							<tr>
-								<td data-photo="110">여성복 대여</td>
+								<td data-photo="110">여상복 대여</td>
 								<td class="alignL">필요량제공</td>
 							</tr>
 							<tr>
@@ -252,7 +252,7 @@
 							</tr>
 							<tr>
 								<td colspan="2" data-photo="116">알선</td>
-								<td class="alignL">납골,산역(장지행사)</td>
+								<td class="alignL">납골,산역(장지행사),필요서류안내</td>
 							</tr>
 							<tr>
 								<td colspan="2" data-photo="116">화장지원</td>
