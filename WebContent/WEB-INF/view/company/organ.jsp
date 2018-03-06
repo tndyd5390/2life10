@@ -208,8 +208,8 @@
 					<!-- 2011 ~2006 -->
 					<article>
 						<section>
-							<h3 class="contTit">크리스찬라이프 새로운 도전</h3>
-							<p>2017년 크리스찬라이프가 새로운 도전을 시작합니다.</p>
+							<h3 class="contTit">크리스찬상조(주) 새로운 도전</h3>
+							<p>2017년 크리스찬상조가 새로운 도전을 시작합니다.</p>
 						</section>
 						<ul class="history">	
 							<li>
