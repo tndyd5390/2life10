@@ -1,3 +1,4 @@
+<%@ page import = "com.cl.util.SessionUtil" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 			<div class="moLnbWrap">
 				<nav class="flexContainer">
@@ -20,8 +21,11 @@
 						<li id="MO70800"><a href="javascript:goMenu('/Lmin/counsel/counselList.do', 'MO70800');">1:1상담</a></li>
 						<li id="MO70900"><a href="javascript:goMenu('/Lmin/regulation/regulationList.do', 'MO0900');">상조관련법규</a></li>
 						<li id="MO71200"><a href="javascript:goMenu('/Lmin/appli/appliList.do', 'MO71200');">가입신청</a></li>
-						<li id="MO71300"><a href="javascript:goMenu('/Lmin/member/memberList.do', 'MO71200');">회원정보</a></li>
-						<li id="MO71400"><a href="javascript:goMenu('/Lmin/catalogue/catalogueList.do', 'MO71200');">카타로그</a></li>
+						<li id="MO71300"><a href="javascript:goMenu('/Lmin/member/memberList.do', 'MO71300');">회원정보</a></li>
+						<li id="MO71400"><a href="javascript:goMenu('/Lmin/catalogue/catalogueList.do', 'MO71400');">카타로그</a></li>
+						<% if(SessionUtil.getSessionInfo("memberAuth").equals("CEO")){%>
+						<li id="MO71500"><a href="javascript:goMenu('/Lmin/analysis/analysisList.do', 'MO71500');">데이터분석</a></li>
+						<% } %>
 						</ul>
 					</div>
 								
@@ -41,8 +45,12 @@
 						<li id="MO70800"><a href="javascript:goMenu('/Lmin/counsel/counselList.do', 'MO70800');">1:1상담</a></li>
 						<li id="MO70900"><a href="javascript:goMenu('/Lmin/regulation/regulationList.do', 'MO0900');">상조관련법규</a></li>
 						<li id="MO71200"><a href="javascript:goMenu('/Lmin/appli/appliList.do', 'MO71200');">가입신청</a></li>
-						<li id="MO71300"><a href="javascript:goMenu('/Lmin/member/memberList.do', 'MO71200');">회원정보</a></li>
-						<li id="MO71400"><a href="javascript:goMenu('/Lmin/catalogue/catalogueList.do', 'MO71200');">카타로그</a></li>
+						<li id="MO71300"><a href="javascript:goMenu('/Lmin/member/memberList.do', 'MO71300');">회원정보</a></li>
+						<li id="MO71400"><a href="javascript:goMenu('/Lmin/catalogue/catalogueList.do', 'MO71400');">카타로그</a></li>
+						<% if(SessionUtil.getSessionInfo("memberAuth").equals("CEO")){%>
+						<li id="MO71500"><a href="javascript:goMenu('/Lmin/analysis/analysisList.do', 'MO71500');">데이터분석</a></li>
+						<% } %>
+						
 					</ul>
 				</nav>
 			</div> <!-- // pcLnbWrap -->

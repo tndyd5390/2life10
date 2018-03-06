@@ -35,7 +35,7 @@ public class NoticeController {
 	private INoticeService noticeService;
 	
 	//private String noticeFilePath = "C:\\Users\\Data3811-32\\git\\2life10\\WebContent\\noticeFile\\";
-	private String noticeFilePath = "/www/thunder-edu_com/file/notice/img/";
+	private String noticeFilePath = "/home/CL/file/notice/img/";
 	
 	@RequestMapping("/Lmin/notice/noticeList")
 	public String noticeList(HttpServletRequest req, Model model, HttpServletResponse resp, HttpSession session) throws Exception{

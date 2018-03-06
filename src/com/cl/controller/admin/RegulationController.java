@@ -33,7 +33,7 @@ public class RegulationController {
 	@Resource(name="RegulationService")
 	private IRegulationService regulationService;
 	
-	private String regulationSavePath = "/www/thunder-edu_com/file/regulation/img/";
+	private String regulationSavePath = "/home/CL/file/regulation/img/";
 	//private String regulationSavePath = "C:\\Users\\Data3811-32\\git\\2life10\\WebContent\\regulationFile\\";
 	
 	/**

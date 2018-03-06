@@ -15,4 +15,8 @@ public interface IAnalysisService {
 	List<AnalysisDTO> getRegYearAnalysis() throws Exception;
 
 	List<AnalysisDTO> getStateAnalysis() throws Exception;
+
+	List<AnalysisDTO> getItemAnalysis() throws Exception;
+
+	List<AnalysisDTO> getCityAnalysis(String state) throws Exception;
 }

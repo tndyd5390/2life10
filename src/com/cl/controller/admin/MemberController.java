@@ -95,7 +95,7 @@ public class MemberController {
 			session.setAttribute("ss_member_auth", memberAuth);
 			session.setAttribute("ss_member_pre", memberPre);
 			
-			if(mDTO.getMemberAuth().equals("A")){
+			if(mDTO.getMemberAuth().equals("A") || mDTO.getMemberAuth().equals("CEO")){
 				url = "/Lmin/notice/noticeList.do";
 			}else{
 				url = "/main.do";
