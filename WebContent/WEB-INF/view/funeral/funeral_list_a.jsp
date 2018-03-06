@@ -159,7 +159,7 @@
 								<td rowspan="6">고인용품 및<br/>입관 수시용품</td>
 								<td rowspan="2" data-photo="103">관</td>
 								<td>화장시</td>
-								<td class="alignL">오동나무 0.5치</td>
+								<td class="alignL">오동나무 0.6치</td>
 							</tr>
 							<tr>
 								<td>매장시</td>
@@ -198,7 +198,7 @@
 								<td class="alignL">3벌 (상,하의검정색 정장, Y셔츠, 넥타이포함)</td>
 							</tr>
 							<tr>
-								<td data-photo="110">여성복 대여</td>
+								<td data-photo="110">여상복 대여</td>
 								<td class="alignL">10벌</td>
 							</tr>
 							<tr>
