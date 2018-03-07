@@ -144,7 +144,7 @@
 							<tr>
 								<td>환급서비스</td>
 								<td colspan="2">만기환급률 100%</td>
-								<td class="alignL">만기완납 1년후 헤약시 실납입금액 100%환급</td>
+								<td class="alignL">만기완납 1년후 해약시 실납입금액 100%환급</td>
 							</tr>
 							<tr>
 								<td rowspan="2">인력지원</td>

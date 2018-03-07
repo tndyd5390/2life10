@@ -118,7 +118,7 @@
 						<p class="subTxt">월 40,000원 X 120회 (4,800,000원)</p>
 						<ul class="defaultGrayDotList mt-10">
 							<li>캐딜락리무진, 장의버스 제공 (전국무료)</li>
-							<li>대마수위, 관, 생화특별장식, 헌화 50송이</li>
+							<li>대마수의, 관, 생화특별장식, 헌화 50송이</li>
 							<li>장례지도사 3일간 행사진행, 장례도우미 6명</li>
 						</ul>
 						<br/>
@@ -148,7 +148,7 @@
 							<tr>
 								<td>환급서비스</td>
 								<td colspan="2">만기환급률 100%</td>
-								<td class="alignL">만기완납 1년후 헤약시 실납입금액 100%환급</td>
+								<td class="alignL">만기완납 1년후 해약시 실납입금액 100%환급</td>
 							</tr>
 							<tr>
 								<td rowspan="2">인력지원</td>
@@ -156,8 +156,8 @@
 								<td class="alignL">장례진행의 제반절차를 예법에 따라 장례진행</td>
 							</tr>
 							<tr>
-								<td colspan="2" data-photo="102">장례전문도우미 2명</td>
-								<td class="alignL">장례기간 중 -> 10시간/1일 봉사<br/>-장례기간 중 총4명(총40시간)</td>
+								<td colspan="2" data-photo="102">장례전문도우미 6명</td>
+								<td class="alignL">장례기간 중 -> 10시간/1일 봉사<br/>-장례기간 중 총6명(총40시간)</td>
 							</tr>
 							<tr>
 								<td rowspan="6">고인용품 및<br/>입관 수시용품</td>

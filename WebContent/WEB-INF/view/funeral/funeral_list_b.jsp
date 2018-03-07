@@ -116,7 +116,7 @@
 						<ul class="defaultGrayDotList mt-10">
 							<li>캐딜락리무진, 장의버스 제공 (왕복200Km제공)</li>
 							<li>수의, 관, 꽃바구니 2개 제공</li>
-							<li>장례지도사 3일간 장례 진행, 도우미 2명</li>
+							<li>장례지도사 3일간 장례 진행, 도우미 4명</li>
 							<li>꽃바구니 2개 및 헌화 50송이 제공</li>
 						</ul>
 						<br/>
@@ -145,7 +145,7 @@
 							<tr>
 								<td>환급서비스</td>
 								<td colspan="2">만기환급률 100%</td>
-								<td class="alignL">만기완납 1년후 헤약시 실납입금액 100%환급</td>
+								<td class="alignL">만기완납 1년후 해약시 실납입금액 100%환급</td>
 							</tr>
 							<tr>
 								<td rowspan="2">인력지원</td>
@@ -153,7 +153,7 @@
 								<td class="alignL">장례진행의 제반절차를 예법에 따라 장례진행</td>
 							</tr>
 							<tr>
-								<td colspan="2" data-photo="102">장례전문도우미 2명</td>
+								<td colspan="2" data-photo="102">장례전문도우미 4명</td>
 								<td class="alignL">장례기간 중 -> 10시간/1일 봉사<br/>-장례기간 중 총4명(총40시간)</td>
 							</tr>
 							<tr>
