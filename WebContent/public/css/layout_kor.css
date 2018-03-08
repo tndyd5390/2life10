@@ -905,7 +905,7 @@ a[class*="btn"] {vertical-align:middle;}
             .ethic-manage .container:before {content:"";display:block;overflow:hidden;clear:both;position:absolute;right:39px;bottom:-19px;width:29px;height:20px;background:url('/images/front/common/bg_familymap_pc.png') no-repeat 0 0;}
         /*// 2017-04-07 추가 end */
 
-	.footer .copy {padding:0;font-size:1.3rem;color:#bbb;text-align:left;}
+	.footer .copy {padding:0;font-size:1.3rem;text-align:left;}
 
 	.footer .familyWrap {display:block;}
 		.familyWrap.active .btnFamily {background-position:100% 100%;}
