@@ -162,7 +162,7 @@
 							</tr>
 							<tr>
 								<td colspan="2"  data-photo="104">사진</td>
-								<td class="alignL">11R 30P 앨범 1권</td>
+								<td class="alignL">11R 20P 앨범 1권</td>
 							</tr>
 							<tr>
 								<td colspan="2"  data-photo="105">액자</td>
