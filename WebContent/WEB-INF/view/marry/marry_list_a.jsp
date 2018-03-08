@@ -184,7 +184,7 @@
 							<tr>
 								<td rowspan="3">사진</td>
 								<td data-photo="104">신랑신부</td>
-								<td class="alignL">11R 30P 앨범 1권</td>
+								<td class="alignL">11R 20P 앨범 1권</td>
 							</tr>
 							<tr>
 								<td data-photo="104">신랑혼주</td>
