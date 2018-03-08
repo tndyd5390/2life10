@@ -138,7 +138,7 @@ $(function() {
 				<ul class="defaultGrayDotList mt-10">
 					<li>사망진단서 1통</li>
 					<li>주민등록등본 1통</li>
-					<li>회장장 관할지 수입인지(해당시 화장요금)</li>
+					<li>화장장 관할지 수입인지(해당시 화장요금)</li>
 				</ul>
 				<br/><br/>
 				
@@ -205,7 +205,7 @@ $(function() {
 				<strong class="blueTit2">국민연금 가입자 연금수령인 명의변경</strong>
 				<ul class="defaultGrayDotList mt-10">
 					<li>사망진단서(검안서) 1부</li>
-					<li>수급자 주민등록등본 1부, 심분증, 통장사본</li>
+					<li>수급자 주민등록등본 1부, 신분증, 통장사본</li>
 					<li>망인 주민등록 말소등본, 제적등본 1부</li>
 				</ul>
 				<br/><br/>
