@@ -99,7 +99,7 @@
 							<p class="pcImg"><img src="/public/img/conts/img_joinstep_pc01.png" alt="디자인플라자" /></p>
 						</div>
 						<div class="txtWrap">
-							<strong>1644-4491</strong>
+							<strong>1644-4491, 1544-8199</strong>
 							<p>가입문의 및 상담</p>
 						</div>
 					</li>
