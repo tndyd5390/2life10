@@ -126,7 +126,7 @@
 
 				<div class="tableBasicList">
 					<table class="defaultTable">
-						<caption>장례240</caption>
+						<caption>장례360</caption>
 						<colgroup>
 							<col style="width:18%;" />
 							<col style="width:12%;" />
@@ -154,7 +154,7 @@
 							<tr>
 								<td rowspan="5">리허설촬영</td>
 								<td colspan="2" data-photo="102">신부드레스</td>
-								<td class="alignL">메인드레스2벌, 파티복1벌</td>
+								<td class="alignL">메인드레스 2벌, 파티복 1벌</td>
 							</tr>
 							<tr>
 								<td colspan="2" data-photo="103">신랑예복</td>
@@ -162,11 +162,11 @@
 							</tr>
 							<tr>
 								<td colspan="2" data-photo="104">사진</td>
-								<td class="alignL">11R20P 앨범1권</td>
+								<td class="alignL">11R 20P 앨범 1권</td>
 							</tr>
 							<tr>
 								<td colspan="2" data-photo="105">액자</td>
-								<td class="alignL">20R 액자1개, 5R 3구 관액자</td>
+								<td class="alignL">20R 액자1개, 5R3구 관액자</td>
 							</tr>
 							<tr>
 								<td colspan="2" data-photo="106">헤어/메이크업</td>
@@ -184,15 +184,15 @@
 							<tr>
 								<td rowspan="3">사진</td>
 								<td data-photo="104">신랑신부</td>
-								<td class="alignL">11R30P 앨범1권</td>
+								<td class="alignL">11R 30P 앨범 1권</td>
 							</tr>
 							<tr>
 								<td data-photo="104">신랑혼주</td>
-								<td class="alignL">11R10P 앨범1권</td>
+								<td class="alignL">11R 10P 앨범 1권</td>
 							</tr>
 							<tr>
 								<td data-photo="104">신부혼주</td>
-								<td class="alignL">11R10P 앨범1권</td>
+								<td class="alignL">11R 10P 앨범 1권</td>
 							</tr>
 							<tr>
 								<td colspan="2" data-photo="106">헤어/메이크업</td>

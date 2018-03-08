@@ -162,7 +162,7 @@
 							</tr>
 							<tr>
 								<td colspan="2" data-photo="104">사진</td>
-								<td class="alignL">11R20P 앨범1권</td>
+								<td class="alignL">11R 20P 앨범 1권</td>
 							</tr>
 							<tr>
 								<td colspan="2" data-photo="105">액자</td>
@@ -184,15 +184,15 @@
 							<tr>
 								<td rowspan="3">사진</td>
 								<td data-photo="104">신랑신부</td>
-								<td class="alignL">11R30P 앨범1권</td>
+								<td class="alignL">11R 30P 앨범 1권</td>
 							</tr>
 							<tr>
 								<td data-photo="104">신랑혼주</td>
-								<td class="alignL">11R10P 앨범1권</td>
+								<td class="alignL">11R 10P 앨범 1권</td>
 							</tr>
 							<tr>
 								<td data-photo="104">신부혼주</td>
-								<td class="alignL">11R10P 앨범1권</td>
+								<td class="alignL">11R 10P 앨범 1권</td>
 							</tr>
 							<tr>
 								<td colspan="2" data-photo="106">헤어/메이크업</td>
