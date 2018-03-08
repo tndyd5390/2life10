@@ -98,7 +98,7 @@
 							
 					<ul class="addrArea">
 						<li><strong>주소</strong> <span>서울특별시 강남구 선릉로 115길 3 1F(논현동268-2 1F) </span></li>
-						<li><strong>전화</strong> <span>1644-4491 (02-556-8652 / 02-501-9132 / 02-541-6372)</span></li>
+						<li><strong>전화</strong> <span>1644-4491 (02-556-8652 / 02-501-9132)</span></li>
 						<li><strong>팩스</strong> <span>02-556-4439</span></li>
 					</ul>
 					<!-- mapArea -->
