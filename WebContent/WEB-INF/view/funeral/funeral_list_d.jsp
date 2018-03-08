@@ -157,7 +157,7 @@
 								<td class="alignL">장례진행의 제반절차를 예법에 따라 장례진행</td>
 							</tr>
 							<tr>
-								<td colspan="2" data-photo="102">장례전문도우미 2명</td>
+								<td colspan="2" data-photo="102">장례전문도우미 3명</td>
 								<td class="alignL">장례기간 중 -> 10시간/1일 봉사<br/>-장례기간 중 총3명(총30시간)</td>
 							</tr>
 							<tr>

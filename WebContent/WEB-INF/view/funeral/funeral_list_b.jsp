@@ -115,9 +115,8 @@
 						<p class="subTxt">월 30,000원 X 130회 (3,900,000원)</p>
 						<ul class="defaultGrayDotList mt-10">
 							<li>캐딜락리무진, 장의버스 제공 (왕복200Km제공)</li>
-							<li>수의, 관, 꽃바구니 2개 제공</li>
-							<li>장례지도사 3일간 장례 진행, 도우미 4명</li>
-							<li>꽃바구니 2개 및 헌화 50송이 제공</li>
+							<li>수의, 관, 꽃바구니 2개, 생화2단장식, 헌화50송이 제공</li>
+							<li>장례지도사 3일간 장례 진행, 장례도우미 4명</li>
 						</ul>
 						<br/>
 						<a href="/appli/appliForm.do" class="btnDefault">가입신청</a>

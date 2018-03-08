@@ -104,12 +104,12 @@
 				<br/><br/>
 				<div class="businessIntro">
 					<h3 class="subTit">크리스찬상조부금이란?</h3>
-					<p><strong>가입시 회원이 매월 일정한 금액을 일정기간 불입하면서, 장례발생시 전화 한 통화로 계약된 내용의 서비스를 받게 되는 장례토탈서비스 상품입니다.</strong></p>
+					<p><strong>가입 시 회원이 매월 일정한 금액을 일정기간 불입하면서, 장례발생 시 전화 한 통화로 계약된 내용의 서비스를 받게 되는 장례토탈서비스 상품입니다.</strong></p>
 				</div>
 				<br/><br/>
 				
 				<div class="businessIntro">
-					<h3 class="subTit">크리스찬상상조는?</h3>
+					<h3 class="subTit">크리스찬상조는?</h3>
 				</div>
 				<strong class="blueTit">양심에 기초한 가격을 책정했습니다.</strong>
 				<ul class="defaultGrayDotList mt-10">
@@ -125,7 +125,7 @@
 				<br/><br/>
 				<strong class="blueTit">최상의 서비스를 제공합니다.</strong>
 				<ul class="defaultGrayDotList mt-10">
-					<li>장례도우미가 파견되어 장례진행은 물론 문상객 접대 등 많은 일손을 도우며 모든일에 최선을 다해 섬깁니다.</li>
+					<li>장례도우미가 파견되어 장례진행은 물론 문상객 접대 등 많은 일손을 도우며 모든 일에 최선을 다해 섬깁니다.</li>
 				</ul>
 				<br/><br/>
 				<div class="businessIntro">
@@ -133,8 +133,8 @@
 				</div>
 				<br/>
 				<ul class="defaultGrayDotList mt-10">
-					<li>전국어디서든 즉시 출동</li>
-					<li>어느누구에게나 양도, 양수 가능</li>
+					<li>전국 어디서든 즉시 출동</li>
+					<li>어느 누구에게나 양도, 양수 가능</li>
 					<li>365일 24시간 콜센타 운영</li>
 					<li>내 가족처럼 모시는 친철한 인력서비스</li>
 				</ul>

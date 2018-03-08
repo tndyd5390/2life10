@@ -116,7 +116,7 @@
 						<ul class="defaultGrayDotList mt-10">
 							<li>캐딜락리무진 또는 장의버스 택일 (왕복200Km제공)</li>
 							<li>수의, 관, 꽃바구니 2개 제공</li>
-							<li>장례지도사 3일간 장례 진행, 도우미 2명</li>
+							<li>장례지도사 3일간 장례 진행, 장례도우미 2명</li>
 						</ul>
 						<br/>
 						<a href="/appli/appliForm.do" class="btnDefault">가입신청</a>
