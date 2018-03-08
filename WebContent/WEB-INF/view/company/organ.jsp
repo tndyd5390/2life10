@@ -180,7 +180,7 @@
 									<li>
 										<strong class="month">05월</strong>
 										<ul>
-											<li>아파트전도잔략연구소 세미나 후원</li>
+											<li>아파트전도전략연구소 세미나 후원</li>
 										</ul>
 									</li>
 									<li>
@@ -253,7 +253,7 @@
 									<li>
 										<strong class="month">11월</strong>
 										<ul>
-											<li>선불식 할부거래업등록</li>
+											<li>선불식 할부거래업 등록</li>
 										</ul>
 									</li>
 								</ul>
@@ -264,7 +264,7 @@
 									<li>
 										<strong class="month">04월</strong>
 										<ul>
-											<li>웨딩사업부발족 및 사업개시</li>
+											<li>웨딩사업부 발족 및 사업개시</li>
 										</ul>
 									</li>
 									<li>
@@ -299,7 +299,7 @@
 									<li>
 										<strong class="month">06월</strong>
 										<ul>
-											<li>대전지사설립, 여행사업부발족 및 사업개시</li>
+											<li>대전지사설립, 여행사업부 발족 및 사업개시</li>
 										</ul>
 									</li>
 									<li>
@@ -345,13 +345,13 @@
 									<li>
 										<strong class="month">05월</strong>
 										<ul>
-											<li>크리스찬상조설립 및 사업개시</li>
+											<li>크리스찬상조 설립 및 사업개시</li>
 										</ul>
 									</li>
 									<li>
 										<strong class="month">06월</strong>
 										<ul>
-											<li>금융결제원 CMS 자도이체실시</li>
+											<li>금융결제원 CMS 자동이체실시</li>
 										</ul>
 									</li>
 									<li>

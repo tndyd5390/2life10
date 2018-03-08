@@ -203,11 +203,11 @@
 							</tr>
 							<tr>
 								<td data-photo="110">여상복 대여</td>
-								<td class="alignL">필요량제공</td>
+								<td class="alignL">필요량 제공</td>
 							</tr>
 							<tr>
 								<td data-photo="111">완장</td>
-								<td class="alignL">필요량제공</td>
+								<td class="alignL">필요량 제공</td>
 							</tr>
 							<tr>
 								<td rowspan="5">전통식</td>
@@ -228,7 +228,7 @@
 							</tr>
 							<tr>
 								<td data-photo="112">두건,행전 등</td>
-								<td class="alignL">필요량제공</td>
+								<td class="alignL">필요량 제공</td>
 							</tr>
 							<tr>
 								<td>발인용품</td>
@@ -259,11 +259,11 @@
 							</tr>
 							<tr>
 								<td colspan="2" data-photo="116">화장지원</td>
-								<td class="alignL">납골당의뢰시 할인 및 유골함 제공</td>
+								<td class="alignL">닙골당 의뢰시 할인 및 유골함 제공</td>
 							</tr>
 							<tr>
 								<td colspan="2" data-photo="116">행정안내</td>
-								<td class="alignL">각종행정절차안내<br/>필요한서류 안내</td>
+								<td class="alignL">각종 행정절차 안내<br/>필요한 서류 안내</td>
 							</tr>
 						</tbody>
 					</table>
