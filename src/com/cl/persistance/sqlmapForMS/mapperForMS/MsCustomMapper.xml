@@ -11,7 +11,7 @@
 	    WHERE
 	    	회원명 = #{memberName} AND
 	    	LEFT(주민등록번호, 6) = #{memberRrn} AND
-	    	RIGHT(휴대폰, 4) = #{phoneNo},
+	    	RIGHT(휴대폰, 4) = #{phoneNo} AND
 	    	관리구분 = '가입'
 	    ORDER BY
 	        회원번호 DESC
