@@ -23,7 +23,7 @@
 	    		FUNERAL_NOTICE_NAME	LIKE CONCAT('%',#{search},'%')
 	    	</if>
 	    	<if test="searchBox==02">
-	    		FUNERAL_NOTICE_MEMBER LIKE CONCAT('%',#{search}},'%')
+	    		FUNERAL_NOTICE_MEMBER LIKE CONCAT('%',#{search},'%')
 	    	</if>
 	    	</where>
 	    	) P,
