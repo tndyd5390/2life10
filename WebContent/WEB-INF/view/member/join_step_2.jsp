@@ -369,8 +369,8 @@
 							<tr>
 								<th scope="row">이메일 주소</th>
 								<td>
-									<input type="text" name="email1" id="email1" value="" title="이름" class="inputType2" style="" maxlength="20"> @
-									<input type="text" name="email2" id="email2" value="" title="이름" class="inputType2" style="" maxlength="5">
+									<input type="text" name="email1" id="email1" value="" title="이름" class="inputType2"> @
+									<input type="text" name="email2" id="email2" value="" title="이름" class="inputType2">
 									<select id="emailBox" name="emailBox" title="" class="inputType2">
 										<option value="">선택하세요</option>
 										<option value="nate.com">nate.com</option>
