@@ -90,11 +90,19 @@
 			  WHEN '전라북도' THEN '전북'
 			  WHEN '경상북도' THEN '경북'
 			  WHEN '경상남도' THEN '경남'
+			  WHEN '충청남도' THEN '충남'
+			  WHEN '충청북도' THEN '충북'
+			  WHEN '제주특별' THEN '제주'
+			  WHEN '세종특별' THEN '세종'
 			  ELSE LEFT(ADDR,2) END AS ADDR2,
 			  COUNT(CASE LEFT(ADDR, 4) WHEN '전라남도' THEN '전남'
 			  WHEN '전라북도' THEN '전북'
 			  WHEN '경상북도' THEN '경북'
 			  WHEN '경상남도' THEN '경남'
+			  WHEN '충청남도' THEN '충남'
+			  WHEN '충청북도' THEN '충북'
+			  WHEN '제주특별' THEN '제주'
+			  WHEN '세종특별' THEN '세종'
 			  ELSE LEFT(ADDR,2) END) CNT
 			FROM 
 			  CUSTOM 
@@ -141,9 +149,13 @@
 		FROM
 			(SELECT 
 			 	CASE LEFT(ADDR, 4) WHEN '전라남도' THEN '전남'
-			 	WHEN '전라북도' THEN '전북'
-			 	WHEN '경상북도' THEN '경북'
-			 	WHEN '경상남도' THEN '경남'
+				WHEN '전라북도' THEN '전북'
+				WHEN '경상북도' THEN '경북'
+				WHEN '경상남도' THEN '경남'
+				WHEN '충청남도' THEN '충남'
+				WHEN '충청북도' THEN '충북'
+				WHEN '제주특별' THEN '제주'
+				WHEN '세종특별' THEN '세종'
 				ELSE LEFT(ADDR,2) END AS ADDR1,
 				SUBSTRING_INDEX(SUBSTRING_INDEX(ADDR,' ', 2), ' ', -1) ADDR3
 			FROM 
