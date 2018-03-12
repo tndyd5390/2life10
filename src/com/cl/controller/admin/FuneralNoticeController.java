@@ -83,9 +83,9 @@ public class FuneralNoticeController {
 		
 		url = "/Lmin/funeral/funeralNoticeList.do";
 		if(result == 0){
-			msg = "부고알림 등록에 실패했습니다.";
+			msg = "부고알림 등록에 실패하였습니다.";
 		}else{
-			msg = "부고알림 등록에 실패했습니다.";
+			msg = "부고알림 등록에 성공하였습니다.";
 		}
 		
 		model.addAttribute("url", url);

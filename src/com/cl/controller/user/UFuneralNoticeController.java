@@ -26,14 +26,14 @@ public class UFuneralNoticeController {
 	public String funeralNoticeList(HttpServletRequest req, Model model) throws Exception{
 		log.info("funeralNoticeList Start!!");
 		
-		int viewCount = 10;
-		int splitPage = 5;
+		//int viewCount = 10;
+		int splitPage = 10;
 		
 		HashMap<String, Object> hMap = new HashMap<>();
 		
 		hMap = PageUtil.paging(req, splitPage);
-		hMap.put("page", viewCount);
-		hMap = funeralNoticeService.getUserFuneralNoticeList(hMap);
+		//hMap.put("page", viewCount);
+		hMap = funeralNoticeService.getFuneralNoticeList(hMap);
 		
 		model.addAttribute("hMap", hMap);
 		

@@ -9,6 +9,8 @@
 <%
 	HashMap<String, Object> hMap = (HashMap) request.getAttribute("hMap");
 	List<FuneralNoticeDTO> fList = (List<FuneralNoticeDTO>) hMap.get("list");
+	int pageBtnSplit = 5;
+
 %>
 <%@include file="/WEB-INF/view/include/inc_header.jsp"%>
 <!--#include file="../include/inc_header.jsp"-->
@@ -178,9 +180,9 @@
 				</div>
 
 				<!-- pageArea -->
-				<%-- <div class="pageArea">
+				<div class="pageArea">
 					<%= PageUtil.frontPaging(hMap, pageBtnSplit)%>
-				</div> --%>
+				</div>
 				<!-- // pageArea -->
 
 

@@ -41,7 +41,7 @@
 	    	</if>
 	    </where>
 	    ORDER BY 
-	    	ROWNUM DESC
+	    	FUNERAL_NOTICE_DAY DESC
 	    LIMIT #{page}, #{splitPage}
 	</select>
 
@@ -84,7 +84,7 @@
 	    	</if>
 	    </where>
 	    ORDER BY 
-	    	ROWNUM DESC
+	    	FUNERAL_NOTICE_DAY DESC
 	    LIMIT 0, #{page}
 	</select>
 	
