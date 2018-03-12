@@ -457,36 +457,39 @@ public class MemberController {
 	@RequestMapping("/member/findIdProc")
 	public String findIdProc(HttpServletRequest req, HttpServletResponse resp, HttpSession session,Model model) throws Exception{
 		log.info("findIdProc Start!!");
-		SessionUtil.memberCheck(resp, session);
 		String msg = "";
 		String url = "";
-		String memberName = CmmUtil.nvl(req.getParameter("name"));
-		String memberEmail1 = CmmUtil.nvl(req.getParameter("email1"));
-		String memberEmail2 = CmmUtil.nvl(req.getParameter("email2"));
-		log.info("memberName : "+memberName);
-		log.info("memberEmail1 : "+memberEmail1);
-		log.info("memberEmail2 : "+memberEmail2);
 		
-		MemberDTO mDTO = new MemberDTO();
-		mDTO.setMemberName(AES256Util.strEncode(memberName));
-		mDTO.setMemberEmail1(AES256Util.strEncode(memberEmail1));
-		mDTO.setMemberEmail2(AES256Util.strEncode(memberEmail2));
-		
-		mDTO = memberService.getMemberId(mDTO);
-		if(mDTO != null){
-			msg = "회원님의 아이디는 "+mDTO.getMemberId()+" 입니다.";
-			url = "/member/login.do";
-		}else{
-			msg = "일치하는 회원이 없습니다.";
+		if(!"".equals(CmmUtil.nvl((String)session.getAttribute("ss_member_no")))){
+			msg = "로그인된 상태에서는 불가능합니다.";
 			url = "/member/findId.do";
-		};
-		
-		System.out.println(url);
-		System.out.println(msg);
-		model.addAttribute("url" ,url);
-		model.addAttribute("msg" ,msg);
-		mDTO = null;
-		log.info("findIdProc End!!");
+		}else{
+			String memberName = CmmUtil.nvl(req.getParameter("name"));
+			String memberEmail1 = CmmUtil.nvl(req.getParameter("email1"));
+			String memberEmail2 = CmmUtil.nvl(req.getParameter("email2"));
+			log.info("memberName : "+memberName);
+			log.info("memberEmail1 : "+memberEmail1);
+			log.info("memberEmail2 : "+memberEmail2);
+			
+			MemberDTO mDTO = new MemberDTO();
+			mDTO.setMemberName(AES256Util.strEncode(memberName));
+			mDTO.setMemberEmail1(AES256Util.strEncode(memberEmail1));
+			mDTO.setMemberEmail2(AES256Util.strEncode(memberEmail2));
+			
+			mDTO = memberService.getMemberId(mDTO);
+			if(mDTO != null){
+				msg = "회원님의 아이디는 "+mDTO.getMemberId()+" 입니다.";
+				url = "/member/login.do";
+			}else{
+				msg = "일치하는 회원이 없습니다.";
+				url = "/member/findId.do";
+			};
+			
+			model.addAttribute("url" ,url);
+			model.addAttribute("msg" ,msg);
+			mDTO = null;
+			log.info("findIdProc End!!");
+		}
 		return "/member/redirect";
 	}
 	

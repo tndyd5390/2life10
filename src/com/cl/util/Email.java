@@ -44,7 +44,7 @@ public class Email {
 		contents += "<td height='20' style='color: rgb(77, 77, 77); line-height: 14px; font-size: 12px;></td>";
 		contents += "</tr>";
 		contents += "<tr>";
-		contents += "<td style='color: rgb(77, 77, 77); line-height: 14px; font-size: 12px;><img src='http://thunder-edu.com/public/img/common/t_logo.png'></td>";
+		contents += "<td style='color: rgb(77, 77, 77); line-height: 14px; font-size: 12px;><img src='http://4christian.co.kr/public/img/common/t_logo.png'></td>";
 		contents += "</tr>";
 		contents += "<tr>";
 		contents += "<td height='2' style='color: rgb(77, 77, 77); line-height: 14px; font-size: 12px;></td>";
