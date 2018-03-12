@@ -232,7 +232,10 @@ public class MemberController {
 		String memberPassword = SHA256Util.sha256(CmmUtil.nvl(req.getParameter("password")));
 		String memberName = CmmUtil.nvl(req.getParameter("name"));
 		String memberSex = CmmUtil.nvl(req.getParameter("sex"));
-		String memberHomeNo = CmmUtil.nvl(req.getParameter("tel1"))+"-"+CmmUtil.nvl(req.getParameter("tel2"))+"-"+CmmUtil.nvl(req.getParameter("tel3"));
+		String memberHomeNo = null;
+		if(CmmUtil.nvl(req.getParameter("tel1")) != "" && CmmUtil.nvl(req.getParameter("tel2")) != "" && CmmUtil.nvl(req.getParameter("tel3")) != ""){
+			memberHomeNo = CmmUtil.nvl(req.getParameter("tel1"))+"-"+CmmUtil.nvl(req.getParameter("tel2"))+"-"+CmmUtil.nvl(req.getParameter("tel3"));
+		}
 		String memberPhoneNo = CmmUtil.nvl(req.getParameter("phone1"))+"-"+CmmUtil.nvl(req.getParameter("phone2"))+"-"+CmmUtil.nvl(req.getParameter("phone3"));
 		String memberPostNo = CmmUtil.nvl(req.getParameter("postcode"));
 		String memberAddress = CmmUtil.nvl(req.getParameter("address1"));
@@ -259,7 +262,9 @@ public class MemberController {
 		mDTO.setMemberPassword(memberPassword);
 		mDTO.setMemberName(AES256Util.strEncode(memberName));
 		mDTO.setMemberSex(memberSex);
-		mDTO.setMemberHomeNo(AES256Util.strEncode(memberHomeNo));
+		if(memberHomeNo != null){
+			mDTO.setMemberHomeNo(AES256Util.strEncode(memberHomeNo));
+		}
 		mDTO.setMemberPhoneNo(AES256Util.strEncode(memberPhoneNo));
 		mDTO.setMemberPostNo(AES256Util.strEncode(memberPostNo));
 		mDTO.setMemberAddress(AES256Util.strEncode(memberAddress));
