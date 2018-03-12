@@ -125,13 +125,14 @@
 				%>
 				<section>
 					<h3 class="contTit">
-						<span>선사</span>
-						<%=TextUtil.exchangeEscapeNvl(cDTO.getCruiseShipName()) %>
+						<span>상품</span>
+						<%=TextUtil.exchangeEscapeNvl(cDTO.getCruiseName()) %>
+
 					</h3>
 					<div class="dashList">
 					    <ul>
                             <li>날짜 : <%=CmmUtil.nvl(cDTO.getCruiseStartDay())%> ~ <%=CmmUtil.nvl(cDTO.getCruiseEndDay())%> </li>
-                            <li>상품 : <%=TextUtil.exchangeEscapeNvl(cDTO.getCruiseName()) %></li>
+                            <li>선사 : <%=TextUtil.exchangeEscapeNvl(cDTO.getCruiseShipName()) %></li>
                             <li>인원 : <%=TextUtil.exchangeEscapeNvl(cDTO.getCruiseAccomodation()) %>명</li>
                             <li>상품가 : <%=TextUtil.addComma(TextUtil.exchangeEscapeNvl(cDTO.getCruisePrice())) %>원</li>
                             <li>캐빈 : <%=TextUtil.exchangeEscapeNvl(cDTO.getCruiseCabinCode()) %></li>
