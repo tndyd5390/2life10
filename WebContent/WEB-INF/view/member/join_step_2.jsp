@@ -150,53 +150,77 @@
 			alert("아이디를 입력하세요.");
 			id.focus();
 			return false;
-		}else if(idCheckTF == false){
+		}
+		if(idCheckTF == false){
 			alert("아이디 중복확인이 필요합니다.");
 			return false;
-		}else if(pwd.val()==""){
+		}
+		if(pwd.val()==""){
 			alert("패스워드를 입력하세요.");
 			pwd.focus();
 			return false;
-		}else if(pwdChk==""){
+		}
+		if(pwdChk==""){
 			alert("패스워드확인을 입력하세요.");
 			pwd.focus();
 			return false;
-		}else if(pwd.val()!=pwdChk.val()){
+		}
+		if(pwd.val()!=pwdChk.val()){
 			alert("패스워드가 일치 하지 않습니다.");
 			pwd.focus();
 			return false;
-		}else if(name.val()==""){
+		}
+		if(name.val()==""){
 			alert("이름을 입력하세요.");
 			name.focus();
 			return false;
-		}else if(sex.val()==""){
+		}
+		if(sex.val()==""){
 			alert("성별을 선택하세요.");
 			sex.focus();
 			return false;
-		}else if(home2.val()==""){
+		}
+		
+		/* if(home2.val()==""){
 			alert("전화번호를 입력하세요.");
 			home2.focus();
 			return false;
-		}else if(home3.val()==""){
+		}
+		if(home3.val()==""){
 			alert("전화번호를 입력하세요.");
 			home3.focus();
 			return false;
-		}else if(phone2.val()==""){
+		} */
+		if(home1.val() != ""){
+			if(home2.val()==""){
+				alert("전화번호를 입력하세요.");
+				home2.focus();
+				return false;
+			}
+			if(home3.val()==""){
+				alert("전화번호를 입력하세요.");
+				home3.focus();
+				return false;
+			} 
+		}
+		if(phone2.val()==""){
 			alert("휴대전화번호를 입력하세요.");
 			phone2.focus();
 			return false;
-		}else if(phone3.val()==""){
+		}
+		if(phone3.val()==""){
 			alert("휴대전화번호를 입력하세요.");
 			phone3.focus();
 			return false;
-		}else{
-			if(confirm("가입하시겠습니까?")){
-				f.submit();
-				return true;
-			}else{
-				return false;
-			}
 		}
+		
+		if(confirm("가입하시겠습니까?")){
+			f.submit();
+			return true;
+		}else{
+			return false;
+		}
+		
 	};
 	
 
@@ -294,8 +318,24 @@
 								<th scope="row">자택전화</th>
 								<td>
 									<select id="tel1" name="tel1" title="" class="inputType3">
+										<option value="">선택</option>
 										<option value="02">02</option>
+										<option value="051">051</option>
+										<option value="053">053</option>
+										<option value="032">032</option>
+										<option value="062">062</option>
+										<option value="042">042</option>
+										<option value="052">052</option>
+										<option value="044">044</option>
 										<option value="031">031</option>
+										<option value="033">033</option>
+										<option value="043">043</option>
+										<option value="041">041</option>
+										<option value="063">063</option>
+										<option value="061">061</option>
+										<option value="054">054</option>
+										<option value="055">055</option>
+										<option value="064">064</option>
 									</select>
 									-
 									<input type="text" name="tel2" id="tel2" value="" title="이름" class="inputType2" style="" maxlength="4">
