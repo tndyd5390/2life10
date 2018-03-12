@@ -11,8 +11,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>redirect</title>
 <script type="text/javascript">
-	alert("<%=msg%>");
-	location.href="<%=url%>?mNo=<%=mNo%>";
+alert("<%=msg%>");
+location.href="<%=url%>";
 </script>
 </head>
 <body>

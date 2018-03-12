@@ -183,7 +183,7 @@ public class MemberController {
 			}else{
 				model.addAttribute("memberNo", msDTO.getMemberNo());
 				log.info("memberNo : "+ msDTO.getMemberNo());
-				msg = "회원정보가 확인 되었습니다. 계속 진행하세요.";
+				msg = "상조에 가입된 회원정보가 확인 되었습니다. 계속 진행하세요.";
 			}
 		}
 		url = "/member/joinStep2.do";
@@ -277,10 +277,10 @@ public class MemberController {
 		
 		if(result == 1){
 			url = "/member/login.do";
-			msg = "회원가입 성공";
+			msg = "회원가입이 완료되었습니다.";
 		}else{
 			url = "/member/joinStep.do";
-			msg = "회원가입 실패";
+			msg = "회원가입에 실패하였습니다.";
 		}
 		
 		model.addAttribute("url", url);
@@ -381,7 +381,9 @@ public class MemberController {
 		MemberDTO mDTO = new MemberDTO();
 		
 		mDTO.setMemberNo(memberNo);
-		mDTO.setMemberPassword(SHA256Util.sha256(memberPassword));
+		if(!memberPassword.equals("")) {
+			mDTO.setMemberPassword(AES256Util.strEncode(memberPassword));
+		}
 		mDTO.setMemberName(AES256Util.strEncode(memberName));
 		mDTO.setMemberSex(memberSex);
 		mDTO.setMemberHomeNo(AES256Util.strEncode(memberHomeNo));
@@ -427,9 +429,9 @@ public class MemberController {
 		int result = memberService.deleteMember(memberNo);
 		
 		if(result == 0) {
-			msg = "삭제성공.";
+			msg = "삭제 되었습니다";
 		} else {
-			msg = "삭제실패.";
+			msg = "삭제 실패하였습니다/";
 		}
 		url = "/Lmin/member/memberList.do";
 		
@@ -474,9 +476,10 @@ public class MemberController {
 			url = "/member/findId.do";
 		};
 		
+		System.out.println(url);
+		System.out.println(msg);
 		model.addAttribute("url" ,url);
 		model.addAttribute("msg" ,msg);
-		
 		mDTO = null;
 		log.info("findIdProc End!!");
 		return "/member/redirect";
