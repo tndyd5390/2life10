@@ -180,13 +180,14 @@ public class MemberController {
 				model.addAttribute("memberNo", "N");
 				msg = "일치하는 회원이 없습니다. 계속 진행하세요.";
 				log.info("memberNo : N");
+				url = "/member/joinStep2.do?mNo=N";
 			}else{
 				model.addAttribute("memberNo", msDTO.getMemberNo());
 				log.info("memberNo : "+ msDTO.getMemberNo());
 				msg = "상조에 가입된 회원정보가 확인 되었습니다. 계속 진행하세요.";
+				url = "/member/joinStep2.do?mNo="+msDTO.getMemberNo();
 			}
 		}
-		url = "/member/joinStep2.do";
 		
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
