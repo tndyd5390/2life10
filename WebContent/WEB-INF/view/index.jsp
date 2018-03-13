@@ -140,7 +140,7 @@
                             <ul class="list_inner">
 							 <%if(fList.size()>0){%>
 								<%for(FuneralNoticeDTO fDTO : fList){%>
-	                                <li><a href="/funeral/funeralNoticeList.do"><%=CmmUtil.nvl(fDTO.getFuneralNoticeName())%>님 소천 | <%=CmmUtil.nvl(fDTO.getFuneralNoticeDay())%></a></li>
+	                                <li><a href="/funeral/funeralNoticeList.do"><%=CmmUtil.nvl(fDTO.getFuneralNoticeName())%>님 소천 | <%=CmmUtil.nvl(fDTO.getFuneralNoticeDay())%> | <%=CmmUtil.nvl(fDTO.getFuneralNoticePlace())%></a></li>
 								<%}%>                            	
                                 <!-- <li><a href="#">공지 2</a></li>
                                 <li><a href="#">공지 3</a></li> -->
