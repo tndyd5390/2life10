@@ -27,7 +27,7 @@
     <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean"
           p:jobDetail-ref="dummyJob"
           p:startDelay="1000"
-          p:cronExpression="0 0 3 * * ?"/>
+          p:cronExpression="0 0 03 * * ?"/>
  
     <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="triggers">
