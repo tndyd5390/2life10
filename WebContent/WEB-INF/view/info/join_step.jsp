@@ -100,7 +100,7 @@
 						</div>
 						<div class="txtWrap">
 							<strong>1644-4491, 1544-8199</strong>
-							<p>가입문의 및 상담</p>
+							<p>24시간 장례접수, 가입문의 및 상담</p>
 						</div>
 					</li>
 				</div>

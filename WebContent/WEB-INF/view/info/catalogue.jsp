@@ -112,7 +112,7 @@
 						<h3 class="contTit"><span>크리스찬상조</span>상품 웹 카다로그</h3>
 						<p class="txt">다양한 상품을 확인하세요.</p>
 						<%if(cList.size()>0){%>
-							<a href="javascript:download('<%=CmmUtil.nvl(cList.get(0).getCatalogueNo())%>')" class="btnDefault"><%=CmmUtil.nvl(cList.get(0).getCatalogueStart().split("\\.")[0]) %> 장례상품 카다로그</a>
+							<a href="javascript:download('<%=CmmUtil.nvl(cList.get(0).getCatalogueNo())%>')" class="btnDefault"><%=CmmUtil.nvl(cList.get(0).getCatalogueStart().split("\\.")[0]) %>-2018 카다로그</a>
 						<%}%>
 					</div>
 				</header>

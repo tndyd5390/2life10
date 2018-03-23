@@ -100,7 +100,7 @@
 		f.submit();
 	};
 	
-	function gaPage(page, lastPage) {
+	function goPage(page, lastPage) {
 		var f = $("#f");
 		var goPage = $("#page");
 		f.attr("action", "/Lmin/member/memberList.do");

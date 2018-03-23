@@ -116,7 +116,7 @@
 									<li>
 										<strong class="month">02월</strong>
 										<ul>
-											<li>N+ 교회사역연구소 세미나 후원제휴</li>
+											<li>N+ 교회사역연구소 세미나 후원</li>
 										</ul>
 									</li>
 								</ul>
@@ -151,7 +151,7 @@
 									<li>
 										<strong class="month">09월</strong>
 										<ul>
-											<li>부흥한국 전도 컴퍼런스 후원 업무제휴</li>
+											<li>부흥한국 전도 컨퍼런스 후원</li>
 										</ul>
 									</li>
 									<li>
@@ -197,7 +197,7 @@
 									<li>
 										<strong class="month">07월</strong>
 										<ul>
-											<li>교회사역개발원 세미나 후원제휴</li>
+											<li>교회사역개발원 세미나 후원</li>
 											<li>두리하나선교원 후원</li>
 										</ul>
 									</li>

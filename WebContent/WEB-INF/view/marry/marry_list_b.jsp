@@ -115,7 +115,6 @@
 						<ul class="defaultGrayDotList mt-10">
 							<li>새로이 시작하는 아름다운 순간!</li>
 							<li>크리스찬상조 웨딩사업부가 행복한 추억을 간직할 수 있도록 도와드리겠습니다.</li>
-							<li>리허설촬영 및 본식진행 시 웨딩드레스 및 스튜디오 등 / 비디오촬영</li>
 						</ul>
 						<br/>
 						<a href="/appli/appliForm.do" class="btnDefault">가입신청</a>
@@ -166,7 +165,7 @@
 							</tr>
 							<tr>
 								<td colspan="2" data-photo="105">액자</td>
-								<td class="alignL">20R 액자1개, 5R3구 관액자</td>
+								<td class="alignL">20R 액자 1개, 5R3구 관액자</td>
 							</tr>
 							<tr>
 								<td colspan="2" data-photo="106">헤어/메이크업</td>
@@ -184,7 +183,7 @@
 							<tr>
 								<td rowspan="3">사진</td>
 								<td data-photo="104">신랑신부</td>
-								<td class="alignL">11R 20P 앨범1권</td>
+								<td class="alignL">11R 20P 앨범 1권</td>
 							</tr>
 							<tr>
 								<td data-photo="104">신랑혼주</td>
@@ -228,7 +227,7 @@
 							<li>상품 중, 일부 품목을 회원님께서 개인으로 준비 또는 개인사정으로 사용할 수 없는 상품에 대하여 현금으로 반환되지 않습니다.</li>
 							<li>지역의 특성과 문화에 따라 상품의 내용에 차이가 있을 수 있으며, 같은 가격대에서 다른 상품으로 호환이 가능합니다.</li>
 							<li>각 상품은 드레스, 스튜디오, 및 메이크업 등 업체의 차이가 있습니다.</li>
-							<li>사진/앨범의 담위 : 5R은 5X7인치, 8R은 8X10인치, 11R은 11X14인치, 20R은 20X24인치이며, P는 페이지 약자입니다.</li>
+							<li>사진/앨범의 단위 : 5R은 5X7인치, 8R은 8X10인치, 11R은 11X14인치, 20R은 20X24인치이며, P는 페이지 약자입니다.</li>
 						</ul>
 					</section>
 				</article>

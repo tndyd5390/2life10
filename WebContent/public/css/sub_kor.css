@@ -187,7 +187,7 @@
 #pro_info .numList > li:nth-child(9) ~ li {margin-left:24px;}
 #pro_info .numList > li:nth-child(99) ~ li {margin-left:32px;}
 #pro_info .nonumList > li { list-style-type:decimal; text-indent:0;margin-left:15px;}
-#pro_info .nonumList > li {margin-left:24px;}
+#pro_info .nonumList > li {margin-left:24px; margin-bottom:10px;}
 #pro_info .roundNumList > li {padding-left:16px;text-indent:-16px;}
 
 
@@ -624,7 +624,7 @@
 #pro_info .numList > li:nth-child(9) ~ li {margin-left:24px;}
 #pro_info .numList > li:nth-child(99) ~ li {margin-left:32px;}
 #pro_info .nonumList > li { list-style-type:decimal; text-indent:0;margin-left:15px;}
-#pro_info .nonumList > li {margin-left:24px;}
+#pro_info .nonumList > li {margin-left:24px; margin-bottom:10px;}
 #pro_info .roundNumList > li {padding-left:16px;text-indent:-16px;}
 
 
@@ -930,7 +930,7 @@
 #pro_info .numList > li:nth-child(9) ~ li {margin-left:24px;}
 #pro_info .numList > li:nth-child(99) ~ li {margin-left:32px;}
 #pro_info .nonumList > li { list-style-type:decimal; text-indent:0;margin-left:25px;}
-#pro_info .nonumList > li {margin-left:24px;}
+#pro_info .nonumList > li {margin-left:24px; margin-bottom:10px;}
 #pro_info .roundNumList > li {padding-left:16px;text-indent:-16px;}
 
 
