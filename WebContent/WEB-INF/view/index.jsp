@@ -150,8 +150,8 @@
                     </div>
                     <div class="customer">
                         <p class="center"><em>고객센터</em><strong>1644-4491</strong> <span>24시간 친절히 상담해드립니다.</span></p>
-                        <a href="/appli/appliForm.do" class="btn_search"><span class="txt">가입신청</span></a>
-                        <a href="/counsel/counselWrite.do" class="btn_member"><span class="txt">가입문의</span></a>
+                        <a href="/appli/appliForm.do" class="btn_search"><span class="txt">가입문의</span></a>
+                        <a href="/counsel/counselWrite.do" class="btn_member"><span class="txt">1:1상담</span></a>
                     </div>
                 </div>
             </div>
