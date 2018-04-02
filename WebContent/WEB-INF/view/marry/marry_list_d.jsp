@@ -153,7 +153,7 @@
 							<tr>
 								<td rowspan="5">리허설촬영</td>
 								<td colspan="2" data-photo="102">신부드레스</td>
-								<td class="alignL">메인드레스2벌, 파티복1벌</td>
+								<td class="alignL">메인드레스2벌(대여), 파티복1벌(대여)</td>
 							</tr>
 							<tr>
 								<td colspan="2" data-photo="103">신랑예복</td>
@@ -165,7 +165,7 @@
 							</tr>
 							<tr>
 								<td colspan="2" data-photo="105">액자</td>
-								<td class="alignL">20R 액자1개, 9관 갤러리 액자</td>
+								<td class="alignL">20R 액자1개</td>
 							</tr>
 							<tr>
 								<td colspan="2" data-photo="106">헤어/메이크업</td>
