@@ -115,6 +115,7 @@
 						<ul class="defaultGrayDotList mt-10">
 							<li>새로이 시작하는 아름다운 순간!</li>
 							<li>크리스찬상조 웨딩사업부가 행복한 추억을 간직할 수 있도록 도와드리겠습니다.</li>
+							<li>해당상품 가입자(2013년 12월 31일까지)에 한하여 이용 가능합니다.</li>
 						</ul>
 						<br/>
 						<a href="/appli/appliForm.do" class="btnDefault">가입신청</a>
