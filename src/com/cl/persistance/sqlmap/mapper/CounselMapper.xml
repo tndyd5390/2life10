@@ -74,4 +74,8 @@
 		WHERE
 			COUNSEL_NO		= #{counselNo}	
 	</update>
+	
+	<delete id="deleteCounsel" parameterType="string">
+		DELETE FROM COUNSEL_INFO WHERE COUNSEL_NO = #{cNo}
+	</delete>
 </mapper>

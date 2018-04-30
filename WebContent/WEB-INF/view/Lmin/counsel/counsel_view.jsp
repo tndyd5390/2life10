@@ -105,6 +105,11 @@
 		}
 	};
 
+	function goDelete(){
+		if(confirm("삭제 하시겠습니까?")){
+			location.href="/Lmin/counsel/deleteCounsel.do?cNo=" + '<%=CmmUtil.nvl(cDTO.getCounselNo())%>';
+		}
+	}
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -146,6 +151,7 @@
 					<button type="button" class="btnDefaultForm" id="listBtn" onclick="return doSubmit();">답변완료</button>
 				<%}%>
 					<button type="button" class="btnDefaultForm" id="listBtn" onclick="goList();">목록</button>
+					<button type="button" class="btnDefaultForm" id="listBtn" onclick="goDelete();">삭제</button>
 				</div>
 				<!-- // btnArea -->
 

@@ -17,5 +17,6 @@ public interface CounselMapper {
 	CounselDTO getCounselDetail(CounselDTO cDTO) throws Exception;
 
 	int updateReplyStat(CounselDTO cDTO) throws Exception;
-
+	
+	int deleteCounsel(String cNo) throws Exception;
 }

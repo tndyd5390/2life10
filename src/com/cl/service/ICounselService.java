@@ -14,4 +14,6 @@ public interface ICounselService {
 
 	int updateReplyStat(CounselDTO cDTO) throws Exception;
 	
+	int deleteCounsel(String cNo) throws Exception;
+	
 }

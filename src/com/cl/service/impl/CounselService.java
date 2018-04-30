@@ -46,5 +46,10 @@ public class CounselService implements ICounselService{
 	public int updateReplyStat(CounselDTO cDTO) throws Exception {
 		return counselMapper.updateReplyStat(cDTO);
 	}
+
+	@Override
+	public int deleteCounsel(String cNo) throws Exception {
+		return counselMapper.deleteCounsel(cNo);
+	}
 	
 }
