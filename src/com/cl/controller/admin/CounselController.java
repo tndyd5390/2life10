@@ -172,4 +172,29 @@ public class CounselController {
 		log.info("Lmin:counselReplyProc End!!");
 		return "/alert";
 	}
+	
+	@RequestMapping(value="/Lmin/counsel/deleteCounsel")
+	public String deleteCounsel(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+		
+		String returnPage = "";
+		String msg = "";
+		String url = "";
+		String cNo = CmmUtil.nvl(req.getParameter("cNo"));
+		log.info("cNo : " + cNo);
+		
+		
+		int result = counselService.deleteCounsel(cNo);
+		
+		if(result != 0){
+			returnPage = "redirect:/Lmin/counsel/counselList.do";
+		}else{
+			msg = "삭제 실패...";
+			url = "/Lmin/counsel/counselList.do";
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			returnPage = "/alert";
+		}
+		
+		return returnPage;
+	}
 }

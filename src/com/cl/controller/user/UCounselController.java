@@ -49,12 +49,17 @@ public class UCounselController {
 		String counselEmail2 = CmmUtil.nvl(req.getParameter("email2"));
 		String counselPhoneNo = CmmUtil.nvl(req.getParameter("phone1"))+"-"+CmmUtil.nvl(req.getParameter("phone2"))+"-"+CmmUtil.nvl(req.getParameter("phone3"));
 		
+		String ip = CmmUtil.nvl(req.getHeader("X-FORWARDED-FOR"));
+		if("".equals(ip)) ip = req.getRemoteAddr();
+		
+		log.info("cliend IP : " + ip);
 		log.info("counselRegName : "+counselRegName);
 		log.info("counselRegTitle : "+counselTitle);
 		log.info("counselRegContents : "+counselContents);
 		log.info("counselRegEmail1 : "+counselEmail1);
 		log.info("counselRegEmail2 : "+counselEmail2);
 		log.info("counselPhoneNo : "+counselPhoneNo);
+		log.info("cliend IP : " + ip);
 		
 		CounselDTO cDTO = new CounselDTO();
 		
