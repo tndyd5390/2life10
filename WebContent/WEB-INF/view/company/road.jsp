@@ -41,7 +41,9 @@
 		$("#subtitle2").text($("#"+mbId2).text());
 		
 	});
-
+	window.onload = function(){
+		document.getElementById('daumRoughmapHowToGoTa').innerHTML="지하철:7호선 강남구청역 2호선 선릉역</br>버스:4312,472,361,3219";
+	}
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -117,7 +119,9 @@
 							"timestamp" : "1514267214116",
 							"key" : "m3oe"
 						}).render();
+						
 					</script>
+					
 					</div>
 				</div>
 
