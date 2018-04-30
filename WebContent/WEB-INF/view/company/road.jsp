@@ -42,7 +42,7 @@
 		
 	});
 	window.onload = function(){
-		document.getElementById('daumRoughmapHowToGoTa').innerHTML="지하철:7호선 강남구청역 2호선 선릉역</br>버스:4312,472,361,3219";
+		document.getElementById('daumRoughmapHowToGoTa').innerHTML="분당선 선정릉역 1번 출구, 7호선 강남구청역 2번 출구</br>버스:4312,472,361,3219";
 		$('.section_busstop > .wrap_list').append("<li><span class='icon_bus icon_bus4'></sapn>\n<a href='http://map.daum.net/?busStopId=11230591014&from=roughmap' target='_blank' style='width: 133px; padding-left: 30px; padding-top: 3px;'>한국토지주택공사앞</a></li>");
 		
 
