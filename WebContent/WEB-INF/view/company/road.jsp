@@ -43,6 +43,9 @@
 	});
 	window.onload = function(){
 		document.getElementById('daumRoughmapHowToGoTa').innerHTML="지하철:7호선 강남구청역 2호선 선릉역</br>버스:4312,472,361,3219";
+		$('.section_busstop > .wrap_list').append("<li><span class='icon_bus icon_bus4'></sapn>\n<a href='http://map.daum.net/?busStopId=11230591014&from=roughmap' target='_blank' style='width: 133px; padding-left: 30px'>한국토지주택공사앞</a></li>");
+		
+		
 	}
 </script>
 
@@ -96,7 +99,7 @@
 			<div id="road" class="contents"> <!-- 페이지별 ID -->
 				<div class="defaultTabCon">
 
-					<h3 class="smallTit">오시는길</h3>
+					<h3 class="smallTit">오시는asdfasdfasdfasdfasdf길</h3>
 							
 					<ul class="addrArea">
 						<li><strong>주소</strong> <span>서울특별시 강남구 선릉로 115길 3 1F(논현동268-2 1F) </span></li>
