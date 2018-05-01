@@ -234,11 +234,6 @@
 		<version>1.1</version>
 	  </dependency>
 	  <!-- mssql lib -->
-	<!-- <dependency>
-		<groupId>com.microsoft.sqlserver</groupId>
-		<artifactId>sqljdbc41</artifactId>
-		<version>4.2</version>
-	</dependency> -->
 	  <!-- mssql -->
 		<dependency>
 		    <groupId>net.sourceforge.jtds</groupId>
