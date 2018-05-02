@@ -38,7 +38,13 @@ public class InquiryDTO {
 	private String paymentMethod;//불입종별
 	private String age;//나이
 	private String fullPayment;
-	
+	private String delayPayCnt;
+	public String getDelayPayCnt() {
+		return delayPayCnt;
+	}
+	public void setDelayPayCnt(String delayPayCnt) {
+		this.delayPayCnt = delayPayCnt;
+	}
 	public String getFullPayment() {
 		return fullPayment;
 	}

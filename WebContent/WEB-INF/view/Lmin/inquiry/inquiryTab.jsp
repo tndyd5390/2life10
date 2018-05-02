@@ -198,21 +198,15 @@ $( function() {
 								<th scope="row">불입횟수</th>
 								<td><%=CmmUtil.nvl(iDTO.getLastPaymentCount()) %></td>
 								<th scope="row">연체</th>
-								<td>-</td>
+								<td><%=CmmUtil.nvl(iDTO.getDelayPayCnt())%></td>
 							</tr>
 							<tr>
 								<th scope="row">불입총금액</th>
-								<td><%=TextUtil.addComma(CmmUtil.nvl(iDTO.getTotalPayment())) %></td>
-								<th scope="row">영업사원</th>
-								<td><%=CmmUtil.nvl(iDTO.getSalesPerson()) %></td>
+								<td colspan="3"><%=TextUtil.addComma(CmmUtil.nvl(iDTO.getTotalPayment())) %></td>
 							</tr>
 							<tr>
 								<th scope="row">집주소</th>
 								<td colspan="3"><%=CmmUtil.nvl(iDTO.getAddr()) %></td>
-							</tr>
-							<tr>
-								<th scope="row">발송처주소</th>
-								<td colspan="3">-</td>
 							</tr>
 							<tr>
 								<th scope="row">집전화번호</th>
@@ -227,8 +221,19 @@ $( function() {
 								<%
 								}
 								%>
-								<th scope="row">발송처전화</th>
+								<th scope="row">휴대폰</th>
+								<%
+								System.out.println("  ".equals(CmmUtil.nvl(iDTO.getPhoneNo())));
+								if("".equals(CmmUtil.nvl(iDTO.getPhoneNo()).replaceAll(" ", ""))){
+								%>
 								<td>-</td>
+								<%
+								}else{
+								%>
+								<td><%=CmmUtil.nvl(iDTO.getPhoneNo()) %></td>
+								<%
+								}
+								%>
 							</tr>
 						</tbody>
 					</table>
@@ -237,16 +242,14 @@ $( function() {
 					<table class="defaultTable">
 						<caption></caption>
 						<colgroup>
-							<col style="width:auto%;">
-							<col style="width:30%;">
-							<col style="width:30%;">
-							<col style="width:30%;">
+							<col style="width:20%;">
+							<col style="width:40%;">
+							<col style="width:40%;">
 						</colgroup>
 						<thead>
 							<tr>
-								<th scope="row">No</th>
-								<th scope="row">예정납입</th>
-								<th scope="row">실제납입</th>
+								<th scope="row">납입회차</th>
+								<th scope="row">납입일자</th>
 								<th scope="row">납입방법</th>
 							</tr>
 						</thead>
@@ -256,9 +259,8 @@ $( function() {
 							InquiryDTO dto = iList.get(i);
 						%>
 							<tr>
-								<td><%= (i + 1) %></td>
+								<td><%=CmmUtil.nvl(dto.getLastPaymentCount()) %></td>
 								<td><%=CmmUtil.nvl(dto.getPaymentDay()) %></td>
-								<td><%=CmmUtil.nvl(dto.getRealPaymentDay()) %></td>
 								<td><%=CmmUtil.nvl(dto.getPaymentRoute()) %></td>
 							</tr>
 							

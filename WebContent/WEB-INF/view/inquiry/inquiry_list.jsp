@@ -183,21 +183,15 @@ $( function() {
 								<th scope="row">불입횟수</th>
 								<td><%=CmmUtil.nvl(iDTO.getLastPaymentCount()) %></td>
 								<th scope="row">연체</th>
-								<td>-</td>
+								<td><%=CmmUtil.nvl(iDTO.getDelayPayCnt())%></td>
 							</tr>
 							<tr>
 								<th scope="row">불입총금액</th>
-								<td><%=TextUtil.addComma(CmmUtil.nvl(iDTO.getTotalPayment())) %></td>
-								<th scope="row">영업사원</th>
-								<td><%=CmmUtil.nvl(iDTO.getSalesPerson()) %></td>
+								<td colspan="3"><%=TextUtil.addComma(CmmUtil.nvl(iDTO.getTotalPayment())) %></td>
 							</tr>
 							<tr>
 								<th scope="row">집주소</th>
 								<td colspan="3"><%=CmmUtil.nvl(iDTO.getAddr()) %></td>
-							</tr>
-							<tr>
-								<th scope="row">발송처주소</th>
-								<td colspan="3">-</td>
 							</tr>
 							<tr>
 								<th scope="row">집전화번호</th>
@@ -212,8 +206,19 @@ $( function() {
 								<%
 								}
 								%>
-								<th scope="row">발송처전화</th>
+								<th scope="row">휴대폰</th>
+								<%
+								System.out.println("  ".equals(CmmUtil.nvl(iDTO.getPhoneNo())));
+								if("".equals(CmmUtil.nvl(iDTO.getPhoneNo()).replaceAll(" ", ""))){
+								%>
 								<td>-</td>
+								<%
+								}else{
+								%>
+								<td><%=CmmUtil.nvl(iDTO.getPhoneNo()) %></td>
+								<%
+								}
+								%>
 							</tr>
 						</tbody>
 					</table>
