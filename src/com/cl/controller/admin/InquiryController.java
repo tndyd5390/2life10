@@ -92,6 +92,16 @@ public class InquiryController {
 		
 		List<Map<String, Object>> totalInquiry = inquiryService.getInquiryTab(memberInfo);
 		model.addAttribute("totalInquiry", totalInquiry);
+		
+		url = null;
+		msg = null;
+		name = null;
+		birthday = null;
+		phone = null;
+		msDTO = null;
+		memberInfo = null;
+		totalInquiry = null;
+		
 		log.info(this.getClass() + ".inquriyCheckAndProc end!!!");
 		return "/Lmin/inquiry/inquiryTab";
 	}

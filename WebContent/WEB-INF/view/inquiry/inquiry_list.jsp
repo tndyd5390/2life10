@@ -222,16 +222,14 @@ $( function() {
 					<table class="defaultTable">
 						<caption></caption>
 						<colgroup>
-							<col style="width:auto%;">
-							<col style="width:30%;">
-							<col style="width:30%;">
-							<col style="width:30%;">
+							<col style="width:20%;">
+							<col style="width:40%;">
+							<col style="width:40%;">
 						</colgroup>
 						<thead>
 							<tr>
-								<th scope="row">No</th>
-								<th scope="row">예정납입</th>
-								<th scope="row">실제납입</th>
+								<th scope="row">납입회차</th>
+								<th scope="row">납입일자</th>
 								<th scope="row">납입방법</th>
 							</tr>
 						</thead>
@@ -241,9 +239,8 @@ $( function() {
 							InquiryDTO dto = iList.get(i);
 						%>
 							<tr>
-								<td><%= (i + 1) %></td>
+								<td><%=CmmUtil.nvl(dto.getLastPaymentCount()) %></td>
 								<td><%=CmmUtil.nvl(dto.getPaymentDay()) %></td>
-								<td><%=CmmUtil.nvl(dto.getRealPaymentDay()) %></td>
 								<td><%=CmmUtil.nvl(dto.getPaymentRoute()) %></td>
 							</tr>
 							
