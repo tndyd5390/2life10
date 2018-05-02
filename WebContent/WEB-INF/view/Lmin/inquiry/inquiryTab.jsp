@@ -267,6 +267,7 @@ $( function() {
 						%>
 						</tbody>
 					</table>
+					
 				</div>
 				  	</div>
 				  <%
