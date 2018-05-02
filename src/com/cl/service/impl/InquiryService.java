@@ -45,6 +45,15 @@ public class InquiryService implements IInquiryService{
 		}
 		return result;
 	}
-	
-	
+
+	@Override
+	public List<Map<String, Object>> getInquiryTab(String memberPre) throws Exception {
+		List<String> memberNos = inquiryMapperForMS.getMemberNosFromMemberPre(memberPre);
+		List<Map<String, Object>> result = new ArrayList<>();
+		for(String memberPreNo : memberNos){
+			Map<String, Object> inquiry = getInquiryTotal(memberPreNo);
+			result.add(inquiry);
+		}
+		return result;
+	}
 }

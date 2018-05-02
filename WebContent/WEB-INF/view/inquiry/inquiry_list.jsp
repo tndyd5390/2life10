@@ -7,12 +7,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/include/inc_header.jsp" %>
 <%
-	Map<String, Object> map = (Map<String, Object>)request.getAttribute("totalInquiry");
-	List<InquiryDTO> iList = (List<InquiryDTO>)map.get("iList");
-	if(iList == null) iList = new ArrayList();
-	InquiryDTO iDTO = (InquiryDTO)map.get("iDTO");
-	if(iDTO == null) iDTO = new InquiryDTO();
+	List<Map<String, Object>> totalInquiry = (List<Map<String, Object>>)request.getAttribute("totalInquiry");
+	if(totalInquiry == null) totalInquiry = new ArrayList();
+	int tmp1 = 0, tmp2 = 0;
 %>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<div id="contentsWrap">
 		<div class="container">
 			<div class="conTitWrap">
@@ -54,7 +53,14 @@
 	});
 
 </script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<script type="text/javascript">
+$( function() {
+    $( "#tabs" ).tabs();
+});
+</script>
 <form action="#" name="menuFrm" method="post">
 	<input type="hidden" name="menuNum"/>
 </form>	
@@ -108,10 +114,28 @@
 
 			<div class="contents"> <!-- 페이지별 ID none -->
 				<h3 class="smallTit">납부조회</h3>
-
-				<div class="tableBasicList">
-					<table class="defaultTable">
-						<caption></caption>
+				<div id="tabs">
+				  <ul>
+				  <%
+				  	for(Map<String, Object> tab : totalInquiry){
+				  		tmp1++;
+						InquiryDTO iDTO = (InquiryDTO)tab.get("iDTO");
+				  %>
+					    <li><a href="#<%=iDTO.getItem() + tmp1%>"><%=iDTO.getItem()%></a></li>
+				  <%
+				  	}
+				  %>
+				  </ul>
+				  <%
+				  	for(Map<String, Object> tab : totalInquiry){
+				  		tmp2++;
+						InquiryDTO iDTO = (InquiryDTO)tab.get("iDTO");
+						List<InquiryDTO> iList = (List<InquiryDTO>)tab.get("iList");
+						if(iList == null) iList = new ArrayList();
+				  %>
+					    <div id="<%=iDTO.getItem() + tmp2%>">
+					    <div class="tableBasicList">
+				    	<table class="defaultTable">
 						<colgroup>
 							<col style="width:20%;">
 							<col style="width:30%;">
@@ -193,9 +217,8 @@
 							</tr>
 						</tbody>
 					</table>
-				</div>
-			
-				<div class="tableBasicList">
+					</div>
+					<div class="tableBasicList">
 					<table class="defaultTable">
 						<caption></caption>
 						<colgroup>
@@ -204,14 +227,14 @@
 							<col style="width:30%;">
 							<col style="width:30%;">
 						</colgroup>
-						<head>
+						<thead>
 							<tr>
 								<th scope="row">No</th>
 								<th scope="row">예정납입</th>
 								<th scope="row">실제납입</th>
 								<th scope="row">납입방법</th>
 							</tr>
-						</head>
+						</thead>
 						<tbody>
 						<%
 						for(int i = 0; i< iList.size(); i++){
@@ -227,64 +250,15 @@
 						<%
 						}
 						%>
-						<!-- 	<tr>
-								<td>1</td>
-								<td>2012.12</td>
-								<td>2012.12.17</td>
-								<td>자동이체</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>2012.12</td>
-								<td>2012.12.17</td>
-								<td>자동이체</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>2012.12</td>
-								<td>2012.12.17</td>
-								<td>자동이체</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>2012.12</td>
-								<td>2012.12.17</td>
-								<td>자동이체</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>2012.12</td>
-								<td>2012.12.17</td>
-								<td>자동이체</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>2012.12</td>
-								<td>2012.12.17</td>
-								<td>자동이체</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>2012.12</td>
-								<td>2012.12.17</td>
-								<td>자동이체</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>2012.12</td>
-								<td>2012.12.17</td>
-								<td>자동이체</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>2012.12</td>
-								<td>2012.12.17</td>
-								<td>자동이체</td>
-							</tr> -->
 						</tbody>
 					</table>
+					
 				</div>
-
+				  	</div>
+				  <%
+				  	}
+				  %>
+				</div>
 			</div> <!-- // contents -->
 
 

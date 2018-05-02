@@ -49,5 +49,18 @@
 	    	    관리구분 NOT IN('해약', '행사', '만기')
 	 ORDER BY 회원번호 DESC
 	</select>
-
+	
+	<select id="getMemberNosFromMemberPre" parameterType="string" resultType="string">
+		SELECT ACC.회원번호 AS MEMBERPRE
+  		  FROM CUSTOMVIEW ACC 
+ 	INNER JOIN 
+       		  (SELECT 회원명 				AS NAME, 
+       		          LEFT(주민등록번호, 6) AS BIRTHDAY, 
+       		          RIGHT(휴대폰, 4) 	AS PHONE 
+       		     FROM CUSTOMVIEW 
+       		    WHERE 회원번호 = #{memberPre}) TMP
+    		ON ACC.회원명 = TMP.NAME 
+   		   AND LEFT(ACC.주민등록번호, 6) = TMP.BIRTHDAY 
+           AND RIGHT(ACC.휴대폰, 4) = TMP.PHONE
+	</select>
 </mapper>

@@ -1,7 +1,9 @@
 //������ȸ ��Ʈ�ѷ�
 package com.cl.controller.user;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -43,10 +45,9 @@ public class UInquiryController {
 			model.addAttribute("url", "/");
 			return "/alert";
 		}
-		//if("".equals(memberPreNo)) memberPreNo = "213783";
 		
-		Map<String, Object> map = inquiryService.getInquiryTotal(memberPreNo);
-		if(map == null) map = new HashMap<>();
+		List<Map<String, Object>> map = inquiryService.getInquiryTab(memberPreNo);
+		if(map == null) map = new ArrayList();
 		
 		model.addAttribute("totalInquiry", map);
 

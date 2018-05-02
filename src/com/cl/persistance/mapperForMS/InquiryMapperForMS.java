@@ -11,4 +11,5 @@ public interface InquiryMapperForMS {
 	public InquiryDTO getInquiryInfo(String memberPreNo) throws Exception;
 	public List<InquiryDTO> getInquiryList(String memberPreNo) throws Exception;
 	public List<String> getMemberNos(Map<Object, Object> memberInfo) throws Exception;
+	public List<String> getMemberNosFromMemberPre(String memberPre) throws Exception;
 }
