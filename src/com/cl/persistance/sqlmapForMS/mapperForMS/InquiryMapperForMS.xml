@@ -37,7 +37,17 @@
 		                불입방법 		AS PAYMENTROUTE
 	  	  FROM ACCVIEW 
 	     WHERE 회원번호 = #{memberPreNo}
-	 	 ORDER BY 불입최종회차;
+	 	 ORDER BY 불입최종회차 DESC;
+	</select>
+	
+	<select id="getMemberNos" parameterType="java.util.Map" resultType="string">
+		SELECT 회원번호   AS MEMBERNO	    	  
+	    FROM CUSTOMVIEW
+	    WHERE 회원명 = #{name} AND
+	    	  LEFT(주민등록번호, 6) = #{birthday} AND
+	    	  RIGHT(휴대폰, 4) = #{phone} AND
+	    	    관리구분 NOT IN('해약', '행사', '만기')
+	 ORDER BY 회원번호 DESC
 	</select>
 
 </mapper>

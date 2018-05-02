@@ -23,6 +23,7 @@
 						<li id="MO71200"><a href="javascript:goMenu('/Lmin/appli/appliList.do', 'MO71200');">가입신청</a></li>
 						<li id="MO71300"><a href="javascript:goMenu('/Lmin/member/memberList.do', 'MO71300');">회원정보</a></li>
 						<li id="MO71400"><a href="javascript:goMenu('/Lmin/catalogue/catalogueList.do', 'MO71400');">카타로그</a></li>
+						<li id="MO71400"><a href="javascript:goMenu('/Lmin/inquiry/inquiryInfoInput.do', 'MO71400');">납부조회</a></li>
 						<% if(SessionUtil.getSessionInfo("memberAuth").equals("CEO")){%>
 						<li id="MO71500"><a href="javascript:goMenu('/Lmin/analysis/analysisList.do', 'MO71500');">데이터분석</a></li>
 						<% } %>
@@ -47,6 +48,7 @@
 						<li id="MO71200"><a href="javascript:goMenu('/Lmin/appli/appliList.do', 'MO71200');">가입신청</a></li>
 						<li id="MO71300"><a href="javascript:goMenu('/Lmin/member/memberList.do', 'MO71300');">회원정보</a></li>
 						<li id="MO71400"><a href="javascript:goMenu('/Lmin/catalogue/catalogueList.do', 'MO71400');">카타로그</a></li>
+						<li id="MO71400"><a href="javascript:goMenu('/Lmin/inquiry/inquiryInfoInput.do', 'MO71400');">납부조회</a></li>
 						<% if(SessionUtil.getSessionInfo("memberAuth").equals("CEO")){%>
 						<li id="MO71500"><a href="javascript:goMenu('/Lmin/analysis/analysisList.do', 'MO71500');">데이터분석</a></li>
 						<% } %>
