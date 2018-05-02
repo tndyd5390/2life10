@@ -208,7 +208,6 @@ $( function() {
 								%>
 								<th scope="row">휴대폰</th>
 								<%
-								System.out.println("  ".equals(CmmUtil.nvl(iDTO.getPhoneNo())));
 								if("".equals(CmmUtil.nvl(iDTO.getPhoneNo()).replaceAll(" ", ""))){
 								%>
 								<td>-</td>
