@@ -39,6 +39,13 @@ public class InquiryDTO {
 	private String age;//나이
 	private String fullPayment;
 	private String delayPayCnt;
+	private String contribution;//불입금
+	public String getContribution() {
+		return contribution;
+	}
+	public void setContribution(String contribution) {
+		this.contribution = contribution;
+	}
 	public String getDelayPayCnt() {
 		return delayPayCnt;
 	}

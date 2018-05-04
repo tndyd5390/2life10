@@ -26,14 +26,15 @@
 				cv.관리구분				AS CLASSIFICATION,
 				cv.영업사원				AS SALESPERSON,
 				cv.주소					AS ADDR,
-				cv.집전화					AS TEL_NO,
+				cv.집전화					AS TELNO,
 				cv.휴대폰					AS PHONENO,
 				(SELECT DATEDIFF(MONTH, (SELECT 불입일자 
 				 						   FROM ACCVIEW 
 				 						  WHERE 회원번호 = #{memberPreNo}
 				 						    AND 불입최종회차 = 1), GETDATE()) - (SELECT MAX(불입최종회차) 
 				 						                                      FROM ACCVIEW 
-				 						                                     WHERE 회원번호 = #{memberPreNo}) + 1) AS DELAYPAYCNT
+				 						                                     WHERE 회원번호 = #{memberPreNo}) + 1) AS DELAYPAYCNT,
+				cv.이체일					AS TRANSFERDT
   		   FROM (SELECT TOP(1) * FROM AccView a WHERE 회원번호 = #{memberPreNo} ORDER BY a.실불입일 desc) av INNER JOIN CustomView cv 
     		 ON cv.회원번호 = av.회원번호
 	</select>
@@ -41,7 +42,8 @@
 		SELECT 불입최종회차  		AS LASTPAYMENTCOUNT,
 	      	       불입일자  		AS PAYMENTDAY,
 		                실불입일  		AS REALPAYMENTDAY,
-		                불입방법 		AS PAYMENTROUTE
+		                불입방법 		AS PAYMENTROUTE,
+		                불입금			AS CONTRIBUTION
 	  	  FROM ACCVIEW 
 	     WHERE 회원번호 = #{memberPreNo}
 	 	 ORDER BY 불입최종회차 DESC;

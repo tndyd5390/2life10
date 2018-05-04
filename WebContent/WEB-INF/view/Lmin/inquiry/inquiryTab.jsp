@@ -167,14 +167,8 @@ $( function() {
 							<tr>
 								<th scope="row">주민등록번호</th>
 								<td><%=CmmUtil.nvl(iDTO.getMemberRrn()) + "******" %></td>
-								<th scope="row">성별</th>
-								<td><%=CmmUtil.nvl(iDTO.getSex()) %></td>
-							</tr>
-							<tr>
 								<th scope="row">상품종류</th>
 								<td><%=CmmUtil.nvl(iDTO.getItem()) %></td>
-								<th scope="row">나이</th>
-								<td><%=CmmUtil.nvl(iDTO.getAge()) %></td>
 							</tr>
 							<tr>
 								<th scope="row">만기계약금</th>
@@ -202,7 +196,9 @@ $( function() {
 							</tr>
 							<tr>
 								<th scope="row">불입총금액</th>
-								<td colspan="3"><%=TextUtil.addComma(CmmUtil.nvl(iDTO.getTotalPayment())) %></td>
+								<td><%=TextUtil.addComma(CmmUtil.nvl(iDTO.getTotalPayment())) %></td>
+								<th scope="row">이체일</th>
+								<td><%=CmmUtil.nvl(iDTO.getTransferDt()) %></td>
 							</tr>
 							<tr>
 								<th scope="row">집주소</th>
@@ -249,7 +245,7 @@ $( function() {
 							<tr>
 								<th scope="row">납입회차</th>
 								<th scope="row">납입일자</th>
-								<th scope="row">납입방법</th>
+								<th scope="row">납입금액</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -260,7 +256,7 @@ $( function() {
 							<tr>
 								<td><%=CmmUtil.nvl(dto.getLastPaymentCount()) %></td>
 								<td><%=CmmUtil.nvl(dto.getPaymentDay()) %></td>
-								<td><%=CmmUtil.nvl(dto.getPaymentRoute()) %></td>
+								<td><%=TextUtil.addComma(CmmUtil.nvl(dto.getContribution())) %></td>
 							</tr>
 							
 						<%
