@@ -190,13 +190,13 @@ $( function() {
 							</tr>
 							<tr>
 								<th scope="row">불입횟수</th>
-								<td><%=CmmUtil.nvl(iDTO.getLastPaymentCount()) %></td>
+								<td><%=CmmUtil.nvl(iDTO.getLastPaymentCount()) + "회" %></td>
 								<th scope="row">연체</th>
-								<td><%=CmmUtil.nvl(iDTO.getDelayPayCnt())%></td>
+								<td><%=CmmUtil.nvl(iDTO.getDelayPayCnt()) + "회"%></td>
 							</tr>
 							<tr>
 								<th scope="row">불입총금액</th>
-								<td><%=TextUtil.addComma(CmmUtil.nvl(iDTO.getTotalPayment())) %></td>
+								<td><%=TextUtil.addComma(CmmUtil.nvl(iDTO.getTotalPayment())) + "원" %></td>
 								<th scope="row">이체일</th>
 								<td><%=CmmUtil.nvl(iDTO.getTransferDt()) %></td>
 							</tr>
@@ -207,7 +207,7 @@ $( function() {
 							<tr>
 								<th scope="row">집전화번호</th>
 								<%
-								if("".equals(CmmUtil.nvl(iDTO.getTelNo()) )){
+								if("".equals(CmmUtil.nvl(iDTO.getTelNo()).replaceAll(" ", ""))){
 								%>
 								<td>-</td>
 								<%
