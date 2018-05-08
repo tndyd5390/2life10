@@ -28,12 +28,31 @@
 				cv.주소					AS ADDR,
 				cv.집전화					AS TELNO,
 				cv.휴대폰					AS PHONENO,
-				(SELECT DATEDIFF(MONTH, (SELECT 불입일자 
-				 						   FROM ACCVIEW 
-				 						  WHERE 회원번호 = #{memberPreNo}
-				 						    AND 불입최종회차 = 1), GETDATE()) - (SELECT MAX(불입최종회차) 
-				 						                                      FROM ACCVIEW 
-				 						                                     WHERE 회원번호 = #{memberPreNo}) + 1) AS DELAYPAYCNT,
+				(CASE WHEN
+	 			 CONVERT(INT,(SELECT DATEDIFF(MONTH, (SELECT 불입일자 
+				 			    FROM ACCVIEW 
+				 			   WHERE 회원번호 = #{memberPreNo}
+								 AND 불입최종회차 = 1), GETDATE()) - (SELECT MAX(불입최종회차) 
+				 						                           FROM ACCVIEW 
+				 						                          WHERE 회원번호 = #{memberPreNo}) + 1))
+				>=  
+				 CONVERT(INT,(SELECT RIGHT(LOWER(상품), LEN(상품) - CHARINDEX('x', LOWER(상품))) 
+	   							FROM CUSTOMVIEW 
+	  						   WHERE 회원번호 = #{memberPreNo})) - CONVERT(INT,(SELECT MAX(불입최종회차) 
+				 				    								  		   FROM ACCVIEW 
+				 				   								      		  WHERE 회원번호 = #{memberPreNo}))
+				THEN CONVERT(INT,(SELECT RIGHT(LOWER(상품), LEN(상품) - CHARINDEX('x', LOWER(상품))) 
+	   								FROM CUSTOMVIEW 
+	  							   WHERE 회원번호 = #{memberPreNo})) - CONVERT(INT,(SELECT MAX(불입최종회차) 
+				 				   										   		   FROM ACCVIEW 
+				 				   										  		  WHERE 회원번호 = #{memberPreNo}))
+				ELSE CONVERT(INT,(SELECT DATEDIFF(MONTH, (SELECT 불입일자 
+				 						   					FROM ACCVIEW 
+				 						  				   WHERE 회원번호 = #{memberPreNo}
+				 						    			  	 AND 불입최종회차 = 1), GETDATE()) - (SELECT MAX(불입최종회차) 
+				 						                     								   FROM ACCVIEW 
+				 						                                     				  WHERE 회원번호 = #{memberPreNo}) + 1)) 
+				 END) 					AS DELAYPAYCNT,
 				cv.이체일					AS TRANSFERDT
   		   FROM (SELECT TOP(1) * FROM AccView a WHERE 회원번호 = #{memberPreNo} ORDER BY a.실불입일 desc) av INNER JOIN CustomView cv 
     		 ON cv.회원번호 = av.회원번호

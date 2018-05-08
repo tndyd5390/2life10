@@ -22,6 +22,7 @@ public class MsCustomService implements IMsCustomService{
 		List<MsCustomDTO> mList = msCustomMapper.getMemberYN(msDTO);
 		
 		if(mList.size()>0){
+			System.out.println("true");
 			msDTO = mList.get(0);
 		}
 		return msDTO;

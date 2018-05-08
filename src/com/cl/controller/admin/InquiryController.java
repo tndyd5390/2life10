@@ -76,12 +76,14 @@ public class InquiryController {
 		msDTO.setPhoneNo(phone);
 		
 		msDTO = msCustomService.getMemberYN(msDTO);
-		
+		System.out.println(msDTO);
+		System.out.println(msDTO.getMemberNo());
 		if(msDTO != null && msDTO.getMemberNo() == null){
 			msg = "일치하는 회원이 없습니다.";
 			url="/Lmin/inquiry/inquiryInfoInput.do";
 			model.addAttribute("msg", msg);
 			model.addAttribute("url", url);
+			log.info(this.getClass() + ".inquriyCheckAndProc end!!!");
 			return "/alert";
 		}
 		

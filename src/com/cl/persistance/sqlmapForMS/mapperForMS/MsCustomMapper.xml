@@ -12,7 +12,7 @@
 	    	회원명 = #{memberName} AND
 	    	LEFT(주민등록번호, 6) = #{memberRrn} AND
 	    	RIGHT(휴대폰, 4) = #{phoneNo} AND
-	    	관리구분 = '가입'
+	    	관리구분 NOT IN ('철회', '해약', '행사')
 	    ORDER BY
 	        회원번호 DESC
 	</select>

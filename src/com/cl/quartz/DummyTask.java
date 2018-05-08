@@ -1,6 +1,7 @@
 package com.cl.quartz;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,6 +102,7 @@ public class DummyTask {
 		long end = System.currentTimeMillis();
 		long take = end - start;
 		log.info("it takes " + take + "ms");
+		log.info(new Date());
 		log.info("cron end");
 	}
 }
