@@ -15,13 +15,13 @@
 			   av.불입방법				AS PAYMENTROUTE,
 			   av.불입최종회차			AS LASTPAYMENTCOUNT,
 			   (CONVERT(INT, av.불입금) * CONVERT(INT, av.불입최종회차)) AS TOTALPAYMENT,
-			   (case convert(int, right(cv.주민등록번호, len(cv.주민등록번호) - charindex('-', cv.주민등록번호)))
-			    when 1 then '남자'
-				when 2 then '여자'
-				else '기타'
-				end) 				AS SEX,
-		        ((year(getdate())+1) - cast(('19' + substring(cv.주민등록번호, 1, 2)) as int)) AS AGE,
-				(convert(int, av.불입금)) AS PAYMENTMONEY,
+			   (CASE CONVERT(INT, RIGHT(cv.주민등록번호, LEN(cv.주민등록번호) - CHARINDEX('-', cv.주민등록번호)))
+			    WHEN 1 THEN '남자'
+				WHEN 2 THEN '여자'
+				ELSE '기타'
+				END) 				AS SEX,
+		        ((YEAR(GETDATE())+1) - CAST(('19' + SUBSTRING(cv.주민등록번호, 1, 2)) AS INT)) AS AGE,
+				(CONVERT(INT, av.불입금)) AS PAYMENTMONEY,
 				'월납' 					AS PAYMENTMETHOD,
 				cv.관리구분				AS CLASSIFICATION,
 				cv.영업사원				AS SALESPERSON,
