@@ -26,8 +26,13 @@ public class UAppliController {
 	private IAppliService appliService;
 	
 	@RequestMapping("appli/appliForm")
-	public String applyForm() throws Exception{
+	public String applyForm(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession sesion) throws Exception{
 		log.info(this.getClass() + ".appliForm start!!!");
+		String uType = CmmUtil.nvl(req.getParameter("uType"));
+		log.info("uType : " + uType);
+		if(!"".equals(uType.trim())){
+			model.addAttribute("uType", uType);
+		}
 		log.info(this.getClass() + ".appliForm end!!!");
 		return "/appli/appli_form";
 	}

@@ -1,6 +1,57 @@
+<%@page import="com.cl.util.HttpUtil"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@ page import= "com.cl.util.SessionUtil"%>
 <%@ page import= "com.cl.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	String uri = CmmUtil.nvl(request.getRequestURI().split("//")[1]);
+	
+	Cookie[] cookies = request.getCookies();
+	
+	Map<String, String> cookieMap = new HashMap<>();
+	if(cookies != null){
+		for (int i = 0; i < cookies.length; i++) {
+			cookieMap.put(cookies[i].getName(), cookies[i].getValue());
+		} 
+	}
+	
+	if (uri.equals("appli/appli_form.jsp")) {
+		String uType = CmmUtil.nvl((String) request.getAttribute("uType"));
+		if (!"".equals(uType)) {
+			if (!cookieMap.containsKey("visitID")) {
+				SimpleDateFormat sd = new SimpleDateFormat("yyyyMMddHHmmss");
+				Cookie info = new Cookie("visitID", uType + sd.format(new Date()));
+				info.setMaxAge(365 * 24 * 60 * 60);
+				info.setPath("/");
+				response.addCookie(info);
+			}
+		}
+	}else{
+		if(cookieMap.containsKey("visitID")){
+			
+			HashMap<String, String> hashmapJson = new HashMap<String, String>();
+			HashMap<String, Object> hashmapRes = new HashMap<String, Object>();
+			
+			try{
+				hashmapJson.put("visitID", cookieMap.get("visitID"));
+				hashmapJson.put("URL", uri);
+				String charSet = "UTF-8";
+				HashMap<String, String> hashmapResponse = (HashMap<String, String>) HttpUtil.callURL("http://localhost:8081/visitStatistics/visit.do", null, hashmapJson, charSet);
+				if ("200".equals(hashmapResponse.get("httpStatus"))){
+					//통신성공
+				}else{
+					//통신 실패
+				}
+			}catch(Exception e){
+				
+			}
+			
+		}
+	}
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
