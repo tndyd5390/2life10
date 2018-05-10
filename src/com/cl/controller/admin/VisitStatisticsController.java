@@ -38,6 +38,9 @@ private Logger log = Logger.getLogger(this.getClass());
 		
 		visitStatisticsService.insertVisitInfo(visitInfo);
 		
+		
+		CmmUtil.nullProc(visitID, url, visitInfo);
+		
 		log.info(this.getClass() + ".visitStatistics end!!!");
 	}
 	
