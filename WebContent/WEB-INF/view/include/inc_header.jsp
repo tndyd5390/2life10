@@ -39,7 +39,7 @@
 				hashmapJson.put("visitID", cookieMap.get("visitID"));
 				hashmapJson.put("URL", uri);
 				String charSet = "UTF-8";
-				HashMap<String, String> hashmapResponse = (HashMap<String, String>) HttpUtil.callURL("http://localhost:8081/visitStatistics/visit.do", null, hashmapJson, charSet);
+				HashMap<String, String> hashmapResponse = (HashMap<String, String>) HttpUtil.callURL("http://www.4christian.co.kr//visitStatistics/visit.do", null, hashmapJson, charSet);
 				if ("200".equals(hashmapResponse.get("httpStatus"))){
 					//통신성공
 				}else{

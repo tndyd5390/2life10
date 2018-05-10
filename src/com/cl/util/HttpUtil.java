@@ -15,7 +15,7 @@ import java.util.Map.Entry;
 import javax.servlet.http.HttpServletRequest;
 
 public class HttpUtil {
-	public static String MapToQeuryString(HashMap<String, String> map, String charSet){
+	public static String MapToQueryString(HashMap<String, String> map, String charSet){
 		StringBuilder sbQuery = new StringBuilder();
 
 		try {
@@ -43,8 +43,8 @@ public class HttpUtil {
         URL url;
         HttpURLConnection urlConnection;
 
-        String getParams = MapToQeuryString(getData, charSet);
-        String postParams = MapToQeuryString(postData, charSet);
+        String getParams = MapToQueryString(getData, charSet);
+        String postParams = MapToQueryString(postData, charSet);
 
         if (!"".equals(getParams)){
         	sURL += "?" + getParams;

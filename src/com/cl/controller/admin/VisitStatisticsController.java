@@ -38,6 +38,10 @@ private Logger log = Logger.getLogger(this.getClass());
 		
 		visitStatisticsService.insertVisitInfo(visitInfo);
 		
+		visitID = null;
+		url = null;
+		visitInfo = null;
+		
 		log.info(this.getClass() + ".visitStatistics end!!!");
 	}
 	
