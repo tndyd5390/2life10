@@ -55,7 +55,13 @@ public class PageUtil {
 			nowPage = Integer.parseInt((String) hMap.get("nowPage"));
 			
 			if(pageList!=splitPage){
-				pageList = (pageList / splitPage) + 1;
+				if((pageList%splitPage) == 0){
+					// 페이지리스트가 자를페이지 수로 나누어 떨어질 때 마지막페이지 추가하지 않음
+					pageList = (pageList / splitPage);
+				}else{
+					// 나누어 떨어지지 않으면, 마지막페이지를 추가하여 남은 항목을 마지막 페이지에 뿌려줌
+					pageList = (pageList / splitPage)+1;
+				}
 			}else{
 				pageList = (pageList / splitPage);
 			}
