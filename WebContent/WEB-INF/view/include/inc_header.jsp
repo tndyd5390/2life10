@@ -24,7 +24,7 @@
 			if (!cookieMap.containsKey("visitID")) {
 				SimpleDateFormat sd = new SimpleDateFormat("yyyyMMddHHmmss");
 				Cookie info = new Cookie("visitID", uType + sd.format(new Date()));
-				info.setMaxAge(365 * 24 * 60 * 60);
+				//info.setMaxAge(365 * 24 * 60 * 60);
 				info.setPath("/");
 				response.addCookie(info);
 			}
