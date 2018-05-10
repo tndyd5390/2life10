@@ -40,10 +40,4 @@ public class CmmUtil {
 			return "";
 		}
 	}
-	
-	public static void nullProc(Object...objects){
-		for(int i = 0; i< objects.length; i++){
-			objects = null;
-		}
-	}
 }
