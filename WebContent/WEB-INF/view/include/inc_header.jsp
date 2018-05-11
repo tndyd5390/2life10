@@ -39,7 +39,7 @@
 				hashmapJson.put("visitID", cookieMap.get("visitID"));
 				hashmapJson.put("URL", uri);
 				String charSet = "UTF-8";
-				HashMap<String, String> hashmapResponse = (HashMap<String, String>) HttpUtil.callURL("http://www.4christian.co.kr//visitStatistics/visit.do", null, hashmapJson, charSet);
+				HashMap<String, String> hashmapResponse = (HashMap<String, String>) HttpUtil.callURL("http://www.4christian.co.kr/visitStatistics/visit.do", null, hashmapJson, charSet);
 				if ("200".equals(hashmapResponse.get("httpStatus"))){
 					//통신성공
 				}else{
@@ -119,13 +119,13 @@
 			
 			<header>
 				<h1 class="logo">
-					<a href="/main.do"><img src="/public/img/common/t_logo.png" alt="크리스찬라이프" /></a>
+					<a href="/main.do"><img src="/public/img/common/t_logo_new.png" alt="크리스찬라이프" /></a>
 					
 				</h1>
 
 				<div class="topMenuWrap">
 					<ul>
-						<li><a href="/appli/appliForm.do">온라인가입신청</a></li>
+						<li><a href="/appli/appliForm.do">온라인asdfasdf가입신청</a></li>
 						<%if("".equals((String)session.getAttribute("ss_member_no"))||session.getAttribute("ss_member_no")!=null){%>
 							<li><a href="/member/chgPass.do">회원정보변경</a></li>
 							<li><a href="/member/logout.do">로그아웃</a></li>
