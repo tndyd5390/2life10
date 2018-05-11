@@ -49,7 +49,9 @@
 			}
 		})
 		$(".ui-helper-hidden-accessible").hide();
-
+		if(MobileCheck().check){
+			$("#funeralImg").hide();
+		}
 	});
 
 </script>
@@ -112,7 +114,7 @@
 				</div>
 				
 				<header class="contInfoArea">
-					<p class="img"><img src="/public/img/conts/img_pro_a_p350.png" alt="프라임 350 안내이미지" /></p>
+					<p class="img" id="funeralImg"><img src="/public/img/conts/img_pro_a_p350.png" alt="프라임 350 안내이미지" /></p>
 					<div class="area">
 						<h3 class="contTit"><span>프라임(350)상품</span></h3>
 						<p class="subTxt">월 35,000원 X 100회 (3,500,000원)</p>
