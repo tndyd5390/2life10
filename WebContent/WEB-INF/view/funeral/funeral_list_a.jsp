@@ -101,15 +101,15 @@
 						<button type="button">장례 260</button>
 					</strong>
 					<ul>
+						<li class="tab02"><a href="/funeral/funeralList_b.do">프라임 390</a></li>
 						<li class="tab01 active"><a href="/funeral/funeralList_a.do">장례 260</a></li>
-						<li class="tab02"><a href="/funeral/funeralList_b.do">장례 390</a></li>
 						<li class="tab03"><a href="/funeral/funeralList_c.do">장례 480</a></li>
 						<li class="tab04"><a href="/funeral/funeralList_d.do">프라임(350)상품</a></li>
 					</ul>
 				</div>
 				
 				<header class="contInfoArea">
-					<p class="img"><img src="../public/img/conts/img_pro_a_260.png" alt="장례 260 안내이미지" /></p>
+					<p class="img"><img src="/public/img/conts/img_pro_a_260.png" alt="장례 260 안내이미지" /></p>
 					<div class="area">
 						<h3 class="contTit"><span>장례260</span></h3>
 						<p class="subTxt">월 26,000원 X 100회 (2,600,000원)</p>
