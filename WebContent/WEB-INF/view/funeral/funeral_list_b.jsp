@@ -102,20 +102,20 @@
 
 				<div class="defaultTab">
 				    <strong class="select">
-                        <button type="button">프리미엄 390</button>
+                        <button type="button">프리미엄(390)</button>
                     </strong>
 					<ul>
-						<li class="tab02 active"><a href="/funeral/funeralList_b.do">프리미엄 390</a></li>
-						<li class="tab01"><a href="/funeral/funeralList_a.do">장례 260</a></li>
-						<li class="tab03"><a href="/funeral/funeralList_c.do">장례 480</a></li>
-						<li class="tab04"><a href="/funeral/funeralList_d.do">프라임(350)상품</a></li>
+						<li class="tab02 active"><a href="/funeral/funeralList_b.do">프리미엄(390) 상품</a></li>
+						<li class="tab03"><a href="/funeral/funeralList_c.do">VIP(480) 상품</a></li>
+						<li class="tab01"><a href="/funeral/funeralList_a.do">라이트(260) 상품</a></li>
+						<li class="tab04"><a href="/funeral/funeralList_d.do">프라임(350) 상품</a></li>
 					</ul>
 				</div>
 				
 				<header class="contInfoArea">
 					<p class="img" id="funeralImg"><img src="/public/img/conts/img_pro_a_390.png" alt="프리미엄 390 안내이미지" /></p>
 					<div class="area">
-						<h3 class="contTit"><span>프리미엄 390</span></h3>
+						<h3 class="contTit"><span>프리미엄(390)</span></h3>
 						<p class="subTxt">월 30,000원 X 130회 (3,900,000원)</p>
 						<ul class="defaultGrayDotList mt-10">
 							<li>캐딜락리무진, 장의버스 제공 (왕복200Km제공)</li>
@@ -130,7 +130,7 @@
 
 				<div class="tableBasicList">
 					<table class="defaultTable">
-						<caption>장례390</caption>
+						<caption>프리미엄(390)</caption>
 						<colgroup>
 							<col style="width:18%;" />
 							<col style="width:12%;" />
