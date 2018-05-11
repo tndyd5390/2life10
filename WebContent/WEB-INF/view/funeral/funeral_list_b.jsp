@@ -72,7 +72,7 @@
                         <strong><button type="button" class="select" id="subtitle">장례상품</button></strong>
                         <ul>
 							<li id="MO30100"><a href="javascript:goMenu('/funeral/funeralMark.do', 'MO30100');">장례상품특징</a></li>
-							<li id="MO30200"><a href="javascript:goMenu('/funeral/funeralList_a.do', 'MO30200');">장례상품</a></li>
+							<li id="MO30200"><a href="javascript:goMenu('/funeral/funeralList_b.do', 'MO30200');">장례상품</a></li>
 							<li id="MO30300"><a href="javascript:goMenu('/funeral/funeralInfo_a.do', 'MO30300');">장례정보</a></li>
 							<li id="MO30400"><a href="javascript:goMenu('/funeral/funeralNoticeList.do', 'MO30400');">부고알림</a></li>
                         </ul>
@@ -85,7 +85,7 @@
                 <nav>
                     <ul class="pcLnb">
 							<li id="MN30100"><a href="javascript:goMenu('/funeral/funeralMark.do', 'MN30100');">장례상품특징</a></li>
-							<li id="MN30200"><a href="javascript:goMenu('/funeral/funeralList_a.do', 'MN30200');">장례상품</a></li>
+							<li id="MN30200"><a href="javascript:goMenu('/funeral/funeralList_b.do', 'MN30200');">장례상품</a></li>
 							<li id="MN30300"><a href="javascript:goMenu('/funeral/funeralInfo_a.do', 'MN30300');">장례정보</a></li>
 							<li id="MN30400"><a href="javascript:goMenu('/funeral/funeralNoticeList.do', 'MN30400');">부고알림</a></li>
                     </ul>
@@ -98,10 +98,10 @@
 
 				<div class="defaultTab">
 				    <strong class="select">
-                        <button type="button">프라임 390</button>
+                        <button type="button">프리미엄 390</button>
                     </strong>
 					<ul>
-						<li class="tab02 active"><a href="/funeral/funeralList_b.do">프라임 390</a></li>
+						<li class="tab02 active"><a href="/funeral/funeralList_b.do">프리미엄 390</a></li>
 						<li class="tab01"><a href="/funeral/funeralList_a.do">장례 260</a></li>
 						<li class="tab03"><a href="/funeral/funeralList_c.do">장례 480</a></li>
 						<li class="tab04"><a href="/funeral/funeralList_d.do">프라임(350)상품</a></li>
@@ -109,9 +109,9 @@
 				</div>
 				
 				<header class="contInfoArea">
-					<p class="img"><img src="/public/img/conts/img_pro_a_390.png" alt="프라임 390 안내이미지" /></p>
+					<p class="img"><img src="/public/img/conts/img_pro_a_390.png" alt="프리미엄 390 안내이미지" /></p>
 					<div class="area">
-						<h3 class="contTit"><span>프라임 390</span></h3>
+						<h3 class="contTit"><span>프리미엄 390</span></h3>
 						<p class="subTxt">월 30,000원 X 130회 (3,900,000원)</p>
 						<ul class="defaultGrayDotList mt-10">
 							<li>캐딜락리무진, 장의버스 제공 (왕복200Km제공)</li>

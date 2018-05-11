@@ -72,7 +72,7 @@
                         <strong><button type="button" class="select" id="subtitle">장례상품</button></strong>
                         <ul>
 							<li id="MO30100"><a href="javascript:goMenu('/funeral/funeralMark.do', 'MO30100');">장례상품특징</a></li>
-							<li id="MO30200"><a href="javascript:goMenu('/funeral/funeralList_a.do', 'MO30200');">장례상품</a></li>
+							<li id="MO30200"><a href="javascript:goMenu('/funeral/funeralList_b.do', 'MO30200');">장례상품</a></li>
 							<li id="MO30300"><a href="javascript:goMenu('/funeral/funeralInfo_a.do', 'MO30300');">장례정보</a></li>
 							<li id="MO30400"><a href="javascript:goMenu('/funeral/funeralNoticeList.do', 'MO30400');">부고알림</a></li>
                         </ul>
@@ -85,7 +85,7 @@
                 <nav>
                     <ul class="pcLnb">
 							<li id="MN30100"><a href="javascript:goMenu('/funeral/funeralMark.do', 'MN30100');">장례상품특징</a></li>
-							<li id="MN30200"><a href="javascript:goMenu('/funeral/funeralList_a.do', 'MN30200');">장례상품</a></li>
+							<li id="MN30200"><a href="javascript:goMenu('/funeral/funeralList_b.do', 'MN30200');">장례상품</a></li>
 							<li id="MN30300"><a href="javascript:goMenu('/funeral/funeralInfo_a.do', 'MN30300');">장례정보</a></li>
 							<li id="MN30400"><a href="javascript:goMenu('/funeral/funeralNoticeList.do', 'MN30400');">부고알림</a></li>
                     </ul>
@@ -101,7 +101,7 @@
 						<button type="button">장례 260</button>
 					</strong>
 					<ul>
-						<li class="tab02"><a href="/funeral/funeralList_b.do">프라임 390</a></li>
+						<li class="tab02"><a href="/funeral/funeralList_b.do">프리미엄 390</a></li>
 						<li class="tab01 active"><a href="/funeral/funeralList_a.do">장례 260</a></li>
 						<li class="tab03"><a href="/funeral/funeralList_c.do">장례 480</a></li>
 						<li class="tab04"><a href="/funeral/funeralList_d.do">프라임(350)상품</a></li>
