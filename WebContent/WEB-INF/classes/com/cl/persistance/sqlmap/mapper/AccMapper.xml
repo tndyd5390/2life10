@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cl.persistance.mapper.AccMapper">
+	<insert id="insertAccs" parameterType="hashmap">
+		INSERT INTO ACC
+		(
+			MEMBER_NO,
+			PAYMENT_DAY,
+			PAYMENT_COUNT,
+			PAYMENT_MONEY,
+			LAST_PAYMENT_COUNT,
+			PAYMENT_ROUTE,
+			REAL_PAYMENT_DAY,
+			DISCOUNT_MONEY,
+			ETC
+		)
+		VALUES
+		<foreach collection="accList" item="item" separator=",">
+		(
+			#{item.memberNo},
+			#{item.paymentDay},
+			#{item.paymentCount},
+			#{item.paymentMoney},
+			#{item.lastPaymentCount},
+			#{item.paymentRoute},
+			#{item.realPaymentDay},
+			#{item.discountMoney},
+			#{item.etc}
+		)
+		</foreach>
+	</insert>
+</mapper>

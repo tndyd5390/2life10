@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cl.persistance.mapperForMS.InquiryMapperForMS">
+	<select id="getInquiryInfo" parameterType="string" resultType="InquiryDTO">
+		SELECT cv.회원번호				AS MEMBERNO,
+	  		   cv.회원명				AS MEMBERNAME,
+	     	   cv.주민등록번호			AS MEMBERRRN,
+			   (UPPER(cv.상품)) 		AS ITEM,
+			   (CASE CONVERT(INT, LEFT(LOWER(cv.상품), CHARINDEX('x', lower(cv.상품))-1)) * CONVERT(INT, RIGHT(LOWER(cv.상품), LEN(cv.상품) - CHARINDEX('x', LOWER(cv.상품))))
+				WHEN 2793000 THEN 2800000
+				WHEN 2886000 THEN 2900000 
+				ELSE CONVERT(INT, LEFT(LOWER(cv.상품), CHARINDEX('x', LOWER(cv.상품))-1)) * CONVERT(INT, RIGHT(LOWER(cv.상품), LEN(cv.상품) - CHARINDEX('x', LOWER(cv.상품)))) 
+				END) 				AS FULLPAYMENT,
+			   cv.가입일 				AS REGDT,
+			   av.불입방법				AS PAYMENTROUTE,
+			   av.불입최종회차			AS LASTPAYMENTCOUNT,
+			   (CONVERT(INT, av.불입금) * CONVERT(INT, av.불입최종회차)) AS TOTALPAYMENT,
+			   (CASE CONVERT(INT, RIGHT(cv.주민등록번호, LEN(cv.주민등록번호) - CHARINDEX('-', cv.주민등록번호)))
+			    WHEN 1 THEN '남자'
+				WHEN 2 THEN '여자'
+				ELSE '기타'
+				END) 				AS SEX,
+		        ((YEAR(GETDATE())+1) - CAST(('19' + SUBSTRING(cv.주민등록번호, 1, 2)) AS INT)) AS AGE,
+				(CONVERT(INT, av.불입금)) AS PAYMENTMONEY,
+				'월납' 					AS PAYMENTMETHOD,
+				cv.관리구분				AS CLASSIFICATION,
+				cv.영업사원				AS SALESPERSON,
+				cv.주소					AS ADDR,
+				cv.집전화					AS TELNO,
+				cv.휴대폰					AS PHONENO,
+				(CASE WHEN
+	 			 CONVERT(INT,(SELECT DATEDIFF(MONTH, (SELECT 불입일자 
+				 			    FROM ACCVIEW 
+				 			   WHERE 회원번호 = #{memberPreNo}
+								 AND 불입최종회차 = 1), GETDATE()) - (SELECT MAX(불입최종회차) 
+				 						                           FROM ACCVIEW 
+				 						                          WHERE 회원번호 = #{memberPreNo}) + 1))
+				>=  
+				 CONVERT(INT,(SELECT RIGHT(LOWER(상품), LEN(상품) - CHARINDEX('x', LOWER(상품))) 
+	   							FROM CUSTOMVIEW 
+	  						   WHERE 회원번호 = #{memberPreNo})) - CONVERT(INT,(SELECT MAX(불입최종회차) 
+				 				    								  		   FROM ACCVIEW 
+				 				   								      		  WHERE 회원번호 = #{memberPreNo}))
+				THEN CONVERT(INT,(SELECT RIGHT(LOWER(상품), LEN(상품) - CHARINDEX('x', LOWER(상품))) 
+	   								FROM CUSTOMVIEW 
+	  							   WHERE 회원번호 = #{memberPreNo})) - CONVERT(INT,(SELECT MAX(불입최종회차) 
+				 				   										   		   FROM ACCVIEW 
+				 				   										  		  WHERE 회원번호 = #{memberPreNo}))
+				ELSE CONVERT(INT,(SELECT DATEDIFF(MONTH, (SELECT 불입일자 
+				 						   					FROM ACCVIEW 
+				 						  				   WHERE 회원번호 = #{memberPreNo}
+				 						    			  	 AND 불입최종회차 = 1), GETDATE()) - (SELECT MAX(불입최종회차) 
+				 						                     								   FROM ACCVIEW 
+				 						                                     				  WHERE 회원번호 = #{memberPreNo}) + 1)) 
+				 END) 					AS DELAYPAYCNT,
+				cv.이체일					AS TRANSFERDT
+  		   FROM (SELECT TOP(1) * FROM AccView a WHERE 회원번호 = #{memberPreNo} ORDER BY a.실불입일 desc) av INNER JOIN CustomView cv 
+    		 ON cv.회원번호 = av.회원번호
+	</select>
+	<select id="getInquiryList" parameterType="string" resultType="InquiryDTO">
+		SELECT 불입최종회차  		AS LASTPAYMENTCOUNT,
+	      	       불입일자  		AS PAYMENTDAY,
+		                실불입일  		AS REALPAYMENTDAY,
+		                불입방법 		AS PAYMENTROUTE,
+		                불입금			AS CONTRIBUTION
+	  	  FROM ACCVIEW 
+	     WHERE 회원번호 = #{memberPreNo}
+	 	 ORDER BY 불입최종회차 DESC;
+	</select>
+	
+	<select id="getMemberNos" parameterType="java.util.Map" resultType="string">
+		SELECT 회원번호   AS MEMBERNO	    	  
+	    FROM CUSTOMVIEW
+	    WHERE 회원명 = #{name} AND
+	    	  LEFT(주민등록번호, 6) = #{birthday} AND
+	    	  RIGHT(휴대폰, 4) = #{phone} AND
+	    	    관리구분 NOT IN('해약', '행사', '만기')
+	 ORDER BY 회원번호 DESC
+	</select>
+	
+	<select id="getMemberNosFromMemberPre" parameterType="string" resultType="string">
+		SELECT ACC.회원번호 AS MEMBERPRE
+  		  FROM CUSTOMVIEW ACC 
+ 	INNER JOIN 
+       		  (SELECT 회원명 				AS NAME, 
+       		          LEFT(주민등록번호, 6) AS BIRTHDAY, 
+       		          RIGHT(휴대폰, 4) 	AS PHONE 
+       		     FROM CUSTOMVIEW 
+       		    WHERE 회원번호 = #{memberPre}) TMP
+    		ON ACC.회원명 = TMP.NAME 
+   		   AND LEFT(ACC.주민등록번호, 6) = TMP.BIRTHDAY 
+           AND RIGHT(ACC.휴대폰, 4) = TMP.PHONE
+	</select>
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cl.persistance.mapper.MainMapper">
+	<select id="getMainNoticeList" resultType="NoticeDTO">
+		SELECT
+			NOTICE_NO		AS NOTICENO,
+			NOTICE_TITLE	AS NOTICETITLE
+		FROM
+			NOTICE_INFO
+		ORDER BY
+			NOTICE_NO DESC
+		LIMIT
+			0, 3
+	</select>
+	
+	<select id="getMainFuneralNoticeList" resultType="FuneralNoticeDTO">
+		SELECT
+			FUNERAL_NOTICE_NO		AS FUNERALNOTICENO,
+			FUNERAL_NOTICE_NAME		AS FUNERALNOTICENAME,
+			FUNERAL_NOTICE_MEMBER	AS FUNERALNOTICEMEMBER,
+			FUNERAL_NOTICE_PLACE	AS FUNERALNOTICEPLACE,
+			FUNERAL_NOTICE_DAY		AS FUNERALNOTICEDAY
+		FROM
+			FUNERAL_NOTICE
+		ORDER BY
+			FUNERAL_NOTICE_DAY DESC
+		LIMIT
+			0, 10
+	</select>
+</mapper>

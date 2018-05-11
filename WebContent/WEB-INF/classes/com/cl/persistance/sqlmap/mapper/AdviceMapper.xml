@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cl.persistance.mapper.AdviceMapper">
+	<select id="getAdviceList" resultType="AdviceDTO" parameterType="hashmap">
+		SELECT @ROWNUM := @ROWNUM + 1 	AS ROWNUM,
+			   ADVICE_NO				AS ADVICENO,
+			   ADVICE_NAME				AS ADVICENAME,
+			   ADVICE_PHONE_NO			AS ADVICEPHONENO,
+			   ADVICE_POST_NO			AS ADVICEPOSTNO,
+			   ADVICE_ADDRESS			AS ADVICEADDRESS,
+			   ADVICE_ADDRESS_DETAIL	AS ADVICEADDRESSDETAIL,
+			   ADVICE_VIEW_CNT			AS ADVICEVIEWCNT,
+			   REG_MEMBER_NO			AS REGMEMBERNO,
+			   REG_DT					AS REGDT,
+			   CHG_MEMBER_NO			AS CHGMEMBERNO,
+			   CHG_DT					AS CHGDT,
+			   P.PAGE					AS PAGE
+		  FROM ADVICE_INFO,
+		  	   (SELECT COUNT(*) AS PAGE FROM ADVICE_INFO
+		  	    <where>
+		  	    	<if test="search!=null">
+		  				INSTR(ADVICE_NAME, #{search}) > 0
+		  			</if>
+		  	    </where>
+		  	   ) P,
+		  (SELECT @ROWNUM := 0) R
+		  <where>
+		  	<if test="search!=null">
+		  		INSTR(ADVICE_NAME, #{search}) > 0
+		  	</if>
+		  </where>
+	  ORDER BY ROWNUM DESC
+	     LIMIT #{page}, #{splitPage}
+	</select>
+
+	<insert id="insertAdvice" parameterType="AdviceDTO">
+		INSERT INTO ADVICE_INFO
+		(
+			ADVICE_NAME,
+			ADVICE_PHONE_NO,
+			ADVICE_POST_NO,
+			ADVICE_ADDRESS,
+			ADVICE_ADDRESS_DETAIL,
+			ADVICE_VIEW_CNT,
+			REG_MEMBER_NO,
+			REG_DT
+		)
+		VALUES
+		(
+			#{adviceName},
+			#{advicePhoneNo},
+			#{advicePostNo},
+			#{adviceAddress},
+			#{adviceAddressDetail},
+			0,
+			#{regMemberNo},
+			NOW()
+		)
+	</insert>
+	<select id="getAdviceDetail" parameterType="string" resultType="AdviceDTO">
+		SELECT @ROWNUM := @ROWNUM + 1 	AS ROWNUM,
+			   ADVICE_NO				AS ADVICENO,
+			   ADVICE_NAME				AS ADVICENAME,
+			   ADVICE_PHONE_NO			AS ADVICEPHONENO,
+			   ADVICE_POST_NO			AS ADVICEPOSTNO,
+			   ADVICE_ADDRESS			AS ADVICEADDRESS,
+			   ADVICE_ADDRESS_DETAIL	AS ADVICEADDRESSDETAIL,
+			   ADVICE_VIEW_CNT			AS ADVICEVIEWCNT,
+			   REG_MEMBER_NO			AS REGMEMBERNO,
+			   REG_DT					AS REGDT,
+			   CHG_MEMBER_NO			AS CHGMEMBERNO,
+			   CHG_DT					AS CHGDT
+		  FROM ADVICE_INFO
+		 WHERE ADVICE_NO = #{adviceNo}
+	</select>
+	<delete id="deleteAdvice" parameterType="string">
+		DELETE FROM ADVICE_INFO WHERE ADVICE_NO = #{adviceNo}
+	</delete>
+	
+	<update id="updateAdvice" parameterType="AdviceDTO">
+		UPDATE ADVICE_INFO
+		   SET ADVICE_NAME = #{adviceName},
+		   	   ADVICE_PHONE_NO = #{advicePhoneNo},
+		   	   ADVICE_POST_NO = #{advicePostNo},
+		   	   ADVICE_ADDRESS = #{adviceAddress},
+		   	   ADVICE_ADDRESS_DETAIL = #{adviceAddressDetail},
+		   	   CHG_MEMBER_NO = #{chgMemberNo},
+		   	   CHG_DT = NOW()
+		 WHERE ADVICE_NO = #{adviceNo}
+	</update>
+</mapper>

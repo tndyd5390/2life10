@@ -17,5 +17,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry excluding="main/java/|test/java/" kind="src" path="src"/>
-	<classpathentry kind="output" path="target/classes"/>
+	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cl.persistance.mapper.AnalysisMapper">
+	<select id="getSexAnalysisData" resultType="AnalysisDTO">
+		SELECT 
+		  IF(RIGHT(MEMBER_RRN, 1) IN (1,3,5),'남자','여자') AS SEX,
+		  COUNT(*) CNT
+		FROM 
+		  CUSTOM 
+		WHERE
+		  CLASSIFICATION NOT IN ('해약','행사','만기') AND 
+		  ADDR != '' AND
+		  MEMBER_RRN != '' AND
+		  LENGTH(MEMBER_RRN) =  8
+		GROUP BY SEX
+	</select>
+	
+	<select id="getAgeAnalysisData" resultType="AnalysisDTO">
+		SELECT 
+			TRUNCATE((DATE_FORMAT(NOW(),'%Y') - CONCAT(CASE RIGHT(MEMBER_RRN,1) WHEN 3 THEN 20
+		    WHEN 4 THEN 20
+		    ELSE 19 END, LEFT(MEMBER_RRN, 2)))/10,0)*10 AS AGE,
+			SUM(IF(RIGHT(MEMBER_RRN, 1) IN (1,3,5),1,0)) AS M, 
+			SUM(IF(RIGHT(MEMBER_RRN, 1) IN (2,4,6),1,0)) AS F,
+			COUNT(*) CNT
+		FROM 
+			CUSTOM
+		WHERE
+			CLASSIFICATION NOT IN ('해약','행사','만기') AND ADDR != '' AND
+		  	MEMBER_RRN != '' AND 
+		  	LENGTH(MEMBER_RRN) =  8
+		GROUP BY 
+			AGE
+	</select>
+	
+	<select id="getReRegAnalysis" resultType="AnalysisDTO">
+		SELECT 
+			COUNT(*) AS CNT,
+			SUM(IF(BB.YN='재가입',1,0)) AS REREG,
+			SUM(IF(BB.YN='N',1,0)) AS NOTREG,
+			TRUNCATE((SUM(IF(BB.YN='재가입',1,0))/COUNT(*))*100,0) AS PER
+		FROM
+			(
+			SELECT 
+				AA.MEMBER_RRN,
+				AA.CANCLE,
+				AA.REG,
+				IF(AA.REG>0, '재가입','N') AS YN
+			FROM
+				(
+				SELECT 
+					MEMBER_NAME,
+					MEMBER_RRN,
+					SUM(IF(CLASSIFICATION IN ('해지','행사','만기'),1,0)) AS CANCLE,
+					SUM(IF(CLASSIFICATION='가입',1,0)) AS REG
+				FROM 
+					CUSTOM
+				WHERE 
+					MEMBER_RRN != '' AND
+					LENGTH(MEMBER_RRN) =  8
+				GROUP BY 
+					MEMBER_RRN, MEMBER_NAME
+				) AA
+			WHERE 
+				AA.CANCLE != 0
+			) BB
+	</select>
+	
+	<select id="getRegYearAnalysis" resultType="AnalysisDTO">
+		SELECT 
+			CONCAT(LEFT(REG_DT,4),'년') AS YEARS,
+			COUNT(*) CNT
+		FROM 
+			CUSTOM
+		GROUP BY 
+			YEARS
+	</select>
+	
+	<select id="getStateAnalysis" resultType="AnalysisDTO">
+		SELECT 
+			IF(AA.ADDR2 NOT IN ('경기','서울','충청', '전남','인천',
+								'경북','경남','전북','부산','강원',
+								'광주','대전','대구','울산','충남',
+								'제주','충북','세종'),'기타', AA.ADDR2) AS STATE,
+			SUM(AA.CNT) AS CNT
+		FROM
+			(
+			SELECT 
+			  CASE LEFT(ADDR, 4) WHEN '전라남도' THEN '전남'
+			  WHEN '전라북도' THEN '전북'
+			  WHEN '경상북도' THEN '경북'
+			  WHEN '경상남도' THEN '경남'
+			  WHEN '충청남도' THEN '충남'
+			  WHEN '충청북도' THEN '충북'
+			  WHEN '제주특별' THEN '제주'
+			  WHEN '세종특별' THEN '세종'
+			  ELSE LEFT(ADDR,2) END AS ADDR2,
+			  COUNT(CASE LEFT(ADDR, 4) WHEN '전라남도' THEN '전남'
+			  WHEN '전라북도' THEN '전북'
+			  WHEN '경상북도' THEN '경북'
+			  WHEN '경상남도' THEN '경남'
+			  WHEN '충청남도' THEN '충남'
+			  WHEN '충청북도' THEN '충북'
+			  WHEN '제주특별' THEN '제주'
+			  WHEN '세종특별' THEN '세종'
+			  ELSE LEFT(ADDR,2) END) CNT
+			FROM 
+			  CUSTOM 
+			WHERE 
+			  CLASSIFICATION NOT IN ('해약','행사','만기') AND 
+			  ADDR != '' AND 
+			  MEMBER_RRN != '' AND
+			  LENGTH(MEMBER_RRN) = 8
+			GROUP BY 
+			  ADDR2
+			ORDER BY 
+			  CNT DESC
+			) AA
+		GROUP BY
+			STATE
+		ORDER BY 
+			CNT DESC
+	</select>
+	
+	<select id="getItemAnalysis" resultType="AnalysisDTO">
+		SELECT 
+			ITEM,
+			COUNT(*)AS CNT, 
+			SUM(IF(RIGHT(MEMBER_RRN, 1) IN (1,3,5),1,0)) AS M, 
+			SUM(IF(RIGHT(MEMBER_RRN, 1) IN (2,4,6),1,0)) AS F 
+		FROM 
+			CUSTOM
+		WHERE 
+			CLASSIFICATION NOT IN ('해약','행사','만기') AND 
+			ADDR != '' AND 
+			MEMBER_RRN != '' AND 
+			LENGTH(MEMBER_RRN) = 8
+		GROUP BY 
+			ITEM
+		ORDER BY 
+			CNT DESC
+	</select>
+	
+	<select id="getCityAnalysis" parameterType="String" resultType="AnalysisDTO">
+		SELECT 
+			AA.ADDR1,
+			IF(BB.CITY_NM IS NULL, '기타', AA.ADDR3) ADDR2,
+			COUNT(*) CNT
+		FROM
+			(SELECT 
+			 	CASE LEFT(ADDR, 4) WHEN '전라남도' THEN '전남'
+				WHEN '전라북도' THEN '전북'
+				WHEN '경상북도' THEN '경북'
+				WHEN '경상남도' THEN '경남'
+				WHEN '충청남도' THEN '충남'
+				WHEN '충청북도' THEN '충북'
+				WHEN '제주특별' THEN '제주'
+				WHEN '세종특별' THEN '세종'
+				ELSE LEFT(ADDR,2) END AS ADDR1,
+				SUBSTRING_INDEX(SUBSTRING_INDEX(ADDR,' ', 2), ' ', -1) ADDR3
+			FROM 
+				CUSTOM C
+			WHERE 
+				CLASSIFICATION NOT IN ('만기','해약','행사') AND 
+				ADDR != '' AND 
+				LENGTH(MEMBER_RRN) = 8  AND 
+				MEMBER_RRN != ''
+			) AA
+		 	LEFT OUTER JOIN (
+		   		SELECT 
+		   			* 
+		   		FROM 
+		   			ADDR_AREA 
+		   		WHERE 
+		   			STATE_NM = #{state}
+			) BB
+			 ON AA.ADDR3 = BB.CITY_NM
+		WHERE 
+			AA.ADDR1 = #{state}
+		GROUP BY 
+			ADDR2
+		ORDER BY
+			CNT DESC
+	</select>
+</mapper>
