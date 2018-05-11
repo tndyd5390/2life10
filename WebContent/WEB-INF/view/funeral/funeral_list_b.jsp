@@ -47,6 +47,7 @@
 			}
 		})
 		$(".ui-helper-hidden-accessible").hide();
+		console.log(MobileCheck());
 	});
 
 </script>

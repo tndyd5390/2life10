@@ -135,7 +135,7 @@
                                             <div class="depth02">
                                                 <ul class="sub_depth">
 													<li id="MO30100"><a href="javascript:goMenu('/funeral/funeralMark.do', 'MO30100');">장례상품특징</a></li>
-													<li id="MO31100"><a href="javascript:goMenu('/funeral/funeralList_a.do', 'MO31100');">장례상품</a></li>
+													<li id="MO31100"><a href="javascript:goMenu('/funeral/funeralList_b.do', 'MO31100');">장례상품</a></li>
 													<li id="MO30200"><a href="javascript:goMenu('/funeral/funeralInfo_a.do', 'MO30200');">장례정보</a></li>
 													<li id="MO30300"><a href="javascript:goMenu('/funeral/funeralNoticeList.do', 'MO30300');">부고알림</a></li>
                                                 </ul>
