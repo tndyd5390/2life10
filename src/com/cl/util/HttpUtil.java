@@ -15,6 +15,11 @@ import java.util.Map.Entry;
 import javax.servlet.http.HttpServletRequest;
 
 public class HttpUtil {
+	public static String getUtype(HttpServletRequest req){
+		return CmmUtil.nvl((String)req.getAttribute("uType"));
+	}
+	
+			
 	public static String MapToQueryString(HashMap<String, String> map, String charSet){
 		StringBuilder sbQuery = new StringBuilder();
 

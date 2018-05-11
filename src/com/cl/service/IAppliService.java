@@ -10,4 +10,5 @@ public interface IAppliService {
 	public HashMap<String, Object> getAppliList(HashMap<String, Object> hMap) throws Exception;
 	public AppliDTO getAppliDetail(String appliNo) throws Exception;
 	public int updateAppliReply(String appliNo) throws Exception;
+	public int deleteAppli(String appliNo) throws Exception;
 }

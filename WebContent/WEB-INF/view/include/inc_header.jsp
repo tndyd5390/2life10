@@ -19,7 +19,7 @@
 	}
 	
 	if (uri.equals("appli/appli_form.jsp")) {
-		String uType = CmmUtil.nvl((String) request.getAttribute("uType"));
+		String uType = HttpUtil.getUtype(request);
 		if (!"".equals(uType)) {
 			if (!cookieMap.containsKey("visitID")) {
 				SimpleDateFormat sd = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -125,7 +125,7 @@
 
 				<div class="topMenuWrap">
 					<ul>
-						<li><a href="/appli/appliForm.do">온라인asdfasdf가입신청</a></li>
+						<li><a href="/appli/appliForm.do">온라인가입신청</a></li>
 						<%if("".equals((String)session.getAttribute("ss_member_no"))||session.getAttribute("ss_member_no")!=null){%>
 							<li><a href="/member/chgPass.do">회원정보변경</a></li>
 							<li><a href="/member/logout.do">로그아웃</a></li>
@@ -245,7 +245,7 @@
 									                            <li id="MO60500"><a href="javascript:goMenu('/regulation/regulationList.do', 'MO60500');">상조관련법규</a></li>
 									                            <li id="MO60600"><a href="javascript:goMenu('/agreement/agreementList.do', 'MO60600');">이용약관</a></li>
 									                            <li id="MO60700"><a href="javascript:goMenu('/inquiry/inquiryList.do', 'MO60700');">납부조회</a></li>
-									                            <li id="MO60800"><a href="javascript:goMenu('/appli/appliForm.do', 'MO60800');">가입신청</a></li>
+									                            <li id="MO60800"><a href="javascript:goMenu('/appli/appliForm.do', 'MO60800');">가입상담신청</a></li>
 									                            <%if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_member_no")))){%>
 										                            <li id="MO60900"><a href="javascript:goMenu('/member/login.do', 'MO60900');">로그인</a></li>
 									                            <% }else{%>
