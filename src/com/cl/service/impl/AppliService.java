@@ -46,4 +46,9 @@ public class AppliService implements IAppliService{
 	public int updateAppliReply(String appliNo) throws Exception {
 		return appliMapper.updateAppliReply(appliNo);
 	}
+
+	@Override
+	public int deleteAppli(String appliNo) throws Exception {
+		return appliMapper.deleteAppli(appliNo);
+	}
 }

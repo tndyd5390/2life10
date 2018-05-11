@@ -163,4 +163,28 @@ public class AppliController {
 		log.info(this.getClass() + ".appliReplyProc end!!!");
 		return "/alert";
 	}
+	
+	@RequestMapping(value="Lmin/appli/deleteAppli")
+	public String appliDelete(HttpServletRequest req,HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+		log.info(this.getClass() + ".appliDelete start!!!");
+		
+		SessionUtil.sessionCheck(resp, session);
+		String appliNo = CmmUtil.nvl(req.getParameter("aNo"));
+		
+		log.info("appliNo : "+appliNo);
+		
+		int result = appliService.deleteAppli(appliNo);
+		
+		if(result != 0){
+			model.addAttribute("msg", "삭제 되었습니다.");
+		}else{
+			model.addAttribute("msg", "삭제 실패했습니다.");
+		}
+		model.addAttribute("url", "/Lmin/appli/appliList.do");
+
+		appliNo = null;
+		
+		log.info(this.getClass() + ".appliDelete end!!!");
+		return "/alert";
+	}
 }

@@ -55,11 +55,11 @@
 	<div id="contentsWrap">
 		<div class="container">
 			<div class="conTitWrap">
-				<h2>관리자/1:1상담</h2>
+				<h2>관리자/가입상담신청</h2>
 				<div class="location">
 					<span class="home">홈</span>
 					<span>관리자모드</span>
-					<strong>1:1상담</strong>
+					<strong>가입상담신청</strong>
 				</div>
 			</div> <!-- // conTitWrap -->
 			<!-- 메뉴 영역 -->

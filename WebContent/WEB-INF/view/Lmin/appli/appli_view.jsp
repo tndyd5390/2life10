@@ -52,11 +52,11 @@
 	<div id="contentsWrap">
 		<div class="container">
 			<div class="conTitWrap">
-				<h2>관리자/1:1상담</h2>
+				<h2>관리자/가입상담신청</h2>
 				<div class="location">
 					<span class="home">홈</span>
 					<span>관리자모드</span>
-					<strong>1:1상담</strong>
+					<strong>가입상담신청</strong>
 				</div>
 			</div> <!-- // conTitWrap -->
 			<!-- 메뉴 영역 -->
@@ -102,6 +102,12 @@
 			return false;
 		}
 	};
+	
+	function goDelete(){
+		if(confirm("삭제 하시겠습니까?")){
+			location.href="/Lmin/appli/deleteAppli.do?aNo=" + '<%=CmmUtil.nvl(aDTO.getAppliNo())%>';
+		}
+	}
 
 </script>
 
@@ -133,6 +139,11 @@
 								<p>신청 상품 : <%=CmmUtil.nvl(aDTO.getAppliProdCodeName())%></br>
 								       구좌 : <%=CmmUtil.nvl(aDTO.getAppliContractCodeName())%></br>
 								       전화번호 : <%=AES256Util.strDecode(CmmUtil.nvl(aDTO.getAppliPhoneNo()))%> 
+								   <%if(!CmmUtil.nvl(aDTO.getAppliContractCodeName()).equals("")){
+									%>
+										[ 30만원 할인대상입니다. ]
+									<%
+								   } %>
 								</p>
 								</div>				
 						</div>
@@ -146,6 +157,7 @@
 				<%if(CmmUtil.nvl(aDTO.getAppliReply()).equals("N")){%>
 					<button type="button" class="btnDefaultForm" id="listBtn" onclick="return doSubmit();">답변완료</button>
 				<%}%>
+					<button type="button" class="btnDefaultForm" id="listBtn" onclick="goDelete();">삭제</button>
 					<button type="button" class="btnDefaultForm" id="listBtn" onclick="goList();">목록</button>
 				</div>
 				<!-- // btnArea -->
