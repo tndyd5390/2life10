@@ -47,6 +47,10 @@
 			}
 		})
 		$(".ui-helper-hidden-accessible").hide();
+		
+		if(MobileCheck().check){
+			$("#funeralImg").hide();
+		}
 	});
 
 </script>
@@ -109,7 +113,7 @@
 				</div>
 				
 				<header class="contInfoArea">
-					<p class="img"><img src="/public/img/conts/img_pro_a_390.png" alt="프리미엄 390 안내이미지" /></p>
+					<p class="img" id="funeralImg"><img src="/public/img/conts/img_pro_a_390.png" alt="프리미엄 390 안내이미지" /></p>
 					<div class="area">
 						<h3 class="contTit"><span>프리미엄 390</span></h3>
 						<p class="subTxt">월 30,000원 X 130회 (3,900,000원)</p>

@@ -46,7 +46,9 @@
 			}
 		})
 		$(".ui-helper-hidden-accessible").hide();
-
+		if(MobileCheck().check){
+			$("#funeralImg").hide();
+		}
 	});
 
 </script>
@@ -109,7 +111,7 @@
 				</div>
 				
 				<header class="contInfoArea">
-					<p class="img"><img src="/public/img/conts/img_pro_a_260.png" alt="장례 260 안내이미지" /></p>
+					<p class="img" id="funeralImg"><img src="/public/img/conts/img_pro_a_260.png" alt="장례 260 안내이미지" /></p>
 					<div class="area">
 						<h3 class="contTit"><span>장례260</span></h3>
 						<p class="subTxt">월 26,000원 X 100회 (2,600,000원)</p>
