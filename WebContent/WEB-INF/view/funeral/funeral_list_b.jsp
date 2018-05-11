@@ -98,20 +98,20 @@
 
 				<div class="defaultTab">
 				    <strong class="select">
-                        <button type="button">장례 390</button>
+                        <button type="button">프라임 390</button>
                     </strong>
 					<ul>
+						<li class="tab02 active"><a href="/funeral/funeralList_b.do">프라임 390</a></li>
 						<li class="tab01"><a href="/funeral/funeralList_a.do">장례 260</a></li>
-						<li class="tab02 active"><a href="/funeral/funeralList_b.do">장례 390</a></li>
 						<li class="tab03"><a href="/funeral/funeralList_c.do">장례 480</a></li>
 						<li class="tab04"><a href="/funeral/funeralList_d.do">프라임(350)상품</a></li>
 					</ul>
 				</div>
 				
 				<header class="contInfoArea">
-					<p class="img"><img src="/public/img/conts/img_pro_a_390.png" alt="장례 390 안내이미지" /></p>
+					<p class="img"><img src="/public/img/conts/img_pro_a_390.png" alt="프라임 390 안내이미지" /></p>
 					<div class="area">
-						<h3 class="contTit"><span>장례390</span></h3>
+						<h3 class="contTit"><span>프라임 390</span></h3>
 						<p class="subTxt">월 30,000원 X 130회 (3,900,000원)</p>
 						<ul class="defaultGrayDotList mt-10">
 							<li>캐딜락리무진, 장의버스 제공 (왕복200Km제공)</li>
