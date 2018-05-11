@@ -154,7 +154,7 @@
 	                                    <td>
 											<input type="radio" id="agree1" name="appliProdCode" value="42" checked> <label for="agree1">프리미엄 390</label>
 											  <a href="/funeral/funeralList_b.do" target="_blank" class="btn_active_small">상품 상세보기</a>
-											<br><br><b style="color:red; font-weight:bold;">※ 30만원 할인적용 대상입니다.</b>
+											<br><br><b style="color:red; font-weight:bold;">※ -30만원 할인적용 대상입니다.</b>
 	                                    </td>
 	                                </tr>
 	                                <tr>
