@@ -180,13 +180,13 @@
 							</colgroup>
 							<tbody>
 								<tr>
-									<th scope="row">* 상담자명</th>
+									<th scope="row">상담자명</th>
 									<td>
 										<input type="text" name="appliName" value="" title="이름" class="inputType1" style="" maxlength="25" placeholder="필수입력 사항입니다.">
 									</td>
 								</tr>
 								<tr>
-									<th scope="row">* 휴대전화</th>
+									<th scope="row">휴대전화</th>
 									<td>
 										<select id="phoneTel1" name="phoneTel1" id="phoneTel1" title="" class="inputType3">
                                             <option value="010">010</option>
