@@ -801,7 +801,7 @@ a[class*="btn"] {vertical-align:middle;}
 		.header > .container {padding-top:35px;}
 		.header > .container:after {content:"";display:block;clear:both;height:0;visibility:hidden;}
 		.header .logo {position:relative;z-index:1000;float:left;}
-			.logo a {width:179px;height:30px;margin-top:10px;padding:20px 0;}
+			.logo a {width:229px;height:47px;/* margin-top:10px; */padding:20px 0;}
 
 		/* 테블릿 + PC에서만 보이는 탑 사업부문 메뉴 */
 		.topMenuWrap {display:block;position:absolute;top:0;left:0;width:100%;background:#033d6a;}
