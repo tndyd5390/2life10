@@ -50,6 +50,8 @@ public class DownloadUtil extends AbstractView{
 	        	encodedFileName = "\"" + new String(fileName.getBytes("UTF-8"), "8859_1") + "\"";
 	        }else if(browser.equals("Safari")){
 	        	encodedFileName = "\"" + new String(fileName.getBytes("UTF-8"), "8859_1") + "\"";
+	        }else if(browser.equals("Android")){
+	        	encodedFileName = "\"" + new String(fileName.getBytes("UTF-8"), "8859_1") + "\"";
 	        }else { 
 	        	throw new RuntimeException("Not supported browser"); 
 	        }
@@ -94,6 +96,8 @@ public class DownloadUtil extends AbstractView{
 			returnString ="Safari";
 		}else if(header.indexOf("iPhone") > -1){
 			returnString ="iPhone";
+		}else if(header.indexOf("Android") > -1){
+			returnString ="Android";
 		}else{
 			returnString ="FireFox";
 		}
