@@ -51,7 +51,8 @@ public class DownloadUtil extends AbstractView{
 	        }else if(browser.equals("Safari")){
 	        	encodedFileName = "\"" + new String(fileName.getBytes("UTF-8"), "8859_1") + "\"";
 	        }else if(browser.equals("Android")){
-	        	encodedFileName = "\"" + new String(fileName.getBytes("UTF-8"), "8859_1") + "\"";
+	        	/*encodedFileName = "\"" + new String(fileName.getBytes("euc-kr"), "8859_1") + "\"";*/
+	        	encodedFileName = "\"" + fileName + "\"";
 	        }else { 
 	        	throw new RuntimeException("Not supported browser"); 
 	        }
