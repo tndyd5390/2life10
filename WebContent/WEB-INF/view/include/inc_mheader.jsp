@@ -27,6 +27,23 @@
 				//info.setMaxAge(365 * 24 * 60 * 60);
 				info.setPath("/");
 				response.addCookie(info);
+
+				HashMap<String, String> hashmapJson = new HashMap<String, String>();
+				HashMap<String, Object> hashmapRes = new HashMap<String, Object>();
+				
+				try{
+					hashmapJson.put("visitID", "F");
+					hashmapJson.put("URL", uri);
+					String charSet = "UTF-8";
+					HashMap<String, String> hashmapResponse = (HashMap<String, String>) HttpUtil.callURL("http://www.4christian.co.kr/visitStatistics/visit.do", null, hashmapJson, charSet);
+					if ("200".equals(hashmapResponse.get("httpStatus"))){
+						//통신성공
+					}else{
+						//통신 실패
+					}
+				}catch(Exception e){
+					
+				}
 			}
 		}
 	}else{
