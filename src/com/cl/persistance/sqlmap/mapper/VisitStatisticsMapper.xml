@@ -7,7 +7,8 @@
 		 VISITID, 
 		 SEQ, 
 		 URL, 
-		 UTYPE, 
+		 UTYPE,
+		 IP,
 		 REG_DT
 		 ) 
 		 VALUES
@@ -16,6 +17,7 @@
 		 IFNULL((SELECT MAX(TMP.SEQ) FROM VISIT_STATISTICS TMP WHERE TMP.VISITID = #{visitID}), 0) + 1,
 		 #{URL},
 		 #{uType},
+		 #{ip},
 		 NOW()
 		 )
 	</insert>

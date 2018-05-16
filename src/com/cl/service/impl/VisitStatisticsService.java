@@ -14,7 +14,6 @@ public class VisitStatisticsService implements IVisitStatisticsService{
 	
 	@Override
 	public int insertVisitInfo(Map<String, String> visitInfo) throws Exception {
-		System.out.println(visitInfo.get("visitID"));
 		return visitStatisticsMapper.insertVisitInfo(visitInfo);
 	}
 

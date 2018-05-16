@@ -8,7 +8,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	String uri = CmmUtil.nvl(request.getRequestURI().split("//")[1]);
-	
 	Cookie[] cookies = request.getCookies();
 	
 	Map<String, String> cookieMap = new HashMap<>();
@@ -19,21 +18,23 @@
 	}
 	
 	if (uri.equals("appli/appli_form.jsp")) {
-		String uType = CmmUtil.nvl((String) request.getAttribute("uType"));
+		String uType = HttpUtil.getUtype(request);
 		if (!"".equals(uType)) {
 			if (!cookieMap.containsKey("visitID")) {
 				SimpleDateFormat sd = new SimpleDateFormat("yyyyMMddHHmmss");
-				Cookie info = new Cookie("visitID", uType + sd.format(new Date()));
+				String timeFormat = uType + sd.format(new Date());
+				Cookie info = new Cookie("visitID", timeFormat);
 				//info.setMaxAge(365 * 24 * 60 * 60);
 				info.setPath("/");
 				response.addCookie(info);
-
+				
 				HashMap<String, String> hashmapJson = new HashMap<String, String>();
 				HashMap<String, Object> hashmapRes = new HashMap<String, Object>();
 				
 				try{
-					hashmapJson.put("visitID", "F");
+					hashmapJson.put("visitID", timeFormat);
 					hashmapJson.put("URL", uri);
+					hashmapJson.put("ip", HttpUtil.getIp(request));
 					String charSet = "UTF-8";
 					HashMap<String, String> hashmapResponse = (HashMap<String, String>) HttpUtil.callURL("http://www.4christian.co.kr/visitStatistics/visit.do", null, hashmapJson, charSet);
 					if ("200".equals(hashmapResponse.get("httpStatus"))){
@@ -46,6 +47,7 @@
 				}
 			}
 		}
+		
 	}else{
 		if(cookieMap.containsKey("visitID")){
 			
@@ -55,6 +57,7 @@
 			try{
 				hashmapJson.put("visitID", cookieMap.get("visitID"));
 				hashmapJson.put("URL", uri);
+				hashmapJson.put("ip", HttpUtil.getIp(request));
 				String charSet = "UTF-8";
 				HashMap<String, String> hashmapResponse = (HashMap<String, String>) HttpUtil.callURL("http://www.4christian.co.kr/visitStatistics/visit.do", null, hashmapJson, charSet);
 				if ("200".equals(hashmapResponse.get("httpStatus"))){

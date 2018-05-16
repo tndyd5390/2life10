@@ -30,17 +30,21 @@ private Logger log = Logger.getLogger(this.getClass());
 		log.info("visitID : " + visitID);
 		String url = CmmUtil.nvl(req.getParameter("URL"));
 		log.info("URL : " + url);
+		String ip = CmmUtil.nvl(req.getParameter("ip"));
+		log.info("ip : " + ip);
 		
 		Map<String, String> visitInfo = new HashMap<>();
 		visitInfo.put("visitID", visitID);
 		visitInfo.put("URL", url);
 		visitInfo.put("uType", visitID.substring(0, 1));
+		visitInfo.put("ip", ip);
 		
 		visitStatisticsService.insertVisitInfo(visitInfo);
 		
 		visitID = null;
 		url = null;
 		visitInfo = null;
+		ip = null;
 		
 		log.info(this.getClass() + ".visitStatistics end!!!");
 	}
