@@ -45,7 +45,7 @@
 		$("#subtitle2").text($("#"+mbId2).text());
 		
 	});
-	function agreeCheck(check){
+	/* function agreeCheck(check){
 		if(check.checked){
 			document.getElementById('agree1').checked = true;
 			document.getElementById('agree').checked = true;
@@ -60,12 +60,12 @@
 			document.getElementById('agree1').checked = false;
 			document.getElementById('agree').checked = false;
 		}
-	}
+	} */
 	
 	function appliForSub(){
 		var form = document.getElementById('frm');
 		
-		if(!telChk('tel1', 'tel2', 'tel3') || !telChk('phoneTel1', 'phoneTel2', 'phoneTel3')){
+		/*if(!telChk('tel1', 'tel2', 'tel3') || !telChk('phoneTel1', 'phoneTel2', 'phoneTel3')){
 			alert("전화번호와 휴대폰번호 중 하나는 반드시 입력되야 합니다.")
 			return
 		}else if(form.appliName.value == ""){
@@ -73,8 +73,8 @@
 			form.appliName.focus();
 			return;
 		}else{
-			form.submit();
-		}
+		} */
+		form.submit();
 	}
 		
 </script>
@@ -154,7 +154,7 @@
 	                                    <td>
 											<!-- <input type="radio" id="agree1" name="appliProdCode" value="42" checked> --> <label for="agree1">프리미엄(390) 상품</label>
 											  <a href="/funeral/funeralList_b.do" target="_blank" class="btn_active_small">상품 상세보기</a>
-											<br><br><b style="color:red; font-weight:bold;">※ -30만원 할인적용 대상입니다.</b>
+											<br><br><b style="color:red; font-weight:bold;">※ -30만원 할인적용 대상입니다. 문의전화 1644-4491</b><br>
 	                                    </td>
 	                                </tr>
 	                                <!-- <tr>
@@ -200,9 +200,9 @@
                                             <option value="080">080</option>
                                         </select>
 										-
-										<input type="text" name="phoneTel2" id="phoneTel2" class="inputType2" style="" maxlength="4" placeholder="필수입력 사항입니다.">
+										<input type="number" name="phoneTel2" id="phoneTel2" class="inputType2" style="" maxlength="4" placeholder="필수입력 사항입니다.">
 										-
-										<input type="text" name="phoneTel3" id="phoneTel3" class="inputType2" style="" maxlength="4" placeholder="필수입력 사항입니다.">
+										<input type="number" name="phoneTel3" id="phoneTel3" class="inputType2" style="" maxlength="4" placeholder="필수입력 사항입니다.">
 									</td>
 								</tr>
 								<tr>
@@ -227,9 +227,9 @@
 											<option value="064">064</option>
                                         </select>
 										-
-										<input type="text" name="tel2" id="tel2" class="numPhn inputType2" style="" maxlength="4">
+										<input type="number" name="tel2" id="tel2" class="numPhn inputType2" style="" maxlength="4">
 										-
-										<input type="text" name="tel3" id="tel3" class="numPhn inputType2" style="" maxlength="4">
+										<input type="number" name="tel3" id="tel3" class="numPhn inputType2" style="" maxlength="4">
 									</td>
 								</tr>
 								
