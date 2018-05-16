@@ -45,35 +45,18 @@
 		$("#subtitle2").text($("#"+mbId2).text());
 		
 	});
-	/* function agreeCheck(check){
-		if(check.checked){
-			document.getElementById('agree1').checked = true;
-			document.getElementById('agree').checked = true;
-		}else{
-			document.getElementById('agree1').checked = false;
-			document.getElementById('agree2').checked = true;
-		}
-	}
-	
-	function disAgree(check){
-		if(check.checked){
-			document.getElementById('agree1').checked = false;
-			document.getElementById('agree').checked = false;
-		}
-	} */
 	
 	function appliForSub(){
 		var form = document.getElementById('frm');
 		
-		/*if(!telChk('tel1', 'tel2', 'tel3') || !telChk('phoneTel1', 'phoneTel2', 'phoneTel3')){
-			alert("전화번호와 휴대폰번호 중 하나는 반드시 입력되야 합니다.")
+		if(!telChk('phoneTel1', 'phoneTel2', 'phoneTel3')){
 			return
 		}else if(form.appliName.value == ""){
 			alert("성명을 입력해 주세요.");
 			form.appliName.focus();
 			return;
 		}else{
-		} */
+		}
 		form.submit();
 	}
 		
