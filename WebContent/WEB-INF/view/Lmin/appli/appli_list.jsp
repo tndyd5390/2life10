@@ -208,7 +208,7 @@
 						</tbody>
 					</table>
 				</div>
-				<a href="/Lmin/appli/appliForm.do" class="btn_active_small" style="float:right;">가입신청 폼</a>
+				<!-- <a href="/Lmin/appli/appliForm.do" class="btn_active_small" style="float:right;">가입신청 폼</a> -->
 				<!-- pageArea -->
 				<div class="pageArea">
 					<%=PageUtil.frontPaging(hMap, pageBtnSplit) %>
