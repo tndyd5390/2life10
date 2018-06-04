@@ -18,7 +18,7 @@
 		} 
 	}
 	
-	if (uri.equals("appli/appli_form.jsp")) {
+	if (uri.equals("index.jsp")) {
 		String uType = HttpUtil.getUtype(request);
 		if (!"".equals(uType)) {
 			if (!cookieMap.containsKey("visitID")) {

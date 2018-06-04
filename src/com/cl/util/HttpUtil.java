@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class HttpUtil {
 	public static String getUtype(HttpServletRequest req){
-		return CmmUtil.nvl((String)req.getAttribute("uType"));
+		return CmmUtil.nvl((String)req.getParameter("uType"));
 	}
 	
 			
