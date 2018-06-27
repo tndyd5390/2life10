@@ -29,4 +29,6 @@ public interface MemberMapper {
 
 	int updateMemberPassword(MemberDTO mDTO) throws Exception;
 
+	List<MemberDTO> getnSignMemberList(HashMap<String, Object> hMap) throws Exception;
+
 }

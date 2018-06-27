@@ -24,6 +24,8 @@ public interface IMemberService {
 
 	HashMap<String, Object> updateTmpPass(HashMap<String, Object> hMap) throws Exception;
 
-	int updateMemberPassword(MemberDTO mDTO) throws Exception;	
+	int updateMemberPassword(MemberDTO mDTO) throws Exception;
+
+	HashMap<String, Object> getnSignMemberList(HashMap<String, Object> hMap) throws Exception;	
 	
 }

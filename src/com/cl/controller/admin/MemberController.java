@@ -601,4 +601,25 @@ public class MemberController {
 		log.info("chgPassProc End!!");
 		return "/member/redirect";
 	}
+	
+	@RequestMapping("/Lmin/member/nSignMember")
+	public String nSignMembers(HttpServletRequest req, Model model) throws Exception{
+		log.info("Lmin:nSignMember Start!!");
+		
+
+		int splitPage = 10;
+	
+		HashMap<String, Object> hMap = new HashMap<>();
+		
+		hMap = PageUtil.paging(req, splitPage);
+		
+		hMap = memberService.getnSignMemberList(hMap);
+		
+		model.addAttribute("hMap", hMap);
+		hMap = null;
+		
+		log.info("Lmin:nSignMember End!!");
+		return "/Lmin/member/member_list";
+	}
 }
+	

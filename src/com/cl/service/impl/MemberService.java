@@ -84,4 +84,16 @@ public class MemberService implements IMemberService{
 	public int updateMemberPassword(MemberDTO mDTO) throws Exception {
 		return memberMapper.updateMemberPassword(mDTO);
 	}
+
+	@Override
+	public HashMap<String, Object> getnSignMemberList(HashMap<String, Object> hMap) throws Exception {
+		List<MemberDTO> mList = memberMapper.getnSignMemberList(hMap);
+		hMap.put("list", mList);
+		if(mList.size() > 0) {
+			hMap.put("pageList", mList.get(0).getPage());
+		} else {
+			hMap.put("pageList", 1);
+		}
+		return hMap;
+	}
 }

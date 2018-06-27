@@ -212,4 +212,22 @@
 			MEMBER_NO = #{memberNo} AND
 			MEMBER_PASSWORD = #{memberPassword}
 	</update>
+	
+	<select id="getnSignMemberList" resultType="MemberDTO">
+		SELECT M.MEMBER_NO								MEMBERNO,
+		       M.MEMBER_ID								MEMBERID,
+		       M.MEMBER_NAME							MEMBERNAME,
+		       DATE_FORMAT(M.REG_DT, '%Y.%m.%d')		REGDT,
+		       P.PAGE
+		 FROM MEMBER_INFO M
+		 INNER JOIN
+		       (
+		        SELECT COUNT(*)							PAGE
+		          FROM MEMBER_INFO
+		         WHERE DEL_YN = 'N' AND MEMBER_PRE = 'N'
+		       ) P
+		 WHERE M.DEL_YN = 'N' AND M.MEMBER_PRE = 'N'
+		 ORDER BY MEMBER_NO DESC
+		 LIMIT #{page}, #{splitPage}
+	</select>
 </mapper>

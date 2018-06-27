@@ -68,6 +68,8 @@
 			<!-- 메뉴 영역 -->
 			
 <script type="text/javascript">
+	
+
 	$(function() {
 		//메뉴 제어 
 		var lnb = $(".pcLnbWrap ul li a");
@@ -101,13 +103,13 @@
 	};
 	
 	function goPage(page, lastPage) {
+		var uri = $(location).attr('href').split('/');
 		var f = $("#f");
 		var goPage = $("#page");
-		f.attr("action", "/Lmin/member/memberList.do");
+		f.attr("action", "/Lmin/member/"+uri[uri.length-1]);
 		goPage.val(page);
 		f.submit();
 	};
-
 </script>
 
 <form action="#" name="menuFrm" method="post">
@@ -122,7 +124,6 @@
 			<input type="hidden" name="page" id="page">
 			<div class="contents"> <!-- 페이지별 ID none -->
 				<h3 class="smallTit">회원정보</h3>
-				
 				<div class="tableBasicList">
 					<table class="defaultTable">
 						<caption></caption>
@@ -168,7 +169,7 @@
 				<!-- // pageArea -->
 			</form>
 			</div> <!-- // contents -->
-
+		<a href="/Lmin/member/nSignMember.do" class="btn_active_small" style="float:right;">상조 미가입 회원리스트</a>
 		</div>
 	</div> <!-- // contentsWrap -->
 
