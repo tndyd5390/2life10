@@ -240,7 +240,7 @@
 							</tr>
 							<tr>
 								<td>장의차량</td>
-								<td colspan="2" data-photo="202">캐딜락리무진</td>
+								<td colspan="2" data-photo="202">캐딜락리무진 또는 장의버스 중 택일</td>
 								<td class="alignL">제공(전국무료)</td>
 							</tr>
 							<tr>
