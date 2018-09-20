@@ -32,9 +32,8 @@ public class FuneralNoticeController {
 		log.info("Lmin:funeralNoticeList Start!!");
 		SessionUtil.sessionCheck(resp, session);
 		int splitPage = 10;
-		
+		System.out.println("page : " + CmmUtil.nvl(req.getParameter("page")));
 		HashMap<String, Object> hMap = new HashMap<>();
-		
 		hMap = PageUtil.paging(req, splitPage);
 		hMap = funeralNoticeService.getFuneralNoticeList(hMap);
 		

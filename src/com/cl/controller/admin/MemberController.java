@@ -303,10 +303,11 @@ public class MemberController {
 		log.info("Lmin:memberList Start!!");
 
 		int splitPage = 10;
-	
-		HashMap<String, Object> hMap = new HashMap<>();
 		
-		hMap = PageUtil.paging(req, splitPage);
+		System.out.println("page : " + CmmUtil.nvl(req.getParameter("page")));
+		
+		HashMap<String, Object> hMap = new HashMap<>();
+		hMap = PageUtil.pagingForMember(req, splitPage);
 		
 		hMap = memberService.getMemberList(hMap);
 		
@@ -389,7 +390,7 @@ public class MemberController {
 		
 		mDTO.setMemberNo(memberNo);
 		if(!memberPassword.equals("")) {
-			mDTO.setMemberPassword(AES256Util.strEncode(memberPassword));
+			mDTO.setMemberPassword(SHA256Util.sha256(memberPassword));
 		}
 		mDTO.setMemberName(AES256Util.strEncode(memberName));
 		mDTO.setMemberSex(memberSex);
