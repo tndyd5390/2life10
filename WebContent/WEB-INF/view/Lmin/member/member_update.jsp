@@ -9,6 +9,7 @@
 		mDTO = new MemberDTO();
 	}				
 	String homeNo = CmmUtil.nvl(mDTO.getMemberHomeNo());
+	System.out.println("homeNo : " + homeNo);
 %>
 
 <!DOCTYPE html>
@@ -166,6 +167,18 @@
 			alert("휴대전화번호를 입력하세요.");
 			phone3.focus();
 			return false;
+		} else if (home2.val() != "" && home3.val() == ""){
+			alert("전화번호를 확인해 주세요.")
+			home3.focus();
+			return false;
+		} else if(home3.val() != "" && home2.val() == ""){
+			alert("전화번호를 확인해 주세요.")
+			home2.focus();
+			return false;
+		} else if(home2.val() != "" && home3.val() != "" && home1.val() == ""){
+			alert("지역번호를 선택해 주세요.");
+			home1.focus();
+			return false;
 		} else {
 			$("mNo").val(mNo);
 			f.attr("action", "/Lmin/member/memberUpdateProc.do");
@@ -256,7 +269,7 @@
 								<%}else{ %>
 								<td>
 									<select id="tel1" name="tel1" title="" class="inputType3">
-										<option value="">선택</option>
+										<option value="" selected="selected">선택</option>
 										<option value="02">02</option>
 										<option value="051">051</option>
 										<option value="053">053</option>

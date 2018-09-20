@@ -394,7 +394,6 @@ public class MemberController {
 		}
 		mDTO.setMemberName(AES256Util.strEncode(memberName));
 		mDTO.setMemberSex(memberSex);
-		mDTO.setMemberHomeNo(AES256Util.strEncode(memberHomeNo));
 		mDTO.setMemberPhoneNo(AES256Util.strEncode(memberPhoneNo));
 		mDTO.setMemberPostNo(AES256Util.strEncode(memberPostNo));
 		mDTO.setMemberAddress(AES256Util.strEncode(memberAddress));
@@ -407,6 +406,11 @@ public class MemberController {
 		mDTO.setMemberEmail2(AES256Util.strEncode(memberEmail2));
 		mDTO.setChgMemberNo(chgMemberNo);
 		
+		if(memberHomeNo.split("-").length == 3){
+			mDTO.setMemberHomeNo(AES256Util.strEncode(memberHomeNo));
+		}else{
+			mDTO.setMemberHomeNo(null);
+		}
 		int result = memberService.updateMember(mDTO);
 		
 		url = "/Lmin/member/memberList.do";
