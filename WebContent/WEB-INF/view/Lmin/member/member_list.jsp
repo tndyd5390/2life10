@@ -94,11 +94,7 @@
 	});
 	
 	function goDetail(mNo) {
-		var f = $("#f");
-		var memberNo = $("#mNo");
-		f.attr("action", "/Lmin/member/memberDetail.do");
-		memberNo.val(mNo);
-		f.submit();
+		location.href="/Lmin/member/memberDetail.do?mNo=" + mNo;
 	};
 	
 	function goPage(page, lastPage){
