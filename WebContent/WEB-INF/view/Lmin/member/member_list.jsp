@@ -12,8 +12,9 @@
 	
 	List<MemberDTO> mList = (List<MemberDTO>) hMap.get("list");
 	
-	System.out.println("pl :" +hMap.get("pageList"));
-	System.out.println(hMap.get("nowPage"));
+	
+	String searchWord = CmmUtil.nvl((String)hMap.get("search"));
+	String searchBox = CmmUtil.nvl((String)hMap.get("searchBox"));
 %>
 
 <!DOCTYPE html>
@@ -100,12 +101,24 @@
 		f.submit();
 	};
 	
-	function goPage(page, lastPage) {
+	function goPage(page, lastPage){
 		var f = $("#f");
-		var goPage = $("#page");
-		f.attr("action", "/Lmin/member/memberList.do");
-		goPage.val(page);
+		$("#page").val(page);
 		f.submit();
+	};
+	
+	function doSubmit(){
+		var f = $("#f");
+		var search = $("#search");
+		
+		if(search.val() == ""){
+			alert("검색어를 입력하세요.");
+			search.focus();
+			return false;
+		}else{
+			f.submit();
+			return true;
+		}
 	};
 
 </script>
@@ -117,12 +130,38 @@
 
 
 			<!-- 메뉴 영역 -->
-			<form name="f" id="f" method="post" action="/Lmin/member/memberList.do">
 			<input type="hidden" name="mNo" id="mNo">
-			<input type="hidden" name="page" id="page">
 			<div class="contents"> <!-- 페이지별 ID none -->
 				<h3 class="smallTit">회원정보</h3>
-				
+				<form name="f" id="f" method="post" action="/Lmin/member/memberList.do">
+				<input type="hidden" name="page" id="page">
+				<div class="boardType2">
+					<table summary="">
+						<caption></caption>
+						<colgroup>
+							<col width="100%">
+						</colgroup>
+						<tbody>
+							<tr>
+								<td>
+									<select id="searchBox" name="searchBox" class="inputType3">
+										<option value="00" <%=CmmUtil.select("00", CmmUtil.nvl((String) hMap.get("searchBox")))%>>회원명</option>
+										<option value="01" <%=CmmUtil.select("01", CmmUtil.nvl((String) hMap.get("searchBox")))%>>아이디</option>
+										<option value="02" <%=CmmUtil.select("02", CmmUtil.nvl((String) hMap.get("searchBox")))%>>회원번호</option>
+									</select>
+									<%if(searchBox.equals("00")){ %>
+									<input type="text" name="search" id="search" class="inputType1" value="<%=CmmUtil.nvl(AES256Util.strDecode(searchWord))%>" maxlength="25">
+									<%}else{ %>
+									<input type="text" name="search" id="search" class="inputType1" value="<%=CmmUtil.nvl((String)searchWord) %>" maxlength="25">
+									<%} %>
+									
+									<a href="javascript:doSubmit();" class="btn_active_small">검색</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+                </div>
+				</form>
 				<div class="tableBasicList">
 					<table class="defaultTable">
 						<caption></caption>
@@ -166,7 +205,6 @@
 					<%=PageUtil.frontPaging(hMap, 5) %>
 				</div>
 				<!-- // pageArea -->
-			</form>
 			</div> <!-- // contents -->
 
 		</div>

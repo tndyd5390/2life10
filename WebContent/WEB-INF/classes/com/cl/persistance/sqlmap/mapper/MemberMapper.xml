@@ -85,6 +85,15 @@
 		         WHERE DEL_YN = 'N'
 		       ) P
 		 WHERE M.DEL_YN = 'N'
+		 	<if test="searchBox==00">
+		 		AND M.MEMBER_NAME LIKE CONCAT('%',#{search},'%')
+		 	</if>
+		 	<if test="searchBox==01">
+		 		AND M.MEMBER_ID LIKE CONCAT('%',#{search},'%')
+		 	</if>
+		 	<if test="searchBox==02">
+		 		AND M.MEMBER_NO LIKE CONCAT('%',#{search},'%')
+		 	</if>
 		 ORDER BY MEMBER_NO DESC
 		 LIMIT #{page}, #{splitPage}
 	</select>

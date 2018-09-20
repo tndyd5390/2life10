@@ -40,6 +40,47 @@ public class PageUtil {
 		return hMap;
 	}
 	
+	public static HashMap<String, Object> pagingForMember(HttpServletRequest req, int splitPage) throws Exception{
+		int page;
+		String nowPage = CmmUtil.nvl(req.getParameter("page"));
+		// 현재 페이지를 받음
+		String selBox = CmmUtil.nvl(req.getParameter("searchBox"));
+		// 검색조건 받음
+		String search = CmmUtil.nvl(req.getParameter("search"));
+		// 검색어 받음
+		
+		System.out.println("search : " + search);
+		System.out.println("selBox : " + selBox);
+		if(!search.equals("") && selBox.equals("00")){
+			search = AES256Util.strEncode(search);
+			System.out.println("encode : " + search);
+		}
+		
+		if(!nowPage.equals("")){
+			page = (Integer.parseInt(nowPage)-1) * splitPage;
+			// 페이지 갯수를 구함
+		}else{
+			nowPage = "1";
+			// 첫 페이지로 초기화
+			page = 0;
+			// limit 를 0으로 초기화
+		}
+		
+		HashMap<String, Object> hMap = new HashMap<>();
+		
+		hMap.put("page", page);
+		hMap.put("nowPage", nowPage);
+		hMap.put("splitPage", splitPage);
+		
+		if(!search.equals("")){
+			// 검색어가 있을 때
+			hMap.put("searchBox", selBox);
+			hMap.put("search", search);
+		}
+		
+		return hMap;
+	}
+	
 	// JSP 하단의 페이징을 처리하는 메소드
 	public static String frontPaging(HashMap<String, Object> hMap, int pageBtnSplit){
 		int splitPage=0;
