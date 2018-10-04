@@ -49,4 +49,41 @@ private Logger log = Logger.getLogger(this.getClass());
 		log.info(this.getClass() + ".visitStatistics end!!!");
 	}
 	
+	@RequestMapping(value="/clState")
+	public String clStat(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+		log.info(this.getClass() + ".clStat start!!!");
+		
+		Map<String, Object> visitData = visitStatisticsService.getVisitAllData();
+		
+		model.addAttribute("visitData", visitData);
+		
+		log.info(this.getClass() + ".clStat end!!!");
+		return "/visitstatistics/visitView";
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

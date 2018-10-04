@@ -123,7 +123,11 @@
 <script type="text/javascript" src="/public/js/contents.js"></script>
 <script type="text/javascript" src="/public/js/jquery.form.js"></script>
 <script type="text/javascript" src="/public/js/jquery.rss.js"></script>
-
+<!-- DataTables CSS -->
+<link href="/public/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+<!-- DataTables Responsive CSS -->
+<link href="/public/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+<!-- DataTables JavaScript -->
 <!--[if lt IE 9]>
 	<script src="/js/html5.js"></script>
 	<script src="/js/respond.js"></script>

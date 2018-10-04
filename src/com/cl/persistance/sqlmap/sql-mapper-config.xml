@@ -20,5 +20,6 @@
 		<typeAlias type="com.cl.dto.RegulationDTO" alias="RegulationDTO"/>
 		<typeAlias type="com.cl.dto.CodeDTO" alias="CodeDTO"/>
 		<typeAlias type="com.cl.dto.AnalysisDTO" alias="AnalysisDTO"/>
+		<typeAlias type="com.cl.dto.VisitStatisticsDTO" alias="VisitStatisticsDTO"/>
     </typeAliases>
 </configuration>

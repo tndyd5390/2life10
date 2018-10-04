@@ -21,4 +21,24 @@
 			 NOW()
 			 )
 	</insert>
+	
+	<select id="getVisitInfo" resultType="VisitStatisticsDTO">
+		SELECT VISITID,
+		       SEQ,
+		       URL,
+		       UTYPE,
+		       REG_DT,
+		       IP
+		  FROM VISIT_STATISTICS
+		 WHERE IP IS NOT NULL
+	</select>
+	
+	<select id="getVisitCnt" resultType="java.util.HashMap">
+		SELECT SUBSTR(REG_DT, 1, 10) AS DATE,
+	   		   COUNT(DISTINCT IP) AS CNT
+  		  FROM VISIT_STATISTICS
+  		 WHERE IP IS NOT NULL
+ 		  GROUP BY DATE
+   	   	  ORDER BY DATE DESC
+	</select>
 </mapper>
