@@ -30,7 +30,7 @@
 		       REG_DT,
 		       IP
 		  FROM VISIT_STATISTICS
-		 WHERE IP IS NOT NULL
+		  WHERE IP IS NOT NULL
 	</select>
 	
 	<select id="getVisitCnt" resultType="java.util.HashMap">

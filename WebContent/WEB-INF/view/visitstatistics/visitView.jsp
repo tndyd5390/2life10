@@ -157,10 +157,12 @@
     <script>
     $(document).ready(function() {
         $('#table1').DataTable({
-            responsive: true
+            responsive: true,
+            "order": [[ 3, "desc" ]]
         });
         $('#table2').DataTable({
-            responsive: true
+            responsive: true,
+            "order": [[ 0, "desc" ]]
         });
     });
     </script>
