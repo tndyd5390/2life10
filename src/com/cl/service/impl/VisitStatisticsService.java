@@ -40,9 +40,7 @@ public class VisitStatisticsService implements IVisitStatisticsService{
 		Map<String, Object> resultMap = new HashMap<>();
 		
 		List<VisitStatisticsDTO> visitAllList = getVistitInfo();
-		System.out.println("visitAllList.size : " + visitAllList.size());
 		List<Map<String, String>> visitCnt = getVisitCnt();
-		System.out.println("visitCnt.size : " + visitCnt.size());
 		resultMap.put("visitAllList", visitAllList);
 		resultMap.put("visitCnt", visitCnt);
 		return resultMap;
