@@ -19,6 +19,14 @@ public class NoticeDTO {
 	private String noticeFilePath;
 	private String noticeFileOrgName;
 	private String noticeFileName;
+	private String important;
+	
+	public String getImportant() {
+		return important;
+	}
+	public void setImportant(String important) {
+		this.important = important;
+	}
 	public String getNoticeFileNo() {
 		return noticeFileNo;
 	}

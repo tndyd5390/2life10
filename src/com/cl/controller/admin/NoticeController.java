@@ -71,6 +71,13 @@ public class NoticeController {
 		String contents = CmmUtil.nvl(req.getParameter("contents"));
 		String regMemberNo = CmmUtil.nvl((String) session.getAttribute("ss_member_no"));
 		
+		/**
+		 * 공지글 여부 파라미터 
+		 * 0 일 경우 공지글
+		 * 1 일 경우 일반글
+		 */
+		String important = CmmUtil.nvl(req.getParameter("important"));
+		
 		log.info("title : "+title);
 		log.info("contents : "+contents);
 		log.info("regMemberNo : "+regMemberNo);
@@ -81,6 +88,7 @@ public class NoticeController {
 		nDTO.setNoticeTitle(title);
 		nDTO.setNoticeContents(contents);
 		nDTO.setRegMemberNo(regMemberNo);
+		nDTO.setImportant(important);
 		
 		String noticeFileOrgName = null;
 		String noticeFileName = null;
@@ -168,16 +176,19 @@ public class NoticeController {
 		String noticeTitle = CmmUtil.nvl(req.getParameter("title"));
 		String noticeContents = CmmUtil.nvl(req.getParameter("contents"));
 		String chgMemberNo = CmmUtil.nvl((String) session.getAttribute("ss_member_no"));
+		String important = CmmUtil.nvl(req.getParameter("important"));
 		
 		log.info("noticeNo : "+noticeNo);
 		log.info("noticeTitle : "+noticeTitle);
 		log.info("noticeContents : "+noticeContents);
+		log.info("important : " + important);
 		
 		NoticeDTO nDTO = new NoticeDTO();
 		nDTO.setNoticeNo(noticeNo);
 		nDTO.setNoticeTitle(noticeTitle);
 		nDTO.setNoticeContents(noticeContents);
 		nDTO.setChgMemberNo(chgMemberNo);
+		nDTO.setImportant(important);
 		
 		MultipartFile file = mulReq.getFile("noticeFile");
 		String noticeFileOrgName = "";

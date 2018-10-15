@@ -9,6 +9,7 @@
 	if(nDTO == null){
 		nDTO = new NoticeDTO();
 	}
+	
 
 %>
 <!DOCTYPE html>
@@ -221,6 +222,13 @@
 							<%
 							}
 							%>
+							</tr>
+							<tr>
+								<th scope="row">공지글 여부</th>
+								<td>
+									공지 : <input type="radio" name="important" id="important" value="0" <%=CmmUtil.checked(CmmUtil.nvl(nDTO.getImportant()), "0") %>>
+									일반 : <input type="radio" name="important" id="important" value="1" <%=CmmUtil.checked(CmmUtil.nvl(nDTO.getImportant()), "1") %>>
+								</td>
 							</tr>
 						</tbody>
 					</table>

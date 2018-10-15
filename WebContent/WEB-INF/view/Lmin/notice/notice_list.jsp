@@ -157,7 +157,11 @@
 				<%if(nList.size()!=0){%>
 					<%for(NoticeDTO nDTO : nList){%>
 					<li>
+						<%if(CmmUtil.nvl(nDTO.getImportant()).equals("0")){ %>
+						<p class="num">공지</p>
+						<%}else{ %>
 						<p class="num"><%=CmmUtil.nvl(nDTO.getRowNum())%></p>
+						<%} %>
 						<div class="info">
 							<p class="txt1">
 								<a href="javascript:goDetail('<%=CmmUtil.nvl(nDTO.getNoticeNo())%>')"><%=CmmUtil.nvl(nDTO.getNoticeTitle()) %></a>

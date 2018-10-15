@@ -166,6 +166,13 @@ function doCancel(){
 									<input type="file" name="noticeFile" id="noticeFile" class="inputType5" onchange="javascript:fileCheck(this, ['jpg', 'jpeg', 'png']);">
 								</td>
 							</tr>
+							<tr>
+								<th scope="row">공지글 여부</th>
+								<td>
+									공지 : <input type="radio" name="important" id="important" value="0">
+									일반 : <input type="radio" name="important" id="important" value="1" checked="checked">
+								</td>
+							</tr>
 						</tbody>
 					</table>
 				</div>

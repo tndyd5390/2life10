@@ -9,6 +9,7 @@
       		N.NOTICE_CONTENTS					AS NOTICECONTENTS,
       		N.NOTICE_VIEW_CNT					AS NOTICEVIEWCNT,
       		N.REG_MEMBER_NO						AS REGMEMBERNO,
+      		N.IMPORTANT							AS IMPORTANT,
       		DATE_FORMAT(N.REG_DT, '%Y-%m-%d')	AS REGDT,
       		M.MEMBER_NAME						AS MEMBERNAME,
       		P.PAGE								AS PAGE,
@@ -43,6 +44,7 @@
 	    		AND NOTICE_TITLE LIKE CONCAT('%',#{search},'%')
 	    	</if>
 	    ORDER BY 
+	    	IMPORTANT ASC,
 	    	ROWNUM DESC
 	    LIMIT #{page}, #{splitPage}
 	</select>
@@ -80,14 +82,16 @@
 					NOTICE_CONTENTS,
 					NOTICE_VIEW_CNT,
 					REG_MEMBER_NO,
-					REG_DT
+					REG_DT,
+					IMPORTANT
 				) VALUES (
 					#{noticeFileNo},
 					#{noticeTitle},
 					#{noticeContents},
 					1,
 					#{regMemberNo},
-					NOW()
+					NOW(),
+					#{important}
 				)
 			</when>
 			<!-- 내용만 올릴때 -->
@@ -98,13 +102,15 @@
 					NOTICE_CONTENTS,
 					NOTICE_VIEW_CNT,
 					REG_MEMBER_NO,
-					REG_DT
+					REG_DT,
+					IMPORTANT
 				) VALUES (
 					#{noticeTitle},
 					#{noticeContents},
 					1,
 					#{regMemberNo},
-					NOW()
+					NOW(),
+					#{important}
 				)
 			</otherwise>
 		</choose>
@@ -131,7 +137,8 @@
       		FI.FILE_NO							AS NOTICEFILENO,
             FI.FILE_PATH						AS NOTICEFILEPATH,
             FI.FILE_NAME						AS NOTICEFILENAME,
-            FI.FILE_ORG_NAME					AS NOTICEFILEORGNAME
+            FI.FILE_ORG_NAME					AS NOTICEFILEORGNAME,
+            N.IMPORTANT							AS IMPORTANT
       	FROM
       		NOTICE_INFO N
        INNER JOIN
@@ -156,7 +163,8 @@
 					NOTICE_TITLE 		= #{noticeTitle},
 					NOTICE_CONTENTS 	= #{noticeContents},
 					CHG_MEMBER_NO 		= '3',
-					CHG_DT 				= NOW()
+					CHG_DT 				= NOW(),
+					IMPORTANT 			= #{important}
 				WHERE
 					NOTICE_NO 			= #{noticeNo}
 			</when>
@@ -168,7 +176,8 @@
 					NOTICE_CONTENTS 	= #{noticeContents},
 					CHG_MEMBER_NO 		= '3',
 					CHG_DT 				= NOW(),
-					NOTICE_FILE_NO 		= #{noticeFileNo}
+					NOTICE_FILE_NO 		= #{noticeFileNo},
+					IMPORTANT 			= #{important}
 				WHERE
 					NOTICE_NO 			= #{noticeNo}
 			</otherwise>
