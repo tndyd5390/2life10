@@ -13,6 +13,7 @@
 	List<CounselDTO> cList = (List<CounselDTO>) hMap.get("list");
 	
 	int pageBtnSplit = 5;
+	
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -104,6 +105,10 @@
 		$("#page").val(page);
 		f.submit();
 	};
+	
+	function goDelete(cNo){
+			location.href="/Lmin/counsel/deleteCounsel.do?cNo=" + cNo;
+	}
 
 </script>
 
@@ -145,7 +150,11 @@
 								<% }else{ %>
 									<td><%=CmmUtil.nvl(cDTO.getCounselReply()) %></td>
 								<% } %>
-								<td class="alignL"><a href="javascript:goDetail(<%=CmmUtil.nvl(cDTO.getCounselNo())%>);"><%=CmmUtil.nvl(cDTO.getCounselTitle())%></a></td>
+								<%if(CmmUtil.nvl(cDTO.getCounselTitle()).equals("")){ %>
+									<td class="alignL"><a href="javascript:goDelete('<%=CmmUtil.nvl(cDTO.getCounselNo())%>');">부정등록 글입니다. 클릭시 삭제 됩니다.</a></td>
+								<%}else{ %>
+									<td class="alignL"><a href="javascript:goDetail(<%=CmmUtil.nvl(cDTO.getCounselNo())%>);"><%=CmmUtil.nvl(cDTO.getCounselTitle())%></a></td>
+								<%} %>
 								<td><%=AES256Util.strDecode(CmmUtil.nvl(cDTO.getCounselPhoneNo()))%></td>
 								<td><%=CmmUtil.nvl(cDTO.getRegDt()) %></td>
 							</tr>
