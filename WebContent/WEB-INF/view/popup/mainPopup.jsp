@@ -131,11 +131,6 @@
 				<article class="boardView">
 					<header class="boardTit">
 						<h3><%=CmmUtil.nvl(nDTO.getNoticeTitle())%></h3>
-						<p class="txt">
-							<span class="date"><%=CmmUtil.nvl(nDTO.getRegDt()) %></span>
-							<span class="hits">조회수 <%=CmmUtil.nvl(nDTO.getNoticeViewCnt()) %></span>
-							<span class="writer"><%=AES256Util.strDecode(CmmUtil.nvl(nDTO.getMemberName()))%></span>
-						</p>
 					</header>
 					<article class="boardCont">
 						<div id="ckContent">
