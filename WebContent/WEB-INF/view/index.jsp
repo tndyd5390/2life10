@@ -23,6 +23,7 @@
 	Cookie[] psyCookies = request.getCookies();
 	if(psyCookies != null){//쿠키가 null이 아니라면
 		for(Cookie c : psyCookies){
+			System.out.println("c.getName() : " + c.getName());
 			if(c.getName().equals("pop")){
 				openPopup = false;
 			}

@@ -73,7 +73,6 @@
 
 	function closePopup(){
 		if($("#doNotOpenToday").prop("checked")){
-			alert("test");
 			//쿠키 설정해서 하루동안 팝업 안열리도록
 			$.ajax({
 				url : '/popup/setCookieOneDay.do',
@@ -98,8 +97,9 @@
 			            }
 			   	}
 			});
+		}else{
+			window.close();
 		}
-		window.close();
 	}
 </script>
 <body>

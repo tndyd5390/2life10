@@ -70,10 +70,11 @@ public class MainController {
 		Date now = new Date();
 		
 		Cookie cookie = new Cookie("pop", df.format(now));
-		cookie.setMaxAge(60*60*24);
 		cookie.setPath("/");
+		cookie.setMaxAge(60*60*24);
 		resp.addCookie(cookie);
 		
+		System.out.println("cookie set complete!!");
 		resp.getWriter().println("1");
 		
 		log.info(this.getClass() + ".setCookieOneDay end!!!");
