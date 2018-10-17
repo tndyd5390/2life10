@@ -1,3 +1,4 @@
+<%@page import="java.util.Locale"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.cl.util.CmmUtil" %>
 <%@ page import="com.cl.util.TextUtil" %>
@@ -7,6 +8,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Date" %>
 <%
 
 	HashMap<String, Object> hMap = (HashMap<String,Object>) request.getAttribute("hMap");
@@ -14,6 +16,18 @@
 	List<NoticeDTO> nList = (List<NoticeDTO>) hMap.get("nList");
 	List<FuneralNoticeDTO> fList = (List<FuneralNoticeDTO>) hMap.get("fList");
 	
+	
+	//일단 기본으로 팝업을 띄운다.
+	boolean openPopup = true;
+	
+	Cookie[] psyCookies = request.getCookies();
+	if(psyCookies != null){//쿠키가 null이 아니라면
+		for(Cookie c : psyCookies){
+			if(c.getName().equals("pop")){
+				openPopup = false;
+			}
+		}
+	}
 %>
 
 <!DOCTYPE html>
@@ -49,8 +63,11 @@
         <div class="container">
 
         <script type="text/javascript">
+        <%if(openPopup){%>
+        	window.open("/popup/mainPopup.do", "window", "width=500,height=400");
+        <%}%>
         $(document).ready(function() {
-
+        	
             $("#searchTextBtn").click(function(){
 
                 fn_searchText();
