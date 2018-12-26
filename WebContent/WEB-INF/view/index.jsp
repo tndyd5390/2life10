@@ -269,7 +269,7 @@
 
 				<p class="copy">
 					<small>크리스찬상조(주), 대표자 : 김현재, 서울시 강남구 논현동 268-2 1층, E-mail:cg4491@naver.com</small><br/>
-					<small>대표전화:1644-4491, 팩스:02-556-4439, 통신판매신고번호:제2008-서울강남-1083호</small><br/>
+					<small>대표전화:1644-4491, 팩스:02-556-4439, 통신판매신고번호:제2008-서울강남-1083호, 사업자번호:120-87-25612</small><br/>
 					<small>Copyright (C) 2017 4christian.co.kr. All rights reserved</small>
 				</p>
 
