@@ -8,6 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	String uri = CmmUtil.nvl(request.getRequestURI().split("//")[1]);
+	System.out.println("uri : " + uri);
 	Cookie[] cookies = request.getCookies();
 	
 	Map<String, String> cookieMap = new HashMap<>();
@@ -46,6 +47,37 @@
 				}catch(Exception e){
 					
 				}
+			}
+		}else{//페이스북이 아닌 그냥 접속했다면
+			System.out.println("nomal access");
+			//visitID생성
+			SimpleDateFormat sd = new SimpleDateFormat("yyyyMMddHHmmss");
+			//일반 접속자는 N을 붙여서 보낸다.
+			String timeFormat = "N" + sd.format(new Date());
+			Cookie info = new Cookie("visitID", timeFormat);
+			//쿠키를 사용할 수 있는 경로 설정
+			info.setPath("/");
+			//쿠키 추가
+			response.addCookie(info);
+			
+			//서버로 보낼 파라미터를 위한  Map객체 생성
+			HashMap<String, String> hashmapJson = new HashMap<String, String>();
+			HashMap<String, Object> hashmapRes = new HashMap<String, Object>();
+			
+			//서버로 통신
+			try{
+				hashmapJson.put("visitID", timeFormat);
+				hashmapJson.put("URL", uri);
+				hashmapJson.put("ip", HttpUtil.getIp(request));
+				String charSet = "UTF-8";
+				HashMap<String, String> hashmapResponse = (HashMap<String, String>) HttpUtil.callURL("http://www.4christian.co.kr/visitStatistics/visit.do", null, hashmapJson, charSet);
+				if ("200".equals(hashmapResponse.get("httpStatus"))){
+					//통신성공
+				}else{
+					//통신 실패
+				}
+			}catch(Exception e){
+				
 			}
 		}
 		

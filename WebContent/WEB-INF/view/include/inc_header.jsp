@@ -8,9 +8,11 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
+	//어디로 접속했는지 추출
 	String uri = CmmUtil.nvl(request.getRequestURI().split("//")[1]);
 	Cookie[] cookies = request.getCookies();
 	
+	//쿠키를 추출해서 보기 편하게 Map에 담음
 	Map<String, String> cookieMap = new HashMap<>();
 	if(cookies != null){
 		for (int i = 0; i < cookies.length; i++) {
@@ -18,20 +20,29 @@
 		} 
 	}
 	
+	//만약에 index.jsp로 접속 했다면
 	if (uri.equals("index.jsp")) {
+		//페이스북에서 홈페이지로 왔는지 광고페이지로 왔는지 알아내기위해 uType를 추출
 		String uType = HttpUtil.getUtype(request);
+		
+		//만약에 페이스북을 통해 접속했다면
 		if (!"".equals(uType)) {
+			//쿠키가 visitID를 가지고 있지 않다면 사용자의 첫번째 방문이다.
 			if (!cookieMap.containsKey("visitID")) {
+				//visitID생성
 				SimpleDateFormat sd = new SimpleDateFormat("yyyyMMddHHmmss");
 				String timeFormat = uType + sd.format(new Date());
 				Cookie info = new Cookie("visitID", timeFormat);
-				//info.setMaxAge(365 * 24 * 60 * 60);
+				//쿠키를 사용할 수 있는 경로 설정
 				info.setPath("/");
+				//쿠키 추가
 				response.addCookie(info);
 				
+				//서버로 보낼 파라미터를 위한  Map객체 생성
 				HashMap<String, String> hashmapJson = new HashMap<String, String>();
 				HashMap<String, Object> hashmapRes = new HashMap<String, Object>();
 				
+				//서버로 통신
 				try{
 					hashmapJson.put("visitID", timeFormat);
 					hashmapJson.put("URL", uri);
@@ -47,8 +58,7 @@
 					
 				}
 			}
-		}
-		
+		} 
 	}else{
 		if(cookieMap.containsKey("visitID")){
 			
