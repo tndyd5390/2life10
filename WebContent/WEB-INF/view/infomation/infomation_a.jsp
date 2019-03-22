@@ -136,7 +136,7 @@
 					</section>
 
 					<section>
-						<h4 class="blueTit">4.상조관련자산, 총 고객 환급 의무액 (2017년 12월 기준).</h4>
+						<h4 class="blueTit">4.상조관련자산, 총 고객 환급 의무액 (2018년 12월 기준).</h4>
 						<div class="tableBasicList">
 							<table class="defaultTable">
 								<caption></caption>
@@ -152,8 +152,8 @@
 								</head>
 								<tbody>
 									<tr>
-										<td>1,228,600만원</td>
-										<td>1,359,427만원</td>
+										<td>1,579,580만원</td>
+										<td>1,685,654만원</td>
 									</tr>
 									<tr>
 										<td colspan="2">*현대회계법인의 회계감사를 받았음</td>
