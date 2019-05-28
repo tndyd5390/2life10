@@ -179,7 +179,9 @@
 				<!-- // 주요정보고시사항 -->
 
 				<div class="btn_area">
-					<a href="/file/auditing/auditing.pdf" id="submitLink" class="btn_active">회계감사보고서 다운로드</a>
+					<a href="/file/auditing/2016_auditing.pdf" id="submitLink" class="btn_active">(2016) 회계감사보고서 다운로드</a>
+					<a href="/file/auditing/2017_auditing.pdf" id="submitLink" class="btn_active">(2017) 회계감사보고서 다운로드</a>
+					<a href="/file/auditing/2018_auditing.pdf" id="submitLink" class="btn_active">(2018) 회계감사보고서 다운로드</a>
 				</div>
 			
 
