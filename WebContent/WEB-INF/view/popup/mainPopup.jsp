@@ -72,7 +72,9 @@
 <script type="text/javascript">
 
 	function closePopup(){
-		if($("#doNotOpenToday").prop("checked")){
+		
+		// if문 조건 수정 2019.05.30
+		if($('input:checkbox[id="doNotOpenToday"]').is(":checked")){
 			//쿠키 설정해서 하루동안 팝업 안열리도록
 			$.ajax({
 				url : '/popup/setCookieOneDay.do',
@@ -97,8 +99,10 @@
 			            }
 			   	}
 			});
+		}else{
+			window.close();	
 		}
-		window.close();
+		
 	}
 </script>
 <body>
