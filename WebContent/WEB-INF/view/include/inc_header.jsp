@@ -5,7 +5,11 @@
 <%@page import="java.util.Map"%>
 <%@ page import= "com.cl.util.SessionUtil"%>
 <%@ page import= "com.cl.util.CmmUtil"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<c:set var="now" value="<%=new java.util.Date()%>" />
+<c:set var="sysdate"><fmt:formatDate value="${now}" pattern="yyyyMMddhhmmss" /></c:set>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	//어디로 접속했는지 추출
@@ -129,7 +133,7 @@
 <link type="text/css" rel="stylesheet" href="/public/css/sub_kor.css" />
 <script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="/public/js/TweenMax.min.js"></script>
-<script type="text/javascript" src="/public/js/common.js"></script>
+<script type="text/javascript" src="/public/js/common.js?ver=${sysdate}"></script>
 <script type="text/javascript" src="/public/js/contents.js"></script>
 <script type="text/javascript" src="/public/js/jquery.form.js"></script>
 <script type="text/javascript" src="/public/js/jquery.rss.js"></script>

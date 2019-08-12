@@ -9,6 +9,11 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Date" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<c:set var="now" value="<%=new java.util.Date()%>" />
+<c:set var="sysdate"><fmt:formatDate value="${now}" pattern="yyyyMMddhhmmss" /></c:set>
 <%
 
 	HashMap<String, Object> hMap = (HashMap<String,Object>) request.getAttribute("hMap");
@@ -44,7 +49,7 @@
 <link rel="stylesheet" type="text/css" href="/public/css/jquery.bxslider.css"/>
 <script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="/public/js/TweenMax.min.js"></script>
-<script type="text/javascript" src="/public/js/common.js?ver=1"></script>
+<script type="text/javascript" src="/public/js/common.js?ver=${sysdate}"></script>
 <script type="text/javascript" src="/public/js/jquery.bxslider.js"></script>
 <script type="text/javascript" src="/public/js/contents.js"></script>
 <script type="text/javascript" src="/public/js/jquery.form.js"></script>
