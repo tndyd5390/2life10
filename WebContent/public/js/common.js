@@ -908,5 +908,23 @@ $(function() {
 	
 });
 
+//PC화면 버튼 감추고 지우기
+$(function(){
+	btnChg();
+})
+
 	
-	
+function btnChg(){
+	var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+	if(w < 1800){
+		$('#mobileScreen').css("display", "none");
+		$('#pcScreen').css("display", "block"); 
+	}else if(w == 1920){
+		$('#mobileScreen').css("display", "none");
+		$('#pcScreen').css("display", "none"); 
+	}else{
+		$('#mobileScreen').css("display", "block");
+		$('#pcScreen').css("display", "none"); 
+	}
+}
+

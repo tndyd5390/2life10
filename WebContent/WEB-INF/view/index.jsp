@@ -44,7 +44,7 @@
 <link rel="stylesheet" type="text/css" href="/public/css/jquery.bxslider.css"/>
 <script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="/public/js/TweenMax.min.js"></script>
-<script type="text/javascript" src="/public/js/common.js"></script>
+<script type="text/javascript" src="/public/js/common.js?ver=1"></script>
 <script type="text/javascript" src="/public/js/jquery.bxslider.js"></script>
 <script type="text/javascript" src="/public/js/contents.js"></script>
 <script type="text/javascript" src="/public/js/jquery.form.js"></script>
@@ -69,9 +69,6 @@
         <%}%>
         $(document).ready(function() {
         	
-        	//pc화면 , 모바일화면 변경 함수
-        	btnChg();
-        	
             $("#searchTextBtn").click(function(){
 
                 fn_searchText();
@@ -87,19 +84,7 @@
         });
 		
     	
-    	function btnChg(){
-    		var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    		if(w < 1800){
-    			$('#mobileScreen').css("display", "none");
-    			$('#pcScreen').css("display", "block"); 
-    		}else if(w == 1920){
-        		$('#mobileScreen').css("display", "none");
-        		$('#pcScreen').css("display", "none"); 
-    		}else{
-    			$('#mobileScreen').css("display", "block");
-    			$('#pcScreen').css("display", "none"); 
-    		}
-    	}
+
         
         function fn_searchText(){
             var searchText = $("#searchText").val();
