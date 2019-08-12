@@ -15,8 +15,8 @@ function getCookie(name) {
 	var Scale = getCookie("DesktopModeScale");
 	var defWidth = 1800;
 	if (desktopModeTF == "true") {
-		document
-				.write('<meta name="viewport" content="width='+defWidth+', user-scalable=yes, initial-scale='+Scale+'">');
+		document.write('<meta name="viewport" content="width='+defWidth+', user-scalable=yes, initial-scale='+Scale+'">');
+		
 	} else {
 		document
 				.write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">');
@@ -28,7 +28,8 @@ function getCookie(name) {
 			setModeCookie(true);
 			window.scrollTo(0, 0);
 		}
-		location.reload();
+		
+		location.href= window.location.pathname;
 	}
 	function setModeCookie(switchOn){
 		var now = new Date();
