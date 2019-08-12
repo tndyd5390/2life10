@@ -39,7 +39,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
 <link type="text/css" rel="stylesheet" href="/public/css/default.css"/>
-<link type="text/css" rel="stylesheet" href="/public/css/layout_kor.css"/>
+<link type="text/css" rel="stylesheet" href="/public/css/layout_kor.css?ver=1"/>
 <link type="text/css" rel="stylesheet" href="/public/css/main_kor.css" />
 <link rel="stylesheet" type="text/css" href="/public/css/jquery.bxslider.css"/>
 <script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
@@ -48,6 +48,7 @@
 <script type="text/javascript" src="/public/js/jquery.bxslider.js"></script>
 <script type="text/javascript" src="/public/js/contents.js"></script>
 <script type="text/javascript" src="/public/js/jquery.form.js"></script>
+
 <body>
 <form id="frm" name="frm">
 	<input type="hidden" id="seqNum" name="seqNum" >
@@ -68,6 +69,9 @@
         <%}%>
         $(document).ready(function() {
         	
+        	//pc화면 , 모바일화면 변경 함수
+        	btnChg();
+        	
             $("#searchTextBtn").click(function(){
 
                 fn_searchText();
@@ -81,7 +85,22 @@
             };
             
         });
-
+		
+    	
+    	function btnChg(){
+    		var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    		if(w < 1800){
+    			$('#mobileScreen').css("display", "none");
+    			$('#pcScreen').css("display", "block"); 
+    		}else if(w == 1920){
+        		$('#mobileScreen').css("display", "none");
+        		$('#pcScreen').css("display", "none"); 
+    		}else{
+    			$('#mobileScreen').css("display", "block");
+    			$('#pcScreen').css("display", "none"); 
+    		}
+    	}
+        
         function fn_searchText(){
             var searchText = $("#searchText").val();
             if("" == searchText){

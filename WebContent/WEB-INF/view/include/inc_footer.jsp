@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<script type="text/javascript" src="/public/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/public/js/PCtoMobileScreen.js"></script>
+
+
 	<div class="footer">
 		<div class="container">
 			<footer>
@@ -16,7 +20,10 @@
 					<small>대표전화:1644-4491, 팩스:02-556-4439, 통신판매신고번호:제2008-서울강남-1083호, 사업자등록번호:120-87-25612</small><br/>
 					<small>Copyright (C) 2017 4christian.co.kr. All rights reserved</small>
 				</p>
-
+				<div id="pcScreen" style="text-align:center"><a href="#"  class="btnDefault" style="margin-top:20px"  onclick="desktopMode()">PC 화면</a></div>
+				<div id="mobileScreen" style="display:none;text-align:center"><a href="#"  class="btnDefault" style="margin-top:20px;"  onclick="desktopMode()">모바일 화면</a></div>
+				
+				
 				<div class="familyWrap"> <!-- .btnFamily 버튼 클릭시 다중클래스 on 추가 -->
 					<section>
 						<h2><button type="button" class="btnFamily">FAMILY MAP</button></h2>
