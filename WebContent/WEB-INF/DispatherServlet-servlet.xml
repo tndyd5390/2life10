@@ -5,6 +5,8 @@
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/aop
@@ -12,7 +14,13 @@
     http://www.springframework.org/schema/mvc
     http://www.springframework.org/schema/mvc/spring-mvc.xsd
     http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context.xsd">
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/task
+    http://www.springframework.org/schema/task/spring-task-3.0.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+    
+    
 	<!-- 어노테이션 사용하기 -->
 	<mvc:annotation-driven />
 	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" />
@@ -75,5 +83,12 @@
 	</bean>
 	<bean id="emailSender" class="com.cl.util.EmailSender">
 	</bean>
+	
+	<!-- 스프링 스케줄러 -->
+	<bean id="ScheduleService" class="com.cl.service.impl.ScheduleService" />
+ 	<task:scheduler id="gsScheduler" pool-size="10" />
+ 	<task:executor id="gsTaskExecutor" pool-size="10" />
+ 	<task:annotation-driven executor="gsTaskExecutor" scheduler="gsScheduler" />
+
 	
 </beans>
